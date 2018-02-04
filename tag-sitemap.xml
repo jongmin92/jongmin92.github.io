@@ -639,20 +639,6 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/tags/Cookie/</loc>
-        <lastmod>2018-02-04T06:32:46.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/tags/Session/</loc>
-        <lastmod>2018-02-04T06:32:46.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://jongmin92.github.io/tags/Android/</loc>
         <lastmod>2018-02-04T06:33:10.644Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -683,6 +669,20 @@
     <url>
         <loc>https://jongmin92.github.io/tags/LongPolling/</loc>
         <lastmod>2018-02-04T06:33:10.644Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/tags/SpringBoot/</loc>
+        <lastmod>2018-02-04T13:59:01.680Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/tags/IntelliJ/</loc>
+        <lastmod>2018-02-04T13:59:01.680Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
