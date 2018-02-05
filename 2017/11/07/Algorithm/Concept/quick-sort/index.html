@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/images/etc/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          퀵 정렬 (Quick sort) - 92Hz | Jongmin&#39;s Blog
+        
+    </title>
+
+    <link rel="canonical" href="https://jongmin92.github.io/2017/11/07/Algorithm/Concept/quick-sort/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            /* 기본 포스트 헤더 이미지 (페이지 이미지 || 기본 헤더 이미지) */
+            /* background-image: url('undefined') */
+            /* background-image: url('/images/etc/home.jpg') */
+            background-image: url('/images/etc/home.jpg')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#Algorithm" title="Algorithm">Algorithm</a>
+                            
+                              <a class="tag" href="/tags/#Sort" title="Sort">Sort</a>
+                            
+                              <a class="tag" href="/tags/#Quick sort" title="Quick sort">Quick sort</a>
+                            
+                        </div>
+                        <h1>퀵 정렬 (Quick sort)</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by KimJongMin on
+                            2017-11-07
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">92Hz</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h3><span id="분할정복법과-퀵-정렬-quick-sort">분할정복법과 퀵 정렬 (Quick sort)</span></h3><p>퀵 정렬은 합병 정렬과 마찬가지로 분할정복법을 사용하지만 그 방법에 있어서 차이가 있습니다.<br><strong>퀵 정렬에서는 정렬할 데이터가 주어지면 하나의 값을 <code>기준값(pivot)</code>으로 사용하여 정렬을 합니다.</strong> 어떤 값을 기준값으로 설정하는지가 퀵정렬의 성능을 좌우합니다.</p>
+<p>분할정복법 3단계를 바탕으로 퀵정렬의 과정을 알아보겠습니다.</p>
+<ol>
+<li>분할 : 하나의 값을 기준값(pivot)으로 설정 한 후 데이터들을 기준값보다 큰 값과 작은값으로 분류한다.</li>
+<li>정복 : 분할한 양쪽을 각각 재귀로 퀵 정렬한다.</li>
+<li>합병 : 이미 분할 과정에서 정렬이 완료되었기 때문에 따로 과정이 없다.</li>
+</ol>
+<p><img src="https://ws4.sinaimg.cn/large/006tKfTcgy1fl8t9gfhijj30u00h6q5c.jpg" alt="퀵 정렬에서의 분할정복법 과정"></p>
+<h3><span id="퀵-정렬-의사-코드">퀵 정렬 의사 코드</span></h3><p>의사 코드는 다음과 같습니다.<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">quickSort(A[], p, r) &#123;</span><br><span class="line">    <span class="keyword">if</span>(p&lt;r) then&#123;</span><br><span class="line">        q = partition(A, p, r);    <span class="comment">// 분할</span></span><br><span class="line">        quickSort(A, p, q<span class="number">-1</span>);    <span class="comment">// 왼쪽 부분배열 정렬</span></span><br><span class="line">        quickSort(A, q+<span class="number">1</span>, r);    <span class="comment">// 오른쪽 부분배열 정렬</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">partition(A[], p, r) &#123;</span><br><span class="line">    배열 A[p...r]의 원소들을 A[r]을 기준으로 양쪽으로 재배치하고</span><br><span class="line">    A[r]이 자리한 위치를 <span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>배열 A의 인덱스 p에서 r사이에 있는 데이터를 정렬합니다. 조건문으로 p가 r보다 작은 경우에만 알고리즘이 실행되도록 합니다. 다음으로 partion 함수는 기준값(pivot)을 기준으로 전체 데이터를 나눠주고 피봇 인덱스를 반환하는 역할을 합니다. 따라서, q는 피봇이 됩니다.</p>
+<p>[p, q-1] 은 배열의 왼쪽 부분, 작은 값이고<br>[q+1, r] 까지는 배열의 오른쪽 부분, 큰 값입니다.<br>재귀적으로 quickSort 함수를 호출해 정렬합니다.</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1fl8trgffz7j30nh0ii0ty.jpg" alt=""></p>
+<p>위의 그림에서 기준값(pivot)으로 인덱스의 마지막 값을 사용하고 있습니다. 위의 그림 기준에서 현재 인덱스 j의 값이 기준값보다 크다면 j를 증가시켜 다음값으로 넘어갑니다.<br>그러나 인덱스 j의 값이 기준값보다 작다면 앞쪽으로 보내야하는데, 이때 i값을 1 증가 시킨 후 그 값과 교환합니다.</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1fl8twh3l33j30q00l43zz.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1fl8u0xwg18j30q10hwta0.jpg" alt=""></p>
+<p>위의 과정은 기준값을 마지막 인덱스의 값인 15로 설정하고 i와 j를 증가시키면서 정렬하는 과정을 보여줍니다. 모든 정렬이 완료되면 인덱스 i+1의 값과 기준값의 위치를 변경합니다.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Partition(A, p, r)&#123;</span><br><span class="line">    x&lt;-A[r];</span><br><span class="line">    i&lt;-p<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">for</span> j&lt;-p to r<span class="number">-1</span></span><br><span class="line">    <span class="keyword">if</span> A[j] &lt;= x then</span><br><span class="line">        i&lt;-i+<span class="number">1</span>;</span><br><span class="line">        exchange A[i] <span class="keyword">and</span> A[j];</span><br><span class="line">    exchange A[i+<span class="number">1</span>] <span class="keyword">and</span> A[r];</span><br><span class="line">    <span class="keyword">return</span> i+<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>Partition 함수를 더 자세한 의사 코드로 나타냈습니다. 앞서 설명한 위치 변환과 인덱스 증가로 정렬을 완료하고 마지막으로 기준값(pivot)의 인덱스를 리턴합니다.</strong></p>
+<h3><span id="퀵-정렬-c-코드">퀵 정렬 c++ 코드</span></h3><p>이제 의사 코드를 바탕으로 c++ 코드를 작성하면 다음과 갖습니다. (의사 코드와는 완전히 일치하지는 않습니다.)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ITEM_SIZE 10</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print_arr</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> size)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; size; i++) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; a[i] &lt;&lt; <span class="string">' '</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">partition</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> pivot = right;</span><br><span class="line">    <span class="keyword">int</span> i = left - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> j = left;</span><br><span class="line">    <span class="keyword">int</span> tmp;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (left &lt; right) &#123;</span><br><span class="line">        <span class="keyword">while</span> (j &lt; right) &#123;</span><br><span class="line">            <span class="keyword">if</span> (a[j] &lt; a[pivot]) &#123;</span><br><span class="line">                tmp = a[j];</span><br><span class="line">                a[j] = a[i + <span class="number">1</span>];</span><br><span class="line">                a[i + <span class="number">1</span>] = tmp;</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">            j++;</span><br><span class="line">        &#125;</span><br><span class="line">        tmp = a[pivot];</span><br><span class="line">        a[pivot] = a[i + <span class="number">1</span>];</span><br><span class="line">        a[i + <span class="number">1</span>] = tmp;</span><br><span class="line">    &#125;</span><br><span class="line">    pivot = i + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> pivot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">quick_sort</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (left &lt; right) &#123;</span><br><span class="line">        <span class="keyword">int</span> pivot = partition(a, left, right);</span><br><span class="line">        quick_sort(a, left, pivot - <span class="number">1</span>);</span><br><span class="line">        quick_sort(a, pivot + <span class="number">1</span>, right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a[ITEM_SIZE] = &#123; <span class="number">15</span>, <span class="number">2</span>, <span class="number">24</span>, <span class="number">18</span>, <span class="number">7</span>, <span class="number">13</span>, <span class="number">12</span>, <span class="number">4</span>, <span class="number">21</span>, <span class="number">9</span> &#125;;</span><br><span class="line">    print_arr(a, ITEM_SIZE);</span><br><span class="line">    quick_sort(a, <span class="number">0</span>, ITEM_SIZE - <span class="number">1</span>);</span><br><span class="line">    print_arr(a, ITEM_SIZE);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3><span id="퀵-정렬-시간-복잡도">퀵 정렬 시간 복잡도</span></h3><p>퀵 정렬에서의 시간 복잡도는 파티션(분할) 하는데 모든 데이터를 한번씩 비교하면 되므로 n이 됩니다. 정확하게 말하자면 데이터의 개수가 n개일때, n-1 번의 비교가 이루어집니다.</p>
+<p>합병 정렬보다는 시간 복잡도를 구하는게 조금 더 복잡한데, 합병 정렬은 항상 2개로 나뉘는것과 달리 퀵 정렬은 항상 양쪽이 고르게 나누어지지 않기 때문입니다.</p>
+<p>먼저 최악의 경우부터 생각해보면 모든 배열이 정렬되어있을 때, 기준값이 최대/최소 값일 때, 최악의 시간 복잡도가 발생합니다. 분할은 0개와 나머지 전체로 나누어지므로 결국 데이터는 아무변화가 없고 똑같은 루틴이 반복되기 때문에 시간 복잡도는 <strong><code>O(n^2)</code></strong>가 됩니다.</p>
+<p>반대로 최선의 경우는 항상 절반으로 분할되는 경우로, 이 때는 합병 정렬과 동일한 시간인 <strong><code>O(nlogn)</code></strong>의 시간을 같습니다.</p>
+<p>퀵 정렬은 다른 정렬 알고리즘보다 대체로 빠르기 때문에 퀵 정렬 이라는 이름이 붙었습니다. 그렇지만 최악의 경우에는 O(n^2)의 느린 속도를 보여줬는데 왜 퀵 정렬이 다른 알고리즘 보다 빠른 걸가요?</p>
+<p>최선의 경우와 최악의 경우는 극단적인 케이스라서 실제적으로 일어나기 어려운 상황입니다.</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tKfTcgy1fl8ud3s48pj30sj0ih0wb.jpg" alt="항상 한쪽이 적어도 1/9 이상이 되도록 분할된다면?"></p>
+<p>현식적으로 가정했을 때, n개의 데이터가 항상 9:1로 분할 된다고 하면 한 단계 당 분할되는 시간을 구하면 항상 n이므로 전체 비교 연산은 트리의 깊이 <em> n 입니다.<br>트리는 대칭적이지 않으므로 가장 깊은 오른쪽 경로(최악의 경우)를 예로 들면 (9/10)^k </em> n = 1이 됩니다.<br>따라서 시간 복잡도 k = log9/10(n)이 됩니다.</p>
+<p>이 예가 의미하는 것은 <strong>퀵 정렬의 성능은 파티션이 얼마나 밸런스있게 나뉘냐에 결정된다는 것입니다.</strong> 극단적인 경우만 아니라면 퀵 정렬의 시간 복잡도는 nlogn 이 되므로 실제로 상당히 빠른 정렬 방법이 됩니다.</p>
+<p>출처 : 2015 봄학기 알고리즘 - 부경대 권오흠 교수님</p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2017/11/19/Algorithm/Concept/heap-sort-1/" data-toggle="tooltip" data-placement="top" title="힙 정렬 (Heap sort) - 1">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2017/11/06/Algorithm/Concept/merge-sort/" data-toggle="tooltip" data-placement="top" title="합병 정렬 (Merge sort)">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#Algorithm" title="Algorithm">Algorithm</a>
+                        
+                          <a class="tag" href="/tags/#Sort" title="Sort">Sort</a>
+                        
+                          <a class="tag" href="/tags/#Quick sort" title="Quick sort">Quick sort</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "https-jongmin92-github-io";
+    var disqus_identifier = "https://jongmin92.github.io/2017/11/07/Algorithm/Concept/quick-sort/";
+    var disqus_url = "https://jongmin92.github.io/2017/11/07/Algorithm/Concept/quick-sort/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'left',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: 0.6em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/jongmin92">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; KimJongMin 2018 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://jongmin92.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-90389042-1';
+    var _gaDomain = '92Hz';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
