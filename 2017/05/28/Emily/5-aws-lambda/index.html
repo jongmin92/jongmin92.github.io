@@ -221,7 +221,7 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h2><span id="index">Index</span></h2><ol>
+                <h2 id="index"><a href="#Index" class="headerlink" title="Index"></a>Index</h2><ol>
 <li><a href="#1">AWS Lambda란?</a></li>
 <li><a href="#2">CloudWatch와 Lambda 구성하기</a></li>
 <li><a href="#3">정리하며</a></li>
@@ -232,12 +232,12 @@
 <p>AWS(아마존 웹 서비스)에 대한 기본적인 내용은 생략합니다.</p>
 </blockquote>
 <p><span id="1"></span></p>
-<h2><span id="aws-lambda란">AWS Lambda란?</span></h2><p>어떠한 이벤트에 따라 Cron 프로세스를 구성하는데에는 다양한 방법이 존재합니다. 서버 인스턴스를 띄워놓고 일정 시간에 이벤트를 발생시키는 것이 일반적인 방법 중 하나이지만 이러한 방법으로 구성할 시에는 해당 시간에 Event를 발생시키는 일을 제외하고는 서버 인스턴스를 낭비하게 됩니다.</p>
+<h2 id="aws-lambda란"><a href="#AWS-Lambda란" class="headerlink" title="AWS Lambda란?"></a>AWS Lambda란?</h2><p>어떠한 이벤트에 따라 Cron 프로세스를 구성하는데에는 다양한 방법이 존재합니다. 서버 인스턴스를 띄워놓고 일정 시간에 이벤트를 발생시키는 것이 일반적인 방법 중 하나이지만 이러한 방법으로 구성할 시에는 해당 시간에 Event를 발생시키는 일을 제외하고는 서버 인스턴스를 낭비하게 됩니다.</p>
 <p><a href="https://aws.amazon.com/ko/lambda/details/" target="_blank" rel="noopener">AWS Lambda</a>는 <strong>이벤트에 응답하여 코드를 실행</strong>하고 자동으로 기본 컴퓨팅 리소스를 관리하는 서버 없는 컴퓨팅 서비스입니다. AWS Lambda를 사용하여 커스텀 로직으로 다른 AWS 서비스를 확장하거나, AWS 규모, 성능 및 보안으로 작동하는 자체 백엔드 서비스를 만들 수 있습니다. AWS Lambda는 Amazon S3 버킷의 객체에 대한 변경 또는 Amazon DynamoDB의 테이블 업데이트와 같은 <strong>다양한 이벤트에 대한 응답으로 코드를 자동 실행</strong>할 수 있습니다.</p>
 <p>AWS Lambda는 코드가 실행되지 않을 때는 요금이 부과되지 않습니다. 즉, 서버 인스턴스를 계속 띄워놓는 것과 비교했을 때 더 저렴합니다. AWS Lambda의 자세한 요금 정책은 <a href="https://aws.amazon.com/ko/lambda/pricing/" target="_blank" rel="noopener">AWS 홈페이지</a>에서 확인 가능합니다. (Lambda 함수가 다른 AWS 서비스를 사용하거나 데이터를 전송하는 경우 추가 요금이 부과될 수 있으므로 필히 확인바랍니다.)</p>
 <hr>
 <p><span id="2"></span></p>
-<h2><span id="cloudwatch와-lambda-구성하기">CloudWatch와 Lambda 구성하기</span></h2><p>1) AWS에 로그인 후 Lambda 서비스를 클릭합니다.</p>
+<h2 id="cloudwatch와-lambda-구성하기"><a href="#CloudWatch와-Lambda-구성하기" class="headerlink" title="CloudWatch와 Lambda 구성하기"></a>CloudWatch와 Lambda 구성하기</h2><p>1) AWS에 로그인 후 Lambda 서비스를 클릭합니다.</p>
 <p><img src="/images/post/2017-05-28/lambda_1.png" alt="Lambda Function 생성하기 - 1"></p>
 <p>2) 저와 같이 이미 생성한 Lambda 함수가 있는 경우는 아래와 같이 <strong>Create a Lambda Function</strong> 버튼을 클릭하고 처음으로 Lambda 함수를 생성하는 경우는 <strong>Get Started Now</strong> 버튼을 클릭합니다.</p>
 <p><img src="/images/post/2017-05-28/lambda_2.png" alt="Lambda Function 생성하기 - 2"></p>
@@ -262,7 +262,7 @@
 <p><img src="/images/post/2017-05-28/lambda_9_1.png" alt="Lambda Function 로그 확인 - 1"><br><img src="/images/post/2017-05-28/lambda_9_2.png" alt="Lambda Function 로그 확인 - 2"></p>
 <hr>
 <p><span id="3"></span></p>
-<h2><span id="정리하며">정리하며</span></h2><p>지금까지 진행한 작업은 다음의 이미지 한장으로 정리가 가능합니다. 이번기회에 lambda를 처음 사용해봤지만 앞으로 개인프로젝트에도 실무에서도 자주 사용하게될 것 같습니다.</p>
+<h2 id="정리하며"><a href="#정리하며" class="headerlink" title="정리하며"></a>정리하며</h2><p>지금까지 진행한 작업은 다음의 이미지 한장으로 정리가 가능합니다. 이번기회에 lambda를 처음 사용해봤지만 앞으로 개인프로젝트에도 실무에서도 자주 사용하게될 것 같습니다.</p>
 <p><img src="/images/post/2017-05-28/cloudwatch_lambda.png" alt="AWS의 CloudWatch와 Lambda"></p>
 
                 
@@ -528,7 +528,7 @@
 <script>
     // dynamic User by Hux
     var _gaId = 'UA-90389042-1';
-    var _gaDomain = '92Hz';
+    var _gaDomain = 'undefined';
 
     // Originial
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

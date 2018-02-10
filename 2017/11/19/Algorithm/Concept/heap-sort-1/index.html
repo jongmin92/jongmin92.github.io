@@ -220,7 +220,7 @@
                 <p>힙 정렬은 <code>힙, 바이너리 힙, 이진 힙</code>이라고 부르는 자료구조를 이용하는 정렬 알고리즘입니다.</p>
 <p><strong>힙 정렬의 특징</strong>은 다음과 같습니다.<br>1.최악의 경우에도 시간 복잡도가 nlogn이 되는 빠른 정렬이다.<br>2.힙 정렬은 알고리즘을 구현하는데 추가적인 배열이 필요하지 않다.<br>3.이진 힙(바이너리 힙) 자료구조를 사용한다.</p>
 <p>먼저 힙 정렬을 구현하기 전에, <code>힙</code> 이라는 자료구조에 대해 알아보겠습니다.</p>
-<h3><span id="힙heap-이란">힙(Heap) 이란?</span></h3><p>힙(Heap)은<br>1) complete binary tree(완전 이진 트리) 이면서<br>2) heap property를 만족해야 합니다.</p>
+<h3 id="힙heap-이란"><a href="#힙-Heap-이란" class="headerlink" title="힙(Heap) 이란?"></a>힙(Heap) 이란?</h3><p>힙(Heap)은<br>1) complete binary tree(완전 이진 트리) 이면서<br>2) heap property를 만족해야 합니다.</p>
 <p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1flnbnxri5vj31cy0nu48n.jpg" alt="포화 이진 트리, 완전 이진 트리"></p>
 <p>위의 그림에서는 <strong>full binary tree(포화 이진 트리)</strong>와 <strong>complete binary tree(완전 이진 트리)</strong>에 대해 설명하고 있습니다.</p>
 <p><code>binary tree(이진 트리)</code>란 한 노드가 최대 2개의 자식 노드를 가지는 트리 입니다. 따라서, 위의 2개 트리는 모두 이진 트리입니다. 이진 트리는 이진 탐색 트리(BST)와 이진 힙(Binary Heap)의 구현에 흔히 사용됩니다.</p>
@@ -243,7 +243,7 @@
 <li>A[i]의 오른쪽 자식 노드 : A[2i+1]</li>
 </ul>
 <p>따라서 <strong>Heap은 1차원 배열을 통해 표현이 가능하기 때문에 불필요하게 트리 자료구조를 따로 만들어 사용해 구현할 필요가 없습니다.</strong></p>
-<h3><span id="max-heapify-란">Max-heapify 란?</span></h3><p>지금부터는 어떤 1차원 배열의 데이터가 있을 때 이 1차원 배열을 Heap으로 변환하는 과정에 대해 알아보겠습니다. (이번 포스팅에서는 max heap만을 다루기로 했으므로 max heap을 만드는 방법에 대해 알아보겠습니다.)<br>일반 1차원 배열은 <strong>max-heapify</strong>라는 연산 과정을 통해 max heap으로 만들수 있습니다.</p>
+<h3 id="max-heapify-란"><a href="#Max-heapify-란" class="headerlink" title="Max-heapify 란?"></a>Max-heapify 란?</h3><p>지금부터는 어떤 1차원 배열의 데이터가 있을 때 이 1차원 배열을 Heap으로 변환하는 과정에 대해 알아보겠습니다. (이번 포스팅에서는 max heap만을 다루기로 했으므로 max heap을 만드는 방법에 대해 알아보겠습니다.)<br>일반 1차원 배열은 <strong>max-heapify</strong>라는 연산 과정을 통해 max heap으로 만들수 있습니다.</p>
 <p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1flnd6rf5iij31eq0s6jzw.jpg" alt=""></p>
 <p>max-heapify 연산을 하기 위한 전제조건을 위의 그림에서 보여주고 있습니다.<br>1) 트리의 전체 모양은 complete binary tree이다.<br>2) 왼쪽 서브 트리(subtree)는 그 자체로 heap이다.<br>3) 오른쪽 서브 트리(subtree)는 그 자체로 heap이다.</p>
 <p>여기서 유일하게 루트 노드만이 heap property를 만족하지 않을때, max-heapify 연산을 통해 heap property를 만족하게 만들 수 있습니다.</p>
@@ -515,7 +515,7 @@
 <script>
     // dynamic User by Hux
     var _gaId = 'UA-90389042-1';
-    var _gaDomain = '92Hz';
+    var _gaDomain = 'undefined';
 
     // Originial
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

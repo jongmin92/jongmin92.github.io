@@ -217,7 +217,7 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h2><span id="index">Index</span></h2><ol>
+                <h2 id="index"><a href="#Index" class="headerlink" title="Index"></a>Index</h2><ol>
 <li><a href="#1">크롤링이란?</a></li>
 <li><a href="#2">Scraping - 데이터 가져오기</a></li>
 <li><a href="#3">Parsing - 데이터 추출하기</a></li>
@@ -229,7 +229,7 @@
 <p>Node 버전은 <strong>6.6.0</strong>을 사용합니다.</p>
 </blockquote>
 <p><span id="1"></span></p>
-<h2><span id="크롤링이란">크롤링이란?</span></h2><p>우리가 흔히 부르는 <strong>크롤링(crawling)</strong>이란 <strong>스크래핑(scraping)</strong>이라고도 합니다. 즉 <strong>웹 페이지를 그대로 가져와 데이터를 추출해 내는 행위</strong>입니다. 크롤링 하는 소프트웨어를 크롤러(crawler)라고 부릅니다.</p>
+<h2 id="크롤링이란"><a href="#크롤링이란" class="headerlink" title="크롤링이란?"></a>크롤링이란?</h2><p>우리가 흔히 부르는 <strong>크롤링(crawling)</strong>이란 <strong>스크래핑(scraping)</strong>이라고도 합니다. 즉 <strong>웹 페이지를 그대로 가져와 데이터를 추출해 내는 행위</strong>입니다. 크롤링 하는 소프트웨어를 크롤러(crawler)라고 부릅니다.</p>
 <p>웹 크롤러(web crawler)는 조직적, 자동화된 방법으로 월드 와이드 웹(WWW)을 탐색하는 프로그램입니다. 검색 엔진과 같은 여러 사이트에서는 데이터의 최신 상태 유지를 위해 웹 크롤링을 합니다. 웹 크롤러는 대체로 방문한 사이트의 모든 페이지 복사본을 생성하는데 사용되며, 검색 엔진은 이렇게 생성된 페이지를 보다 빠른 검색을 위해 인덱싱합니다.</p>
 <p>웹 크롤러는 시드(seeds)라고 불리는 URL 리스트에서부터 시작해서 페이지의 모든 하이퍼링크를 인식하여 URL 리스트를 갱신합니다. 갱신된 리스트를 재귀적으로 다시 방문합니다.</p>
 <p>결국 <strong>웹 크롤러는 엄청난 분량의 웹문서를 사람이 직접 구별해서 모으는 일은 거의 불가능하기 때문에, 이를 자동으로 수행해 주는 것입니다.</strong></p>
@@ -241,14 +241,14 @@
 <p>2.<strong>Parsing</strong> : 가져온 데이터를 어떻게 추출할 것인가?</p>
 <hr>
 <p><span id="2"></span></p>
-<h2><span id="scraping-데이터-가져오기">Scraping - 데이터 가져오기</span></h2><p>Javascript에서 웹 페이지 데이터를 가져오기 위해서 <a href="https://github.com/request/request" target="_blank" rel="noopener">request</a> 모듈을 사용합니다.</p>
+<h2 id="scraping-데이터-가져오기"><a href="#Scraping-데이터-가져오기" class="headerlink" title="Scraping - 데이터 가져오기"></a>Scraping - 데이터 가져오기</h2><p>Javascript에서 웹 페이지 데이터를 가져오기 위해서 <a href="https://github.com/request/request" target="_blank" rel="noopener">request</a> 모듈을 사용합니다.</p>
 <p>먼저 request 모듈을 설치합니다.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install request --save</span><br></pre></td></tr></table></figure></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> request = <span class="built_in">require</span>(<span class="string">'request'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> url = <span class="string">"http://www.inu.ac.kr/com/cop/mainWork/foodList1.do?siteId=inu&amp;id=inu_050110010000&amp;command=week"</span>;</span><br><span class="line"></span><br><span class="line">request(url, (error, response, body) =&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span> (error) <span class="keyword">throw</span> error;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">console</span>.log(body);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>위의 코드를 실행하면 아래와 같이 제가 얻고자 했던 학식 메뉴의 데이터를 포함한 웹 페이지 데이터를 가져옵니다. 해당 데이터는 크롬에서 <strong><code>보기 - 개발자 정보 - 소스 보기</code></strong>를 통해서도 확인이 가능합니다.</p>
 <p><img src="/images/post/2017-05-26/scraping.png" alt="웹 페이지 Scraping"></p>
 <hr>
 <p><span id="3"></span></p>
-<h2><span id="parsing-데이터-추출하기">Parsing - 데이터 추출하기</span></h2><p>Scraping을 통해 가져온 데이터에서 원하는 데이터만을 추출(Parsing)하기 위해 <a href="https://github.com/cheeriojs/cheerio" target="_blank" rel="noopener">cheerio</a> 모듈을 사용합니다.</p>
+<h2 id="parsing-데이터-추출하기"><a href="#Parsing-데이터-추출하기" class="headerlink" title="Parsing - 데이터 추출하기"></a>Parsing - 데이터 추출하기</h2><p>Scraping을 통해 가져온 데이터에서 원하는 데이터만을 추출(Parsing)하기 위해 <a href="https://github.com/cheeriojs/cheerio" target="_blank" rel="noopener">cheerio</a> 모듈을 사용합니다.</p>
 <p>cheerio 모듈을 설치합니다.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install cheerio --save</span><br></pre></td></tr></table></figure></p>
 <p>cherrio 모듈을 사용하면 웹 클라이언트 자바스크립트 라이브러리인 <strong><code>jQuery</code></strong> 에서 사용하는 것 처럼 style을 통해 element를 선택할 수 있어, 기존의 선택자 방식을 그대로 사용할 수 있습니다.</p>
 <p>따라서 cherrio를 사용하기 위해서는 Request 모듈을 통해 가져온 HTML 데이터에서 <strong>어떤 element가 우리가 원하는 데이터를 갖고 있는지 파악할 필요가 있습니다.</strong></p>
@@ -266,7 +266,7 @@
 <p><img src="/images/post/2017-05-26/parsing.png" alt="parsing 결과"></p>
 <hr>
 <p><span id="4"></span></p>
-<h2><span id="크롤링-이후">크롤링 이후</span></h2><p>크롤링을 통해 원하는 데이터를 추출했다면 이를 활용해야 합니다. 에밀리에서는 사용자의 요청(학생식당, 카페테리아, 사범대식당, 기숙사식당, 교직원식당)에 따라 해당하는 식당의 메뉴를 제공합니다.</p>
+<h2 id="크롤링-이후"><a href="#크롤링-이후" class="headerlink" title="크롤링 이후"></a>크롤링 이후</h2><p>크롤링을 통해 원하는 데이터를 추출했다면 이를 활용해야 합니다. 에밀리에서는 사용자의 요청(학생식당, 카페테리아, 사범대식당, 기숙사식당, 교직원식당)에 따라 해당하는 식당의 메뉴를 제공합니다.</p>
 <p>메뉴라는 데이터 특성상 실시간으로 변경되는 데이터가 아니기 때문에 한번 크롤링 하고 나면 사용자의 요청(식당)에 따라 다른 응답해주면 될 뿐 데이터 자체는 요일이 변경되지 않는이상 계속 유효합니다. 따라서 <strong>학교 사이트에서 메뉴를 크롤링하는 행위는 학교 메뉴가 갱신되는 일주일 주기마다 한번씩만 하고 크롤링한 데이터를 DB에 저장한다면 사용자의 요청마다 반복적인 크롤링을 하지 않을 수 있습니다.</strong></p>
 <p>이를 위한 해결 방법으로는 <a href="https://github.com/node-schedule/node-schedule" target="_blank" rel="noopener">node-schedule</a> 모듈을 사용해서 정해진 시간마다 실행되도록 하는 방법이 있습니다.</p>
 <p>혹은 <a href="https://aws.amazon.com/ko/lambda/" target="_blank" rel="noopener">AWS-Lambda</a>를 사용할 수도 있습니다.</p>
@@ -531,7 +531,7 @@
 <script>
     // dynamic User by Hux
     var _gaId = 'UA-90389042-1';
-    var _gaDomain = '92Hz';
+    var _gaDomain = 'undefined';
 
     // Originial
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
