@@ -18,7 +18,7 @@
         
     </title>
 
-    <link rel="canonical" href="https://jongmin92.github.io/2018/02/11/Spring/spring-di/">
+    <link rel="canonical" href="https://jongmin92.github.io/2018/02/11/Spring/spring-ioc-di/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -147,14 +147,14 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -219,7 +219,7 @@
 
                 <h1 id="ioc란"><a href="#IoC란" class="headerlink" title="IoC란?"></a>IoC란?</h1><p>IoC 컨테이너 개념을 이해하기 위하여 이와 같은 컨테이너가 왜 등장하게 되었는지를 먼저 이해하는 것이 중요합니다.</p>
 <p>애플리케이션 코드를 작성할 때, 특정 기능이 필요하면 라이브러리 사용하곤 합니다. 이때는 프로그램의 흐름을 제어하는 주체가 애플리케이션 코드입니다. 하지만 <strong>프레임워크(Framework) 기반의 개발에서는 프레임워크 자신이 흐름을 제어하는 주체가 되어, 필요 할 때마다 애플리케이션 코드를 호출하여 사용합니다.</strong></p>
-<p>프레임워크에서 이 제어권을 가지는 것이 바로 <code>컨테이너(Container)</code>입니다. 객체에 대한 제어권이 개발자로부터 컨테이너에게 넘어가면서 객체의 생성부터 생명주기 관리까지의 모든 것을 컨테이너가 맡아서 하게됩니다. 이를 <strong>일반적인 제어권의 흐름이 바뀌었다고 하여 <code>IoC(Inversion of Control : 제어의 역전)</code>라고 합니다.</strong></p>
+<p>프레임워크에서 이 제어권을 가지는 것이 바로 <code>컨테이너(Container)</code>입니다. <strong>객체에 대한 제어권이 개발자로부터 컨테이너에게 넘어가면서 객체의 생성부터 생명주기 관리까지의 모든 것을 컨테이너가 맡아서 하게됩니다.</strong> 이를 <strong>일반적인 제어권의 흐름이 바뀌었다고 하여 <code>IoC(Inversion of Control : 제어의 역전)</code>라고 합니다.</strong></p>
 <p>먼저 지금까지 일반적으로 개발하던 방식에 대해서 생각해보아야 합니다. 모든 인스턴스에 대한 생성 권한은 지금까지 모든 개발자들에게 있었습니다. 즉, 작성하는 코드상에서 개발자가 직접 생성했다는 것입니다. EJB나 IoC 컨테이너를 사용하지 않았던 개발자들은 지금까지 이와 같은 방식을 사용했습니다.</p>
 <p>EJB는 각 개발자들이 모든 인스턴스의 생성 권한에 제약을 가하는 첫번째 프레임워크입니다. EJB는 서비스를 위해 생성되는 컴포넌트에 대한 생성 권한을 EJB 컨테이너에게 위임했습니다. 생성된 인스턴스는 EJB 컨테이너가 생명주기를 관리했습니다. EJB가 EJB 컨테이너에 의하여 관리됨으로 인해 큰 장점을 얻을 수 있었습니다. 그러나 장점 이외에 EJB가 가지고 있는 한계에 부딪히게 되었으며, 이 같은 요구사항을 해결하기 위해 EJB의 한계를 극복하기 위한 시도가 발생했습니다.</p>
 <p>그래서 등장한 것이 경량(LightWeight) IoC 컨테이너 입니다. IoC 컨테이너는 EJB 컨테이너가 가지고 있던 단점을 보완하기 위하여 탄생한 컨테이너 개념입니다. <strong>Spring 프레임워크에서 지원하는 Ioc 컨테이너는 우리들이 흔히 개발하고 사용해왔던 일반 <code>POJO(Plain Old Java Object)</code> 클래스들이 지금까지 EJB를 통하여 실행했던 많은 기능들을 서비스 가능하도록 지원합니다.</strong><br>또한, EJB 컨테이너가 지원하고 있던 Transaction, Object Pooling, 인스턴스 생명주기 관리등의 기능들을 Spring 컨테이너가 지원하며 부가적으로 테스트의 용이성(애플리케이션 품질의 향상), 개발 생산성을 향상 시킬 수 있습니다.</p>
@@ -393,8 +393,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "https-jongmin92-github-io";
-    var disqus_identifier = "https://jongmin92.github.io/2018/02/11/Spring/spring-di/";
-    var disqus_url = "https://jongmin92.github.io/2018/02/11/Spring/spring-di/";
+    var disqus_identifier = "https://jongmin92.github.io/2018/02/11/Spring/spring-ioc-di/";
+    var disqus_url = "https://jongmin92.github.io/2018/02/11/Spring/spring-ioc-di/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
