@@ -151,6 +151,13 @@
 
                         
                         <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/about/">About</a>
                         </li>
                         
@@ -159,13 +166,6 @@
                         
                         <li>
                             <a href="/tags/">Tags</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -222,7 +222,7 @@
                 post-container">
 
                 <h1 id="서론"><a href="#서론" class="headerlink" title="서론"></a>서론</h1><p>Javascript를 이용한 Node.js로 서버프로그래밍을 하다가 최근 <strong>Java를 이용한 Spring Framework를 사용하게 되면서 JavaEE, Servlet, JSP, Tomcat, MVC, WAS와 같은 용어들을 마주하게 되었습니다.</strong> 이번 포스팅을 통해서 Java를 이용한 웹 개발의 히스토리와 여러 용어들을 정리해보고자 합니다.</p>
-<h1 id="시작은-javaee"><a href="#시작은-JavaEE" class="headerlink" title="시작은 JavaEE"></a>시작은 JavaEE</h1><p>기존에는 기업용 서버 소프트웨어 개발이라는 것이 C나 C++을 사용해서 다양한 회사의 미들웨어(middleware) 제품들을 사용해서 개발하는 방식이었습니다. 그러나 이 경우 개발자들은 운영체제와 사용하는 미들웨어 제품에 종속될 수 밖에 없는데, <strong>자바의 플랫폼 독립적 특성</strong>을 활용해서 미들웨어에 필요한 공통 API를 제공하면 그런 문제를 해결할 수 있다는 생각을 했습니다.was<br>그래서 서버 개발에 필요한 기능을 모아서 J2EE라는 표준을 만들었습니다. 그리고 이 J2EE는 버전 5.0 이후로 Java EE로 개칭됩니다.</p>
+<h1 id="시작은-javaee"><a href="#시작은-JavaEE" class="headerlink" title="시작은 JavaEE"></a>시작은 JavaEE</h1><p>기존에는 기업용 서버 소프트웨어 개발이라는 것이 C나 C++을 사용해서 다양한 회사의 미들웨어(middleware) 제품들을 사용해서 개발하는 방식이었습니다. 그러나 이 경우 개발자들은 운영체제와 사용하는 미들웨어 제품에 종속될 수 밖에 없는데, <strong>자바의 플랫폼 독립적 특성</strong>을 활용해서 미들웨어에 필요한 공통 API를 제공하면 그런 문제를 해결할 수 있을 것이라는 생각을 했습니다.<br>그래서 서버 개발에 필요한 기능을 모아서 J2EE라는 표준을 만들었습니다. 그리고 이 J2EE는 버전 5.0 이후로 Java EE로 개칭됩니다.</p>
 <p>자바 플랫폼, 엔터프라이즈 에디션(Java Platform, Enterprise Edition; Java EE)은 자바를 이용한 서버측 개발을 위한 플랫폼입니다. Java EE 플랫폼은 PC에서 동작하는 표준 플랫폼인 Java SE에 부가하여, 웹 애플리케이션 서버에서 동작하는 장애복구 및 분산 멀티티어를 제공하는 자바 소프트웨어의 기능을 추가한 서버를 위한 플랫폼입니다. 이러한 Java EE 스펙에 따라 제품으로 구현한 것을 <code>웹 애플리케이션 서버</code> 또는 <code>WAS</code>라 부릅니다.</p>
 <blockquote>
 <p><strong>WAS란?</strong><br>인터넷 상에서 HTTP를 통해 사용자 컴퓨터나 장치에 애플리케이션을 수행해 주는 미들웨어(소프트웨어 엔진)이다. <strong>웹 애플리케이션 서버는 동적 서버 콘텐츠를 수행하는 것으로 일반적인 웹 서버와 구별이 되며, 주로 데이터베이스 서버와 같이 수행이 된다.</strong><br><img src="/images/post/2018-02-05/was.png" alt=""><br>&lt; 사용자 요청(웹 브라우저) -&gt; 웹 서버 -&gt; WAS(동적 처리) -&gt; 웹 서버 -&gt; 사용자 응답 메세지(웹 브라우저) &gt;<br>예로, 웹 서버에서 JSP를 요청하면 톰캣에서는 JSP 파일을 서블릿으로 변환하여 컴파일을 수행하고, 서블릿의 수행결과를 웹 서버에서 전달하게 된다.</p>
