@@ -151,14 +151,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -222,8 +222,8 @@
                 post-container">
 
                 <h1 id="dispatcherservlet-이란"><a href="#DispatcherServlet-이란" class="headerlink" title="DispatcherServlet 이란?"></a>DispatcherServlet 이란?</h1><p>Spring MVC는 DispatcherServlet의 등장으로 web.xml의 역할이 축소되었습니다. 이전에는 서블릿을 URL로 활용하기 위해서는 반드시 web.xml에 등록해야 했지만, 이제는 <strong><code>DispatcherServlet</code>이 해당 어플리케이션으로 들어오는 요청을 모두 핸들링 해주기 때문입니다.</strong></p>
-<p>web.xml의 역할이 축소되었지만, <servlet>으로 DispatcherServlet을 등록해줘야 하며, 이 객체의 URL 적용범위 또한 web.xml에 설정해야 합니다. 또한 encoding과 관련된 <filter>나 <listener>를 등록하기 위해서 web.xml은 필요합니다.</listener></filter></servlet></p>
-<p>그러나 web.xml에서 중요하게 사용되었던 <servlet> 매핑은 이제 DispatcherServlet이 대신 맡아서 처리하게 되었습니다. <strong>web.xml에 DispatcherServlet의 <url-pattern>을 ‘/‘로 설정함으로써 동시에 이제 <code>모든 요청은 DispatcherServlet으로 전달</code>됩니다.</url-pattern></strong> 물론 DispatcherServlet을 web.xml에 등록해도 계속 서블릿을 web.xml에 매핑해서 사용할 수 있지만, 이런 옛 방식을 버리고 DispatcherServlet을 이용해 웹 개발을 한다면 앞으로 서블릿 파일을 만들 필요도 없어지고 동시에 놀라운 @MVC의 혜택을 얻을 수 있습니다.</servlet></p>
+<p>web.xml의 역할이 축소되었지만, <code>&lt;servlet&gt;</code>으로 DispatcherServlet을 등록해줘야 하며, 이 객체의 URL 적용범위 또한 web.xml에 설정해야 합니다. 또한 encoding과 관련된 <code>&lt;filter&gt;</code>나 <code>&lt;listener&gt;</code>를 등록하기 위해서 web.xml은 필요합니다.</p>
+<p>그러나 web.xml에서 중요하게 사용되었던 <code>&lt;servlet&gt;</code> 매핑은 이제 DispatcherServlet이 대신 맡아서 처리하게 되었습니다. <strong>web.xml에 DispatcherServlet의 <url-pattern>을 ‘/‘로 설정함으로써 동시에 이제 <code>모든 요청은 DispatcherServlet으로 전달</code>됩니다.</url-pattern></strong> 물론 DispatcherServlet을 web.xml에 등록해도 계속 서블릿을 web.xml에 매핑해서 사용할 수 있지만, 이런 옛 방식을 버리고 DispatcherServlet을 이용해 웹 개발을 한다면 앞으로 서블릿 파일을 만들 필요도 없어지고 동시에 놀라운 @MVC의 혜택을 얻을 수 있습니다.</p>
 <p>DispatcherServlet을 이용한다는 것은 스프링에서 제공하는 @MVC를 이용하겠단 뜻입니다. @MVC는 그동안 추상적으로 알아오고 발전했던 MVC(Model, View, Controller) 설계 영역을 노골적으로 분할하여 사용자가 무조건 MVC로 어플리케이션을 설계하게끔 유도하는 방식입니다. 즉, @MVC를 이용해 어플리케이션을 개발한다면 MVC 설계의 원칙대로 웹 어플리케이션을 제작할 수 있게 된다는 뜻입니다.</p>
 <p>그럼 간단하게 DispatcherServlet이 담당하는 역할이 무엇인지 알아봅시다. 먼저 DispatcherServlet에 대해 간단히 정의해보자면, <strong>각각 분리하여 만든 <code>Model, View, Controller</code>를 조합하여 브라우저로 출력해주는 역할을 수행합니다.</strong></p>
 <h1 id="spring-mvc-구조"><a href="#Spring-MVC-구조" class="headerlink" title="Spring MVC 구조"></a>Spring MVC 구조</h1><p><img src="/images/post/2018-03-12/mvc.png" alt=""></p>
