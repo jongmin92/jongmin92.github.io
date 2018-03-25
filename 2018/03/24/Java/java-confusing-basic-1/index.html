@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/images/etc/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          자주 보지 않으면 잊게되는 Java 기초 정리 - 1 - 92Hz | Jongmin&#39;s Blog
+        
+    </title>
+
+    <link rel="canonical" href="https://jongmin92.github.io/2018/03/24/Java/java-confusing-basic-1/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            /* 기본 포스트 헤더 이미지 (페이지 이미지 || 기본 헤더 이미지) */
+            /* background-image: url('undefined') */
+            /* background-image: url('/images/etc/home.jpg') */
+            background-image: url('/images/etc/home.jpg')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#Java" title="Java">Java</a>
+                            
+                        </div>
+                        <h1>자주 보지 않으면 잊게되는 Java 기초 정리 - 1</h1>
+                        <h2 class="subheading">기초적이지만 자주 헷갈리는 자바 문법과 개념을 정리해보자.</h2>
+                        <span class="meta">
+                            Posted by KimJongMin on
+                            2018-03-24
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">92Hz</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>매번 공부해도 너무 당연하다는 듯이 넘어가 잊게되거나, 기억해 두면 좋을것 같은 기초적인 문법과 개념들을 간단히 정리해보겠습니다.</p>
+<h1 id="변수"><a href="#변수" class="headerlink" title="변수"></a>변수</h1><ul>
+<li>덧셈 연산자(+)는 피연산자가 모두 숫자일 때는 두 수를 더하지만, 피연산자 중 어느 한쪽이 String이면 나머지 한 쪽을 먼저 String으로 변환한 다음 두 String을 결합한다.</li>
+</ul>
+<h1 id="연산자"><a href="#연산자" class="headerlink" title="연산자"></a>연산자</h1><ul>
+<li>x &lt;&lt; 2 + 1 : 쉬프트연산자(&lt;&lt;)는 덧셈연산자보다 우선순위가 낮다. 그래서 해당 식은 ‘x &lt;&lt; (2 + 1)’ 과 같다.</li>
+<li>data &amp; 0xFF == 0 : 논리연산자(&amp;)는 비교연산자(==)보다 우선순위가 낮으므로 비교연산 후에 논리연산이 수행된다. 그래서 해당 식은 ‘data &amp; (0xFF == 0)’ 과 같다.</li>
+<li>x &lt; -1 || x &gt; 3 &amp;&amp; x &lt; 5 : 논리연산자 중에서 AND를 의미하는 ‘&amp;&amp;’가 OR을 의미하는 ‘||’보다 우선순위가 높다. 그래서 해당 식은 ‘x &lt; -1 || (x &gt; 3 &amp;&amp; x &lt; 5)’ 과 같다.</li>
+</ul>
+<p><code>산술 변환</code> : 연산 전에 피연산자 타입의 일치를 위해 자동 형변환되는 것. 이 변환은 이항 연산에서 뿐만 아니라 단항 연산에서도 일어난다. ‘산술 변환’의 규칙은 다음과 같다.</p>
+<ol>
+<li><strong>두 피연산자의 타입을 같게 일치시킨다. (보다 큰 타입으로 일치)</strong><ul>
+<li>long + int -&gt; long + long -&gt; long</li>
+<li>float + int -&gt; float + float -&gt; float</li>
+</ul>
+</li>
+<li><strong>피연산자의 타입이 int보다 작은 타입이면 int로 변환된다.</strong><ul>
+<li>byte + short -&gt; int + int -&gt; int</li>
+<li>char + short -&gt; int + int -&gt; int</li>
+</ul>
+</li>
+</ol>
+<p>첫 번째 규칙은 자동 형변환처럼 피연산자의 값손실을 최소화하기 위한 것이고, 두 번째 규칙은 정수형의 기본 타입인 int가 가장 효율적으로 처리할 수 있는 타입이기 때문에, 그리고 int보다 작은 타입, 예를 들면 char나 short의 표현범위가 좁아서 연산중에 오버플로우(overflow)가 발생할 가능성이 높기 때문에 만들어진 것이다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">long</span> a = <span class="number">1000000</span> * <span class="number">1000000</span>;</span><br><span class="line"><span class="keyword">long</span> b = <span class="number">1000000</span> * <span class="number">1000000L</span>;</span><br><span class="line"></span><br><span class="line">System.out.println(<span class="string">"a="</span>+a);</span><br><span class="line">System.out.println(<span class="string">"b="</span>+b);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 결과</span></span><br><span class="line">a = -<span class="number">727379968</span></span><br><span class="line">b = <span class="number">1000000000000</span></span><br></pre></td></tr></table></figure>
+<p>위의 예제에서 ‘1000000 <em> 1000000’의 결과가 1000000000000(2\</em>10의 12승)임에도 불구하고, -727379968라는 결과가 출력되었다. 그 이유는 int 타입과 int 타입의 연산 결과는 int 타입인데, 연산결과가 int 타입의 최대값인 1000000000(2*10의 9승)을 넘으므로 오버플로우(overflow)가 발생했기 때문이다. <strong>이미 오버플로우가 발생한 값을 아무리 long 타입의 변수에 저장해도 소용이 없다.</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> c1 = <span class="string">'a'</span>;      <span class="comment">// c1에는 문자 'a'의 코드값은 97이 저장된다.</span></span><br><span class="line"><span class="keyword">char</span> c2 = c1;      <span class="comment">// c1에 저장되어 있는 값이 c2에 저장된다.</span></span><br><span class="line"><span class="keyword">char</span> c3 = <span class="string">' '</span>;       <span class="comment">// c3를 공백으로 초기화 한다.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> i = c1 +<span class="number">1</span>;      <span class="comment">// 'a' + 1 -&gt; 97 + 1 -&gt; 98</span></span><br><span class="line"></span><br><span class="line">c3 = (<span class="keyword">char</span>)(c1 + <span class="number">1</span>);</span><br><span class="line">c2++;</span><br><span class="line">c2++;</span><br></pre></td></tr></table></figure>
+<p>위의 예제에서 c2++; 대신에 c2=c2+1;을 사용하면 에러가 발생할 것이다. c2+1의 연산결과는 int형이며, 그 결과를 다시 c2에 담으려면 형변환 연산자를 사용하여 char형으로 형변환해야 하기 때문이다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> c1 = <span class="string">'a'</span>;</span><br><span class="line"><span class="keyword">char</span> c2 = c1 + <span class="number">1</span>;       <span class="comment">// 컴파일 에러 발생 O</span></span><br><span class="line"><span class="keyword">char</span> c2 = <span class="string">'a'</span> + <span class="number">1</span>;       <span class="comment">// 컴파일 에러 발생 X</span></span><br></pre></td></tr></table></figure>
+<p>‘a’ + 1은 리터럴 간의 연산이기 때문에 에러가 발생하지 않는다. 상수 또는 리터럴 간의 연산은 실행과정동안 변하는 값이 아니기 때문에, 컴파일 시에 컴파일러가 계산해서 그 결과로 대체함으로써 코드를 보다 효율적으로 만든다. 컴파일러가 미리 덧셈연산을 수행하기 때문에 실행 시에는 덧셈 연산이 수행되지 않는다. 수식에 변수가 들어가 있는 경우에는 컴파일러가 미리 계산을 할 수 없기 때문에 형변환을 해줘야한다. <code>(char c2 = (char) (c1 + 1))</code> 그렇지 않으면 컴파일 에러가 발생한다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">float</span> f = <span class="number">0.1f</span>;         <span class="comment">// f에 0.10000000149011612로 저장된다.</span></span><br><span class="line"><span class="keyword">double</span> d = <span class="number">0.1</span>;      <span class="comment">// d에 0.10000000000000001로 저장된다.</span></span><br></pre></td></tr></table></figure>
+<p>float 타입의 값을 double 타입으로 형변환하면, 부호와 지수는 달라지지 않고 그저 기수의 빈자리를 0으로 채울 뿐이므로 0.1f를 double타입으로 형변환해도 그 값은 전혀 달라지지 않는다. 즉, float 타입의 값을 정밀도가 더 높은 double 타입으로 형변환했다고 해서 오차가 적어지는 것이 아니라는 말이다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">String str1 = <span class="string">"abc"</span>;</span><br><span class="line">String str2 = <span class="keyword">new</span> String(<span class="string">"abc"</span>);</span><br><span class="line"></span><br><span class="line"><span class="string">"abc"</span> == <span class="string">"abc"</span> ? <span class="keyword">true</span></span><br><span class="line">str1 == <span class="string">"abc"</span> ? <span class="keyword">true</span></span><br><span class="line">str2 == <span class="string">"abc"</span> ? <span class="keyword">false</span></span><br><span class="line">str1.equals(<span class="string">"abc"</span>) ? <span class="keyword">true</span></span><br><span class="line">str2.equals(<span class="string">"abc"</span>) ? <span class="keyword">true</span></span><br><span class="line">str2.equals(<span class="string">"ABC"</span>) ? <span class="keyword">false</span></span><br><span class="line">str2.equalsIgnoreCase(<span class="string">"ABC"</span>) ? <span class="keyword">true</span></span><br></pre></td></tr></table></figure>
+<p>str2와 “abc”의 내용이 같은데도 ‘==’로 비교하면, false를 결과로 얻는다. 내용은 같지만 서로 다른 객체이기 때문이다. 그러나 <strong>equals()는 객체가 달라도 내용이 같으면 true를 반환한다. 그래서 문자열을 비교할 때는 항상 equals()를 사용해야 한다.</strong></p>
+<ul>
+<li>효율적인 연산<ul>
+<li>OR 연산 ‘||’의 경우, 두 피연산자 중 어느 한 쪽만 ‘참’이어도 전체 연산결과가 ‘참’이므로 좌측 피연산자가 ‘true(참)’이면, 우측 피연산자의 값은 평가하지 않는다.</li>
+<li>AND 연산 ‘&amp;&amp;’의 경우, 어느 한쪽만 ‘거짓(0)’이어도 전체 연산결과가 ‘거짓(0)’이므로 좌측 피연산자가 ‘거짓(0)’이면, 우측 피연산자의 값은 평가하지 않는다.</li>
+</ul>
+</li>
+</ul>
+<p>비트 XOR 연산자 ‘^’는 두 피연산자의 비트가 다를 때만 1이 된다. 그리고 <strong>같은 값으로 두고 XOR 연산을 수행하면 원래의 값으로 돌아온다는 특징이 있어서 간단한 암호화에 사용된다.</strong></p>
+<p>비트 전환 연산자는 피연산자의 타입이 int보다 작으면 int로 자동 형변환(산술 변환) 후에 연산하기 때문에 연산결과는 32자리의 2진수이다.</p>
+<p>쉬프트 연산자의 좌측 피연산자는 산술변환이 적용되어 int보다 작은 타입은 int타입으로 자동 변환되고 연산결과 역시 int타입이 된다. 그러나 쉬프트 연산자는 다른 이항연산자들과 달리 피연산자의 타입을 일치시킬 필요가 없기 때문에 우측 피연산자에는 산술변환이 적용되지 않는다.</p>
+<p>변수 앞에 키워드 ‘final’을 붙이면 상수가 된다. 상수는 반드시 선언과 동시에 값을 저장해야하며, 한 번 저장된 값은 바꿀 수 없다.</p>
+<h1 id="조건문과-반복문"><a href="#조건문과-반복문" class="headerlink" title="조건문과 반복문"></a>조건문과 반복문</h1><p>JDK 1.5부터 배열과 컬렉션에 저장된 요소에 접근할 때 기존보다 편리한 방법으로 처리할 수 있도록 for문의 새로운 문법이 추가되었다.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (타입 변수명 : 배열 또는 컬렉션) &#123;</span><br><span class="line">    <span class="comment">// 반복할 문장</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>위의 문장에서 타입은 배열 또는 컬렉션의 요소의 타입이어야 한다. 배열 또는 컬렉션에 저장된 값이 매 반복마다 하나씩 순서대로 읽혀서 변수에 저장된다. 그러나 <strong>향상된 for문은 일반적인 for문과 달리 배열이나 컬렉션에 저장된 요소들을 읽어오는 용도로만 사용 수 있다는 제약이 있다.</strong></p>
+<h1 id="배열"><a href="#배열" class="headerlink" title="배열"></a>배열</h1><p>배열은 같은 타입의 여러 변수를 하나의 묶음으로 다루는 것이다.<br>배열을 선언하는 것은 단지 생성된 배열을 다루기 위한 참조변수를 위한 공간이 만들어질 뿐이고, 배열을 생성해야만 비로소 값을 저장할 수 있는 공간이 만들어지는 것이다.</p>
+<p><strong>Java에서는 배열의 길이가 0일 수도 있다.</strong></p>
+<p>배열이름.length - 자바에서는 JVM이 모든 배열의 길이를 별도로 관리하며, ‘배열이름.length’를 통해서 배열의 길이에 대한 정보를 얻을 수 있다. <strong>‘배열이름.length’는 상수이다.</strong></p>
+<p>자바에서는 다음과 같이 배열을 간단히 초기화 할 수 있는 방법을 제공한다.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[] score1 = <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">50</span>, <span class="number">60</span>, <span class="number">70</span>, <span class="number">80</span>, <span class="number">90</span>&#125;; <span class="comment">// 배열의 생성과 초기화를 동시에</span></span><br><span class="line"><span class="keyword">int</span>[] score2 = &#123;<span class="number">50</span>, <span class="number">60</span>, <span class="number">70</span>, <span class="number">80</span>, <span class="number">90</span>&#125; <span class="comment">// new int[]를 생략할 수 있음</span></span><br></pre></td></tr></table></figure></p>
+<p>그러나 배열의 선언과 생성을 따로 하는 경우에는 생략할 수 없다.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> [] score;</span><br><span class="line">score = <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">50</span>, <span class="number">60</span>, <span class="number">70</span>, <span class="number">80</span>, <span class="number">90</span>&#125;; <span class="comment">// OK</span></span><br><span class="line">score = &#123;<span class="number">50</span>, <span class="number">60</span>, <span class="number">70</span>, <span class="number">80</span>, <span class="number">90</span>&#125;; <span class="comment">// 에러. new int[]를 생략할 수 없음</span></span><br></pre></td></tr></table></figure></p>
+<p>만약 score의 값을 바로 출력하면 어떻게 될까? <code>타입@주소</code>의 형식으로 출력된다. ‘[I’는 1차원 int 배열이라는 의미이고, ‘@’뒤에 나오는 16진수는 배열의 주소인데 실제 주소가 아닌 내부 주소이다.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 배열을 가리키는 참조변수 score의 값을 출력</span></span><br><span class="line">System.out.println(score); <span class="comment">// [I@14318bb와 같은 형식의 문자열이 출력된다.</span></span><br></pre></td></tr></table></figure></p>
+<p>**예외적으로 char배열은 println메서드로 출력하면 각 요소가 구분자없이 그대로 출력되는데, 이것은 println메서드가 char배열일 때만 이렇게 동작하록 작성되었기 때문이다.</p>
+<p><strong>for문 대신 System클래스의 arraycopy()를 사용하면 보다 간단하고  빠르게 배열을 복사할 수 있다.</strong></p>
+<p>자바에서 char배열이 아닌 String클래스를 이용해서 문자열을 처리하는 이유는 String클래스가 char배열에 여러 가지 기능을 추가하여 확장한 것이기 때문이다.<br>char배열과 String클래스의 한 가지 중요한 차이는, String객체(문자열)는 읽을 수만 있을 뿐 내용을 변경할 수 없다. (변경 가능한 문자열을 다루려면, StringBuffer 클래스를 사용하면 된다.)</p>
+<p>#</p>
+<h1 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h1><ul>
+<li><a href="http://www.hanbit.co.kr/store/books/look.php?p_code=B9146679987" target="_blank" rel="noopener">스프링4 입문 - 한빛미디어</a></li>
+</ul>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2018/03/25/Spring/toby-1/" data-toggle="tooltip" data-placement="top" title="토비의 스프링 1장 (오브젝트와 의존관계)">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2018/03/12/Spring/spring-mvc/" data-toggle="tooltip" data-placement="top" title="Spring - MVC">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#변수"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">변수</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#연산자"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">연산자</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#조건문과-반복문"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">조건문과 반복문</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#배열"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">배열</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#참고"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">참고</span></a></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#Java" title="Java">Java</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "https-jongmin92-github-io";
+    var disqus_identifier = "https://jongmin92.github.io/2018/03/24/Java/java-confusing-basic-1/";
+    var disqus_url = "https://jongmin92.github.io/2018/03/24/Java/java-confusing-basic-1/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'left',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: 0.6em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/jongmin92">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; KimJongMin 2018 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://jongmin92.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-90389042-1';
+    var _gaDomain = 'auto';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
