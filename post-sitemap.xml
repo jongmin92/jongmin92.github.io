@@ -8,7 +8,7 @@
 
     <url>
         <loc>https://jongmin92.github.io/2018/03/31/Git/pull-request-merge/</loc>
-        <lastmod>2018-03-30T18:15:51.945Z</lastmod>
+        <lastmod>2018-03-30T18:19:33.982Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -23,7 +23,7 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/2018/03/26/Spring/toby-2/</loc>
+        <loc>https://jongmin92.github.io/2018/03/25/Spring/toby-1/</loc>
         <lastmod>2018-03-28T14:56:32.646Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -31,7 +31,7 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/2018/03/25/Spring/toby-1/</loc>
+        <loc>https://jongmin92.github.io/2018/03/26/Spring/toby-2/</loc>
         <lastmod>2018-03-28T14:56:32.646Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -287,7 +287,7 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/2017/06/14/JavaScript/memoization/</loc>
+        <loc>https://jongmin92.github.io/2017/01/30/JavaScript/complete-guide-to-javascript-chapter-8/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -303,7 +303,7 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/2017/01/30/JavaScript/complete-guide-to-javascript-chapter-8/</loc>
+        <loc>https://jongmin92.github.io/2017/06/14/JavaScript/memoization/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -327,7 +327,7 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/2016/12/13/Linux%20&%20Ubuntu/bashrc-bash_profile/</loc>
+        <loc>https://jongmin92.github.io/2016/09/20/Linux%20&%20Ubuntu/add_user/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -335,7 +335,7 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/2016/09/20/Linux%20&%20Ubuntu/add_user/</loc>
+        <loc>https://jongmin92.github.io/2016/12/13/Linux%20&%20Ubuntu/bashrc-bash_profile/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -352,6 +352,14 @@
 
     <url>
         <loc>https://jongmin92.github.io/2017/02/26/Linux%20&%20Ubuntu/screen/</loc>
+        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/2017/08/11/Node/check-in-app-billing-purchase-validation/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -383,14 +391,6 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/2017/08/11/Node/check-in-app-billing-purchase-validation/</loc>
-        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>https://jongmin92.github.io/2017/04/08/Node/sequelize/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -399,7 +399,7 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/2018/01/20/Programming/android-naver-login/</loc>
+        <loc>https://jongmin92.github.io/2017/08/01/Programming/5th-uniton/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -415,6 +415,14 @@
     </url>
 
     <url>
+        <loc>https://jongmin92.github.io/2018/01/20/Programming/android-naver-login/</loc>
+        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://jongmin92.github.io/2018/01/29/Programming/android-retrofit2-okhttp3/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -423,7 +431,7 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/2017/07/07/RaspberryPi/1-os-install/</loc>
+        <loc>https://jongmin92.github.io/2017/08/08/Programming/raspberry-cookbook/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -431,7 +439,15 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/2017/08/01/Programming/5th-uniton/</loc>
+        <loc>https://jongmin92.github.io/2017/07/06/RaspberryPi/0-Intro/</loc>
+        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/2017/07/07/RaspberryPi/1-os-install/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -455,31 +471,7 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/2017/07/06/RaspberryPi/0-Intro/</loc>
-        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/2017/08/08/Programming/raspberry-cookbook/</loc>
-        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/2017/07/10/RaspberryPi/7-jasper/</loc>
-        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/2017/07/10/RaspberryPi/6-extra-gpio/</loc>
+        <loc>https://jongmin92.github.io/2017/07/10/RaspberryPi/4-bash_vim_gist/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -495,7 +487,7 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/2017/07/10/RaspberryPi/4-bash_vim_gist/</loc>
+        <loc>https://jongmin92.github.io/2017/07/10/RaspberryPi/6-extra-gpio/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -503,7 +495,15 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/2017/02/10/ReactNative/useful-post-collection/</loc>
+        <loc>https://jongmin92.github.io/2017/07/10/RaspberryPi/7-jasper/</loc>
+        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/2017/07/20/ReactNative/create-react-native-app/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -519,7 +519,7 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/2017/07/20/ReactNative/create-react-native-app/</loc>
+        <loc>https://jongmin92.github.io/2017/02/10/ReactNative/useful-post-collection/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -551,7 +551,7 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/2017/10/23/Algorithm/Concept/binary-search/</loc>
+        <loc>https://jongmin92.github.io/2017/11/06/Algorithm/Concept/basic-sort/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -559,7 +559,7 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/2017/11/06/Algorithm/Concept/basic-sort/</loc>
+        <loc>https://jongmin92.github.io/2017/10/23/Algorithm/Concept/binary-search/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
