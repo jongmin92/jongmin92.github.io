@@ -147,14 +147,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -217,7 +217,8 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h2 id="index"><a href="#Index" class="headerlink" title="Index"></a>Index</h2><ol>
+                <h2 id="index">Index</h2>
+<ol>
 <li><a href="#1">prototype은 왜 어려울까?</a></li>
 <li><a href="#2">객체(object)는 함수(function)로부터 시작된다</a></li>
 <li><a href="#3">함수(function) 생성시 발생하는 일</a></li>
@@ -226,58 +227,72 @@
 <li><a href="#6">번외</a></li>
 </ol>
 <hr>
-<p><span id="1"></span></p>
-<h2 id="prototype은-왜-어려울까"><a href="#prototype은-왜-어려울까" class="headerlink" title="prototype은 왜 어려울까?"></a>prototype은 왜 어려울까?</h2><p>C++, Java와 같은 <code>클래스</code> 기반 객체지향 언어와 달리 자바스크립트는 <code>프로토타입</code> 기반 객체지향 언어입니다. 프로토타입을 사용하여 객체지향을 추구하기 때문에 자바스크립트를 사용함에 있어 프로토타입을 이해하는 것은 중요합니다. 최근 ECMA6 표준에서 <code>Class</code> 문법이 추가되었지만 C++, Java에서 말하는 클래스가 아닌 <code>프로토타입</code>을 기반으로 하여 만들어진 문법입니다.</p>
-<p>자바스크립트의 프로토타입을 처음 공부하면서 <strong>prototype, [[prototype]], __proto__, 객체, 함수, prototype chain</strong> 과 같은 용어들을 접하게 되는데 공부할수록 서로 뒤엉켜지고, 모르는 것도 아닌 그렇다고 제대로 알고 있는것도 아닌 어중간한 상태가 됩니다.</p>
+<p>&lt;span id='1'&gt;</p>
+<h2 id="prototype은-왜-어려울까">prototype은 왜 어려울까?</h2>
+<p>C++, Java와 같은 <code>클래스</code> 기반 객체지향 언어와 달리 자바스크립트는 <code>프로토타입</code> 기반 객체지향 언어입니다. 프로토타입을 사용하여 객체지향을 추구하기 때문에 자바스크립트를 사용함에 있어 프로토타입을 이해하는 것은 중요합니다. 최근 ECMA6 표준에서 <code>Class</code> 문법이 추가되었지만 C++, Java에서 말하는 클래스가 아닌 <code>프로토타입</code>을 기반으로 하여 만들어진 문법입니다.</p>
+<p>자바스크립트의 프로토타입을 처음 공부하면서 <strong>prototype, [[prototype]], _<em>proto_</em>, 객체, 함수, prototype chain</strong> 과 같은 용어들을 접하게 되는데 공부할수록 서로 뒤엉켜지고, 모르는 것도 아닌 그렇다고 제대로 알고 있는것도 아닌 어중간한 상태가 됩니다.</p>
 <p>자바스크립트를 사용한 경험이 있으시다면 아래의 코드와 같은 형태를 경험한적이 있으실겁니다. 지금부터 아래의 코드가 어떤 원리로 동작하게 되는지 알아보겠습니다.</p>
 <p><img src="/images/post/2017-03-14/prototype_example_1.png" alt="prototype에 property 추가"></p>
 <p>먼저 프로토타입에 대해 이해하기 위해서는 <code>객체(object)는 함수(function)로부터 시작된다</code>라는 것을 알아야 합니다. 이는 prototype을 이해하는데 많은 도움을 줍니다.</p>
 <hr>
-<p><span id="2"></span></p>
-<h2 id="객체object는-함수function로부터-시작된다"><a href="#객체-object-는-함수-function-로부터-시작된다" class="headerlink" title=" 객체(object)는 함수(function)로부터 시작된다"></a><span style="color:red"> 객체(object)는 함수(function)로부터 시작된다</span></h2><p><strong>자바스크립트에서 <a href="https://developer.mozilla.org/ko/docs/Glossary/Primitive" target="_blank" rel="noopener">primitive</a>를 제외하고는 모두 객체(object)입니다.</strong><br> <strong>앞으로 등장하는 Object와 Function은 function(즉, 생성자)입니다. object는 객체를 의미합니다.</strong></p>
-<p>다음의 코드를 분석하기 전 <code>객체(object)는 함수(function)로부터 시작된다</code>라는걸 다시한번 기억하겠습니다.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Book</span>(<span class="params"></span>) </span>&#123; &#125;                <span class="comment">// 함수</span></span><br><span class="line"><span class="keyword">var</span> jsBook = <span class="keyword">new</span> Book();           <span class="comment">// 객체 생성</span></span><br></pre></td></tr></table></figure></p>
-<p>위의 코드에서 <strong>Book이라는 함수를 통해서 jsBook이라는 객체</strong>를 생성했습니다. 이때 Book 함수를 <code>생성자</code>라고 합니다. 생성자는 새로 생성된 객체를 초기화하는 역할을 합니다. 코어 자바스크립트는 기본 타입에 대한 생성자를 내장하고 있는데 이는 다음 코드를 통해 확인이 가능합니다.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> cssBook = &#123;&#125;;                  <span class="comment">// 생성자 선언 없이 객체 생성</span></span><br></pre></td></tr></table></figure></p>
-<p>위에서는 리터럴 방식을 사용하여 객체를 생성하였습니다. 리터럴 방식 또한 결과적으로는 함수를 통하여 객체를 생성하게 됩니다. <strong>자바스크립트 엔진</strong>이 해당 리터럴을 다음과 같이 해석합니다.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> cssBook = <span class="keyword">new</span> <span class="built_in">Object</span>();        <span class="comment">// 객체 생성</span></span><br></pre></td></tr></table></figure></p>
+<p>&lt;span id='2'&gt;</p>
+<h2 id="ltspan-stylequotcolorredquotgt-객체object는-함수function로부터-시작된다ltspangt">&lt;span style=&quot;color:red&quot;&gt; 객체(object)는 함수(function)로부터 시작된다&lt;/span&gt;</h2>
+<p><strong>자바스크립트에서 <a href="https://developer.mozilla.org/ko/docs/Glossary/Primitive" target="_blank" rel="noopener">primitive</a>를 제외하고는 모두 객체(object)입니다.</strong>
+<strong>앞으로 등장하는 Object와 Function은 function(즉, 생성자)입니다. object는 객체를 의미합니다.</strong></p>
+<p>다음의 코드를 분석하기 전 <code>객체(object)는 함수(function)로부터 시작된다</code>라는걸 다시한번 기억하겠습니다.
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Book</span>(<span class="params"></span>) </span>&#123; &#125;                <span class="comment">// 함수</span></span><br><span class="line"><span class="keyword">var</span> jsBook = <span class="keyword">new</span> Book();           <span class="comment">// 객체 생성</span></span><br></pre></td></tr></table></figure></p>
+<p>위의 코드에서 <strong>Book이라는 함수를 통해서 jsBook이라는 객체</strong>를 생성했습니다. 이때 Book 함수를 <code>생성자</code>라고 합니다. 생성자는 새로 생성된 객체를 초기화하는 역할을 합니다. 코어 자바스크립트는 기본 타입에 대한 생성자를 내장하고 있는데 이는 다음 코드를 통해 확인이 가능합니다.
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> cssBook = &#123;&#125;;                  <span class="comment">// 생성자 선언 없이 객체 생성</span></span><br></pre></td></tr></table></figure></p>
+<p>위에서는 리터럴 방식을 사용하여 객체를 생성하였습니다. 리터럴 방식 또한 결과적으로는 함수를 통하여 객체를 생성하게 됩니다. <strong>자바스크립트 엔진</strong>이 해당 리터럴을 다음과 같이 해석합니다.
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> cssBook = <span class="keyword">new</span> <span class="built_in">Object</span>();        <span class="comment">// 객체 생성</span></span><br></pre></td></tr></table></figure></p>
 <p>따라서 결과적으로는 리터럴 방식으로 객체를 생성할때도 Object라는 함수(생성자)를 통해서 객체를 생성하게 됩니다. <strong>Object 뿐만 아니라 Array, Function, Date, RegExp 모두 함수입니다.</strong></p>
 <p><img src="/images/post/2017-03-14/various_function.png" alt="Object, Array, Function, Date, RegExp - 모두 함수(function)이다"></p>
-<p>배열도 객체이기 때문에(자바스크립트 배열은 객체의 특별한 형태입니다. 프로퍼티 이름이 정수로 사용되며, length 프로퍼티를 가집니다.) 객체를 생성할때와 마찬가지로 배열(객체)의 생성에도 함수가 관여하게 됩니다. 따라서 무심코 사용했던 배열의 리터럴 표현도 결국에는 자바스크립트 엔진이 다음과 같이 해석합니다.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> books = [<span class="string">'html'</span>, <span class="string">'css'</span>, <span class="string">'js'</span>];                  <span class="comment">// 배열(객체) 생성</span></span><br><span class="line"><span class="comment">// 엔진이 다음과 같이 해석합니다.</span></span><br><span class="line"><span class="keyword">var</span> books = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="string">'html'</span>, <span class="string">'css'</span>, <span class="string">'js'</span>);         <span class="comment">// 배열(객체) 생성</span></span><br></pre></td></tr></table></figure></p>
+<p>배열도 객체이기 때문에(자바스크립트 배열은 객체의 특별한 형태입니다. 프로퍼티 이름이 정수로 사용되며, length 프로퍼티를 가집니다.) 객체를 생성할때와 마찬가지로 배열(객체)의 생성에도 함수가 관여하게 됩니다. 따라서 무심코 사용했던 배열의 리터럴 표현도 결국에는 자바스크립트 엔진이 다음과 같이 해석합니다.
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> books = [<span class="string">'html'</span>, <span class="string">'css'</span>, <span class="string">'js'</span>];                  <span class="comment">// 배열(객체) 생성</span></span><br><span class="line"><span class="comment">// 엔진이 다음과 같이 해석합니다.</span></span><br><span class="line"><span class="keyword">var</span> books = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="string">'html'</span>, <span class="string">'css'</span>, <span class="string">'js'</span>);         <span class="comment">// 배열(객체) 생성</span></span><br></pre></td></tr></table></figure></p>
 <p>이제 <code>객체(object)는 함수(function)로부터 시작된다</code>라는 것을 알 수 있습니다.</p>
 <hr>
-<p><span id="3"></span></p>
-<h2 id="함수function-생성시-발생하는-일"><a href="#함수-function-생성시-발생하는-일" class="headerlink" title=" 함수(function) 생성시 발생하는 일"></a><span style="color:red"> 함수(function) 생성시 발생하는 일</span></h2><p>객체(object)는 함수(function)로부터 시작되기 때문에 사용자가 객체를 생성하기 위해 먼저 함수를 정의하게 됩니다. 이때 <strong>발생하는 일</strong>에 대해 알아보겠습니다. 여기서는 2가지를 기억해야 합니다.</p>
+<p>&lt;span id='3'&gt;</p>
+<h2 id="ltspan-stylequotcolorredquotgt-함수function-생성시-발생하는-일ltspangt">&lt;span style=&quot;color:red&quot;&gt; 함수(function) 생성시 발생하는 일&lt;/span&gt;</h2>
+<p>객체(object)는 함수(function)로부터 시작되기 때문에 사용자가 객체를 생성하기 위해 먼저 함수를 정의하게 됩니다. 이때 <strong>발생하는 일</strong>에 대해 알아보겠습니다. 여기서는 2가지를 기억해야 합니다.</p>
 <p>1.<strong>함수를 정의하면 함수가 생성되며 <code>Prototype object</code>가 같이 생성 됩니다. 생성된 Prototype object는 함수의 <code>prototype</code> 속성을 통해 접근할 수 있습니다.</strong> (Prototype object같은 경우 함수 생성시에만 됩니다. 일반 객체 생성시에는 생성되지 않습니다.)</p>
 <p><img src="/images/post/2017-03-14/function_property.png" alt="함수 prototype property"></p>
-<p>2.함수의 생성과 함께 생성된 <code>Prototype object</code>는 <code>constructor</code>와 <code>__proto__</code>를 갖고 있습니다. (cover property를 추가한것 처럼 사용자 임의로 추가 가능합니다.) <strong>constructor</strong>는 생성된 함수를 가리키며(여기서는 function Book을 가리킵니다.) <strong>__proto__</strong>는 <code>Prototype Link</code>로서 <strong>객체가 생성될 때 사용된 생성자(함수)의 Prototype object를 가리킵니다.</strong> Prototype Link는 뒤에서 자세하게 알아보겠습니다.</p>
+<p>2.함수의 생성과 함께 생성된 <code>Prototype object</code>는 <code>constructor</code>와 <code>__proto__</code>를 갖고 있습니다. (cover property를 추가한것 처럼 사용자 임의로 추가 가능합니다.) <strong>constructor</strong>는 생성된 함수를 가리키며(여기서는 function Book을 가리킵니다.) **_<em>proto_</em>**는 <code>Prototype Link</code>로서 <strong>객체가 생성될 때 사용된 생성자(함수)의 Prototype object를 가리킵니다.</strong> Prototype Link는 뒤에서 자세하게 알아보겠습니다.</p>
 <p><img src="/images/post/2017-03-14/prototype_object.png" alt="함수와 함께 생성된 Prototype object"></p>
 <p>다이어그램을 통해 확인하면 다음과 같습니다.</p>
 <p><img src="/images/post/2017-03-14/make_function_diagram.png" alt="함수와 Prototype object의 관계"></p>
 <hr>
-<p><span id="4"></span></p>
-<h2 id="객체object-생성시-발생하는-일"><a href="#객체-object-생성시-발생하는-일" class="headerlink" title=" 객체(object) 생성시 발생하는 일"></a><span style="color:red"> 객체(object) 생성시 발생하는 일</span></h2><p>이번에는 객체 생성시 발생하는 일에 대해 알아보겠습니다. 조금 전에 정의한 Book 함수(생성자)를 사용하여 jsBook이라는 객체를 생성해 보겠습니다.</p>
+<p>&lt;span id='4'&gt;</p>
+<h2 id="ltspan-stylequotcolorredquotgt-객체object-생성시-발생하는-일ltspangt">&lt;span style=&quot;color:red&quot;&gt; 객체(object) 생성시 발생하는 일&lt;/span&gt;</h2>
+<p>이번에는 객체 생성시 발생하는 일에 대해 알아보겠습니다. 조금 전에 정의한 Book 함수(생성자)를 사용하여 jsBook이라는 객체를 생성해 보겠습니다.</p>
 <p><img src="/images/post/2017-03-14/make_object.png" alt="Book 함수로 생성한 객체"></p>
 <p>생성자(함수)의 몸체 부분에 어떠한 코드도 작성하지 않았는데 이를 통해 생성한 jsBook 객체가 <code>__proto__</code>라는 프로퍼티를 갖고있습니다.</p>
-<p>여기서 <strong>__proto__</strong> 는 <code>Prototype Link</code>로서 <strong>객체의 생성에 쓰인 생성자 함수의 <code>Prototype object</code></strong>를 가리키고 있습니다. 그렇기 때문에 Book 생성자 함수와 함께 생성된 Prototype object에 추가한 cover라는 프로퍼티가 보이는것을 확인할 수 있습니다.</p>
+<p>여기서 <strong>_<em>proto_</em></strong> 는 <code>Prototype Link</code>로서 **객체의 생성에 쓰인 생성자 함수의 <code>Prototype object</code>**를 가리키고 있습니다. 그렇기 때문에 Book 생성자 함수와 함께 생성된 Prototype object에 추가한 cover라는 프로퍼티가 보이는것을 확인할 수 있습니다.</p>
 <p>조금 더 이해하기 쉽게 다이어그램으로 확인하면 다음과 같습니다.</p>
 <p><img src="/images/post/2017-03-14/make_object_diagram.png" alt="함수, Prototype object, 객체의 관계"></p>
 <p>다이어그램에서도 확인할 수 있다시피 <code>prototype</code> property(함수 생성시 함께 생성된 Prototype object를 가리킴)는 함수객체만 가지며 <code>__proto__</code>는 객체라면 모두 갖고 있습니다.</p>
 <p>이제 프로토타입 체인(Prototype Chain)에 대해 이해할 수 있는 준비가 되었습니다.</p>
 <hr>
-<p><span id="5"></span></p>
-<h2 id="프로토타입-체인prototype-chain"><a href="#프로토타입-체인-Prototype-Chain" class="headerlink" title=" 프로토타입 체인(Prototype Chain)"></a><span style="color:red"> 프로토타입 체인(Prototype Chain)</span></h2><p>결론부터 말씀드리면 <code>프로토타입 체인</code>은 객체의 property를 사용할때 해당 property가 없다면, <code>__proto__</code> property를 이용해 자신의 생성에 관여한 함수(생성자 함수)의 <code>Prototype object</code>에서 property를 찾습니다. 만약 Prototype object에도 해당 property가 없다면 다시 Prototype object의 <strong>__proto__</strong> property를 이용해 Prototype object에서 property를 찾습니다. 이렇게 계속 반복이 이루어지며 해당 property를 찾게 된다면 <strong>값을 반환</strong>하고 찾지 못한다면 <strong>undefined</strong>를 반환합니다. 이렇게 <strong><code>__proto__</code> property를 통해 상위 프로토타입과 연결되어 있는 형태를 프로토타입 체인(Chain)이라고 합니다.</strong></p>
+<p>&lt;span id='5'&gt;</p>
+<h2 id="ltspan-stylequotcolorredquotgt-프로토타입-체인prototype-chainltspangt">&lt;span style=&quot;color:red&quot;&gt; 프로토타입 체인(Prototype Chain)&lt;/span&gt;</h2>
+<p>결론부터 말씀드리면 <code>프로토타입 체인</code>은 객체의 property를 사용할때 해당 property가 없다면, <code>__proto__</code> property를 이용해 자신의 생성에 관여한 함수(생성자 함수)의 <code>Prototype object</code>에서 property를 찾습니다. 만약 Prototype object에도 해당 property가 없다면 다시 Prototype object의 <strong>_<em>proto_</em></strong> property를 이용해 Prototype object에서 property를 찾습니다. 이렇게 계속 반복이 이루어지며 해당 property를 찾게 된다면 <strong>값을 반환</strong>하고 찾지 못한다면 <strong>undefined</strong>를 반환합니다. 이렇게 <strong><code>__proto__</code> property를 통해 상위 프로토타입과 연결되어 있는 형태를 프로토타입 체인(Chain)이라고 합니다.</strong></p>
 <p>프로토타입 체인에 대해 알게되었으니 다시한번 처음 코드를 살펴보겠습니다.</p>
 <p><img src="/images/post/2017-03-14/prototype_example_1.png" alt="프로토타입 체인 예제"></p>
 <p>이제 어떻게 jsBook에 cover라는 property를 추가하지 않았는데도 결과가 출력되는지 이해할 수 있습니다. 다음과 같이 동작할 것입니다.</p>
 <p><img src="/images/post/2017-03-14/prototype_diagram_1.png" alt="프로토타입 체인 예제(cover property 찾는 과정)"></p>
-<p>또한 다음과 같이 <strong>프로토타입 체인의 최상위는 Object이기 때문에 Object.prototype의 property들을 모두 사용할 수 있습니다.</strong> 자주 사용하는 toString()과 valueOf() 모두 Object.prototype에 선언되어 있습니다.<br>(Book Prototype object는 <strong>객체</strong>이기 때문에 Object 생성자가 사용될 것입니다. 따라서 Book Prototype object의 <strong>__proto__</strong>는 Object Prototype object를 가리키게 됩니다.)</p>
-<p><img src="/images/post/2017-03-14/prototype_diagram_2.png" alt="프로토타입 체인의 최상위 object"><br><img src="/images/post/2017-03-14/Object_prototype.png" alt="Object.prototype"></p>
+<p>또한 다음과 같이 <strong>프로토타입 체인의 최상위는 Object이기 때문에 Object.prototype의 property들을 모두 사용할 수 있습니다.</strong> 자주 사용하는 toString()과 valueOf() 모두 Object.prototype에 선언되어 있습니다.
+(Book Prototype object는 <strong>객체</strong>이기 때문에 Object 생성자가 사용될 것입니다. 따라서 Book Prototype object의 **_<em>proto_</em>**는 Object Prototype object를 가리키게 됩니다.)</p>
+<p><img src="/images/post/2017-03-14/prototype_diagram_2.png" alt="프로토타입 체인의 최상위 object">
+<img src="/images/post/2017-03-14/Object_prototype.png" alt="Object.prototype"></p>
 <p><code>Prototype object</code>와 <code>__proto__</code> 그리고 <code>프로토타입 체인</code>에 대해 이해하였으니 다음과 같은 코드도 이해할 수 있습니다. 잘 이해가 되지 않는다면 위의 다이어그램을 참고해보시기 바랍니다.</p>
 <p><img src="/images/post/2017-03-14/prototype_chain_test.png" alt="__proto__와 Prototype object의 관계"></p>
 <hr>
-<p><span id="6"></span></p>
-<h2 id="번외"><a href="#번외" class="headerlink" title="번외"></a>번외</h2><p><img src="/images/post/2017-03-14/prototype_diagram_2_check.png" alt="프로토타입 체인의 최상위 object"><br>혹시 다이어그램을 보면서 function Book의 <strong>__proto__</strong> 는 무엇을 가리키고 있는지 궁금해 하셨을 분들을 위해 추적해보았습니다.</p>
-<p><img src="/images/post/2017-03-14/function_proto.png" alt="function(생성자)의 __proto__ 추적"></p>
+<p>&lt;span id='6'&gt;</p>
+<h2 id="번외">번외</h2>
+<p><img src="/images/post/2017-03-14/prototype_diagram_2_check.png" alt="프로토타입 체인의 최상위 object">
+혹시 다이어그램을 보면서 function Book의 <strong>_<em>proto_</em></strong> 는 무엇을 가리키고 있는지 궁금해 하셨을 분들을 위해 추적해보았습니다.</p>
+<p><img src="/images/post/2017-03-14/function_proto.png" alt="function(생성자)의 proto 추적"></p>
 <p>다음 코드를 도식화 하면 다음과 같은 다이어그램이 나오게 됩니다.</p>
-<p><img src="/images/post/2017-03-14/function_proto_diagram.png" alt="function(생성자)의 __proto__ 추적"></p>
+<p><img src="/images/post/2017-03-14/function_proto_diagram.png" alt="function(생성자)의 proto 추적"></p>
 <p>간단하게 포스팅을 하려했는데 주제가 주제인지라 길어졌습니다. 저도 프로토타입을 처음 공부하면서 어려움을 많이 겪었는데 조금이나마 도움이 되었으면 좋겠습니다.</p>
 
                 
