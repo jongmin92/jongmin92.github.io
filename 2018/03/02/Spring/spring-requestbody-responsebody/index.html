@@ -147,14 +147,14 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -218,24 +218,20 @@
                 post-container">
 
                 <p>웹 서비스와 RESTful한 방식이 시스템을 구성하는 주요 요소로 자리 잡으면서 웹 시스템간에 <strong>XML</strong>이나 <strong>JSON</strong> 등의 형식으로 데이터를 주고 받는 경우가 증가했습니다.</p>
-<p>이에 따라 스프링 MVC도 **클라이언트에서 전송한 XML 데이터나 JSON 또는 기타 데이터를 컨트롤러에서 DOM 객체나 자바 객체로 변환해서 받을 수있는 기능(수신)**을 제공하고 있으며, 비슷하게 **자바 객체를 XML이나 JSON 또는 기타 형식으로 변환해서 전송할 수 있는 기능(송신)**을 제공하고 있습니다.</p>
+<p>이에 따라 스프링 MVC도 <strong>클라이언트에서 전송한 XML 데이터나 JSON 또는 기타 데이터를 컨트롤러에서 DOM 객체나 자바 객체로 변환해서 받을 수있는 기능(수신)</strong>을 제공하고 있으며, 비슷하게 <strong>자바 객체를 XML이나 JSON 또는 기타 형식으로 변환해서 전송할 수 있는 기능(송신)</strong>을 제공하고 있습니다.</p>
 <p><strong><code>@RequestBody</code> 어노테이션과 <code>@ResponseBody</code> 어노테이션은 각각 HTTP 요청의 body 부분을 자바 객체로 변환하고 자바 객체를 HTTP 응답 body로 변환</strong>하는데 사용됩니다.</p>
-<h1 id="requestbody">@RequestBody</h1>
-<p>Spring MVC 컨트롤러에서 HTTP 요청의 body 부분을 자바 객체로 mapping할 때 <code>@RequestBody</code> 어노테이션을 사용합니다. @RequestBody 어노테이션의 기능은 다음과 같습니다.</p>
+<h1 id="requestbody"><a href="#RequestBody" class="headerlink" title="@RequestBody"></a>@RequestBody</h1><p>Spring MVC 컨트롤러에서 HTTP 요청의 body 부분을 자바 객체로 mapping할 때 <code>@RequestBody</code> 어노테이션을 사용합니다. @RequestBody 어노테이션의 기능은 다음과 같습니다.</p>
 <ul>
 <li>@ReuqestBody를 사용하지 않는 경우 : query parameter, form data를 객체에 mapping한다.</li>
 <li>@ReuqestBody를 사용하는 경우 : body에 있는 data를 <strong>HttpMessageConverter</strong>를 이용해 선언한 객체에 mapping한다.</li>
 </ul>
-<h1 id="responsebody">@ResponseBody</h1>
-<p>@ResponseBody는 @RequestBody와 비슷한 방식으로 동작합니다. @ResponseBody가 메소드 레벨에서 부여되면 메소드가 리턴하는 오브젝트는 <a href="https://docs.spring.io/spring/docs/3.2.x/javadoc-api/org/springframework/web/servlet/view/ContentNegotiatingViewResolver.html" target="_blank" rel="noopener">ContentNegotiatingViewResolver</a>를 이용해 뷰를 통해 결과를 만들어내는 것이 아닌, message converter를 통해 바로 HTTP 응답의 메시지 본문으로 변환됩니다.</p>
+<h1 id="responsebody"><a href="#ResponseBody" class="headerlink" title="@ResponseBody"></a>@ResponseBody</h1><p>@ResponseBody는 @RequestBody와 비슷한 방식으로 동작합니다. @ResponseBody가 메소드 레벨에서 부여되면 메소드가 리턴하는 오브젝트는 <a href="https://docs.spring.io/spring/docs/3.2.x/javadoc-api/org/springframework/web/servlet/view/ContentNegotiatingViewResolver.html" target="_blank" rel="noopener">ContentNegotiatingViewResolver</a>를 이용해 뷰를 통해 결과를 만들어내는 것이 아닌, message converter를 통해 바로 HTTP 응답의 메시지 본문으로 변환됩니다.</p>
 <p>ContentNegotiatingViewResolver는 등록되어 있는 ViewResolver중에서 controller 메소드의 리턴값을 통해 등록된 ViewResolver 중에서 적합한 형태로 처리해서 반환하는 반면, <strong>@ResponseBody는 @RequestBody가 선택한 형식으로 결과값을 변환하여 반환한다고 보면 됩니다.</strong></p>
 <blockquote>
 <p><strong><code>@RestController</code>는 @Controller와 @ResponseBody를 동시에 사용하는 것과 같습니다.</strong> @Controller를 사용하는 경우에만 @ResponseBody를 추가하면 됩니다.</p>
 </blockquote>
-<h1 id="httpmessageconverter를-이용한-변환-처리">HttpMessageConverter를 이용한 변환 처리</h1>
-<p><a href="https://docs.spring.io/spring/docs/3.2.x/javadoc-api/org/springframework/web/servlet/mvc/annotation/AnnotationMethodHandlerAdapter.html" target="_blank" rel="noopener">AnnotationMethodHandlerAdapter</a>에는 <a href="https://docs.spring.io/autorepo/docs/spring/3.2.0.M1/api/org/springframework/http/converter/HttpMessageConverter.html" target="_blank" rel="noopener">HttpMessageConverter</a> 타입의 메시지 변환기인 <code>message converter</code>가 여러 개 등록되어 있습니다. @RequestBody가 붙은 파라미터가 있으면 <strong>HTTP 요청의 미디어 타입과 파라미터의 타입을 먼저 확인하고, message converter 중에서 해당 미디어 타입과 파라미터 타입을 처리할 수 있다면, HTTP 요청의 body 부분을 통째로 변환해서 지정된 메소드 파라미터로 전달</strong>해줍니다.</p>
-<h2 id="httpmessageconverter의-종류">HttpMessageConverter의 종류</h2>
-<p><strong>AnnotationMethodHandlerAdapter 클래스는 @RequestBody 어노테이션이 적용된 파라미터나 @ResponseBody 어노테이션이 적용된 메서드에 대해 HttpMessageConverter를 사용해서 변환을 처리</strong>합니다. 주요 HttpMessageConverter 구현 클래스는 다음과 같습니다.</p>
+<h1 id="httpmessageconverter를-이용한-변환-처리"><a href="#HttpMessageConverter를-이용한-변환-처리" class="headerlink" title="HttpMessageConverter를 이용한 변환 처리"></a>HttpMessageConverter를 이용한 변환 처리</h1><p><a href="https://docs.spring.io/spring/docs/3.2.x/javadoc-api/org/springframework/web/servlet/mvc/annotation/AnnotationMethodHandlerAdapter.html" target="_blank" rel="noopener">AnnotationMethodHandlerAdapter</a>에는 <a href="https://docs.spring.io/autorepo/docs/spring/3.2.0.M1/api/org/springframework/http/converter/HttpMessageConverter.html" target="_blank" rel="noopener">HttpMessageConverter</a> 타입의 메시지 변환기인 <code>message converter</code>가 여러 개 등록되어 있습니다. @RequestBody가 붙은 파라미터가 있으면 <strong>HTTP 요청의 미디어 타입과 파라미터의 타입을 먼저 확인하고, message converter 중에서 해당 미디어 타입과 파라미터 타입을 처리할 수 있다면, HTTP 요청의 body 부분을 통째로 변환해서 지정된 메소드 파라미터로 전달</strong>해줍니다.</p>
+<h2 id="httpmessageconverter의-종류"><a href="#HttpMessageConverter의-종류" class="headerlink" title="HttpMessageConverter의 종류"></a>HttpMessageConverter의 종류</h2><p><strong>AnnotationMethodHandlerAdapter 클래스는 @RequestBody 어노테이션이 적용된 파라미터나 @ResponseBody 어노테이션이 적용된 메서드에 대해 HttpMessageConverter를 사용해서 변환을 처리</strong>합니다. 주요 HttpMessageConverter 구현 클래스는 다음과 같습니다.</p>
 <ul>
 <li><strong>ByteArrayHttpMessageConverter</strong> : HTTP 메시지와 byte 배열 사이의 변환을 처리한다. 컨텐츠 타입은 <code>application/octet-stream</code>이다.</li>
 <li><strong>StringHttpMessageConverter</strong> :  HTTP 메시지와 String 사이의 변환을 처리한다. 컨텐츠 타입은 <code>text/plain;charset=ISO-8859-1</code>이다.</li>
@@ -244,13 +240,9 @@
 <li><strong>MappingJacksonHttpMessageConverter</strong> : Jackson 라이브러리를 이용해서 JSON HTTP 메시지와 객체 사이의 변환을 처리한다. 컨텐츠 타입은 <code>applicaion/json</code>이다.</li>
 <li><strong>MarshallingHttpMessageConverter</strong> : 스프링의 Marshaller와 unMarshaller를 이용해서 XML HTTP 메시지와 객체 사이의 변환을 처리한다. 컨텐츠 타입은 <code>application/xml</code> 또는 <code>text/xml</code>이다.</li>
 </ul>
-<h1 id="content-type과-accept-header-기반의-변환-처리">Content-Type과 Accept header 기반의 변환 처리</h1>
-<p>AnnotationMethodHandlerAdapter가 HttpMessageConverter를 이용해서 request의 body 데이터를 @RequestBody 어노테이션이 적용된 자바 객체로 변환할 때에는, <strong>HTTP 요청 header의 <code>Content-Type</code>에 명시된 미디어 타입(MIME)을 지원하는 HttpMessageConverter 구현체를 선택</strong>합니다.
-예를 들어, 요청 미디어 타입이 application/json이고 @RequestBody 어노테이션이 적용된 경우 MappingJacksonHttpMessageConverter가 선택됩니다.</p>
-<p>비슷하게 @ResponseBody 어노테이션을 이용해서 리턴한 객체를 HTTP 응답 객체로 변환할 때에는 <strong>HTTP 요청 header의  <code>Accept</code>에 명시된 미디어 타입(MIME)을 지원하는 HttpMessageConveter 구현체를 선택</strong>합니다.
-예를 들어, Accept에 명시된 값이 application/json이고 @ResponseBody 어노테이션이 적용된 메서드의 리턴 타입이 자바 객체인 경우 MappingJacksonHttpMessageConverter가 선택됩니다.</p>
-<h1 id="참고">참고</h1>
-<p><a href="http://www.baeldung.com/spring-httpmessageconverter-rest" target="_blank" rel="noopener">Http Message Converters with the Spring Framework</a></p>
+<h1 id="content-type과-accept-header-기반의-변환-처리"><a href="#Content-Type과-Accept-header-기반의-변환-처리" class="headerlink" title="Content-Type과 Accept header 기반의 변환 처리"></a>Content-Type과 Accept header 기반의 변환 처리</h1><p>AnnotationMethodHandlerAdapter가 HttpMessageConverter를 이용해서 request의 body 데이터를 @RequestBody 어노테이션이 적용된 자바 객체로 변환할 때에는, <strong>HTTP 요청 header의 <code>Content-Type</code>에 명시된 미디어 타입(MIME)을 지원하는 HttpMessageConverter 구현체를 선택</strong>합니다.<br>예를 들어, 요청 미디어 타입이 application/json이고 @RequestBody 어노테이션이 적용된 경우 MappingJacksonHttpMessageConverter가 선택됩니다.</p>
+<p>비슷하게 @ResponseBody 어노테이션을 이용해서 리턴한 객체를 HTTP 응답 객체로 변환할 때에는 <strong>HTTP 요청 header의  <code>Accept</code>에 명시된 미디어 타입(MIME)을 지원하는 HttpMessageConveter 구현체를 선택</strong>합니다.<br>예를 들어, Accept에 명시된 값이 application/json이고 @ResponseBody 어노테이션이 적용된 메서드의 리턴 타입이 자바 객체인 경우 MappingJacksonHttpMessageConverter가 선택됩니다.</p>
+<h1 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h1><p><a href="http://www.baeldung.com/spring-httpmessageconverter-rest" target="_blank" rel="noopener">Http Message Converters with the Spring Framework</a></p>
 
                 
 
