@@ -229,11 +229,11 @@
 <h2 id="변하는-것과-변하지-않는-것"><a href="#변하는-것과-변하지-않는-것" class="headerlink" title="변하는 것과 변하지 않는 것"></a>변하는 것과 변하지 않는 것</h2><p>이런 코드를 효과적으로 다룰 수 있는 방법은 없을까? <strong>이 문제의 핵심은 변하지 않는, 그러나 많은 곳에서 중복되는 코드와 로직에 따라 자꾸 확장되고 자주 변하는 코드를 잘 분리해내는 작업이다.</strong></p>
 <h3 id="분리와-재사용을-위한-디자인-패턴-적용"><a href="#분리와-재사용을-위한-디자인-패턴-적용" class="headerlink" title="분리와 재사용을 위한 디자인 패턴 적용"></a>분리와 재사용을 위한 디자인 패턴 적용</h3><h4 id="메소드-추출"><a href="#메소드-추출" class="headerlink" title="메소드 추출"></a>메소드 추출</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">deleteAll</span><span class="params">()</span> <span class="keyword">throws</span> SQLException </span>&#123;</span><br><span class="line">    ...</span><br><span class="line"> 	<span class="keyword">try</span> &#123;</span><br><span class="line">        c = dataSource.getConnection();</span><br><span class="line"></span><br><span class="line">        ps = makeStatement(c); <span class="comment">// 변하는 부분을 메소드로 추출하고 변하지 않는 부분에서 호출하도록 만들었다.</span></span><br><span class="line"></span><br><span class="line">        ps.executeUpdate();</span><br><span class="line">	&#125; <span class="keyword">catch</span>(SQLException e)</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> PreparedStatement <span class="title">makeStatement</span><span class="params">(Connection c)</span> <span class="keyword">throws</span> SQLException </span>&#123;</span><br><span class="line">    PreparedStatement ps;</span><br><span class="line">    ps = c.prepareStatement(<span class="string">"delete from users"</span>);</span><br><span class="line">    <span class="keyword">return</span> ps;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>자주 바뀌는 부분을 메소드로 독립시켰는데 별 이득이 없어 보인다. 왜냐하면 <strong>보통 <code>메소드 추출 리펙토링</code>을 적용하는 경우에는 분리시킨 메소드를 다른 곳에서 재사용할 수 있어야 하는데,</strong> 이건 반대로 분리시키고 남은 메소드가 재사용이 필요한 부분이고, 분리된 메소드는 DAO 로직마다 새롭게 만들어서 확장돼야 하는 부분이기 때문이다. 뭔가 반대로 됐다.</p>
-<h4 id="템플릿-메소드-패턴의-적용"><a href="#템플릿-메소드-패턴의-적용" class="headerlink" title="템플릿 메소드 패턴의 적용"></a>템플릿 메소드 패턴의 적용</h4><p><strong><code>템플릿 메소드 패턴</code>은 상속을 통해 식능을 확장해서 사용하는 부분이다. 변하지 않는 부분은 슈퍼클래스에 두고 변하는 부분은 추상 메소드로 정의해둬서 서브클래스에서 오버라이드하여 새롭게 정의해 쓰도록 하는 것이다.</strong></p>
+<h4 id="템플릿-메소드-패턴의-적용"><a href="#템플릿-메소드-패턴의-적용" class="headerlink" title="템플릿 메소드 패턴의 적용"></a>템플릿 메소드 패턴의 적용</h4><p><strong><code>템플릿 메소드 패턴</code>은 상속을 통해 기능을 확장해서 사용하는 부분이다. 변하지 않는 부분은 슈퍼클래스에 두고 변하는 부분은 추상 메소드로 정의해둬서 서브클래스에서 오버라이드하여 새롭게 정의해 쓰도록 하는 것이다.</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">abstract</span> <span class="keyword">protected</span> PreparedStatement <span class="title">makeStatement</span><span class="params">(Connection c)</span> <span class="keyword">throws</span> SQLException</span>;</span><br></pre></td></tr></table></figure>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserDaoDeleteAll</span> <span class="keyword">extends</span> <span class="title">UserDao</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> PreparedStatement <span class="title">makeStatement</span><span class="params">(Connection C)</span> <span class="keyword">throws</span> SQLException </span>&#123;</span><br><span class="line">        PreparedStatment ps = c.prepareStatement(<span class="string">"delete from users"</span>);</span><br><span class="line">        <span class="keyword">return</span> ps;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>이제 UserDao 클래스의 기능을 확장하고 싶을 때마다 상속을 통해 자유롭게 확장할 수 있고, 확장 때문에 기존의 상위  DAO 클래스에 불필요한 변화는 생기지 않도록 할 수 있으니 객체지향 설계의 핵심 원리인 개방 폐쇄 원칙(OCP)을 그럭저럭 지키는 구조를 만들어낼 수는 있는것 같다. 그렇지만 아직 문제가 있다. 가장 큰 문제는 DAO 로직마다 상속을 통해 새로운 클래스를 만들어야 한다는 점이다. 이래서는 장점보다 단점이 더 많아 보인다.</p>
-<p>변하지 않는 코드를 가진 UserDao의 JDBC try/catch/finally 블록과 변하는 PreparedStatement를 담고 있는 서브클래스들이 이미 클래스 리벨에서 컴파일 시점에 이미 그 관계가 결정되어 있다. 따라서 그 관계에 대한 유연성이 떨어진다.</p>
+<p>변하지 않는 코드를 가진 UserDao의 JDBC try/catch/finally 블록과 변하는 PreparedStatement를 담고 있는 서브클래스들이 이미 클래스 레벨에서 컴파일 시점에 이미 그 관계가 결정되어 있다. 따라서 그 관계에 대한 유연성이 떨어진다.</p>
 <h4 id="전략-패턴의-적용"><a href="#전략-패턴의-적용" class="headerlink" title="전략 패턴의 적용"></a>전략 패턴의 적용</h4><p><strong>개방 폐쇠 원칙(OCP)을 잘 지키는 구조이면서도 템플릿 메소드 패턴보다 유연하고 확장성이 뛰어난 것이, 오브젝트를 아예 둘로 분리하고 클래스 레벨에서는 인터페이스를 통해서만 의존하도록 만드는 <code>전략 패턴</code>이다. 전략 패턴은 OCP 관점에서 보면 확장에 해당하는 변하는 부분을 별도의 클래스로 만들어 추상화된 인터페이스를 통해 위임하는 방식이다.</strong></p>
 <p>deleteAll()은 JDBC를 이용해 DB를 업데이트하는 작업이라는 변하지 않는 맥락(context)을 갖는다. deleteAll()의 컨텍스트를 정리해보면 다음과 같다.</p>
 <ul>
@@ -243,7 +243,7 @@
 <li>예외가 발생하면 이를 다시 메소드 밖으로 던지기</li>
 <li>모든 경우에 만들어진 PreparedStatement와 Connection을 적절히 닫아주기</li>
 </ul>
-<p>두번째 작업에서 사용하는 PreparedStatement를 만들어주는 외부 기능이 바로 전략 패턴에서 말하는 전략이라고 볼 수 있다. 전략 패턴의 구조를 따라 이 기능을 인터페이스로 만들어두고 인터페이스 이 메소드를 통해 PreparedStatement 생성 전략을 호출해주면 된다. 여기서 눈여겨볼 것은 이 PreparedStatement를 생성하는 전략을 호출할 때는이 컨텍스트 내에서 만들어둔 DB 커넥션을 전달해야 한다는 점이다.</p>
+<p>두번째 작업에서 사용하는 PreparedStatement를 만들어주는 외부 기능이 바로 전략 패턴에서 말하는 전략이라고 볼 수 있다. 전략 패턴의 구조를 따라 이 기능을 인터페이스로 만들어두고 인터페이스 이 메소드를 통해 PreparedStatement 생성 전략을 호출해주면 된다. 여기서 눈여겨볼 것은 이 PreparedStatement를 생성하는 전략을 호출할 때는 이 컨텍스트 내에서 만들어둔 DB 커넥션을 전달해야 한다는 점이다.</p>
 <p>PreparedStatement를 만드는 전략의 인터페이스는 컨텍스트가 만들어준 Connection을 전달받아서, PreparedStatement를 만들고 만들어진 PreparedStatement 오브젝트를 돌려준다. 이 내용을 인터페이스로 정의하면 다음과 같다.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">StatementStrategy</span> </span>&#123;</span><br><span class="line">    <span class="function">PreparedStatement <span class="title">makePreparedStatement</span><span class="params">(Connection c)</span> <span class="keyword">throws</span> SQLException</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>StatementStrategy 인터페이스를 상속해서 실제 전략 클래스를 만들고 이 전략 클래스를 이용한 전략 패턴을 적용한 코드는 다음과 같다.</p>
@@ -259,8 +259,8 @@
 <p><strong>클라이언트가 컨텍스트가 사용할 전략을 정해서 전달하는 면에서 DI 구조라고 이해할 수도 있다.</strong></p>
 <blockquote>
 <p><strong>마이크로 DI</strong></p>
-<p>의존관계 주입(DI)은 다양한 형태로 젹용할 수 있다. DI의 가장 중요한 개념은 제3자의 도움을 통해 두 오브젝트 사이의 유여ㅛㄴ한 관계가 설정되도록 만든다는 것이다. 이 개념만 따른다면 DI를 이루는 오브젝트와 구성요소의 구조나 관계는 다양하게 만들 수 있다.</p>
-<p>일반적으로 DI는 의존관계에 있느 ㄴ두 개의 오브젝트와 이 관계를 다이내믹하게 설정해주는 오브젝트 팩토리(DI 컨테이너), 그리고 이를 사용하는 클라이언트라는 4개의 오브직트 사이에서 일어난다. 하지만 때로는 원시적인 전략패턴 구조를 따라 클라이언트가 오브젝트 팩토리의 책임을 함께 지고 있을 수도 있다.</p>
+<p>의존관계 주입(DI)은 다양한 형태로 적용할 수 있다. DI의 가장 중요한 개념은 제3자의 도움을 통해 두 오브젝트 사이의 유연한 관계가 설정되도록 만든다는 것이다. 이 개념만 따른다면 DI를 이루는 오브젝트와 구성요소의 구조나 관계는 다양하게 만들 수 있다.</p>
+<p>일반적으로 DI는 의존관계에 있는 두 개의 오브젝트와 이 관계를 다이내믹하게 설정해주는 오브젝트 팩토리(DI 컨테이너), 그리고 이를 사용하는 클라이언트라는 4개의 오브직트 사이에서 일어난다. 하지만 때로는 원시적인 전략패턴 구조를 따라 클라이언트가 오브젝트 팩토리의 책임을 함께 지고 있을 수도 있다.</p>
 <p>이런 경우에는 DI가 매우 작은 단위의 코드와 메소드 사이에서 일어나기도 한다. 이렇게 <strong>DI의 장점을 단순화해서 IoC 컨테이너의 도움 없이 코드 내에서 적용한 경우를 마이크로 DI라고도 한다.</strong> 또는 코드에 의한 의미로 수동 DI라고 부를 수도 있다.</p>
 </blockquote>
 <h2 id="jdbc-전략-패턴의-최적화"><a href="#JDBC-전략-패턴의-최적화" class="headerlink" title="JDBC 전략 패턴의 최적화"></a>JDBC 전략 패턴의 최적화</h2><h3 id="전략과-클라이언트의-동거"><a href="#전략과-클라이언트의-동거" class="headerlink" title="전략과 클라이언트의 동거"></a>전략과 클라이언트의 동거</h3><p>현재 구조에 두 가지 불만이 있다.</p>
@@ -272,11 +272,11 @@
 <h4 id="로컬-클래스"><a href="#로컬-클래스" class="headerlink" title="로컬 클래스"></a>로컬 클래스</h4><p>클래스 파일이 많아지는 문제는 간단한 해결 방법이 있다. StatementStrategy 전략 클래스를 매번 독립된 파일로 만들지 말고 UserDao 클래스 안에 내부 클래스로 정의해버리는 것이다. DeleteAllStatement나 AddStatement는 UserDao 밖에서는 사용되지 않는다. 둘 다 UserDao에서만 사용되고, UserDao의 메소드 로직에 강하게 결합되어 있다.</p>
 <blockquote>
 <p><strong>중첩 클래스의 종류</strong></p>
-<p>다른 클래스 내부에 정의되는 클래스를 중첩 클래스(nested class)라고 한다. 중첩 클래스는 독립적으로 오브젝트로 ㅁ나들어질 수 있는 스태틱 클래스(static class)와 자신이 정의된 클래스의 오브젝트 안에서만 만들어질 수 있는 내부 클래스(inner class)로 구분된다.</p>
+<p>다른 클래스 내부에 정의되는 클래스를 중첩 클래스(nested class)라고 한다. 중첩 클래스는 독립적으로 오브젝트로 만들어질 수 있는 스태틱 클래스(static class)와 자신이 정의된 클래스의 오브젝트 안에서만 만들어질 수 있는 내부 클래스(inner class)로 구분된다.</p>
 <p>내부 클래스는 다시 범위(scope)에 따라 세가지로 구분된다.</p>
 <ul>
 <li>멤버 내부 클래스 : 멤버 필드처럼 오브젝트 레벨에 정의된다.</li>
-<li>로컬 클르스 : 메소드 레벨에 정의된다.</li>
+<li>로컬 클래스 : 메소드 레벨에 정의된다.</li>
 <li>익명 내부 클래스 : 이름을 갖지 않는 익명 클래스이다. 익명 내부 클래스의 범위는 선언된 위치에 따라서 다르다.</li>
 </ul>
 </blockquote>
@@ -297,9 +297,9 @@
 <h3 id="스프링-빈으로-di"><a href="#스프링-빈으로-DI" class="headerlink" title="스프링 빈으로 DI"></a>스프링 빈으로 DI</h3><p>인터페이스를 사용해서 클래스를 자유롭게 변경할 수 있게 하지는 않았지만,  JdbcContext를 UserDao와 DI 구조로 만들어야 할 이유는 다음과 같다.</p>
 <ol>
 <li>JdbcContext가 스프링 컨테이너의 싱글톤 레지스트리에서 관리되는 싱글톤 빈이 되기 때문이다.</li>
-<li>JdbcContext가 DI를 통해 다른 빈에 의존하고 있기 때문이다. JdbcContext는 dataSource 프로퍼티를 통해 DdbcContext 오브젝트를 주입받도록 되어 있다. DI를 위해서는 주입되는 오브젝트와 주입받는 오브젝트 양쪽 모두 스프링 빈을 등록돼야 한다. 스프링이 생성하고 관리하는 IoC 대상이어야 DI에 참여할 수 있기 때문이다.</li>
+<li>JdbcContext가 DI를 통해 다른 빈에 의존하고 있기 때문이다. JdbcContext는 dataSource 프로퍼티를 통해 JdbcContext 오브젝트를 주입받도록 되어 있다. DI를 위해서는 주입되는 오브젝트와 주입받는 오브젝트 양쪽 모두 스프링 빈으로 등록돼야 한다. 스프링이 생성하고 관리하는 IoC 대상이어야 DI에 참여할 수 있기 때문이다.</li>
 </ol>
-<h2 id="템플릿과-콜백"><a href="#템플릿과-콜백" class="headerlink" title="템플릿과 콜백"></a>템플릿과 콜백</h2><p><strong>전략 팬턴은 복잡하지만 바뀌지 않는 일정한 패턴을 갖는 작업 흐름이 존재하고 그중 일부분만 자주 바꿔서 사용해야 하는 경우에 적합한 구조다. 전략 패턴의 기본 구조에 익명 내부 클래스를 활용한 방식이다. 이런 방식을 스프링에서는 <code>템플릿/콜백 패턴</code>이라고 부른다.</strong> 전략 패턴의 컨텍스트를 템플릿이라 부르고, 익명 내부 클래스로 만들어지는 오브젝트를 콜백이라고 부른다.</p>
+<h2 id="템플릿과-콜백"><a href="#템플릿과-콜백" class="headerlink" title="템플릿과 콜백"></a>템플릿과 콜백</h2><p><strong>전략 패턴은 복잡하지만 바뀌지 않는 일정한 패턴을 갖는 작업 흐름이 존재하고 그중 일부분만 자주 바꿔서 사용해야 하는 경우에 적합한 구조다. 전략 패턴의 기본 구조에 익명 내부 클래스를 활용한 방식이다. 이런 방식을 스프링에서는 <code>템플릿/콜백 패턴</code>이라고 부른다.</strong> 전략 패턴의 컨텍스트를 템플릿이라 부르고, 익명 내부 클래스로 만들어지는 오브젝트를 콜백이라고 부른다.</p>
 <blockquote>
 <p><strong>템플릿</strong></p>
 <p>템플릿은 어떤 목적을 위해 미리 만들어둔 모양이 있는 틀을 가리킨다. 템플릿 메소드 패턴은 고정된 틀의 로직을 가진 템플릿 메소드를 슈퍼클래스에 두고, 바뀌는 부분을 서브클래스의 메소드에 두는 구조로 이뤄진다.</p>
