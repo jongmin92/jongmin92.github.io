@@ -2,13 +2,6 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     <url>
-        <loc>https://jongmin92.github.io/tags/AWS/</loc>
-        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://jongmin92.github.io/tags/Algorithm/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -30,6 +23,13 @@
     </url>
 
     <url>
+        <loc>https://jongmin92.github.io/tags/AWS/</loc>
+        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://jongmin92.github.io/tags/Emily/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -44,7 +44,7 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/tags/crawling/</loc>
+        <loc>https://jongmin92.github.io/tags/express/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -59,13 +59,6 @@
 
     <url>
         <loc>https://jongmin92.github.io/tags/scheduling/</loc>
-        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/tags/express/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -94,6 +87,13 @@
 
     <url>
         <loc>https://jongmin92.github.io/tags/%EC%B7%A8%EC%97%85-%EC%A4%80%EB%B9%84/</loc>
+        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/tags/crawling/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -247,20 +247,6 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/tags/Module/</loc>
-        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/tags/exports/</loc>
-        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://jongmin92.github.io/tags/NVM/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -275,21 +261,21 @@
     </url>
 
     <url>
+        <loc>https://jongmin92.github.io/tags/Module/</loc>
+        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/tags/exports/</loc>
+        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://jongmin92.github.io/tags/Require/</loc>
-        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/tags/Sequelize/</loc>
-        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/tags/ORM/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -304,6 +290,20 @@
 
     <url>
         <loc>https://jongmin92.github.io/tags/Uniton/</loc>
+        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/tags/Sequelize/</loc>
+        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/tags/ORM/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -338,6 +338,20 @@
     </url>
 
     <url>
+        <loc>https://jongmin92.github.io/tags/Book/</loc>
+        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/tags/RaspberryPi/</loc>
+        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://jongmin92.github.io/tags/OAuth/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -353,20 +367,6 @@
 
     <url>
         <loc>https://jongmin92.github.io/tags/Naver-Login/</loc>
-        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/tags/Book/</loc>
-        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/tags/RaspberryPi/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -548,14 +548,14 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/tags/React-Native-Image/</loc>
+        <loc>https://jongmin92.github.io/tags/Redux/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/tags/Redux/</loc>
+        <loc>https://jongmin92.github.io/tags/React-Native-Image/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -590,6 +590,13 @@
     </url>
 
     <url>
+        <loc>https://jongmin92.github.io/tags/Heap-sort/</loc>
+        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://jongmin92.github.io/tags/Bubble-sort/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -618,14 +625,14 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/tags/Heap-sort/</loc>
+        <loc>https://jongmin92.github.io/tags/Priority-queue/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/tags/Merge-sort/</loc>
+        <loc>https://jongmin92.github.io/tags/Quick-sort/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -653,14 +660,7 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/tags/Priority-queue/</loc>
-        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/tags/Quick-sort/</loc>
+        <loc>https://jongmin92.github.io/tags/Merge-sort/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -856,13 +856,6 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/tags/Java/</loc>
-        <lastmod>2018-04-07T01:58:26.701Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://jongmin92.github.io/tags/Transaction/</loc>
         <lastmod>2018-04-08T15:56:31.617Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -907,6 +900,13 @@
     <url>
         <loc>https://jongmin92.github.io/tags/POJO/</loc>
         <lastmod>2018-05-21T08:15:52.996Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/tags/Java/</loc>
+        <lastmod>2018-06-06T13:38:41.345Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
