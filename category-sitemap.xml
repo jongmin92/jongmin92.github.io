@@ -14,14 +14,14 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/categories/Algorithm/BOJ/</loc>
+        <loc>https://jongmin92.github.io/categories/Programming/AWS/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/categories/Programming/AWS/</loc>
+        <loc>https://jongmin92.github.io/categories/Algorithm/BOJ/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -42,13 +42,6 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/categories/Programming/JavaScript/</loc>
-        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://jongmin92.github.io/categories/Project/Emily/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -56,7 +49,7 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/categories/Programming/Node/</loc>
+        <loc>https://jongmin92.github.io/categories/Programming/JavaScript/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -64,6 +57,13 @@
 
     <url>
         <loc>https://jongmin92.github.io/categories/Programming/RaspberryPi/</loc>
+        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/categories/Programming/Node/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -128,6 +128,13 @@
     <url>
         <loc>https://jongmin92.github.io/categories/Programming/Java/</loc>
         <lastmod>2018-08-18T03:41:48.551Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/categories/Book/</loc>
+        <lastmod>2018-08-18T04:19:07.827Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
