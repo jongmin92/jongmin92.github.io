@@ -209,6 +209,44 @@
 
 <div class="post-preview">
 
+    <a href="/2018/03/12/Spring/spring-mvc/">
+        <h2 class="post-title">
+            Spring - MVC
+        </h2>
+        <h3 class="post-subtitle">
+            스프링 MVC의 동작 방식에 대해 알아보자.
+        </h3>
+        <div class="post-content-preview">
+            DispatcherServlet 이란?
+Spring MVC는 DispatcherServlet의 등장으로 web.xml의 역할이 축소되었습니다. 이전에는 서블릿을 URL로 활용하기 위해서는 반드시 web.xml에 등록해야 했지만, 이제는 DispatcherServlet이 해당 어플리케이션으로 들어오는 요청을 모두 핸들링 해주기 때문입니다.
+web.xml......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by KimJongMin on
+            2018-03-12
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Spring" title="Spring">Spring</a>
+            
+              <a href="/tags/#MVC" title="MVC">MVC</a>
+            
+              <a href="/tags/#DispatcherServlet" title="DispatcherServlet">DispatcherServlet</a>
+            
+              <a href="/tags/#HandlerMapping" title="HandlerMapping">HandlerMapping</a>
+            
+              <a href="/tags/#ViewResolver" title="ViewResolver">ViewResolver</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2018/03/02/Spring/spring-requestbody-responsebody/">
         <h2 class="post-title">
             Spring - RequestBody & ResponseBody
@@ -218,7 +256,7 @@
         </h3>
         <div class="post-content-preview">
             웹 서비스와 RESTful한 방식이 시스템을 구성하는 주요 요소로 자리 잡으면서 웹 시스템간에 XML이나 JSON 등의 형식으로 데이터를 주고 받는 경우가 증가했습니다.
-이에 따라 스프링 MVC도 클라이언트에서 전송한 XML 데이터나 JSON 또는 기타 데이터를 컨트롤러에서 DOM 객체나 자바 객체로 변환해서 받을 수있는 기능(수신)을 제공하고 있으며......
+이에 따라 스프링 MVC도 **클라이언트에서 전송한 XML 데이터나 JSON 또는 기타 데이터를 컨트롤러에서 DOM 객체나 자바 객체로 변환해서 받을 수있는 기능(수신)**을 제공하고......
         </div>
     </a>
     
@@ -250,7 +288,8 @@
             AOP의 등장 배경과 기본 개념에 대해 알아보자.
         </h3>
         <div class="post-content-preview">
-            AOP의 등장 배경몇 년에 걸쳐 객체지향 프로그래밍(Object Oriented Programming, OOP)은 절차적 프로그래밍 방법론을 거의 완벽히 대체하며 프로그래밍 방법론의 새로운 패러다임으로 떠오르게 되었습니다. 객체지향적 방식의 가장 큰 이점 중 하나는 소프트웨어 시스템이 여러 개의 독립된 클래스들의 집합으로 구성된다는 것입니다. 이들 각......
+            AOP의 등장 배경
+몇 년에 걸쳐 객체지향 프로그래밍(Object Oriented Programming, OOP)은 절차적 프로그래밍 방법론을 거의 완벽히 대체하며 프로그래밍 방법론의 새로운 패러다임으로 떠오르게 되었습니다. 객체지향적 방식의 가장 큰 이점 중 하나는 소프트웨어 시스템이 여러 개의 독립된 클래스들의 집합으로 구성된다는 것입니다. 이들 ......
         </div>
     </a>
     
@@ -280,8 +319,9 @@
             IoC가 등장한 배경과 어노테이션을 이용한 DI 방법에 대해 알아보자.
         </h3>
         <div class="post-content-preview">
-            IoC란?IoC 컨테이너 개념을 이해하기 위하여 이와 같은 컨테이너가 왜 등장하게 되었는지를 먼저 이해하는 것이 중요합니다.
-애플리케이션 코드를 작성할 때, 특정 기능이 필요하면 라이브러리 사용하곤 합니다. 이때는 프로그램의 흐름을 제어하는 주체가 애플리케이션 코드입니다. 하지만 프레임워크(Framework) 기반의 개발에서는 프레임워크 자신이 흐름을......
+            IoC란?
+IoC 컨테이너 개념을 이해하기 위하여 이와 같은 컨테이너가 왜 등장하게 되었는지를 먼저 이해하는 것이 중요합니다.
+애플리케이션 코드를 작성할 때, 특정 기능이 필요하면 라이브러리 사용하곤 합니다. 이때는 프로그램의 흐름을 제어하는 주체가 애플리케이션 코드입니다. 하지만 프레임워크(Framework) 기반의 개발에서는 프레임워크 자신이 흐름......
         </div>
     </a>
     
@@ -313,8 +353,9 @@
             자바EE 부터 Servlet, JSP, MVC 까지 알아보자
         </h3>
         <div class="post-content-preview">
-            서론Javascript를 이용한 Node.js로 서버프로그래밍을 하다가 최근 Java를 이용한 Spring Framework를 사용하게 되면서 JavaEE, Servlet, JSP, Tomcat, MVC, WAS와 같은 용어들을 마주하게 되었습니다. 이번 포스팅을 통해서 Java를 이용한 웹 개발의 히스토리와 여러 용어들을 정리해보고자 합니다.
-시작은......
+            서론
+Javascript를 이용한 Node.js로 서버프로그래밍을 하다가 최근 Java를 이용한 Spring Framework를 사용하게 되면서 JavaEE, Servlet, JSP, Tomcat, MVC, WAS와 같은 용어들을 마주하게 되었습니다. 이번 포스팅을 통해서 Java를 이용한 웹 개발의 히스토리와 여러 용어들을 정리해보고자 합니다.
+시작......
         </div>
     </a>
     
@@ -350,7 +391,8 @@
             SpringBoot 특징 알아보기
         </h3>
         <div class="post-content-preview">
-            서론Spring은 J2EE나 JEE로 알려진 자바 엔터프라이즈 에디션을 경량화하기 위해 시작되었다. 스프링은 무거운 엔터프라이즈 자바 빈(EJB)로 컴포넌트를 개발하지 않았다. 그 대신 의존성 주입(DI)과 관점 지향 프로그래밍(AOP)을 활용해서 EJB의 기능을 평범한 자바 객체(POJO)로 구현할 수 있게 하여 간단하게 엔터프라이즈 자바 개발에 접......
+            서론
+Spring은 J2EE나 JEE로 알려진 자바 엔터프라이즈 에디션을 경량화하기 위해 시작되었다. 스프링은 무거운 엔터프라이즈 자바 빈(EJB)로 컴포넌트를 개발하지 않았다. 그 대신 의존성 주입(DI)과 관점 지향 프로그래밍(AOP)을 활용해서 EJB의 기능을 평범한 자바 객체(POJO)로 구현할 수 있게 하여 간단하게 엔터프라이즈 자바 개발에 ......
         </div>
     </a>
     
@@ -360,46 +402,9 @@
         </p>
         <div class="tags">
             
-              <a href="/tags/#IntelliJ" title="IntelliJ">IntelliJ</a>
-            
               <a href="/tags/#SpringBoot" title="SpringBoot">SpringBoot</a>
             
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2018/01/31/Programming/android-customize-network-timeouts/">
-        <h2 class="post-title">
-            Retrofit2 네트워크 타임아웃 시간 설정하기
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            Retrofit은 기본적인 네트워크 타임아웃 시간 설정을 사용하고 있습니다. 그러나 여러 상황으로 인해 기본적으로 설정된 타임아웃 시간을 변경할 필요가 생기기도 합니다.이번 포스팅에서는 3가지의 네트워크 타임아웃 시간 설정에 대해 알아보고 변경해보겠습니다.
-타임아웃 시간 설정Retrofit에서는 기본적으로 다음의 3가지 타임아웃 시간 설정 값을 갖고 ......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by KimJongMin on
-            2018-01-31
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Android" title="Android">Android</a>
-            
-              <a href="/tags/#Retrofit2" title="Retrofit2">Retrofit2</a>
-            
-              <a href="/tags/#OkHttp3" title="OkHttp3">OkHttp3</a>
-            
-              <a href="/tags/#Timeout" title="Timeout">Timeout</a>
-            
-              <a href="/tags/#LongPolling" title="LongPolling">LongPolling</a>
+              <a href="/tags/#IntelliJ" title="IntelliJ">IntelliJ</a>
             
         </div>
     
@@ -493,7 +498,7 @@
 
     <h5>categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><span class="category-list-count">14</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/BOJ/">BOJ</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Concept/">Concept</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Book/">Book</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/">Programming</a><span class="category-list-count">68</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/AWS/">AWS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/HTML/">HTML</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Java/">Java</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/JavaScript/">JavaScript</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Linux-Ubuntu/">Linux & Ubuntu</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Node/">Node</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/RaspberryPi/">RaspberryPi</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/React-Native/">React Native</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Spring/">Spring</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Tool/">Tool</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project/">Project</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project/Emily/">Emily</a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tip/">Tip</a><span class="category-list-count">3</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><span class="category-list-count">14</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/BOJ/">BOJ</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Concept/">Concept</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Book/">Book</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/">Programming</a><span class="category-list-count">68</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/AWS/">AWS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/HTML/">HTML</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Java/">Java</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/JavaScript/">JavaScript</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Linux-Ubuntu/">Linux & Ubuntu</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Node/">Node</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/RaspberryPi/">RaspberryPi</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/React-Native/">React Native</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Spring/">Spring</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Tool/">Tool</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project/">Project</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project/Emily/">Emily</a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/TWIL/">TWIL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tip/">Tip</a><span class="category-list-count">3</span></li></ul>
     </div>
 
 
@@ -507,6 +512,10 @@
     <div class="tags">
         
             
+            <a href="/tags/#AWS" title="AWS" rel="4">AWS</a>
+            
+        
+            
             <a href="/tags/#Algorithm" title="Algorithm" rel="14">Algorithm</a>
             
         
@@ -516,14 +525,6 @@
         
             
             <a href="/tags/#백준" title="백준" rel="6">백준</a>
-            
-        
-            
-            <a href="/tags/#AWS" title="AWS" rel="4">AWS</a>
-            
-        
-            
-        
             
         
             
@@ -539,19 +540,9 @@
             
         
             
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
             <a href="/tags/#RaspberryPi" title="RaspberryPi" rel="9">RaspberryPi</a>
+            
+        
             
         
             
@@ -576,10 +567,6 @@
         
             
         
-            
-        
-            
-            <a href="/tags/#Linux &amp; Ubuntu" title="Linux &amp; Ubuntu" rel="5">Linux &amp; Ubuntu</a>
             
         
             
@@ -611,36 +598,6 @@
             
         
             
-            <a href="/tags/#Node" title="Node" rel="5">Node</a>
-            
-        
-            
-            <a href="/tags/#Module" title="Module" rel="2">Module</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-            <a href="/tags/#Android" title="Android" rel="4">Android</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
             <a href="/tags/#TIL" title="TIL" rel="14">TIL</a>
             
         
@@ -659,7 +616,55 @@
             
         
             
+        
+            
             <a href="/tags/#JavaScript 완벽가이드" title="JavaScript 완벽가이드" rel="10">JavaScript 완벽가이드</a>
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Linux &amp; Ubuntu" title="Linux &amp; Ubuntu" rel="5">Linux &amp; Ubuntu</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Node" title="Node" rel="5">Node</a>
+            
+        
+            
+            <a href="/tags/#Module" title="Module" rel="2">Module</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Android" title="Android" rel="4">Android</a>
             
         
             
@@ -689,17 +694,11 @@
             
         
             
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
             <a href="/tags/#Jasper" title="Jasper" rel="2">Jasper</a>
+            
+        
+            
+        
             
         
             
@@ -741,11 +740,7 @@
             
         
             
-            <a href="/tags/#Chrome" title="Chrome" rel="2">Chrome</a>
-            
         
-            
-            <a href="/tags/#Chrome Extension" title="Chrome Extension" rel="2">Chrome Extension</a>
             
         
             
@@ -755,17 +750,15 @@
             
         
             
+        
+            
+        
+            
+        
+            
+        
+            
             <a href="/tags/#Spring" title="Spring" rel="11">Spring</a>
-            
-        
-            
-            <a href="/tags/#AOP" title="AOP" rel="2">AOP</a>
-            
-        
-            
-        
-            
-        
             
         
             
@@ -779,17 +772,13 @@
             
         
             
+        
+            
+            <a href="/tags/#AOP" title="AOP" rel="2">AOP</a>
+            
+        
+            
             <a href="/tags/#MVC" title="MVC" rel="2">MVC</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-            <a href="/tags/#IntelliJ" title="IntelliJ" rel="2">IntelliJ</a>
             
         
             
@@ -809,7 +798,7 @@
             
         
             
-        
+            <a href="/tags/#IntelliJ" title="IntelliJ" rel="2">IntelliJ</a>
             
         
             
@@ -822,12 +811,30 @@
         
             
         
+            
+        
+            
+            <a href="/tags/#Chrome" title="Chrome" rel="2">Chrome</a>
+            
+        
+            
+            <a href="/tags/#Chrome Extension" title="Chrome Extension" rel="2">Chrome Extension</a>
             
         
             
         
             
             <a href="/tags/#build tool" title="build tool" rel="2">build tool</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
             
         
             
@@ -859,9 +866,9 @@
             
         
             
-        
-            
             <a href="/tags/#Heap sort" title="Heap sort" rel="3">Heap sort</a>
+            
+        
             
         
             
