@@ -149,7 +149,7 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -163,7 +163,7 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -205,6 +205,16 @@
 </script>
 
 
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-3921438651818825"
+     data-ad-slot="3015269677"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
     <!-- Main Content -->
     <!-- Modify by Yu-Hsuan Yen -->
 
@@ -213,14 +223,23 @@
     <div class="container">
         <div class="row">
 
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-3921438651818825"
+     data-ad-slot="3015269677"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
             <!-- Post Container -->
             <div class="
                 col-lg-8 col-lg-offset-2
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h2 id="index">Index</h2>
-<ol>
+                <h2 id="index"><a href="#Index" class="headerlink" title="Index"></a>Index</h2><ol>
 <li><a href="#1">ES6 Class 문법</a></li>
 <li><a href="#2">Class 정의</a></li>
 <li><a href="#3">constructor</a></li>
@@ -230,34 +249,28 @@
 <li><a href="#7">마치며</a></li>
 </ol>
 <hr>
-<p>&lt;span id='1'&gt;</p>
-<h2 id="es6-class-문법">ES6 Class 문법</h2>
-<p>JavaScript **<code>Class</code>**는 ECMAScript 6을 통해 소개되었습니다. ES6의 Class는 기존 <strong><code>prototype</code></strong> 기반의 상속을 보다 명료하게 사용할 수 있도록 문법을 제공합니다. 이를  <strong>Syntatic Sugar</strong>라고 부르기도 합니다.</p>
+<p><span id="1"></span></p>
+<h2 id="es6-class-문법"><a href="#ES6-Class-문법" class="headerlink" title="ES6 Class 문법"></a>ES6 Class 문법</h2><p>JavaScript <strong><code>Class</code></strong>는 ECMAScript 6을 통해 소개되었습니다. ES6의 Class는 기존 <strong><code>prototype</code></strong> 기반의 상속을 보다 명료하게 사용할 수 있도록 문법을 제공합니다. 이를  <strong>Syntatic Sugar</strong>라고 부르기도 합니다.</p>
 <blockquote>
 <p><a href="https://en.wikipedia.org/wiki/Syntactic_sugar" target="_blank" rel="noopener">Syntatic Sugar</a> : 읽고 표현하는것을 더 쉽게 하기 위해서 고안된 프로그래밍 언어 문법을 말합니다.</p>
 </blockquote>
-<p>JavaScript를 ES6를 통해 처음 접하시는 분들은 알아두셔야할 것이 JavaScript의 Class는 다른 객체지향 언어(C++, C#, Java, Python, Ruby 등...)에서 사용되는 Class 문법과는 다르다는 것입니다. JavaScript에는 Class라는 개념이 없습니다.
-Class가 없기 때문에 기본적으로 Class 기반의 상속도 불가능합니다. 대신 다른 언어에는 존재하지 않는 <a href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Guide/Inheritance_and_the_prototype_chain" target="_blank" rel="noopener">프로토타입(Prototype)</a>이라는 것이 존재합니다. JavaScript는 이 <strong>prototype을 기반으로 상속을 흉내내도록 구현해 사용</strong>합니다. Prototype을 처음 접하시는 분은 <a href="https://jongmin92.github.io/2017/03/14/JavaScript/understand-prototype/">&quot;Prototype 이제는 이해하자&quot;</a>를 참고하시면 도움이 될것같습니다.</p>
+<p>JavaScript를 ES6를 통해 처음 접하시는 분들은 알아두셔야할 것이 JavaScript의 Class는 다른 객체지향 언어(C++, C#, Java, Python, Ruby 등…)에서 사용되는 Class 문법과는 다르다는 것입니다. JavaScript에는 Class라는 개념이 없습니다.<br>Class가 없기 때문에 기본적으로 Class 기반의 상속도 불가능합니다. 대신 다른 언어에는 존재하지 않는 <a href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Guide/Inheritance_and_the_prototype_chain" target="_blank" rel="noopener">프로토타입(Prototype)</a>이라는 것이 존재합니다. JavaScript는 이 <strong>prototype을 기반으로 상속을 흉내내도록 구현해 사용</strong>합니다. Prototype을 처음 접하시는 분은 <a href="https://jongmin92.github.io/2017/03/14/JavaScript/understand-prototype/">“Prototype 이제는 이해하자”</a>를 참고하시면 도움이 될것같습니다.</p>
 <hr>
-<p>&lt;span id='2'&gt;</p>
-<h2 id="class-정의">Class 정의</h2>
-<p>JavaScript에서 Class는 사실 <strong>함수</strong>입니다. 함수를 <strong>함수 선언</strong>과 <strong>함수 표현식</strong>으로 정의할 수 있듯이 class 문법도 <strong>class 선언</strong>과 <strong>class 표현식</strong> 두가지 방법으로 정의가 가능합니다.</p>
+<p><span id="2"></span></p>
+<h2 id="class-정의"><a href="#Class-정의" class="headerlink" title="Class 정의"></a>Class 정의</h2><p>JavaScript에서 Class는 사실 <strong>함수</strong>입니다. 함수를 <strong>함수 선언</strong>과 <strong>함수 표현식</strong>으로 정의할 수 있듯이 class 문법도 <strong>class 선언</strong>과 <strong>class 표현식</strong> 두가지 방법으로 정의가 가능합니다.</p>
 <p>JavaScript 엔진은 function 키워드를 만나면 Function 오브젝트를 생성하듯, class 키워드를 만나면 Class 오브젝트를 생성합니다. class는 클래스를 선언하는 키워드이고 Class 오브젝트는 엔진이 class 키워드로 생성한 오브젝트입니다.</p>
-<h4 id="class-선언">Class 선언</h4>
-<p>함수 선언과 달리 클래스 선언은 <strong>호이스팅</strong>이 일어나지 않기 때문에, 클래스를 사용하기 위해서는 먼저 선언을 해야합니다. 그렇지 않으면 <strong>ReferenceError</strong> 가 발생합니다.</p>
-<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">People</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(name) &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    say() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'My name is '</span> + <span class="keyword">this</span>.name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h4 id="class-표현식">Class 표현식</h4>
-<p>Class 표현식은 이름을 가질 수도 있고 갖지 않을 수도 있습니다.</p>
-<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> People = <span class="class"><span class="keyword">class</span> <span class="title">People</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(name) &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    say() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'My name is '</span> + <span class="keyword">this</span>.name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> People = <span class="class"><span class="keyword">class</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(name) &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    say() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'My name is '</span> + <span class="keyword">this</span>.name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="class-선언"><a href="#Class-선언" class="headerlink" title="Class 선언"></a>Class 선언</h4><p>함수 선언과 달리 클래스 선언은 <strong>호이스팅</strong>이 일어나지 않기 때문에, 클래스를 사용하기 위해서는 먼저 선언을 해야합니다. 그렇지 않으면 <strong>ReferenceError</strong> 가 발생합니다.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">People</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(name) &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    say() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'My name is '</span> + <span class="keyword">this</span>.name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="class-표현식"><a href="#Class-표현식" class="headerlink" title="Class 표현식"></a>Class 표현식</h4><p>Class 표현식은 이름을 가질 수도 있고 갖지 않을 수도 있습니다.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> People = <span class="class"><span class="keyword">class</span> <span class="title">People</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(name) &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    say() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'My name is '</span> + <span class="keyword">this</span>.name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> People = <span class="class"><span class="keyword">class</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(name) &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    say() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'My name is '</span> + <span class="keyword">this</span>.name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
-<p>&lt;span id='3'&gt;</p>
-<h2 id="constructor">constructor</h2>
-<p>constructor는 클래스 인스턴스를 생성하고 생성한 인스턴스를 초기화하는 역할을 합니다. <strong>new People()</strong> 코드를 실행하면 <strong>People.prototype.constructor</strong>가 호출됩니다. 이를 default constructor라고 하며 constructor가 없으면 인스턴스를 생성할 수 없습니다.</p>
-<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> people = <span class="keyword">new</span> People(<span class="string">'KimJongMin'</span>);</span><br></pre></td></tr></table></figure></p>
-<p>new People('KimJongMin')을 실행하면 People 클래스에 작성한 constructor가 자동으로 호출되고 파라미터 값으로 'KimJongMin'을 넘겨 줍니다.</p>
+<p><span id="3"></span></p>
+<h2 id="constructor"><a href="#constructor-NaN" class="headerlink" title="constructor"></a>constructor</h2><p>constructor는 클래스 인스턴스를 생성하고 생성한 인스턴스를 초기화하는 역할을 합니다. <strong>new People()</strong> 코드를 실행하면 <strong>People.prototype.constructor</strong>가 호출됩니다. 이를 default constructor라고 하며 constructor가 없으면 인스턴스를 생성할 수 없습니다.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> people = <span class="keyword">new</span> People(<span class="string">'KimJongMin'</span>);</span><br></pre></td></tr></table></figure>
+<p>new People(‘KimJongMin’)을 실행하면 People 클래스에 작성한 constructor가 자동으로 호출되고 파라미터 값으로 ‘KimJongMin’을 넘겨 줍니다.</p>
 <p>new 연산자가 인스턴스를 생성하는 것처럼 보이지만, 사실 new 연산자는 constructor를 호출하면서 파라미터를 넘겨주는 역할만 합니다. 호출된 constructor가 인스턴스를 생성하여 반환하면 new 연산자가 받아 new를 실행한 곳으로 반환합니다. 과정은 다음과 같습니다.</p>
 <ol>
-<li>new People('KimJongMin')을 실행</li>
+<li>new People(‘KimJongMin’)을 실행</li>
 <li>new 연산자가 constructor를 호출하면서 파라미터 전달</li>
 <li>constructor에 작성한 코드를 실행하기 전에 빈 Object 를 생성</li>
 <li>constructor 코드를 실행</li>
@@ -265,26 +278,23 @@ Class가 없기 때문에 기본적으로 Class 기반의 상속도 불가능합
 <li>생성한 Object 반환</li>
 </ol>
 <p>다음은 생성된 인스턴스의 구조입니다.</p>
-<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.dir(people);</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.dir(people);</span><br></pre></td></tr></table></figure>
 <p><img src="/images/post/2017-06-18/instance-structure.png" alt=""></p>
-<p>people 인스턴스의 **_<em>proto_</em>**는 People Class 오브젝트와 함께 생성된 <strong>Prototype object</strong>를 가리키고 있습니다. 결국 Class 문법을 이용한 코드를 prototype 기반의 코드로 변경하면 다음과 같습니다.</p>
-<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">People</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">People.prototype.say = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'My name is '</span> + <span class="keyword">this</span>.name);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>people 인스턴스의 <strong>__proto__</strong>는 People Class 오브젝트와 함께 생성된 <strong>Prototype object</strong>를 가리키고 있습니다. 결국 Class 문법을 이용한 코드를 prototype 기반의 코드로 변경하면 다음과 같습니다.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">People</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">People.prototype.say = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'My name is '</span> + <span class="keyword">this</span>.name);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <hr>
-<p>&lt;span id='4'&gt;</p>
-<h2 id="prototype-기반-상속es5과-class-기반-상속es6-비교">Prototype 기반 상속(ES5)과 Class 기반 상속(ES6) 비교</h2>
-<p>먼저 ES5에서 Prototype을 사용하여 상속을 구현하는 방법을 살펴보고, 그 후 ES6에서 Class로 상속을 구현하는 형태를 보겠습니다.</p>
-<h4 id="es5-prototype-기반-상속">ES5 Prototype 기반 상속</h4>
-<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Cat</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Cat.prototype.speak = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.name + <span class="string">' makes a noise.'</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Lion</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// `super()` 호출</span></span><br><span class="line">  Cat.call(<span class="keyword">this</span>, name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// `Cat` 클래스 상속</span></span><br><span class="line">Lion.prototype = <span class="built_in">Object</span>.create(Cat.prototype);</span><br><span class="line">Lion.prototype.constructor = Lion;</span><br><span class="line"></span><br><span class="line"><span class="comment">// `speak()` 메서드 오버라이드</span></span><br><span class="line">Lion.prototype.speak = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  Cat.prototype.speak.call(<span class="keyword">this</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.name + <span class="string">' roars.'</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> lion = <span class="keyword">new</span> Lion(<span class="string">'Samba'</span>);</span><br><span class="line">lion.speak();</span><br><span class="line"></span><br><span class="line">[결과]</span><br><span class="line">Sambda makes a noise.</span><br><span class="line">Sambda roars.</span><br></pre></td></tr></table></figure></p>
+<p><span id="4"></span></p>
+<h2 id="prototype-기반-상속es5과-class-기반-상속es6-비교"><a href="#Prototype-기반-상속-ES5-과-Class-기반-상속-ES6-비교" class="headerlink" title="Prototype 기반 상속(ES5)과 Class 기반 상속(ES6) 비교"></a>Prototype 기반 상속(ES5)과 Class 기반 상속(ES6) 비교</h2><p>먼저 ES5에서 Prototype을 사용하여 상속을 구현하는 방법을 살펴보고, 그 후 ES6에서 Class로 상속을 구현하는 형태를 보겠습니다.</p>
+<h4 id="es5-prototype-기반-상속"><a href="#ES5-Prototype-기반-상속" class="headerlink" title="ES5 Prototype 기반 상속"></a>ES5 Prototype 기반 상속</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Cat</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Cat.prototype.speak = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.name + <span class="string">' makes a noise.'</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Lion</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// `super()` 호출</span></span><br><span class="line">  Cat.call(<span class="keyword">this</span>, name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// `Cat` 클래스 상속</span></span><br><span class="line">Lion.prototype = <span class="built_in">Object</span>.create(Cat.prototype);</span><br><span class="line">Lion.prototype.constructor = Lion;</span><br><span class="line"></span><br><span class="line"><span class="comment">// `speak()` 메서드 오버라이드</span></span><br><span class="line">Lion.prototype.speak = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  Cat.prototype.speak.call(<span class="keyword">this</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.name + <span class="string">' roars.'</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> lion = <span class="keyword">new</span> Lion(<span class="string">'Samba'</span>);</span><br><span class="line">lion.speak();</span><br><span class="line"></span><br><span class="line">[결과]</span><br><span class="line">Sambda makes a noise.</span><br><span class="line">Sambda roars.</span><br></pre></td></tr></table></figure>
 <p>new Lion()을 실행하면 Lion()이 호출되고, default constructor를 호출합니다. 그래서 Lion()을 생성자(constructor) 함수라고 합니다.</p>
 <p>생성자 함수가 있으면 Cat.prototype.speak와 같이 prototype에 메서드를 연결한 코드가 있습니다. 이와 같이 prototype에 작성하지 않으면 각각의 인스턴스에 메서드가 생성되게 됩니다. 이 형태가 ES5에서 인스턴스를 구현하는 기본 형태 입니다.</p>
 <p><a href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/create" target="_blank" rel="noopener">Object.create()</a>를 통해 Cat.prototype에 연결된 메서드를 Lion.prototype.__proto__에 첨부합니다. Lion.prototype에는 constructor가 연결되어 있는데 prototype을 재 할당했기 때문에 지워진 constructor를 다시 할당해 줍니다.</p>
 <p>결과적으로 Lion 생성자 함수의 구조는 다음과 같습니다.</p>
 <p><img src="/images/post/2017-06-18/instance-structure2.png" alt=""></p>
-<h4 id="es6-class-기반-상속">ES6 Class 기반 상속</h4>
-<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cat</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(name) &#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  speak() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name + <span class="string">' makes a noise.'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Lion</span> <span class="keyword">extends</span> <span class="title">Cat</span> </span>&#123;</span><br><span class="line">  speak() &#123;</span><br><span class="line">    <span class="keyword">super</span>.speak();</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name + <span class="string">' roars.'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> lion = <span class="keyword">new</span> Lion(<span class="string">'Samba'</span>);</span><br><span class="line">lion.speak();</span><br><span class="line"></span><br><span class="line">[결과]</span><br><span class="line">Sambda makes a noise.</span><br><span class="line">Sambda roars.</span><br></pre></td></tr></table></figure></p>
+<h4 id="es6-class-기반-상속"><a href="#ES6-Class-기반-상속" class="headerlink" title="ES6 Class 기반 상속"></a>ES6 Class 기반 상속</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cat</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(name) &#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  speak() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name + <span class="string">' makes a noise.'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Lion</span> <span class="keyword">extends</span> <span class="title">Cat</span> </span>&#123;</span><br><span class="line">  speak() &#123;</span><br><span class="line">    <span class="keyword">super</span>.speak();</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name + <span class="string">' roars.'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> lion = <span class="keyword">new</span> Lion(<span class="string">'Samba'</span>);</span><br><span class="line">lion.speak();</span><br><span class="line"></span><br><span class="line">[결과]</span><br><span class="line">Sambda makes a noise.</span><br><span class="line">Sambda roars.</span><br></pre></td></tr></table></figure>
 <p>ES6에서는 <strong><code>extends</code></strong> 키워드로 상속을 구현합니다. Cat 클래스를 상속받은 Lion 클래스의 구조는 다음과 같습니다.</p>
 <p><img src="/images/post/2017-06-18/instance-structure3.png" alt=""></p>
-<p>위의 prototype을 통해 상속을 구현한 Lion 생성자 함수의 구조와 비교했을때 일치합니다. 추가적으로 new Lion('Samba') 를 실행하면 다음의 과정을 거치게됩니다.</p>
+<p>위의 prototype을 통해 상속을 구현한 Lion 생성자 함수의 구조와 비교했을때 일치합니다. 추가적으로 new Lion(‘Samba’) 를 실행하면 다음의 과정을 거치게됩니다.</p>
 <ol>
 <li>Lion 클래스의 constructor를 호출</li>
 <li>Lion 클래스에 constructor를 작성하지 않았기 때문에 슈퍼 클래스의(Cat) constructor가 호출됨 (내부적으로 프로토타입 체인으로 인해)</li>
@@ -292,24 +302,18 @@ Class가 없기 때문에 기본적으로 Class 기반의 상속도 불가능합
 <li>생성한 인스턴스를 lion에 할당</li>
 </ol>
 <hr>
-<p>&lt;span id='5'&gt;</p>
-<h2 id="super-키워드">super 키워드</h2>
-<p>서브 클래스와 슈퍼 클래스에 같은 이름의 메서드가 존재하면 슈퍼 클래스의 메서드는 호출되지 않습니다. 이때 <strong><code>super</code></strong> 키워드를 사용해서 슈퍼 클래스의 메서드를 호출할 수 있습니다. (서브 클래스의 constructor에 super()를 작성하면 슈퍼 클래스의 constructor가 호출됩니다.)</p>
+<p><span id="5"></span></p>
+<h2 id="super-키워드"><a href="#super-키워드" class="headerlink" title="super 키워드"></a>super 키워드</h2><p>서브 클래스와 슈퍼 클래스에 같은 이름의 메서드가 존재하면 슈퍼 클래스의 메서드는 호출되지 않습니다. 이때 <strong><code>super</code></strong> 키워드를 사용해서 슈퍼 클래스의 메서드를 호출할 수 있습니다. (서브 클래스의 constructor에 super()를 작성하면 슈퍼 클래스의 constructor가 호출됩니다.)</p>
 <hr>
-<p>&lt;span id='6'&gt;</p>
-<h2 id="static-키워드">static 키워드</h2>
-<p>static 키워드는 클래스를 위한 정적(static) 메소드를 정의합니다. 정적 메소드는 prototype에 연결되지 않고 클래스에 직접 연결되기 때문에 클래스의 인스턴스화(instantiating) 없이 호출되며, 클래스의 인스턴스에서는 호출할 수 없습니다. 동일한 클래스 내의 다른 정적 메서드 내에서 정적 메서드를 호출하는 경우 키워드 this를 사용할 수 있다.</p>
-<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Lion</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> speak() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'Noise~'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Lion.speak();</span><br><span class="line"></span><br><span class="line">[결과]</span><br><span class="line">Noise~</span><br></pre></td></tr></table></figure></p>
+<p><span id="6"></span></p>
+<h2 id="static-키워드"><a href="#static-키워드" class="headerlink" title="static 키워드"></a>static 키워드</h2><p>static 키워드는 클래스를 위한 정적(static) 메소드를 정의합니다. 정적 메소드는 prototype에 연결되지 않고 클래스에 직접 연결되기 때문에 클래스의 인스턴스화(instantiating) 없이 호출되며, 클래스의 인스턴스에서는 호출할 수 없습니다. 동일한 클래스 내의 다른 정적 메서드 내에서 정적 메서드를 호출하는 경우 키워드 this를 사용할 수 있다.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Lion</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> speak() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'Noise~'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Lion.speak();</span><br><span class="line"></span><br><span class="line">[결과]</span><br><span class="line">Noise~</span><br></pre></td></tr></table></figure>
 <p>정적 메소드는 어플리케이션(application)을 위한 유틸리티(utility) 함수를 생성하는데 주로 사용됩니다.</p>
 <hr>
-<p>&lt;span id='7'&gt;</p>
-<h2 id="마치며">마치며</h2>
-<p>ES6의 Class 문법에 대해 정리해 보았다. JavaScript 언어를 약 1년전 Node.js 를 시작하며 처음 접하게 되었는데 사실 그 당시 Prototype과 상속에 대해 크게 다룰일이 없었다. (어쩌면 너무 무지해서 사용 필요성을 느끼지 못했을 수도...) 그 후 Node.js 버전을 올리고 ES6를 공부하며 Class 문법을 접하게 되었는데 JavaScript의 Prototype에 대한 이해와 지식이 부족하다 보니 이전에 공부했던 C++과 Java의 Class 처럼 이해했던 것 같다. 그래도 그 후 Prototype과 더불이 Class까지 공부하며 지금은 어느정도 이해하게 된것 같다. 결론은... 역시나 JavaScript에서 Prototype을 이해하는건 중요한것 같다.</p>
+<p><span id="7"></span></p>
+<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>ES6의 Class 문법에 대해 정리해 보았다. JavaScript 언어를 약 1년전 Node.js 를 시작하며 처음 접하게 되었는데 사실 그 당시 Prototype과 상속에 대해 크게 다룰일이 없었다. (어쩌면 너무 무지해서 사용 필요성을 느끼지 못했을 수도…) 그 후 Node.js 버전을 올리고 ES6를 공부하며 Class 문법을 접하게 되었는데 JavaScript의 Prototype에 대한 이해와 지식이 부족하다 보니 이전에 공부했던 C++과 Java의 Class 처럼 이해했던 것 같다. 그래도 그 후 Prototype과 더불이 Class까지 공부하며 지금은 어느정도 이해하게 된것 같다. 결론은… 역시나 JavaScript에서 Prototype을 이해하는건 중요한것 같다.</p>
 <blockquote>
-<p>참고
-<a href="https://gomugom.github.io/is-class-only-a-syntactic-sugar/" target="_blank" rel="noopener">ES6 Class는 단지 prototype 상속의 문법설탕일 뿐인가?</a>
-<a href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Classes" target="_blank" rel="noopener">MDN - Classes</a>
-<a href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Guide/Inheritance_and_the_prototype_chain" target="_blank" rel="noopener">MDN - 상속과 프로토타입</a></p>
+<p>참고<br><a href="https://gomugom.github.io/is-class-only-a-syntactic-sugar/" target="_blank" rel="noopener">ES6 Class는 단지 prototype 상속의 문법설탕일 뿐인가?</a><br><a href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Classes" target="_blank" rel="noopener">MDN - Classes</a><br><a href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Guide/Inheritance_and_the_prototype_chain" target="_blank" rel="noopener">MDN - 상속과 프로토타입</a></p>
 </blockquote>
 
                 
@@ -333,6 +337,16 @@ Class가 없기 때문에 기본적으로 Class 기반의 상속도 불가능합
                 
                 <!-- 多说 Share end-->
 
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-3921438651818825"
+     data-ad-slot="3015269677"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
                 <!-- 多说评论框 start -->
                 
                 <!-- 多说评论框 end -->
@@ -445,6 +459,16 @@ Class가 없기 때문에 기본적으로 Class 기반의 상속도 불가능합
 </style>
 
 
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-3921438651818825"
+     data-ad-slot="3015269677"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 
     <!-- Footer -->
     <!-- Footer -->
@@ -485,7 +509,7 @@ Class가 없기 때문에 기본적으로 Class 기반의 상속도 불가능합
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; KimJongMin 2018 
+                    Copyright &copy; KimJongMin 2019 
                     <br>
                     Theme by <a href="http://huangxuan.me">Hux</a> 
                     <span style="display: inline-block; margin: 0 5px;">
