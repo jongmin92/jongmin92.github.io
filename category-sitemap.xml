@@ -14,14 +14,14 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/categories/Algorithm/BOJ/</loc>
+        <loc>https://jongmin92.github.io/categories/Programming/AWS/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/categories/Programming/AWS/</loc>
+        <loc>https://jongmin92.github.io/categories/Algorithm/BOJ/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -42,13 +42,6 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/categories/Programming/JavaScript/</loc>
-        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://jongmin92.github.io/categories/Project/Emily/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -63,7 +56,7 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/categories/Programming/RaspberryPi/</loc>
+        <loc>https://jongmin92.github.io/categories/Programming/JavaScript/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -71,6 +64,13 @@
 
     <url>
         <loc>https://jongmin92.github.io/categories/Programming/React-Native/</loc>
+        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/categories/Programming/RaspberryPi/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -126,15 +126,15 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/categories/Programming/Java/</loc>
-        <lastmod>2018-08-20T13:30:27.330Z</lastmod>
+        <loc>https://jongmin92.github.io/categories/Programming/</loc>
+        <lastmod>2019-02-10T15:13:48.128Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/categories/Programming/</loc>
-        <lastmod>2019-02-10T12:00:31.717Z</lastmod>
+        <loc>https://jongmin92.github.io/categories/Programming/Java/</loc>
+        <lastmod>2019-02-10T15:13:48.128Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
