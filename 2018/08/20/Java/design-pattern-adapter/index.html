@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/images/etc/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          Design Pattern - Adapter - 92Hz | Jongmin&#39;s Blog
+        
+    </title>
+
+    <link rel="canonical" href="https://jongmin92.github.io/2018/08/20/Java/design-pattern-adapter/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            /* 기본 포스트 헤더 이미지 (페이지 이미지 || 기본 헤더 이미지) */
+            /* background-image: url('undefined') */
+            /* background-image: url('/images/etc/home.jpg') */
+            background-image: url('/images/etc/home.jpg')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#java" title="java">java</a>
+                            
+                              <a class="tag" href="/tags/#design pattern" title="design pattern">design pattern</a>
+                            
+                              <a class="tag" href="/tags/#adapter" title="adapter">adapter</a>
+                            
+                        </div>
+                        <h1>Design Pattern - Adapter</h1>
+                        <h2 class="subheading">바꿔서 재이용하기</h2>
+                        <span class="meta">
+                            Posted by KimJongMin on
+                            2018-08-20
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">92Hz</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-3921438651818825"
+     data-ad-slot="3015269677"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <blockquote>
+<p>해당 포스팅은 <a href="https://book.naver.com/bookdb/book_detail.nhn?bid=4529127" target="_blank" rel="noopener">Java 언어로 배우는 디자인 패턴 입문</a> 책을 참고해 작성했습니다.<br>사용된 코드는 <a href="https://github.com/jongmin92/Design-Pattern" target="_blank" rel="noopener">jongmin92/Design-Pattern</a> repository 에서 확인할 수 있습니다.</p>
+</blockquote>
+<h1 id="adapter-패턴"><a href="#Adapter-패턴" class="headerlink" title="Adapter 패턴"></a>Adapter 패턴</h1><p>이미 제공되어 있는 것을 그대로 사용할 수 없을 때, 필요한 형태로 교환하고 사용하는 일이 자주 있습니다. <strong>‘이미 제공되어 있는 것’과 ‘필요한 것’ 사이(서로 다른 두 개)의 ‘차이’를 없애주는 디자인 패턴이 <code>Adapter 패턴</code> 입니다.</strong></p>
+<p>Adapter 패턴은 Wrapper 패턴으로 불리기도 하며, 다음과 같은 두 가지 종류가 있습니다.</p>
+<ul>
+<li>클래스에 의한 Adapter 패턴 (상속을 사용한 Adapter 패턴)</li>
+<li>인스턴스에 의한 Adapter 패턴 (위임을 사용한 Adapter 패턴)</li>
+</ul>
+<h2 id="예제-프로그램1-상속을-사용한-adapter-패턴"><a href="#예제-프로그램-1-상속을-사용한-Adapter-패턴" class="headerlink" title="예제 프로그램(1) - 상속을 사용한 Adapter 패턴"></a>예제 프로그램(1) - 상속을 사용한 Adapter 패턴</h2><p>만들 예제 프로그램은 주어진 문자열을 아래와 같이 표시하는 간단한 것입니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(Hello)</span><br><span class="line">*Hello*</span><br></pre></td></tr></table></figure>
+<p>Banner 클래스에는 문자열을 괄호로 묶어서 표시하는 showWithParen 메소드와 문자열 전후에 *를 붙여 표시하는 showWithAster 메소드가 준비되어 있습니다. (이미 제공되어 있는 것)</p>
+<p>Print 인터페이스에는 문자열을 느슨하게(괄호 사용) 표시하기 위한 printWeak 메소드와 문자열을 강하게 표시하기 위한 (* 표시를 앞뒤에 붙여 강조) printStrong 메소드가 선언되어 있습니다.</p>
+<p>지금 하고 싶은 일은 Banner 클래스를 사용해서 Print 인터페이스를 충족시키는 클래스를 만드는 일입니다.</p>
+<p>PrintBanner 클래스가 어댑터의 역할을 담당합니다. 이 클래스는 제공되어 있는 Banner 클래스를 <strong>상속</strong>해서, 필요로 하는 Print 인터페이스를 <strong>구현</strong>합니다.</p>
+<p><img src="/images/post/2018-08-20/adapter-uml_1.png" alt=""></p>
+<h3 id="banner-클래스"><a href="#Banner-클래스" class="headerlink" title="Banner 클래스"></a>Banner 클래스</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Banner</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String string;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Banner</span><span class="params">(String string)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.string = string;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showWithParen</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">'('</span> + string + <span class="string">')'</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showWithAster</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">'*'</span> + string + <span class="string">'*'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="print-인터페이스"><a href="#Print-인터페이스" class="headerlink" title="Print 인터페이스"></a>Print 인터페이스</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Print</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">printWeak</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">printStrong</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="printbanner-클래스"><a href="#PrintBanner-클래스" class="headerlink" title="PrintBanner 클래스"></a>PrintBanner 클래스</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PrintBanner</span> <span class="keyword">extends</span> <span class="title">Banner</span> <span class="keyword">implements</span> <span class="title">Print</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PrintBanner</span><span class="params">(String string)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(string);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printWeak</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        showWithParen();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printStrong</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        showWithAster();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="main-클래스"><a href="#Main-클래스" class="headerlink" title="Main 클래스"></a>Main 클래스</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Print p = <span class="keyword">new</span> PrintBanner(<span class="string">"Hello"</span>);</span><br><span class="line">        p.printWeak();</span><br><span class="line">        p.printStrong();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Main 클래스는 Print 인터페이스를 사용하고 있습니다. Banner 클래스나 showWithParen 메소드나 showWithAster 메소드는 Main 클래스 소스 코드 상에서는 완전히 감추어져 있습니다.</p>
+<h2 id="예제-프로그램2-위임을-사용한-adapter-패턴"><a href="#예제-프로그램-2-위임을-사용한-Adapter-패턴" class="headerlink" title="예제 프로그램(2) - 위임을 사용한 Adapter 패턴"></a>예제 프로그램(2) - 위임을 사용한 Adapter 패턴</h2><p>Main 클래스, Banner 클래스, Print 인터페이스는 예제 프로그램(1)과 동일합니다.</p>
+<p>PrintBanner 클래스는 banner 필드에서 Banner 클래스의 인스턴스를 가집니다. 이 인스턴스는 PrintBanner 클래스의 생성자에서 생성합니다.</p>
+<p>이전 예와는 달리, 이번에는 필드를 경우해서 호출하고 있습니다. 즉 위임을 하고 있습니다.</p>
+<p><img src="/images/post/2018-08-20/adapter-uml_2.png" alt=""></p>
+<h3 id="printbanner-클래스"><a href="#PrintBanner-클래스-1" class="headerlink" title="PrintBanner 클래스"></a>PrintBanner 클래스</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PrintBanner</span> <span class="keyword">implements</span> <span class="title">Print</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Banner banner;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PrintBanner</span><span class="params">(String string)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.banner = <span class="keyword">new</span> Banner(string);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printWeak</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        banner.showWithParen();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printStrong</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        banner.showWithAster();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="adapter-패턴의-구성요소"><a href="#Adapter-패턴의-구성요소" class="headerlink" title="Adapter 패턴의 구성요소"></a>Adapter 패턴의 구성요소</h2><ul>
+<li><strong>Target(대상)의 역할</strong><br>지금 필요한 메소드를 결정합니다. 예제 프로그램에서 Print 인터페이스(상속의 경우)나 Print 클래스(위임의 경우)가 이 역할을 합니다.</li>
+<li><strong>Client(의뢰자)의 역할</strong><br>Target 역할의 메소드를 사용해서 일을 합니다. 예제 프로그램에서 Main 클래스가 이 역할을 합니다.</li>
+<li><strong>Adaptee(개조되는 쪽)의 역할</strong><br>Adaptee는 이미 준비되어 있는 메소드를 갖고 있는 역할입니다. Adaptee역의 메소드가 Target 역할의 메소드와 일치하면 다음 Adapter의 역할은 필요없습니다.</li>
+<li><strong>Adapter의 역할</strong><br>Adapter 패턴의 주인공입니다. Adaptee 역할의 메소드를 사용해서 어떻게든 Target 역할을 만족시키기 위한 것이 Adapter 패턴의 목적이며, Adapter 역할의 임무입니다. 예제 프로그램에서는 PrintBanner 클래스가 Adapter의 역할을 합니다.</li>
+</ul>
+<h2 id="사고-넓히기"><a href="#사고-넓히기" class="headerlink" title="사고 넓히기"></a>사고 넓히기</h2><h3 id="어떤-경우에-사용할까"><a href="#어떤-경우에-사용할까" class="headerlink" title="어떤 경우에 사용할까?"></a>어떤 경우에 사용할까?</h3><p><strong>Adapter 패턴은 기존의 클래스를 개조해서 필요한 클래스를 만듭니다.</strong> 이 패턴으로 필요한 메소드를 빠르게 만들 수 있습니다.</p>
+<p>이미 만들어진 클래스를 새로운 인터페이스(API)에 맞게 개조시킬 때 기존 클래스의 소스를 바꾸어서 ‘수정’하려고 합니다. 그러나 그렇게하면 테스트가 이미 끝난 기존의 클래스를 수정한 후에 다시 한 번 테스트 해야 합니다. Adapter 패턴은 기존의 클래스를 전혀 수정하지 않고 목적한 인터페이스(API)에 맞추려는 것입니다.</p>
+<p>만약 버그가 발생해도 기존의 클래스(Adaptee의 역할)에는 버그가 없으므로 Adapter 역할의 클래스를 중점적으로 조사하면 되고, 프로그램 검사도 상당히 쉬워집니다.</p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2019/02/10/Java/mockito-anotation-field-initialize/" data-toggle="tooltip" data-placement="top" title="Mockito annotation을 사용하는 field 초기화 하기">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2018/08/18/Book/servlet_container_review/" data-toggle="tooltip" data-placement="top" title="<웹 프로그래머를 위한 서블릿 컨테이너의 이해> 리뷰">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-3921438651818825"
+     data-ad-slot="3015269677"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#adapter-패턴"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Adapter 패턴</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#예제-프로그램1-상속을-사용한-adapter-패턴"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">예제 프로그램(1) - 상속을 사용한 Adapter 패턴</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#banner-클래스"><span class="toc-nav-number">1.1.1.</span> <span class="toc-nav-text">Banner 클래스</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#print-인터페이스"><span class="toc-nav-number">1.1.2.</span> <span class="toc-nav-text">Print 인터페이스</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#printbanner-클래스"><span class="toc-nav-number">1.1.3.</span> <span class="toc-nav-text">PrintBanner 클래스</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#main-클래스"><span class="toc-nav-number">1.1.4.</span> <span class="toc-nav-text">Main 클래스</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#예제-프로그램2-위임을-사용한-adapter-패턴"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">예제 프로그램(2) - 위임을 사용한 Adapter 패턴</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#printbanner-클래스"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">PrintBanner 클래스</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#adapter-패턴의-구성요소"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">Adapter 패턴의 구성요소</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#사고-넓히기"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">사고 넓히기</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#어떤-경우에-사용할까"><span class="toc-nav-number">1.4.1.</span> <span class="toc-nav-text">어떤 경우에 사용할까?</span></a></li></ol></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#java" title="java">java</a>
+                        
+                          <a class="tag" href="/tags/#design pattern" title="design pattern">design pattern</a>
+                        
+                          <a class="tag" href="/tags/#adapter" title="adapter">adapter</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "https-jongmin92-github-io";
+    var disqus_identifier = "https://jongmin92.github.io/2018/08/20/Java/design-pattern-adapter/";
+    var disqus_url = "https://jongmin92.github.io/2018/08/20/Java/design-pattern-adapter/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'left',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: 0.6em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/jongmin92">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; KimJongMin 2019 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://jongmin92.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-90389042-1';
+    var _gaDomain = 'auto';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
