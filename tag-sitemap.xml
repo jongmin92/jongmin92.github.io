@@ -807,6 +807,34 @@
     </url>
 
     <url>
+        <loc>https://jongmin92.github.io/tags/IoC/</loc>
+        <lastmod>2018-11-09T15:52:19.808Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/tags/DI/</loc>
+        <lastmod>2018-11-09T15:52:19.808Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/tags/RequestBody/</loc>
+        <lastmod>2018-11-09T15:52:19.808Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/tags/ResponseBody/</loc>
+        <lastmod>2018-11-09T15:52:19.808Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://jongmin92.github.io/tags/MVC/</loc>
         <lastmod>2018-11-09T15:52:19.808Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -835,29 +863,15 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/tags/RequestBody/</loc>
-        <lastmod>2018-11-09T15:52:19.808Z</lastmod>
+        <loc>https://jongmin92.github.io/tags/JUnit/</loc>
+        <lastmod>2018-11-09T15:52:19.809Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/tags/ResponseBody/</loc>
-        <lastmod>2018-11-09T15:52:19.808Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/tags/IoC/</loc>
-        <lastmod>2018-11-09T15:52:19.808Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/tags/DI/</loc>
-        <lastmod>2018-11-09T15:52:19.808Z</lastmod>
+        <loc>https://jongmin92.github.io/tags/Testing/</loc>
+        <lastmod>2018-11-09T15:52:19.809Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -871,20 +885,6 @@
 
     <url>
         <loc>https://jongmin92.github.io/tags/Template-Callback/</loc>
-        <lastmod>2018-11-09T15:52:19.809Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/tags/JUnit/</loc>
-        <lastmod>2018-11-09T15:52:19.809Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/tags/Testing/</loc>
         <lastmod>2018-11-09T15:52:19.809Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -968,6 +968,13 @@
     </url>
 
     <url>
+        <loc>https://jongmin92.github.io/tags/gradle/</loc>
+        <lastmod>2018-11-09T15:52:19.811Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://jongmin92.github.io/tags/maven/</loc>
         <lastmod>2018-11-09T15:52:19.811Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -976,13 +983,6 @@
 
     <url>
         <loc>https://jongmin92.github.io/tags/mvn/</loc>
-        <lastmod>2018-11-09T15:52:19.811Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/tags/gradle/</loc>
         <lastmod>2018-11-09T15:52:19.811Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>

@@ -15,14 +15,6 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/2019/02/18/Java/oop-tdd-practice-car-racing-game/</loc>
-        <lastmod>2019-02-18T14:10:16.576Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>https://jongmin92.github.io/2019/02/10/Java/mockito-anotation-field-initialize/</loc>
         <lastmod>2019-02-11T13:03:47.198Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -55,6 +47,14 @@
     </url>
 
     <url>
+        <loc>https://jongmin92.github.io/2018/08/08/Tool/gradle_basic/</loc>
+        <lastmod>2018-11-09T15:52:19.811Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://jongmin92.github.io/2018/08/09/Tool/jenkins/</loc>
         <lastmod>2018-11-09T15:52:19.811Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -71,8 +71,8 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/2018/08/08/Tool/gradle_basic/</loc>
-        <lastmod>2018-11-09T15:52:19.811Z</lastmod>
+        <loc>https://jongmin92.github.io/2018/04/15/Spring/toby-6/</loc>
+        <lastmod>2018-11-09T15:52:19.810Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -87,15 +87,7 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/2018/04/15/Spring/toby-6/</loc>
-        <lastmod>2018-11-09T15:52:19.810Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/2018/04/01/Spring/toby-3/</loc>
+        <loc>https://jongmin92.github.io/2018/03/26/Spring/toby-2/</loc>
         <lastmod>2018-11-09T15:52:19.809Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -103,7 +95,7 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/2018/03/26/Spring/toby-2/</loc>
+        <loc>https://jongmin92.github.io/2018/04/01/Spring/toby-3/</loc>
         <lastmod>2018-11-09T15:52:19.809Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -127,7 +119,7 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/2018/03/12/Spring/spring-mvc/</loc>
+        <loc>https://jongmin92.github.io/2018/02/11/Spring/spring-ioc-di/</loc>
         <lastmod>2018-11-09T15:52:19.808Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -143,7 +135,7 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/2018/02/11/Spring/spring-ioc-di/</loc>
+        <loc>https://jongmin92.github.io/2018/03/12/Spring/spring-mvc/</loc>
         <lastmod>2018-11-09T15:52:19.808Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -239,7 +231,7 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/2017/08/08/Book/raspberry-cookbook/</loc>
+        <loc>https://jongmin92.github.io/2018/08/05/Book/effective_java_2e_review/</loc>
         <lastmod>2018-11-09T15:52:19.804Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -247,7 +239,7 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/2018/08/05/Book/effective_java_2e_review/</loc>
+        <loc>https://jongmin92.github.io/2017/08/08/Book/raspberry-cookbook/</loc>
         <lastmod>2018-11-09T15:52:19.804Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
