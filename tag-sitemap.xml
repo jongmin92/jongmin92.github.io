@@ -821,20 +821,6 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/tags/RequestBody/</loc>
-        <lastmod>2018-11-09T15:52:19.808Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/tags/ResponseBody/</loc>
-        <lastmod>2018-11-09T15:52:19.808Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://jongmin92.github.io/tags/MVC/</loc>
         <lastmod>2018-11-09T15:52:19.808Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -857,6 +843,20 @@
 
     <url>
         <loc>https://jongmin92.github.io/tags/ViewResolver/</loc>
+        <lastmod>2018-11-09T15:52:19.808Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/tags/RequestBody/</loc>
+        <lastmod>2018-11-09T15:52:19.808Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/tags/ResponseBody/</loc>
         <lastmod>2018-11-09T15:52:19.808Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -1082,6 +1082,48 @@
     <url>
         <loc>https://jongmin92.github.io/tags/Kernel-mode/</loc>
         <lastmod>2019-02-20T15:47:00.502Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/tags/socket/</loc>
+        <lastmod>2019-02-27T15:34:29.578Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/tags/nonblocking/</loc>
+        <lastmod>2019-02-27T15:34:29.578Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/tags/select/</loc>
+        <lastmod>2019-02-27T15:34:29.578Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/tags/poll/</loc>
+        <lastmod>2019-02-27T15:34:29.578Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/tags/epoll/</loc>
+        <lastmod>2019-02-27T15:34:29.578Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/tags/multiplexing/</loc>
+        <lastmod>2019-02-27T15:34:29.578Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
