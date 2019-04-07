@@ -71,7 +71,7 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/2018/08/09/Tool/jenkins/</loc>
+        <loc>https://jongmin92.github.io/2018/07/31/Tip/intellij-shortcut/</loc>
         <lastmod>2018-11-09T15:52:19.811Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -87,24 +87,16 @@
     </url>
 
     <url>
+        <loc>https://jongmin92.github.io/2018/08/09/Tool/jenkins/</loc>
+        <lastmod>2018-11-09T15:52:19.811Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://jongmin92.github.io/2018/08/06/Tool/maven_basic/</loc>
         <lastmod>2018-11-09T15:52:19.811Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/2018/07/31/Tip/intellij-shortcut/</loc>
-        <lastmod>2018-11-09T15:52:19.811Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/2018/05/20/Spring/toby-8/</loc>
-        <lastmod>2018-11-09T15:52:19.810Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -119,7 +111,23 @@
     </url>
 
     <url>
+        <loc>https://jongmin92.github.io/2018/05/20/Spring/toby-8/</loc>
+        <lastmod>2018-11-09T15:52:19.810Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://jongmin92.github.io/2018/03/26/Spring/toby-2/</loc>
+        <lastmod>2018-11-09T15:52:19.809Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/2018/04/01/Spring/toby-3/</loc>
         <lastmod>2018-11-09T15:52:19.809Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -136,14 +144,6 @@
 
     <url>
         <loc>https://jongmin92.github.io/2018/04/08/Spring/toby-5/</loc>
-        <lastmod>2018-11-09T15:52:19.809Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/2018/04/01/Spring/toby-3/</loc>
         <lastmod>2018-11-09T15:52:19.809Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -183,7 +183,7 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/2018/07/03/Java/java-lambda-stream/</loc>
+        <loc>https://jongmin92.github.io/2018/04/07/Java/java-lang-package-and-useful-class/</loc>
         <lastmod>2018-11-09T15:52:19.807Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -191,7 +191,7 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/2018/04/07/Java/java-lang-package-and-useful-class/</loc>
+        <loc>https://jongmin92.github.io/2018/07/03/Java/java-lambda-stream/</loc>
         <lastmod>2018-11-09T15:52:19.807Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
