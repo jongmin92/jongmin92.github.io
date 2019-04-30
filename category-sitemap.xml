@@ -14,7 +14,7 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/categories/Programming/AWS/</loc>
+        <loc>https://jongmin92.github.io/categories/Algorithm/BOJ/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -28,7 +28,7 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/categories/Algorithm/BOJ/</loc>
+        <loc>https://jongmin92.github.io/categories/Programming/AWS/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -42,14 +42,14 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/categories/Programming/HTML/</loc>
+        <loc>https://jongmin92.github.io/categories/Programming/JavaScript/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/categories/Programming/JavaScript/</loc>
+        <loc>https://jongmin92.github.io/categories/Programming/HTML/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -98,13 +98,6 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/categories/Programming/Spring/</loc>
-        <lastmod>2018-05-21T08:15:52.996Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://jongmin92.github.io/categories/Tip/</loc>
         <lastmod>2018-07-31T14:29:14.819Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -126,15 +119,22 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/categories/Programming/</loc>
-        <lastmod>2019-03-09T15:43:30.030Z</lastmod>
+        <loc>https://jongmin92.github.io/categories/Programming/Java/</loc>
+        <lastmod>2019-04-30T10:11:37.291Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/categories/Programming/Java/</loc>
-        <lastmod>2019-03-09T15:43:30.030Z</lastmod>
+        <loc>https://jongmin92.github.io/categories/Programming/</loc>
+        <lastmod>2019-04-30T11:25:50.378Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/categories/Programming/Spring/</loc>
+        <lastmod>2019-04-30T11:25:50.378Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
