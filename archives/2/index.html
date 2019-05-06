@@ -132,14 +132,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -206,6 +206,78 @@
             
                 <!-- Main Content -->
 
+
+<div class="post-preview">
+
+    <a href="/2019/03/03/Java/java-nio/">
+        <h2 class="post-title">
+            Java NIO와 멀티플렉싱 기반의 다중 접속 서버
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            자바 NIO에 대한 소개와 NIO와 함께 도입된 자바에서 I/O 멀티플렉싱(multiplexing)을 구현한 selector에 대해 알아봅니다. I/O 멀티플렉싱(multiplexing)에 대한 개념에 대해 아직 잘 이해하지 못하고 있다면 먼저 &lt;멀티플렉싱 기반의 다중 접속 서버로 가기까지&gt; 포스팅을 읽어주세요.
+Overview자바 NIO ......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by KimJongMin on
+            2019-03-03
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#nio" title="nio">nio</a>
+            
+              <a href="/tags/#select" title="select">select</a>
+            
+              <a href="/tags/#multiplexing" title="multiplexing">multiplexing</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2019/02/28/Java/java-with-non-blocking-io/">
+        <h2 class="post-title">
+            멀티플렉싱 기반의 다중 접속 서버로 가기까지
+        </h2>
+        <h3 class="post-subtitle">
+            멀티프로세스 -> 멀티스레드 -> 멀티플렉싱
+        </h3>
+        <div class="post-content-preview">
+            소켓이란?소켓은 네트워크 상에서 서버와 클라이언트 두개의 프로그램이 특정 포트를 통해 양방향 통신이 가능하도록 만들어주는 추상화된 장치입니다. 메모리의 유저 공간에 존재하는 프로세스(서버, 클라이언트)는 커널 공간에 생성된 소켓을 통해 데이터를 송수신할 수 있습니다.
+소켓은 아래와 같이 지역(로컬) IP 주소, Port 번호와 상대방의 IP 주소와 P......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by KimJongMin on
+            2019-02-28
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#select" title="select">select</a>
+            
+              <a href="/tags/#multiplexing" title="multiplexing">multiplexing</a>
+            
+              <a href="/tags/#socket" title="socket">socket</a>
+            
+              <a href="/tags/#nonblocking" title="nonblocking">nonblocking</a>
+            
+              <a href="/tags/#poll" title="poll">poll</a>
+            
+              <a href="/tags/#epoll" title="epoll">epoll</a>
+            
+        </div>
+    
+
+</div>
+<hr>
 
 <div class="post-preview">
 
@@ -350,78 +422,6 @@ Adapter 패턴이미 제공되어 있는 것을 그대로 사용할 수 없을 �
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2018/08/18/Book/servlet_container_review/">
-        <h2 class="post-title">
-            <웹 프로그래머를 위한 서블릿 컨테이너의 이해> 리뷰
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            한빛미디어 - 웹 프로그래머를 위한 서블릿 컨테이너의 이해
-스프링을 이용해 개발하고 있지만 스프링이 구동되는 서블릿 컨테이너에 대한 이해가 부족해 읽게 되었다. (어떻게 돌아가고 있는지 궁금했다…)
-책의 구성은 서블릿 컨테이너를 학습해야 하는 이유를 시작으로 HTTP 프로토콜에 대한 이해 그리고 서블릿의 이해로 이어진다.그 후에는 실제 서블릿 컨테이너......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by KimJongMin on
-            2018-08-18
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#java" title="java">java</a>
-            
-              <a href="/tags/#book" title="book">book</a>
-            
-              <a href="/tags/#review" title="review">review</a>
-            
-              <a href="/tags/#servlet container" title="servlet container">servlet container</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2018/08/18/Java/design-pattern-iterator/">
-        <h2 class="post-title">
-            Design Pattern - Iterator
-        </h2>
-        <h3 class="post-subtitle">
-            순서대로 지정해서 처리하기
-        </h3>
-        <div class="post-content-preview">
-            
-해당 포스팅은 Java 언어로 배우는 디자인 패턴 입문 책을 참고해 작성했습니다.사용된 코드는 jongmin92/Design-Pattern repository 에서 확인할 수 있습니다.
-
-Iterator 패턴Java 언어에서 배열 arr의 모든 요소를 표시하기 위해서는 다음과 같이 for문을 사용합니다.
-123for (int i = 0; i &lt;......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by KimJongMin on
-            2018-08-18
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#java" title="java">java</a>
-            
-              <a href="/tags/#design pattern" title="design pattern">design pattern</a>
-            
-              <a href="/tags/#iterator" title="iterator">iterator</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -508,7 +508,7 @@ Iterator 패턴Java 언어에서 배열 arr의 모든 요소를 표시하기 위
 
     <h5>categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><span class="category-list-count">14</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/BOJ/">BOJ</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Concept/">Concept</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Book/">Book</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/">Programming</a><span class="category-list-count">77</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/AWS/">AWS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/HTML/">HTML</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Java/">Java</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/JavaScript/">JavaScript</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Linux-Ubuntu/">Linux & Ubuntu</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Node/">Node</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/RaspberryPi/">RaspberryPi</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/React-Native/">React Native</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Spring/">Spring</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Tool/">Tool</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project/">Project</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project/Emily/">Emily</a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tip/">Tip</a><span class="category-list-count">3</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><span class="category-list-count">14</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/BOJ/">BOJ</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Concept/">Concept</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Book/">Book</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/">Programming</a><span class="category-list-count">79</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/AWS/">AWS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/HTML/">HTML</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Java/">Java</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/JavaScript/">JavaScript</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Linux-Ubuntu/">Linux & Ubuntu</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Node/">Node</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/RaspberryPi/">RaspberryPi</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/React-Native/">React Native</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Spring/">Spring</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Tool/">Tool</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project/">Project</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project/Emily/">Emily</a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tip/">Tip</a><span class="category-list-count">3</span></li></ul>
     </div>
 
 
@@ -538,19 +538,19 @@ Iterator 패턴Java 언어에서 배열 arr의 모든 요소를 표시하기 위
             
         
             
-            <a href="/tags/#java" title="java" rel="6">java</a>
-            
-        
-            
             <a href="/tags/#book" title="book" rel="4">book</a>
             
         
             
-            <a href="/tags/#review" title="review" rel="3">review</a>
+            <a href="/tags/#RaspberryPi" title="RaspberryPi" rel="9">RaspberryPi</a>
             
         
             
-            <a href="/tags/#RaspberryPi" title="RaspberryPi" rel="9">RaspberryPi</a>
+            <a href="/tags/#java" title="java" rel="6">java</a>
+            
+        
+            
+            <a href="/tags/#review" title="review" rel="3">review</a>
             
         
             
@@ -590,10 +590,6 @@ Iterator 패턴Java 언어에서 배열 arr의 모든 요소를 표시하기 위
             
         
             
-        
-            
-        
-            
             <a href="/tags/#design pattern" title="design pattern" rel="2">design pattern</a>
             
         
@@ -602,11 +598,19 @@ Iterator 패턴Java 언어에서 배열 arr의 모든 요소를 표시하기 위
             
         
             
-            <a href="/tags/#Java" title="Java" rel="9">Java</a>
+        
             
         
             
-            <a href="/tags/#Async" title="Async" rel="3">Async</a>
+            <a href="/tags/#Java" title="Java" rel="11">Java</a>
+            
+        
+            
+            <a href="/tags/#Async" title="Async" rel="4">Async</a>
+            
+        
+            
+        
             
         
             
@@ -617,8 +621,6 @@ Iterator 패턴Java 언어에서 배열 arr의 모든 요소를 표시하기 위
         
             
             <a href="/tags/#DeferredResult" title="DeferredResult" rel="2">DeferredResult</a>
-            
-        
             
         
             
@@ -656,11 +658,27 @@ Iterator 패턴Java 언어에서 배열 arr의 모든 요소를 표시하기 위
             
         
             
+        
+            
+        
+            
+        
+            
+        
+            
             <a href="/tags/#TIL" title="TIL" rel="14">TIL</a>
             
         
             
             <a href="/tags/#JavaScript" title="JavaScript" rel="14">JavaScript</a>
+            
+        
+            
+        
+            
+        
+            
+        
             
         
             
@@ -674,23 +692,9 @@ Iterator 패턴Java 언어에서 배열 arr의 모든 요소를 표시하기 위
             
         
             
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
             <a href="/tags/#Linux &amp; Ubuntu" title="Linux &amp; Ubuntu" rel="5">Linux &amp; Ubuntu</a>
+            
+        
             
         
             
@@ -720,9 +724,27 @@ Iterator 패턴Java 언어에서 배열 arr의 모든 요소를 표시하기 위
             
         
             
+            <a href="/tags/#Module" title="Module" rel="2">Module</a>
+            
         
             
-            <a href="/tags/#Module" title="Module" rel="2">Module</a>
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
             
         
             
@@ -754,19 +776,7 @@ Iterator 패턴Java 언어에서 배열 arr의 모든 요소를 표시하기 위
             
         
             
-        
-            
-        
-            
-        
-            
-        
-            
             <a href="/tags/#Jasper" title="Jasper" rel="2">Jasper</a>
-            
-        
-            
-        
             
         
             
@@ -812,14 +822,6 @@ Iterator 패턴Java 언어에서 배열 arr의 모든 요소를 표시하기 위
             
         
             
-        
-            
-        
-            
-        
-            
-        
-            
             <a href="/tags/#React Native" title="React Native" rel="4">React Native</a>
             
         
@@ -832,27 +834,17 @@ Iterator 패턴Java 언어에서 배열 arr의 모든 요소를 표시하기 위
             
         
             
-            <a href="/tags/#Chrome" title="Chrome" rel="2">Chrome</a>
-            
-        
-            
-            <a href="/tags/#Chrome Extension" title="Chrome Extension" rel="2">Chrome Extension</a>
-            
-        
-            
-        
-            
-            <a href="/tags/#IntelliJ" title="IntelliJ" rel="2">IntelliJ</a>
-            
-        
-            
-        
-            
-            <a href="/tags/#Spring" title="Spring" rel="11">Spring</a>
+            <a href="/tags/#Spring" title="Spring" rel="12">Spring</a>
             
         
             
             <a href="/tags/#AOP" title="AOP" rel="2">AOP</a>
+            
+        
+            
+        
+            
+        
             
         
             
@@ -865,8 +857,6 @@ Iterator 패턴Java 언어에서 배열 arr의 모든 요소를 표시하기 위
         
             
             <a href="/tags/#MVC" title="MVC" rel="2">MVC</a>
-            
-        
             
         
             
@@ -894,15 +884,19 @@ Iterator 패턴Java 언어에서 배열 arr의 모든 요소를 표시하기 위
             
         
             
-        
+            <a href="/tags/#IntelliJ" title="IntelliJ" rel="2">IntelliJ</a>
             
         
             
         
             
-            <a href="/tags/#build tool" title="build tool" rel="2">build tool</a>
+        
+            
+            <a href="/tags/#Chrome" title="Chrome" rel="2">Chrome</a>
             
         
+            
+            <a href="/tags/#Chrome Extension" title="Chrome Extension" rel="2">Chrome Extension</a>
             
         
             
@@ -919,6 +913,20 @@ Iterator 패턴Java 언어에서 배열 arr의 모든 요소를 표시하기 위
         
             
             <a href="/tags/#ci &amp; cd" title="ci &amp; cd" rel="2">ci &amp; cd</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#build tool" title="build tool" rel="2">build tool</a>
+            
+        
             
         
             

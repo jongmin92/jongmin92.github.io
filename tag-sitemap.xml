@@ -912,13 +912,6 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/tags/Spring/</loc>
-        <lastmod>2018-11-09T15:52:19.810Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://jongmin92.github.io/tags/AOP/</loc>
         <lastmod>2018-11-09T15:52:19.810Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -1178,6 +1171,13 @@
     </url>
 
     <url>
+        <loc>https://jongmin92.github.io/tags/DeferredResult/</loc>
+        <lastmod>2019-04-14T11:03:40.505Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://jongmin92.github.io/tags/RestTemplate/</loc>
         <lastmod>2019-04-14T11:03:40.505Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -1199,22 +1199,50 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/tags/DeferredResult/</loc>
-        <lastmod>2019-04-14T11:03:40.505Z</lastmod>
+        <loc>https://jongmin92.github.io/tags/Spring/</loc>
+        <lastmod>2019-05-04T16:22:25.931Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/tags/Configuration/</loc>
+        <lastmod>2019-05-04T16:22:25.931Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/tags/Bean/</loc>
+        <lastmod>2019-05-04T16:22:25.931Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/tags/Bean-references/</loc>
+        <lastmod>2019-05-04T16:22:25.931Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://jongmin92.github.io/tags/Java/</loc>
-        <lastmod>2019-04-29T15:07:50.609Z</lastmod>
+        <lastmod>2019-05-06T15:39:05.102Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://jongmin92.github.io/tags/Async/</loc>
-        <lastmod>2019-04-29T15:07:50.609Z</lastmod>
+        <lastmod>2019-05-06T15:39:05.102Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/tags/CompletableFuture/</loc>
+        <lastmod>2019-05-06T15:39:05.102Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
