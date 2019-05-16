@@ -8,7 +8,7 @@
 
     <url>
         <loc>https://jongmin92.github.io/2019/05/09/Gradle/gradle-api-vs-implementation/</loc>
-        <lastmod>2019-05-16T15:00:05.118Z</lastmod>
+        <lastmod>2019-05-16T15:07:56.767Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -167,7 +167,7 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/2018/04/01/Spring/toby-3/</loc>
+        <loc>https://jongmin92.github.io/2018/04/04/Spring/toby-4/</loc>
         <lastmod>2018-11-09T15:52:19.809Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -175,7 +175,7 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/2018/04/04/Spring/toby-4/</loc>
+        <loc>https://jongmin92.github.io/2018/04/01/Spring/toby-3/</loc>
         <lastmod>2018-11-09T15:52:19.809Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -223,7 +223,7 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/2018/04/07/Java/java-lang-package-and-useful-class/</loc>
+        <loc>https://jongmin92.github.io/2018/07/03/Java/java-lambda-stream/</loc>
         <lastmod>2018-11-09T15:52:19.807Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -231,7 +231,7 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/2018/07/03/Java/java-lambda-stream/</loc>
+        <loc>https://jongmin92.github.io/2018/04/07/Java/java-lang-package-and-useful-class/</loc>
         <lastmod>2018-11-09T15:52:19.807Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
