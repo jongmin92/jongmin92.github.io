@@ -877,20 +877,6 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/tags/Exception/</loc>
-        <lastmod>2018-11-09T15:52:19.809Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/tags/DataAccessException/</loc>
-        <lastmod>2018-11-09T15:52:19.809Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://jongmin92.github.io/tags/Context-DI/</loc>
         <lastmod>2018-11-09T15:52:19.809Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -899,6 +885,20 @@
 
     <url>
         <loc>https://jongmin92.github.io/tags/Template-Callback/</loc>
+        <lastmod>2018-11-09T15:52:19.809Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/tags/Exception/</loc>
+        <lastmod>2018-11-09T15:52:19.809Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/tags/DataAccessException/</loc>
         <lastmod>2018-11-09T15:52:19.809Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -1227,13 +1227,6 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/tags/Java/</loc>
-        <lastmod>2019-05-06T15:39:05.102Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://jongmin92.github.io/tags/Async/</loc>
         <lastmod>2019-05-06T15:39:05.102Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -1250,6 +1243,27 @@
     <url>
         <loc>https://jongmin92.github.io/tags/Gradle/</loc>
         <lastmod>2019-05-16T15:07:56.767Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/tags/Java/</loc>
+        <lastmod>2019-05-19T16:43:20.043Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/tags/Armeria/</loc>
+        <lastmod>2019-05-19T16:43:20.043Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/tags/Open-source/</loc>
+        <lastmod>2019-05-19T16:43:20.043Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
