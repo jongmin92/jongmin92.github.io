@@ -765,20 +765,6 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/tags/Lambda/</loc>
-        <lastmod>2018-11-09T15:52:19.807Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/tags/Stream/</loc>
-        <lastmod>2018-11-09T15:52:19.807Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://jongmin92.github.io/tags/Linux-Ubuntu/</loc>
         <lastmod>2018-11-09T15:52:19.807Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -801,6 +787,20 @@
 
     <url>
         <loc>https://jongmin92.github.io/tags/less-F/</loc>
+        <lastmod>2018-11-09T15:52:19.807Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/tags/Lambda/</loc>
+        <lastmod>2018-11-09T15:52:19.807Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/tags/Stream/</loc>
         <lastmod>2018-11-09T15:52:19.807Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -863,20 +863,6 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/tags/JUnit/</loc>
-        <lastmod>2018-11-09T15:52:19.809Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/tags/Testing/</loc>
-        <lastmod>2018-11-09T15:52:19.809Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://jongmin92.github.io/tags/Context-DI/</loc>
         <lastmod>2018-11-09T15:52:19.809Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -885,6 +871,20 @@
 
     <url>
         <loc>https://jongmin92.github.io/tags/Template-Callback/</loc>
+        <lastmod>2018-11-09T15:52:19.809Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/tags/JUnit/</loc>
+        <lastmod>2018-11-09T15:52:19.809Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/tags/Testing/</loc>
         <lastmod>2018-11-09T15:52:19.809Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -1199,13 +1199,6 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/tags/Spring/</loc>
-        <lastmod>2019-05-04T16:22:25.931Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://jongmin92.github.io/tags/Configuration/</loc>
         <lastmod>2019-05-04T16:22:25.931Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -1264,6 +1257,41 @@
     <url>
         <loc>https://jongmin92.github.io/tags/Open-source/</loc>
         <lastmod>2019-05-19T16:43:20.043Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/tags/Spring/</loc>
+        <lastmod>2019-05-26T12:08:16.800Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/tags/Bean/</loc>
+        <lastmod>2019-05-26T12:08:16.800Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/tags/Closeable/</loc>
+        <lastmod>2019-05-26T12:08:16.800Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/tags/AutoClosable/</loc>
+        <lastmod>2019-05-26T12:08:16.800Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/tags/DisposableBeanAdapter/</loc>
+        <lastmod>2019-05-26T12:08:16.800Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
