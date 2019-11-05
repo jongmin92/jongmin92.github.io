@@ -145,14 +145,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -228,43 +228,39 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h2 id="index">Index</h2>
-<ol>
+                <h2 id="index"><a href="#Index" class="headerlink" title="Index"></a>Index</h2><ol>
 <li><a href="#1">React Native 정적 이미지 사용하기</a></li>
-<li><a href="#2">Native 측면에서 바라보기</a></li>
+<li><a href="#2">Native 측면에서 바라보기</a><ol>
 <li><a href="#2-1">Android</a></li>
 <li><a href="#2-2">iOS</a></li>
 <li><a href="#2-3">이미지 사용하기</a></li>
+</ol>
+</li>
 <li><a href="#3">코드로 한번 더 복습하기</a></li>
 <li><a href="#4">눈으로 확인하는 결과</a></li>
 </ol>
 <hr>
 <p>React Native는 <strong>웹뷰</strong>를 통해 인터페이스를 구축하는 하이브리드 방식(예를 들면 Ionic)과는 달리 자바스크립트로 작성한 코드가 <strong>Native UI 컴포넌트</strong>로 만들어집니다. React Native에서 이미지를 사용하는 코드는 iOS와 Android 모두 통합되어 있지만, 정적인 이미지 파일을 추가하는 부분은 <strong>Naming</strong>에 있어 차이가 있습니다. 이번에는 React Native에서 정적 이미지를 사용하는 방법과, 정적 이미지 추가 시 반복되는 작업을 좀 더 효율적으로 할 수 있도록 Node를 사용하여 스크립트를 작성하는 부분을 다뤄보도록 하겠습니다. 글 작성 기준 React Native의 최신버전은 0.4입니다.</p>
 <hr>
-<p>&lt;span id='1'&gt;</p>
-<h2 id="react-native-정적-이미지-사용하기">React Native 정적 이미지 사용하기</h2>
-<p>React Native에서 <strong>정적 이미지</strong>를 추가하는 방법은 <a href="https://facebook.github.io/react-native/docs/images.html" target="_blank" rel="noopener">공식홈페이지</a>에서도 잘 설명되어 있지만 한번 더 살펴보겠습니다.</p>
-<p>다음과 같이 react-native 의 기본적인 <code>Image</code> 컴포넌트를 통해 정적인 이미지 파일을 사용할 수 있습니다. 아래의 코드는 작성된 컴포넌트의 파일과 같은 경로에 있는 <code>gold.png</code>라는 파일을 사용합니다.
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Image source=&#123;require(&apos;./gold.png&apos;)&#125; /&gt;</span><br></pre></td></tr></table></figure></p>
+<p><span id="1"></span></p>
+<h2 id="react-native-정적-이미지-사용하기"><a href="#React-Native-정적-이미지-사용하기" class="headerlink" title="React Native 정적 이미지 사용하기"></a>React Native 정적 이미지 사용하기</h2><p>React Native에서 <strong>정적 이미지</strong>를 추가하는 방법은 <a href="https://facebook.github.io/react-native/docs/images.html" target="_blank" rel="noopener">공식홈페이지</a>에서도 잘 설명되어 있지만 한번 더 살펴보겠습니다.</p>
+<p>다음과 같이 react-native 의 기본적인 <code>Image</code> 컴포넌트를 통해 정적인 이미지 파일을 사용할 수 있습니다. 아래의 코드는 작성된 컴포넌트의 파일과 같은 경로에 있는 <code>gold.png</code>라는 파일을 사용합니다.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Image source=&#123;require(&apos;./gold.png&apos;)&#125; /&gt;</span><br></pre></td></tr></table></figure></p>
 <p>하나의 파일을 두개의 플랫폼(iOS와 Android)에서 같이 사용할 수 있지만 만약 플랫폼에 따라 다른 이미지를 사용하고 싶다면 <code>gold.png</code>라는 파일을 <code>gold.android.png</code>와 <code>gold.ios.png</code>로 각각 저장하여 사용할 수 있습니다.  이와 같은 경우는 주로 Android와 iOS에서 같은 목적으로 사용되는 이미지가 다를 경우 유용합니다. (React Native에서 iOS와 Android의 Entry file이 index.ios.js와 index.android.js 인것과 같은 개념입니다.)</p>
 <p>또한 React Native의 <code>packager</code>는 <strong>플랫폼</strong> 뿐만 아니라 <strong>디바이스 스크린의 해상도</strong>에 따라서도 다른 이미지를 제공할 수 있습니다. 따라서 다음과 같이 이미지 파일의 이름을 해상도에 따라 달리하여 사용할 수 있습니다.</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">├─ Test.js</span><br><span class="line">└── img/</span><br><span class="line">    ├── gold@2x.png</span><br><span class="line">    └── gold@3x.png</span><br></pre></td></tr></table></figure></p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;/* Test.js 코드의 render 부분 */&#125;</span><br><span class="line">&lt;Image source=&#123;require(&apos;./img/gold.png&apos;)&#125; /&gt;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">├─ Test.js</span><br><span class="line">└── img/</span><br><span class="line">    ├── gold@2x.png</span><br><span class="line">    └── gold@3x.png</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;/* Test.js 코드의 render 부분 */&#125;</span><br><span class="line">&lt;Image source=&#123;require(&apos;./img/gold.png&apos;)&#125; /&gt;</span><br></pre></td></tr></table></figure>
 <p>파일 구조와 Test.js의 코드가 위와 같을 때 iPhone 6와 iPhone 6 Plus는 각각 gold@2x.png와 gold@3x.png 파일을 사용합니다. 만약 디바이스 스크린의 해상도에 해당하는 파일이 없다면 <strong>가장 밀접한 해상도를 가진 파일</strong>을 사용합니다.</p>
-<p>정리하면 <strong>디바이스의 플랫폼과 해상도</strong>에 따라 파일을 사용하고 싶을 경우 다음과 같이 사용할 수 있습니다.
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">├─ Test.js</span><br><span class="line">└── img/</span><br><span class="line">    ├── gold@2x.android.png</span><br><span class="line">    ├── gold@2x.ios.png</span><br><span class="line">    ├── gold@3x.android.png</span><br><span class="line">    └── gold@3x.ios.png</span><br></pre></td></tr></table></figure></p>
+<p>정리하면 <strong>디바이스의 플랫폼과 해상도</strong>에 따라 파일을 사용하고 싶을 경우 다음과 같이 사용할 수 있습니다.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">├─ Test.js</span><br><span class="line">└── img/</span><br><span class="line">    ├── gold@2x.android.png</span><br><span class="line">    ├── gold@2x.ios.png</span><br><span class="line">    ├── gold@3x.android.png</span><br><span class="line">    └── gold@3x.ios.png</span><br></pre></td></tr></table></figure></p>
 <p>React Native에서 정적인 이미지를 사용할 경우 주의해야할 점은 <a href="https://facebook.github.io/react-native/docs/images.html" target="_blank" rel="noopener">공식홈페이지</a>를 참고하시면 좋을것 같습니다.</p>
 <hr>
-<p>&lt;span id='2'&gt;</p>
-<h2 id="native-측면에서-바라보기">Native 측면에서 바라보기</h2>
-<p>React Native는 기존 Android와 iOS에서 이미지를 추가하여 사용하는 방법을 그대로 사용할 수도 있습니다. 이미 위의 방법으로 해결이 가능하며 이 방법이 좀 더 복잡하기에 사용을 권장드리지 않지만 이런방법으로도 가능하다는걸 알고계시면 좋을것 같습니다. Native에서 Android와 iOS의 이미지 파일은 다음과 같은 경로에 저장하여 사용합니다.</p>
+<p><span id="2"></span></p>
+<h2 id="native-측면에서-바라보기"><a href="#Native-측면에서-바라보기" class="headerlink" title="Native 측면에서 바라보기"></a>Native 측면에서 바라보기</h2><p>React Native는 기존 Android와 iOS에서 이미지를 추가하여 사용하는 방법을 그대로 사용할 수도 있습니다. 이미 위의 방법으로 해결이 가능하며 이 방법이 좀 더 복잡하기에 사용을 권장드리지 않지만 이런방법으로도 가능하다는걸 알고계시면 좋을것 같습니다. Native에서 Android와 iOS의 이미지 파일은 다음과 같은 경로에 저장하여 사용합니다.</p>
 <ul>
 <li>Android <code>Test-app/android/app/src/main/res/</code></li>
 <li>iOS <code>Test-app/ios/Test-app/images.xcassets/</code></li>
 </ul>
-<p>&lt;span id='2-1'&gt;</p>
-<h3 id="android">Android</h3>
-<p>Android에서 해상도별로 이미지를 추가하는 방법을 알아보겠습니다.</p>
+<p><span id="2-1"></span></p>
+<h3 id="android"><a href="#Android" class="headerlink" title="Android"></a>Android</h3><p>Android에서 해상도별로 이미지를 추가하는 방법을 알아보겠습니다.</p>
 <p>1.처음 프로젝트 생성시에는 <strong>drawable</strong>관련 폴더가 없으므로 <code>android/app/src/main/res/</code> 에 해당 폴더들을 생성합니다.</p>
 <ul>
 <li>drawable-mdpi</li>
@@ -281,41 +277,25 @@
 <li>drawable-xxhdpi/gold.png</li>
 <li>drawable-xxxhdpi/gold.png</li>
 </ul>
-<p>&lt;span id='2-2'&gt;</p>
-<h3 id="ios">iOS</h3>
-<p>iOS에서 이미지를 추가하는 방법은 Android에 비해 좀 더 번거롭습니다. 글로 설명하는것보다 사진을 참고하는 것이 이해하기 쉽기 때문에 사진을 첨부합니다.</p>
-<p>1.먼저 xcode에서 프로젝트의 root폴더에서 ios폴더를 로드한 후 <strong>images.xcassets</strong> 폴더를 클릭 후 AppIcon 아래의 빈공간을 우클릭하면 <strong>New Image set</strong>라는 메뉴가 있습니다. 클릭 후 1x, 2x, 3x에 이미지를 넣으신 후 이미지의 이름을 설정합니다.
-<img src="/images/post/2017-01-22/iOS-add-image1.png" alt="xcode에서 이미지 추가1"></p>
-<p>2.위와 같이 이미지를 넣고나면 해당 경로에 다음과 같은 형식으로 파일이 생성됩니다. <strong>Contents.json</strong>은 이미지 파일에 대한 정보를 갖고 있습니다.
-<img src="/images/post/2017-01-22/iOS-add-image2.png" alt="xcode에서 이미지 추가2"></p>
-<p>&lt;span id='2-3'&gt;</p>
-<h4 id="이미지-사용하기">이미지 사용하기</h4>
-<p>Android와 iOS에 이미지 추가가 모두 끝났습니다. 추가한 이미지를 React Native 에서 사용해보겠습니다.
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;/* Test.js 코드의 render 부분 */&#125;</span><br><span class="line">&lt;Image source=&#123;require(&apos;image!gold&apos;)&#125; /&gt;</span><br></pre></td></tr></table></figure></p>
-<p>위의 코드에 **image!**라는 부분의 추가와 <strong>이미지 파일의 확장자</strong>가 사라졌다는게 전과 다릅니다. 이미지의 위치를 알리는 <strong>경로</strong> 또한 명시할 필요가 사라졌습니다.</p>
+<p><span id="2-2"></span></p>
+<h3 id="ios"><a href="#iOS" class="headerlink" title="iOS"></a>iOS</h3><p>iOS에서 이미지를 추가하는 방법은 Android에 비해 좀 더 번거롭습니다. 글로 설명하는것보다 사진을 참고하는 것이 이해하기 쉽기 때문에 사진을 첨부합니다.</p>
+<p>1.먼저 xcode에서 프로젝트의 root폴더에서 ios폴더를 로드한 후 <strong>images.xcassets</strong> 폴더를 클릭 후 AppIcon 아래의 빈공간을 우클릭하면 <strong>New Image set</strong>라는 메뉴가 있습니다. 클릭 후 1x, 2x, 3x에 이미지를 넣으신 후 이미지의 이름을 설정합니다.<br><img src="/images/post/2017-01-22/iOS-add-image1.png" alt="xcode에서 이미지 추가1"></p>
+<p>2.위와 같이 이미지를 넣고나면 해당 경로에 다음과 같은 형식으로 파일이 생성됩니다. <strong>Contents.json</strong>은 이미지 파일에 대한 정보를 갖고 있습니다.<br><img src="/images/post/2017-01-22/iOS-add-image2.png" alt="xcode에서 이미지 추가2"></p>
+<p><span id="2-3"></span></p>
+<h4 id="이미지-사용하기"><a href="#이미지-사용하기" class="headerlink" title="이미지 사용하기"></a>이미지 사용하기</h4><p>Android와 iOS에 이미지 추가가 모두 끝났습니다. 추가한 이미지를 React Native 에서 사용해보겠습니다.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;/* Test.js 코드의 render 부분 */&#125;</span><br><span class="line">&lt;Image source=&#123;require(&apos;image!gold&apos;)&#125; /&gt;</span><br></pre></td></tr></table></figure></p>
+<p>위의 코드에 <strong>image!</strong>라는 부분의 추가와 <strong>이미지 파일의 확장자</strong>가 사라졌다는게 전과 다릅니다. 이미지의 위치를 알리는 <strong>경로</strong> 또한 명시할 필요가 사라졌습니다.</p>
 <hr>
-<p>&lt;span id='3'&gt;</p>
-<h2 id="코드로-한번-더-복습하기">코드로 한번 더 복습하기</h2>
-<p>이제 React Native에서 정적인 이미지를 추가하는 방법을 모두 알아보았습니다. 마지막으로 코드상에서 정적인 이미지를 사용하는 방법을 정리해보겠습니다.</p>
-<p>-- Native 에서 이미지를 추가하는 방법을 사용하였을 경우
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;/* Test.js 코드의 render 부분 */&#125;</span><br><span class="line">&lt;Image source=&#123;require(&apos;image!gold&apos;)&#125; /&gt;</span><br></pre></td></tr></table></figure></p>
-<p>-- 프로젝트 폴더내에 추가 후 상대경로를 사용하는 경우
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;/* Test.js 코드의 render 부분 */&#125;</span><br><span class="line">&lt;Image source=&#123;require(&apos;./image/gold.png&apos;)&#125; /&gt;</span><br></pre></td></tr></table></figure></p>
-<p>-- 첫번째와 두번째 방법을 모두 사용하는 경우 (Native에서 사용되는 폴더에서 이미지를 찾은 후 존재하지 않을 경우 상대경로를 사용하여 이미지를 사용)
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;/* Test.js 코드의 render 부분 */&#125;</span><br><span class="line">&lt;Image source=&#123; &#123;uri: &apos;gold&apos;, isStatic: true&#125; &#125; /&gt;</span><br></pre></td></tr></table></figure></p>
+<p><span id="3"></span></p>
+<h2 id="코드로-한번-더-복습하기"><a href="#코드로-한번-더-복습하기" class="headerlink" title="코드로 한번 더 복습하기"></a>코드로 한번 더 복습하기</h2><p>이제 React Native에서 정적인 이미지를 추가하는 방법을 모두 알아보았습니다. 마지막으로 코드상에서 정적인 이미지를 사용하는 방법을 정리해보겠습니다.</p>
+<p>– Native 에서 이미지를 추가하는 방법을 사용하였을 경우<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;/* Test.js 코드의 render 부분 */&#125;</span><br><span class="line">&lt;Image source=&#123;require(&apos;image!gold&apos;)&#125; /&gt;</span><br></pre></td></tr></table></figure></p>
+<p>– 프로젝트 폴더내에 추가 후 상대경로를 사용하는 경우<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;/* Test.js 코드의 render 부분 */&#125;</span><br><span class="line">&lt;Image source=&#123;require(&apos;./image/gold.png&apos;)&#125; /&gt;</span><br></pre></td></tr></table></figure></p>
+<p>– 첫번째와 두번째 방법을 모두 사용하는 경우 (Native에서 사용되는 폴더에서 이미지를 찾은 후 존재하지 않을 경우 상대경로를 사용하여 이미지를 사용)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;/* Test.js 코드의 render 부분 */&#125;</span><br><span class="line">&lt;Image source=&#123; &#123;uri: &apos;gold&apos;, isStatic: true&#125; &#125; /&gt;</span><br></pre></td></tr></table></figure></p>
 <hr>
-<p>&lt;span id='4'&gt;</p>
-<h2 id="눈으로-확인하는-결과">눈으로 확인하는 결과</h2>
-<p>iPhone6와 iPhone6 Plus 에서 Gold 이미지가 기기의 해상도에 맞게 다른 파일로 사용된것을 확인할 수 있습니다.
-&lt;div style=&quot;display:flex; justify-content: center&quot;&gt;
-&lt;figure style=&quot;width: 350px; max-height: 580px&quot;&gt;
-<img src="/images/post/2017-01-22/iPhone6.png" alt="iPhone6 에서의 Gold 이미지">
-&lt;/figure&gt;</p>
-<p>&lt;figure style=&quot;width: 350px; max-height: 580px&quot;&gt;
-<img src="/images/post/2017-01-22/iPhone6Plus.png" alt="iPhone6Plus 에서의 Gold 이미지">
-&lt;/figure&gt;
-&lt;/div&gt;</p>
-<p>&lt;br&gt;다음 포스팅에서는 정적인 이미지 파일을 쉽게 추가하여 사용할 수 있도록 자동화하는 스크립트 작성에 대해서 작성하겠습니다.</p>
+<p><span id="4"></span></p>
+<h2 id="눈으로-확인하는-결과"><a href="#눈으로-확인하는-결과" class="headerlink" title="눈으로 확인하는 결과"></a>눈으로 확인하는 결과</h2><p>iPhone6와 iPhone6 Plus 에서 Gold 이미지가 기기의 해상도에 맞게 다른 파일로 사용된것을 확인할 수 있습니다.</p>
+<div style="display:flex; justify-content: center"><br><figure style="width: 350px; max-height: 580px"><br><img src="/images/post/2017-01-22/iPhone6.png" alt="iPhone6 에서의 Gold 이미지"><br></figure><br><br><figure style="width: 350px; max-height: 580px"><br><img src="/images/post/2017-01-22/iPhone6Plus.png" alt="iPhone6Plus 에서의 Gold 이미지"><br></figure><br></div>
+
+<p><br>다음 포스팅에서는 정적인 이미지 파일을 쉽게 추가하여 사용할 수 있도록 자동화하는 스크립트 작성에 대해서 작성하겠습니다.</p>
 
                 
 

@@ -151,14 +151,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -234,16 +234,13 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1 id="dispatcherservlet-이란">DispatcherServlet 이란?</h1>
-<p>Spring MVC는 DispatcherServlet의 등장으로 web.xml의 역할이 축소되었습니다. 이전에는 서블릿을 URL로 활용하기 위해서는 반드시 web.xml에 등록해야 했지만, 이제는 <strong><code>DispatcherServlet</code>이 해당 어플리케이션으로 들어오는 요청을 모두 핸들링 해주기 때문입니다.</strong></p>
+                <h1 id="dispatcherservlet-이란"><a href="#DispatcherServlet-이란" class="headerlink" title="DispatcherServlet 이란?"></a>DispatcherServlet 이란?</h1><p>Spring MVC는 DispatcherServlet의 등장으로 web.xml의 역할이 축소되었습니다. 이전에는 서블릿을 URL로 활용하기 위해서는 반드시 web.xml에 등록해야 했지만, 이제는 <strong><code>DispatcherServlet</code>이 해당 어플리케이션으로 들어오는 요청을 모두 핸들링 해주기 때문입니다.</strong></p>
 <p>web.xml의 역할이 축소되었지만, <code>&lt;servlet&gt;</code>으로 DispatcherServlet을 등록해줘야 하며, 이 객체의 URL 적용범위 또한 web.xml에 설정해야 합니다. 또한 encoding과 관련된 <code>&lt;filter&gt;</code>나 <code>&lt;listener&gt;</code>를 등록하기 위해서 web.xml은 필요합니다.</p>
-<p>그러나 web.xml에서 중요하게 사용되었던 <code>&lt;servlet&gt;</code> 매핑은 이제 DispatcherServlet이 대신 맡아서 처리하게 되었습니다. <strong>web.xml에 DispatcherServlet의 &lt;url-pattern&gt;을 '/'로 설정함으로써 동시에 이제 <code>모든 요청은 DispatcherServlet으로 전달</code>됩니다.</strong> 물론 DispatcherServlet을 web.xml에 등록해도 계속 서블릿을 web.xml에 매핑해서 사용할 수 있지만, 이런 옛 방식을 버리고 DispatcherServlet을 이용해 웹 개발을 한다면 앞으로 서블릿 파일을 만들 필요도 없어지고 동시에 놀라운 @MVC의 혜택을 얻을 수 있습니다.</p>
+<p>그러나 web.xml에서 중요하게 사용되었던 <code>&lt;servlet&gt;</code> 매핑은 이제 DispatcherServlet이 대신 맡아서 처리하게 되었습니다. <strong>web.xml에 DispatcherServlet의 <url-pattern>을 ‘/‘로 설정함으로써 동시에 이제 <code>모든 요청은 DispatcherServlet으로 전달</code>됩니다.</url-pattern></strong> 물론 DispatcherServlet을 web.xml에 등록해도 계속 서블릿을 web.xml에 매핑해서 사용할 수 있지만, 이런 옛 방식을 버리고 DispatcherServlet을 이용해 웹 개발을 한다면 앞으로 서블릿 파일을 만들 필요도 없어지고 동시에 놀라운 @MVC의 혜택을 얻을 수 있습니다.</p>
 <p>DispatcherServlet을 이용한다는 것은 스프링에서 제공하는 @MVC를 이용하겠단 뜻입니다. @MVC는 그동안 추상적으로 알아오고 발전했던 MVC(Model, View, Controller) 설계 영역을 노골적으로 분할하여 사용자가 무조건 MVC로 어플리케이션을 설계하게끔 유도하는 방식입니다. 즉, @MVC를 이용해 어플리케이션을 개발한다면 MVC 설계의 원칙대로 웹 어플리케이션을 제작할 수 있게 된다는 뜻입니다.</p>
 <p>그럼 간단하게 DispatcherServlet이 담당하는 역할이 무엇인지 알아봅시다. 먼저 DispatcherServlet에 대해 간단히 정의해보자면, <strong>각각 분리하여 만든 <code>Model, View, Controller</code>를 조합하여 브라우저로 출력해주는 역할을 수행합니다.</strong></p>
-<h1 id="spring-mvc-구조">Spring MVC 구조</h1>
-<p><img src="/images/post/2018-03-12/mvc.png" alt=""></p>
-<h2 id="등장-요소">등장 요소</h2>
-<ul>
+<h1 id="spring-mvc-구조"><a href="#Spring-MVC-구조" class="headerlink" title="Spring MVC 구조"></a>Spring MVC 구조</h1><p><img src="/images/post/2018-03-12/mvc.png" alt=""></p>
+<h2 id="등장-요소"><a href="#등장-요소" class="headerlink" title="등장 요소"></a>등장 요소</h2><ul>
 <li><strong>DispatcherServlet</strong> : 프런트 컨트롤러 담당, 모든 HTTP 요청을 받아들여 그 밖의 오브젝트 사이의 흐름을 제어, 기본적으로 스프링 MVC의 DispatcherServlet 클래스를 그대로 적용</li>
 <li><strong>HandlerMapping</strong> : 클라이언트의 요청을 바탕으로 어느 컨트롤러를 실행할지 결정</li>
 <li><strong>Model</strong> : 컨트롤러에서 뷰로 넘겨줄 오브젝트를 저장하기 위한 오브젝트, HttpServletRequest와 HttpSession처럼 String 형 키와 오브젝트를 연결해서 오브젝트를 유지</li>
@@ -253,8 +250,7 @@
 <li><strong>컨트롤러(Controller)</strong> : 클라이언트 요청에 맞는 프레젠테이션 층의 애플리케이션 처리를 실행해야 함. 애플리케이션 개발자가 애플리케이션 처리 사양에 맞게 작성</li>
 <li><strong>뷰 / JSP 등</strong> : 클라이언트에 대해 화면 표시 처리. 자바에서는 JSP 등으로 작성하는 일이 많으며, 애플리케이션 개발자가 화면의 사양에 맞게 작성</li>
 </ul>
-<h2 id="동작-순서">동작 순서</h2>
-<ol>
+<h2 id="동작-순서"><a href="#동작-순서" class="headerlink" title="동작 순서"></a>동작 순서</h2><ol>
 <li>DispatcherServlet은 브라우저로부터 요청을 받아들입니다.</li>
 <li>DispatcherServlet은 요청된 URL을 HandlerMapping 오브젝트에 넘기고 호출 대상의 컨트롤러 오브젝트를 얻어 URL에 해당하는 메서드를 실행합니다.</li>
 <li>컨트롤러 오브젝트는 비즈니스 로직으로 처리를 실행하고, 그 결과를 바탕으로 뷰에 전달할 오브젝트를 Model 오브젝트에 저장합니다. 끝으로 컨트롤러 오브젝트는 처리 결과에 맞는 View 이름을 반환합니다.</li>
@@ -263,8 +259,7 @@
 <li>View 오브젝트는 해당하는 뷰를 호출해서 화면 표시를 의뢰합니다.</li>
 <li>뷰는 Model 오브젝트에서 화면 표시에 필요한 오브젝트를 가져와 화면 표시 처리를 실행합니다.</li>
 </ol>
-<h1 id="참고">참고</h1>
-<ul>
+<h1 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h1><ul>
 <li><a href="http://www.hanbit.co.kr/store/books/look.php?p_code=B9146679987" target="_blank" rel="noopener">스프링4 입문 - 한빛미디어</a></li>
 </ul>
 
