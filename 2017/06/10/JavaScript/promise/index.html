@@ -227,7 +227,8 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h2 id="index"><a href="#Index" class="headerlink" title="Index"></a>Index</h2><ol>
+                <h2 id="index">Index</h2>
+<ol>
 <li><a href="#1">Promise란?</a></li>
 <li><a href="#2">Promise 사용법</a></li>
 <li><a href="#3">Promise 상태</a></li>
@@ -237,39 +238,55 @@
 <li><a href="#7">Promise 특징</a></li>
 </ol>
 <hr>
-<p><span id="1"></span></p>
-<h2 id="promise란"><a href="#Promise란" class="headerlink" title="Promise란?"></a>Promise란?</h2><p>자바스크립트에서는 비동기 프로그래밍 해결을 위해 하나의 패턴으로 <a href="http://openwiki.kr/tech/callback" target="_blank" rel="noopener">콜백</a>을 사용했다. 그러나 콜백 패턴은 비동기 처리 중 발생한 오류를 예외 처리하기 힘들고 여러 개의 비동기 로직을 한꺼번에 처리하는 데도 한계가 있다. 즉 콜백 패턴은 그다지 유용한 패턴이 아니다. 이때 비동기 프로그래밍을 위한 또 다른 패턴으로 Promise가 등장했다.</p>
-<p><strong><code>Promise</code></strong>는 <strong>비동기  처리 로직을 추상화한 객체와 그것을 조작하는 방식</strong>을 말한다. Promise를 지원하는 함수는 비동기 처리 로직을 추상화한 promise 객체를 반환 한다. 그리고 객체를 변수에 대입하고 성공 시 동작할 함수와 실패 시 동작할 함수 를 등록해 사용한다.</p>
+<p>&lt;span id='1'&gt;</p>
+<h2 id="promise란">Promise란?</h2>
+<p>자바스크립트에서는 비동기 프로그래밍 해결을 위해 하나의 패턴으로 <a href="http://openwiki.kr/tech/callback" target="_blank" rel="noopener">콜백</a>을 사용했다. 그러나 콜백 패턴은 비동기 처리 중 발생한 오류를 예외 처리하기 힘들고 여러 개의 비동기 로직을 한꺼번에 처리하는 데도 한계가 있다. 즉 콜백 패턴은 그다지 유용한 패턴이 아니다. 이때 비동기 프로그래밍을 위한 또 다른 패턴으로 Promise가 등장했다.</p>
+<p>**<code>Promise</code>**는 <strong>비동기  처리 로직을 추상화한 객체와 그것을 조작하는 방식</strong>을 말한다. Promise를 지원하는 함수는 비동기 처리 로직을 추상화한 promise 객체를 반환 한다. 그리고 객체를 변수에 대입하고 성공 시 동작할 함수와 실패 시 동작할 함수 를 등록해 사용한다.</p>
 <p>함수를 작성하는 방법은 promise 객체의 인터페이스에 의존 한다. 즉, promise 객체에서 제공하는 메서드만 사용해야 하므로 전통적인 콜백 패턴처럼 인자가 자유롭게 결정되는 게 아니라 같은 방식으로 통일된다. Promise 라고 부르는 하나의 인터페이스를 이용해 다양한 비동기 처리 문제를 해결할 수 있다. 복잡한 비동기 처리를 쉽게 패턴화할 수 있다는 뜻이다. 이것이 Promise의 역할이며 Promise를 사용하는 많은 이유 중 하나다.</p>
 <hr>
-<p><span id="2"></span></p>
-<h2 id="promise-사용법"><a href="#Promise-사용법" class="headerlink" title="Promise 사용법"></a>Promise 사용법</h2><p>Promise는 new 연산자를 선언하여 Promise 인스턴스 객체를 생성한다.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 비동기 처리 로직 후 resolve 또는 reject를 호출</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
-<p>new  연산자로 생성된 Promise 인스턴스 객체에는 성공(resolve), 실패(reject)했을 때 호출될 콜백 함수를 등록할 수 있는 Promise.then()이라고 하는 인스턴스 메서드가 있다.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">promise.then(onFulfilled, onRejected)</span><br></pre></td></tr></table></figure></p>
-<p>성공했을 때는 onFulfilled가 호출되고 실패했을 때는 onRejected가 호출된다. promise.then()으로 성공 혹은 실패 시의 동작을 동시에 등록할 수 있다. 만약 오류 처리만 한다면 promise.then(undefined, onRejected)와 같은 의미인 promise.catch(onRejected)를 사용하면 된다.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">promise.catch(onRejected)</span><br></pre></td></tr></table></figure></p>
+<p>&lt;span id='2'&gt;</p>
+<h2 id="promise-사용법">Promise 사용법</h2>
+<p>Promise는 new 연산자를 선언하여 Promise 인스턴스 객체를 생성한다.
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 비동기 처리 로직 후 resolve 또는 reject를 호출</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>new  연산자로 생성된 Promise 인스턴스 객체에는 성공(resolve), 실패(reject)했을 때 호출될 콜백 함수를 등록할 수 있는 Promise.then()이라고 하는 인스턴스 메서드가 있다.
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">promise.then(onFulfilled, onRejected)</span><br></pre></td></tr></table></figure></p>
+<p>성공했을 때는 onFulfilled가 호출되고 실패했을 때는 onRejected가 호출된다. promise.then()으로 성공 혹은 실패 시의 동작을 동시에 등록할 수 있다. 만약 오류 처리만 한다면 promise.then(undefined, onRejected)와 같은 의미인 promise.catch(onRejected)를 사용하면 된다.
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">promise.catch(onRejected)</span><br></pre></td></tr></table></figure></p>
 <hr>
-<p><span id="3"></span></p>
-<h2 id="promise-상태"><a href="#Promise-상태" class="headerlink" title="Promise 상태"></a>Promise 상태</h2><p>생성자 함수를 new 연산하여 생성된 <strong>Promise 인스턴스 객체에는 3가지 상태가 존재</strong>한다. promise 객체는 Pending 상태로 시작해 Fulfilled나 Rejected 상태가 되면 다시는 변화하지 않는다. (Event 리스너와는 다르게 then()으로 등록된 콜백함수는 한 번만 호출된다.)</p>
+<p>&lt;span id='3'&gt;</p>
+<h2 id="promise-상태">Promise 상태</h2>
+<p>생성자 함수를 new 연산하여 생성된 <strong>Promise 인스턴스 객체에는 3가지 상태가 존재</strong>한다. promise 객체는 Pending 상태로 시작해 Fulfilled나 Rejected 상태가 되면 다시는 변화하지 않는다. (Event 리스너와는 다르게 then()으로 등록된 콜백함수는 한 번만 호출된다.)</p>
 <ul>
 <li><strong>Pending</strong> : 성공도 실패도 아닌 상태, Promise 인스턴스 객체가 생성된 초기상태</li>
 <li><strong>Fulfilled</strong> : 성공(resolve)했을 때의 상태, onFulfilled가 호출된다.</li>
 <li><strong>Rejected</strong> : 실패(reject))했을 때의 상태, onRejected 호출된다.</li>
 </ul>
 <hr>
-<p><span id="4"></span></p>
-<h2 id="promiseresolve-promisereject"><a href="#Promise-resolve-Promise-reject" class="headerlink" title="Promise.resolve, Promise.reject"></a>Promise.resolve, Promise.reject</h2><p>Promise의 정적 메서드인 <strong><code>Promise.resolve()</code></strong>를 사용하면 new Promise() 구문을 단축해 표기할 수 있다. Promise.resolve()는 Fulfilled 상태인 promise 객체를 반환한다. 또한, Promise. resolve()는 <strong>thenable</strong> 객체를 promise 객체로 변환할 수 있다. 이것은 Promise.resolve()의 중요한 특징 중 하나다.</p>
+<p>&lt;span id='4'&gt;</p>
+<h2 id="promiseresolve-promisereject">Promise.resolve, Promise.reject</h2>
+<p>Promise의 정적 메서드인 **<code>Promise.resolve()</code>**를 사용하면 new Promise() 구문을 단축해 표기할 수 있다. Promise.resolve()는 Fulfilled 상태인 promise 객체를 반환한다. 또한, Promise. resolve()는 <strong>thenable</strong> 객체를 promise 객체로 변환할 수 있다. 이것은 Promise.resolve()의 중요한 특징 중 하나다.</p>
 <p>thenable은 ES6 Promises 사양에 정의된 개념이다. then()을 가진 객체 즉, 유사 promise 객체를 의미한다. length 프로퍼티를 갖고 있지만, 배열이 아닌 유사 배열 객체 Array-like Object와 같다. Promise.resolve()는 thenable 객체의 then() 이 Promise의 then()과 같은 동작을 할 것이라 기대하고 promise 객체로 변환한다.</p>
-<p><strong><code>Promise.reject()</code></strong>도 promise 객체를 반환한다. 따라서 에러 객체와 함께 catch()를 이용해 등록한 콜백 함수가 호출된다.</p>
+<p>**<code>Promise.reject()</code>**도 promise 객체를 반환한다. 따라서 에러 객체와 함께 catch()를 이용해 등록한 콜백 함수가 호출된다.</p>
 <hr>
-<p><span id="5"></span></p>
-<h2 id="promiseprototypethen"><a href="#Promise-prototype-then" class="headerlink" title="Promise.prototype.then"></a>Promise.prototype.then</h2><p>Promise에서는 <strong>메서드를 체인하여 코드를 작성할 수 있다.</strong> then()은 콜백 함수를 동록하기만 하는것이 아니라 콜백에서 반환된 값을 기준으로 새로운 promise 객체를 생성하여 전달하는 기능도 갖고 있다.</p>
+<p>&lt;span id='5'&gt;</p>
+<h2 id="promiseprototypethen">Promise.prototype.then</h2>
+<p>Promise에서는 <strong>메서드를 체인하여 코드를 작성할 수 있다.</strong> then()은 콜백 함수를 동록하기만 하는것이 아니라 콜백에서 반환된 값을 기준으로 새로운 promise 객체를 생성하여 전달하는 기능도 갖고 있다.</p>
 <hr>
-<p><span id="6"></span></p>
-<h2 id="promiseall-promiserace"><a href="#Promise-all-Promise-race" class="headerlink" title="Promise.all, Promise.race"></a>Promise.all, Promise.race</h2><p><strong><code>Promise.all()</code></strong>은 Promise 객체를 배열로 전달받고 객체의 상태가 모두 Fulfilled 됐을 때 then()으로 등록한 함수를 호출한다.<br><strong><code>Promise.race()</code></strong>는 Promise.all()과 마찬가지로 promise 객체를 배열로 전달한다. Promise.all()과 달리 전달한 객체의 상태가 모두 Fulfilled가 될 때까지 기다리지 않고 전달한 객체 중 하나만 완료(Fulfilled, Rejected)되어도 다음 동작으로 넘어간다. Promise.race는 먼저 완료된 promise 객체가 있더라도 다른 promise 객체를 취소하지 않는다. (ES6 Promise 사양에는 취소라는 개념이 없다.)</p>
+<p>&lt;span id='6'&gt;</p>
+<h2 id="promiseall-promiserace">Promise.all, Promise.race</h2>
+<p>**<code>Promise.all()</code>**은 Promise 객체를 배열로 전달받고 객체의 상태가 모두 Fulfilled 됐을 때 then()으로 등록한 함수를 호출한다.
+**<code>Promise.race()</code>**는 Promise.all()과 마찬가지로 promise 객체를 배열로 전달한다. Promise.all()과 달리 전달한 객체의 상태가 모두 Fulfilled가 될 때까지 기다리지 않고 전달한 객체 중 하나만 완료(Fulfilled, Rejected)되어도 다음 동작으로 넘어간다. Promise.race는 먼저 완료된 promise 객체가 있더라도 다른 promise 객체를 취소하지 않는다. (ES6 Promise 사양에는 취소라는 개념이 없다.)</p>
 <hr>
-<p><span id="7"></span></p>
-<h2 id="promise-특징"><a href="#Promise-특징" class="headerlink" title="Promise 특징"></a>Promise 특징</h2><h4 id="1-promise는-항상-비동기로-처리된다"><a href="#1-Promise는-항상-비동기로-처리된다" class="headerlink" title="1. Promise는 항상 비동기로 처리된다."></a>1. Promise는 항상 비동기로 처리된다.</h4><p>Promise.resolve()나 resolve()를 사용하면 promise 객체는 바로 Fulfilled 상태가 되기 때문에 then()으로 등록한 콜백 함수가 동기적으로 호출될 것이라 생각할 수 있다. 하지만 실제로는 then()으로 등록한 <strong>콜백 함수는 비동기적으로 호출</strong>된다.<br>동기적으로 처리 가능한 상황에서도 비동기적으로 처리하는 이유는 동기와 비동기가 혼재될때 발생하는 문제를 막기 위함이다.</p>
-<h4 id="2-새로운-promise-객체를-반환하는-then"><a href="#2-새로운-promise-객체를-반환하는-then" class="headerlink" title="2. 새로운 promise 객체를 반환하는 then"></a>2. 새로운 promise 객체를 반환하는 then</h4><p>promise.then(), catch()는 최초의 promise 객체에 메서드를 체인하는 것처럼 보이지만 실제로는 then()과 catch()는 <strong>새로운 promise 객체를 생성해 반환</strong>한다.<br>Promise.all()과 Promise.race() 또한 새로운 promise 객체를 생성해 반환한다.</p>
-<h4 id="3-콜백-헬과-무관한-promise"><a href="#3-콜백-헬과-무관한-Promise" class="headerlink" title="3. 콜백-헬과 무관한 Promise"></a>3. 콜백-헬과 무관한 Promise</h4><p>Promise는 callback-hell 을 해결할수는 없고 완화할 수 있을 뿐이다. 완화할 수 있는 이유는 <strong>단일 인터페이스와 명확한 비동기 시점 표현, 강력한 에러 처리 메커니즘</strong> 때문이다. 이는 비동기 처리 자체를 손쉽게 다룰 수 있도록 하는 것이므로 callback-hell 을 해결하는 방법으로 여기는건 바람직하지 않다.</p>
+<p>&lt;span id='7'&gt;</p>
+<h2 id="promise-특징">Promise 특징</h2>
+<h4 id="1-promise는-항상-비동기로-처리된다">1. Promise는 항상 비동기로 처리된다.</h4>
+<p>Promise.resolve()나 resolve()를 사용하면 promise 객체는 바로 Fulfilled 상태가 되기 때문에 then()으로 등록한 콜백 함수가 동기적으로 호출될 것이라 생각할 수 있다. 하지만 실제로는 then()으로 등록한 <strong>콜백 함수는 비동기적으로 호출</strong>된다.
+동기적으로 처리 가능한 상황에서도 비동기적으로 처리하는 이유는 동기와 비동기가 혼재될때 발생하는 문제를 막기 위함이다.</p>
+<h4 id="2-새로운-promise-객체를-반환하는-then">2. 새로운 promise 객체를 반환하는 then</h4>
+<p>promise.then(), catch()는 최초의 promise 객체에 메서드를 체인하는 것처럼 보이지만 실제로는 then()과 catch()는 <strong>새로운 promise 객체를 생성해 반환</strong>한다.
+Promise.all()과 Promise.race() 또한 새로운 promise 객체를 생성해 반환한다.</p>
+<h4 id="3-콜백-헬과-무관한-promise">3. 콜백-헬과 무관한 Promise</h4>
+<p>Promise는 callback-hell 을 해결할수는 없고 완화할 수 있을 뿐이다. 완화할 수 있는 이유는 <strong>단일 인터페이스와 명확한 비동기 시점 표현, 강력한 에러 처리 메커니즘</strong> 때문이다. 이는 비동기 처리 자체를 손쉽게 다룰 수 있도록 하는 것이므로 callback-hell 을 해결하는 방법으로 여기는건 바람직하지 않다.</p>
 
                 
 
