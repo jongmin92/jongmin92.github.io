@@ -261,13 +261,13 @@
     
       <category term="Async" scheme="https://jongmin92.github.io/tags/Async/"/>
     
-      <category term="DeferredResult" scheme="https://jongmin92.github.io/tags/DeferredResult/"/>
-    
       <category term="RestTemplate" scheme="https://jongmin92.github.io/tags/RestTemplate/"/>
     
       <category term="AsyncRestTemplate" scheme="https://jongmin92.github.io/tags/AsyncRestTemplate/"/>
     
       <category term="Netty" scheme="https://jongmin92.github.io/tags/Netty/"/>
+    
+      <category term="DeferredResult" scheme="https://jongmin92.github.io/tags/DeferredResult/"/>
     
   </entry>
   
@@ -298,6 +298,8 @@
     
       <category term="Async" scheme="https://jongmin92.github.io/tags/Async/"/>
     
+      <category term="DeferredResult" scheme="https://jongmin92.github.io/tags/DeferredResult/"/>
+    
       <category term="ExecutorService" scheme="https://jongmin92.github.io/tags/ExecutorService/"/>
     
       <category term="Future" scheme="https://jongmin92.github.io/tags/Future/"/>
@@ -305,8 +307,6 @@
       <category term="FutureTask" scheme="https://jongmin92.github.io/tags/FutureTask/"/>
     
       <category term="ListenableFuture" scheme="https://jongmin92.github.io/tags/ListenableFuture/"/>
-    
-      <category term="DeferredResult" scheme="https://jongmin92.github.io/tags/DeferredResult/"/>
     
       <category term="ResponseBodyEmitter" scheme="https://jongmin92.github.io/tags/ResponseBodyEmitter/"/>
     
@@ -565,11 +565,11 @@
     
       <category term="java" scheme="https://jongmin92.github.io/tags/java/"/>
     
-      <category term="servlet container" scheme="https://jongmin92.github.io/tags/servlet-container/"/>
-    
       <category term="book" scheme="https://jongmin92.github.io/tags/book/"/>
     
       <category term="review" scheme="https://jongmin92.github.io/tags/review/"/>
+    
+      <category term="servlet container" scheme="https://jongmin92.github.io/tags/servlet-container/"/>
     
   </entry>
   
