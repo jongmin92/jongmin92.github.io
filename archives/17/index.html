@@ -139,14 +139,14 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -222,16 +222,15 @@
 
 <div class="post-preview">
 
-    <a href="/2017/01/30/JavaScript/complete-guide-to-javascript-chapter-10/">
+    <a href="/2017/01/30/JavaScript/complete-guide-to-javascript-chapter-9/">
         <h2 class="post-title">
-            자바스크립트 완벽가이드 10장 (정규 표현식을 사용한 패턴 매칭)
+            자바스크립트 완벽가이드 9장 (클래스와 모듈)
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            정규 표현식(regular expression)은 문자의 패턴을 나타내는 객체다. 자바스크립트의 RegExp 클래스는 정규 표현식을 표현하고, String과 RegExp에는 정규표현식을 사용하여 강력한 패턴 매칭을 수행하는 메서드와 텍스트상에서 특정 텍스트를 찾아서 바꾸는 함수가 정의되어 있다.
-10.1 정규 표현식 정의자바스크립트에서 정규 표현식은 ......
+            자바스크립트에서 클래스는 프로토타입 기반의 상속 메커니즘을 기반으로 하고있다. 두 객체가 같은 프로토타입 객체로부터 프로퍼티를 상속받았다면, 둘은 같은 클래스의 인스턴스다. 자바스크립트의 클래스와 프로토타입 기반 상속 메커니즘은 자바나 그와 비슷한 언어의 클래스 상속과는 상당히 다르다. 자바스크립트 클래스의 중요한 특징 중 하나는 동적으로 확장될 수 ......
         </div>
     </a>
     
@@ -295,46 +294,13 @@
             
         </h3>
         <div class="post-content-preview">
-            자바스크립트의 기본 데이터 타입은 객체다. 객체는 일종의 복합체로, 여러 값(원시 타입, 다른 객체)들을 묶어 이름으로 저장하고, 값을 가져올 수 있다. 객체는 이름과 값으로 구성된 프로퍼티들의 정렬되지 않은 집합이다. 자바스크립트 객체는 객체가 가진 고유 프로퍼티를 유지하는 것 외에 ‘프로토타입’이라고 하는 다른 객체의 프로퍼티를 상속 받는다. 객체......
+            자바스크립트의 기본 데이터 타입은 객체다. 객체는 일종의 복합체로, 여러 값(원시 타입, 다른 객체)들을 묶어 이름으로 저장하고, 값을 가져올 수 있다. 객체는 이름과 값으로 구성된 프로퍼티들의 정렬되지 않은 집합이다. 자바스크립트 객체는 객체가 가진 고유 프로퍼티를 유지하는 것 외에 **'프로토타입'**이라고 하는 다른 객체의 프로퍼티를 상속 받는다......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by KimJongMin on
             2017-01-28
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#TIL" title="TIL">TIL</a>
-            
-              <a href="/tags/#JavaScript" title="JavaScript">JavaScript</a>
-            
-              <a href="/tags/#JavaScript 완벽가이드" title="JavaScript 완벽가이드">JavaScript 완벽가이드</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2017/01/27/JavaScript/complete-guide-to-javascript-chapter-5/">
-        <h2 class="post-title">
-            자바스크립트 완벽가이드 5장 (문장)
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            문장(statement), 즉 ‘문’은 자바스크립트 문장, 다시 말해 명령이다. 자바스크립트 문장은 세미콜론(;)으로 끝난다. 표현식은 어떤 값을 생성하기 위해 평가되지만, 구문은 어떤 일을 하기위해 실행되는 것이다.
-5.2 복합문과 빈 문장문장 블록은 여러 문장을 하나의 복합문으로 묶는다. 자바스크립트에는 블록 단위의 유효범위(scope)가 존재하지......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by KimJongMin on
-            2017-01-27
         </p>
         <div class="tags">
             
@@ -361,7 +327,43 @@
         </h3>
         <div class="post-content-preview">
             표현식(expression)은 자바스크립트 인터프리터가 값으로 평가하는 자바스크립트 구문이다.
-4.1 기본 표현식가장 간단한 형태의 표현식은 ‘기본 표현식’으로, 다른 표현식을 포함하지 않은 독립적 표현식이다. 자바스크립트에서 기본 표현식은 상수나 리터럴 값, 특정 키워드들 그리고 변수 참조를 말한다.this는 상수가 아니고 프로그램 안에서 위치에 따......
+4.1 기본 표현식
+가장 간단한 형태의 표현식은 '기본 표현식'으로, 다른 표현식을 포함하지 않은 독립적 표현식이다. 자바스크립트에서 기본 표현식은 상수나 리터럴 값, 특정 키워드들 그리고 변수 참조를 말한다.&lt;br&gt;
+this는 상수가 아니고 프로......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by KimJongMin on
+            2017-01-27
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#TIL" title="TIL">TIL</a>
+            
+              <a href="/tags/#JavaScript" title="JavaScript">JavaScript</a>
+            
+              <a href="/tags/#JavaScript 완벽가이드" title="JavaScript 완벽가이드">JavaScript 완벽가이드</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/01/27/JavaScript/complete-guide-to-javascript-chapter-5/">
+        <h2 class="post-title">
+            자바스크립트 완벽가이드 5장 (문장)
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            문장(statement), 즉 '문'은 자바스크립트 문장, 다시 말해 명령이다. 자바스크립트 문장은 세미콜론(;)으로 끝난다. 표현식은 어떤 값을 생성하기 위해 평가되지만, 구문은 어떤 일을 하기위해 실행되는 것이다.
+5.2 복합문과 빈 문장
+문장 블록은 여러 문장을 하나의 복합문으로 묶는다. 자바스크립트에는 블록 단위의 유효범위(scope)가 존재하......
         </div>
     </a>
     
@@ -393,7 +395,8 @@
             
         </h3>
         <div class="post-content-preview">
-            자바스크립트의 타입은 크게 원시 타입(promitive type)과 객체 타입(object type)으로 나뉜다. 원시타입에는 숫자, 텍스트의 나열, 불리언 진리 값이 있다.자바스크립트에서 null과 undefined는 원시값이긴 하지만, 숫자도 아니고, 문자열이나 불리언도 아니다. null과 undefined는 자기 자신만을 값으로 갖는 독립적인 타......
+            자바스크립트의 타입은 크게 원시 타입(promitive type)과 객체 타입(object type)으로 나뉜다. 원시타입에는 숫자, 텍스트의 나열, 불리언 진리 값이 있다.
+자바스크립트에서 null과 undefined는 원시값이긴 하지만, 숫자도 아니고, 문자열이나 불리언도 아니다. null과 undefined는 자기 자신만을 값으로 갖는 독립적인 ......
         </div>
     </a>
     
@@ -531,9 +534,19 @@
             
         
             
-            <a href="/tags/#Java" title="Java" rel="14">Java</a>
+            <a href="/tags/#java" title="java" rel="6">java</a>
             
         
+            
+            <a href="/tags/#book" title="book" rel="4">book</a>
+            
+        
+            
+            <a href="/tags/#review" title="review" rel="3">review</a>
+            
+        
+            
+            <a href="/tags/#RaspberryPi" title="RaspberryPi" rel="9">RaspberryPi</a>
             
         
             
@@ -557,15 +570,9 @@
             
         
             
-            <a href="/tags/#java" title="java" rel="6">java</a>
-            
         
             
-            <a href="/tags/#book" title="book" rel="4">book</a>
-            
-        
-            
-            <a href="/tags/#review" title="review" rel="3">review</a>
+            <a href="/tags/#Java" title="Java" rel="14">Java</a>
             
         
             
@@ -575,7 +582,15 @@
             
         
             
-            <a href="/tags/#RaspberryPi" title="RaspberryPi" rel="9">RaspberryPi</a>
+        
+            
+        
+            
+        
+            
+        
+            
+        
             
         
             
@@ -597,7 +612,53 @@
             
         
             
+        
+            
+        
+            
             <a href="/tags/#JavaScript 완벽가이드" title="JavaScript 완벽가이드" rel="10">JavaScript 완벽가이드</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Linux &amp; Ubuntu" title="Linux &amp; Ubuntu" rel="5">Linux &amp; Ubuntu</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Node" title="Node" rel="5">Node</a>
+            
+        
+            
+            <a href="/tags/#Android" title="Android" rel="4">Android</a>
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Module" title="Module" rel="2">Module</a>
             
         
             
@@ -649,6 +710,10 @@
             
         
             
+        
+            
+        
+            
             <a href="/tags/#nio" title="nio" rel="2">nio</a>
             
         
@@ -665,69 +730,19 @@
             
         
             
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
             <a href="/tags/#Reactive" title="Reactive" rel="2">Reactive</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-            <a href="/tags/#Linux &amp; Ubuntu" title="Linux &amp; Ubuntu" rel="5">Linux &amp; Ubuntu</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-            <a href="/tags/#Node" title="Node" rel="5">Node</a>
-            
-        
-            
-            <a href="/tags/#Android" title="Android" rel="4">Android</a>
-            
-        
-            
-        
-            
-        
-            
-            <a href="/tags/#Module" title="Module" rel="2">Module</a>
-            
-        
-            
-        
             
         
             
@@ -740,10 +755,6 @@
         
             
             <a href="/tags/#OkHttp3" title="OkHttp3" rel="2">OkHttp3</a>
-            
-        
-            
-        
             
         
             
@@ -789,17 +800,13 @@
             
         
             
+        
+            
+        
+            
+        
+            
             <a href="/tags/#GPIO" title="GPIO" rel="2">GPIO</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
             
         
             
@@ -829,16 +836,6 @@
             
         
             
-            <a href="/tags/#Chrome" title="Chrome" rel="2">Chrome</a>
-            
-        
-            
-            <a href="/tags/#Chrome Extension" title="Chrome Extension" rel="2">Chrome Extension</a>
-            
-        
-            
-        
-            
         
             
         
@@ -847,29 +844,29 @@
             
         
             
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-            <a href="/tags/#IntelliJ" title="IntelliJ" rel="2">IntelliJ</a>
-            
-        
-            
-        
-            
             <a href="/tags/#AOP" title="AOP" rel="2">AOP</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#MVC" title="MVC" rel="2">MVC</a>
+            
+        
+            
+        
             
         
             
@@ -887,12 +884,16 @@
             
         
             
+        
+            
+            <a href="/tags/#IntelliJ" title="IntelliJ" rel="2">IntelliJ</a>
+            
+        
+            
             <a href="/tags/#Toby" title="Toby" rel="7">Toby</a>
             
         
             
-            <a href="/tags/#MVC" title="MVC" rel="2">MVC</a>
-            
         
             
         
@@ -917,9 +918,19 @@
             
         
             
+            <a href="/tags/#Chrome" title="Chrome" rel="2">Chrome</a>
+            
+        
+            
+            <a href="/tags/#Chrome Extension" title="Chrome Extension" rel="2">Chrome Extension</a>
+            
         
             
         
+            
+        
+            
+            <a href="/tags/#build tool" title="build tool" rel="2">build tool</a>
             
         
             
@@ -930,14 +941,6 @@
         
             
             <a href="/tags/#ci &amp; cd" title="ci &amp; cd" rel="2">ci &amp; cd</a>
-            
-        
-            
-        
-            
-            <a href="/tags/#build tool" title="build tool" rel="2">build tool</a>
-            
-        
             
         
             
@@ -959,13 +962,13 @@
             
         
             
+        
+            
+        
+            
+        
+            
             <a href="/tags/#Heap sort" title="Heap sort" rel="3">Heap sort</a>
-            
-        
-            
-        
-            
-        
             
         
             

@@ -154,14 +154,14 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -233,95 +233,121 @@
                 <blockquote>
 <p><strong>해당 포스팅의 내용은 <a href="http://www.kyobobook.co.kr/product/detailViewKor.laf?barcode=9788995379431" target="_blank" rel="noopener">Java의 정석 2권 - Chapter 14 람다 &amp; 스트림</a>에 있는 내용을 요약한 것입니다. 해당 책으로 복습하며 정리한 내용이고 문제가 된다면 바로 해당 포스팅을 삭제하도록 하겠습니다.</strong></p>
 </blockquote>
-<h1 id="람다와-스트림"><a href="#람다와-스트림" class="headerlink" title="람다와 스트림"></a>람다와 스트림</h1><h2 id="람다식이란"><a href="#람다식이란" class="headerlink" title="람다식이란?"></a>람다식이란?</h2><p><strong><code>람다식(Lambda expression)</code>은 간단히 말해서 메서드를 하나의 ‘식(expression)’으로 표현한 것이다.</strong> 람다식은 함수를 간략하면서도 명확한 식으로 표현할 수 있게 해준다.</p>
-<p>메서드를 람다식으로 표현하면 메서드의 이름과 반환값이 없어지므로, 람다식을 ‘익명 함수(annonymous function)’이라고도 한다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">5</span>];</span><br><span class="line">Arrays.setAll(arr, i -&gt; (<span class="keyword">int</span>)(Math.random()*<span class="number">5</span>)+<span class="number">1</span>); <span class="comment">// arr=[1,5,2,1,1]</span></span><br></pre></td></tr></table></figure>
-<p>위의 문장에서  ‘i -&gt; (int)(Math.random()*5)+1)’이 람다식이다. 이 람다식이 하는 일을 메서드로 표현하면 다음과 같다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">method</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">int</span>)(Math.random()*<span class="number">5</span>) + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="람다와-스트림">람다와 스트림</h1>
+<h2 id="람다식이란">람다식이란?</h2>
+<p><strong><code>람다식(Lambda expression)</code>은 간단히 말해서 메서드를 하나의 '식(expression)'으로 표현한 것이다.</strong> 람다식은 함수를 간략하면서도 명확한 식으로 표현할 수 있게 해준다.</p>
+<p>메서드를 람다식으로 표현하면 메서드의 이름과 반환값이 없어지므로, 람다식을 '익명 함수(annonymous function)'이라고도 한다.</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">5</span>];</span><br><span class="line">Arrays.setAll(arr, i -&gt; (<span class="keyword">int</span>)(Math.random()*<span class="number">5</span>)+<span class="number">1</span>); <span class="comment">// arr=[1,5,2,1,1]</span></span><br></pre></td></tr></table></figure></p>
+<p>위의 문장에서  'i -&gt; (int)(Math.random()*5)+1)'이 람다식이다. 이 람다식이 하는 일을 메서드로 표현하면 다음과 같다.</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">method</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">int</span>)(Math.random()*<span class="number">5</span>) + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>위의 메서드보다 람다식이 간결하고 이해하기 쉽다. 게다가 모든 메서드는 클래스에 포함되어야 하므로 클래스도 새로 만들어야 하고, 객체도 생성해야만 비로소 이 메서드를 호출할 수 있다. 그러나 람다식은 이 모든 과정없이 오직 <strong>람다식 자체만으로도 이 메서드의 역할을 대신할 수 있다.</strong></p>
 <p><strong>또한, 람다식은 메서드의 매개변수로 전달되어지는 것이 가능하고, 메서드의 결과로 반환될 수도 있다. 람다식으로 인해 메서드를 변수처럼 다루는 것이 가능해진 것이다.</strong></p>
-<h2 id="람다식-작성하기"><a href="#람다식-작성하기" class="headerlink" title="람다식 작성하기"></a>람다식 작성하기</h2><p>랃마식은 ‘익명 함수’답게 메서드에서 이름과 반환타입을 제거하고 매개변수 선언부와 몸통{} 사이에 ‘-&gt;’를 추가한다.</p>
-<p>반환값이 있는 경우, return문 대신 ‘식(expression)’으로 대신 할 수 있다. 식의 연산결과가 자동으로 반환값이 된다. 이때는 ‘문장(statement)’이 아닌 ‘식’이므로 끝에 ‘;’을 붙이지 않는다.</p>
+<h2 id="람다식-작성하기">람다식 작성하기</h2>
+<p>랃마식은 '익명 함수'답게 메서드에서 이름과 반환타입을 제거하고 매개변수 선언부와 몸통{} 사이에 '-&gt;'를 추가한다.</p>
+<p>반환값이 있는 경우, return문 대신 '식(expression)'으로 대신 할 수 있다. 식의 연산결과가 자동으로 반환값이 된다. 이때는 '문장(statement)'이 아닌 '식'이므로 끝에 ';'을 붙이지 않는다.</p>
 <p>람다식에 선언된 매개변수의 타입은 추론이 가능한 경우는 생략할 수 있는데, 대부분의 경우에 생략가능하다. 람다식에 반환타입이 없는 이유도 항상 추론이 가능하기 때문이다.</p>
 <p>매개변수가 하나뿐인 경우에는 괄호()를 생략할 수 있다. 단, 매개변수의 타입이 있으면 괄호()를 생략할 수 없다.</p>
-<p>마찬가지로 괄호{}안의 문장이 하나일 때는 괄호{}를 생략할 수 있다. 이 때 문장의 끝에 ‘;’를 붙이지 않아야 한다. 그러나 괄호{} 안의 문장이 return문일 경우 괄호{}를 생략할 수 없다.</p>
-<h2 id="함수형-인터페이스funtional-interface"><a href="#함수형-인터페이스-Funtional-Interface" class="headerlink" title="함수형 인터페이스(Funtional Interface)"></a>함수형 인터페이스(Funtional Interface)</h2><p>자바에서 모든 메서드는 클래스 내에 포함되어야 한다. 사실 람다식은 익명 클래스의 객체와 동일하다.</p>
+<p>마찬가지로 괄호{}안의 문장이 하나일 때는 괄호{}를 생략할 수 있다. 이 때 문장의 끝에 ';'를 붙이지 않아야 한다. 그러나 괄호{} 안의 문장이 return문일 경우 괄호{}를 생략할 수 없다.</p>
+<h2 id="함수형-인터페이스funtional-interface">함수형 인터페이스(Funtional Interface)</h2>
+<p>자바에서 모든 메서드는 클래스 내에 포함되어야 한다. 사실 람다식은 익명 클래스의 객체와 동일하다.</p>
 <p>하나의 메서드가 선언된 인터페이스를 정의해서 람다식을 다루는 것은 기존의 자바의 규칙들을 어기지 않으면서도 자연스럽다. 그래서 인터페이스를 통해 람다식을 다루기로 결정되었으며, 람다식을 다루기 위한 인터페이스를 <code>함수형 인터페이스(functional interface)</code>라고 부른다.</p>
 <p>단, 함수형 인터페이스에는 오직 하나의 추상 메서드만 정의되어 있어야 한다는 제약이 있다. 그래야 람다식과 인터페이스의 메서드가 1:1로 연결 될 수 있기 때문이다. 반면에 static 메서드와 default 메서드의 개수에는 제약이 없다.</p>
 <blockquote>
-<p><strong><code>@FunctionalInterface</code></strong>를 붙이면, 컴파일러가 함수형 인터페이스를 올바르게 정의했는지 확인해주므로, 꼭 붙이는 것이 좋다.</p>
+<p>**<code>@FunctionalInterface</code>**를 붙이면, 컴파일러가 함수형 인터페이스를 올바르게 정의했는지 확인해주므로, 꼭 붙이는 것이 좋다.</p>
 </blockquote>
-<p><strong>함수형 인터페이스 타입의 매개변수와 반환타입</strong><br>함수형 인터페이스 MyFunction이 아래와 같이 정의되어 있을 때,</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FunctionalInterface</span></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">MyFunction</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">myMethod</span><span class="params">()</span></span>;	<span class="comment">// 추상 메서드</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>함수형 인터페이스 타입의 매개변수와 반환타입</strong>
+함수형 인터페이스 MyFunction이 아래와 같이 정의되어 있을 때,</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FunctionalInterface</span></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">MyFunction</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">myMethod</span><span class="params">()</span></span>;	<span class="comment">// 추상 메서드</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>메서드의 매개변수가 MyFunction 타입이면, 이 메서드를 호출할 때 람다식을 참조하는 참조변수를 매개변수로 지정해야한다는 뜻이다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">aMethod</span><span class="params">(MyFunction f)</span> </span>&#123;</span><br><span class="line">    f.myMethod();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line">MyFunction f = () -&gt; System.out.println(<span class="string">"myMethod()"</span>);</span><br><span class="line">aMethod(f);</span><br></pre></td></tr></table></figure>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">aMethod</span><span class="params">(MyFunction f)</span> </span>&#123;</span><br><span class="line">    f.myMethod();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line">MyFunction f = () -&gt; System.out.println(<span class="string">"myMethod()"</span>);</span><br><span class="line">aMethod(f);</span><br></pre></td></tr></table></figure></p>
 <p>또는 참조변수 없이 직접 람다식을 매개변수로 지정하는 것도 가능하다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aMethod(() -&gt; System.out.println(<span class="string">"myMethod()"</span>));</span><br></pre></td></tr></table></figure>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aMethod(() -&gt; System.out.println(<span class="string">"myMethod()"</span>));</span><br></pre></td></tr></table></figure></p>
 <p>메서드의 반환타입이 함수형 인터페이스라면, 이 함수형 인터페이스의 추상 메서드와 동등한 람다식을 가리키는 참조변수를 반환하거나 람다식을 직접 반환할 수 있다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">MyFunction <span class="title">mymethod</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    MyFunction f = () -&gt; &#123;&#125;;</span><br><span class="line">    <span class="keyword">return</span> f;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">MyFunction <span class="title">mymethod</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    MyFunction f = () -&gt; &#123;&#125;;</span><br><span class="line">    <span class="keyword">return</span> f;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>람다식을 참조변수로 다룰 수 있다는 것은 메서드를 통해 람다식을 주고받을 수 있다는 것을 의미한다. 즉, 변수처럼 메서드를 주고받는 것이 가능해진 것이다. (사실상 메서드가 아니라 객체를 주고받는 것이라 달라진 것은 없다.)</p>
-<p><strong>람다식의 타입과 형변환</strong><br>함수형 인터페이스로 람다식을 참조할 수 있는 것일 뿐, 람다식의 타입이 함수형 인터페이스의 타입과 일치하는 것은 아니다. 람다식은 익명 객체이고 익명 객체는 타입이 없다. 정확히는 타입은 있지만 컴파일러가 임의로 이름을 정하기 때문에 알 수 없는 것이다. 그래서 대입 연산자의 양변의 타입을 일치시키기 위해 형변환이 필요하다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MyFunction f = (Myfunction)(() -&gt; &#123;&#125;);</span><br></pre></td></tr></table></figure>
+<p><strong>람다식의 타입과 형변환</strong>
+함수형 인터페이스로 람다식을 참조할 수 있는 것일 뿐, 람다식의 타입이 함수형 인터페이스의 타입과 일치하는 것은 아니다. 람다식은 익명 객체이고 익명 객체는 타입이 없다. 정확히는 타입은 있지만 컴파일러가 임의로 이름을 정하기 때문에 알 수 없는 것이다. 그래서 대입 연산자의 양변의 타입을 일치시키기 위해 형변환이 필요하다.</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MyFunction f = (Myfunction)(() -&gt; &#123;&#125;);</span><br></pre></td></tr></table></figure></p>
 <p>람다식은 MyFunction 인터페이스를 직접 구현하지 않았지만, 이 인터페이스를 구현한 클래스의 객체와 완전히 동일하기 때문에 위처럼 형변환을 허용한다. 그리고 이 형변환은 생략가능하다.</p>
 <p>람다식은 이름이 없을 뿐 객체인데도, Object 타입으로 형변환 할 수 없다. 람다식은 오직 함수형 인터페이스로만 형변환이 가능하다.</p>
-<p>일반적인 익명 객체라면, 객체의 타입이 <strong>‘외부클래스이름$번호’</strong>와 같은 형식으로 타입이 결정되었을 텐데, 람다식의 타입은 <strong>‘외부클래스이름$$Lambda$번호’</strong>와 같은 형식으로 되어 있다.</p>
-<p><strong>외부 변수를 참조하는 람다식</strong><br>람다식도 익명 객체, 즉 익명 클래스의 인스턴스이므로 람다식에서 외부에 선언된 변수에 접근하는 규칙은 익명 클래스와 동일하다.</p>
+<p>일반적인 익명 객체라면, 객체의 타입이 **'외부클래스이름$번호'**와 같은 형식으로 타입이 결정되었을 텐데, 람다식의 타입은 **'외부클래스이름$$Lambda$번호'**와 같은 형식으로 되어 있다.</p>
+<p><strong>외부 변수를 참조하는 람다식</strong>
+람다식도 익명 객체, 즉 익명 클래스의 인스턴스이므로 람다식에서 외부에 선언된 변수에 접근하는 규칙은 익명 클래스와 동일하다.</p>
 <p>람다식 내에서 참조하는 지역변수는 final이 붙지 않았어도 상수로 간주한다.(인스턴스 변수는 변경 가능) 람다식 내에서 지역변수를 참조하면 람다식 내에서나 다른 어느 곳에서도 이 변수의 값을 변경할 수 없다.</p>
-<h2 id="javautilfunction-패키지"><a href="#java-util-function-패키지" class="headerlink" title="java.util.function 패키지"></a>java.util.function 패키지</h2><p>java.util.function 패키지에 일반적으로 자주 쓰이는 형식의 메서드를 함수형 인터페이스로 미리 정의해 놓았다. 매번 새로운 함수형 인터페이스를 정의하지 말고, 가능하면 이 패키지의 인터페이스를 활용하는 것이 좋다.</p>
+<h2 id="javautilfunction-패키지">java.util.function 패키지</h2>
+<p>java.util.function 패키지에 일반적으로 자주 쓰이는 형식의 메서드를 함수형 인터페이스로 미리 정의해 놓았다. 매번 새로운 함수형 인터페이스를 정의하지 말고, 가능하면 이 패키지의 인터페이스를 활용하는 것이 좋다.</p>
 <p>그래야 함수형 인터페이스에 정의된 메서드 이름도 통일되고, 재사용성이나 유지보수 측면에서도 좋다. 자주 쓰이는 가장 기본적인 함수형 인터페이스는 다음과 같다.</p>
 <ul>
-<li>java.lang.Runnable<ul>
+<li>java.lang.Runnable
+<ul>
 <li>메서드 : void run()</li>
 <li>매개변수도 없고, 반환값도 없음.</li>
 </ul>
 </li>
-<li>Supplier&lt;T&gt;<ul>
+<li>Supplier&lt;T&gt;
+<ul>
 <li>메서드 : T get()</li>
 <li>매개변수는 없고, 반환값만 있음.</li>
 </ul>
 </li>
-<li>Consumer&lt;T&gt;<ul>
+<li>Consumer&lt;T&gt;
+<ul>
 <li>메서드 : void accept(T t)</li>
 <li>Supplier와 반대로 매개변수만 있고, 반환값이 없음</li>
 </ul>
 </li>
-<li>Function&lt;T, R&gt;<ul>
+<li>Function&lt;T, R&gt;
+<ul>
 <li>메서드 : R apply(T t)</li>
 <li>일반적인 함수, 하나의 매개변수를 받아서 결과를 반환</li>
 </ul>
 </li>
-<li>Predicate&lt;T&gt;<ul>
+<li>Predicate&lt;T&gt;
+<ul>
 <li>메서드 : boolean test(T t)</li>
 <li>조건식을 표현하는데 사용됨.</li>
 </ul>
 </li>
 </ul>
 <blockquote>
-<p>타입 문자 ‘T’는 ‘Type’을, ‘R’은 ‘Return Type’을 의미한다.</p>
-<p>인터페이스 이름 앞에 접두사 ‘Bi’가 붙으면 매개변수가 두 개인 함수형 인터페이스이다.</p>
+<p>타입 문자 'T'는 'Type'을, 'R'은 'Return Type'을 의미한다.</p>
+<p>인터페이스 이름 앞에 접두사 'Bi'가 붙으면 매개변수가 두 개인 함수형 인터페이스이다.</p>
 <p>3개 이상의 매개변수를 갖는 함수형 인터페이스를 선언한다면 직접 만들어서 서야한다.</p>
 </blockquote>
 <p>컬렉션 프레임웍의 인터페이스에 디폴트 메서드가 추가되었다.</p>
 <ul>
-<li>Collection<ul>
-<li>boolean removeIf(Predicate&lt;E&gt; filter)<br>: 조건에 맞는 요소를 삭제</li>
+<li>Collection
+<ul>
+<li>boolean removeIf(Predicate&lt;E&gt; filter)
+: 조건에 맞는 요소를 삭제</li>
 </ul>
 </li>
-<li>List<ul>
-<li>void replaceAll(UnaryOperator&lt;E&gt; operator)<br>: 모든 요소를 변환하여 대체</li>
+<li>List
+<ul>
+<li>void replaceAll(UnaryOperator&lt;E&gt; operator)
+: 모든 요소를 변환하여 대체</li>
 </ul>
 </li>
-<li>Iterable<ul>
-<li>void forEach(Consumer&lt;T&gt; action)<br>: 모든 요소에 작업 action을 수행</li>
+<li>Iterable
+<ul>
+<li>void forEach(Consumer&lt;T&gt; action)
+: 모든 요소에 작업 action을 수행</li>
 </ul>
 </li>
-<li>Map<ul>
-<li>V compute(K key, BiFunction&lt;K,V,V&gt; f)<br>: 지정된 키의 값에 작업 f를 수행</li>
-<li>V computeIfAbsent(K key, BiFunction&lt;K,V&gt; f)<br>: 키가 없으면, 작업 f 수행 후 추가</li>
-<li>V computeIfPresentt(K key, BiFunction&lt;K,V,V&gt; f)<br>: 지정된 키가 있을 때, 작업 f 수행</li>
-<li>V merge(K key, V value, BiFunction&lt;V,V,V&gt; f)<br>: 모든 요소에 병합작업 f를 수행</li>
-<li>void forEach(BiConsumer&lt;K,V&gt; action)<br>: 모든 요소에 작업 action을 수행</li>
-<li>void replaceAll(BiFunction&lt;K,V,V&gt; f)<br>: 모든 요소에 치환작업 f를 수행</li>
+<li>Map
+<ul>
+<li>V compute(K key, BiFunction&lt;K,V,V&gt; f)
+: 지정된 키의 값에 작업 f를 수행</li>
+<li>V computeIfAbsent(K key, BiFunction&lt;K,V&gt; f)
+: 키가 없으면, 작업 f 수행 후 추가</li>
+<li>V computeIfPresentt(K key, BiFunction&lt;K,V,V&gt; f)
+: 지정된 키가 있을 때, 작업 f 수행</li>
+<li>V merge(K key, V value, BiFunction&lt;V,V,V&gt; f)
+: 모든 요소에 병합작업 f를 수행</li>
+<li>void forEach(BiConsumer&lt;K,V&gt; action)
+: 모든 요소에 작업 action을 수행</li>
+<li>void replaceAll(BiFunction&lt;K,V,V&gt; f)
+: 모든 요소에 치환작업 f를 수행</li>
 </ul>
 </li>
 </ul>
@@ -332,49 +358,73 @@
 <li>intFunction&lt;R&gt; : AFunction은 입력이 A타입이고 출력은 generic 타입</li>
 <li>ObjintConsumer&lt;T&gt; : ObjAFunction은 입력이 T, A타입이고 출력은 없다.</li>
 </ul>
-<h2 id="function의-합성과-predicate의-결합"><a href="#Function의-합성과-Predicate의-결합" class="headerlink" title="Function의 합성과 Predicate의 결합"></a>Function의 합성과 Predicate의 결합</h2><p>java.util.function 패키지의 함수형 인터페이스에는 추상형메서드 외에도 디폴트 메서드와 static 메서드가 정의되어 있다.</p>
-<p><strong>Function의 합성</strong><br>함수 f, g가 있을 때, <strong>f.andThen(g)</strong>는 함수 f를 먼저 적용하고, 그 다음에 함수 g를 적용한다. 그리고 <strong>f.compose(g)</strong>는 반대로 g를 먼저 적용하고 f를 적용한다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Function&lt;String, Integer&gt; f = (s) -&gt; Integer.parseInt(s, <span class="number">16</span>);</span><br><span class="line">Function&lt;Integer, String&gt; g = (i) -&gt; Integer.toBinaryString(i);</span><br><span class="line">Function&lt;String, String&gt; h = f.andThen(g);</span><br><span class="line">Function&lt;Integer, Integer&gt; i = f.compose(g);</span><br></pre></td></tr></table></figure>
-<p><strong>Predicate의 결합</strong><br>여러 조건식을 논리 연산자로 연결해서 하나의 식을 구성할 수 있는 것처럼, 여러 Predicate를 and(), or(), negate()로 연결해서 하나의 새로운 Predicate를 결합할 수 있다.</p>
-<h2 id="메서드-참조"><a href="#메서드-참조" class="headerlink" title="메서드 참조"></a>메서드 참조</h2><p>람다식을 더욱 간결하게 표현할 수 있는 방법이 있다. 람다식이 하나의 메서드만 호출하는 경우에는 <code>메서드 참조</code>라는 방법으로 람다식을 간략히 할 수 있다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// 변환 전</span></span><br><span class="line">Function&lt;String, Integer&gt; f = (String s) -&gt; Integer.parseInt(s);</span><br><span class="line"></span><br><span class="line"><span class="comment">/// 변환 후</span></span><br><span class="line">Function&lt;String, Integer&gt; f = Integer::parseInt;</span><br></pre></td></tr></table></figure>
+<h2 id="function의-합성과-predicate의-결합">Function의 합성과 Predicate의 결합</h2>
+<p>java.util.function 패키지의 함수형 인터페이스에는 추상형메서드 외에도 디폴트 메서드와 static 메서드가 정의되어 있다.</p>
+<p><strong>Function의 합성</strong>
+함수 f, g가 있을 때, **f.andThen(g)**는 함수 f를 먼저 적용하고, 그 다음에 함수 g를 적용한다. 그리고 **f.compose(g)**는 반대로 g를 먼저 적용하고 f를 적용한다.</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Function&lt;String, Integer&gt; f = (s) -&gt; Integer.parseInt(s, <span class="number">16</span>);</span><br><span class="line">Function&lt;Integer, String&gt; g = (i) -&gt; Integer.toBinaryString(i);</span><br><span class="line">Function&lt;String, String&gt; h = f.andThen(g);</span><br><span class="line">Function&lt;Integer, Integer&gt; i = f.compose(g);</span><br></pre></td></tr></table></figure></p>
+<p><strong>Predicate의 결합</strong>
+여러 조건식을 논리 연산자로 연결해서 하나의 식을 구성할 수 있는 것처럼, 여러 Predicate를 and(), or(), negate()로 연결해서 하나의 새로운 Predicate를 결합할 수 있다.</p>
+<h2 id="메서드-참조">메서드 참조</h2>
+<p>람다식을 더욱 간결하게 표현할 수 있는 방법이 있다. 람다식이 하나의 메서드만 호출하는 경우에는 <code>메서드 참조</code>라는 방법으로 람다식을 간략히 할 수 있다.</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// 변환 전</span></span><br><span class="line">Function&lt;String, Integer&gt; f = (String s) -&gt; Integer.parseInt(s);</span><br><span class="line"></span><br><span class="line"><span class="comment">/// 변환 후</span></span><br><span class="line">Function&lt;String, Integer&gt; f = Integer::parseInt;</span><br></pre></td></tr></table></figure></p>
 <blockquote>
-<p>하나의 메서드만 호출하는 람다식은 ‘클래스이름::메서드이름’ 또는 ‘참조변수::메서드이름’</p>
+<p>하나의 메서드만 호출하는 람다식은 '클래스이름::메서드이름' 또는 '참조변수::메서드이름'</p>
 <p>으로 바꿀 수 있다.</p>
 </blockquote>
 <p>메서드 참조는 람다식을 마치 static 변수처럼 다룰 수 있게 해준다. 메서드 참조는 코드를 간략히 하는데 유용해서 많이 사용된다.</p>
-<h1 id="스트림stream"><a href="#스트림-stream" class="headerlink" title="스트림(stream)"></a>스트림(stream)</h1><h2 id="스트림이란"><a href="#스트림이란" class="headerlink" title="스트림이란?"></a>스트림이란?</h2><p><strong><code>스트림</code>은 데이터 소스를 추상화하고, 데이터를 다루는데 자주 사용되는 메서드들을 정의해 놓았다. 데이터 소스를 추상화했다는 것은, 데이터 소스가 무엇이던 간에 같은 방식으로 다룰 수 있게 되었다는 것과 코드의 재사용성이 높아진다는 것을 의미한다.</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">String[] strArr = &#123;<span class="string">"aaa"</span>, <span class="string">"bbb"</span>, <span class="string">"ccc"</span>&#125;;</span><br><span class="line">List&lt;String&gt; strList = Arrays.asList(strArr);</span><br><span class="line"></span><br><span class="line">stream&lt;String&gt; strStream1 = strList.stream();</span><br><span class="line">stream&lt;String&gt; strStream2 = Arrays.stream(strArr);</span><br><span class="line"></span><br><span class="line">strStream1.sorted().forEach(System.out::println);</span><br><span class="line">strStream2.sorted().forEach(System.out::println);</span><br></pre></td></tr></table></figure>
-<p><strong>스트림은 데이터 소스를 변경하지 않는다.</strong><br>스트림은 데이터 소스로부터 데이터를 읽기만할 뿐, 데이터 소스를 변경하지 않는다. 필요하다면, 결과를 컬렉션이나 배열에 담아서 반환할 수도 있다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; sortedList = strStream2.sorted().collect(Collectors.toList());</span><br></pre></td></tr></table></figure>
-<p><strong>스트림은 일회용이다.</strong><br>스트림은 Iterator처럼 일회용이다. 한번 사용하면 닫혀서 다시 사용할 수 없다. 필요하다면 스트림을 다시 생성해야 한다.</p>
-<p><strong>스트림은 작업을 내부 반복으로 처리한다.</strong><br>내부 반복이라는 것은 반복문을 메서드의 내부에 숨길 수 있다는 것을 의미한다. forEach()는 스트림에 정의된 메서드 중의 하나로 매개변수에 대입된 람다식을 데이터 소스의 모든 요소에 적용한다. (forEach()는 메서드 안에 for문을 넣어버린 것이다.)</p>
-<p><strong>스트림의 연산</strong><br>스트림이 제공하는 다양한 연산을 이용해서 복잡한 작업들을 간단히 처리할 수 있다.</p>
+<h1 id="스트림stream">스트림(stream)</h1>
+<h2 id="스트림이란">스트림이란?</h2>
+<p><strong><code>스트림</code>은 데이터 소스를 추상화하고, 데이터를 다루는데 자주 사용되는 메서드들을 정의해 놓았다. 데이터 소스를 추상화했다는 것은, 데이터 소스가 무엇이던 간에 같은 방식으로 다룰 수 있게 되었다는 것과 코드의 재사용성이 높아진다는 것을 의미한다.</strong></p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">String[] strArr = &#123;<span class="string">"aaa"</span>, <span class="string">"bbb"</span>, <span class="string">"ccc"</span>&#125;;</span><br><span class="line">List&lt;String&gt; strList = Arrays.asList(strArr);</span><br><span class="line"></span><br><span class="line">stream&lt;String&gt; strStream1 = strList.stream();</span><br><span class="line">stream&lt;String&gt; strStream2 = Arrays.stream(strArr);</span><br><span class="line"></span><br><span class="line">strStream1.sorted().forEach(System.out::println);</span><br><span class="line">strStream2.sorted().forEach(System.out::println);</span><br></pre></td></tr></table></figure></p>
+<p><strong>스트림은 데이터 소스를 변경하지 않는다.</strong>
+스트림은 데이터 소스로부터 데이터를 읽기만할 뿐, 데이터 소스를 변경하지 않는다. 필요하다면, 결과를 컬렉션이나 배열에 담아서 반환할 수도 있다.</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; sortedList = strStream2.sorted().collect(Collectors.toList());</span><br></pre></td></tr></table></figure></p>
+<p><strong>스트림은 일회용이다.</strong>
+스트림은 Iterator처럼 일회용이다. 한번 사용하면 닫혀서 다시 사용할 수 없다. 필요하다면 스트림을 다시 생성해야 한다.</p>
+<p><strong>스트림은 작업을 내부 반복으로 처리한다.</strong>
+내부 반복이라는 것은 반복문을 메서드의 내부에 숨길 수 있다는 것을 의미한다. forEach()는 스트림에 정의된 메서드 중의 하나로 매개변수에 대입된 람다식을 데이터 소스의 모든 요소에 적용한다. (forEach()는 메서드 안에 for문을 넣어버린 것이다.)</p>
+<p><strong>스트림의 연산</strong>
+스트림이 제공하는 다양한 연산을 이용해서 복잡한 작업들을 간단히 처리할 수 있다.</p>
 <ul>
 <li>중간 연산 : 연산 결과가 스트림인 연산. 스트림에 연속해서 중간 연산을 할 수 있음</li>
 <li>최종 연산 : 연산 결과가 스트림이 아닌 연산. 스트림의 요소를 소모하므로 단 한번만 가능</li>
 </ul>
-<p><strong>지연된 연산</strong><br>스트림 연산에서 한 가지 중요한 점은 최종 연산이 수행되기 전까지는 중간 연산이 수행되지 않는다는 것이다. 중간 연산을 호출하는 것은 단지 어떤 작업이 수행되어야하는지를 지정해주는 것일 뿐이다. 최종 연산이 수행되어야 비로소 스트림의 요소들이 중간 연산을 거쳐 최종 연산에서 소모된다.</p>
-<p><strong>병렬 스트림</strong><br>스트림으로 데이터를 다룰 때의 장점 중 하나가 병렬 처리가 쉽다는 것이다. 병렬 스트림은 내부적으로 fork&amp;join을 이용해서 자동적으로 연산을 병렬로 수행한다. 모든 스트림은 기본적으로 병렬 스트림이 아니므로 병렬 스트림을 사용하려면 parallelStream() 메서드를 사용해 병렬 스트림으로 전환해야 한다.</p>
-<h2 id="스트림-만들기"><a href="#스트림-만들기" class="headerlink" title="스트림 만들기"></a>스트림 만들기</h2><p>스트림의 소스가 될 수 있는 대상은 배열, 컬렉션, 임의의 수 등 다양하다.</p>
-<p><strong>컬렉션</strong><br>컬렉션의 최고 조상인 Collection에 stream()이 정의되어 있다. 그래서 Collection의 자손인 List와 Set을 구현한 컬렉션 클래스들은 모두 이 메서드로 스트림을 생성할 수 있다. stream()은 해당 컬렉션을 소스로 하는 스트림을 반환한다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Stream&lt;T&gt; Collection.stream()</span><br></pre></td></tr></table></figure>
-<p><strong>배열</strong><br>배열을 소스로 하는 스트림을 생성하는 메서드는 다음과 같이 Stream과 Arrays에 static 메서드로 정의되어 있다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Stream&lt;T&gt; Stream.of(T... values)</span><br><span class="line">Stream&lt;T&gt; Stream.of(T[])</span><br><span class="line">Stream&lt;T&gt; Arrays.stream(T[])</span><br><span class="line">Stream&lt;T&gt; Arrays.stream(T[] array, <span class="keyword">int</span> startInclusive, <span class="keyword">int</span> endExclusive)</span><br></pre></td></tr></table></figure>
+<p><strong>지연된 연산</strong>
+스트림 연산에서 한 가지 중요한 점은 최종 연산이 수행되기 전까지는 중간 연산이 수행되지 않는다는 것이다. 중간 연산을 호출하는 것은 단지 어떤 작업이 수행되어야하는지를 지정해주는 것일 뿐이다. 최종 연산이 수행되어야 비로소 스트림의 요소들이 중간 연산을 거쳐 최종 연산에서 소모된다.</p>
+<p><strong>병렬 스트림</strong>
+스트림으로 데이터를 다룰 때의 장점 중 하나가 병렬 처리가 쉽다는 것이다. 병렬 스트림은 내부적으로 fork&amp;join을 이용해서 자동적으로 연산을 병렬로 수행한다. 모든 스트림은 기본적으로 병렬 스트림이 아니므로 병렬 스트림을 사용하려면 parallelStream() 메서드를 사용해 병렬 스트림으로 전환해야 한다.</p>
+<h2 id="스트림-만들기">스트림 만들기</h2>
+<p>스트림의 소스가 될 수 있는 대상은 배열, 컬렉션, 임의의 수 등 다양하다.</p>
+<p><strong>컬렉션</strong>
+컬렉션의 최고 조상인 Collection에 stream()이 정의되어 있다. 그래서 Collection의 자손인 List와 Set을 구현한 컬렉션 클래스들은 모두 이 메서드로 스트림을 생성할 수 있다. stream()은 해당 컬렉션을 소스로 하는 스트림을 반환한다.</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Stream&lt;T&gt; Collection.stream()</span><br></pre></td></tr></table></figure></p>
+<p><strong>배열</strong>
+배열을 소스로 하는 스트림을 생성하는 메서드는 다음과 같이 Stream과 Arrays에 static 메서드로 정의되어 있다.</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Stream&lt;T&gt; Stream.of(T... values)</span><br><span class="line">Stream&lt;T&gt; Stream.of(T[])</span><br><span class="line">Stream&lt;T&gt; Arrays.stream(T[])</span><br><span class="line">Stream&lt;T&gt; Arrays.stream(T[] array, <span class="keyword">int</span> startInclusive, <span class="keyword">int</span> endExclusive)</span><br></pre></td></tr></table></figure></p>
 <p>그리고 int, long, double과 같은 기본형 배열을 소스로 하는 스트림을 생성하는 메서드도 있다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">IntStream IntStream.of(<span class="keyword">int</span> ...values) <span class="comment">// 가변인자</span></span><br><span class="line">IntStream IntStream.of(<span class="keyword">int</span>[])</span><br><span class="line">IntStream Arrays.stream(<span class="keyword">int</span>[])</span><br><span class="line">IntStream Arrays.stream(<span class="keyword">int</span>[] array, <span class="keyword">int</span> startInclusive, <span class="keyword">int</span> endExclusive)</span><br></pre></td></tr></table></figure>
-<p><strong>특정 범위의 정수</strong><br>IntStream과 LongStream은 지정된 범위의 연속된 정수를 스트림으로 생성해서 반환하는 range()와 rangeClosed()를 가지고 있다.</p>
-<p><strong>임의의 수</strong><br>난수를 생성하는데 사용하는 Random 클래스에는 해당 타입의 난수들로 이루어지는 스트림을 반환하는 인스턴스 메서드들이 포함되어 있다.</p>
-<h2 id="스트림의-중간연산"><a href="#스트림의-중간연산" class="headerlink" title="스트림의 중간연산"></a>스트림의 중간연산</h2><p><strong>스트림 자르기 - skip(), limit()</strong><br>skip()과 limit()은 스트림의 일부를 잘라낼 때 사용한다.</p>
-<p><strong>스트림의 요소 걸러내기 - filter(), distinct()</strong><br>distinct()는 스트림에서 중복된 요소들을 제거하고, filter()는 주어진 조건(Predicate)에 맞지 않는 요소를 걸러낸다.</p>
-<p><strong>정렬 - sorted()</strong><br>스트림을 정렬할 때는 sorted()를 사용하면 된다.</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">IntStream IntStream.of(<span class="keyword">int</span> ...values) <span class="comment">// 가변인자</span></span><br><span class="line">IntStream IntStream.of(<span class="keyword">int</span>[])</span><br><span class="line">IntStream Arrays.stream(<span class="keyword">int</span>[])</span><br><span class="line">IntStream Arrays.stream(<span class="keyword">int</span>[] array, <span class="keyword">int</span> startInclusive, <span class="keyword">int</span> endExclusive)</span><br></pre></td></tr></table></figure></p>
+<p><strong>특정 범위의 정수</strong>
+IntStream과 LongStream은 지정된 범위의 연속된 정수를 스트림으로 생성해서 반환하는 range()와 rangeClosed()를 가지고 있다.</p>
+<p><strong>임의의 수</strong>
+난수를 생성하는데 사용하는 Random 클래스에는 해당 타입의 난수들로 이루어지는 스트림을 반환하는 인스턴스 메서드들이 포함되어 있다.</p>
+<h2 id="스트림의-중간연산">스트림의 중간연산</h2>
+<p><strong>스트림 자르기 - skip(), limit()</strong>
+skip()과 limit()은 스트림의 일부를 잘라낼 때 사용한다.</p>
+<p><strong>스트림의 요소 걸러내기 - filter(), distinct()</strong>
+distinct()는 스트림에서 중복된 요소들을 제거하고, filter()는 주어진 조건(Predicate)에 맞지 않는 요소를 걸러낸다.</p>
+<p><strong>정렬 - sorted()</strong>
+스트림을 정렬할 때는 sorted()를 사용하면 된다.</p>
 <p>sorted()는 지정된 Comparator로 스트림을 정렬하는데, Comparator대신 int값을 반환하는 람다식을 사용하는 것도 가능하다. Comparator를 지정하지 않으면 스트림 요소의 기본 정렬 기준(Comparable)으로 정렬한다. 단, 스트림의 요소가 Comparable을 구현한 클래스가 아니면 예외가 발생한다.</p>
 <p>JDK 1.8부터 Comparator 인터페이스에 static 메서드와 디폴트 메서드가 많이 추가되었는데, 이 메서드들을 이용하면 정렬이 쉬워진다. 이 메서드들은 모두 Comparator&lt;T&gt;를 반환한다.</p>
-<p><strong>변환 - map()</strong><br>스트림의 요소에 저장된 값 중에서 원하는 필드만 뽑아내거나 특정 형태로 변환해야 할 때가 있다. 이 때 사용하는 것이 바로 map()이다. 이 메서드의 선언부는 아래와 같으며, 매개변수로 T타입을 R타입으로 변환해서 반환하는 함수를 지정해야한다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Stream&lt;R&gt; <span class="title">map</span><span class="params">(Function&lt;? <span class="keyword">super</span> T,? extends R&gt; mapper)</span></span></span><br></pre></td></tr></table></figure>
-<p><strong>조회 - peek()</strong><br>연산과 연산 사이에 올바르게 처리되었는지 확인하고 싶다면, peek()를 사용한다. forEach()와 달리 스트림의 요소를 소모하지 않으므로 연산 사이에 여러 번 끼워 넣어도 문제가 되지 않는다.</p>
+<p><strong>변환 - map()</strong>
+스트림의 요소에 저장된 값 중에서 원하는 필드만 뽑아내거나 특정 형태로 변환해야 할 때가 있다. 이 때 사용하는 것이 바로 map()이다. 이 메서드의 선언부는 아래와 같으며, 매개변수로 T타입을 R타입으로 변환해서 반환하는 함수를 지정해야한다.</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Stream&lt;R&gt; <span class="title">map</span><span class="params">(Function&lt;? <span class="keyword">super</span> T,? extends R&gt; mapper)</span></span></span><br></pre></td></tr></table></figure></p>
+<p><strong>조회 - peek()</strong>
+연산과 연산 사이에 올바르게 처리되었는지 확인하고 싶다면, peek()를 사용한다. forEach()와 달리 스트림의 요소를 소모하지 않으므로 연산 사이에 여러 번 끼워 넣어도 문제가 되지 않는다.</p>
 <p>filter()나 map()의 결과를 확인할 때 유용하게 사용될 수 있다.</p>
-<p><strong>mapToInt(), mapToLong(), mapToDouble()</strong><br>map()은 연산의 결과로 Stream&lt;T&gt; 타입의 스트림을 반환하는데, 스트림의 요소를 숫자로 변환하는 경우 IntStream과 같은 기본형 스트림으로 변환하는 것이 더 유용할 수 있다.</p>
+<p><strong>mapToInt(), mapToLong(), mapToDouble()</strong>
+map()은 연산의 결과로 Stream&lt;T&gt; 타입의 스트림을 반환하는데, 스트림의 요소를 숫자로 변환하는 경우 IntStream과 같은 기본형 스트림으로 변환하는 것이 더 유용할 수 있다.</p>
 <p>count()만 지원하는 Stream&lt;T&gt;와 달리 IntStream과 같은 기본형 스트림은 아래와 같이 숫자를 다루는데 편리한 메서드들을 제공한다.</p>
 <ul>
 <li>Int sum() : 스트림의 모든 요소의 총합</li>
@@ -385,58 +435,74 @@
 <p>위의 메서드들은 최종연산이기 때문에 호출 후 스트림이 닫힌다는 점을 주의해야 한다.</p>
 <p>sum()과 average()를 모두 호출해야할 때, 스트림을 또 생성해야하므로 불편하다. 그래서 summaryStatistics()라는 메서드가 따로 제공된다.</p>
 <p>반대로 IntStream을 Stream&lt;T&gt;로 변환할 때는 mapToObj()를, Stream&lt;Integer&gt;로 변환할 때는 boxed()를 사용한다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">IntStream intStream = <span class="keyword">new</span> Random().ints(<span class="number">1</span>, <span class="number">46</span>); <span class="comment">// 1~45 사이의 정수</span></span><br><span class="line">Stream&lt;String&gt; lottoStream = intStream.distinct().limit(<span class="number">6</span>).sorted().mapToObj(i -&gt; i + <span class="string">","</span>);</span><br><span class="line">lottoStream.forEach(System.out::print);</span><br></pre></td></tr></table></figure>
-<p><strong>flatMap() - Stream&lt;T[]&gt;를 Stream&lt;T&gt;로 변환</strong><br>스트림의 요소가 배열이거나 map()의 연산결과가 배열인 경우, 즉 스트림의 타입이 Stream&lt;T[]&gt;인 경우, Stream&lt;T&gt;로 다루는 것이 더 편리할 때가 있다. 그럴 때는 map()대신 flatMap()을 사용하면 된다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Stream&lt;String[]&gt; strArrStrm = Stream.of(</span><br><span class="line">	<span class="keyword">new</span> String[]&#123;<span class="string">"abc"</span>, <span class="string">"def"</span>, <span class="string">"ghi"</span>&#125;,</span><br><span class="line">    <span class="keyword">new</span> String[]&#123;<span class="string">"ABC"</span>, <span class="string">"GHI"</span>, <span class="string">"JKLMN"</span>&#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Stream&lt;String&gt; strStrm = strArrStrm.flatMap(Arrays::stream);</span><br></pre></td></tr></table></figure>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">IntStream intStream = <span class="keyword">new</span> Random().ints(<span class="number">1</span>, <span class="number">46</span>); <span class="comment">// 1~45 사이의 정수</span></span><br><span class="line">Stream&lt;String&gt; lottoStream = intStream.distinct().limit(<span class="number">6</span>).sorted().mapToObj(i -&gt; i + <span class="string">","</span>);</span><br><span class="line">lottoStream.forEach(System.out::print);</span><br></pre></td></tr></table></figure></p>
+<p><strong>flatMap() - Stream&lt;T[]&gt;를 Stream&lt;T&gt;로 변환</strong>
+스트림의 요소가 배열이거나 map()의 연산결과가 배열인 경우, 즉 스트림의 타입이 Stream&lt;T[]&gt;인 경우, Stream&lt;T&gt;로 다루는 것이 더 편리할 때가 있다. 그럴 때는 map()대신 flatMap()을 사용하면 된다.</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Stream&lt;String[]&gt; strArrStrm = Stream.of(</span><br><span class="line">	<span class="keyword">new</span> String[]&#123;<span class="string">"abc"</span>, <span class="string">"def"</span>, <span class="string">"ghi"</span>&#125;,</span><br><span class="line">    <span class="keyword">new</span> String[]&#123;<span class="string">"ABC"</span>, <span class="string">"GHI"</span>, <span class="string">"JKLMN"</span>&#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Stream&lt;String&gt; strStrm = strArrStrm.flatMap(Arrays::stream);</span><br></pre></td></tr></table></figure></p>
 <p>요소의 타입이 Stream&lt;String&gt;인 스트림(Stream&lt;Stream&lt;String&gt;&gt;)이 있을때, 이 스트림을 Stream&lt;T&gt;으로 변환하려면 다음과 같이 map()과 flatMap()을 함께 사용해야 한다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Stream&lt;String&gt; strStream = strStrm</span><br><span class="line">	.map(s -&gt; s.toArray(String[]::<span class="keyword">new</span>)) <span class="comment">// Stream&lt;Stream&lt;String&gt;&gt; -&gt; Stream&lt;String[]&gt;</span></span><br><span class="line">	.flatMap(Arrays::stream); <span class="comment">// Stream&lt;String[]&gt; -&gt; Stream&lt;String&gt;</span></span><br></pre></td></tr></table></figure>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Stream&lt;String&gt; strStream = strStrm</span><br><span class="line">	.map(s -&gt; s.toArray(String[]::<span class="keyword">new</span>)) <span class="comment">// Stream&lt;Stream&lt;String&gt;&gt; -&gt; Stream&lt;String[]&gt;</span></span><br><span class="line">	.flatMap(Arrays::stream); <span class="comment">// Stream&lt;String[]&gt; -&gt; Stream&lt;String&gt;</span></span><br></pre></td></tr></table></figure></p>
 <p>toArray()는 스트림을 배열로 변환해서 반환한다. 매개변수를 지정하지 않으면 Object[]을 반환하므로 특정 타입의 생성자를 지정해줘야 한다. 위에서는 String배열의 생성자(String[]::new)를 지정하였다.</p>
-<h2 id="optionallttgt와-optionalint"><a href="#Optional-lt-T-gt-와-OptionalInt" class="headerlink" title="Optional&lt;T&gt;와 OptionalInt"></a>Optional&lt;T&gt;와 OptionalInt</h2><p>최종 연산의 결과 타입이 Optional인 경우가 있다. <code>Optional&lt;T&gt;</code>은 지네릭 클래스로 ‘T타입의 객체’를 감싸는 래퍼 클래스이다. 그래서 Optional타입의 객체에는 모든 타입의 참조변수를 담을 수 있다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Optional</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> T value; <span class="comment">// T타입의 참조변수</span></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="optionallttgt와-optionalint">Optional&lt;T&gt;와 OptionalInt</h2>
+<p>최종 연산의 결과 타입이 Optional인 경우가 있다. <code>Optional&lt;T&gt;</code>은 지네릭 클래스로 'T타입의 객체'를 감싸는 래퍼 클래스이다. 그래서 Optional타입의 객체에는 모든 타입의 참조변수를 담을 수 있다.</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Optional</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> T value; <span class="comment">// T타입의 참조변수</span></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>최종 연산의 결과를 그냥 반환하는게 아니라 Optional 객체에 담아서 반환한다. 이처럼 객체에 담아서 반환을 하면, 반환된 결과가 null인지 매번 if문으로 체크하는 대신 Optional에 정의된 메서드를 통해서 간단히 처리할 수 있다.</p>
 <blockquote>
 <p>Objects클래스에 isNull(), nonNull(), requireNonNull()과 같은 메서드가 있는 것도 널 체크를 위한 if문을 메서드 안으로 넣어서 코드의 복잡도를 낮추기 위한 것이다.</p>
 </blockquote>
-<p><strong>Optional 객체 생성하기</strong><br>Optional 객체를 생성할 때는 of() 또는 ofNullable()을 사용한다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String str = <span class="string">"abc"</span>;</span><br><span class="line">Optional&lt;String&gt; optVal = Optional.of(str);</span><br></pre></td></tr></table></figure>
+<p><strong>Optional 객체 생성하기</strong>
+Optional 객체를 생성할 때는 of() 또는 ofNullable()을 사용한다.</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String str = <span class="string">"abc"</span>;</span><br><span class="line">Optional&lt;String&gt; optVal = Optional.of(str);</span><br></pre></td></tr></table></figure></p>
 <p>만일 참조변수의 값이 null일 가능성이 있으면, of()대신 ofNullable()을 사용해야 한다. of()는 매개변수의 값이 null이면 NullPointerException을 발생하기 때문이다.</p>
 <p>Optional&lt;T&gt;타입의 참조변수를 기본값으로 초기화 할 때는 empty()를 사용한다. null로 초기화하는 것이 가능하지만, empty()로 초기화하는 것이 바람직하다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Optional&lt;String&gt; optVal = <span class="keyword">null</span>; <span class="comment">// null로 초기화</span></span><br><span class="line">Optional&lt;String&gt; optVal = Optional.&lt;String&gt;empty(); <span class="comment">// 빈 객체로 초기화</span></span><br></pre></td></tr></table></figure>
-<p><strong>Optional 객체의 값 가져오기</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Optional&lt;String&gt; optVal = Optional.of(<span class="string">"abc"</span>);</span><br><span class="line">String str1 = optVal.get(); <span class="comment">// optVal에 저장된 값을 반환. null이면 예외 발생</span></span><br><span class="line">String str2 = optVal.orElse(<span class="string">""</span>); <span class="comment">// optVal에 저장된 값이 null일 때는, ""을 반환</span></span><br></pre></td></tr></table></figure></p>
-<p><strong>orElse()</strong>의 변형으로 null을 대체할 값을 반환하는 람다식을 지정할 수 있는 <strong>orElseGet()</strong>과 null일 때 지정된 예외를 발생시키는 <strong>orElseThrow()</strong>가 있다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String str3 = optVal2.orElseGet(String::<span class="keyword">new</span>); <span class="comment">// () -&gt; new String()과 동일</span></span><br><span class="line">String str4 = optVal2.orElseThrow(NullPointerException::<span class="keyword">new</span>); <span class="comment">// null이면 예외 발생</span></span><br></pre></td></tr></table></figure>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Optional&lt;String&gt; optVal = <span class="keyword">null</span>; <span class="comment">// null로 초기화</span></span><br><span class="line">Optional&lt;String&gt; optVal = Optional.&lt;String&gt;empty(); <span class="comment">// 빈 객체로 초기화</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>Optional 객체의 값 가져오기</strong>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Optional&lt;String&gt; optVal = Optional.of(<span class="string">"abc"</span>);</span><br><span class="line">String str1 = optVal.get(); <span class="comment">// optVal에 저장된 값을 반환. null이면 예외 발생</span></span><br><span class="line">String str2 = optVal.orElse(<span class="string">""</span>); <span class="comment">// optVal에 저장된 값이 null일 때는, ""을 반환</span></span><br></pre></td></tr></table></figure></p>
+<p>**orElse()**의 변형으로 null을 대체할 값을 반환하는 람다식을 지정할 수 있는 **orElseGet()**과 null일 때 지정된 예외를 발생시키는 **orElseThrow()**가 있다.</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String str3 = optVal2.orElseGet(String::<span class="keyword">new</span>); <span class="comment">// () -&gt; new String()과 동일</span></span><br><span class="line">String str4 = optVal2.orElseThrow(NullPointerException::<span class="keyword">new</span>); <span class="comment">// null이면 예외 발생</span></span><br></pre></td></tr></table></figure></p>
 <p><strong>Stream처럼 Optional 객체에도 filter()와 map(), 그리고 flatMap()을 사용할 수 있다.</strong></p>
-<p><strong>isPresent()</strong>는 Optional 객체의 값이 null이면 false를, 아니면 true를 반환한다. <strong>ifPresent()</strong>은 값이 있으면 주어진 람다식을 실행하고 , 없으면 아무 일도 하지 않는다. ifPresent()는 Optional&lt;T&gt;를 반환하는 findAny()나 findFirst()와 같은 최종 연산과 잘 어울린다.</p>
-<h2 id="스트림의-최종-연산"><a href="#스트림의-최종-연산" class="headerlink" title="스트림의 최종 연산"></a>스트림의 최종 연산</h2><p>최종 연산은 스트림의 요소를 소모해서 결과를 만들어낸다. 그래서 <strong>최종 연산후에는 스트림이 닫히게 되고 더 이상 사용할 수 없다. 최종 연산의 결과는 스트림 요소의 합과 같은 단일 값이거나, 스트림의 요소가 담긴 배열 또는 컬렉션일 수 있다.</strong></p>
-<p><strong>forEach()</strong><br>반환 타입이 void이므로 스트림의 요소를 출력하는 용도로 많이 사용된다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">forEach</span><span class="params">(Consumer&lt;? <span class="keyword">super</span> T&gt; action)</span></span></span><br></pre></td></tr></table></figure>
-<p><strong>조건 검사 - allMatch(), anyMatch(), noneMatch(), findFirst(), findAny()</strong><br>스트림의 요소에 대해 지정된 조건에 모든 요소가 일치하는지, 일부가 일치하는지 아니면 어떤 요소도 일치하지 않는지 확인하는데 사용할 수 있는 메서드들이다. 이 메서드들은 모두 매개변수로 Predicate를 요구하며, 연산결과로 boolean을 반환한다.</p>
-<p><strong>통계 - count(), sum(), average(), max(), min()</strong><br>IntStream과 같은 기본형 스트림에는 스트림의 요소들에 대한 통계 정보를 얻을 수 있는 메서드들이 있다. 대부분의 경우 위의 메서드를 사용하기보다 기본형 스트림으로 변환하거나 reduce()와 collect()를 사용해 통계 정보를 얻는다.</p>
-<p><strong>리듀싱 - reduce()</strong><br>스트림의 요소를 줄여나가면서 연산을 수행하고 최종결과를 반환한다. 처음 두 요소를 가지고 연산한 결과를 가지고 그 다음 요소와 연산한다. 그래서 매개변수의 타입이 BinaryOperator&lt;T&gt;인 것이다. 이 과정에서 스트림의 요소를 하나씩 소모하게 되며, 스트림의 모든 요소를 소모하게 되면 그 결과를 반환한다.</p>
+<p>**isPresent()**는 Optional 객체의 값이 null이면 false를, 아니면 true를 반환한다. **ifPresent()**은 값이 있으면 주어진 람다식을 실행하고 , 없으면 아무 일도 하지 않는다. ifPresent()는 Optional&lt;T&gt;를 반환하는 findAny()나 findFirst()와 같은 최종 연산과 잘 어울린다.</p>
+<h2 id="스트림의-최종-연산">스트림의 최종 연산</h2>
+<p>최종 연산은 스트림의 요소를 소모해서 결과를 만들어낸다. 그래서 <strong>최종 연산후에는 스트림이 닫히게 되고 더 이상 사용할 수 없다. 최종 연산의 결과는 스트림 요소의 합과 같은 단일 값이거나, 스트림의 요소가 담긴 배열 또는 컬렉션일 수 있다.</strong></p>
+<p><strong>forEach()</strong>
+반환 타입이 void이므로 스트림의 요소를 출력하는 용도로 많이 사용된다.</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">forEach</span><span class="params">(Consumer&lt;? <span class="keyword">super</span> T&gt; action)</span></span></span><br></pre></td></tr></table></figure></p>
+<p><strong>조건 검사 - allMatch(), anyMatch(), noneMatch(), findFirst(), findAny()</strong>
+스트림의 요소에 대해 지정된 조건에 모든 요소가 일치하는지, 일부가 일치하는지 아니면 어떤 요소도 일치하지 않는지 확인하는데 사용할 수 있는 메서드들이다. 이 메서드들은 모두 매개변수로 Predicate를 요구하며, 연산결과로 boolean을 반환한다.</p>
+<p><strong>통계 - count(), sum(), average(), max(), min()</strong>
+IntStream과 같은 기본형 스트림에는 스트림의 요소들에 대한 통계 정보를 얻을 수 있는 메서드들이 있다. 대부분의 경우 위의 메서드를 사용하기보다 기본형 스트림으로 변환하거나 reduce()와 collect()를 사용해 통계 정보를 얻는다.</p>
+<p><strong>리듀싱 - reduce()</strong>
+스트림의 요소를 줄여나가면서 연산을 수행하고 최종결과를 반환한다. 처음 두 요소를 가지고 연산한 결과를 가지고 그 다음 요소와 연산한다. 그래서 매개변수의 타입이 BinaryOperator&lt;T&gt;인 것이다. 이 과정에서 스트림의 요소를 하나씩 소모하게 되며, 스트림의 모든 요소를 소모하게 되면 그 결과를 반환한다.</p>
 <p>최종 연산 count()와 sum()  등은 내부적으로 모두 reduce()를 이용해서 작성되어 있다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> count = intStream.reduce(<span class="number">0</span>, (a,b) -&gt; a + <span class="number">1</span>); <span class="comment">// count()</span></span><br><span class="line"><span class="keyword">int</span> sum = intStream.reduce(<span class="number">0</span>, (a,b) -&gt; a + b); <span class="comment">// sum()</span></span><br><span class="line"><span class="keyword">int</span> max = intStream.reduce(Integer.MIN_VALUE, (a,b) -&gt; a&gt;b ? a:b); <span class="comment">// max()</span></span><br><span class="line"><span class="keyword">int</span> min = intStream.reduce(Integer.MAX_VALUE, (a,b) -&gt; a&lt;b ? a:b); <span class="comment">// min()</span></span><br></pre></td></tr></table></figure>
-<h2 id="collect"><a href="#Collect" class="headerlink" title="Collect()"></a>Collect()</h2><p><strong><code>collect()</code>는 스트림의 요소를 수집하는 최종 연산으로 리듀싱(reducing)과 유사하다. </strong>collect()가 스트림의 요소를 수집하려면, 어떻게 수집할 것인가에 대한 방법이 정의되어 있어야 하는데, 이 방법을 정의한 것이 바로 컬렉터(collector)이다.</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> count = intStream.reduce(<span class="number">0</span>, (a,b) -&gt; a + <span class="number">1</span>); <span class="comment">// count()</span></span><br><span class="line"><span class="keyword">int</span> sum = intStream.reduce(<span class="number">0</span>, (a,b) -&gt; a + b); <span class="comment">// sum()</span></span><br><span class="line"><span class="keyword">int</span> max = intStream.reduce(Integer.MIN_VALUE, (a,b) -&gt; a&gt;b ? a:b); <span class="comment">// max()</span></span><br><span class="line"><span class="keyword">int</span> min = intStream.reduce(Integer.MAX_VALUE, (a,b) -&gt; a&lt;b ? a:b); <span class="comment">// min()</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="collect">Collect()</h2>
+<p>**<code>collect()</code>는 스트림의 요소를 수집하는 최종 연산으로 리듀싱(reducing)과 유사하다. **collect()가 스트림의 요소를 수집하려면, 어떻게 수집할 것인가에 대한 방법이 정의되어 있어야 하는데, 이 방법을 정의한 것이 바로 컬렉터(collector)이다.</p>
 <p>컬렉터는 Collector 인터페이스를 구현한 것으로, 직접 구현할 수도 있고 미리 작성된 것을 사용할 수도 있다. Collectors 클래스는 미리 작성된 다양한 종류의 컬렉터를 반환하는 static 메서드를 갖고 있다.</p>
 <ul>
 <li>collect() : 스트림의 최종연산, 매개변수로 컬렉터를 필요로 한다.</li>
 <li>Collector : 인터페이스, 컬렉터는 이 인터페이스를 구현해야 한다.</li>
 <li>Collectors : 클래스, static 메서드로 미리 작성된 컬렉터를 제공한다.</li>
 </ul>
-<p><strong>스트림을 컬렉션과 배열로 변환 - toList(), toSet(), toMap(), toCollection(), toArray()</strong><br>List나 Set이 아닌 특정 컬렉션을 지정하려면, toCollection()에 해당 컬렉션의 생성자 참조를 매개변수로 넣어주면 된다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; names = stuStream.map(Student::getName)</span><br><span class="line">    .collect(Collectors.toList());</span><br><span class="line">ArrayList&lt;String&gt; list = names.stream()</span><br><span class="line">    .collect(Collectors.toCollection(ArrayList::<span class="keyword">new</span>));</span><br></pre></td></tr></table></figure>
+<p><strong>스트림을 컬렉션과 배열로 변환 - toList(), toSet(), toMap(), toCollection(), toArray()</strong>
+List나 Set이 아닌 특정 컬렉션을 지정하려면, toCollection()에 해당 컬렉션의 생성자 참조를 매개변수로 넣어주면 된다.</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; names = stuStream.map(Student::getName)</span><br><span class="line">    .collect(Collectors.toList());</span><br><span class="line">ArrayList&lt;String&gt; list = names.stream()</span><br><span class="line">    .collect(Collectors.toCollection(ArrayList::<span class="keyword">new</span>));</span><br></pre></td></tr></table></figure></p>
 <p>Map은 키와 값의 쌍으로 저장해야하므로 객체의 어떤 필드를 키로 사용할지와 값으로 사용할지를 지정해줘야 한다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, Person&gt; map = personStream.collect(Collectors.toMap(p-&gt;p.getRegId(), p-&gt;p));</span><br></pre></td></tr></table></figure>
-<p>스트림에 저장된 요소들을 ‘T[]’ 타입의 배열로 변환하려면, toArray()를 사용하면 된다. 단, 해당 타입의 생성자 참조를 매개변수로 지정해줘야 한다. 만일 매개변수를 지정하지 않으면 반환되는 배열의 타입은 ‘Object[]’이다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Student[] stuNames = studentStream.toArray(Student[]::<span class="keyword">new</span>); <span class="comment">// OK</span></span><br><span class="line">Student[] stuNames = studentStream.toArray(); <span class="comment">// 에러</span></span><br><span class="line">Object[] stuNames = studentStream.toArray(); <span class="comment">// OK</span></span><br></pre></td></tr></table></figure>
-<p><strong>통계 - countint(), summingInt(), averagingInt(), maxBy(), minBy()</strong><br>최종 연산들이 제공하는 통계 정보를 collect()로 똑같이 얻을 수 있다.</p>
-<p><strong>리듀싱 - reducing()</strong><br>리듀싱 역시 collect()로 가능하다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">IntStream intStream = <span class="keyword">new</span> Random().ints(<span class="number">1</span>, <span class="number">46</span>).distinct().limit(<span class="number">6</span>);</span><br><span class="line"></span><br><span class="line">OptionalInt max = intStream.reduce(Integer::max);</span><br><span class="line">Optional&lt;Integer&gt; max = intStream.boxed().collect(reducing(Integer::max));</span><br><span class="line"></span><br><span class="line"><span class="keyword">long</span> sum = intStream.reduce(<span class="number">0</span>, (a, b) -&gt; a + b);</span><br><span class="line"><span class="keyword">long</span> sum = intStream.boxed().collect(reducing(<span class="number">0</span>, (a, b) -&gt; a + b));</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> grandTotal = stuStream.map(Student::getTotalScore).reduce(<span class="number">0</span>, Integer::sum);</span><br><span class="line"><span class="keyword">int</span> grandTotal = stuStream.collect(reducing(<span class="number">0</span>, Student::getTotalScore, Integer::sum));</span><br></pre></td></tr></table></figure>
-<p><strong>문자열 결합 - joining()</strong><br>문자열 스트림의 모든 요소를 하나의 문자열로 연결해서 반환한다. 구분자를 지정해줄 수도 있고, 접두사와 접미사도 가능하다. 스트림의 요소가 String이나 StringBuffer처럼 CharSequence의 자손인 경우에만 결합이 가능하므로 스트림의 요소가 문자열이 아닌 경우에는 먼저 map()을 이용해서 스트림의 요소를 문자열로 변환해야 한다.</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, Person&gt; map = personStream.collect(Collectors.toMap(p-&gt;p.getRegId(), p-&gt;p));</span><br></pre></td></tr></table></figure></p>
+<p>스트림에 저장된 요소들을 'T[]' 타입의 배열로 변환하려면, toArray()를 사용하면 된다. 단, 해당 타입의 생성자 참조를 매개변수로 지정해줘야 한다. 만일 매개변수를 지정하지 않으면 반환되는 배열의 타입은 'Object[]'이다.</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Student[] stuNames = studentStream.toArray(Student[]::<span class="keyword">new</span>); <span class="comment">// OK</span></span><br><span class="line">Student[] stuNames = studentStream.toArray(); <span class="comment">// 에러</span></span><br><span class="line">Object[] stuNames = studentStream.toArray(); <span class="comment">// OK</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>통계 - countint(), summingInt(), averagingInt(), maxBy(), minBy()</strong>
+최종 연산들이 제공하는 통계 정보를 collect()로 똑같이 얻을 수 있다.</p>
+<p><strong>리듀싱 - reducing()</strong>
+리듀싱 역시 collect()로 가능하다.</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">IntStream intStream = <span class="keyword">new</span> Random().ints(<span class="number">1</span>, <span class="number">46</span>).distinct().limit(<span class="number">6</span>);</span><br><span class="line"></span><br><span class="line">OptionalInt max = intStream.reduce(Integer::max);</span><br><span class="line">Optional&lt;Integer&gt; max = intStream.boxed().collect(reducing(Integer::max));</span><br><span class="line"></span><br><span class="line"><span class="keyword">long</span> sum = intStream.reduce(<span class="number">0</span>, (a, b) -&gt; a + b);</span><br><span class="line"><span class="keyword">long</span> sum = intStream.boxed().collect(reducing(<span class="number">0</span>, (a, b) -&gt; a + b));</span><br></pre></td></tr></table></figure></p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> grandTotal = stuStream.map(Student::getTotalScore).reduce(<span class="number">0</span>, Integer::sum);</span><br><span class="line"><span class="keyword">int</span> grandTotal = stuStream.collect(reducing(<span class="number">0</span>, Student::getTotalScore, Integer::sum));</span><br></pre></td></tr></table></figure></p>
+<p><strong>문자열 결합 - joining()</strong>
+문자열 스트림의 모든 요소를 하나의 문자열로 연결해서 반환한다. 구분자를 지정해줄 수도 있고, 접두사와 접미사도 가능하다. 스트림의 요소가 String이나 StringBuffer처럼 CharSequence의 자손인 경우에만 결합이 가능하므로 스트림의 요소가 문자열이 아닌 경우에는 먼저 map()을 이용해서 스트림의 요소를 문자열로 변환해야 한다.</p>
 <p>만일 map()없이 스트림에 바로 joining()하면, 스트림의 요소에 toString()을 호출한 결과를 결합한다.</p>
-<p><strong>그룹화와 분할 - groupingBy, partitioningBy()</strong><br>그룹화는 스트림의 요소를 특정 기준으로 그룹화하는 것을 의미하고, 분할은 스트림의 요소를 두 가지, 지정된 조건에 일치하는 그룹과 일치하지 않는 그룹으로의 분할을 의미한다. 스트림을 두 개의 그룹으로 나눠야 한다면, partitioningBy()로 분할하는 것이 더 빠르다. 그 외에는 groupingBy()를 쓰면 된다. 그룹화와 분할의 결과는 Map에 반환된다.</p>
-<h1 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h1><ul>
+<p><strong>그룹화와 분할 - groupingBy, partitioningBy()</strong>
+그룹화는 스트림의 요소를 특정 기준으로 그룹화하는 것을 의미하고, 분할은 스트림의 요소를 두 가지, 지정된 조건에 일치하는 그룹과 일치하지 않는 그룹으로의 분할을 의미한다. 스트림을 두 개의 그룹으로 나눠야 한다면, partitioningBy()로 분할하는 것이 더 빠르다. 그 외에는 groupingBy()를 쓰면 된다. 그룹화와 분할의 결과는 Map에 반환된다.</p>
+<h1 id="참고">참고</h1>
+<ul>
 <li><a href="http://www.kyobobook.co.kr/product/detailViewKor.laf?barcode=9788995379431" target="_blank" rel="noopener">Java의 정석 - 2</a></li>
 </ul>
 
