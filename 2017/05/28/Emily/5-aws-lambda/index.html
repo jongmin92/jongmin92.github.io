@@ -89,11 +89,11 @@
                     <div class="post-heading">
                         <div class="tags">
                             
+                              <a class="tag" href="/tags/#AWS" title="AWS">AWS</a>
+                            
                               <a class="tag" href="/tags/#Emily" title="Emily">Emily</a>
                             
                               <a class="tag" href="/tags/#bot" title="bot">bot</a>
-                            
-                              <a class="tag" href="/tags/#AWS" title="AWS">AWS</a>
                             
                               <a class="tag" href="/tags/#lambda" title="lambda">lambda</a>
                             
@@ -151,14 +151,14 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -234,75 +234,48 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h2 id="index">Index</h2>
-<ol>
+                <h2 id="index"><a href="#Index" class="headerlink" title="Index"></a>Index</h2><ol>
 <li><a href="#1">AWS Lambda란?</a></li>
 <li><a href="#2">CloudWatch와 Lambda 구성하기</a></li>
 <li><a href="#3">정리하며</a></li>
 </ol>
 <hr>
-<p><a href="http://localhost:4000/2017/05/26/Emily/4-crawling/" target="_blank" rel="noopener">저번 포스팅</a>에서 작성한 <strong>학식 메뉴 크롤링(학식 메뉴를 크롤링해 DB에 저장)</strong> 코드를 **<code>AWS Labmda</code>**를 사용해 일주일에 한번씩 실행되도록 스케쥴링을 해보겠습니다.</p>
+<p><a href="http://localhost:4000/2017/05/26/Emily/4-crawling/" target="_blank" rel="noopener">저번 포스팅</a>에서 작성한 <strong>학식 메뉴 크롤링(학식 메뉴를 크롤링해 DB에 저장)</strong> 코드를 <strong><code>AWS Labmda</code></strong>를 사용해 일주일에 한번씩 실행되도록 스케쥴링을 해보겠습니다.</p>
 <blockquote>
 <p>AWS(아마존 웹 서비스)에 대한 기본적인 내용은 생략합니다.</p>
 </blockquote>
-<p>&lt;span id='1'&gt;</p>
-<h2 id="aws-lambda란">AWS Lambda란?</h2>
-<p>어떠한 이벤트에 따라 Cron 프로세스를 구성하는데에는 다양한 방법이 존재합니다. 서버 인스턴스를 띄워놓고 일정 시간에 이벤트를 발생시키는 것이 일반적인 방법 중 하나이지만 이러한 방법으로 구성할 시에는 해당 시간에 Event를 발생시키는 일을 제외하고는 서버 인스턴스를 낭비하게 됩니다.</p>
+<p><span id="1"></span></p>
+<h2 id="aws-lambda란"><a href="#AWS-Lambda란" class="headerlink" title="AWS Lambda란?"></a>AWS Lambda란?</h2><p>어떠한 이벤트에 따라 Cron 프로세스를 구성하는데에는 다양한 방법이 존재합니다. 서버 인스턴스를 띄워놓고 일정 시간에 이벤트를 발생시키는 것이 일반적인 방법 중 하나이지만 이러한 방법으로 구성할 시에는 해당 시간에 Event를 발생시키는 일을 제외하고는 서버 인스턴스를 낭비하게 됩니다.</p>
 <p><a href="https://aws.amazon.com/ko/lambda/details/" target="_blank" rel="noopener">AWS Lambda</a>는 <strong>이벤트에 응답하여 코드를 실행</strong>하고 자동으로 기본 컴퓨팅 리소스를 관리하는 서버 없는 컴퓨팅 서비스입니다. AWS Lambda를 사용하여 커스텀 로직으로 다른 AWS 서비스를 확장하거나, AWS 규모, 성능 및 보안으로 작동하는 자체 백엔드 서비스를 만들 수 있습니다. AWS Lambda는 Amazon S3 버킷의 객체에 대한 변경 또는 Amazon DynamoDB의 테이블 업데이트와 같은 <strong>다양한 이벤트에 대한 응답으로 코드를 자동 실행</strong>할 수 있습니다.</p>
 <p>AWS Lambda는 코드가 실행되지 않을 때는 요금이 부과되지 않습니다. 즉, 서버 인스턴스를 계속 띄워놓는 것과 비교했을 때 더 저렴합니다. AWS Lambda의 자세한 요금 정책은 <a href="https://aws.amazon.com/ko/lambda/pricing/" target="_blank" rel="noopener">AWS 홈페이지</a>에서 확인 가능합니다. (Lambda 함수가 다른 AWS 서비스를 사용하거나 데이터를 전송하는 경우 추가 요금이 부과될 수 있으므로 필히 확인바랍니다.)</p>
 <hr>
-<p>&lt;span id='2'&gt;</p>
-<h2 id="cloudwatch와-lambda-구성하기">CloudWatch와 Lambda 구성하기</h2>
-<ol>
-<li>AWS에 로그인 후 Lambda 서비스를 클릭합니다.</li>
-</ol>
+<p><span id="2"></span></p>
+<h2 id="cloudwatch와-lambda-구성하기"><a href="#CloudWatch와-Lambda-구성하기" class="headerlink" title="CloudWatch와 Lambda 구성하기"></a>CloudWatch와 Lambda 구성하기</h2><p>1) AWS에 로그인 후 Lambda 서비스를 클릭합니다.</p>
 <p><img src="/images/post/2017-05-28/lambda_1.png" alt="Lambda Function 생성하기 - 1"></p>
-<ol start="2">
-<li>저와 같이 이미 생성한 Lambda 함수가 있는 경우는 아래와 같이 <strong>Create a Lambda Function</strong> 버튼을 클릭하고 처음으로 Lambda 함수를 생성하는 경우는 <strong>Get Started Now</strong> 버튼을 클릭합니다.</li>
-</ol>
+<p>2) 저와 같이 이미 생성한 Lambda 함수가 있는 경우는 아래와 같이 <strong>Create a Lambda Function</strong> 버튼을 클릭하고 처음으로 Lambda 함수를 생성하는 경우는 <strong>Get Started Now</strong> 버튼을 클릭합니다.</p>
 <p><img src="/images/post/2017-05-28/lambda_2.png" alt="Lambda Function 생성하기 - 2"></p>
-<ol start="3">
-<li>Blueprint는 자주 사용되어지는 미리 준비된 Lambda 함수의 환경을 제공합니다. 저희는 <strong>Blank Function</strong>을 선택해서 직접 trigger(Event)와 환경을 설정합니다.</li>
-</ol>
+<p>3) Blueprint는 자주 사용되어지는 미리 준비된 Lambda 함수의 환경을 제공합니다. 저희는 <strong>Blank Function</strong>을 선택해서 직접 trigger(Event)와 환경을 설정합니다.</p>
 <p><img src="/images/post/2017-05-28/lambda_3.png" alt="Lambda Function 생성하기 - 3"></p>
-<ol start="4">
-<li>Lambda를 일정 시간 규칙에 맞게 호출할 것이기 때문에 <strong>CloudWatch Events - Schedule</strong>를 선택합니다. <a href="https://aws.amazon.com/ko/cloudwatch/" target="_blank" rel="noopener">CloudWatch</a>는 AWS에서 실행되는 애플리케이션을 위한 모니터링 서비스 뿐만 아니라 Schedule도 제공합니다.
-(Lambda를 실행시키기 위한 trigger로 다양한 방법이 제공됩니다. 한가지 예시로 S3의 특정 Bucket에 이미지 파일이 업로드 될때마다 ReSizing을 하고싶다면 trigger로 S3를 설정한 후 Bucket과 Event type(Delete, Put, Post, Copy)을 설정하여 해당 Lambda를 수행하도록 할 수 있습니다.)</li>
-</ol>
+<p>4) Lambda를 일정 시간 규칙에 맞게 호출할 것이기 때문에 <strong>CloudWatch Events - Schedule</strong>를 선택합니다. <a href="https://aws.amazon.com/ko/cloudwatch/" target="_blank" rel="noopener">CloudWatch</a>는 AWS에서 실행되는 애플리케이션을 위한 모니터링 서비스 뿐만 아니라 Schedule도 제공합니다.<br>(Lambda를 실행시키기 위한 trigger로 다양한 방법이 제공됩니다. 한가지 예시로 S3의 특정 Bucket에 이미지 파일이 업로드 될때마다 ReSizing을 하고싶다면 trigger로 S3를 설정한 후 Bucket과 Event type(Delete, Put, Post, Copy)을 설정하여 해당 Lambda를 수행하도록 할 수 있습니다.)</p>
 <p><img src="/images/post/2017-05-28/lambda_4.png" alt="Lambda Function 생성하기 - 4"></p>
-<ol start="5">
-<li>CloudWatch Events -  Schedule의 내용을 작성합니다. <strong>Rule name</strong>과 <strong>Rule description</strong>에는 해당 Schedule의 이름과 설명을 적고, <strong>Schedule expression</strong>에는 Event를 발생시키고자 하는 주기에 맞게 Cron 식을 작성합니다.
-Schedule expression에 작성한 Cron 식에 따라 Event가 발생하는 시간이 달라집니다. Cron 식을 처음 접하시는 분은 <a href="http://docs.aws.amazon.com/ko_kr/AmazonCloudWatch/latest/events/ScheduledEvents.html" target="_blank" rel="noopener">AWS 홈페이지1</a>, <a href="http://docs.aws.amazon.com/ko_kr/lambda/latest/dg/tutorial-scheduled-events-schedule-expressions.html" target="_blank" rel="noopener">AWS 홈페이지2</a>를 참고해서 Cron 식을 작성합니다.
-<strong>단, Cron 식에 사용되는 시간은 UTC를 기준으로 하기 때문에 유의해야 합니다. 제가 작성한 cron 식 <code>(0 13 ? * SUN *)</code>을 기준으로 하면 <code>매주 일요일 22(13+9)시</code>에 이벤트가 발생합니다.</strong></li>
-</ol>
+<p>5) CloudWatch Events -  Schedule의 내용을 작성합니다. <strong>Rule name</strong>과 <strong>Rule description</strong>에는 해당 Schedule의 이름과 설명을 적고, <strong>Schedule expression</strong>에는 Event를 발생시키고자 하는 주기에 맞게 Cron 식을 작성합니다.<br>Schedule expression에 작성한 Cron 식에 따라 Event가 발생하는 시간이 달라집니다. Cron 식을 처음 접하시는 분은 <a href="http://docs.aws.amazon.com/ko_kr/AmazonCloudWatch/latest/events/ScheduledEvents.html" target="_blank" rel="noopener">AWS 홈페이지1</a>, <a href="http://docs.aws.amazon.com/ko_kr/lambda/latest/dg/tutorial-scheduled-events-schedule-expressions.html" target="_blank" rel="noopener">AWS 홈페이지2</a>를 참고해서 Cron 식을 작성합니다.<br><strong>단, Cron 식에 사용되는 시간은 UTC를 기준으로 하기 때문에 유의해야 합니다. 제가 작성한 cron 식 <code>(0 13 ? * SUN *)</code>을 기준으로 하면 <code>매주 일요일 22(13+9)시</code>에 이벤트가 발생합니다.</strong></p>
 <p><img src="/images/post/2017-05-28/lambda_5.png" alt="Lambda Function 생성하기 - 5"></p>
 <p>6-1) 다음과 같이 Lambda function의 <strong>이름, 설명, 실행환경</strong>(포스팅 기준 Node.js 6.10 이 최신 버전입니다.) 을 작성합니다.</p>
-<p>6-2) 다음으로 CloudWatch Events에 의해서 실행될 <strong>코드</strong>를 기재해야합니다. 코드를 기재하는 방식은 <strong>직접 작성, .ZIP 파일로 압축, S3를 이용</strong>하는 3가지 방식중 하나로 진행됩니다.
-만약 작성한 코드가 aws-sdk를 제외한 외부 라이브러리를 사용하고 있다면 <strong>코드와 함께 라이브러리 파일(node_modules)을 압축</strong>하여 .ZIP 파일을 업로드 해야합니다.</p>
-<p>6-3) 기존에 작성했던 코드에서 수정이 필요합니다. Lambda function의 코드가 에러없이 잘 완료되었는지 <strong>callback</strong>을 통해 결과를 반환해야합니다. <a href="http://localhost:4000/2017/05/26/Emily/4-crawling/" target="_blank" rel="noopener">지난번에 작성했던 코드</a>는 다음과 같이 수정됩니다. (예시를 들기위해 간단하게 작성했을 뿐, 실제 DB에 Insert 하는 부분은 생략되어 있습니다.)
-29, 30번째 줄과, 34번째 줄에 추가된 코드에 주의하셔야 합니다.</p>
-<p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">exports.handler = <span class="function">(<span class="params">event, context, callback</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> request = <span class="built_in">require</span>(<span class="string">'request'</span>);</span><br><span class="line">    <span class="keyword">const</span> cheerio = <span class="built_in">require</span>(<span class="string">'cheerio'</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">const</span> url = <span class="string">"http://www.inu.ac.kr/com/cop/mainWork/foodList1.do?siteId=inu&amp;id=inu_050110010000&amp;command=week"</span>;</span><br><span class="line">    </span><br><span class="line">    request(url, (error, response, body) =&gt; &#123;</span><br><span class="line">      <span class="keyword">if</span> (error) <span class="keyword">throw</span> error;</span><br><span class="line">    </span><br><span class="line">      <span class="keyword">let</span> $ = cheerio.load(body);</span><br><span class="line">    </span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> krDay = <span class="string">''</span>;</span><br><span class="line">        <span class="keyword">let</span> corner = <span class="string">''</span>;</span><br><span class="line">        <span class="keyword">let</span> menu = <span class="string">''</span>;</span><br><span class="line">    </span><br><span class="line">        $(<span class="string">'table'</span>).find(<span class="string">'tr'</span>).each(<span class="function"><span class="keyword">function</span> (<span class="params">index, elem</span>) </span>&#123;</span><br><span class="line">          <span class="keyword">if</span> (index % <span class="number">6</span> === <span class="number">0</span>) &#123;</span><br><span class="line">            krDay = $(<span class="keyword">this</span>).find(<span class="string">'th'</span>).text().trim();</span><br><span class="line">    </span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;krDay&#125;</span>`</span>);</span><br><span class="line">          &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            corner = $(<span class="keyword">this</span>).find(<span class="string">'th'</span>).text().trim();</span><br><span class="line">            menu = $(<span class="keyword">this</span>).find(<span class="string">'th'</span>).next().text().trim();</span><br><span class="line">    </span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;corner&#125;</span> -&gt; <span class="subst">$&#123;menu&#125;</span>`</span>);</span><br><span class="line">          &#125;</span><br><span class="line">          </span><br><span class="line">          callback(<span class="literal">null</span>);</span><br><span class="line">          context.succeed();</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">        <span class="built_in">console</span>.error(error);</span><br><span class="line">        callback(err);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>6-2) 다음으로 CloudWatch Events에 의해서 실행될 <strong>코드</strong>를 기재해야합니다. 코드를 기재하는 방식은 <strong>직접 작성, .ZIP 파일로 압축, S3를 이용</strong>하는 3가지 방식중 하나로 진행됩니다.<br>만약 작성한 코드가 aws-sdk를 제외한 외부 라이브러리를 사용하고 있다면 <strong>코드와 함께 라이브러리 파일(node_modules)을 압축</strong>하여 .ZIP 파일을 업로드 해야합니다.</p>
+<p>6-3) 기존에 작성했던 코드에서 수정이 필요합니다. Lambda function의 코드가 에러없이 잘 완료되었는지 <strong>callback</strong>을 통해 결과를 반환해야합니다. <a href="http://localhost:4000/2017/05/26/Emily/4-crawling/" target="_blank" rel="noopener">지난번에 작성했던 코드</a>는 다음과 같이 수정됩니다. (예시를 들기위해 간단하게 작성했을 뿐, 실제 DB에 Insert 하는 부분은 생략되어 있습니다.)<br>29, 30번째 줄과, 34번째 줄에 추가된 코드에 주의하셔야 합니다.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">exports.handler = <span class="function">(<span class="params">event, context, callback</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> request = <span class="built_in">require</span>(<span class="string">'request'</span>);</span><br><span class="line">    <span class="keyword">const</span> cheerio = <span class="built_in">require</span>(<span class="string">'cheerio'</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">const</span> url = <span class="string">"http://www.inu.ac.kr/com/cop/mainWork/foodList1.do?siteId=inu&amp;id=inu_050110010000&amp;command=week"</span>;</span><br><span class="line">    </span><br><span class="line">    request(url, (error, response, body) =&gt; &#123;</span><br><span class="line">      <span class="keyword">if</span> (error) <span class="keyword">throw</span> error;</span><br><span class="line">    </span><br><span class="line">      <span class="keyword">let</span> $ = cheerio.load(body);</span><br><span class="line">    </span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> krDay = <span class="string">''</span>;</span><br><span class="line">        <span class="keyword">let</span> corner = <span class="string">''</span>;</span><br><span class="line">        <span class="keyword">let</span> menu = <span class="string">''</span>;</span><br><span class="line">    </span><br><span class="line">        $(<span class="string">'table'</span>).find(<span class="string">'tr'</span>).each(<span class="function"><span class="keyword">function</span> (<span class="params">index, elem</span>) </span>&#123;</span><br><span class="line">          <span class="keyword">if</span> (index % <span class="number">6</span> === <span class="number">0</span>) &#123;</span><br><span class="line">            krDay = $(<span class="keyword">this</span>).find(<span class="string">'th'</span>).text().trim();</span><br><span class="line">    </span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;krDay&#125;</span>`</span>);</span><br><span class="line">          &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            corner = $(<span class="keyword">this</span>).find(<span class="string">'th'</span>).text().trim();</span><br><span class="line">            menu = $(<span class="keyword">this</span>).find(<span class="string">'th'</span>).next().text().trim();</span><br><span class="line">    </span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;corner&#125;</span> -&gt; <span class="subst">$&#123;menu&#125;</span>`</span>);</span><br><span class="line">          &#125;</span><br><span class="line">          </span><br><span class="line">          callback(<span class="literal">null</span>);</span><br><span class="line">          context.succeed();</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">        <span class="built_in">console</span>.error(error);</span><br><span class="line">        callback(err);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p><img src="/images/post/2017-05-28/lambda_6_1.png" alt="Lambda Function 생성하기 - 6"></p>
 <p>6_4) 필요에 따라 환경변수(Environment variables)와 Advanced settings를 작성한 후 <strong>Role</strong>을 작성하고 다음단계로 넘어갑니다. (Handler에 index.handler 라고 작성했기 때문에 .ZIP파일로 압축할때 소스코드(.js)의 파일명은 index가 되어야 합니다)</p>
 <p><img src="/images/post/2017-05-28/lambda_6_2.png" alt="Lambda Function 생성하기 - 6"></p>
-<ol start="7">
-<li>지금까지 설정한 옵션을 확인하고 최종적으로 function을 생성합니다.</li>
-</ol>
+<p>7) 지금까지 설정한 옵션을 확인하고 최종적으로 function을 생성합니다.</p>
 <p><img src="/images/post/2017-05-28/lambda_7.png" alt="Lambda Function 생성하기 - 7"></p>
-<ol start="8">
-<li>생성된 Lambda Function을 <strong>테스트</strong>할 수 있습니다. Actions -&gt; Configure test event를 통해 테스트를 위한 이벤트를 설정합니다. trigger(Event)로 CloudWatch Events - Schedule를 설정했기 때문에 event template 목록 중 <strong>Schedule Event</strong>를 선택합니다.</li>
-</ol>
-<p><img src="/images/post/2017-05-28/lambda_8_1.png" alt="Lambda Function 테스트 - 1">
-<img src="/images/post/2017-05-28/lambda_8_2.png" alt="Lambda Function 테스트 - 2"></p>
-<ol start="9">
-<li>테스트 후 CloudWatch의 <strong>로그</strong>를 통해서 lambda function 코드에서 출력했던 로그 및 실행결과를 확인할 수 있습니다.</li>
-</ol>
-<p><img src="/images/post/2017-05-28/lambda_9_1.png" alt="Lambda Function 로그 확인 - 1">
-<img src="/images/post/2017-05-28/lambda_9_2.png" alt="Lambda Function 로그 확인 - 2"></p>
+<p>8) 생성된 Lambda Function을 <strong>테스트</strong>할 수 있습니다. Actions -&gt; Configure test event를 통해 테스트를 위한 이벤트를 설정합니다. trigger(Event)로 CloudWatch Events - Schedule를 설정했기 때문에 event template 목록 중 <strong>Schedule Event</strong>를 선택합니다.</p>
+<p><img src="/images/post/2017-05-28/lambda_8_1.png" alt="Lambda Function 테스트 - 1"><br><img src="/images/post/2017-05-28/lambda_8_2.png" alt="Lambda Function 테스트 - 2"></p>
+<p>9) 테스트 후 CloudWatch의 <strong>로그</strong>를 통해서 lambda function 코드에서 출력했던 로그 및 실행결과를 확인할 수 있습니다.</p>
+<p><img src="/images/post/2017-05-28/lambda_9_1.png" alt="Lambda Function 로그 확인 - 1"><br><img src="/images/post/2017-05-28/lambda_9_2.png" alt="Lambda Function 로그 확인 - 2"></p>
 <hr>
-<p>&lt;span id='3'&gt;</p>
-<h2 id="정리하며">정리하며</h2>
-<p>지금까지 진행한 작업은 다음의 이미지 한장으로 정리가 가능합니다. 이번기회에 lambda를 처음 사용해봤지만 앞으로 개인프로젝트에도 실무에서도 자주 사용하게될 것 같습니다.</p>
+<p><span id="3"></span></p>
+<h2 id="정리하며"><a href="#정리하며" class="headerlink" title="정리하며"></a>정리하며</h2><p>지금까지 진행한 작업은 다음의 이미지 한장으로 정리가 가능합니다. 이번기회에 lambda를 처음 사용해봤지만 앞으로 개인프로젝트에도 실무에서도 자주 사용하게될 것 같습니다.</p>
 <p><img src="/images/post/2017-05-28/cloudwatch_lambda.png" alt="AWS의 CloudWatch와 Lambda"></p>
 
                 
@@ -369,11 +342,11 @@ Schedule expression에 작성한 Cron 식에 따라 Event가 발생하는 시간
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
+                          <a class="tag" href="/tags/#AWS" title="AWS">AWS</a>
+                        
                           <a class="tag" href="/tags/#Emily" title="Emily">Emily</a>
                         
                           <a class="tag" href="/tags/#bot" title="bot">bot</a>
-                        
-                          <a class="tag" href="/tags/#AWS" title="AWS">AWS</a>
                         
                           <a class="tag" href="/tags/#lambda" title="lambda">lambda</a>
                         

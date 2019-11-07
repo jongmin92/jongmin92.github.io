@@ -143,14 +143,14 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -227,57 +227,49 @@
                 post-container">
 
                 <p><strong>build script의 <code>dependencies</code> 블록에 여러 가지 다양한 종속성 구성(api, implementation, compileOnly, runtimeOnly, annotationProcessor)을 사용하여 라이브러리 종속성을 선언할 수 있습니다.</strong> 다양한 종속성 구성 중 api와 implementation의 차이에 대해서 알아봅니다.</p>
-<h1 id="api-amp-implementation">api &amp; implementation</h1>
-<p><a href="https://docs.gradle.org/current/userguide/dependency_management_for_java_projects.html#sec:configurations_java_tutorial" target="_blank" rel="noopener">Gradle document</a>에서는 api와 implementation에 대해서 다음과 같이 설명하고 있습니다.</p>
+<h1 id="api-amp-implementation"><a href="#api-amp-implementation" class="headerlink" title="api &amp; implementation"></a>api &amp; implementation</h1><p><a href="https://docs.gradle.org/current/userguide/dependency_management_for_java_projects.html#sec:configurations_java_tutorial" target="_blank" rel="noopener">Gradle document</a>에서는 api와 implementation에 대해서 다음과 같이 설명하고 있습니다.</p>
 <ul>
-<li><strong>api</strong></li>
-</ul>
-<blockquote>
+<li><strong>api</strong><blockquote>
 <p><strong>The dependencies required to compile the production source of the project which are part of the API exposed by the project.</strong> For example the project uses Guava and exposes public interfaces with Guava classes in their method signatures.</p>
 <p><strong>프로젝트에 의해 노출 된 API의 일부인 프로젝트의 프로덕션 소스를 컴파일하는 데 필요한 종속성</strong></p>
 </blockquote>
-<ul>
-<li><strong>implementation</strong></li>
-</ul>
-<blockquote>
+</li>
+<li><strong>implementation</strong><blockquote>
 <p><strong>The dependencies required to compile the production source of the project which are not part of the API exposed by the project.</strong> For example the project uses Hibernate for its internal persistence layer implementation.</p>
 <p><strong>프로젝트에 의해 노출 된 API의 일부가 아닌 프로젝트의 프로덕션 소스를 컴파일하는 데 필요한 종속성</strong></p>
 </blockquote>
+</li>
+</ul>
 <p>위 설명만 가지고는 이해하기가 쉽지 않습니다. <a href="https://developer.android.com/studio/build/dependencies?utm_source=android-studio#dependency_configurations" target="_blank" rel="noopener">Android Developers document</a>에서는 같은 내용을 다음과 같이 한글로 설명하고 있습니다.</p>
 <ul>
-<li><strong>api</strong></li>
-</ul>
-<blockquote>
+<li><strong>api</strong><blockquote>
 <p>Gradle은 컴파일 클래스 경로 및 빌드 출력에 종속성을 추가합니다. <strong>모듈에 api 종속성을 포함하면 다른 모듈에 그 종속성을 과도적으로 내보내기를 원하며 따라서 런타임과 컴파일 시 모두 종속성을 사용할 수 있다는 사실을 Gradle에 알려줄 수 있습니다.</strong></p>
 <p>이 구성은 compile(현재 지원 중단됨)과 똑같이 동작합니다. 다만 이것은 주의해서 사용해야 하며 다른 업스트림 소비자에게 일시적으로 내보내는 종속성만 함께 사용해야 합니다. 그 이유는 api 종속성이 외부 API를 변경하면 Gradle이 컴파일 시 해당 종속성에 액세스할 권한이 있는 모듈을 모두 다시 컴파일하기 때문입니다. 그러므로 api 종속성이 많이 있으면 빌드 시간이 상당히 증가합니다. 종속성의 API를 별도의 모듈에 노출시키고 싶은 것이 아니라면 라이브러리 모듈은 implementation 종속성을 대신 사용해야 합니다.</p>
 </blockquote>
-<ul>
-<li><strong>implementation</strong></li>
-</ul>
-<blockquote>
+</li>
+<li><strong>implementation</strong><blockquote>
 <p>Gradle은 종속성을 컴파일 클래스 경로에 추가하여 종속성을 빌드 출력에 패키징합니다. 다만 <strong>모듈이 implementation 종속성을 구성하는 경우, 이것은 Gradle에 개발자가 모듈이 컴파일 시 다른 모듈로 유출되는 것을 원치 않는다는 것을 알려줍니다. 즉, 종속성은 런타임 시 다른 모듈에서만 이용할 수 있습니다.</strong></p>
 <p>api 또는 compile(지원 중단됨) 대신 이 종속성 구성을 사용하면 빌드 시스템이 재컴파일해야 하는 모듈의 수가 줄어들기 때문에 빌드 시간이 상당히 개선될 수 있습니다. 예를 들어, implementation 종속성이 API를 변경하면 Gradle은 해당 종속성과 그 종속성에 직접 연결된 모듈만 다시 컴파일합니다. 대부분의 앱과 테스트 모듈은 이 구성을 사용해야 합니다.</p>
 </blockquote>
+</li>
+</ul>
 <p>간단하게 차이점을 정리하면 다음과 같습니다.</p>
 <ul>
-<li><strong>api</strong>: 의존 라이브러리 수정시 해당 모듈을 의존하고 있는 모듈들 또한 재빌드
-<ul>
+<li><strong>api</strong>: 의존 라이브러리 수정시 해당 모듈을 의존하고 있는 모듈들 또한 재빌드<ul>
 <li>A(api) &lt;- B &lt;- C 일 때, C 에서 A 를 접근할 수 있음</li>
 <li>A 수정시 B 와 C 모두 재빌드</li>
 </ul>
 </li>
-<li><strong>implementaion</strong>: 의존 라이브러리 수정시 본 모듈까지만 재빌드
-<ul>
+<li><strong>implementaion</strong>: 의존 라이브러리 수정시 본 모듈까지만 재빌드<ul>
 <li>A(implementation) &lt;- B &lt;- C 일 때, C 에서 A 를 접근할 수 없음</li>
-<li>A 수정시 B 까지 재빌드</li>
+<li>A 수정시 B 까지 재빌드 </li>
 </ul>
 </li>
 </ul>
-<h1 id="참고">참고</h1>
-<ul>
-<li>https://stackoverflow.com/a/44419574</li>
-<li>https://medium.com/mindorks/implementation-vs-api-in-gradle-3-0-494c817a6fa</li>
-<li>https://www.youtube.com/watch?v=7ll-rkLCtyk&amp;feature=youtu.be&amp;t=29m35s</li>
+<h1 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h1><ul>
+<li><a href="https://stackoverflow.com/a/44419574" target="_blank" rel="noopener">https://stackoverflow.com/a/44419574</a></li>
+<li><a href="https://medium.com/mindorks/implementation-vs-api-in-gradle-3-0-494c817a6fa" target="_blank" rel="noopener">https://medium.com/mindorks/implementation-vs-api-in-gradle-3-0-494c817a6fa</a></li>
+<li><a href="https://www.youtube.com/watch?v=7ll-rkLCtyk&amp;feature=youtu.be&amp;t=29m35s" target="_blank" rel="noopener">https://www.youtube.com/watch?v=7ll-rkLCtyk&amp;feature=youtu.be&amp;t=29m35s</a></li>
 </ul>
 
                 
