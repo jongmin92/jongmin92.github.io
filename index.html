@@ -132,6 +132,13 @@
 
                         
                         <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -140,13 +147,6 @@
                         
                         <li>
                             <a href="/about/">About</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -222,6 +222,41 @@
 
 <div class="post-preview">
 
+    <a href="/2019/11/13/Database/mysql-replication/">
+        <h2 class="post-title">
+            MySQL - Replication
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            Database Replication
+여러 대의 DB 서버가 있을 때 각각의 DB 서버가 동일한 데이터를 유지하도록 하는 메커니즘 혹은 기법을 말한다.
+Replication(리플리케이션)을 이용해서 백업과 부하분산같은 목적을 달성할 수 있다.
+master 서버에 데이터가 기록(쓰기)되고, slave 서버들은 master에 기록된 데이터를 전파받으며 보......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by KimJongMin on
+            2019-11-13
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#MySQL" title="MySQL">MySQL</a>
+            
+              <a href="/tags/#Replication" title="Replication">Replication</a>
+            
+              <a href="/tags/#MMM" title="MMM">MMM</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2019/11/10/Java/reactive-3/">
         <h2 class="post-title">
             Reactive Streams (3)
@@ -230,10 +265,10 @@
             publishOn, subscribeOn
         </h3>
         <div class="post-content-preview">
-            “Reactive Streams란 non-blocking과 back pressure를 이용한 asynchronous 스트림 처리의 표준이다.” 라고 지난 글에서 이야기 했다.
+            &quot;Reactive Streams란 non-blocking과 back pressure를 이용한 asynchronous 스트림 처리의 표준이다.&quot; 라고 지난 글에서 이야기 했다.
 이번에는 asynchronous(비동기 처리)에 대해서 이야기해보자.
 먼저 아래 간단한 코드를 실행해보자.
-123456789101112131415161718192021222324......
+12345678910111213141516171819......
         </div>
     </a>
     
@@ -296,9 +331,10 @@ Operator라 함은 Stream의 map연산 처럼 Publisher가 제공하는 data를 
             Observable & Observer와 Publisher & Subscriber의 차이
         </h3>
         <div class="post-content-preview">
-            Reactive Streams 란?reactive-streams.org 에서는 Reactive Streams를 다음과 같이 정의하고 있다.
+            Reactive Streams 란?
+reactive-streams.org 에서는 Reactive Streams를 다음과 같이 정의하고 있다.
 
-Reactive Streams is an initiative to provide a standard for asynchronous stream processing with non-blocking back pres......
+Reactive Streams is an initiative to provide a standard for asynchronous stream processing with non-blocking back pre......
         </div>
     </a>
     
@@ -328,7 +364,8 @@ Reactive Streams is an initiative to provide a standard for asynchronous stream 
             
         </h3>
         <div class="post-content-preview">
-            최근 사내에서 Kafka 관련된 설정을 리팩토링하는 작업을 했습니다. SpringBoot를 도입하며 Kafka 설정 관련된 부분들을 SpringBoot의 @ConfigurationProperties를 이용하도록 변경하고, XML 기반의 빈 생성 부분을 Java Config 기반으로 변경했습니다.현재 프로젝트에서는 여러가지 이유로 기존의 Kafka Pr......
+            최근 사내에서 Kafka 관련된 설정을 리팩토링하는 작업을 했습니다. SpringBoot를 도입하며 Kafka 설정 관련된 부분들을 SpringBoot의 @ConfigurationProperties를 이용하도록 변경하고, XML 기반의 빈 생성 부분을 Java Config 기반으로 변경했습니다.
+현재 프로젝트에서는 여러가지 이유로 기존의 Kafka P......
         </div>
     </a>
     
@@ -365,7 +402,8 @@ Reactive Streams is an initiative to provide a standard for asynchronous stream 
         </h3>
         <div class="post-content-preview">
             얼마 전 개발자 생에 처음으로 오픈소스에 컨트리뷰트를 하는 경험을 하였습니다. 이번 포스팅에서는 오픈소스 첫 컨트리뷰트 관련해 이야기 해보려 합니다.
-어떻게 시작하게 되었는가?개발자라면 한 번쯤 오픈소스에 기여하고 컨트리뷰터가 되어보고 싶다는 생각을 가져봅니다. 저 역시 언젠가 한 번쯤… 이라는 생각은 오래 전 부터 갖고 있었지만 막상 실행에 옮기기 ......
+어떻게 시작하게 되었는가?
+개발자라면 한 번쯤 오픈소스에 기여하고 컨트리뷰터가 되어보고 싶다는 생각을 가져봅니다. 저 역시 언젠가 한 번쯤... 이라는 생각은 오래 전 부터 갖고 있었지만 막상 실행에 옮......
         </div>
     </a>
     
@@ -380,35 +418,6 @@ Reactive Streams is an initiative to provide a standard for asynchronous stream 
               <a href="/tags/#Armeria" title="Armeria">Armeria</a>
             
               <a href="/tags/#Open source" title="Open source">Open source</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2019/05/09/Gradle/gradle-api-vs-implementation/">
-        <h2 class="post-title">
-            (Gradle dependency) api와 implementation 차이
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            build script의 dependencies 블록에 여러 가지 다양한 종속성 구성(api, implementation, compileOnly, runtimeOnly, annotationProcessor)을 사용하여 라이브러리 종속성을 선언할 수 있습니다. 다양한 종속성 구성 중 api와 implementation의 차이에 대해서 알아봅니다.
-api......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by KimJongMin on
-            2019-05-09
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Gradle" title="Gradle">Gradle</a>
             
         </div>
     
@@ -498,7 +507,7 @@ api......
 
     <h5>categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><span class="category-list-count">14</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/BOJ/">BOJ</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Concept/">Concept</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Book/">Book</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/">Programming</a><span class="category-list-count">85</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/AWS/">AWS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Gradle/">Gradle</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/HTML/">HTML</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Java/">Java</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/JavaScript/">JavaScript</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Linux-Ubuntu/">Linux & Ubuntu</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Node/">Node</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/RaspberryPi/">RaspberryPi</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/React-Native/">React Native</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Spring/">Spring</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Tool/">Tool</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project/">Project</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project/Emily/">Emily</a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tip/">Tip</a><span class="category-list-count">3</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><span class="category-list-count">14</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/BOJ/">BOJ</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Concept/">Concept</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Book/">Book</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Database/">Database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/">Programming</a><span class="category-list-count">85</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/AWS/">AWS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Gradle/">Gradle</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/HTML/">HTML</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Java/">Java</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/JavaScript/">JavaScript</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Linux-Ubuntu/">Linux & Ubuntu</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Node/">Node</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/RaspberryPi/">RaspberryPi</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/React-Native/">React Native</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Spring/">Spring</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Tool/">Tool</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project/">Project</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project/Emily/">Emily</a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tip/">Tip</a><span class="category-list-count">3</span></li></ul>
     </div>
 
 
@@ -512,23 +521,7 @@ api......
     <div class="tags">
         
             
-            <a href="/tags/#Emily" title="Emily" rel="6">Emily</a>
-            
-        
-            
-            <a href="/tags/#bot" title="bot" rel="6">bot</a>
-            
-        
-            
             <a href="/tags/#AWS" title="AWS" rel="4">AWS</a>
-            
-        
-            
-        
-            
-        
-            
-        
             
         
             
@@ -544,11 +537,15 @@ api......
             
         
             
-        
+            <a href="/tags/#Emily" title="Emily" rel="6">Emily</a>
             
         
             
-            <a href="/tags/#Java" title="Java" rel="15">Java</a>
+            <a href="/tags/#bot" title="bot" rel="6">bot</a>
+            
+        
+            
+        
             
         
             
@@ -566,7 +563,49 @@ api......
             
         
             
+            <a href="/tags/#book" title="book" rel="4">book</a>
+            
+        
+            
+            <a href="/tags/#review" title="review" rel="3">review</a>
+            
+        
+            
+            <a href="/tags/#RaspberryPi" title="RaspberryPi" rel="9">RaspberryPi</a>
+            
+        
+            
+            <a href="/tags/#Java" title="Java" rel="15">Java</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
             <a href="/tags/#design pattern" title="design pattern" rel="2">design pattern</a>
+            
+        
+            
+        
+            
+        
             
         
             
@@ -606,7 +645,9 @@ api......
             
         
             
-            <a href="/tags/#nio" title="nio" rel="2">nio</a>
+        
+            
+        
             
         
             
@@ -614,23 +655,15 @@ api......
             
         
             
+        
+            
+        
+            
             <a href="/tags/#multiplexing" title="multiplexing" rel="3">multiplexing</a>
             
         
             
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
+            <a href="/tags/#nio" title="nio" rel="2">nio</a>
             
         
             
@@ -682,12 +715,6 @@ api......
             
         
             
-            <a href="/tags/#book" title="book" rel="4">book</a>
-            
-        
-            
-            <a href="/tags/#review" title="review" rel="3">review</a>
-            
         
             
         
@@ -695,48 +722,12 @@ api......
         
             
         
-            
-            <a href="/tags/#RaspberryPi" title="RaspberryPi" rel="9">RaspberryPi</a>
-            
-        
-            
-        
-            
-            <a href="/tags/#Node" title="Node" rel="5">Node</a>
-            
-        
-            
-        
-            
-        
-            
-            <a href="/tags/#Module" title="Module" rel="2">Module</a>
             
         
             
         
             
             <a href="/tags/#Android" title="Android" rel="4">Android</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
             
         
             
@@ -772,9 +763,49 @@ api......
             
         
             
+            <a href="/tags/#Node" title="Node" rel="5">Node</a>
+            
+        
+            
+            <a href="/tags/#Module" title="Module" rel="2">Module</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Chrome" title="Chrome" rel="2">Chrome</a>
+            
+        
+            
+            <a href="/tags/#Chrome Extension" title="Chrome Extension" rel="2">Chrome Extension</a>
+            
+        
+            
+            <a href="/tags/#IntelliJ" title="IntelliJ" rel="2">IntelliJ</a>
+            
+        
+            
+        
+            
         
             
             <a href="/tags/#Jasper" title="Jasper" rel="2">Jasper</a>
+            
+        
             
         
             
@@ -820,13 +851,17 @@ api......
             
         
             
-            <a href="/tags/#React Native" title="React Native" rel="4">React Native</a>
+        
+            
+            <a href="/tags/#jenkins" title="jenkins" rel="2">jenkins</a>
             
         
             
-        
+            <a href="/tags/#ci &amp; cd" title="ci &amp; cd" rel="2">ci &amp; cd</a>
             
         
+            
+            <a href="/tags/#build tool" title="build tool" rel="2">build tool</a>
             
         
             
@@ -835,16 +870,6 @@ api......
         
             
             <a href="/tags/#Spring" title="Spring" rel="13">Spring</a>
-            
-        
-            
-            <a href="/tags/#IoC" title="IoC" rel="2">IoC</a>
-            
-        
-            
-            <a href="/tags/#DI" title="DI" rel="2">DI</a>
-            
-        
             
         
             
@@ -868,13 +893,13 @@ api......
             
         
             
-            <a href="/tags/#Toby" title="Toby" rel="7">Toby</a>
+        
+            
+            <a href="/tags/#IoC" title="IoC" rel="2">IoC</a>
             
         
             
-        
-            
-            <a href="/tags/#IntelliJ" title="IntelliJ" rel="2">IntelliJ</a>
+            <a href="/tags/#DI" title="DI" rel="2">DI</a>
             
         
             
@@ -892,7 +917,7 @@ api......
             
         
             
-        
+            <a href="/tags/#Toby" title="Toby" rel="7">Toby</a>
             
         
             
@@ -908,31 +933,23 @@ api......
             
         
             
-            <a href="/tags/#Chrome" title="Chrome" rel="2">Chrome</a>
-            
-        
-            
-            <a href="/tags/#Chrome Extension" title="Chrome Extension" rel="2">Chrome Extension</a>
-            
         
             
         
             
         
             
+            <a href="/tags/#React Native" title="React Native" rel="4">React Native</a>
+            
+        
+            
         
             
         
             
-            <a href="/tags/#jenkins" title="jenkins" rel="2">jenkins</a>
-            
         
             
-            <a href="/tags/#ci &amp; cd" title="ci &amp; cd" rel="2">ci &amp; cd</a>
-            
         
-            
-            <a href="/tags/#build tool" title="build tool" rel="2">build tool</a>
             
         
             
@@ -948,15 +965,13 @@ api......
             
         
             
+        
+            
+        
+            
+        
+            
             <a href="/tags/#Heap sort" title="Heap sort" rel="3">Heap sort</a>
-            
-        
-            
-        
-            
-        
-            
-        
             
         
             

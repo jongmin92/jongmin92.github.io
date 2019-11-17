@@ -132,6 +132,13 @@
 
                         
                         <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -140,13 +147,6 @@
                         
                         <li>
                             <a href="/about/">About</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -222,6 +222,45 @@
 
 <div class="post-preview">
 
+    <a href="/2018/04/01/Spring/toby-3/">
+        <h2 class="post-title">
+            토비의 스프링 3장 (템플릿)
+        </h2>
+        <h3 class="post-subtitle">
+            변하는 것과 변하지 않는 것, 컨텍스트와 DI, 템플릿과 콜백
+        </h3>
+        <div class="post-content-preview">
+            템플릿
+
+개방 폐쇄 원칙 (OCP)
+어떤 부분은 변경을 통해 그 기능이 다양해지고 확장하려는 성질이 있고, 어떤 부분은 고정되어 있고 변하지 않으려는 성질이 있다. 변화의 특성이 다른 부분을 구분해주고, 각각 다른 목적과 다른 이유에 의해 다른 시점에 독립적으로 변경될 수 있는 효율적인 구조를 만들어주는 것이 개방 폐쇄 원칙이다.
+
+템플릿이란 성질이 ......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by KimJongMin on
+            2018-04-01
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Spring" title="Spring">Spring</a>
+            
+              <a href="/tags/#Toby" title="Toby">Toby</a>
+            
+              <a href="/tags/#Context &amp; DI" title="Context &amp; DI">Context &amp; DI</a>
+            
+              <a href="/tags/#Template &amp; Callback" title="Template &amp; Callback">Template &amp; Callback</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2018/03/31/Git/pull-request-merge/">
         <h2 class="post-title">
             PR(Pull Request) merge
@@ -230,7 +269,8 @@
             PR(Pull Request) merge와 사용할 수 있는 옵션 3가지에 대해 알아보자.
         </h3>
         <div class="post-content-preview">
-            PR(Pull Request) merge보통 upstream의 repository를 fork한 후, origin에서 feature branch를 만들어 작업한 후 작업이 완료되면 upstream branch에 반영하기 위해 pull request를 요청해 merge 합니다. (upstream repository에 push 권한이 있는 사람이 merge......
+            PR(Pull Request) merge
+보통 upstream의 repository를 fork한 후, origin에서 feature branch를 만들어 작업한 후 작업이 완료되면 upstream branch에 반영하기 위해 pull request를 요청해 merge 합니다. (upstream repository에 push 권한이 있는 사람이 merg......
         </div>
     </a>
     
@@ -266,8 +306,9 @@
             less +F의 사용법에 대해 알아보고 파일을 실시간으로 모니터링 해보자
         </h3>
         <div class="post-content-preview">
-            Stop using tail -f얼마전 tail -f를사용하며 스크롤 기능을 사용하고 싶어 검색하던 중 less +F를 알게 되었습니다. less +F에 대해 잘 설명한 글이 있어 번역해보려 합니다. 해당 글은 Stop using tail -f (mostly) 에서 볼 수 있습니다.
-파일의 변화를 실시간으로 모니터링하기 위해 여전히 많은 사람들이 ta......
+            Stop using tail -f
+얼마전 tail -f를사용하며 스크롤 기능을 사용하고 싶어 검색하던 중 less +F를 알게 되었습니다. less +F에 대해 잘 설명한 글이 있어 번역해보려 합니다. 해당 글은 Stop using tail -f (mostly) 에서 볼 수 있습니다.
+파일의 변화를 실시간으로 모니터링하기 위해 여전히 많은 사람들이 t......
         </div>
     </a>
     
@@ -301,8 +342,9 @@
             테스팅 프레임워크 JUnit, 스프링 테스트 적용
         </h3>
         <div class="post-content-preview">
-            테스트스프링이 개발자에게 제공하는 가장 중요한 가치는 객체지향과 테스트이다.
-테스트란 내가 예상하고 의도했던 대로 코드가 정확히 동작하는지를 확인해서, 만든 코드를 확신할 수 있게 해주는 작업이다. 또한 테스트의 결과가 원하는 대로 나오지 않는 경우에는 코드나 설계에 결함이 있음을 알수 있다. 이를 통해 코드의 결함을 제거해가는 작업, 디버깅을 거치게......
+            테스트
+스프링이 개발자에게 제공하는 가장 중요한 가치는 객체지향과 테스트이다.
+테스트란 내가 예상하고 의도했던 대로 코드가 정확히 동작하는지를 확인해서, 만든 코드를 확신할 수 있게 해주는 작업이다. 또한 테스트의 결과가 원하는 대로 나오지 않는 경우에는 코드나 설계에 결함이 있음을 알수 있다. 이를 통해 코드의 결함을 제거해가는 작업, 디버깅을 거치......
         </div>
     </a>
     
@@ -336,8 +378,9 @@
             제어의 역전(IoC), 싱글톤 레지스트리와 오브젝트 스코프, 의존관계 주입(DI)
         </h3>
         <div class="post-content-preview">
-            스프링스프링은 자바 엔터프라이즈 애플리케이션 개발에 사용되는 프레임워크다. 애플리케이션 프레임워크는 애플리케이션 개발을 빠르고 효율적으로 할 수 있도록 애플리케이션의 바탕이 되는 틀과 공통 프로 그래밍 모델, 기술 API 등을 제공해준다.
-스프링은 스프링 컨테이너 또는 애플리케이션 컨텍스트라고 불리는 스프링 런타임 엔진을 제공한다. 스프링 컨테이너는 ......
+            스프링
+스프링은 자바 엔터프라이즈 애플리케이션 개발에 사용되는 프레임워크다. 애플리케이션 프레임워크는 애플리케이션 개발을 빠르고 효율적으로 할 수 있도록 애플리케이션의 바탕이 되는 틀과 공통 프로 그래밍 모델, 기술 API 등을 제공해준다.
+스프링은 스프링 컨테이너 또는 애플리케이션 컨텍스트라고 불리는 스프링 런타임 엔진을 제공한다. 스프링 컨테이너는......
         </div>
     </a>
     
@@ -371,8 +414,9 @@
             스프링 MVC의 동작 방식에 대해 알아보자.
         </h3>
         <div class="post-content-preview">
-            DispatcherServlet 이란?Spring MVC는 DispatcherServlet의 등장으로 web.xml의 역할이 축소되었습니다. 이전에는 서블릿을 URL로 활용하기 위해서는 반드시 web.xml에 등록해야 했지만, 이제는 DispatcherServlet이 해당 어플리케이션으로 들어오는 요청을 모두 핸들링 해주기 때문입니다.
-web.xml의......
+            DispatcherServlet 이란?
+Spring MVC는 DispatcherServlet의 등장으로 web.xml의 역할이 축소되었습니다. 이전에는 서블릿을 URL로 활용하기 위해서는 반드시 web.xml에 등록해야 했지만, 이제는 DispatcherServlet이 해당 어플리케이션으로 들어오는 요청을 모두 핸들링 해주기 때문입니다.
+web.xml......
         </div>
     </a>
     
@@ -391,39 +435,6 @@ web.xml의......
               <a href="/tags/#HandlerMapping" title="HandlerMapping">HandlerMapping</a>
             
               <a href="/tags/#ViewResolver" title="ViewResolver">ViewResolver</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2018/03/02/Spring/spring-requestbody-responsebody/">
-        <h2 class="post-title">
-            Spring - RequestBody & ResponseBody
-        </h2>
-        <h3 class="post-subtitle">
-            RequestBody와 ResponseBody에 대해 알아보자.
-        </h3>
-        <div class="post-content-preview">
-            웹 서비스와 RESTful한 방식이 시스템을 구성하는 주요 요소로 자리 잡으면서 웹 시스템간에 XML이나 JSON 등의 형식으로 데이터를 주고 받는 경우가 증가했습니다.
-이에 따라 스프링 MVC도 클라이언트에서 전송한 XML 데이터나 JSON 또는 기타 데이터를 컨트롤러에서 DOM 객체나 자바 객체로 변환해서 받을 수있는 기능(수신)을 제공하고 있으며......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by KimJongMin on
-            2018-03-02
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Spring" title="Spring">Spring</a>
-            
-              <a href="/tags/#RequestBody" title="RequestBody">RequestBody</a>
-            
-              <a href="/tags/#ResponseBody" title="ResponseBody">ResponseBody</a>
             
         </div>
     
@@ -517,7 +528,7 @@ web.xml의......
 
     <h5>categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><span class="category-list-count">14</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/BOJ/">BOJ</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Concept/">Concept</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Book/">Book</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/">Programming</a><span class="category-list-count">85</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/AWS/">AWS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Gradle/">Gradle</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/HTML/">HTML</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Java/">Java</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/JavaScript/">JavaScript</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Linux-Ubuntu/">Linux & Ubuntu</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Node/">Node</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/RaspberryPi/">RaspberryPi</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/React-Native/">React Native</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Spring/">Spring</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Tool/">Tool</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project/">Project</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project/Emily/">Emily</a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tip/">Tip</a><span class="category-list-count">3</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><span class="category-list-count">14</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/BOJ/">BOJ</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Concept/">Concept</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Book/">Book</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Database/">Database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/">Programming</a><span class="category-list-count">85</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/AWS/">AWS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Gradle/">Gradle</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/HTML/">HTML</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Java/">Java</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/JavaScript/">JavaScript</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Linux-Ubuntu/">Linux & Ubuntu</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Node/">Node</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/RaspberryPi/">RaspberryPi</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/React-Native/">React Native</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Spring/">Spring</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Tool/">Tool</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project/">Project</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project/Emily/">Emily</a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tip/">Tip</a><span class="category-list-count">3</span></li></ul>
     </div>
 
 
@@ -531,23 +542,7 @@ web.xml의......
     <div class="tags">
         
             
-            <a href="/tags/#Emily" title="Emily" rel="6">Emily</a>
-            
-        
-            
-            <a href="/tags/#bot" title="bot" rel="6">bot</a>
-            
-        
-            
             <a href="/tags/#AWS" title="AWS" rel="4">AWS</a>
-            
-        
-            
-        
-            
-        
-            
-        
             
         
             
@@ -563,11 +558,15 @@ web.xml의......
             
         
             
-        
+            <a href="/tags/#Emily" title="Emily" rel="6">Emily</a>
             
         
             
-            <a href="/tags/#Java" title="Java" rel="15">Java</a>
+            <a href="/tags/#bot" title="bot" rel="6">bot</a>
+            
+        
+            
+        
             
         
             
@@ -585,7 +584,49 @@ web.xml의......
             
         
             
+            <a href="/tags/#book" title="book" rel="4">book</a>
+            
+        
+            
+            <a href="/tags/#review" title="review" rel="3">review</a>
+            
+        
+            
+            <a href="/tags/#RaspberryPi" title="RaspberryPi" rel="9">RaspberryPi</a>
+            
+        
+            
+            <a href="/tags/#Java" title="Java" rel="15">Java</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
             <a href="/tags/#design pattern" title="design pattern" rel="2">design pattern</a>
+            
+        
+            
+        
+            
+        
             
         
             
@@ -625,7 +666,9 @@ web.xml의......
             
         
             
-            <a href="/tags/#nio" title="nio" rel="2">nio</a>
+        
+            
+        
             
         
             
@@ -633,23 +676,15 @@ web.xml의......
             
         
             
+        
+            
+        
+            
             <a href="/tags/#multiplexing" title="multiplexing" rel="3">multiplexing</a>
             
         
             
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
+            <a href="/tags/#nio" title="nio" rel="2">nio</a>
             
         
             
@@ -701,12 +736,6 @@ web.xml의......
             
         
             
-            <a href="/tags/#book" title="book" rel="4">book</a>
-            
-        
-            
-            <a href="/tags/#review" title="review" rel="3">review</a>
-            
         
             
         
@@ -714,48 +743,12 @@ web.xml의......
         
             
         
-            
-            <a href="/tags/#RaspberryPi" title="RaspberryPi" rel="9">RaspberryPi</a>
-            
-        
-            
-        
-            
-            <a href="/tags/#Node" title="Node" rel="5">Node</a>
-            
-        
-            
-        
-            
-        
-            
-            <a href="/tags/#Module" title="Module" rel="2">Module</a>
             
         
             
         
             
             <a href="/tags/#Android" title="Android" rel="4">Android</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
             
         
             
@@ -791,9 +784,49 @@ web.xml의......
             
         
             
+            <a href="/tags/#Node" title="Node" rel="5">Node</a>
+            
+        
+            
+            <a href="/tags/#Module" title="Module" rel="2">Module</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Chrome" title="Chrome" rel="2">Chrome</a>
+            
+        
+            
+            <a href="/tags/#Chrome Extension" title="Chrome Extension" rel="2">Chrome Extension</a>
+            
+        
+            
+            <a href="/tags/#IntelliJ" title="IntelliJ" rel="2">IntelliJ</a>
+            
+        
+            
+        
+            
         
             
             <a href="/tags/#Jasper" title="Jasper" rel="2">Jasper</a>
+            
+        
             
         
             
@@ -839,13 +872,17 @@ web.xml의......
             
         
             
-            <a href="/tags/#React Native" title="React Native" rel="4">React Native</a>
+        
+            
+            <a href="/tags/#jenkins" title="jenkins" rel="2">jenkins</a>
             
         
             
-        
+            <a href="/tags/#ci &amp; cd" title="ci &amp; cd" rel="2">ci &amp; cd</a>
             
         
+            
+            <a href="/tags/#build tool" title="build tool" rel="2">build tool</a>
             
         
             
@@ -854,16 +891,6 @@ web.xml의......
         
             
             <a href="/tags/#Spring" title="Spring" rel="13">Spring</a>
-            
-        
-            
-            <a href="/tags/#IoC" title="IoC" rel="2">IoC</a>
-            
-        
-            
-            <a href="/tags/#DI" title="DI" rel="2">DI</a>
-            
-        
             
         
             
@@ -887,13 +914,13 @@ web.xml의......
             
         
             
-            <a href="/tags/#Toby" title="Toby" rel="7">Toby</a>
+        
+            
+            <a href="/tags/#IoC" title="IoC" rel="2">IoC</a>
             
         
             
-        
-            
-            <a href="/tags/#IntelliJ" title="IntelliJ" rel="2">IntelliJ</a>
+            <a href="/tags/#DI" title="DI" rel="2">DI</a>
             
         
             
@@ -911,7 +938,7 @@ web.xml의......
             
         
             
-        
+            <a href="/tags/#Toby" title="Toby" rel="7">Toby</a>
             
         
             
@@ -927,31 +954,23 @@ web.xml의......
             
         
             
-            <a href="/tags/#Chrome" title="Chrome" rel="2">Chrome</a>
-            
-        
-            
-            <a href="/tags/#Chrome Extension" title="Chrome Extension" rel="2">Chrome Extension</a>
-            
         
             
         
             
         
             
+            <a href="/tags/#React Native" title="React Native" rel="4">React Native</a>
+            
+        
+            
         
             
         
             
-            <a href="/tags/#jenkins" title="jenkins" rel="2">jenkins</a>
-            
         
             
-            <a href="/tags/#ci &amp; cd" title="ci &amp; cd" rel="2">ci &amp; cd</a>
-            
         
-            
-            <a href="/tags/#build tool" title="build tool" rel="2">build tool</a>
             
         
             
@@ -967,15 +986,13 @@ web.xml의......
             
         
             
+        
+            
+        
+            
+        
+            
             <a href="/tags/#Heap sort" title="Heap sort" rel="3">Heap sort</a>
-            
-        
-            
-        
-            
-        
-            
-        
             
         
             

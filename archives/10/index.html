@@ -132,6 +132,13 @@
 
                         
                         <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -140,13 +147,6 @@
                         
                         <li>
                             <a href="/about/">About</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -222,6 +222,41 @@
 
 <div class="post-preview">
 
+    <a href="/2017/11/07/Algorithm/Concept/quick-sort/">
+        <h2 class="post-title">
+            퀵 정렬 (Quick sort)
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            분할정복법과 퀵 정렬 (Quick sort)
+퀵 정렬은 합병 정렬과 마찬가지로 분할정복법을 사용하지만 그 방법에 있어서 차이가 있습니다.
+퀵 정렬에서는 정렬할 데이터가 주어지면 하나의 값을 기준값(pivot)으로 사용하여 정렬을 합니다. 어떤 값을 기준값으로 설정하는지가 퀵정렬의 성능을 좌우합니다.
+분할정복법 3단계를 바탕으로 퀵정렬의 과정을 알아보겠......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by KimJongMin on
+            2017-11-07
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Algorithm" title="Algorithm">Algorithm</a>
+            
+              <a href="/tags/#Sort" title="Sort">Sort</a>
+            
+              <a href="/tags/#Quick sort" title="Quick sort">Quick sort</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2017/11/06/Algorithm/Concept/merge-sort/">
         <h2 class="post-title">
             합병 정렬 (Merge sort)
@@ -230,11 +265,12 @@
             
         </h3>
         <div class="post-content-preview">
-            분할정복법과 합병 정렬 (Merge sort)합병 정렬은 앞서 알아본 선택, 삽입, 버블 정렬과는 다르게 분할정복법이라는 개념을 사용합니다.
-분할정복법(Divide-And-Conquer)이라는 것은 주어진 문제를 다음과 같은 3단계의 절차를 통해 해결하는 방법입니다.
+            분할정복법과 합병 정렬 (Merge sort)
+합병 정렬은 앞서 알아본 선택, 삽입, 버블 정렬과는 다르게 분할정복법이라는 개념을 사용합니다.
+**분할정복법(Divide-And-Conquer)**이라는 것은 주어진 문제를 다음과 같은 3단계의 절차를 통해 해결하는 방법입니다.
 
 분할 : 해결하고자 하는 문제를 작은 크기의 동일한 문제들로 분할한다.
-정복 : 각......
+정......
         </div>
     </a>
     
@@ -267,9 +303,11 @@
         </h3>
         <div class="post-content-preview">
             정렬 알고리즘 종류와 특징
-선택 정렬선택 정렬은 해당 순서에 원소를 넣을 위치는 이미 정해져 있고, 어떤 원소를 넣을지 선택한다라고 생각하면 이해하기 쉽습니다.
 
-현재 위의 예시에서는 각 순서마다 정렬되지 않은 범위에서 가장 큰 원소를 찾아 맨 마지막 값의 자리와 변경합니다. 가장 큰값을 찾아 맨 오른쪽 원소와 변경해 오름차순으로 정렬했지만, 매 순서......
+선택 정렬
+선택 정렬은 해당 순서에 원소를 넣을 위치는 이미 정해져 있고, 어떤 원소를 넣을지 선택한다라고 생각하면 이해하기 쉽습니다.
+
+현재 위의 예시에서는 각 순서마다 정렬되지 않은 범위에서 가장 큰 원소를 찾아 맨 마지막 값의 자리와 변경합니다. 가장 큰값을 찾아 맨 오른쪽 원소와 변경해 오름차순으로 정렬했지만, 매 ......
         </div>
     </a>
     
@@ -306,8 +344,10 @@
         </h3>
         <div class="post-content-preview">
             소수(Prime Number)는 약수로 1과 자기 자신만을 가지는 정수입니다. 정수론의 기본 정리에 의해 모든 자연수는 단 하나의 소수들의 곱으로 표현됩니다.
-소수 구하는 알고리즘1. 기본적인 접근소수는 1과 N만을 약수로 가진다. 그럼 2부터 N-1까지의 수로는 나눠져서는 안된다.
-12345678910111213141516171819202122232......
+소수 구하는 알고리즘
+1. 기본적인 접근
+소수는 1과 N만을 약수로 가진다. 그럼 2부터 N-1까지의 수로는 나눠져서는 안된다.
+123456789101112131415161718192021222......
         </div>
     </a>
     
@@ -341,7 +381,8 @@
             
         </h3>
         <div class="post-content-preview">
-            주어진 배열에서 특정한 요소(target) 을 찾아내는 상황을 가정해 봅시다. 가장 쉬운 방법은 각각의 배열 요소와 target 값을 같은지 순차적으로 모두 비교하는 것입니다. 만약 배열의 크기가 n이라고 했을때, 이 알고리즘의 시간복잡도를 Big-O notation을 이용해 나타낸다면 O(n)이 될 것 입니다.그러나 더 효율적이고 빠르게 target......
+            주어진 배열에서 특정한 요소(target) 을 찾아내는 상황을 가정해 봅시다. 가장 쉬운 방법은 각각의 배열 요소와 target 값을 같은지 순차적으로 모두 비교하는 것입니다. 만약 배열의 크기가 n이라고 했을때, 이 알고리즘의 시간복잡도를 Big-O notation을 이용해 나타낸다면 **O(n)**이 될 것 입니다.
+그러나 더 효율적이고 빠르게 t......
         </div>
     </a>
     
@@ -372,46 +413,14 @@
         </h3>
         <div class="post-content-preview">
             문제 : https://www.acmicpc.net/problem/12100
-째로탈출2처럼 코드가 깁니다… 째로탈출2와 마찬가지로 2차원 배열을 조작하는 부분에서 코드가 많이 길어지게 되는데 더 간결하게 만들 수 있도록 연습을 해야할 것 같습니다.구현은 combine_map함수를 통해서 방향에 맞게 같은 숫자를 합쳐주고 move_map함수를 통해 빈공......
+째로탈출2처럼 코드가 깁니다... 째로탈출2와 마찬가지로 2차원 배열을 조작하는 부분에서 코드가 많이 길어지게 되는데 더 간결하게 만들 수 있도록 연습을 해야할 것 같습니다.
+구현은 combine_map함수를 통해서 방향에 맞게 같은 숫자를 합쳐주고 move_map함수를 통해......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by KimJongMin on
             2017-10-12
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Algorithm" title="Algorithm">Algorithm</a>
-            
-              <a href="/tags/#BOJ" title="BOJ">BOJ</a>
-            
-              <a href="/tags/#백준" title="백준">백준</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2017/10/11/Algorithm/boj-13460/">
-        <h2 class="post-title">
-            <13460> 째로탈출 2
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            문제 : https://www.acmicpc.net/problem/13460
-처음 풀이 방향을 잘못 잡고, 풀이시 여러 예외 사향을 잘못 생각하는 바람에 시간이 오래 걸렸습니다.코드가 조금 긴 편입니다… 저는 dfs를 활용해서 풀었습니다. 주의해야 할 사항이 몇가지 있었는데,1. 이미 기울였던 방향과 그 반대방향으로 다시 기울여서는 안된다. (이미 기......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by KimJongMin on
-            2017-10-11
         </p>
         <div class="tags">
             
@@ -513,7 +522,7 @@
 
     <h5>categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><span class="category-list-count">14</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/BOJ/">BOJ</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Concept/">Concept</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Book/">Book</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/">Programming</a><span class="category-list-count">85</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/AWS/">AWS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Gradle/">Gradle</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/HTML/">HTML</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Java/">Java</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/JavaScript/">JavaScript</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Linux-Ubuntu/">Linux & Ubuntu</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Node/">Node</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/RaspberryPi/">RaspberryPi</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/React-Native/">React Native</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Spring/">Spring</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Tool/">Tool</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project/">Project</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project/Emily/">Emily</a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tip/">Tip</a><span class="category-list-count">3</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><span class="category-list-count">14</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/BOJ/">BOJ</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Concept/">Concept</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Book/">Book</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Database/">Database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/">Programming</a><span class="category-list-count">85</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/AWS/">AWS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Gradle/">Gradle</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/HTML/">HTML</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Java/">Java</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/JavaScript/">JavaScript</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Linux-Ubuntu/">Linux & Ubuntu</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Node/">Node</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/RaspberryPi/">RaspberryPi</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/React-Native/">React Native</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Spring/">Spring</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Tool/">Tool</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project/">Project</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project/Emily/">Emily</a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tip/">Tip</a><span class="category-list-count">3</span></li></ul>
     </div>
 
 
@@ -527,23 +536,7 @@
     <div class="tags">
         
             
-            <a href="/tags/#Emily" title="Emily" rel="6">Emily</a>
-            
-        
-            
-            <a href="/tags/#bot" title="bot" rel="6">bot</a>
-            
-        
-            
             <a href="/tags/#AWS" title="AWS" rel="4">AWS</a>
-            
-        
-            
-        
-            
-        
-            
-        
             
         
             
@@ -559,11 +552,15 @@
             
         
             
-        
+            <a href="/tags/#Emily" title="Emily" rel="6">Emily</a>
             
         
             
-            <a href="/tags/#Java" title="Java" rel="15">Java</a>
+            <a href="/tags/#bot" title="bot" rel="6">bot</a>
+            
+        
+            
+        
             
         
             
@@ -581,7 +578,49 @@
             
         
             
+            <a href="/tags/#book" title="book" rel="4">book</a>
+            
+        
+            
+            <a href="/tags/#review" title="review" rel="3">review</a>
+            
+        
+            
+            <a href="/tags/#RaspberryPi" title="RaspberryPi" rel="9">RaspberryPi</a>
+            
+        
+            
+            <a href="/tags/#Java" title="Java" rel="15">Java</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
             <a href="/tags/#design pattern" title="design pattern" rel="2">design pattern</a>
+            
+        
+            
+        
+            
+        
             
         
             
@@ -621,7 +660,9 @@
             
         
             
-            <a href="/tags/#nio" title="nio" rel="2">nio</a>
+        
+            
+        
             
         
             
@@ -629,23 +670,15 @@
             
         
             
+        
+            
+        
+            
             <a href="/tags/#multiplexing" title="multiplexing" rel="3">multiplexing</a>
             
         
             
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
+            <a href="/tags/#nio" title="nio" rel="2">nio</a>
             
         
             
@@ -697,12 +730,6 @@
             
         
             
-            <a href="/tags/#book" title="book" rel="4">book</a>
-            
-        
-            
-            <a href="/tags/#review" title="review" rel="3">review</a>
-            
         
             
         
@@ -710,48 +737,12 @@
         
             
         
-            
-            <a href="/tags/#RaspberryPi" title="RaspberryPi" rel="9">RaspberryPi</a>
-            
-        
-            
-        
-            
-            <a href="/tags/#Node" title="Node" rel="5">Node</a>
-            
-        
-            
-        
-            
-        
-            
-            <a href="/tags/#Module" title="Module" rel="2">Module</a>
             
         
             
         
             
             <a href="/tags/#Android" title="Android" rel="4">Android</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
             
         
             
@@ -787,9 +778,49 @@
             
         
             
+            <a href="/tags/#Node" title="Node" rel="5">Node</a>
+            
+        
+            
+            <a href="/tags/#Module" title="Module" rel="2">Module</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Chrome" title="Chrome" rel="2">Chrome</a>
+            
+        
+            
+            <a href="/tags/#Chrome Extension" title="Chrome Extension" rel="2">Chrome Extension</a>
+            
+        
+            
+            <a href="/tags/#IntelliJ" title="IntelliJ" rel="2">IntelliJ</a>
+            
+        
+            
+        
+            
         
             
             <a href="/tags/#Jasper" title="Jasper" rel="2">Jasper</a>
+            
+        
             
         
             
@@ -835,13 +866,17 @@
             
         
             
-            <a href="/tags/#React Native" title="React Native" rel="4">React Native</a>
+        
+            
+            <a href="/tags/#jenkins" title="jenkins" rel="2">jenkins</a>
             
         
             
-        
+            <a href="/tags/#ci &amp; cd" title="ci &amp; cd" rel="2">ci &amp; cd</a>
             
         
+            
+            <a href="/tags/#build tool" title="build tool" rel="2">build tool</a>
             
         
             
@@ -850,16 +885,6 @@
         
             
             <a href="/tags/#Spring" title="Spring" rel="13">Spring</a>
-            
-        
-            
-            <a href="/tags/#IoC" title="IoC" rel="2">IoC</a>
-            
-        
-            
-            <a href="/tags/#DI" title="DI" rel="2">DI</a>
-            
-        
             
         
             
@@ -883,13 +908,13 @@
             
         
             
-            <a href="/tags/#Toby" title="Toby" rel="7">Toby</a>
+        
+            
+            <a href="/tags/#IoC" title="IoC" rel="2">IoC</a>
             
         
             
-        
-            
-            <a href="/tags/#IntelliJ" title="IntelliJ" rel="2">IntelliJ</a>
+            <a href="/tags/#DI" title="DI" rel="2">DI</a>
             
         
             
@@ -907,7 +932,7 @@
             
         
             
-        
+            <a href="/tags/#Toby" title="Toby" rel="7">Toby</a>
             
         
             
@@ -923,31 +948,23 @@
             
         
             
-            <a href="/tags/#Chrome" title="Chrome" rel="2">Chrome</a>
-            
-        
-            
-            <a href="/tags/#Chrome Extension" title="Chrome Extension" rel="2">Chrome Extension</a>
-            
         
             
         
             
         
             
+            <a href="/tags/#React Native" title="React Native" rel="4">React Native</a>
+            
+        
+            
         
             
         
             
-            <a href="/tags/#jenkins" title="jenkins" rel="2">jenkins</a>
-            
         
             
-            <a href="/tags/#ci &amp; cd" title="ci &amp; cd" rel="2">ci &amp; cd</a>
-            
         
-            
-            <a href="/tags/#build tool" title="build tool" rel="2">build tool</a>
             
         
             
@@ -963,15 +980,13 @@
             
         
             
+        
+            
+        
+            
+        
+            
             <a href="/tags/#Heap sort" title="Heap sort" rel="3">Heap sort</a>
-            
-        
-            
-        
-            
-        
-            
-        
             
         
             

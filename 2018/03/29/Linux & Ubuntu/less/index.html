@@ -149,6 +149,13 @@
 
                         
                         <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -157,13 +164,6 @@
                         
                         <li>
                             <a href="/about/">About</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -232,7 +232,8 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1 id="stop-using-tail-f"><a href="#Stop-using-tail-f" class="headerlink" title="Stop using tail -f"></a>Stop using tail -f</h1><p>얼마전 tail -f를사용하며 스크롤 기능을 사용하고 싶어 검색하던 중 less +F를 알게 되었습니다. less +F에 대해 잘 설명한 글이 있어 번역해보려 합니다. 해당 글은 <a href="https://www.brianstorti.com/stop-using-tail/" target="_blank" rel="noopener">Stop using tail -f (mostly)</a> 에서 볼 수 있습니다.</p>
+                <h1 id="stop-using-tail-f">Stop using tail -f</h1>
+<p>얼마전 tail -f를사용하며 스크롤 기능을 사용하고 싶어 검색하던 중 less +F를 알게 되었습니다. less +F에 대해 잘 설명한 글이 있어 번역해보려 합니다. 해당 글은 <a href="https://www.brianstorti.com/stop-using-tail/" target="_blank" rel="noopener">Stop using tail -f (mostly)</a> 에서 볼 수 있습니다.</p>
 <p>파일의 변화를 실시간으로 모니터링하기 위해 여전히 많은 사람들이 <code>tail -f</code>를 사용하고 있습니다. tail-f 보다 <code>less +F</code> 를 사용하는게 조금 더 나은 방법이 될 수 있습니다.</p>
 <p><code>less</code> documentation에서 <code>+F</code>에 대해 잘 설명하고 있습니다.</p>
 <blockquote>
@@ -241,14 +242,15 @@
 <p><code>tail -f</code> 명령어와 비슷하다고 하는데, 어떤 점에서 더 좋을까요?</p>
 <p>간단하게, less +F를 사용하면 <strong>navigation과 watching 모드 사이를 쉽게 변경할 수 있습니다.</strong> tail -f를 사용하셨던 분들은 아마 file을 실시간으로 모니터링하면서 해당 파일에서 무언가를 검색하거나 위, 아래로 이동하고 싶었던 적이 있을것 입니다. 그럴때마다 tail 명령어를 종료하거나 새로운 shell로 vim을 통해 문제를 해결했을 것입니다. 그러나 less 명령어를 사용하면 더이상 그런 번거로운 수고를 할 필요 없습니다.</p>
 <p><code>production.log</code> 라는 파일을 모니터링한다고 가정해 보겠습니다.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ less +F production.log</span><br><span class="line"></span><br><span class="line">Important</span><br><span class="line"><span class="built_in">log</span></span><br><span class="line">information</span><br><span class="line">here</span><br><span class="line"></span><br><span class="line">Waiting <span class="keyword">for</span> data... (interrupt to abort)</span><br></pre></td></tr></table></figure>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ less +F production.log</span><br><span class="line"></span><br><span class="line">Important</span><br><span class="line"><span class="built_in">log</span></span><br><span class="line">information</span><br><span class="line">here</span><br><span class="line"></span><br><span class="line">Waiting <span class="keyword">for</span> data... (interrupt to abort)</span><br></pre></td></tr></table></figure></p>
 <p>tail 명령어와 결과가 비슷한것 같지만, <code>Ctrl-c</code>를 눌러 <strong>normal</strong> less 모드로 변경할 수 있습니다. +F 플래그 없이 파일을 오픈한 것과 같은 모드입니다. 그 후, normal less 모드에서 사용할 수 있는 기능들을 똑같이 사용할 수 있습니다. <code>/foo</code>를 검색한다던가, 검색 결과를 <code>n</code> 또는 <code>N</code>을 통해 이동할 수 있습니다. 또한 <code>j</code>와 <code>k</code>를 통해 라인을 이동할 수도 있습니다. 추가적으로 <code>m</code>을 통해 마크도 생성할 수 있습니다.</p>
 <p>필요한 작업을 모두 끝내고 나면, <code>F</code>를 눌러 다시 모니터링 모드로 돌아갈 수 있습니다.</p>
-<h1 id="when-not-to-use-less"><a href="#When-not-to-use-less" class="headerlink" title="When not to use less"></a>When not to use less</h1><p>동시에 여러개의 파일을 모니터링 해야하는 경우에는 <code>tail -f</code>가 조금 더 나을 수 있습니다.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ tail -f *.txt</span><br><span class="line"></span><br><span class="line">==&gt; file1.txt &lt;==</span><br><span class="line">content <span class="keyword">for</span> first file</span><br><span class="line"></span><br><span class="line">==&gt; file2.txt &lt;==</span><br><span class="line">content <span class="keyword">for</span> second file</span><br><span class="line"></span><br><span class="line">==&gt; file3.txt &lt;==</span><br><span class="line">content <span class="keyword">for</span> third file</span><br></pre></td></tr></table></figure>
+<h1 id="when-not-to-use-less">When not to use less</h1>
+<p>동시에 여러개의 파일을 모니터링 해야하는 경우에는 <code>tail -f</code>가 조금 더 나을 수 있습니다.</p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ tail -f *.txt</span><br><span class="line"></span><br><span class="line">==&gt; file1.txt &lt;==</span><br><span class="line">content <span class="keyword">for</span> first file</span><br><span class="line"></span><br><span class="line">==&gt; file2.txt &lt;==</span><br><span class="line">content <span class="keyword">for</span> second file</span><br><span class="line"></span><br><span class="line">==&gt; file3.txt &lt;==</span><br><span class="line">content <span class="keyword">for</span> third file</span><br></pre></td></tr></table></figure></p>
 <p>변경이 발생할 때, 파일 이름과 새로운 내용이 보이기 때문에 매우 편리합니다.</p>
 <p>그러나, <code>less</code>의 경우에는 다음처럼 출력됩니다.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ less +F *.txt</span><br><span class="line"></span><br><span class="line">content <span class="keyword">for</span> first file</span><br></pre></td></tr></table></figure>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ less +F *.txt</span><br><span class="line"></span><br><span class="line">content <span class="keyword">for</span> first file</span><br></pre></td></tr></table></figure></p>
 <p>less는 동시에 오직 하나의 파일 내용만 볼 수 있으며, 2번째 파일을 보고 싶을 경우 <code>Ctrl-c</code>로 normal mode로 변환 후 <code>:n</code>을 눌러 다음 buffer로 이동해야 합니다. 그 후 다시 <code>F</code>를 눌러 모니터링 모드로 돌아가면 됩니다.</p>
 <p>필요와 경우에 따라서, <code>less</code>와 <code>tail</code>을 잘 사용하면 조금 더 효율적인 작업을 할 수 있을것 입니다.</p>
 

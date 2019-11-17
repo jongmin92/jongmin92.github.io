@@ -145,6 +145,13 @@
 
                         
                         <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -153,13 +160,6 @@
                         
                         <li>
                             <a href="/about/">About</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -228,7 +228,8 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1 id="젠킨스"><a href="#젠킨스" class="headerlink" title="젠킨스"></a>젠킨스</h1><p><strong><code>젠킨스</code></strong> 는 자바로 작성된 오픈 소스 소트트웨어로 <strong>지속적 통합</strong>(Continuous Integration, <strong>CI</strong>)과 <strong>지속적 배포</strong>(Continuous Delivery, <strong>CD</strong>)를 제공한다.</p>
+                <h1 id="젠킨스">젠킨스</h1>
+<p><strong><code>젠킨스</code></strong> 는 자바로 작성된 오픈 소스 소트트웨어로 <strong>지속적 통합</strong>(Continuous Integration, <strong>CI</strong>)과 <strong>지속적 배포</strong>(Continuous Delivery, <strong>CD</strong>)를 제공한다.</p>
 <p>웹 애플리케이션 형태로 제공되고 있어서 어떠한 환경에서도 손쉽게 설치할 수 있으며 도커를 사용해 설치할 수도 있다. 또한 천 개 이상의 플러그인으로 다양한 시스템과 연동할 수 있다.</p>
 <p>젠킨스의 주요 기능은 다음과 같다.</p>
 <ul>
@@ -245,27 +246,40 @@
 <li>그루비 스크립트를 이용한 자유로운 잡 스케줄링</li>
 </ul>
 <p>젠킨스는 개발자가 소스코드를 추가, 수정한 뒤 형상관리 도구에 저장하면 자동으로 읽어 빌드 및 테스트를 실행한다.</p>
-<h2 id="젠킨스-설치"><a href="#젠킨스-설치" class="headerlink" title="젠킨스 설치"></a>젠킨스 설치</h2><p>젠킨스를 사용하려면 JDK와 메이븐이 필요하다.</p>
+<h2 id="젠킨스-설치">젠킨스 설치</h2>
+<p>젠킨스를 사용하려면 JDK와 메이븐이 필요하다.</p>
 <p>macOS에서 brew를 이용해 쉽게 설치가 가능하다.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew install jenkins</span><br></pre></td></tr></table></figure>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew install jenkins</span><br></pre></td></tr></table></figure></p>
 <p>추후 필요하다면 다음과 같이 삭제할 수도 있다.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew remove jenkins</span><br></pre></td></tr></table></figure>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew remove jenkins</span><br></pre></td></tr></table></figure></p>
 <p>설치 후 다음과 같이 젠킨스를 백그라운드 서비스로 구동 및 중지가 가능하다.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ brew services start jenkins</span><br><span class="line">$ brew services stop jenkins</span><br></pre></td></tr></table></figure>
-<p>젠킨스를 실행 후 웹사이트에 접속한다. <a href="http://localhost:8080" target="_blank" rel="noopener">http://localhost:8080</a><br><img src="/images/post/2018-08-09/set_up_1.png" alt=""></p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ brew services start jenkins</span><br><span class="line">$ brew services stop jenkins</span><br></pre></td></tr></table></figure></p>
+<p>젠킨스를 실행 후 웹사이트에 접속한다. http://localhost:8080
+<img src="/images/post/2018-08-09/set_up_1.png" alt=""></p>
 <p>처음 접속 시 Administrator password를 입력하게 되어 있는데 아래의 경로에 있는 파일에서 키를 확인해 입력한다.</p>
 <p><code>/Users/{사용자 계정}/.jenkins/secrets/initialAdminPassword</code></p>
-<p><img src="/images/post/2018-08-09/set_up_2.png" alt=""><br>젠킨스를 어떻게 설치할지 결정할 수 있다. ‘Install suggested plugins’를 선택하면 젠킨스에서 추천하는 플러그인들이 같이 설치되고, ‘Select plugins to install’을 선택하면 필요한 플러그인을 선택하여 설치할 수 있다.</p>
-<p><img src="/images/post/2018-08-09/set_up_3.png" alt=""><br>필요한 플러그인들을 자동으로 설치하기 시작한다.</p>
-<p><img src="/images/post/2018-08-09/set_up_4.png" alt=""><br>설치가 끝나면 관리자 정보 입력 화면이 나온다. 정보를 입력한 후 ‘Save and Finish’ 버튼을 클릭한다.</p>
-<p><img src="/images/post/2018-08-09/set_up_5.png" alt=""><br><img src="/images/post/2018-08-09/set_up_6.png" alt=""></p>
-<h2 id="빌드-잡job-생성하기"><a href="#빌드-잡-job-생성하기" class="headerlink" title="빌드 잡(job) 생성하기"></a>빌드 잡(job) 생성하기</h2><ol>
-<li>좌측 메뉴 상단에 있는 ‘새로운 Item’을 클릭한다. ‘Enter an item name’에 적당한 이름을 넣고 아래의 템플릿 중 ‘Freestyle project’를 선택한 후 ‘OK’ 버튼을 클릭한다. (Freestyle project는 거의 모든 젠킨스의 설정을 자유롭게 설정할 수 있다.)<br> <img src="/images/post/2018-08-09/set_up_7.png" alt=""></li>
-<li>Github에 테스트를 위해 간단하게 만들어 놓은 프로젝트를 가져와 빌드를 테스트 한다.<br> <img src="/images/post/2018-08-09/set_up_8.png" alt=""></li>
-<li>Github에서 프로젝트를 가져오기 위해서는 자격 증명을 추가해야 한다. ssh-key를 등록하거나 Github의 계정을 입력해야 한다.<br> <img src="/images/post/2018-08-09/set_up_9.png" alt=""></li>
-<li>Credentials 선택 박스에서 조금 전 추가한 계정을 선택한 후 ‘저장’ 버튼을 클릭한다.<br> <img src="/images/post/2018-08-09/set_up_10.png" alt=""></li>
-<li>‘Build Now’를 클릭해 빌드를 진행한다.<br> <img src="/images/post/2018-08-09/set_up_11.png" alt=""></li>
-<li>‘Console Output’을 누르면 빌드가 성공한 것을 확인할 수 있다.<br> <img src="/images/post/2018-08-09/set_up_12.png" alt=""></li>
+<p><img src="/images/post/2018-08-09/set_up_2.png" alt="">
+젠킨스를 어떻게 설치할지 결정할 수 있다. 'Install suggested plugins'를 선택하면 젠킨스에서 추천하는 플러그인들이 같이 설치되고, 'Select plugins to install'을 선택하면 필요한 플러그인을 선택하여 설치할 수 있다.</p>
+<p><img src="/images/post/2018-08-09/set_up_3.png" alt="">
+필요한 플러그인들을 자동으로 설치하기 시작한다.</p>
+<p><img src="/images/post/2018-08-09/set_up_4.png" alt="">
+설치가 끝나면 관리자 정보 입력 화면이 나온다. 정보를 입력한 후 'Save and Finish' 버튼을 클릭한다.</p>
+<p><img src="/images/post/2018-08-09/set_up_5.png" alt="">
+<img src="/images/post/2018-08-09/set_up_6.png" alt=""></p>
+<h2 id="빌드-잡job-생성하기">빌드 잡(job) 생성하기</h2>
+<ol>
+<li>좌측 메뉴 상단에 있는 '새로운 Item'을 클릭한다. 'Enter an item name'에 적당한 이름을 넣고 아래의 템플릿 중 'Freestyle project'를 선택한 후 'OK' 버튼을 클릭한다. (Freestyle project는 거의 모든 젠킨스의 설정을 자유롭게 설정할 수 있다.)
+<img src="/images/post/2018-08-09/set_up_7.png" alt=""></li>
+<li>Github에 테스트를 위해 간단하게 만들어 놓은 프로젝트를 가져와 빌드를 테스트 한다.
+<img src="/images/post/2018-08-09/set_up_8.png" alt=""></li>
+<li>Github에서 프로젝트를 가져오기 위해서는 자격 증명을 추가해야 한다. ssh-key를 등록하거나 Github의 계정을 입력해야 한다.
+<img src="/images/post/2018-08-09/set_up_9.png" alt=""></li>
+<li>Credentials 선택 박스에서 조금 전 추가한 계정을 선택한 후 '저장' 버튼을 클릭한다.
+<img src="/images/post/2018-08-09/set_up_10.png" alt=""></li>
+<li>'Build Now'를 클릭해 빌드를 진행한다.
+<img src="/images/post/2018-08-09/set_up_11.png" alt=""></li>
+<li>'Console Output'을 누르면 빌드가 성공한 것을 확인할 수 있다.
+<img src="/images/post/2018-08-09/set_up_12.png" alt=""></li>
 </ol>
 
                 

@@ -147,6 +147,13 @@
 
                         
                         <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -155,13 +162,6 @@
                         
                         <li>
                             <a href="/about/">About</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -230,7 +230,8 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h2 id="index"><a href="#Index" class="headerlink" title="Index"></a>Index</h2><ol>
+                <h2 id="index">Index</h2>
+<ol>
 <li><a href="#1">NVM (Node Version Manager)</a></li>
 <li><a href="#2">NVM 사용시 이점</a></li>
 <li><a href="#3">NVM 설치</a></li>
@@ -240,31 +241,41 @@
 </ol>
 <hr>
 <p>오늘은 NVM에 대해서 알아보겠습니다. 저는 회사에서 Ionic 을 통해서 하이브리드 앱을 개발하고 있습니다. Ionic의 개발환경은 기본적으로 Node.js를 필요로 합니다. 당시 처음 입사하였을때는 회사에서 사용중인 Node v4.4.0을 설치하여 사용하고 있었습니다. 그러나 후에 여러개의 프로젝트를 하며 ES6 문법을 사용하기 위해 상위 버전의 Node를 사용해야하 하는 일이 생겼습니다. 이런 경우 보통 Node를 제거한 후 상위 버전을 사용하게 된다면 후에 다시 Ionic 프로젝트를 할때 문제가 됩니다. 이럴때 NVM을 사용한다면 여러개의 Node 를 버전별로 쉽게 관리하고 사용할 수 있습니다. 지금부터 NVM을 사용했을때의 이점과 설치 및 사용방법에 대해 알아보겠습니다.</p>
-<p><span id="1"></span></p>
-<h2 id="nvm-node-version-manager"><a href="#NVM-Node-Version-Manager" class="headerlink" title="NVM (Node Version Manager)"></a>NVM (Node Version Manager)</h2><p><a href="https://github.com/creationix/nvm" target="_blank" rel="noopener">NVM</a>은 말 그대로 Node의 버전을 관리해주는 매니저입니다. Ruby에는 RVM이 있듯이 Node에서는 NVM을 사용합니다. 한 사용자 계정에 여러개의 Node 버전을 설치하여 선택하여 사용할 수 있습니다.</p>
-<p><span id="2"></span></p>
-<h3 id="nvm-사용시-이점"><a href="#NVM-사용시-이점" class="headerlink" title="NVM 사용시 이점"></a>NVM 사용시 이점</h3><ul>
+<p>&lt;span id='1'&gt;</p>
+<h2 id="nvm-node-version-manager">NVM (Node Version Manager)</h2>
+<p><a href="https://github.com/creationix/nvm" target="_blank" rel="noopener">NVM</a>은 말 그대로 Node의 버전을 관리해주는 매니저입니다. Ruby에는 RVM이 있듯이 Node에서는 NVM을 사용합니다. 한 사용자 계정에 여러개의 Node 버전을 설치하여 선택하여 사용할 수 있습니다.</p>
+<p>&lt;span id='2'&gt;</p>
+<h3 id="nvm-사용시-이점">NVM 사용시 이점</h3>
+<ul>
 <li>여러 버전의 Node를 쉽게 사용할 수 있습니다. (기존의 버전을 삭제할 필요가 없습니다.)</li>
 <li>NVM을 사용하지 않고 설치한 Node는 <code>/usr/local/bin/</code> 경로에 설치되지만 NVM을 사용하여 설치했을 경우에는 <code>/User/kimjongmin/.nvm/versions/node/</code> 경로에 설치됩니다. NVM을 사용했을 경우 사용자의 종속되어 설치되기 때문에 npm을 통하여 모듈을 설치할 때도 기존과는 달리 <code>-g</code> 옵션을 주지 않아도 설치 가능합니다. (npm또한 Node와 같이 설치되기 때문에 Node 버전마다 다르게 설치됩니다.)</li>
 <li>Node 버전에 따라 npm도 다르게 설치되기 때문에 모듈의 버전들도 각기 다르게 관리할 수 있습니다. 예를들어, Node v4.4.0 에서는 cordova v5.7.1을 Node v6.6.0 에서는 cordova v6.1.1을 설치하여 사용할 수 있습니다.</li>
 </ul>
-<p><span id="3"></span></p>
-<h3 id="nvm-설치"><a href="#NVM-설치" class="headerlink" title="NVM 설치"></a>NVM 설치</h3><p>NVM 설치전 기존에 설치되어 있던 Node를 제거하는것을 권장하지만 NVM 설치 후 제거하여도 괜찮습니다.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl을 이용하여 설치</span><br><span class="line">$ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.4/install.sh | bash</span><br></pre></td></tr></table></figure>
-<p>설치 후 PATH 정보는 <code>.bashrc</code>에 저장되므로 재로그인 없이 사용하려면 변경된 <code>.bashrc</code>를 다시 적용시켜주어야 합니다.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure></p>
-<p><span id="4"></span></p>
-<h3 id="nvm-명령어"><a href="#NVM-명령어" class="headerlink" title="NVM 명령어"></a>NVM 명령어</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 현재 최신 버전의 Node 설치 (별도의 버전을 지정하지 않고 현재 최신 버전으로 설치합니다.)</span><br><span class="line">$ nvm install node</span><br><span class="line">$ node -v (버전확인)</span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 설치된 Node 특정 버전 삭제하기</span><br><span class="line">$ nvm uninstall v4.4.0</span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">// 설치된 Node는 ~/.nvm/versions/ 경로에서 확인 가능합니다.</span><br><span class="line">$ <span class="built_in">which</span> node</span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// NVM에서 지원하는 Node의 버전을 확인할 수 있습니다.</span><br><span class="line">$ nvm ls-remote</span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 특정 Node 버전 설치는 다음과 같이 가능합니다.</span><br><span class="line">$ nvm install v4.4.0</span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 설치되어 사용가능한 Node 버전 확인</span><br><span class="line">$ nvm ls</span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 특정 Node 버전 사용</span><br><span class="line">$ nvm use v6.6.0</span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 터미널 시작시 노드 기본버전 설정</span><br><span class="line">$ nvm <span class="built_in">alias</span> default v6.6.0</span><br></pre></td></tr></table></figure>
-<p><strong>Tip) 자주쓰는 명령어 alias 등록하기</strong><br>저는 NVM을 통해 Node v4.4.0과 v6.6.0을 설치하여 사용하고 있습니다. 프로젝트마다 Node 버전이 달라 프로젝트 변경시 Node의 버전도 변경해 주어야 하는 번거로움이 있어 <code>~.bash_custom</code>에 alias 로 등록하여 사용하고 있습니다. <code>(~.bashrc, ~.bash_profile )</code> 저는 다음과 같이 사용합니다. (파일에 추가 후 source 명령어로 변경된 파일을 적용하거나 새로운 쉘을 열어야 적용됩니다.)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">alias</span> nv=<span class="string">'node -v'</span></span><br><span class="line"><span class="built_in">alias</span> n4=<span class="string">'nvm use v4.4.0'</span></span><br><span class="line"><span class="built_in">alias</span> n6=<span class="string">'nvm use v6.6.0'</span></span><br></pre></td></tr></table></figure></p>
-<p><span id="5"></span></p>
-<h3 id="모듈-설치"><a href="#모듈-설치" class="headerlink" title="모듈 설치"></a>모듈 설치</h3><p>NVM use 명령어를 통해 원하는 Node 버전을 선택 후 npm install 을 통해 필요한 모듈을 설치할 수 있습니다. 기존 사용법과 동일하나 NVM 은 <code>/User</code>에 설치되기 때문에 더이상 sudo 명령어를 사용하지 않아도 됩니다. 또한 하나의 Node 버전에서 필요한 모듈을 설치 후 새로운 Node 버전을 생성할 때 특정 버전 npm 패키지를 마이그레이션 할 수 있습니다.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nvm install v6.6.0 --reinstall-packages-from=4.4.0</span><br></pre></td></tr></table></figure></p>
-<p><span id="6"></span></p>
-<h3 id="기존에-설치되어-있던-node-제거"><a href="#기존에-설치되어-있던-Node-제거" class="headerlink" title="기존에 설치되어 있던 Node 제거"></a>기존에 설치되어 있던 Node 제거</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo rm -rf /usr/<span class="built_in">local</span>/lib/node /usr/<span class="built_in">local</span>/lib/node_modules /var/db/receipts/org.nodejs.*</span><br></pre></td></tr></table></figure>
+<p>&lt;span id='3'&gt;</p>
+<h3 id="nvm-설치">NVM 설치</h3>
+<p>NVM 설치전 기존에 설치되어 있던 Node를 제거하는것을 권장하지만 NVM 설치 후 제거하여도 괜찮습니다.</p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl을 이용하여 설치</span><br><span class="line">$ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.4/install.sh | bash</span><br></pre></td></tr></table></figure></p>
+<p>설치 후 PATH 정보는 <code>.bashrc</code>에 저장되므로 재로그인 없이 사용하려면 변경된 <code>.bashrc</code>를 다시 적용시켜주어야 합니다.
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure></p>
+<p>&lt;span id='4'&gt;</p>
+<h3 id="nvm-명령어">NVM 명령어</h3>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 현재 최신 버전의 Node 설치 (별도의 버전을 지정하지 않고 현재 최신 버전으로 설치합니다.)</span><br><span class="line">$ nvm install node</span><br><span class="line">$ node -v (버전확인)</span><br></pre></td></tr></table></figure></p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 설치된 Node 특정 버전 삭제하기</span><br><span class="line">$ nvm uninstall v4.4.0</span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">// 설치된 Node는 ~/.nvm/versions/ 경로에서 확인 가능합니다.</span><br><span class="line">$ <span class="built_in">which</span> node</span><br></pre></td></tr></table></figure></p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// NVM에서 지원하는 Node의 버전을 확인할 수 있습니다.</span><br><span class="line">$ nvm ls-remote</span><br></pre></td></tr></table></figure></p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 특정 Node 버전 설치는 다음과 같이 가능합니다.</span><br><span class="line">$ nvm install v4.4.0</span><br></pre></td></tr></table></figure></p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 설치되어 사용가능한 Node 버전 확인</span><br><span class="line">$ nvm ls</span><br></pre></td></tr></table></figure></p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 특정 Node 버전 사용</span><br><span class="line">$ nvm use v6.6.0</span><br></pre></td></tr></table></figure></p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 터미널 시작시 노드 기본버전 설정</span><br><span class="line">$ nvm <span class="built_in">alias</span> default v6.6.0</span><br></pre></td></tr></table></figure></p>
+<p><strong>Tip) 자주쓰는 명령어 alias 등록하기</strong>
+저는 NVM을 통해 Node v4.4.0과 v6.6.0을 설치하여 사용하고 있습니다. 프로젝트마다 Node 버전이 달라 프로젝트 변경시 Node의 버전도 변경해 주어야 하는 번거로움이 있어 <code>~.bash_custom</code>에 alias 로 등록하여 사용하고 있습니다. <code>(~.bashrc, ~.bash_profile )</code> 저는 다음과 같이 사용합니다. (파일에 추가 후 source 명령어로 변경된 파일을 적용하거나 새로운 쉘을 열어야 적용됩니다.)
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">alias</span> nv=<span class="string">'node -v'</span></span><br><span class="line"><span class="built_in">alias</span> n4=<span class="string">'nvm use v4.4.0'</span></span><br><span class="line"><span class="built_in">alias</span> n6=<span class="string">'nvm use v6.6.0'</span></span><br></pre></td></tr></table></figure></p>
+<p>&lt;span id='5'&gt;</p>
+<h3 id="모듈-설치">모듈 설치</h3>
+<p>NVM use 명령어를 통해 원하는 Node 버전을 선택 후 npm install 을 통해 필요한 모듈을 설치할 수 있습니다. 기존 사용법과 동일하나 NVM 은 <code>/User</code>에 설치되기 때문에 더이상 sudo 명령어를 사용하지 않아도 됩니다. 또한 하나의 Node 버전에서 필요한 모듈을 설치 후 새로운 Node 버전을 생성할 때 특정 버전 npm 패키지를 마이그레이션 할 수 있습니다.
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nvm install v6.6.0 --reinstall-packages-from=4.4.0</span><br></pre></td></tr></table></figure></p>
+<p>&lt;span id='6'&gt;</p>
+<h3 id="기존에-설치되어-있던-node-제거">기존에 설치되어 있던 Node 제거</h3>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo rm -rf /usr/<span class="built_in">local</span>/lib/node /usr/<span class="built_in">local</span>/lib/node_modules /var/db/receipts/org.nodejs.*</span><br></pre></td></tr></table></figure></p>
 
                 
 

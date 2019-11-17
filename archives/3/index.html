@@ -132,6 +132,13 @@
 
                         
                         <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -140,13 +147,6 @@
                         
                         <li>
                             <a href="/about/">About</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -222,6 +222,49 @@
 
 <div class="post-preview">
 
+    <a href="/2019/03/05/Java/java-reactor-pattern/">
+        <h2 class="post-title">
+            [번역] Java Reactor Pattern
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            해당 글은 아래의 Reactor Pattern Explained 시리즈를 번역하였습니다.
+
+Reactor Pattern Explained - Part 1
+Reactor Pattern Explained - Part 2
+Reactor Pattern Explained - Part 3
+
+Part 1
+서버가 동시에 요청(이벤트)을 받을 때, 보통 요청을 처리하......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by KimJongMin on
+            2019-03-05
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#select" title="select">select</a>
+            
+              <a href="/tags/#multiplexing" title="multiplexing">multiplexing</a>
+            
+              <a href="/tags/#nio" title="nio">nio</a>
+            
+              <a href="/tags/#non-blocking io" title="non-blocking io">non-blocking io</a>
+            
+              <a href="/tags/#reactor" title="reactor">reactor</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2019/03/03/Java/java-nio/">
         <h2 class="post-title">
             Java NIO와 멀티플렉싱 기반의 다중 접속 서버
@@ -231,7 +274,8 @@
         </h3>
         <div class="post-content-preview">
             자바 NIO에 대한 소개와 NIO와 함께 도입된 자바에서 I/O 멀티플렉싱(multiplexing)을 구현한 selector에 대해 알아봅니다. I/O 멀티플렉싱(multiplexing)에 대한 개념에 대해 아직 잘 이해하지 못하고 있다면 먼저 &lt;멀티플렉싱 기반의 다중 접속 서버로 가기까지&gt; 포스팅을 읽어주세요.
-Overview자바 NIO ......
+Overview
+자바 NIO......
         </div>
     </a>
     
@@ -241,11 +285,11 @@ Overview자바 NIO ......
         </p>
         <div class="tags">
             
-              <a href="/tags/#nio" title="nio">nio</a>
-            
               <a href="/tags/#select" title="select">select</a>
             
               <a href="/tags/#multiplexing" title="multiplexing">multiplexing</a>
+            
+              <a href="/tags/#nio" title="nio">nio</a>
             
         </div>
     
@@ -263,8 +307,10 @@ Overview자바 NIO ......
             멀티프로세스 -> 멀티스레드 -> 멀티플렉싱
         </h3>
         <div class="post-content-preview">
-            소켓이란?소켓은 네트워크 상에서 서버와 클라이언트 두개의 프로그램이 특정 포트를 통해 양방향 통신이 가능하도록 만들어주는 추상화된 장치입니다. 메모리의 유저 공간에 존재하는 프로세스(서버, 클라이언트)는 커널 공간에 생성된 소켓을 통해 데이터를 송수신할 수 있습니다.
-소켓은 아래와 같이 지역(로컬) IP 주소, Port 번호와 상대방의 IP 주소와 P......
+            소켓이란?
+소켓은 네트워크 상에서 서버와 클라이언트 두개의 프로그램이 특정 포트를 통해 양방향 통신이 가능하도록 만들어주는 추상화된 장치입니다. 메모리의 유저 공간에 존재하는 프로세스(서버, 클라이언트)는 커널 공간에 생성된 소켓을 통해 데이터를 송수신할 수 있습니다.
+
+소켓은 아래와 같이 지역(로컬) IP 주소, Port 번호와 상대방의 IP 주소와......
         </div>
     </a>
     
@@ -274,17 +320,17 @@ Overview자바 NIO ......
         </p>
         <div class="tags">
             
-              <a href="/tags/#select" title="select">select</a>
-            
-              <a href="/tags/#multiplexing" title="multiplexing">multiplexing</a>
-            
               <a href="/tags/#socket" title="socket">socket</a>
             
               <a href="/tags/#nonblocking" title="nonblocking">nonblocking</a>
             
+              <a href="/tags/#select" title="select">select</a>
+            
               <a href="/tags/#poll" title="poll">poll</a>
             
               <a href="/tags/#epoll" title="epoll">epoll</a>
+            
+              <a href="/tags/#multiplexing" title="multiplexing">multiplexing</a>
             
         </div>
     
@@ -302,9 +348,10 @@ Overview자바 NIO ......
             
         </h3>
         <div class="post-content-preview">
-            Computer system일반적인 컴퓨터 시스템은 CPU, 메모리, 외부 장치(ex. 하드디스크, 키보드, 모니터, 마우스)로 구성된다. CPU와 장치 컨트롤러들은 메모리 사이클을 두고 경쟁하며 동시에 실행된다. 경쟁상황에서 공유하는 메모리에 순차적으로 접근할 수 있도록 메모리 컨트롤러가 메모리에 대한 접근을 제어한다.
+            Computer system
+일반적인 컴퓨터 시스템은 CPU, 메모리, 외부 장치(ex. 하드디스크, 키보드, 모니터, 마우스)로 구성된다. CPU와 장치 컨트롤러들은 메모리 사이클을 두고 경쟁하며 동시에 실행된다. 경쟁상황에서 공유하는 메모리에 순차적으로 접근할 수 있도록 메모리 컨트롤러가 메모리에 대한 접근을 제어한다.
 
-장치 컨트롤러: 컴퓨터 내의......
+장치 컨트롤러: 컴퓨터 내......
         </div>
     </a>
     
@@ -340,10 +387,12 @@ Overview자바 NIO ......
             
         </h3>
         <div class="post-content-preview">
-            객체지향의 사실과 오해 (역할, 책임, 협력 관점에서 본 객체지향)
+            
+객체지향의 사실과 오해 (역할, 책임, 협력 관점에서 본 객체지향)
 협력하는 객체들의 공동체
+
 객체지향의 목표는 실세계를 모방하는 것이 아니다. 오히려 새로운 세계를 창조하는 것이다.
-객체를 스스로 생각하고 스스로 결정하는 현실 세계의 생명체에 비유하는 것은 상태와 행위를 ‘캡슐화’하는 소프트웨어 객체의 ‘자율성’을 설명하는 데 효과적이다. 현실 세계의......
+객체를 스스로 생각하고 스스로 결정하는 현실 세계의 생명체에 비유하는 것은 상태와 행위를 '캡슐화'하는 소프트웨어 객체의 '자율성'을 설명하는 데 효과적이다. 현실 세......
         </div>
     </a>
     
@@ -375,10 +424,12 @@ Overview자바 NIO ......
             Mock
         </h3>
         <div class="post-content-preview">
-            Mockito JUnit ruleMockito에서 제공하는 @Mock, @Spy, @InjectMocks과 같은 annotation을 사용하는 field를 초기화 하는 방법으로는 2가지가 제공되고 있었다.
+            Mockito JUnit rule
+Mockito에서 제공하는 @Mock, @Spy, @InjectMocks과 같은 annotation을 사용하는 field를 초기화 하는 방법으로는 2가지가 제공되고 있었다.
+
 
 JUnit test class에 @RunWith(MockitoJUnitRunner.class)를 추가하는 방법
-1234567891011@RunWi......
+1234567891011@Run......
         </div>
     </a>
     
@@ -393,41 +444,6 @@ JUnit test class에 @RunWith(MockitoJUnitRunner.class)를 추가하는 방법
               <a href="/tags/#Mockito" title="Mockito">Mockito</a>
             
               <a href="/tags/#TDD" title="TDD">TDD</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2018/08/20/Java/design-pattern-adapter/">
-        <h2 class="post-title">
-            Design Pattern - Adapter
-        </h2>
-        <h3 class="post-subtitle">
-            바꿔서 재이용하기
-        </h3>
-        <div class="post-content-preview">
-            
-해당 포스팅은 Java 언어로 배우는 디자인 패턴 입문 책을 참고해 작성했습니다.사용된 코드는 jongmin92/Design-Pattern repository 에서 확인할 수 있습니다.
-
-Adapter 패턴이미 제공되어 있는 것을 그대로 사용할 수 없을 때, 필요한 형태로 교환하고 사용하는 일이 자주 있습니다. ‘이미 제공되어 있는 것’과 ‘필요한 ......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by KimJongMin on
-            2018-08-20
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#java" title="java">java</a>
-            
-              <a href="/tags/#design pattern" title="design pattern">design pattern</a>
-            
-              <a href="/tags/#adapter" title="adapter">adapter</a>
             
         </div>
     
@@ -521,7 +537,7 @@ Adapter 패턴이미 제공되어 있는 것을 그대로 사용할 수 없을 �
 
     <h5>categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><span class="category-list-count">14</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/BOJ/">BOJ</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Concept/">Concept</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Book/">Book</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/">Programming</a><span class="category-list-count">85</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/AWS/">AWS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Gradle/">Gradle</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/HTML/">HTML</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Java/">Java</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/JavaScript/">JavaScript</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Linux-Ubuntu/">Linux & Ubuntu</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Node/">Node</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/RaspberryPi/">RaspberryPi</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/React-Native/">React Native</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Spring/">Spring</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Tool/">Tool</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project/">Project</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project/Emily/">Emily</a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tip/">Tip</a><span class="category-list-count">3</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><span class="category-list-count">14</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/BOJ/">BOJ</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Concept/">Concept</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Book/">Book</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Database/">Database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/">Programming</a><span class="category-list-count">85</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/AWS/">AWS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Gradle/">Gradle</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/HTML/">HTML</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Java/">Java</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/JavaScript/">JavaScript</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Linux-Ubuntu/">Linux & Ubuntu</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Node/">Node</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/RaspberryPi/">RaspberryPi</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/React-Native/">React Native</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Spring/">Spring</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Tool/">Tool</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project/">Project</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project/Emily/">Emily</a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tip/">Tip</a><span class="category-list-count">3</span></li></ul>
     </div>
 
 
@@ -535,23 +551,7 @@ Adapter 패턴이미 제공되어 있는 것을 그대로 사용할 수 없을 �
     <div class="tags">
         
             
-            <a href="/tags/#Emily" title="Emily" rel="6">Emily</a>
-            
-        
-            
-            <a href="/tags/#bot" title="bot" rel="6">bot</a>
-            
-        
-            
             <a href="/tags/#AWS" title="AWS" rel="4">AWS</a>
-            
-        
-            
-        
-            
-        
-            
-        
             
         
             
@@ -567,11 +567,15 @@ Adapter 패턴이미 제공되어 있는 것을 그대로 사용할 수 없을 �
             
         
             
-        
+            <a href="/tags/#Emily" title="Emily" rel="6">Emily</a>
             
         
             
-            <a href="/tags/#Java" title="Java" rel="15">Java</a>
+            <a href="/tags/#bot" title="bot" rel="6">bot</a>
+            
+        
+            
+        
             
         
             
@@ -589,7 +593,49 @@ Adapter 패턴이미 제공되어 있는 것을 그대로 사용할 수 없을 �
             
         
             
+            <a href="/tags/#book" title="book" rel="4">book</a>
+            
+        
+            
+            <a href="/tags/#review" title="review" rel="3">review</a>
+            
+        
+            
+            <a href="/tags/#RaspberryPi" title="RaspberryPi" rel="9">RaspberryPi</a>
+            
+        
+            
+            <a href="/tags/#Java" title="Java" rel="15">Java</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
             <a href="/tags/#design pattern" title="design pattern" rel="2">design pattern</a>
+            
+        
+            
+        
+            
+        
             
         
             
@@ -629,7 +675,9 @@ Adapter 패턴이미 제공되어 있는 것을 그대로 사용할 수 없을 �
             
         
             
-            <a href="/tags/#nio" title="nio" rel="2">nio</a>
+        
+            
+        
             
         
             
@@ -637,23 +685,15 @@ Adapter 패턴이미 제공되어 있는 것을 그대로 사용할 수 없을 �
             
         
             
+        
+            
+        
+            
             <a href="/tags/#multiplexing" title="multiplexing" rel="3">multiplexing</a>
             
         
             
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
+            <a href="/tags/#nio" title="nio" rel="2">nio</a>
             
         
             
@@ -705,12 +745,6 @@ Adapter 패턴이미 제공되어 있는 것을 그대로 사용할 수 없을 �
             
         
             
-            <a href="/tags/#book" title="book" rel="4">book</a>
-            
-        
-            
-            <a href="/tags/#review" title="review" rel="3">review</a>
-            
         
             
         
@@ -718,48 +752,12 @@ Adapter 패턴이미 제공되어 있는 것을 그대로 사용할 수 없을 �
         
             
         
-            
-            <a href="/tags/#RaspberryPi" title="RaspberryPi" rel="9">RaspberryPi</a>
-            
-        
-            
-        
-            
-            <a href="/tags/#Node" title="Node" rel="5">Node</a>
-            
-        
-            
-        
-            
-        
-            
-            <a href="/tags/#Module" title="Module" rel="2">Module</a>
             
         
             
         
             
             <a href="/tags/#Android" title="Android" rel="4">Android</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
             
         
             
@@ -795,9 +793,49 @@ Adapter 패턴이미 제공되어 있는 것을 그대로 사용할 수 없을 �
             
         
             
+            <a href="/tags/#Node" title="Node" rel="5">Node</a>
+            
+        
+            
+            <a href="/tags/#Module" title="Module" rel="2">Module</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Chrome" title="Chrome" rel="2">Chrome</a>
+            
+        
+            
+            <a href="/tags/#Chrome Extension" title="Chrome Extension" rel="2">Chrome Extension</a>
+            
+        
+            
+            <a href="/tags/#IntelliJ" title="IntelliJ" rel="2">IntelliJ</a>
+            
+        
+            
+        
+            
         
             
             <a href="/tags/#Jasper" title="Jasper" rel="2">Jasper</a>
+            
+        
             
         
             
@@ -843,13 +881,17 @@ Adapter 패턴이미 제공되어 있는 것을 그대로 사용할 수 없을 �
             
         
             
-            <a href="/tags/#React Native" title="React Native" rel="4">React Native</a>
+        
+            
+            <a href="/tags/#jenkins" title="jenkins" rel="2">jenkins</a>
             
         
             
-        
+            <a href="/tags/#ci &amp; cd" title="ci &amp; cd" rel="2">ci &amp; cd</a>
             
         
+            
+            <a href="/tags/#build tool" title="build tool" rel="2">build tool</a>
             
         
             
@@ -858,16 +900,6 @@ Adapter 패턴이미 제공되어 있는 것을 그대로 사용할 수 없을 �
         
             
             <a href="/tags/#Spring" title="Spring" rel="13">Spring</a>
-            
-        
-            
-            <a href="/tags/#IoC" title="IoC" rel="2">IoC</a>
-            
-        
-            
-            <a href="/tags/#DI" title="DI" rel="2">DI</a>
-            
-        
             
         
             
@@ -891,13 +923,13 @@ Adapter 패턴이미 제공되어 있는 것을 그대로 사용할 수 없을 �
             
         
             
-            <a href="/tags/#Toby" title="Toby" rel="7">Toby</a>
+        
+            
+            <a href="/tags/#IoC" title="IoC" rel="2">IoC</a>
             
         
             
-        
-            
-            <a href="/tags/#IntelliJ" title="IntelliJ" rel="2">IntelliJ</a>
+            <a href="/tags/#DI" title="DI" rel="2">DI</a>
             
         
             
@@ -915,7 +947,7 @@ Adapter 패턴이미 제공되어 있는 것을 그대로 사용할 수 없을 �
             
         
             
-        
+            <a href="/tags/#Toby" title="Toby" rel="7">Toby</a>
             
         
             
@@ -931,31 +963,23 @@ Adapter 패턴이미 제공되어 있는 것을 그대로 사용할 수 없을 �
             
         
             
-            <a href="/tags/#Chrome" title="Chrome" rel="2">Chrome</a>
-            
-        
-            
-            <a href="/tags/#Chrome Extension" title="Chrome Extension" rel="2">Chrome Extension</a>
-            
         
             
         
             
         
             
+            <a href="/tags/#React Native" title="React Native" rel="4">React Native</a>
+            
+        
+            
         
             
         
             
-            <a href="/tags/#jenkins" title="jenkins" rel="2">jenkins</a>
-            
         
             
-            <a href="/tags/#ci &amp; cd" title="ci &amp; cd" rel="2">ci &amp; cd</a>
-            
         
-            
-            <a href="/tags/#build tool" title="build tool" rel="2">build tool</a>
             
         
             
@@ -971,15 +995,13 @@ Adapter 패턴이미 제공되어 있는 것을 그대로 사용할 수 없을 �
             
         
             
+        
+            
+        
+            
+        
+            
             <a href="/tags/#Heap sort" title="Heap sort" rel="3">Heap sort</a>
-            
-        
-            
-        
-            
-        
-            
-        
             
         
             
