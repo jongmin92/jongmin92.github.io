@@ -232,10 +232,10 @@
 
                 <h1 id="그레이들">그레이들</h1>
 <h2 id="그루비와-그레이들">그루비와 그레이들</h2>
-<p>**<code>그루비</code>**는 자바 가상머신에서 동작하는 오픈 소스 스크립트 언어이다. 그루비는 자바 문법을 더욱 쉽게 쓰기 위해 스크립트 언어와 비슷한 문법으로 되어 있어서, 대부분의 자바 프로그래머는 자바 코드를 작성하는 느낌으로 그루비를 작성할 수 있다. 동적 언어이며 자바와 달리 작성한 스크립트를 컴파일할 필요 없이 직접 실행할 수도 있다.</p>
+<p><strong><code>그루비</code></strong> 는 자바 가상머신에서 동작하는 오픈 소스 스크립트 언어이다. 그루비는 자바 문법을 더욱 쉽게 쓰기 위해 스크립트 언어와 비슷한 문법으로 되어 있어서, 대부분의 자바 프로그래머는 자바 코드를 작성하는 느낌으로 그루비를 작성할 수 있다. 동적 언어이며 자바와 달리 작성한 스크립트를 컴파일할 필요 없이 직접 실행할 수도 있다.</p>
 <p>또한, 일부 자바 프레임워크에서는 그루비를 지원한다. 대표적인 스프링 프레임워크에서도 그루비를 이용할 수 있다.</p>
 <p>이처럼 자바와 거의 같고, 스크립트 언어처럼 부담 없이 작성해서 바로 실행할 수 있는 특징을 고려하면, 그루비를 사용해서 자바 빌드 도구를 만들려는 생각은 자연스럽다.</p>
-<p>그루비의 이러한 이점을 최대한 활용해서 개발한 빌드 도구가 **<code>그레이들</code>**이다.</p>
+<p>그루비의 이러한 이점을 최대한 활용해서 개발한 빌드 도구가 <strong><code>그레이들</code></strong> 이다.</p>
 <h2 id="그레이들이란">그레이들이란</h2>
 <p><strong>그레이들은 그루비를 사용한 빌드 도구이다.</strong> 메이븐은 XML을 이용하여 빌드 정보를 기술했는데, 그레이들은 그루비를 이용해 빌드 정보를 기술하기 한다. 때문에 자바 프로그래머가 좀 더 쉽게 다룰 수 있다.</p>
 <p>그레이들의 특징은 다음과 같다.</p>
@@ -257,7 +257,7 @@
 <p>그레이들 명령어를 사용해 프로젝트를 생성할 수 있다.</p>
 <p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir gradle-app</span><br><span class="line"><span class="built_in">cd</span> gradle-app</span><br><span class="line">gradle init --<span class="built_in">type</span> java-library</span><br></pre></td></tr></table></figure></p>
 <p><strong>gradle init</strong></p>
-<p>그레이들 명령어는 gradle OO 형태로 실행한다. 위에서 프로젝트를 생성하며 사용한 init은 그레이들에서 **<code>'태스크'</code>**라고 부른다. 이 init은 프로젝트의 기본적은 파일과 폴더를 생성한다.</p>
+<p>그레이들 명령어는 gradle OO 형태로 실행한다. 위에서 프로젝트를 생성하며 사용한 init은 그레이들에서 <strong><code>'태스크'</code></strong> 라고 부른다. 이 init은 프로젝트의 기본적은 파일과 폴더를 생성한다.</p>
 <p>--type은 생성할 프로젝트의 타입을 지정하는 옵션인데, java-library는 자바 프로젝트임을 나타낸다. 지정한 언어의 샘플 코드를 생성한다. 이 옵션을 생략하면 그레이들 프로젝트의 기본적인 파일들만 생성된다.</p>
 <blockquote>
 <p><strong>그레이들 실행과 태스크</strong></p>
