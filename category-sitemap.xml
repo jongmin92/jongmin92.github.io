@@ -21,13 +21,6 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/categories/Project/</loc>
-        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://jongmin92.github.io/categories/Programming/AWS/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -35,7 +28,14 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/categories/Programming/JavaScript/</loc>
+        <loc>https://jongmin92.github.io/categories/Project/</loc>
+        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/categories/Programming/HTML/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -49,7 +49,7 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/categories/Programming/HTML/</loc>
+        <loc>https://jongmin92.github.io/categories/Programming/JavaScript/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -141,14 +141,14 @@
 
     <url>
         <loc>https://jongmin92.github.io/categories/Programming/</loc>
-        <lastmod>2019-11-20T15:38:48.673Z</lastmod>
+        <lastmod>2019-11-21T16:15:27.240Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://jongmin92.github.io/categories/Programming/Spring/</loc>
-        <lastmod>2019-11-20T15:38:48.673Z</lastmod>
+        <lastmod>2019-11-21T16:15:27.240Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
