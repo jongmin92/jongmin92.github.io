@@ -149,13 +149,6 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -164,6 +157,13 @@
                         
                         <li>
                             <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -233,15 +233,20 @@
                 post-container">
 
                 <p>안드로이드에서 <strong>&lt;네이버 아이디로 로그인&gt;</strong> 기능을 구현하며 <strong>OAuth 2.0</strong>에 대해 알아보고, 라이브러리를 적용하는 방법에 대해 알아보겠습니다.</p>
-<h2 id="oauth-20"><a href="#OAuth-2-0" class="headerlink" title="OAuth 2.0"></a>OAuth 2.0</h2><p>OAuth는 <strong><code>인증(Authentication)과 허가(Authorization)</code></strong>을 위한 표준 프로토콜로, 사용자가 Facebook이나 트위터 같은 인터넷 서비스의 기능을 다른 애플리케이션(데스크톱, 웹, 모바일 등)에서도 사용할 수 있게 한 것입니다.</p>
-<p>Facebook이나 트위터의 기능을 이용하기 위해 사용자가 반드시 Facebook이나 트위터에 로그인해야 하는 것이 아니라, 별도의 인증 절차를 거치면 다른 서비스에서 Facebook과 트위터의 기능을 이용할 수 있게 됩니다. 이런 방식은 Facebook이나 트위터 같은 서비스 제공자뿐만 아니라 사용자와 여러 인터넷 서비스 업체 모두에 이익이 되는 생태계를 구축하는데 기여했습니다.<br>이 방식에서 사용하는 <strong>인증 절차가 <code>OAuth</code></strong>입니다.</p>
+<h2 id="oauth-20">OAuth 2.0</h2>
+<p>OAuth는 **<code>인증(Authentication)과 허가(Authorization)</code>**을 위한 표준 프로토콜로, 사용자가 Facebook이나 트위터 같은 인터넷 서비스의 기능을 다른 애플리케이션(데스크톱, 웹, 모바일 등)에서도 사용할 수 있게 한 것입니다.</p>
+<p>Facebook이나 트위터의 기능을 이용하기 위해 사용자가 반드시 Facebook이나 트위터에 로그인해야 하는 것이 아니라, 별도의 인증 절차를 거치면 다른 서비스에서 Facebook과 트위터의 기능을 이용할 수 있게 됩니다. 이런 방식은 Facebook이나 트위터 같은 서비스 제공자뿐만 아니라 사용자와 여러 인터넷 서비스 업체 모두에 이익이 되는 생태계를 구축하는데 기여했습니다.
+이 방식에서 사용하는 **인증 절차가 <code>OAuth</code>**입니다.</p>
 <p>OAuth를 이용하면 이 인증을 공유하는 애플리케이션끼리는 별도의 인증이 필요없습니다. 따라서 여러 애플리케이션을 통합하여 사용하는 것이 가능하게 됩니다.</p>
-<p><strong>OAuth 2.0은 authorization(허가, 승인)을 위한 산업 표준 프로토콜</strong>입니다. OAuth 2.0 전에 OAuth 1.0이 만들어져 사용되었지만 웹, 데스크탑, 모바일 등의 어플리케이션의 authorization flow(권한 흐름)을 보다 단순화 하는데 초점이 맞춰졌습니다.<br>(OAuth 1.0에서는 Acess Token을 받으면 계속 사용이 가능했습니다. 그러나 OAuth 2.0에서는 보안 강화를 위해 Access Token의 Life-time을 지정할 수 있게됐고, Life-time이 만료되면 Refresh Token을 통해 Access Token을 재발급을 받아야 합니다.)</p>
-<h2 id="주의사항"><a href="#주의사항" class="headerlink" title="주의사항"></a>주의사항</h2><p><strong><code>로그인과 OAuth는 반드시 분리해서 이해해야 합니다.</code></strong> 아래의 예시를 통해 그 이유를 생각해봅시다.</p>
+<p><strong>OAuth 2.0은 authorization(허가, 승인)을 위한 산업 표준 프로토콜</strong>입니다. OAuth 2.0 전에 OAuth 1.0이 만들어져 사용되었지만 웹, 데스크탑, 모바일 등의 어플리케이션의 authorization flow(권한 흐름)을 보다 단순화 하는데 초점이 맞춰졌습니다.
+(OAuth 1.0에서는 Acess Token을 받으면 계속 사용이 가능했습니다. 그러나 OAuth 2.0에서는 보안 강화를 위해 Access Token의 Life-time을 지정할 수 있게됐고, Life-time이 만료되면 Refresh Token을 통해 Access Token을 재발급을 받아야 합니다.)</p>
+<h2 id="주의사항">주의사항</h2>
+<p><strong><code>로그인과 OAuth는 반드시 분리해서 이해해야 합니다.</code></strong> 아래의 예시를 통해 그 이유를 생각해봅시다.</p>
 <blockquote>
-<p>사원증을 이용해 출입할 수 있는 회사를 생각해 보자. 그런데 외부 손님이 그 회사에 방문할 일이 있다. 회사 사원이 건물에 출입하는 것이 로그인이라면 OAuth는 방문증을 수령한 후 회사에 출입하는 것에 비유할 수 있다. 방문증이란 사전에 정해진 곳만 다닐 수 있도록 하는 것이니, ‘방문증’을 가진 사람이 출입할 수 있는 곳과 ‘사원증’을 가진 사람이 출입할 수 있는 곳은 다르다. 역시 직접 서비스에 로그인한 사용자와 OAuth를 이용해 권한을 인증받은 사용자는 할 수 있는 일이 다르다.</p>
+<p>사원증을 이용해 출입할 수 있는 회사를 생각해 보자. 그런데 외부 손님이 그 회사에 방문할 일이 있다. 회사 사원이 건물에 출입하는 것이 로그인이라면 OAuth는 방문증을 수령한 후 회사에 출입하는 것에 비유할 수 있다. 방문증이란 사전에 정해진 곳만 다닐 수 있도록 하는 것이니, '방문증'을 가진 사람이 출입할 수 있는 곳과 '사원증'을 가진 사람이 출입할 수 있는 곳은 다르다. 역시 직접 서비스에 로그인한 사용자와 OAuth를 이용해 권한을 인증받은 사용자는 할 수 있는 일이 다르다.</p>
 </blockquote>
-<h2 id="구성요소"><a href="#구성요소" class="headerlink" title="구성요소"></a>구성요소</h2><ul>
+<h2 id="구성요소">구성요소</h2>
+<ul>
 <li>사용자(Resource Owner) : Service Provider에 계정을 가지고 있으면서, Client를 이용하려는 사용자</li>
 <li>소비자(Client) : OAuth 인증을 사용해 Service Provider의 기능을 사용하려는 애플리케이션이나 웹 서비스</li>
 <li>API 서버(Resource Server) : OAuth를 사용하는 Open API를 제공하는 서비스</li>
@@ -249,22 +254,32 @@
 <li>접근 토큰(Access Token) : 인증 후 Client가 Resource Server의 자원에 접근하기 위한 키를 포함한 값</li>
 <li>갱신 토큰(Refresh Token) : 유효기간이 지난 Access Token을 갱신하기 위해 사용되는 값</li>
 </ul>
-<h2 id="인증과정"><a href="#인증과정" class="headerlink" title="인증과정"></a>인증과정</h2><p><img src="https://ws2.sinaimg.cn/large/006tKfTcgy1fnn3785mw7j31460ro435.jpg" alt="OAuth 2.0 과정"></p>
+<h2 id="인증과정">인증과정</h2>
+<p><img src="https://ws2.sinaimg.cn/large/006tKfTcgy1fnn3785mw7j31460ro435.jpg" alt="OAuth 2.0 과정"></p>
 <hr>
-<h2 id="네이버-아이디로-로그인"><a href="#네이버-아이디로-로그인" class="headerlink" title="네이버 아이디로 로그인"></a>네이버 아이디로 로그인</h2><p><strong><code>&lt;네이버 아이디로 로그인&gt;</code>은 OAuth 2.0 기반의 사용자 인증 기능을 제공해 네이버가 아닌 다른 서비스에서 네이버의 사용자 인증 기능을 이용할 수 있게 하는 서비스입니다.</strong> 별도의 아이디나 비밀번호를 기억할 필요 없이 네이버 아이디로 간편하고 안전하게 서비스에 로그인할 수 있어, 가입이 귀찮거나 가입한 계정이 생각나지 않아 서비스를 이탈하는 사용자를 잡을 수 있습니다.</p>
+<h2 id="네이버-아이디로-로그인">네이버 아이디로 로그인</h2>
+<p><strong><code>&lt;네이버 아이디로 로그인&gt;</code>은 OAuth 2.0 기반의 사용자 인증 기능을 제공해 네이버가 아닌 다른 서비스에서 네이버의 사용자 인증 기능을 이용할 수 있게 하는 서비스입니다.</strong> 별도의 아이디나 비밀번호를 기억할 필요 없이 네이버 아이디로 간편하고 안전하게 서비스에 로그인할 수 있어, 가입이 귀찮거나 가입한 계정이 생각나지 않아 서비스를 이탈하는 사용자를 잡을 수 있습니다.</p>
 <p>&lt;네이버 아이디로 로그인&gt;을 통해 로그인하는 기본 절차는 다음과 같습니다.</p>
 <ol>
 <li>로그인 (네이버 앱이 설치되어 있다면 네이버 앱의 간편 로그인 기능으로 로그인, 네이버 앱이 설치되지 않았다면 애플리케이션에서 인앱 브라우저가 실행되고 네이버 로그인 화면으로 이동한다.)</li>
 <li>사용자가 네이버 아이디로 로그인하면 사용자 정보에 동의하는 화면으로 이동한다.</li>
 <li>사용자가 정보 제공에 동의하면 <strong>콜백 URL로 애플리케이션에 <code>접근 토큰(access token)</code>이 발급된다.</strong> 발급받은 접근 토큰을 이용해 OAuth 2.0을 지원하는 네이버의 오픈 API를 사용하거나 사용자의 정보를 얻어 올 수 있다.</li>
 </ol>
-<h2 id="특징"><a href="#특징" class="headerlink" title="특징"></a>특징</h2><p>네이버 아이디로 로그인한 사용자의 이름, 메일 주소, 별명, 프로필 사진, 생일, 연령대, 성별 등을 API로 간단하게 조회할 수 있습니다.</p>
-<h2 id="적용-칠자"><a href="#적용-칠자" class="headerlink" title="적용 칠자"></a>적용 칠자</h2><ol>
-<li>애플리케이션 등록<br>네이버 아이디로 로그인을 적용하기 위해 애플리케이션을 등록하고 <strong>클라이언트 아이디와 클라이언트 시크릿 키</strong>를 발급받는다.</li>
-<li>애플리케이션 개발<br>네이버 아이디로 로그인을 이용하기 위한 정보를 확인하고 등록한 환경에 맞는 개발가이드를 참고해 애플리케이션을 개발한다.<br><a href="https://developers.naver.com/docs/login/android/" target="_blank" rel="noopener">- Android 튜토리얼 참고</a></li>
-<li>서비스 적용<br>개발을 완료하면 서비스에 네이버 아이디로 로그인을 적용한다.</li>
+<h2 id="특징">특징</h2>
+<p>네이버 아이디로 로그인한 사용자의 이름, 메일 주소, 별명, 프로필 사진, 생일, 연령대, 성별 등을 API로 간단하게 조회할 수 있습니다.</p>
+<h2 id="적용-칠자">적용 칠자</h2>
+<ol>
+<li>애플리케이션 등록
+네이버 아이디로 로그인을 적용하기 위해 애플리케이션을 등록하고 <strong>클라이언트 아이디와 클라이언트 시크릿 키</strong>를 발급받는다.</li>
+<li>애플리케이션 개발
+네이버 아이디로 로그인을 이용하기 위한 정보를 확인하고 등록한 환경에 맞는 개발가이드를 참고해 애플리케이션을 개발한다.
+<a href="https://developers.naver.com/docs/login/android/" target="_blank" rel="noopener">- Android 튜토리얼 참고</a></li>
+<li>서비스 적용
+개발을 완료하면 서비스에 네이버 아이디로 로그인을 적용한다.</li>
 </ol>
-<h2 id="결과"><a href="#결과" class="headerlink" title="결과"></a>결과</h2><p><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1fnn43ymkojj30u01hcdhh.jpg" alt="네이버 아이디로 로그인 전"><br><img src="https://ws4.sinaimg.cn/large/006tKfTcgy1fnn449h4vyj30u01hcdif.jpg" alt="네이버 아이디로 로그인 후"></p>
+<h2 id="결과">결과</h2>
+<p><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1fnn43ymkojj30u01hcdhh.jpg" alt="네이버 아이디로 로그인 전">
+<img src="https://ws4.sinaimg.cn/large/006tKfTcgy1fnn449h4vyj30u01hcdif.jpg" alt="네이버 아이디로 로그인 후"></p>
 
                 
 
