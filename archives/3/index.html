@@ -132,6 +132,13 @@
 
                         
                         <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -140,13 +147,6 @@
                         
                         <li>
                             <a href="/about/">About</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -222,6 +222,42 @@
 
 <div class="post-preview">
 
+    <a href="/2019/04/30/Spring/spring-bean-lite-mode/">
+        <h2 class="post-title">
+            @Bean Lite Mode & inter-bean references
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            @Bean Methods in @Configuration Classes일반적으로 @Bean 어노테이션은 @Configuration 어노테이션이 사용된 클래스 내의 메서드에 선언이 됩니다. 이 경우 @Bean 어노테이션을 사용하는 메서드는 같은 클래스의 다른 @Bean 메소드를 직접 호출하여 참조할 수 있습니다. 이렇게하면 bean 간의 참조(refer......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by KimJongMin on
+            2019-04-30
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Java" title="Java">Java</a>
+            
+              <a href="/tags/#Spring" title="Spring">Spring</a>
+            
+              <a href="/tags/#@Configuration" title="@Configuration">@Configuration</a>
+            
+              <a href="/tags/#@Bean" title="@Bean">@Bean</a>
+            
+              <a href="/tags/#Bean references" title="Bean references">Bean references</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2019/04/26/Java/java-async-3/">
         <h2 class="post-title">
             AsyncRestTemplate의 콜백 헬과 중복 작업 문제
@@ -276,13 +312,13 @@
             
               <a href="/tags/#Async" title="Async">Async</a>
             
-              <a href="/tags/#DeferredResult" title="DeferredResult">DeferredResult</a>
-            
               <a href="/tags/#RestTemplate" title="RestTemplate">RestTemplate</a>
             
               <a href="/tags/#AsyncRestTemplate" title="AsyncRestTemplate">AsyncRestTemplate</a>
             
               <a href="/tags/#Netty" title="Netty">Netty</a>
+            
+              <a href="/tags/#DeferredResult" title="DeferredResult">DeferredResult</a>
             
         </div>
     
@@ -316,6 +352,8 @@
             
               <a href="/tags/#Async" title="Async">Async</a>
             
+              <a href="/tags/#DeferredResult" title="DeferredResult">DeferredResult</a>
+            
               <a href="/tags/#ExecutorService" title="ExecutorService">ExecutorService</a>
             
               <a href="/tags/#Future" title="Future">Future</a>
@@ -323,8 +361,6 @@
               <a href="/tags/#FutureTask" title="FutureTask">FutureTask</a>
             
               <a href="/tags/#ListenableFuture" title="ListenableFuture">ListenableFuture</a>
-            
-              <a href="/tags/#DeferredResult" title="DeferredResult">DeferredResult</a>
             
               <a href="/tags/#ResponseBodyEmitter" title="ResponseBodyEmitter">ResponseBodyEmitter</a>
             
@@ -402,45 +438,6 @@ Overview자바 NIO ......
               <a href="/tags/#select" title="select">select</a>
             
               <a href="/tags/#multiplexing" title="multiplexing">multiplexing</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2019/02/28/Java/java-with-non-blocking-io/">
-        <h2 class="post-title">
-            멀티플렉싱 기반의 다중 접속 서버로 가기까지
-        </h2>
-        <h3 class="post-subtitle">
-            멀티프로세스 -> 멀티스레드 -> 멀티플렉싱
-        </h3>
-        <div class="post-content-preview">
-            소켓이란?소켓은 네트워크 상에서 서버와 클라이언트 두개의 프로그램이 특정 포트를 통해 양방향 통신이 가능하도록 만들어주는 추상화된 장치입니다. 메모리의 유저 공간에 존재하는 프로세스(서버, 클라이언트)는 커널 공간에 생성된 소켓을 통해 데이터를 송수신할 수 있습니다.
-소켓은 아래와 같이 지역(로컬) IP 주소, Port 번호와 상대방의 IP 주소와 P......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by KimJongMin on
-            2019-02-28
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#select" title="select">select</a>
-            
-              <a href="/tags/#multiplexing" title="multiplexing">multiplexing</a>
-            
-              <a href="/tags/#socket" title="socket">socket</a>
-            
-              <a href="/tags/#nonblocking" title="nonblocking">nonblocking</a>
-            
-              <a href="/tags/#poll" title="poll">poll</a>
-            
-              <a href="/tags/#epoll" title="epoll">epoll</a>
             
         </div>
     
@@ -534,7 +531,7 @@ Overview자바 NIO ......
 
     <h5>categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><span class="category-list-count">14</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/BOJ/">BOJ</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Concept/">Concept</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Book/">Book</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Database/">Database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/">Programming</a><span class="category-list-count">88</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/AWS/">AWS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Gradle/">Gradle</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/HTML/">HTML</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Java/">Java</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/JavaScript/">JavaScript</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Linux-Ubuntu/">Linux & Ubuntu</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Node/">Node</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/RaspberryPi/">RaspberryPi</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/React-Native/">React Native</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Spring/">Spring</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Tool/">Tool</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project/">Project</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project/Emily/">Emily</a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tip/">Tip</a><span class="category-list-count">3</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><span class="category-list-count">14</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/BOJ/">BOJ</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Concept/">Concept</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Book/">Book</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Database/">Database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/">Programming</a><span class="category-list-count">89</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/AWS/">AWS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Gradle/">Gradle</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/HTML/">HTML</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Java/">Java</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/JavaScript/">JavaScript</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Linux-Ubuntu/">Linux & Ubuntu</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Node/">Node</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/RaspberryPi/">RaspberryPi</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/React-Native/">React Native</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Spring/">Spring</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Tool/">Tool</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project/">Project</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project/Emily/">Emily</a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tip/">Tip</a><span class="category-list-count">3</span></li></ul>
     </div>
 
 
@@ -564,6 +561,32 @@ Overview자바 NIO ......
             
         
             
+            <a href="/tags/#Emily" title="Emily" rel="6">Emily</a>
+            
+        
+            
+            <a href="/tags/#bot" title="bot" rel="6">bot</a>
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Java" title="Java" rel="19">Java</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
             <a href="/tags/#java" title="java" rel="6">java</a>
             
         
@@ -578,37 +601,17 @@ Overview자바 NIO ......
             
         
             
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
             <a href="/tags/#RaspberryPi" title="RaspberryPi" rel="9">RaspberryPi</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-            <a href="/tags/#Emily" title="Emily" rel="6">Emily</a>
-            
-        
-            
-            <a href="/tags/#bot" title="bot" rel="6">bot</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-            <a href="/tags/#Java" title="Java" rel="18">Java</a>
-            
-        
-            
-        
-            
-        
             
         
             
@@ -642,11 +645,55 @@ Overview자바 NIO ......
             
         
             
-        
-            
-        
-            
             <a href="/tags/#JavaScript 완벽가이드" title="JavaScript 완벽가이드" rel="10">JavaScript 완벽가이드</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Linux &amp; Ubuntu" title="Linux &amp; Ubuntu" rel="5">Linux &amp; Ubuntu</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Jasper" title="Jasper" rel="2">Jasper</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#GPIO" title="GPIO" rel="2">GPIO</a>
+            
+        
+            
+        
+            
+        
+            
+        
             
         
             
@@ -668,6 +715,24 @@ Overview자바 NIO ......
             
         
             
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
             <a href="/tags/#Async" title="Async" rel="4">Async</a>
             
         
@@ -678,15 +743,7 @@ Overview자바 NIO ......
             
         
             
-        
-            
             <a href="/tags/#DeferredResult" title="DeferredResult" rel="2">DeferredResult</a>
-            
-        
-            
-        
-            
-        
             
         
             
@@ -728,35 +785,11 @@ Overview자바 NIO ......
             
         
             
-        
-            
-        
-            
             <a href="/tags/#Reactive" title="Reactive" rel="3">Reactive</a>
             
         
             
-            <a href="/tags/#Linux &amp; Ubuntu" title="Linux &amp; Ubuntu" rel="5">Linux &amp; Ubuntu</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
             <a href="/tags/#Node" title="Node" rel="5">Node</a>
-            
-        
-            
-        
             
         
             
@@ -768,23 +801,9 @@ Overview자바 NIO ......
             
         
             
+        
+            
             <a href="/tags/#Module" title="Module" rel="2">Module</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
             
         
             
@@ -818,38 +837,6 @@ Overview자바 NIO ......
             
         
             
-            <a href="/tags/#Jasper" title="Jasper" rel="2">Jasper</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-            <a href="/tags/#GPIO" title="GPIO" rel="2">GPIO</a>
-            
-        
-            
-        
-            
-        
-            
         
             
         
@@ -876,25 +863,59 @@ Overview자바 NIO ......
             
         
             
-            <a href="/tags/#Chrome" title="Chrome" rel="2">Chrome</a>
-            
         
-            
-            <a href="/tags/#Chrome Extension" title="Chrome Extension" rel="2">Chrome Extension</a>
-            
-        
-            
-            <a href="/tags/#IntelliJ" title="IntelliJ" rel="2">IntelliJ</a>
             
         
             
         
             
-            <a href="/tags/#Spring" title="Spring" rel="16">Spring</a>
+            <a href="/tags/#Spring" title="Spring" rel="17">Spring</a>
             
         
             
-            <a href="/tags/#Spring Boot" title="Spring Boot" rel="3">Spring Boot</a>
+            <a href="/tags/#Spring Boot" title="Spring Boot" rel="4">Spring Boot</a>
+            
+        
+            
+            <a href="/tags/#Micrometer" title="Micrometer" rel="2">Micrometer</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Bean Validation" title="Bean Validation" rel="2">Bean Validation</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#IoC" title="IoC" rel="2">IoC</a>
+            
+        
+            
+            <a href="/tags/#DI" title="DI" rel="2">DI</a>
+            
+        
+            
+            <a href="/tags/#MVC" title="MVC" rel="2">MVC</a>
+            
+        
+            
+        
             
         
             
@@ -916,33 +937,7 @@ Overview자바 NIO ......
             
         
             
-        
-            
-            <a href="/tags/#Bean Validation" title="Bean Validation" rel="2">Bean Validation</a>
-            
-        
-            
-            <a href="/tags/#MVC" title="MVC" rel="2">MVC</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-            <a href="/tags/#IoC" title="IoC" rel="2">IoC</a>
-            
-        
-            
-            <a href="/tags/#DI" title="DI" rel="2">DI</a>
-            
-        
+            <a href="/tags/#IntelliJ" title="IntelliJ" rel="2">IntelliJ</a>
             
         
             
@@ -956,13 +951,11 @@ Overview자바 NIO ......
             
         
             
-            <a href="/tags/#jenkins" title="jenkins" rel="2">jenkins</a>
+            <a href="/tags/#Chrome" title="Chrome" rel="2">Chrome</a>
             
         
             
-            <a href="/tags/#ci &amp; cd" title="ci &amp; cd" rel="2">ci &amp; cd</a>
-            
-        
+            <a href="/tags/#Chrome Extension" title="Chrome Extension" rel="2">Chrome Extension</a>
             
         
             
@@ -985,6 +978,18 @@ Overview자바 NIO ......
             <a href="/tags/#build tool" title="build tool" rel="2">build tool</a>
             
         
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#jenkins" title="jenkins" rel="2">jenkins</a>
+            
+        
+            
+            <a href="/tags/#ci &amp; cd" title="ci &amp; cd" rel="2">ci &amp; cd</a>
             
         
             
