@@ -95,9 +95,9 @@
                             
                               <a class="tag" href="/tags/#Spring Boot" title="Spring Boot">Spring Boot</a>
                             
-                              <a class="tag" href="/tags/#Micrometer" title="Micrometer">Micrometer</a>
-                            
                               <a class="tag" href="/tags/#Actuator" title="Actuator">Actuator</a>
+                            
+                              <a class="tag" href="/tags/#Micrometer" title="Micrometer">Micrometer</a>
                             
                               <a class="tag" href="/tags/#Prometheus" title="Prometheus">Prometheus</a>
                             
@@ -254,7 +254,7 @@ Grafana는 그래프, 테이블 같은 것들을 지원할 뿐만 아니라 시�
 <h1 id="actuator-endpoint-설정">Actuator Endpoint 설정</h1>
 <p>Actuator는 Spring MVC 혹은 Spring WebFlux를 사용하는 경우, Micrometer를 통해 생성된 애플리케이션의 metric을 <code>Prometheus 서버</code>에서 가져갈(Pull)수 있도록 <a href="https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html#production-ready-metrics-export-prometheus" target="_blank" rel="noopener">추가적인 endpoint를 제공</a>해준다.</p>
 <p>Spring Boot 2.0 이상부터 사용하는 Actuator는 1.x 버전에서 사용하던 것과는 달리 대부분의 endpoint가 disabled로 설정되어 있다. 기본적으로 <code>/health</code>와 <code>/info</code> 2가지 endpoint만 default로 사용 가능하다. 따라서 <code>/Prometheus</code> endpoint를 사용할 수 있도록 다음과 같이 <code>application.yml</code>에서 설정이 필요하다.
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">management:</span></span><br><span class="line"><span class="attr">  endpoints:</span></span><br><span class="line"><span class="attr">    web:</span></span><br><span class="line"><span class="attr">      exposure:</span></span><br><span class="line"><span class="attr">        include:</span> <span class="string">prometheus</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">management:</span></span><br><span class="line"><span class="attr">  endpoints:</span></span><br><span class="line"><span class="attr">    web:</span></span><br><span class="line"><span class="attr">      exposure:</span></span><br><span class="line"><span class="attr">        include:</span> <span class="string">health,</span> <span class="string">info,</span> <span class="string">prometheus</span></span><br></pre></td></tr></table></figure></p>
 <p>애플리케이션을 실행하고 http://localhost:8080/actuator 를 통해 Actuator가 제공하는 endpoint들을 확인할 수 있다.
 <img src="/images/post/2019-12-04/endpoint.png" alt="endpoint"></p>
 <p>http://localhost:8080/actuator/prometheus 에서는 Micrometer를 통해 수집된 metric들을 확인할 수 있다.</p>
@@ -409,9 +409,9 @@ Grafana는 그래프, 테이블 같은 것들을 지원할 뿐만 아니라 시�
                         
                           <a class="tag" href="/tags/#Spring Boot" title="Spring Boot">Spring Boot</a>
                         
-                          <a class="tag" href="/tags/#Micrometer" title="Micrometer">Micrometer</a>
-                        
                           <a class="tag" href="/tags/#Actuator" title="Actuator">Actuator</a>
+                        
+                          <a class="tag" href="/tags/#Micrometer" title="Micrometer">Micrometer</a>
                         
                           <a class="tag" href="/tags/#Prometheus" title="Prometheus">Prometheus</a>
                         
