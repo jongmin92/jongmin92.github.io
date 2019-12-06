@@ -132,14 +132,14 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -222,6 +222,40 @@
 
 <div class="post-preview">
 
+    <a href="/2018/04/15/Spring/toby-6/">
+        <h2 class="post-title">
+            토비의 스프링 6장 (AOP)
+        </h2>
+        <h3 class="post-subtitle">
+            트랜잭션 코드의 분리, 고립된 단위 테스트, 다이내믹 프록시와 팩토리빈, 스프링의 프록시 팩토리 빈, 스프링 AOP, 트랜잭션 속성
+        </h3>
+        <div class="post-content-preview">
+            AOPAOP는 IoC/DI, 서비스 추상화와 더불어 스프링의 3대 기반기술중 하나다.
+AOP를 바르게 이용하려면 OOP를 대체하려고 하는 것처럼 보이는 AOP라는 이름 뒤에 감춰진, 그 필연적인 등장배경과 스프링이 그것을 도입한 이유, 그 적용을 통해 얻을 수 있는 장점이 무엇인지에 대한 충분한 이해가 필요하다.
+스프링에 적용된 가장 인기 있는 AOP......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by KimJongMin on
+            2018-04-15
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Spring" title="Spring">Spring</a>
+            
+              <a href="/tags/#AOP" title="AOP">AOP</a>
+            
+              <a href="/tags/#Toby" title="Toby">Toby</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2018/04/08/Spring/toby-5/">
         <h2 class="post-title">
             토비의 스프링 5장 (서비스 추상화)
@@ -230,11 +264,8 @@
             트랜잭션 서비스 추상화, 서비스 추상화와 단일 책임 원칙
         </h3>
         <div class="post-content-preview">
-            서비스 추상화
-트랜잭션 서비스 추상화
-트랜잭션이란 더 이상 나눌 수 없는 단위 작업을 말한다. 작업을 쪼개서 작은 단위로 만들 수 없다는 것은 트랜잭션의 핵심 속성인 원자성을 의미한다.
-트랜잭션 경계설정
-DB는 그 자체로 완벽한 트랜잭션을 지원한다. SQL을 이용해 다중 로우의 수정이나 삭제를 위한 요청을 했을 때 일부 로우만 삭제되고 안 된다거나, ......
+            서비스 추상화트랜잭션 서비스 추상화트랜잭션이란 더 이상 나눌 수 없는 단위 작업을 말한다. 작업을 쪼개서 작은 단위로 만들 수 없다는 것은 트랜잭션의 핵심 속성인 원자성을 의미한다.
+트랜잭션 경계설정DB는 그 자체로 완벽한 트랜잭션을 지원한다. SQL을 이용해 다중 로우의 수정이나 삭제를 위한 요청을 했을 때 일부 로우만 삭제되고 안 된다거나, 일부 ......
         </div>
     </a>
     
@@ -266,8 +297,7 @@ DB는 그 자체로 완벽한 트랜잭션을 지원한다. SQL을 이용해 다
             Object, String, StringBuffer, StringBuilder, Wrapper 클래스 / Objects, Scanner, StringTokenizer, BigInteger, BigDecimal 클래스
         </h3>
         <div class="post-content-preview">
-            java.lang 패키지와 유용한 클래스
-java.lang 패키지는 자바프로그래밍에 가장 기본이 되는 클래스들을 포함하고 있다. 그렇기 때문에 java.lang 패키지의 클래스들은 import문 없이도 사용할 수 있게 되어 있다. 그 동안 String 클래스나 System 클래스를 import문 없이 사용할 수 있었던 이유가 바로 java.lang 패......
+            java.lang 패키지와 유용한 클래스java.lang 패키지는 자바프로그래밍에 가장 기본이 되는 클래스들을 포함하고 있다. 그렇기 때문에 java.lang 패키지의 클래스들은 import문 없이도 사용할 수 있게 되어 있다. 그 동안 String 클래스나 System 클래스를 import문 없이 사용할 수 있었던 이유가 바로 java.lang 패키......
         </div>
     </a>
     
@@ -296,9 +326,8 @@ java.lang 패키지는 자바프로그래밍에 가장 기본이 되는 클래�
         </h3>
         <div class="post-content-preview">
             매번 공부해도 너무 당연하다는 듯이 넘어가 잊게되거나, 기억해 두면 좋을것 같은 기초적인 문법과 개념들을 간단히 정리해보겠습니다.
-변수
-덧셈 연산자(+)는 피연산자가 모두 숫자일 때는 두 수를 더하지만, 피연산자 중 어느 한쪽이 String이면 나머지 한 쪽을 먼저 String으로 변환한 다음 두 String을 결합한다.
-참조변수의 출력이나 덧셈연산자......
+변수덧셈 연산자(+)는 피연산자가 모두 숫자일 때는 두 수를 더하지만, 피연산자 중 어느 한쪽이 String이면 나머지 한 쪽을 먼저 String으로 변환한 다음 두 String을 결합한다.
+참조변수의 출력이나 덧셈연산자를......
         </div>
     </a>
     
@@ -326,12 +355,9 @@ java.lang 패키지는 자바프로그래밍에 가장 기본이 되는 클래�
             예외처리 방법, 예외처리 전략, 예외 전환, DataAccessException
         </h3>
         <div class="post-content-preview">
-            예외
-JdbcTemplate을 대표로 하는 스프링의 데이터 액세스 기능에 담겨 있는 예외처리와 관련된 접근 방법에 대해 알아보자.
-사라진 SQLException
-JdbcTemplate을 적용한 코드에서는 SQLException이 사라졌다. 이 SQLException은 어디로 간 것일까?
-초난감 예외처리
-예외가 발생하면 그것을 catch 블록을 써서 잡......
+            예외JdbcTemplate을 대표로 하는 스프링의 데이터 액세스 기능에 담겨 있는 예외처리와 관련된 접근 방법에 대해 알아보자.
+사라진 SQLExceptionJdbcTemplate을 적용한 코드에서는 SQLException이 사라졌다. 이 SQLException은 어디로 간 것일까?
+초난감 예외처리예외가 발생하면 그것을 catch 블록을 써서 잡아내는......
         </div>
     </a>
     
@@ -366,11 +392,10 @@ JdbcTemplate을 적용한 코드에서는 SQLException이 사라졌다. 이 SQLE
         </h3>
         <div class="post-content-preview">
             템플릿
-
 개방 폐쇄 원칙 (OCP)
 어떤 부분은 변경을 통해 그 기능이 다양해지고 확장하려는 성질이 있고, 어떤 부분은 고정되어 있고 변하지 않으려는 성질이 있다. 변화의 특성이 다른 부분을 구분해주고, 각각 다른 목적과 다른 이유에 의해 다른 시점에 독립적으로 변경될 수 있는 효율적인 구조를 만들어주는 것이 개방 폐쇄 원칙이다.
 
-템플릿이란 성질이 ......
+템플릿이란 성질이 다......
         </div>
     </a>
     
@@ -387,43 +412,6 @@ JdbcTemplate을 적용한 코드에서는 SQLException이 사라졌다. 이 SQLE
               <a href="/tags/#Context &amp; DI" title="Context &amp; DI">Context &amp; DI</a>
             
               <a href="/tags/#Template &amp; Callback" title="Template &amp; Callback">Template &amp; Callback</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2018/03/31/Git/pull-request-merge/">
-        <h2 class="post-title">
-            PR(Pull Request) merge
-        </h2>
-        <h3 class="post-subtitle">
-            PR(Pull Request) merge와 사용할 수 있는 옵션 3가지에 대해 알아보자.
-        </h3>
-        <div class="post-content-preview">
-            PR(Pull Request) merge
-보통 upstream의 repository를 fork한 후, origin에서 feature branch를 만들어 작업한 후 작업이 완료되면 upstream branch에 반영하기 위해 pull request를 요청해 merge 합니다. (upstream repository에 push 권한이 있는 사람이 merg......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by KimJongMin on
-            2018-03-31
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Git" title="Git">Git</a>
-            
-              <a href="/tags/#Pull Request" title="Pull Request">Pull Request</a>
-            
-              <a href="/tags/#Create a merge commit" title="Create a merge commit">Create a merge commit</a>
-            
-              <a href="/tags/#Squash and merge" title="Squash and merge">Squash and merge</a>
-            
-              <a href="/tags/#Rebase and merge" title="Rebase and merge">Rebase and merge</a>
             
         </div>
     
@@ -517,7 +505,7 @@ JdbcTemplate을 적용한 코드에서는 SQLException이 사라졌다. 이 SQLE
 
     <h5>categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><span class="category-list-count">14</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/BOJ/">BOJ</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Concept/">Concept</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Book/">Book</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Database/">Database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/">Programming</a><span class="category-list-count">89</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/AWS/">AWS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Gradle/">Gradle</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/HTML/">HTML</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Java/">Java</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/JavaScript/">JavaScript</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Linux-Ubuntu/">Linux & Ubuntu</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Node/">Node</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/RaspberryPi/">RaspberryPi</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/React-Native/">React Native</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Spring/">Spring</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Tool/">Tool</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project/">Project</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project/Emily/">Emily</a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tip/">Tip</a><span class="category-list-count">3</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><span class="category-list-count">14</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/BOJ/">BOJ</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Concept/">Concept</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Book/">Book</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Database/">Database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/">Programming</a><span class="category-list-count">90</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/AWS/">AWS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Gradle/">Gradle</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/HTML/">HTML</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Java/">Java</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/JavaScript/">JavaScript</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Linux-Ubuntu/">Linux & Ubuntu</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Node/">Node</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/RaspberryPi/">RaspberryPi</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/React-Native/">React Native</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Spring/">Spring</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Tool/">Tool</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project/">Project</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project/Emily/">Emily</a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tip/">Tip</a><span class="category-list-count">3</span></li></ul>
     </div>
 
 
@@ -529,10 +517,6 @@ JdbcTemplate을 적용한 코드에서는 SQLException이 사라졌다. 이 SQLE
     <!-- no hr -->
     <h5><a href="/tags/">FEATURED TAGS</a></h5>
     <div class="tags">
-        
-            
-            <a href="/tags/#AWS" title="AWS" rel="4">AWS</a>
-            
         
             
             <a href="/tags/#Algorithm" title="Algorithm" rel="14">Algorithm</a>
@@ -547,15 +531,7 @@ JdbcTemplate을 적용한 코드에서는 SQLException이 사라졌다. 이 SQLE
             
         
             
-            <a href="/tags/#java" title="java" rel="6">java</a>
-            
-        
-            
             <a href="/tags/#book" title="book" rel="4">book</a>
-            
-        
-            
-            <a href="/tags/#review" title="review" rel="3">review</a>
             
         
             
@@ -563,19 +539,17 @@ JdbcTemplate을 적용한 코드에서는 SQLException이 사라졌다. 이 SQLE
             
         
             
+            <a href="/tags/#java" title="java" rel="6">java</a>
+            
         
+            
+            <a href="/tags/#review" title="review" rel="3">review</a>
             
         
             
         
             
-        
-            
-            <a href="/tags/#Java" title="Java" rel="19">Java</a>
-            
-        
-            
-        
+            <a href="/tags/#Java" title="Java" rel="20">Java</a>
             
         
             
@@ -603,83 +577,7 @@ JdbcTemplate을 적용한 코드에서는 SQLException이 사라졌다. 이 SQLE
             
         
             
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
             <a href="/tags/#design pattern" title="design pattern" rel="2">design pattern</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-            <a href="/tags/#Async" title="Async" rel="4">Async</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-            <a href="/tags/#DeferredResult" title="DeferredResult" rel="2">DeferredResult</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-            <a href="/tags/#nio" title="nio" rel="2">nio</a>
-            
-        
-            
-            <a href="/tags/#select" title="select" rel="3">select</a>
-            
-        
-            
-            <a href="/tags/#multiplexing" title="multiplexing" rel="3">multiplexing</a>
-            
-        
-            
-        
-            
-        
-            
-            <a href="/tags/#Reactive" title="Reactive" rel="3">Reactive</a>
-            
-        
-            
-        
             
         
             
@@ -705,17 +603,11 @@ JdbcTemplate을 적용한 코드에서는 SQLException이 사라졌다. 이 SQLE
             
         
             
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
             <a href="/tags/#Linux &amp; Ubuntu" title="Linux &amp; Ubuntu" rel="5">Linux &amp; Ubuntu</a>
+            
+        
+            
+            <a href="/tags/#AWS" title="AWS" rel="4">AWS</a>
             
         
             
@@ -737,6 +629,10 @@ JdbcTemplate을 적용한 코드에서는 SQLException이 사라졌다. 이 SQLE
             
         
             
+        
+            
+        
+            
             <a href="/tags/#Module" title="Module" rel="2">Module</a>
             
         
@@ -747,67 +643,11 @@ JdbcTemplate을 적용한 코드에서는 SQLException이 사라졌다. 이 SQLE
             
         
             
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
             <a href="/tags/#Retrofit2" title="Retrofit2" rel="2">Retrofit2</a>
             
         
             
             <a href="/tags/#OkHttp3" title="OkHttp3" rel="2">OkHttp3</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-            <a href="/tags/#React Native" title="React Native" rel="4">React Native</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
             
         
             
@@ -837,9 +677,53 @@ JdbcTemplate을 적용한 코드에서는 SQLException이 사라졌다. 이 SQLE
             
         
             
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
             <a href="/tags/#GPIO" title="GPIO" rel="2">GPIO</a>
             
         
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#React Native" title="React Native" rel="4">React Native</a>
             
         
             
@@ -855,15 +739,7 @@ JdbcTemplate을 적용한 코드에서는 SQLException이 사라졌다. 이 SQLE
             
         
             
-        
-            
-        
-            
-        
-            
-        
-            
-        
+            <a href="/tags/#IntelliJ" title="IntelliJ" rel="2">IntelliJ</a>
             
         
             
@@ -873,13 +749,7 @@ JdbcTemplate을 적용한 코드에서는 SQLException이 사라졌다. 이 SQLE
             
         
             
-            <a href="/tags/#Spring Boot" title="Spring Boot" rel="4">Spring Boot</a>
-            
         
-            
-        
-            
-            <a href="/tags/#Micrometer" title="Micrometer" rel="2">Micrometer</a>
             
         
             
@@ -887,15 +757,9 @@ JdbcTemplate을 적용한 코드에서는 SQLException이 사라졌다. 이 SQLE
             
         
             
-            <a href="/tags/#AOP" title="AOP" rel="2">AOP</a>
-            
         
             
-            <a href="/tags/#Bean Validation" title="Bean Validation" rel="2">Bean Validation</a>
-            
         
-            
-            <a href="/tags/#IntelliJ" title="IntelliJ" rel="2">IntelliJ</a>
             
         
             
@@ -908,62 +772,6 @@ JdbcTemplate을 적용한 코드에서는 SQLException이 사라졌다. 이 SQLE
         
             
         
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-            <a href="/tags/#IoC" title="IoC" rel="2">IoC</a>
-            
-        
-            
-            <a href="/tags/#DI" title="DI" rel="2">DI</a>
-            
-        
-            
-            <a href="/tags/#Toby" title="Toby" rel="7">Toby</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-            <a href="/tags/#build tool" title="build tool" rel="2">build tool</a>
             
         
             
@@ -989,11 +797,191 @@ JdbcTemplate을 적용한 코드에서는 SQLException이 사라졌다. 이 SQLE
             
         
             
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Async" title="Async" rel="4">Async</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#Reactive" title="Reactive" rel="3">Reactive</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Spring Boot" title="Spring Boot" rel="4">Spring Boot</a>
+            
+        
+            
+            <a href="/tags/#Micrometer" title="Micrometer" rel="2">Micrometer</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Bean Validation" title="Bean Validation" rel="2">Bean Validation</a>
+            
+        
+            
+            <a href="/tags/#AOP" title="AOP" rel="2">AOP</a>
+            
+        
+            
+            <a href="/tags/#IoC" title="IoC" rel="2">IoC</a>
+            
+        
+            
+            <a href="/tags/#DI" title="DI" rel="2">DI</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#build tool" title="build tool" rel="2">build tool</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#nio" title="nio" rel="2">nio</a>
+            
+        
+            
+            <a href="/tags/#select" title="select" rel="3">select</a>
+            
+        
+            
+            <a href="/tags/#multiplexing" title="multiplexing" rel="3">multiplexing</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Toby" title="Toby" rel="7">Toby</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
             <a href="/tags/#Sort" title="Sort" rel="6">Sort</a>
             
         
             
+        
+            
+        
+            
+        
+            
             <a href="/tags/#Heap sort" title="Heap sort" rel="3">Heap sort</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#DeferredResult" title="DeferredResult" rel="2">DeferredResult</a>
+            
+        
             
         
             
