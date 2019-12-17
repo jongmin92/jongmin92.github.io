@@ -5,16 +5,16 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA" />
+    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="keyword"  content="">
+    <meta name="keyword" content="">
     <link rel="shortcut icon" href="/images/etc/ironman-draw.png">
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          Spring - RequestBody &amp; ResponseBody - 92Hz | Jongmin&#39;s Blog
+          Spring - RequestBody &amp; ResponseBody - 92Hz
         
     </title>
 
@@ -36,6 +36,9 @@
     <link rel="stylesheet" href="/css/signature.css">
 
     <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- For SEO -->
+    <link rel="canonical" href="https://jongmin92.github.io/2018/03/02/spring/spring-requestbody-responsebody/">
 
     <!-- Custom Fonts -->
     <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
@@ -79,7 +82,7 @@
     
 </style>
 
-<header class="intro-header" >
+<header class="intro-header">
     <!-- Signature -->
     <div id="signature">
         <div class="container">
@@ -147,14 +150,14 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -213,12 +216,7 @@
 
             <center>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-3921438651818825"
-         data-ad-slot="3015269677"></ins>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -238,12 +236,12 @@
 <li>@ReuqestBody를 사용하지 않는 경우 : query parameter, form data를 객체에 mapping한다.</li>
 <li>@ReuqestBody를 사용하는 경우 : body에 있는 data를 <strong>HttpMessageConverter</strong>를 이용해 선언한 객체에 mapping한다.</li>
 </ul>
-<h1 id="responsebody"><a href="#ResponseBody" class="headerlink" title="@ResponseBody"></a>@ResponseBody</h1><p>@ResponseBody는 @RequestBody와 비슷한 방식으로 동작합니다. @ResponseBody가 메소드 레벨에서 부여되면 메소드가 리턴하는 오브젝트는 <a href="https://docs.spring.io/spring/docs/3.2.x/javadoc-api/org/springframework/web/servlet/view/ContentNegotiatingViewResolver.html" target="_blank" rel="noopener">ContentNegotiatingViewResolver</a>를 이용해 뷰를 통해 결과를 만들어내는 것이 아닌, message converter를 통해 바로 HTTP 응답의 메시지 본문으로 변환됩니다.</p>
+<h1 id="responsebody"><a href="#ResponseBody" class="headerlink" title="@ResponseBody"></a>@ResponseBody</h1><p>@ResponseBody는 @RequestBody와 비슷한 방식으로 동작합니다. @ResponseBody가 메소드 레벨에서 부여되면 메소드가 리턴하는 오브젝트는 <a href="https://docs.spring.io/spring/docs/3.2.x/javadoc-api/org/springframework/web/servlet/view/ContentNegotiatingViewResolver.html" rel="external nofollow noopener noreferrer" target="_blank">ContentNegotiatingViewResolver</a>를 이용해 뷰를 통해 결과를 만들어내는 것이 아닌, message converter를 통해 바로 HTTP 응답의 메시지 본문으로 변환됩니다.</p>
 <p>ContentNegotiatingViewResolver는 등록되어 있는 ViewResolver중에서 controller 메소드의 리턴값을 통해 등록된 ViewResolver 중에서 적합한 형태로 처리해서 반환하는 반면, <strong>@ResponseBody는 @RequestBody가 선택한 형식으로 결과값을 변환하여 반환한다고 보면 됩니다.</strong></p>
 <blockquote>
 <p><strong><code>@RestController</code>는 @Controller와 @ResponseBody를 동시에 사용하는 것과 같습니다.</strong> @Controller를 사용하는 경우에만 @ResponseBody를 추가하면 됩니다.</p>
 </blockquote>
-<h1 id="httpmessageconverter를-이용한-변환-처리"><a href="#HttpMessageConverter를-이용한-변환-처리" class="headerlink" title="HttpMessageConverter를 이용한 변환 처리"></a>HttpMessageConverter를 이용한 변환 처리</h1><p><a href="https://docs.spring.io/spring/docs/3.2.x/javadoc-api/org/springframework/web/servlet/mvc/annotation/AnnotationMethodHandlerAdapter.html" target="_blank" rel="noopener">AnnotationMethodHandlerAdapter</a>에는 <a href="https://docs.spring.io/autorepo/docs/spring/3.2.0.M1/api/org/springframework/http/converter/HttpMessageConverter.html" target="_blank" rel="noopener">HttpMessageConverter</a> 타입의 메시지 변환기인 <code>message converter</code>가 여러 개 등록되어 있습니다. @RequestBody가 붙은 파라미터가 있으면 <strong>HTTP 요청의 미디어 타입과 파라미터의 타입을 먼저 확인하고, message converter 중에서 해당 미디어 타입과 파라미터 타입을 처리할 수 있다면, HTTP 요청의 body 부분을 통째로 변환해서 지정된 메소드 파라미터로 전달</strong>해줍니다.</p>
+<h1 id="httpmessageconverter를-이용한-변환-처리"><a href="#HttpMessageConverter를-이용한-변환-처리" class="headerlink" title="HttpMessageConverter를 이용한 변환 처리"></a>HttpMessageConverter를 이용한 변환 처리</h1><p><a href="https://docs.spring.io/spring/docs/3.2.x/javadoc-api/org/springframework/web/servlet/mvc/annotation/AnnotationMethodHandlerAdapter.html" rel="external nofollow noopener noreferrer" target="_blank">AnnotationMethodHandlerAdapter</a>에는 <a href="https://docs.spring.io/autorepo/docs/spring/3.2.0.M1/api/org/springframework/http/converter/HttpMessageConverter.html" rel="external nofollow noopener noreferrer" target="_blank">HttpMessageConverter</a> 타입의 메시지 변환기인 <code>message converter</code>가 여러 개 등록되어 있습니다. @RequestBody가 붙은 파라미터가 있으면 <strong>HTTP 요청의 미디어 타입과 파라미터의 타입을 먼저 확인하고, message converter 중에서 해당 미디어 타입과 파라미터 타입을 처리할 수 있다면, HTTP 요청의 body 부분을 통째로 변환해서 지정된 메소드 파라미터로 전달</strong>해줍니다.</p>
 <h2 id="httpmessageconverter의-종류"><a href="#HttpMessageConverter의-종류" class="headerlink" title="HttpMessageConverter의 종류"></a>HttpMessageConverter의 종류</h2><p><strong>AnnotationMethodHandlerAdapter 클래스는 @RequestBody 어노테이션이 적용된 파라미터나 @ResponseBody 어노테이션이 적용된 메서드에 대해 HttpMessageConverter를 사용해서 변환을 처리</strong>합니다. 주요 HttpMessageConverter 구현 클래스는 다음과 같습니다.</p>
 <ul>
 <li><strong>ByteArrayHttpMessageConverter</strong> : HTTP 메시지와 byte 배열 사이의 변환을 처리한다. 컨텐츠 타입은 <code>application/octet-stream</code>이다.</li>
@@ -255,7 +253,7 @@
 </ul>
 <h1 id="content-type과-accept-header-기반의-변환-처리"><a href="#Content-Type과-Accept-header-기반의-변환-처리" class="headerlink" title="Content-Type과 Accept header 기반의 변환 처리"></a>Content-Type과 Accept header 기반의 변환 처리</h1><p>AnnotationMethodHandlerAdapter가 HttpMessageConverter를 이용해서 request의 body 데이터를 @RequestBody 어노테이션이 적용된 자바 객체로 변환할 때에는, <strong>HTTP 요청 header의 <code>Content-Type</code>에 명시된 미디어 타입(MIME)을 지원하는 HttpMessageConverter 구현체를 선택</strong>합니다.<br>예를 들어, 요청 미디어 타입이 application/json이고 @RequestBody 어노테이션이 적용된 경우 MappingJacksonHttpMessageConverter가 선택됩니다.</p>
 <p>비슷하게 @ResponseBody 어노테이션을 이용해서 리턴한 객체를 HTTP 응답 객체로 변환할 때에는 <strong>HTTP 요청 header의  <code>Accept</code>에 명시된 미디어 타입(MIME)을 지원하는 HttpMessageConveter 구현체를 선택</strong>합니다.<br>예를 들어, Accept에 명시된 값이 application/json이고 @ResponseBody 어노테이션이 적용된 메서드의 리턴 타입이 자바 객체인 경우 MappingJacksonHttpMessageConverter가 선택됩니다.</p>
-<h1 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h1><p><a href="http://www.baeldung.com/spring-httpmessageconverter-rest" target="_blank" rel="noopener">Http Message Converters with the Spring Framework</a></p>
+<h1 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h1><p><a href="http://www.baeldung.com/spring-httpmessageconverter-rest" rel="external nofollow noopener noreferrer" target="_blank">Http Message Converters with the Spring Framework</a></p>
 
                 
 
@@ -280,12 +278,7 @@
 
                 <center>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-3921438651818825"
-         data-ad-slot="3015269677"></ins>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -428,7 +421,7 @@
 
                 
                     <li>
-                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420">
+                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -439,7 +432,7 @@
 
                 
                     <li>
-                        <a target="_blank"  href="https://github.com/jongmin92">
+                        <a target="_blank" href="https://github.com/jongmin92" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -454,15 +447,12 @@
                 <p class="copyright text-muted">
                     Copyright &copy; KimJongMin 2019 
                     <br>
-                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    Theme by <a href="http://huangxuan.me" rel="external nofollow noopener noreferrer" target="_blank">Hux</a> 
                     <span style="display: inline-block; margin: 0 5px;">
                         <i class="fa fa-heart"></i>
                     </span> 
-                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
-                    <iframe
-                        style="margin-left: 2px; margin-bottom:-5px;"
-                        frameborder="0" scrolling="0" width="91px" height="20px"
-                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    re-Ported by <a href="http://beantech.org" rel="external nofollow noopener noreferrer" target="_blank">BeanTech</a> | 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px" src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true">
                     </iframe>
                 </p>
             </div>
@@ -563,10 +553,10 @@
 
 
 	<a id="rocket" href="#top" class=""></a>
-	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
-    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async></script>
 <!-- Image to hack wechat -->
-<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0" />
+<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0">
 <!-- Migrate from head to bottom, no longer block render and still work -->
 
 </body>

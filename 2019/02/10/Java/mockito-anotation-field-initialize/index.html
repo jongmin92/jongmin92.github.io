@@ -5,16 +5,16 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA" />
+    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="keyword"  content="">
+    <meta name="keyword" content="">
     <link rel="shortcut icon" href="/images/etc/ironman-draw.png">
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          Mockito annotation을 사용하는 field 초기화 하기 - 92Hz | Jongmin&#39;s Blog
+          Mockito annotation을 사용하는 field 초기화 하기 - 92Hz
         
     </title>
 
@@ -36,6 +36,9 @@
     <link rel="stylesheet" href="/css/signature.css">
 
     <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- For SEO -->
+    <link rel="canonical" href="https://jongmin92.github.io/2019/02/10/java/mockito-anotation-field-initialize/">
 
     <!-- Custom Fonts -->
     <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
@@ -79,7 +82,7 @@
     
 </style>
 
-<header class="intro-header" >
+<header class="intro-header">
     <!-- Signature -->
     <div id="signature">
         <div class="container">
@@ -147,14 +150,14 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -213,12 +216,7 @@
 
             <center>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-3921438651818825"
-         data-ad-slot="3015269677"></ins>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -239,7 +237,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MockitoTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Before</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setup</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        MockitoAnnotations.initMocks(<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Mock</span></span><br><span class="line">    <span class="keyword">private</span> List list;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">shouldDoSomething</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        list.add(<span class="number">100</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>그리고 추가로 Mockito <a href="https://static.javadoc.io/org.mockito/mockito-core/2.24.0/org/mockito/Mockito.html#mockito_junit_rule" target="_blank" rel="noopener">1.10.17</a> 버전부터 제공하는 <code>JUnit rule</code>을 이용하는 방법이 있다.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MockitoTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Rule</span></span><br><span class="line">    <span class="keyword">public</span> MockitoRule mockito = MockitoJUnit.rule();</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Mock</span></span><br><span class="line">    <span class="keyword">private</span> List list;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">shouldDoSomething</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        list.add(<span class="number">100</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>그리고 추가로 Mockito <a href="https://static.javadoc.io/org.mockito/mockito-core/2.24.0/org/mockito/Mockito.html#mockito_junit_rule" rel="external nofollow noopener noreferrer" target="_blank">1.10.17</a> 버전부터 제공하는 <code>JUnit rule</code>을 이용하는 방법이 있다.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MockitoTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Rule</span></span><br><span class="line">    <span class="keyword">public</span> MockitoRule mockito = MockitoJUnit.rule();</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Mock</span></span><br><span class="line">    <span class="keyword">private</span> List list;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">shouldDoSomething</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        list.add(<span class="number">100</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>그럼 위의 3가지 방법 중 어떤 방법을 사용하는 것이 좋을까? 먼저, 3가지 방식들을 비교하기전에 <strong>Test Runner, @RunWith, Rule</strong>에 대해서 간단하게 알아보자.</p>
 <h1 id="test-runner"><a href="#Test-Runner" class="headerlink" title="Test Runner"></a>Test Runner</h1><p><strong>JUnit 프레임워크에서 테스트 클래스 내에 존재하는 각각의 테스트 메소드 실행을 담 당하고 있는 클래스를 Test Runner라고 한다.</strong> Test Runner는 테스트 클래스의 구조에 맞게 테스트 메소드들을 실행하고 결과를 표시하는 역할을 수행한다. 우리 눈에는 보이지 않지만, 테스트 케이스를 IDE에서 실행하면 내부적으로 는 JUnit의 BlockJUnit4ClassRunner라는 Test Runner 클래스가 실행되고, IDE는 그 결과를 해석해서 우리에게 보기 편한 화면으로 보여준다.</p>
 <blockquote>
@@ -249,7 +247,7 @@
 <h1 id="rule"><a href="#Rule" class="headerlink" title="Rule"></a>Rule</h1><p>JUnit 4.7 버전부터 추가된 기능으로 <strong>하나의 테스트 클래스 내에서 각 테스트 메소드의 동작 방식을 재정의하거나 추가하기 위해 사용하는 기능이다.</strong> 테스트 케이스 수행을 좀 더 세밀하게 조작할 수 있게 된다.</p>
 <h1 id="결론"><a href="#결론" class="headerlink" title="결론"></a>결론</h1><p>MockitoJUnit의 rule을 사용하면 MockitoJUnitRunner와 똑같은 기능을 수행하면서, 다른 Test Runner를 사용할 수 있다. 사용하고 있는 Mockito의 버전이 1.10.17, JUnit 버전이 4.7 이상이라면 <strong>@RunWith가 아닌 MockitoJUnit의 rule을 사용해서 Mockito annotation을 사용하는 field를 초기화 하자</strong></p>
 <h1 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h1><ul>
-<li><a href="https://stackoverflow.com/questions/10806345/runwithmockitojunitrunner-class-vs-mockitoannotations-initmocksthis/10812752#10812752" target="_blank" rel="noopener">@RunWith(MockitoJUnitRunner.class) vs MockitoAnnotations.initMocks(this)</a></li>
+<li><a href="https://stackoverflow.com/questions/10806345/runwithmockitojunitrunner-class-vs-mockitoannotations-initmocksthis/10812752#10812752" rel="external nofollow noopener noreferrer" target="_blank">@RunWith(MockitoJUnitRunner.class) vs MockitoAnnotations.initMocks(this)</a></li>
 </ul>
 
                 
@@ -275,12 +273,7 @@
 
                 <center>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-3921438651818825"
-         data-ad-slot="3015269677"></ins>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -423,7 +416,7 @@
 
                 
                     <li>
-                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420">
+                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -434,7 +427,7 @@
 
                 
                     <li>
-                        <a target="_blank"  href="https://github.com/jongmin92">
+                        <a target="_blank" href="https://github.com/jongmin92" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -449,15 +442,12 @@
                 <p class="copyright text-muted">
                     Copyright &copy; KimJongMin 2019 
                     <br>
-                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    Theme by <a href="http://huangxuan.me" rel="external nofollow noopener noreferrer" target="_blank">Hux</a> 
                     <span style="display: inline-block; margin: 0 5px;">
                         <i class="fa fa-heart"></i>
                     </span> 
-                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
-                    <iframe
-                        style="margin-left: 2px; margin-bottom:-5px;"
-                        frameborder="0" scrolling="0" width="91px" height="20px"
-                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    re-Ported by <a href="http://beantech.org" rel="external nofollow noopener noreferrer" target="_blank">BeanTech</a> | 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px" src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true">
                     </iframe>
                 </p>
             </div>
@@ -558,10 +548,10 @@
 
 
 	<a id="rocket" href="#top" class=""></a>
-	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
-    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async></script>
 <!-- Image to hack wechat -->
-<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0" />
+<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0">
 <!-- Migrate from head to bottom, no longer block render and still work -->
 
 </body>

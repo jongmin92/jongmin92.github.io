@@ -5,16 +5,16 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA" />
+    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="keyword"  content="">
+    <meta name="keyword" content="">
     <link rel="shortcut icon" href="/images/etc/ironman-draw.png">
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          NVM (Node Version Manager) 사용하기 - 92Hz | Jongmin&#39;s Blog
+          NVM (Node Version Manager) 사용하기 - 92Hz
         
     </title>
 
@@ -36,6 +36,9 @@
     <link rel="stylesheet" href="/css/signature.css">
 
     <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- For SEO -->
+    <link rel="canonical" href="https://jongmin92.github.io/2016/09/20/node/nvm-(node-version-manager)/">
 
     <!-- Custom Fonts -->
     <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
@@ -79,7 +82,7 @@
     
 </style>
 
-<header class="intro-header" >
+<header class="intro-header">
     <!-- Signature -->
     <div id="signature">
         <div class="container">
@@ -147,14 +150,14 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -213,12 +216,7 @@
 
             <center>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-3921438651818825"
-         data-ad-slot="3015269677"></ins>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -241,7 +239,7 @@
 <hr>
 <p>오늘은 NVM에 대해서 알아보겠습니다. 저는 회사에서 Ionic 을 통해서 하이브리드 앱을 개발하고 있습니다. Ionic의 개발환경은 기본적으로 Node.js를 필요로 합니다. 당시 처음 입사하였을때는 회사에서 사용중인 Node v4.4.0을 설치하여 사용하고 있었습니다. 그러나 후에 여러개의 프로젝트를 하며 ES6 문법을 사용하기 위해 상위 버전의 Node를 사용해야하 하는 일이 생겼습니다. 이런 경우 보통 Node를 제거한 후 상위 버전을 사용하게 된다면 후에 다시 Ionic 프로젝트를 할때 문제가 됩니다. 이럴때 NVM을 사용한다면 여러개의 Node 를 버전별로 쉽게 관리하고 사용할 수 있습니다. 지금부터 NVM을 사용했을때의 이점과 설치 및 사용방법에 대해 알아보겠습니다.</p>
 <p><span id="1"></span></p>
-<h2 id="nvm-node-version-manager"><a href="#NVM-Node-Version-Manager" class="headerlink" title="NVM (Node Version Manager)"></a>NVM (Node Version Manager)</h2><p><a href="https://github.com/creationix/nvm" target="_blank" rel="noopener">NVM</a>은 말 그대로 Node의 버전을 관리해주는 매니저입니다. Ruby에는 RVM이 있듯이 Node에서는 NVM을 사용합니다. 한 사용자 계정에 여러개의 Node 버전을 설치하여 선택하여 사용할 수 있습니다.</p>
+<h2 id="nvm-node-version-manager"><a href="#NVM-Node-Version-Manager" class="headerlink" title="NVM (Node Version Manager)"></a>NVM (Node Version Manager)</h2><p><a href="https://github.com/creationix/nvm" rel="external nofollow noopener noreferrer" target="_blank">NVM</a>은 말 그대로 Node의 버전을 관리해주는 매니저입니다. Ruby에는 RVM이 있듯이 Node에서는 NVM을 사용합니다. 한 사용자 계정에 여러개의 Node 버전을 설치하여 선택하여 사용할 수 있습니다.</p>
 <p><span id="2"></span></p>
 <h3 id="nvm-사용시-이점"><a href="#NVM-사용시-이점" class="headerlink" title="NVM 사용시 이점"></a>NVM 사용시 이점</h3><ul>
 <li>여러 버전의 Node를 쉽게 사용할 수 있습니다. (기존의 버전을 삭제할 필요가 없습니다.)</li>
@@ -289,12 +287,7 @@
 
                 <center>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-3921438651818825"
-         data-ad-slot="3015269677"></ins>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -426,7 +419,7 @@
 
                 
                     <li>
-                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420">
+                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -437,7 +430,7 @@
 
                 
                     <li>
-                        <a target="_blank"  href="https://github.com/jongmin92">
+                        <a target="_blank" href="https://github.com/jongmin92" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -452,15 +445,12 @@
                 <p class="copyright text-muted">
                     Copyright &copy; KimJongMin 2019 
                     <br>
-                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    Theme by <a href="http://huangxuan.me" rel="external nofollow noopener noreferrer" target="_blank">Hux</a> 
                     <span style="display: inline-block; margin: 0 5px;">
                         <i class="fa fa-heart"></i>
                     </span> 
-                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
-                    <iframe
-                        style="margin-left: 2px; margin-bottom:-5px;"
-                        frameborder="0" scrolling="0" width="91px" height="20px"
-                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    re-Ported by <a href="http://beantech.org" rel="external nofollow noopener noreferrer" target="_blank">BeanTech</a> | 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px" src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true">
                     </iframe>
                 </p>
             </div>
@@ -561,10 +551,10 @@
 
 
 	<a id="rocket" href="#top" class=""></a>
-	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
-    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async></script>
 <!-- Image to hack wechat -->
-<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0" />
+<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0">
 <!-- Migrate from head to bottom, no longer block render and still work -->
 
 </body>

@@ -5,16 +5,16 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA" />
+    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="keyword"  content="">
+    <meta name="keyword" content="">
     <link rel="shortcut icon" href="/images/etc/ironman-draw.png">
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          4) 학식 메뉴 크롤링 하기 - 92Hz | Jongmin&#39;s Blog
+          4) 학식 메뉴 크롤링 하기 - 92Hz
         
     </title>
 
@@ -36,6 +36,9 @@
     <link rel="stylesheet" href="/css/signature.css">
 
     <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- For SEO -->
+    <link rel="canonical" href="https://jongmin92.github.io/2017/05/26/emily/4-crawling/">
 
     <!-- Custom Fonts -->
     <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
@@ -79,7 +82,7 @@
     
 </style>
 
-<header class="intro-header" >
+<header class="intro-header">
     <!-- Signature -->
     <div id="signature">
         <div class="container">
@@ -147,14 +150,14 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -213,12 +216,7 @@
 
             <center>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-3921438651818825"
-         data-ad-slot="3015269677"></ins>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -237,7 +235,7 @@
 <li><a href="#4">크롤링 이후</a></li>
 </ol>
 <hr>
-<p><a href="http://plus.kakao.com/home/@인천대학교-에밀리" target="_blank" rel="noopener">인천대학교-에밀리</a>에 처음 추가한 기능은 <strong>교내 식당의 메뉴를 알려주는 기능</strong>이였습니다. 학교 DB에 접근할 수 있는 권한이 없었기 때문에 <strong>하루마다 매일 갱신</strong>되는 식당의 메뉴를 알기 위해서는 <a href="http://www.inu.ac.kr/com/cop/mainWork/foodList1.do?siteId=inu&amp;id=inu_050110010000&amp;command=week" target="_blank" rel="noopener">학교 홈페이지</a>에서 데이터를 참조하는 방법밖에 없었습니다. 이를 해결하기 위해 <strong><code>크롤링</code></strong>에 대해 공부하고 구현했던 방법에 대해 포스팅하려 합니다.</p>
+<p><a href="http://plus.kakao.com/home/@인천대학교-에밀리" rel="external nofollow noopener noreferrer" target="_blank">인천대학교-에밀리</a>에 처음 추가한 기능은 <strong>교내 식당의 메뉴를 알려주는 기능</strong>이였습니다. 학교 DB에 접근할 수 있는 권한이 없었기 때문에 <strong>하루마다 매일 갱신</strong>되는 식당의 메뉴를 알기 위해서는 <a href="http://www.inu.ac.kr/com/cop/mainWork/foodList1.do?siteId=inu&amp;id=inu_050110010000&amp;command=week" rel="external nofollow noopener noreferrer" target="_blank">학교 홈페이지</a>에서 데이터를 참조하는 방법밖에 없었습니다. 이를 해결하기 위해 <strong><code>크롤링</code></strong>에 대해 공부하고 구현했던 방법에 대해 포스팅하려 합니다.</p>
 <blockquote>
 <p>Node 버전은 <strong>6.6.0</strong>을 사용합니다.</p>
 </blockquote>
@@ -254,14 +252,14 @@
 <p>2.<strong>Parsing</strong> : 가져온 데이터를 어떻게 추출할 것인가?</p>
 <hr>
 <p><span id="2"></span></p>
-<h2 id="scraping-데이터-가져오기"><a href="#Scraping-데이터-가져오기" class="headerlink" title="Scraping - 데이터 가져오기"></a>Scraping - 데이터 가져오기</h2><p>Javascript에서 웹 페이지 데이터를 가져오기 위해서 <a href="https://github.com/request/request" target="_blank" rel="noopener">request</a> 모듈을 사용합니다.</p>
+<h2 id="scraping-데이터-가져오기"><a href="#Scraping-데이터-가져오기" class="headerlink" title="Scraping - 데이터 가져오기"></a>Scraping - 데이터 가져오기</h2><p>Javascript에서 웹 페이지 데이터를 가져오기 위해서 <a href="https://github.com/request/request" rel="external nofollow noopener noreferrer" target="_blank">request</a> 모듈을 사용합니다.</p>
 <p>먼저 request 모듈을 설치합니다.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install request --save</span><br></pre></td></tr></table></figure></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> request = <span class="built_in">require</span>(<span class="string">'request'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> url = <span class="string">"http://www.inu.ac.kr/com/cop/mainWork/foodList1.do?siteId=inu&amp;id=inu_050110010000&amp;command=week"</span>;</span><br><span class="line"></span><br><span class="line">request(url, (error, response, body) =&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span> (error) <span class="keyword">throw</span> error;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">console</span>.log(body);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>위의 코드를 실행하면 아래와 같이 제가 얻고자 했던 학식 메뉴의 데이터를 포함한 웹 페이지 데이터를 가져옵니다. 해당 데이터는 크롬에서 <strong><code>보기 - 개발자 정보 - 소스 보기</code></strong>를 통해서도 확인이 가능합니다.</p>
 <p><img src="/images/post/2017-05-26/scraping.png" alt="웹 페이지 Scraping"></p>
 <hr>
 <p><span id="3"></span></p>
-<h2 id="parsing-데이터-추출하기"><a href="#Parsing-데이터-추출하기" class="headerlink" title="Parsing - 데이터 추출하기"></a>Parsing - 데이터 추출하기</h2><p>Scraping을 통해 가져온 데이터에서 원하는 데이터만을 추출(Parsing)하기 위해 <a href="https://github.com/cheeriojs/cheerio" target="_blank" rel="noopener">cheerio</a> 모듈을 사용합니다.</p>
+<h2 id="parsing-데이터-추출하기"><a href="#Parsing-데이터-추출하기" class="headerlink" title="Parsing - 데이터 추출하기"></a>Parsing - 데이터 추출하기</h2><p>Scraping을 통해 가져온 데이터에서 원하는 데이터만을 추출(Parsing)하기 위해 <a href="https://github.com/cheeriojs/cheerio" rel="external nofollow noopener noreferrer" target="_blank">cheerio</a> 모듈을 사용합니다.</p>
 <p>cheerio 모듈을 설치합니다.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install cheerio --save</span><br></pre></td></tr></table></figure></p>
 <p>cherrio 모듈을 사용하면 웹 클라이언트 자바스크립트 라이브러리인 <strong><code>jQuery</code></strong> 에서 사용하는 것 처럼 style을 통해 element를 선택할 수 있어, 기존의 선택자 방식을 그대로 사용할 수 있습니다.</p>
 <p>따라서 cherrio를 사용하기 위해서는 Request 모듈을 통해 가져온 HTML 데이터에서 <strong>어떤 element가 우리가 원하는 데이터를 갖고 있는지 파악할 필요가 있습니다.</strong></p>
@@ -281,8 +279,8 @@
 <p><span id="4"></span></p>
 <h2 id="크롤링-이후"><a href="#크롤링-이후" class="headerlink" title="크롤링 이후"></a>크롤링 이후</h2><p>크롤링을 통해 원하는 데이터를 추출했다면 이를 활용해야 합니다. 에밀리에서는 사용자의 요청(학생식당, 카페테리아, 사범대식당, 기숙사식당, 교직원식당)에 따라 해당하는 식당의 메뉴를 제공합니다.</p>
 <p>메뉴라는 데이터 특성상 실시간으로 변경되는 데이터가 아니기 때문에 한번 크롤링 하고 나면 사용자의 요청(식당)에 따라 다른 응답해주면 될 뿐 데이터 자체는 요일이 변경되지 않는이상 계속 유효합니다. 따라서 <strong>학교 사이트에서 메뉴를 크롤링하는 행위는 학교 메뉴가 갱신되는 일주일 주기마다 한번씩만 하고 크롤링한 데이터를 DB에 저장한다면 사용자의 요청마다 반복적인 크롤링을 하지 않을 수 있습니다.</strong></p>
-<p>이를 위한 해결 방법으로는 <a href="https://github.com/node-schedule/node-schedule" target="_blank" rel="noopener">node-schedule</a> 모듈을 사용해서 정해진 시간마다 실행되도록 하는 방법이 있습니다.</p>
-<p>혹은 <a href="https://aws.amazon.com/ko/lambda/" target="_blank" rel="noopener">AWS-Lambda</a>를 사용할 수도 있습니다.</p>
+<p>이를 위한 해결 방법으로는 <a href="https://github.com/node-schedule/node-schedule" rel="external nofollow noopener noreferrer" target="_blank">node-schedule</a> 모듈을 사용해서 정해진 시간마다 실행되도록 하는 방법이 있습니다.</p>
+<p>혹은 <a href="https://aws.amazon.com/ko/lambda/" rel="external nofollow noopener noreferrer" target="_blank">AWS-Lambda</a>를 사용할 수도 있습니다.</p>
 <p>저는 <strong><code>AWS-Lambda</code></strong> 를 사용해서 스케쥴링을 하였는데 이와 관련된 내용은 다음에 포스팅하도록 하겠습니다.</p>
 
                 
@@ -308,12 +306,7 @@
 
                 <center>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-3921438651818825"
-         data-ad-slot="3015269677"></ins>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -445,7 +438,7 @@
 
                 
                     <li>
-                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420">
+                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -456,7 +449,7 @@
 
                 
                     <li>
-                        <a target="_blank"  href="https://github.com/jongmin92">
+                        <a target="_blank" href="https://github.com/jongmin92" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -471,15 +464,12 @@
                 <p class="copyright text-muted">
                     Copyright &copy; KimJongMin 2019 
                     <br>
-                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    Theme by <a href="http://huangxuan.me" rel="external nofollow noopener noreferrer" target="_blank">Hux</a> 
                     <span style="display: inline-block; margin: 0 5px;">
                         <i class="fa fa-heart"></i>
                     </span> 
-                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
-                    <iframe
-                        style="margin-left: 2px; margin-bottom:-5px;"
-                        frameborder="0" scrolling="0" width="91px" height="20px"
-                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    re-Ported by <a href="http://beantech.org" rel="external nofollow noopener noreferrer" target="_blank">BeanTech</a> | 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px" src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true">
                     </iframe>
                 </p>
             </div>
@@ -580,10 +570,10 @@
 
 
 	<a id="rocket" href="#top" class=""></a>
-	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
-    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async></script>
 <!-- Image to hack wechat -->
-<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0" />
+<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0">
 <!-- Migrate from head to bottom, no longer block render and still work -->
 
 </body>

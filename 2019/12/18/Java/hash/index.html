@@ -5,16 +5,16 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA" />
+    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="keyword"  content="">
+    <meta name="keyword" content="">
     <link rel="shortcut icon" href="/images/etc/ironman-draw.png">
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          Hash - MD5와 SHA256 - 92Hz | Jongmin&#39;s Blog
+          Hash - MD5와 SHA256 - 92Hz
         
     </title>
 
@@ -36,6 +36,9 @@
     <link rel="stylesheet" href="/css/signature.css">
 
     <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- For SEO -->
+    <link rel="canonical" href="https://jongmin92.github.io/2019/12/18/java/hash/">
 
     <!-- Custom Fonts -->
     <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
@@ -79,7 +82,7 @@
     
 </style>
 
-<header class="intro-header" >
+<header class="intro-header">
     <!-- Signature -->
     <div id="signature">
         <div class="container">
@@ -151,14 +154,14 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -217,12 +220,7 @@
 
             <center>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-3921438651818825"
-         data-ad-slot="3015269677"></ins>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -248,12 +246,12 @@
 </blockquote>
 <p>kotlin으로 작성한 코드를 통해 간단히 확인해보자. java에서 제공하는 <code>MessageDigest</code>를 사용하면 쉽게 MD5 해시 함수를 통한 해시 값을 만들 수 있다.</p>
 <p>아래 코드에서는 MD5 해시 함수를 통해 해시 값(128비트)을 생성하고 Hex string으로 변환하였다.</p>
-<p><a href="https://www.md5hashgenerator.com/" target="_blank" rel="noopener">Online MD5 Hash Generator</a>를 이용해서도 테스트할 수 있다.</p>
+<p><a href="https://www.md5hashgenerator.com/" rel="external nofollow noopener noreferrer" target="_blank">Online MD5 Hash Generator</a>를 이용해서도 테스트할 수 있다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">val</span> planText = <span class="string">"password1!2@3#"</span></span><br><span class="line">    <span class="keyword">val</span> md = MessageDigest.getInstance(<span class="string">"MD5"</span>)</span><br><span class="line">    md.update(planText.toByteArray())</span><br><span class="line"></span><br><span class="line">    <span class="keyword">val</span> digest = DatatypeConverter.printHexBinary(md.digest())</span><br><span class="line">    println(<span class="string">"planText: <span class="subst">$&#123;planText&#125;</span>"</span>)</span><br><span class="line">    println(<span class="string">"MD5 encoding result: <span class="subst">$&#123;digest&#125;</span>"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">----------실행 결과----------</span><br><span class="line">planText: password1!<span class="number">2</span>@<span class="number">3</span>#</span><br><span class="line">MD5 encoding result: E9C4736A0963EB81C0C85AF48CF2F3F2</span><br></pre></td></tr></table></figure>
 <h2 id="sha-256"><a href="#SHA-256" class="headerlink" title="SHA-256"></a>SHA-256</h2><p><strong><code>SHA-256</code>은 SHA(Secure Hash Algorithm) 알고리즘의 한 종류로서 256비트의 해시 값을 생성하는 해시 함수이다.</strong> SHA-256은 미국의 국립표준기술연구소(NIST; National Institute of Standards and Technology)에 의해 공표된 표준 해시 알고리즘인 SHA-2 계열 중 하나이며 블록체인에서 가장 많이 채택하여 사용하고 있다.</p>
 <p>개인용 컴퓨터로 무차별 대입을 수행해 해시 충돌 사례를 찾으려고 할 때 많은 시간이 소요될 정도로 큰 숫자이므로 충돌로부터 비교적 안전하다고 평가된다.</p>
 <p>아래 코드에서는 SHA-256 해시 함수를 통해 해시 값(256비트)을 생성하고 Hex string으로 변환하였다.</p>
-<p><a href="https://www.cleancss.com/sha256-hash-generator" target="_blank" rel="noopener">Online SHA-256 Hash Generator</a>를 이용해서도 테스트할 수 있다.</p>
+<p><a href="https://www.cleancss.com/sha256-hash-generator" rel="external nofollow noopener noreferrer" target="_blank">Online SHA-256 Hash Generator</a>를 이용해서도 테스트할 수 있다.</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">val</span> planText = <span class="string">"password1!2@3#"</span></span><br><span class="line">    <span class="keyword">val</span> md = MessageDigest.getInstance(<span class="string">"SHA-256"</span>)</span><br><span class="line">    md.update(planText.toByteArray())</span><br><span class="line"></span><br><span class="line">    <span class="keyword">val</span> digest = DatatypeConverter.printHexBinary(md.digest())</span><br><span class="line">    println(<span class="string">"planText: <span class="subst">$&#123;planText&#125;</span>"</span>)</span><br><span class="line">    println(<span class="string">"SHA-256 encoding result: <span class="subst">$&#123;digest&#125;</span>"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">----------실행 결과----------</span><br><span class="line">planText: password1!<span class="number">2</span>@<span class="number">3</span>#</span><br><span class="line">SHA<span class="number">-256</span> encoding result: <span class="number">0979334</span>AF544553966CB7AF741869C971C716A6879C562FDFE781B50F2F5862E</span><br></pre></td></tr></table></figure>
                 
 
@@ -274,12 +272,7 @@
 
                 <center>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-3921438651818825"
-         data-ad-slot="3015269677"></ins>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -426,7 +419,7 @@
 
                 
                     <li>
-                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420">
+                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -437,7 +430,7 @@
 
                 
                     <li>
-                        <a target="_blank"  href="https://github.com/jongmin92">
+                        <a target="_blank" href="https://github.com/jongmin92" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -452,15 +445,12 @@
                 <p class="copyright text-muted">
                     Copyright &copy; KimJongMin 2019 
                     <br>
-                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    Theme by <a href="http://huangxuan.me" rel="external nofollow noopener noreferrer" target="_blank">Hux</a> 
                     <span style="display: inline-block; margin: 0 5px;">
                         <i class="fa fa-heart"></i>
                     </span> 
-                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
-                    <iframe
-                        style="margin-left: 2px; margin-bottom:-5px;"
-                        frameborder="0" scrolling="0" width="91px" height="20px"
-                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    re-Ported by <a href="http://beantech.org" rel="external nofollow noopener noreferrer" target="_blank">BeanTech</a> | 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px" src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true">
                     </iframe>
                 </p>
             </div>
@@ -561,10 +551,10 @@
 
 
 	<a id="rocket" href="#top" class=""></a>
-	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
-    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async></script>
 <!-- Image to hack wechat -->
-<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0" />
+<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0">
 <!-- Migrate from head to bottom, no longer block render and still work -->
 
 </body>

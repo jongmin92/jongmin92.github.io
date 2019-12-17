@@ -5,16 +5,16 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA" />
+    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="keyword"  content="">
+    <meta name="keyword" content="">
     <link rel="shortcut icon" href="/images/etc/ironman-draw.png">
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          Java와 함께하는 Web - 92Hz | Jongmin&#39;s Blog
+          Java와 함께하는 Web - 92Hz
         
     </title>
 
@@ -36,6 +36,9 @@
     <link rel="stylesheet" href="/css/signature.css">
 
     <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- For SEO -->
+    <link rel="canonical" href="https://jongmin92.github.io/2018/02/05/spring/web-with-java/">
 
     <!-- Custom Fonts -->
     <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
@@ -79,7 +82,7 @@
     
 </style>
 
-<header class="intro-header" >
+<header class="intro-header">
     <!-- Signature -->
     <div id="signature">
         <div class="container">
@@ -151,14 +154,14 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -217,12 +220,7 @@
 
             <center>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-3921438651818825"
-         data-ad-slot="3015269677"></ins>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -242,7 +240,7 @@
 </blockquote>
 <p>그렇게 시작된 자바EE는 출발부터 많은 관심을 받았고, 특히 웹 개발을 위해 자바EE 표준에 포함된 <strong>서블릿(Servlet)</strong>과 <strong>JSP</strong>는 당시 막 유행하던 PHP나 ASP와 함께 <code>CGI</code>를 몰아내며 자바 언어가 인기를 얻는데 한 몫을 담당했습니다.</p>
 <blockquote>
-<p><strong>CGI란?</strong> (인용 - <a href="http://www.terms.co.kr/CGI.htm" target="_blank" rel="noopener">http://www.terms.co.kr/CGI.htm</a>)<br><strong>CGI는 웹서버에 있어 사용자의 요구를 응용프로그램에 전달하고 그 결과를 사용자에게 되돌려주기 위한 표준적인 방법이다.</strong> 사용자가 하이퍼링크를 클릭 하거나 웹사이트의 주소를 입력함으로써 웹 페이지를 요청하면, 서버는 요청된 페이지를 보내준다. 그러나, 사용자가 웹페이지의 양식에 내용을 기재하여 보냈을 때, 그것은 보통 응용프로그램에 의해 처리될 필요가 있다. 웹 서버는 그 양식 정보를 조그만 응용프로그램에 전달하는데, 이 프로그램은 데이터를 처리하고 필요에 따라 확인 메시지를 보내주기도 한다. 이렇게 <strong>서버와 응용 프로그램간에 데이터를 주고받기 위한 방법이나 규약들을 CGI라고 부른다.</strong> 이것은 웹의 HTTP 프로토콜의 일부이다.<br>만약 웹사이트를 만들 때 어떠한 제어를 위해 CGI 프로그램을 사용하기 원하면, HTML 파일 내에 있는 URL 내에 그 프로그램의 이름을 기술하면 된다. 만약 폼을 만들려고 할 때, 이 URL은 FORMS 태그의 일부로서 기술될 수 있는데, 예를 들어 아래와 같이 쓸 수 있을 것이다.<br>이 태그의 결과로서 mybiz.com에 있는 서버는 입력된 데이터를 저장하기 위해 제어권을 “formprog.pl”이라는 CGI 프로그램에 넘기고, 확인 메시지를 되돌려준다 (여기서 .pl은 Perl로 작성된 프로그램이라는 것을 가리키지만, CGI는 다른 언어로도 작성될 수 있다).<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">FORM</span> <span class="attr">METHOD</span>=<span class="string">POST</span> <span class="attr">ACTION</span>=<span class="string">http://www.mybiz.com/cgi-local/formprog.pl</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>CGI란?</strong> (인용 - <a href="http://www.terms.co.kr/CGI.htm" rel="external nofollow noopener noreferrer" target="_blank">http://www.terms.co.kr/CGI.htm</a>)<br><strong>CGI는 웹서버에 있어 사용자의 요구를 응용프로그램에 전달하고 그 결과를 사용자에게 되돌려주기 위한 표준적인 방법이다.</strong> 사용자가 하이퍼링크를 클릭 하거나 웹사이트의 주소를 입력함으로써 웹 페이지를 요청하면, 서버는 요청된 페이지를 보내준다. 그러나, 사용자가 웹페이지의 양식에 내용을 기재하여 보냈을 때, 그것은 보통 응용프로그램에 의해 처리될 필요가 있다. 웹 서버는 그 양식 정보를 조그만 응용프로그램에 전달하는데, 이 프로그램은 데이터를 처리하고 필요에 따라 확인 메시지를 보내주기도 한다. 이렇게 <strong>서버와 응용 프로그램간에 데이터를 주고받기 위한 방법이나 규약들을 CGI라고 부른다.</strong> 이것은 웹의 HTTP 프로토콜의 일부이다.<br>만약 웹사이트를 만들 때 어떠한 제어를 위해 CGI 프로그램을 사용하기 원하면, HTML 파일 내에 있는 URL 내에 그 프로그램의 이름을 기술하면 된다. 만약 폼을 만들려고 할 때, 이 URL은 FORMS 태그의 일부로서 기술될 수 있는데, 예를 들어 아래와 같이 쓸 수 있을 것이다.<br>이 태그의 결과로서 mybiz.com에 있는 서버는 입력된 데이터를 저장하기 위해 제어권을 “formprog.pl”이라는 CGI 프로그램에 넘기고, 확인 메시지를 되돌려준다 (여기서 .pl은 Perl로 작성된 프로그램이라는 것을 가리키지만, CGI는 다른 언어로도 작성될 수 있다).<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">FORM</span> <span class="attr">METHOD</span>=<span class="string">POST</span> <span class="attr">ACTION</span>=<span class="string">http://www.mybiz.com/cgi-local/formprog.pl</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 </blockquote>
 <p>자바EE의 핵심은 EJB(Enterprise Java Beans)라는 기술이었습니다. EJB는 자바EE가 대체하는 미들웨어에서 구동되던 기업의 핵심 서비스를 만들기 위한 분산처리 및 트랜잭션, 보안 등을 지원하는 컴포넌트 모델을 제공하는 기술입니다. 이러한 EJB는 주목을 받으며 널리 쓰이게 되었지만 시간이 지남에 따라 몇 가지 심각한 문제들로 비판을 받게 되었고, 이러한 문제점을 개선하기 위해 Spring Framework가 처음 개발되었습니다. 특히 고가의 풀스택 자바EE 서버가 아닌 톰캣과 같은 일반 서블릿 컨테이너에서도 구동된다는 것이 큰 강점으로 작용했습니다.</p>
 <p>다시 말하면, 이는 Spring을 통해 비싼 자바EE 서버를 구매하지 않아도 EJB보다 훨씬 간편한 방식으로 EJB가 제공하던 선언적 트랜잭션 및 보안 처리, 분산 환경 지원 등 주요 기능을 모두 사용할 수 있게 되었음을 뜻하며, 무엇보다 이제는 더 이상 각 자바EE 서버 제품에 특화된 설정을 따로 공부하거나 서버 제품을 바꿀 때마다 포팅 작업이 필요없이 Spring만 이용하면 톰캣이든 레진(Resin)이든 기존의 풀스택 자바EE 서버이든 관계없이 간단하게 배포가 가능하다는 뜻입니다.</p>
@@ -250,7 +248,7 @@
 <h2 id="멀티-프로세스-동작-방식"><a href="#멀티-프로세스-동작-방식" class="headerlink" title="멀티 프로세스 동작 방식"></a>멀티 프로세스 동작 방식</h2><p><img src="/images/post/2018-02-05/multi_process.png" alt=""><br>클라이언트의 요청을 받아 웹 애플리케이션을 직접 실행하는 구조로 <strong>각각의 요청에 대해 프로세스를 생성하고 응답한 뒤 종료하는 형태</strong>이다. 이는 각각의 많은 요청이 들어오는 경우 프로세스를 계속 생성하므로(프로세스를 생성하는 작업은 필요이상의 부담을 주게 된다) 시스템 부하가 커지게 되 안정적인 서비스가 힘들다.</p>
 <h2 id="멀티-스레드-동작-방식"><a href="#멀티-스레드-동작-방식" class="headerlink" title="멀티 스레드 동작 방식"></a>멀티 스레드 동작 방식</h2><p><img src="/images/post/2018-02-05/multi_thread.png" alt=""><br><strong>클라이언트의 요청을 받으면 웹 애플리케이션을 거치지 않고 <code>웹 컨테이너</code>로 요청이 전달된다. 그리고 웹 컨테이너가 요청을 처리할 스레드를 생성하는 형태이다.</strong> 멀티스레드 방식은 최초 요청 시 웹 애플리케이션을 실행한 후 종료하지 않은 상태에서 같은 요청이 여러 번 오는 경우, 실행되고 있는 웹 애플리케이션의 스레드를 생성해 요청을 처리하는 방법이다. <strong>CGI에서 사용하는 멀티프로세스 방식보다 시스템 부하를 줄여 안정적인 서비스를 제공할 수 있다.</strong></p>
 <blockquote>
-<p><strong>컨테이너란?</strong> (인용 - <a href="http://yayongi.tistory.com/entry/%EC%BB%A8%ED%85%8C%EC%9D%B4%EB%84%88%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C" target="_blank" rel="noopener">컨테이너란?? 무엇일까?</a>)<br><strong>컨테이너는 Servlet을 실행하고 관리하는 역할을 합니다. 개발자가 해야하는 역할을 대신 함으로써, 개발자가 해야하는 일을 대폭 줄여줍니다.</strong> 컨테이너는 개발자가 웹서버와 통신하기 위하여 소켓을 생성하고, 특정 포트에 리스닝하고, 스트림을 생성하는 등의 복잡한 일들을 대신합니다. 또한 Servlet의 생성부터 소멸까지 일련의 과정을 관리하며, 요청이 들어올 때마다 새로운 자바 스레드를 하나 생성합니다.<br>톰캣을 예로 들면 아파치와 같은 웹서버가 사용자로부터 Servlet에 대한 요청을 받으면 이것을 바로 호출하는 것이 아니라 컨테이너에게 이 요청을 넘겨주고 이 컨테이너는 <code>request와 response 객체를 생성</code>하고 해당하는 <code>Servlet의 스레드를 생성</code>하여 앞의 <code>두 객체를 인자로 넘깁니다.</code><br>스레드 생성 후 이 <code>스레드의 service() 메소드를 호출</code>하고 처음에 사용자로부터 요청받은 방식이 get인지 post인지에 따라 <code>doGet()과 doPost() 메소드 중 선택 생성</code>합니다. 만약 doPost가 생성되었다고 가정하면, 이 doPost() 메소드는 독 페이지를 생성하고, 이것을 처음 받은 response 객체에 실어서 컨테이너에게 보냅니다. 컨테이너는 <code>이 객체를 HTTPResponse로 변환하여 클라이언트에게 보냅니다.</code> 그런 다음 처음에 생성한 <code>객체 Request와 Response를 소멸</code>시킵니다.</p>
+<p><strong>컨테이너란?</strong> (인용 - <a href="http://yayongi.tistory.com/entry/%EC%BB%A8%ED%85%8C%EC%9D%B4%EB%84%88%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C" rel="external nofollow noopener noreferrer" target="_blank">컨테이너란?? 무엇일까?</a>)<br><strong>컨테이너는 Servlet을 실행하고 관리하는 역할을 합니다. 개발자가 해야하는 역할을 대신 함으로써, 개발자가 해야하는 일을 대폭 줄여줍니다.</strong> 컨테이너는 개발자가 웹서버와 통신하기 위하여 소켓을 생성하고, 특정 포트에 리스닝하고, 스트림을 생성하는 등의 복잡한 일들을 대신합니다. 또한 Servlet의 생성부터 소멸까지 일련의 과정을 관리하며, 요청이 들어올 때마다 새로운 자바 스레드를 하나 생성합니다.<br>톰캣을 예로 들면 아파치와 같은 웹서버가 사용자로부터 Servlet에 대한 요청을 받으면 이것을 바로 호출하는 것이 아니라 컨테이너에게 이 요청을 넘겨주고 이 컨테이너는 <code>request와 response 객체를 생성</code>하고 해당하는 <code>Servlet의 스레드를 생성</code>하여 앞의 <code>두 객체를 인자로 넘깁니다.</code><br>스레드 생성 후 이 <code>스레드의 service() 메소드를 호출</code>하고 처음에 사용자로부터 요청받은 방식이 get인지 post인지에 따라 <code>doGet()과 doPost() 메소드 중 선택 생성</code>합니다. 만약 doPost가 생성되었다고 가정하면, 이 doPost() 메소드는 독 페이지를 생성하고, 이것을 처음 받은 response 객체에 실어서 컨테이너에게 보냅니다. 컨테이너는 <code>이 객체를 HTTPResponse로 변환하여 클라이언트에게 보냅니다.</code> 그런 다음 처음에 생성한 <code>객체 Request와 Response를 소멸</code>시킵니다.</p>
 </blockquote>
 <h2 id="servlet-동작-방식"><a href="#Servlet-동작-방식" class="headerlink" title="Servlet 동작 방식"></a>Servlet 동작 방식</h2><p><img src="/images/post/2018-02-05/servlet.png" alt=""></p>
 <ol>
@@ -286,14 +284,14 @@
 <h2 id="mvc-model-1"><a href="#MVC-Model-1" class="headerlink" title="MVC Model 1"></a>MVC Model 1</h2><p><img src="/images/post/2018-02-05/mvc_model1.png" alt=""><br>Model1 방식은 사용자로부터 요청을 JSP가 받아(더 정확히는 JSP 에서 사용자가 요청을 합니다.) <code>Java Bean</code>(DTO, DAO)을 호출해 처리합니다.<br>이 방식은 개발 속도가 빠르고 배우기 쉽지만 프레젠테이션 로직과 비즈니스 로직이 혼재하기 때문에 JSP 코드가 복잡해져 유지 보수가 어려워진다는 단점이 있습니다.</p>
 <h2 id="mvc-model-2"><a href="#MVC-Model-2" class="headerlink" title="MVC Model 2"></a>MVC Model 2</h2><p><img src="/images/post/2018-02-05/mvc_model2.png" alt=""><br>단순히 JSP만 사용하거나, Servlet만 사용하는 것이 아니라 두개의 장단점을 모두 취해 <code>View</code> 는 <code>JSP</code>로, <code>Controller</code>는 <code>Servlet</code>을 사용한 것이 Model2 입니다. 보여지는 부분은 HTML이 중심이 되는 <code>JSP</code>, 다른 자바 클래스에게 데이터를 넘겨주는 부분은 Java 코드가 중심이 되는 <code>Servlet</code>이 담당하게 됩니다. 그리고 <code>Model</code> 영역 에서는 DTO, DAO를 통해 Mysql 과 같은 데이터베이스에 접근합니다.</p>
 <h1 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h1><ul>
-<li><a href="https://okky.kr/article/415474" target="_blank" rel="noopener">자바EE의 역사 및 스프링과의 관계</a></li>
-<li><a href="https://ko.wikipedia.org/wiki/%EC%9E%90%EB%B0%94_%ED%94%8C%EB%9E%AB%ED%8F%BC,_%EC%97%94%ED%84%B0%ED%94%84%EB%9D%BC%EC%9D%B4%EC%A6%88_%EC%97%90%EB%94%94%EC%85%98" target="_blank" rel="noopener">위키백과 - 자바 플랫폼, 엔터프라이즈 에디션</a></li>
-<li><a href="http://dzlove.tistory.com/entry/서블릿-자바-서블릿으로-알아보는-웹-프로그래밍" target="_blank" rel="noopener">서블릿-자바-서블릿으로-알아보는-웹-프로그래밍</a></li>
-<li><a href="http://myblog.opendocs.co.kr/archives/427" target="_blank" rel="noopener">Servlet - Concept</a></li>
-<li><a href="http://a07274.tistory.com/314" target="_blank" rel="noopener">Java Servlet 이란? (개념 및 예제)</a></li>
-<li><a href="http://anster.tistory.com/128" target="_blank" rel="noopener">JSP와 Servlet, 왜 같이 쓸까?</a></li>
-<li><a href="http://myblog.opendocs.co.kr/archives/440" target="_blank" rel="noopener">JSP - Concept</a></li>
-<li><a href="http://www.javajigi.net/pages/viewpage.action?pageId=73" target="_blank" rel="noopener">Model1, Model2 개발 방식</a></li>
+<li><a href="https://okky.kr/article/415474" rel="external nofollow noopener noreferrer" target="_blank">자바EE의 역사 및 스프링과의 관계</a></li>
+<li><a href="https://ko.wikipedia.org/wiki/%EC%9E%90%EB%B0%94_%ED%94%8C%EB%9E%AB%ED%8F%BC,_%EC%97%94%ED%84%B0%ED%94%84%EB%9D%BC%EC%9D%B4%EC%A6%88_%EC%97%90%EB%94%94%EC%85%98" rel="external nofollow noopener noreferrer" target="_blank">위키백과 - 자바 플랫폼, 엔터프라이즈 에디션</a></li>
+<li><a href="http://dzlove.tistory.com/entry/서블릿-자바-서블릿으로-알아보는-웹-프로그래밍" rel="external nofollow noopener noreferrer" target="_blank">서블릿-자바-서블릿으로-알아보는-웹-프로그래밍</a></li>
+<li><a href="http://myblog.opendocs.co.kr/archives/427" rel="external nofollow noopener noreferrer" target="_blank">Servlet - Concept</a></li>
+<li><a href="http://a07274.tistory.com/314" rel="external nofollow noopener noreferrer" target="_blank">Java Servlet 이란? (개념 및 예제)</a></li>
+<li><a href="http://anster.tistory.com/128" rel="external nofollow noopener noreferrer" target="_blank">JSP와 Servlet, 왜 같이 쓸까?</a></li>
+<li><a href="http://myblog.opendocs.co.kr/archives/440" rel="external nofollow noopener noreferrer" target="_blank">JSP - Concept</a></li>
+<li><a href="http://www.javajigi.net/pages/viewpage.action?pageId=73" rel="external nofollow noopener noreferrer" target="_blank">Model1, Model2 개발 방식</a></li>
 </ul>
 
                 
@@ -319,12 +317,7 @@
 
                 <center>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-3921438651818825"
-         data-ad-slot="3015269677"></ins>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -471,7 +464,7 @@
 
                 
                     <li>
-                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420">
+                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -482,7 +475,7 @@
 
                 
                     <li>
-                        <a target="_blank"  href="https://github.com/jongmin92">
+                        <a target="_blank" href="https://github.com/jongmin92" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -497,15 +490,12 @@
                 <p class="copyright text-muted">
                     Copyright &copy; KimJongMin 2019 
                     <br>
-                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    Theme by <a href="http://huangxuan.me" rel="external nofollow noopener noreferrer" target="_blank">Hux</a> 
                     <span style="display: inline-block; margin: 0 5px;">
                         <i class="fa fa-heart"></i>
                     </span> 
-                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
-                    <iframe
-                        style="margin-left: 2px; margin-bottom:-5px;"
-                        frameborder="0" scrolling="0" width="91px" height="20px"
-                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    re-Ported by <a href="http://beantech.org" rel="external nofollow noopener noreferrer" target="_blank">BeanTech</a> | 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px" src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true">
                     </iframe>
                 </p>
             </div>
@@ -606,10 +596,10 @@
 
 
 	<a id="rocket" href="#top" class=""></a>
-	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
-    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async></script>
 <!-- Image to hack wechat -->
-<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0" />
+<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0">
 <!-- Migrate from head to bottom, no longer block render and still work -->
 
 </body>

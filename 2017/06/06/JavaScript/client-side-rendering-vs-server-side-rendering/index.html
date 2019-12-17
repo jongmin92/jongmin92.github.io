@@ -5,16 +5,16 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA" />
+    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="keyword"  content="">
+    <meta name="keyword" content="">
     <link rel="shortcut icon" href="/images/etc/ironman-draw.png">
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          [번역] Client-side rendering VS. Server-sde rendering - 92Hz | Jongmin&#39;s Blog
+          [번역] Client-side rendering VS. Server-sde rendering - 92Hz
         
     </title>
 
@@ -36,6 +36,9 @@
     <link rel="stylesheet" href="/css/signature.css">
 
     <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- For SEO -->
+    <link rel="canonical" href="https://jongmin92.github.io/2017/06/06/javascript/client-side-rendering-vs-server-side-rendering/">
 
     <!-- Custom Fonts -->
     <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
@@ -79,7 +82,7 @@
     
 </style>
 
-<header class="intro-header" >
+<header class="intro-header">
     <!-- Signature -->
     <div id="signature">
         <div class="container">
@@ -145,14 +148,14 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -211,12 +214,7 @@
 
             <center>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-3921438651818825"
-         data-ad-slot="3015269677"></ins>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -239,7 +237,7 @@
 </ol>
 <hr>
 <blockquote>
-<p>해당 포스팅은 <a href="https://medium.com/@adamzerner/client-side-rendering-vs-server-side-rendering-a32d2cf3bfcc" target="_blank" rel="noopener">Adam Zerner - Client-side rendering vs. server-side rendering</a>의 글을 번역하였습니다.</p>
+<p>해당 포스팅은 <a href="https://medium.com/@adamzerner/client-side-rendering-vs-server-side-rendering-a32d2cf3bfcc" rel="external nofollow noopener noreferrer" target="_blank">Adam Zerner - Client-side rendering vs. server-side rendering</a>의 글을 번역하였습니다.</p>
 </blockquote>
 <p>초기에, 웹 프레임워크들은 서버(Server)에서 렌더링된 뷰를 갖고있었습니다. 현재는 클라이언트(Client)에서도 렌더링된 뷰를 가집니다. 지금부터 각각의 장점과 단점에 대해 알아보겠습니다.</p>
 <p><span id="1"></span></p>
@@ -273,7 +271,7 @@
 <p>이러한 이유가 클라이언트 측 렌더링이 SEO에 좋지 않은 이유입니다.</p>
 <hr>
 <p><span id="3"></span></p>
-<h2 id="사전-렌더링prerendering"><a href="#사전-렌더링-Prerendering" class="headerlink" title="사전 렌더링(Prerendering)"></a>사전 렌더링(Prerendering)</h2><p>2009년에 Google은 이 문제를 해결할 수 있는 <a href="https://webmasters.googleblog.com/2009/10/proposal-for-making-ajax-crawlable.html" target="_blank" rel="noopener">방법</a>을 소개했습니다.</p>
+<h2 id="사전-렌더링prerendering"><a href="#사전-렌더링-Prerendering" class="headerlink" title="사전 렌더링(Prerendering)"></a>사전 렌더링(Prerendering)</h2><p>2009년에 Google은 이 문제를 해결할 수 있는 <a href="https://webmasters.googleblog.com/2009/10/proposal-for-making-ajax-crawlable.html" rel="external nofollow noopener noreferrer" target="_blank">방법</a>을 소개했습니다.</p>
 <p><img src="/images/post/2017-06-06/prerendering.png" alt=""></p>
 <p>크롤러가 <code>www.example.com/page?query#!mystate</code> 를 방문하면 <code>www.example.com/page?query&amp;_escaped_fragment_=mystate</code> 로 변환됩니다. 이렇게하면 서버가 <code>_escaped_fragment_</code>를 사용하여 요청을 받으면 사람이 아닌 크롤러에서 요청을 받는다는 것을 알 수 있습니다.</p>
 <p>그렇기때문에 요청이 크롤러에서 온 경우 <code>&lt;div class = &quot;container&quot;&gt; ... &lt;/ div&gt;</code>를 제공할 수 있습니다.<br>일반적인 요청 인 경우 <code>&lt;div class = &quot;container&quot;&gt; &lt;/ div&gt;</code>를 제공하고 JavaScript가 내용을 내부에 삽입하도록 할 수 있습니다.</p>
@@ -284,16 +282,16 @@
 <h2 id="더-똑똑해진-크롤러"><a href="#더-똑똑해진-크롤러" class="headerlink" title="더 똑똑해진 크롤러"></a>더 똑똑해진 크롤러</h2><p>6년 후, Google은 크롤러가 한층 더 똑똑해 졌다고 발표했습니다. <strong>Crawler 2.0</strong>에서 <code>&lt;script&gt;</code> 태그를 볼 때 웹 브라우저처럼 실제로 요청을하고 코드를 실행하고 DOM을 조작한다는 것입니다.</p>
 <p>그래서 다음과 같은 코드가<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <p>이제는 이렇게 보이는 것입니다.<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></span><br><span class="line">  ...</span><br><span class="line">  ...</span><br><span class="line">  ...</span><br><span class="line">  ...</span><br><span class="line">  ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p><a href="https://support.google.com/webmasters/answer/6066468?hl=en" target="_blank" rel="noopener">Fetch as Google</a>를 사용하여 Google 크롤러가 특정 URL을 방문했을 때 어떤 내용을 볼지 결정할 수 있습니다.</p>
+<p><a href="https://support.google.com/webmasters/answer/6066468?hl=en" rel="external nofollow noopener noreferrer" target="_blank">Fetch as Google</a>를 사용하여 Google 크롤러가 특정 URL을 방문했을 때 어떤 내용을 볼지 결정할 수 있습니다.</p>
 <p>관련된 발표문의 내용 일부를 첨부합니다.</p>
 <blockquote>
-<p>당시 우리 시스템은 자바 스크립트를 사용하여 사용자에게 콘텐츠를 제공하는 페이지를 렌더링하고 이해할 수 없었습니다. <a href="https://developers.google.com/webmasters/ajax-crawling/docs/learn-more" target="_blank" rel="noopener">크롤러는 동적으로 생성 된 콘텐츠를 볼 수 없었기 때문에</a> 웹 마스터가 AJAX 기반 애플리케이션을 검색 엔진으로 인덱싱 할 수 있도록 일련의 방법을 제안했습니다.<br><br>시대가 바뀌 었습니다. 현재 Googlebot이 자바 스크립트 또는 CSS 파일을 크롤링하는 것을 차단하지 않는 한 일반적으로 최신 브라우저와 같이 웹 페이지를 렌더링하고 이해할 수 있습니다.</p>
+<p>당시 우리 시스템은 자바 스크립트를 사용하여 사용자에게 콘텐츠를 제공하는 페이지를 렌더링하고 이해할 수 없었습니다. <a href="https://developers.google.com/webmasters/ajax-crawling/docs/learn-more" rel="external nofollow noopener noreferrer" target="_blank">크롤러는 동적으로 생성 된 콘텐츠를 볼 수 없었기 때문에</a> 웹 마스터가 AJAX 기반 애플리케이션을 검색 엔진으로 인덱싱 할 수 있도록 일련의 방법을 제안했습니다.<br><br>시대가 바뀌 었습니다. 현재 Googlebot이 자바 스크립트 또는 CSS 파일을 크롤링하는 것을 차단하지 않는 한 일반적으로 최신 브라우저와 같이 웹 페이지를 렌더링하고 이해할 수 있습니다.</p>
 </blockquote>
 <hr>
 <p><span id="5"></span></p>
 <h2 id="덜-똑똑한-크롤러"><a href="#덜-똑똑한-크롤러" class="headerlink" title="덜 똑똑한 크롤러"></a>덜 똑똑한 크롤러</h2><p>불행히도 Google 만이 유일한 검색 엔진이 아닙니다. Bing, Yahho, Duck Duck Go, Baidu 등도 있으며 실제로 사람들은 이러한 검색 엔진도 빈번하게 사용합니다.</p>
 <p><img src="/images/post/2017-06-06/search_engine.png" alt=""></p>
-<p>다른 검색 엔진은 JavaScript를 잘 처리하지 못합니다. 다음 글을 참고해보세요. <a href="https://medium.freecodecamp.com/seo-vs-react-is-it-neccessary-to-render-react-pages-in-the-backend-74ce5015c0c9" target="_blank" rel="noopener">SEO vs. React: Web Crawlers are Smarter Than You Think</a></p>
+<p>다른 검색 엔진은 JavaScript를 잘 처리하지 못합니다. 다음 글을 참고해보세요. <a href="https://medium.freecodecamp.com/seo-vs-react-is-it-neccessary-to-render-react-pages-in-the-backend-74ce5015c0c9" rel="external nofollow noopener noreferrer" target="_blank">SEO vs. React: Web Crawlers are Smarter Than You Think</a></p>
 <hr>
 <p><span id="6"></span></p>
 <h2 id="두-세계의-장점"><a href="#두-세계의-장점" class="headerlink" title="두 세계의 장점"></a>두 세계의 장점</h2><p>두 세계(서버 측 렌더링, 클라이언트 측 렌더링)의 장점을 최대한 활용하려면 다음의 방법이 있습니다.</p>
@@ -317,7 +315,7 @@
 <li>웹 검색의 약 1/4은 Google 이외의 엔진으로 수행됩니다.</li>
 <li>모두가 빠른 인터넷 연결을 사용하는 것은 아닙니다.</li>
 <li>휴대 전화 사용자는 대개 빠른 인터넷 연결이 필요하지 않습니다.</li>
-<li><a href="https://www.nngroup.com/articles/too-fast-ux/" target="_blank" rel="noopener">너무 빠른 UI는 혼란 스러울 수 있습니다.</a> 사용자가 링크를 클릭한다고 가정 해보세요. 앱에서 새로운 뷰로 이동합니다. 그러나 새로운 뷰는 이전의 뷰와 미묘하게 다릅니다. 그리고 변경 사항은 즉시 발생했습니다 (클라이언트 측 렌더링의 장점). 새로운 뷰가 실제로 로드 된 것을 사용자가 알지 못할 수도 있습니다. 또는 사용자가 주의를 기울 였지만 상대적으로 미묘하기 때문에 사용자는 전환이 실제로 발생했는지 여부를 감지하기 위해 약간의 노력을 기울여야합니다. 때로는 약간의 로딩 스피너와 전체 페이지 재 렌더링을 하는 것이 좋습니다.</li>
+<li><a href="https://www.nngroup.com/articles/too-fast-ux/" rel="external nofollow noopener noreferrer" target="_blank">너무 빠른 UI는 혼란 스러울 수 있습니다.</a> 사용자가 링크를 클릭한다고 가정 해보세요. 앱에서 새로운 뷰로 이동합니다. 그러나 새로운 뷰는 이전의 뷰와 미묘하게 다릅니다. 그리고 변경 사항은 즉시 발생했습니다 (클라이언트 측 렌더링의 장점). 새로운 뷰가 실제로 로드 된 것을 사용자가 알지 못할 수도 있습니다. 또는 사용자가 주의를 기울 였지만 상대적으로 미묘하기 때문에 사용자는 전환이 실제로 발생했는지 여부를 감지하기 위해 약간의 노력을 기울여야합니다. 때로는 약간의 로딩 스피너와 전체 페이지 재 렌더링을 하는 것이 좋습니다.</li>
 <li>캐싱이 중요합니다. 따라서 서버 측 렌더링을 사용하면 실제로 사용자가 실제로 모든 것을 서버로 가져갈 필요가 없습니다. 때로는 바다 건너편의 “공식”서버가 아닌 근처의 서버에 가면됩니다.</li>
 <li>실제로 성과와 관련하여 때로는 중요하지 않습니다. 때로는 속도가 좋고 속도가 약간 올라가더라도 삶이 더 좋아지지는 않습니다.</li>
 </ul>
@@ -348,12 +346,7 @@
 
                 <center>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-3921438651818825"
-         data-ad-slot="3015269677"></ins>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -483,7 +476,7 @@
 
                 
                     <li>
-                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420">
+                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -494,7 +487,7 @@
 
                 
                     <li>
-                        <a target="_blank"  href="https://github.com/jongmin92">
+                        <a target="_blank" href="https://github.com/jongmin92" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -509,15 +502,12 @@
                 <p class="copyright text-muted">
                     Copyright &copy; KimJongMin 2019 
                     <br>
-                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    Theme by <a href="http://huangxuan.me" rel="external nofollow noopener noreferrer" target="_blank">Hux</a> 
                     <span style="display: inline-block; margin: 0 5px;">
                         <i class="fa fa-heart"></i>
                     </span> 
-                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
-                    <iframe
-                        style="margin-left: 2px; margin-bottom:-5px;"
-                        frameborder="0" scrolling="0" width="91px" height="20px"
-                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    re-Ported by <a href="http://beantech.org" rel="external nofollow noopener noreferrer" target="_blank">BeanTech</a> | 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px" src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true">
                     </iframe>
                 </p>
             </div>
@@ -618,10 +608,10 @@
 
 
 	<a id="rocket" href="#top" class=""></a>
-	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
-    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async></script>
 <!-- Image to hack wechat -->
-<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0" />
+<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0">
 <!-- Migrate from head to bottom, no longer block render and still work -->
 
 </body>

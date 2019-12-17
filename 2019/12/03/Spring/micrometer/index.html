@@ -5,16 +5,16 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA" />
+    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="keyword"  content="">
+    <meta name="keyword" content="">
     <link rel="shortcut icon" href="/images/etc/ironman-draw.png">
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          Micrometer - 92Hz | Jongmin&#39;s Blog
+          Micrometer - 92Hz
         
     </title>
 
@@ -36,6 +36,9 @@
     <link rel="stylesheet" href="/css/signature.css">
 
     <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- For SEO -->
+    <link rel="canonical" href="https://jongmin92.github.io/2019/12/03/spring/micrometer/">
 
     <!-- Custom Fonts -->
     <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
@@ -79,7 +82,7 @@
     
 </style>
 
-<header class="intro-header" >
+<header class="intro-header">
     <!-- Signature -->
     <div id="signature">
         <div class="container">
@@ -149,14 +152,14 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -215,12 +218,7 @@
 
             <center>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-3921438651818825"
-         data-ad-slot="3015269677"></ins>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -232,11 +230,11 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1 id="micrometer란"><a href="#Micrometer란" class="headerlink" title="Micrometer란?"></a>Micrometer란?</h1><p><a href="https://micrometer.io/" target="_blank" rel="noopener">micrometer.io</a>에서는 <code>Micrometer</code>에 대해서 다음과 같이 소개하고 있다.</p>
+                <h1 id="micrometer란"><a href="#Micrometer란" class="headerlink" title="Micrometer란?"></a>Micrometer란?</h1><p><a href="https://micrometer.io/" rel="external nofollow noopener noreferrer" target="_blank">micrometer.io</a>에서는 <code>Micrometer</code>에 대해서 다음과 같이 소개하고 있다.</p>
 <blockquote>
 <p><strong>Micrometer</strong> provides a simple <code>facade</code> over the instrumentation <code>clients</code> for the most popular <code>monitoring systems</code>, allowing you to instrument your <code>JVM-based application</code> code without vendor lock-in. Think <code>SLF4J</code>, but for metrics</p>
 </blockquote>
-<p><strong>Micrometer는 JVM 기반의 애플리케이션에서 다양한 모니터링 도구가 제공하는 클라이언트 라이브러리에 대한 <a href="https://ko.wikipedia.org/wiki/%ED%8D%BC%EC%82%AC%EB%93%9C_%ED%8C%A8%ED%84%B4" target="_blank" rel="noopener">facade</a>를 제공한다.</strong> 로깅 관련된 시스템에서는 SLF4J가 있다면 모니터링(metric) 시스템에서는 Micrometer가 있는 것이다.</p>
+<p><strong>Micrometer는 JVM 기반의 애플리케이션에서 다양한 모니터링 도구가 제공하는 클라이언트 라이브러리에 대한 <a href="https://ko.wikipedia.org/wiki/%ED%8D%BC%EC%82%AC%EB%93%9C_%ED%8C%A8%ED%84%B4" rel="external nofollow noopener noreferrer" target="_blank">facade</a>를 제공한다.</strong> 로깅 관련된 시스템에서는 SLF4J가 있다면 모니터링(metric) 시스템에서는 Micrometer가 있는 것이다.</p>
 <p>즉, 모니터링 시스템을 만드는 vendor들은 Micrometer 인터페이스를 따르기 때문에 Micrometer를 사용하면 애플리케이션 내의 코드 상에서는 모니터링 시스템 클라이언트로 어떤 것을 사용할지에 대한 고민에서 벗어나 Micrometer를 이용해 애플리케이션 metric을 수집하기만 하면 된다.<br>(모니터링 시스템을 선택하는 것은 런타임 시점에 정해진다고 생각하면 된다.)</p>
 <p>예를 들어, 모니터링 시스템으로 Prometheus를 사용한다고 하면 아래와 같이 표현할 수 있다.<br><img src="/images/post/2019-12-03/micrometer.png" alt="micrometer"></p>
 <p>Micrometer는 다음과 같은 모니터링 시스템을 지원한다.</p>
@@ -244,7 +242,7 @@
 <li>AppOptics, Azure Monitor, Netflix Atlas, CloudWatch, Datadog, Dynatrace, Elastic, Ganglia, Graphite, Humio, Influx/Telegraf, JMX, KairosDB, New Relic, Prometheus, SignalFx, Google Stackdriver, StatsD, Wavefront</li>
 </ul>
 <p><strong>Micrometer에 의해서 기록된 애플리케이션의 metric 정보는 시스템의 이상 유뮤룰 판단하기 위한 모니터링(알람) 용도로 사용된다.</strong></p>
-<h1 id="supported-monitoring-systems"><a href="#Supported-monitoring-systems" class="headerlink" title="Supported monitoring systems"></a>Supported monitoring systems</h1><p>Micrometer는 코어 모듈과 측정 <a href="https://en.wikipedia.org/wiki/Service_provider_interface" target="_blank" rel="noopener">SPI</a>(Service Provider Interface)를 포함하고 있다. (각각 Registry라고 부르는 다양한 모니터링 시스템에 대한 구현을 포함하고 있다.)<br>모니터링 시스템에는 중요한 3가지 특징이 있다.</p>
+<h1 id="supported-monitoring-systems"><a href="#Supported-monitoring-systems" class="headerlink" title="Supported monitoring systems"></a>Supported monitoring systems</h1><p>Micrometer는 코어 모듈과 측정 <a href="https://en.wikipedia.org/wiki/Service_provider_interface" rel="external nofollow noopener noreferrer" target="_blank">SPI</a>(Service Provider Interface)를 포함하고 있다. (각각 Registry라고 부르는 다양한 모니터링 시스템에 대한 구현을 포함하고 있다.)<br>모니터링 시스템에는 중요한 3가지 특징이 있다.</p>
 <h2 id="dimensionality"><a href="#Dimensionality" class="headerlink" title="Dimensionality"></a>Dimensionality</h2><p>Dimensionality는 수집하는 metric 이름에 tag(key-value)를 붙일 수 있도록 지원하는 것을 말한다. 반면 일부 모니터링 시스템의 경우에는 tag 형태가 아닌, flat한 metric name만 사용이 가능하다. 이를 hierarchical system이라고 한다.<br>Micrometer는 hierarchical system에 metric을 보낼 때는 tag를 metric name에 추가한다.</p>
 <ul>
 <li>Dimensional: AppOptics, Atlas, Azure Monitor, Cloudwatch, Datadog, Datadog StatsD, Dynatrace, Elastic, Humio, Influx, KairosDB, New Relic, <code>Prometheus</code>, SignalFx, Sysdig StatsD, Telegraf StatsD, Wavefront</li>
@@ -264,7 +262,7 @@
 <h1 id="registry"><a href="#Registry" class="headerlink" title="Registry"></a>Registry</h1><p><code>Meter</code>는 애플리케이션의 metric을 수집하기 위한 인터페이스이다. Meter는 <code>MeterRegistry</code>에 의해 생성되어 등록된다. 지원되는 각 모니터링 시스템은 MeterRegistry 구현체를 갖고 있다.</p>
 <p><code>SimpleMeterRegistry</code>는 각 meter의 최신 값을 메모리에 저장한다. 그리고 metric 정보를 다른 시스템으로 내보내지 않는다. 따라서 만약 어떤 모니터링 시스템을 사용할지 결정하지 못했다면 SimpleMegerRegistry를 사용하면 된다.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MeterRegistry registry = <span class="keyword">new</span> SimpleMeterRegistry();</span><br></pre></td></tr></table></figure></p>
 <h2 id="composite-registries"><a href="#Composite-registries" class="headerlink" title="Composite registries"></a>Composite registries</h2><p>Micrometer는 여러 Registry를 추가할 수 있는 <code>CompositeMeterRegistry</code>를 제공한다. 따라서 CompositeMeterRegistry를 사용하면 둘 이상의 모니터링 시스템에서 동시에 metric을 사용할 수 있다.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">CompositeMeterRegistry compositeRegistry = <span class="keyword">new</span> CompositeMeterRegistry();</span><br><span class="line">SimpleMeterRegistry oneSimpleMeter = <span class="keyword">new</span> SimpleMeterRegistry();</span><br><span class="line">AtlasMeterRegistry atlasMeterRegistry = <span class="keyword">new</span> AtlasMeterRegistry(atlasConfig, Clock.SYSTEM);</span><br><span class="line"> </span><br><span class="line">compositeRegistry.add(oneSimpleMeter);</span><br><span class="line">compositeRegistry.add(atlasMeterRegistry);</span><br></pre></td></tr></table></figure></p>
-<h2 id="global-registry"><a href="#Global-registry" class="headerlink" title="Global registry"></a>Global registry</h2><p>Micrometer는 static 변수로 <code>Global MeterRegistry</code>를 제공한다. <a href="https://github.com/micrometer-metrics/micrometer/blob/master/micrometer-core/src/main/java/io/micrometer/core/instrument/Metrics.java#L35" target="_blank" rel="noopener">Metrics.globalRegistry</a>를 통해 static 변수에 접근할 수 있으며 Metrics 클래스에는 글로벌 MeterRegistry를 기반으로 Meter를 생성하는 정적 빌더 메소드가 있다.<br>Global MeterRegistry는 CompositeMeterRegistry 객체이다.</p>
+<h2 id="global-registry"><a href="#Global-registry" class="headerlink" title="Global registry"></a>Global registry</h2><p>Micrometer는 static 변수로 <code>Global MeterRegistry</code>를 제공한다. <a href="https://github.com/micrometer-metrics/micrometer/blob/master/micrometer-core/src/main/java/io/micrometer/core/instrument/Metrics.java#L35" rel="external nofollow noopener noreferrer" target="_blank">Metrics.globalRegistry</a>를 통해 static 변수에 접근할 수 있으며 Metrics 클래스에는 글로벌 MeterRegistry를 기반으로 Meter를 생성하는 정적 빌더 메소드가 있다.<br>Global MeterRegistry는 CompositeMeterRegistry 객체이다.</p>
 <h1 id="meters"><a href="#Meters" class="headerlink" title="Meters"></a>Meters</h1><p>Micrometer는 Meter의 구현체로 다음의 것들을 지원한다. Meter의 type 별로 수집되는 metric 수가 다르다.</p>
 <ul>
 <li>Timer, Counter, Gauge, DistributionSummary, LongTaskTimer, FunctionCounter, FunctionTimer, TimeGauge</li>
@@ -314,12 +312,7 @@
 
                 <center>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-3921438651818825"
-         data-ad-slot="3015269677"></ins>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -464,7 +457,7 @@
 
                 
                     <li>
-                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420">
+                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -475,7 +468,7 @@
 
                 
                     <li>
-                        <a target="_blank"  href="https://github.com/jongmin92">
+                        <a target="_blank" href="https://github.com/jongmin92" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -490,15 +483,12 @@
                 <p class="copyright text-muted">
                     Copyright &copy; KimJongMin 2019 
                     <br>
-                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    Theme by <a href="http://huangxuan.me" rel="external nofollow noopener noreferrer" target="_blank">Hux</a> 
                     <span style="display: inline-block; margin: 0 5px;">
                         <i class="fa fa-heart"></i>
                     </span> 
-                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
-                    <iframe
-                        style="margin-left: 2px; margin-bottom:-5px;"
-                        frameborder="0" scrolling="0" width="91px" height="20px"
-                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    re-Ported by <a href="http://beantech.org" rel="external nofollow noopener noreferrer" target="_blank">BeanTech</a> | 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px" src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true">
                     </iframe>
                 </p>
             </div>
@@ -599,10 +589,10 @@
 
 
 	<a id="rocket" href="#top" class=""></a>
-	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
-    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async></script>
 <!-- Image to hack wechat -->
-<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0" />
+<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0">
 <!-- Migrate from head to bottom, no longer block render and still work -->
 
 </body>

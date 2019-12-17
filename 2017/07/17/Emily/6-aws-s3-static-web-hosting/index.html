@@ -5,16 +5,16 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA" />
+    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="keyword"  content="">
+    <meta name="keyword" content="">
     <link rel="shortcut icon" href="/images/etc/ironman-draw.png">
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          6) AWS S3를 이용한 웹 호스팅 - 92Hz | Jongmin&#39;s Blog
+          6) AWS S3를 이용한 웹 호스팅 - 92Hz
         
     </title>
 
@@ -36,6 +36,9 @@
     <link rel="stylesheet" href="/css/signature.css">
 
     <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- For SEO -->
+    <link rel="canonical" href="https://jongmin92.github.io/2017/07/17/emily/6-aws-s3-static-web-hosting/">
 
     <!-- Custom Fonts -->
     <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
@@ -79,7 +82,7 @@
     
 </style>
 
-<header class="intro-header" >
+<header class="intro-header">
     <!-- Signature -->
     <div id="signature">
         <div class="container">
@@ -151,14 +154,14 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -217,12 +220,7 @@
 
             <center>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-3921438651818825"
-         data-ad-slot="3015269677"></ins>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -250,7 +248,7 @@
 <p>학교 홈페이지에서 제공하는 <strong><code>수업 목록(엑셀 파일)</code></strong>를 활용(파싱)하여 시간표 데이터를 만들고, 이를 학생들이 쉽게 등록 및 수정할 수 있도록 웹 페이지를 만들었습니다 (아무래도 전공도 다양하고 수업의 수도 많다보니 단순히 버튼 및 텍스트로 상호작용하여 시간표를 등록하는것은 불편하다고 판단해 시간이 좀 더 걸리더라도 웹 페이지를 만들기로 결정했었습니다.)</p>
 <p>학생들이 많이 사용하는 여러 시간표 앱 및 웹 서비스를 참고해서 다음과 같은 <strong><code>시간표 등록 및 수정 페이지</code></strong>를 만들었습니다.</p>
 <p><img src="/images/post/2017-07-17/emily-timetable.png" alt="에밀리 시간표 등록 및 수정 페이지"></p>
-<p>참고로 에밀리 시간표 등록 및 수정 페이지는 <strong>React(<a href="https://github.com/coryhouse/react-slingshot" target="_blank" rel="noopener">Starter-Kit</a>)</strong>를 이용해서 만들었습니다. 아무래도 회사에서 React Native를 사용해서 앱을 개발하다보니 React를 사용해 웹 개발을 함에 있어서도 도움이 많이 되었습니다.</p>
+<p>참고로 에밀리 시간표 등록 및 수정 페이지는 <strong>React(<a href="https://github.com/coryhouse/react-slingshot" rel="external nofollow noopener noreferrer" target="_blank">Starter-Kit</a>)</strong>를 이용해서 만들었습니다. 아무래도 회사에서 React Native를 사용해서 앱을 개발하다보니 React를 사용해 웹 개발을 함에 있어서도 도움이 많이 되었습니다.</p>
 <hr>
 <p><span id="2"></span></p>
 <h2 id="aws-s3란"><a href="#AWS-S3란" class="headerlink" title="AWS S3란?"></a>AWS S3란?</h2><p>사용자들이 에밀리 시간표 페이지를 사용할 수 있도록 하기 위해서는 웹 페이지를 <strong>호스팅</strong>해야합니다. 간단히 호스팅할 수 있는 여러 방법들이 있지만, AWS 공부도 할겸 S3를 이용해 호스팅해보기로 생각했습니다.</p>
@@ -259,7 +257,7 @@
 <hr>
 <p><span id="3"></span></p>
 <h2 id="도메인-등록"><a href="#도메인-등록" class="headerlink" title="도메인 등록"></a>도메인 등록</h2><p>이미 등록된 도메인이 있다면 이 단계를 생략하면 됩니다. 그러나 <strong>inuemily.com</strong>과 같이 등록된 도메인 이름이 없는 경우, 원하는 도메인 이름을 만들어 등록해야 합니다.</p>
-<p>도메인이 없으시다면 AWS의 Route53 - Registered domains를 통해 도메인을 생성하고, AWS가 아닌 다른 서비스로부터 도메인을 사용중 이라면 기존 도메인 DNS 서비스 역할을 하는 AWS Route53으로 <strong>마이그레이션</strong>을 해야 S3를 이용한 정적 웹사이트 호스팅이 가능합니다. 마이그레이션 관련해서는 <a href="http://docs.aws.amazon.com/ko_kr/Route53/latest/DeveloperGuide/MigratingDNS.html" target="_blank" rel="noopener">AWS 문서</a>를 참고하면 좋을것 같습니다.</p>
+<p>도메인이 없으시다면 AWS의 Route53 - Registered domains를 통해 도메인을 생성하고, AWS가 아닌 다른 서비스로부터 도메인을 사용중 이라면 기존 도메인 DNS 서비스 역할을 하는 AWS Route53으로 <strong>마이그레이션</strong>을 해야 S3를 이용한 정적 웹사이트 호스팅이 가능합니다. 마이그레이션 관련해서는 <a href="http://docs.aws.amazon.com/ko_kr/Route53/latest/DeveloperGuide/MigratingDNS.html" rel="external nofollow noopener noreferrer" target="_blank">AWS 문서</a>를 참고하면 좋을것 같습니다.</p>
 <p>저는 다음과 같이 <strong>inuemily.com</strong> 이라는 도메인을 갖고 있습니다.</p>
 <p><img src="/images/post/2017-07-17/domain.png" alt="에밀리 도메인"></p>
 <hr>
@@ -291,7 +289,7 @@
 <p><img src="/images/post/2017-07-17/s3_route53_configure.png" alt="S3 버킷 Route 53 - Record Set 설정"></p>
 <p>Route 53의 Record Set 까지 설정을 마치면 해당 루트 도메인과 서브 도메인을 통해서 사이트에 접속할 수 있습니다.</p>
 <blockquote>
-<p>참고<br><a href="http://docs.aws.amazon.com/ko_kr/AmazonS3/latest/dev/website-hosting-custom-domain-walkthrough.html#website-hosting-custom-domain-walkthrough-domain-registry" target="_blank" rel="noopener">AWS - 사용자 지정 도메인으로 정적 웹 사이트 설정</a><br><a href="http://pyrasis.com/book/TheArtOfAmazonWebServices/Chapter11/03/03" target="_blank" rel="noopener">아마존 웹 서비스를 다루는 기술 - 11장</a></p>
+<p>참고<br><a href="http://docs.aws.amazon.com/ko_kr/AmazonS3/latest/dev/website-hosting-custom-domain-walkthrough.html#website-hosting-custom-domain-walkthrough-domain-registry" rel="external nofollow noopener noreferrer" target="_blank">AWS - 사용자 지정 도메인으로 정적 웹 사이트 설정</a><br><a href="http://pyrasis.com/book/TheArtOfAmazonWebServices/Chapter11/03/03" rel="external nofollow noopener noreferrer" target="_blank">아마존 웹 서비스를 다루는 기술 - 11장</a></p>
 </blockquote>
 
                 
@@ -317,12 +315,7 @@
 
                 <center>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-3921438651818825"
-         data-ad-slot="3015269677"></ins>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -458,7 +451,7 @@
 
                 
                     <li>
-                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420">
+                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -469,7 +462,7 @@
 
                 
                     <li>
-                        <a target="_blank"  href="https://github.com/jongmin92">
+                        <a target="_blank" href="https://github.com/jongmin92" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -484,15 +477,12 @@
                 <p class="copyright text-muted">
                     Copyright &copy; KimJongMin 2019 
                     <br>
-                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    Theme by <a href="http://huangxuan.me" rel="external nofollow noopener noreferrer" target="_blank">Hux</a> 
                     <span style="display: inline-block; margin: 0 5px;">
                         <i class="fa fa-heart"></i>
                     </span> 
-                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
-                    <iframe
-                        style="margin-left: 2px; margin-bottom:-5px;"
-                        frameborder="0" scrolling="0" width="91px" height="20px"
-                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    re-Ported by <a href="http://beantech.org" rel="external nofollow noopener noreferrer" target="_blank">BeanTech</a> | 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px" src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true">
                     </iframe>
                 </p>
             </div>
@@ -593,10 +583,10 @@
 
 
 	<a id="rocket" href="#top" class=""></a>
-	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
-    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async></script>
 <!-- Image to hack wechat -->
-<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0" />
+<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0">
 <!-- Migrate from head to bottom, no longer block render and still work -->
 
 </body>

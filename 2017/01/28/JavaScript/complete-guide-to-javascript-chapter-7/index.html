@@ -5,16 +5,16 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA" />
+    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="keyword"  content="">
+    <meta name="keyword" content="">
     <link rel="shortcut icon" href="/images/etc/ironman-draw.png">
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          자바스크립트 완벽가이드 7장 (배열) - 92Hz | Jongmin&#39;s Blog
+          자바스크립트 완벽가이드 7장 (배열) - 92Hz
         
     </title>
 
@@ -36,6 +36,9 @@
     <link rel="stylesheet" href="/css/signature.css">
 
     <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- For SEO -->
+    <link rel="canonical" href="https://jongmin92.github.io/2017/01/28/javascript/complete-guide-to-javascript-chapter-7/">
 
     <!-- Custom Fonts -->
     <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
@@ -79,7 +82,7 @@
     
 </style>
 
-<header class="intro-header" >
+<header class="intro-header">
     <!-- Signature -->
     <div id="signature">
         <div class="container">
@@ -147,14 +150,14 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -213,12 +216,7 @@
 
             <center>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-3921438651818825"
-         data-ad-slot="3015269677"></ins>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -288,7 +286,7 @@
 <h2 id="711-유사-배열-객체"><a href="#7-11-유사-배열-객체" class="headerlink" title="7.11 유사 배열 객체"></a>7.11 유사 배열 객체</h2><p>length 프로퍼티와 양의 정수 이름의 프로퍼티가 있는 객체는 일종의 배열로 취급할 수 있다. 이를 <code>유사 배열 객체</code>라고 한다.<br>자바스크립트 배열 메서드는 배열뿐 아니라 유사 배열 객체에도 적용이 가능 하도록 범용 메서드로 구현되었다. 유사 배열은 Array.prototype을 상속받지 않기 때문에, 배열 메서드를 해당 객체의 메서드로 호출할 수는 없지만 <code>Function.call</code> 메서드를 통해서 간접적으로 호출할 수 있다.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;<span class="string">"0"</span>:<span class="string">"a"</span>, <span class="string">"1"</span>:<span class="string">"b"</span>, <span class="string">"2"</span>:<span class="string">"c"</span>, <span class="attr">length</span>:<span class="number">3</span>&#125;;     <span class="comment">// 유사 배열 객체</span></span><br><span class="line"><span class="built_in">Array</span>.prototype.join(a, <span class="string">"+"</span>)                       <span class="comment">// =&gt; 'a+b+c'</span></span><br></pre></td></tr></table></figure></p>
 <hr>
 <h2 id="712-문자열을-배열처럼-사용하기"><a href="#7-12-문자열을-배열처럼-사용하기" class="headerlink" title="7.12 문자열을 배열처럼 사용하기"></a><span style="color:red">7.12 문자열을 배열처럼 사용하기</span></h2><p>문자열은 읽기 전용 배열처럼 동작한다. 문자열의 각 문자는 chatAt() 메서드로 접근할 수도 있지만 대괄호 []를 사용해 접근할 수도 있다. 문자열을 인덱스로 접근함으로써 얻을 수 있는 가장 큰 장점은 charAt() 메서드 호출을 단순하게 []로 대체 함으로써 코드가 전보다 간결해지고, 가독성이 높아지는 것이다.<br><strong>문자열은 변하지 않는 값이라서, 읽기 전용 배열</strong>로만 다룰 수 있다. push(), sort(), reverse(), splice()와 같은 배열 메서드는 배열을 직접 수정하므로 문자열에서는 작동하지 않는다.</p>
-<p><br><br><strong>출처 : <a href="http://book.naver.com/bookdb/book_detail.nhn?bid=10338797" target="_blank" rel="noopener">“JavaScript: The Definitive Guide, by David Flanagan (O’Reilly). Copyright 2011 David Flanagan, 978-0-596-80552-4”</a></strong></p>
+<p><br><br><strong>출처 : <a href="http://book.naver.com/bookdb/book_detail.nhn?bid=10338797" rel="external nofollow noopener noreferrer" target="_blank">“JavaScript: The Definitive Guide, by David Flanagan (O’Reilly). Copyright 2011 David Flanagan, 978-0-596-80552-4”</a></strong></p>
 
                 
 
@@ -297,7 +295,7 @@
                 <ul class="pager">
                     
                         <li class="previous">
-                            <a href="/2017/01/30/JavaScript/complete-guide-to-javascript-chapter-10/" data-toggle="tooltip" data-placement="top" title="자바스크립트 완벽가이드 10장 (정규 표현식을 사용한 패턴 매칭)">&larr; Previous Post</a>
+                            <a href="/2017/01/30/JavaScript/complete-guide-to-javascript-chapter-9/" data-toggle="tooltip" data-placement="top" title="자바스크립트 완벽가이드 9장 (클래스와 모듈)">&larr; Previous Post</a>
                         </li>
                     
                     
@@ -313,12 +311,7 @@
 
                 <center>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-3921438651818825"
-         data-ad-slot="3015269677"></ins>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -450,7 +443,7 @@
 
                 
                     <li>
-                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420">
+                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -461,7 +454,7 @@
 
                 
                     <li>
-                        <a target="_blank"  href="https://github.com/jongmin92">
+                        <a target="_blank" href="https://github.com/jongmin92" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -476,15 +469,12 @@
                 <p class="copyright text-muted">
                     Copyright &copy; KimJongMin 2019 
                     <br>
-                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    Theme by <a href="http://huangxuan.me" rel="external nofollow noopener noreferrer" target="_blank">Hux</a> 
                     <span style="display: inline-block; margin: 0 5px;">
                         <i class="fa fa-heart"></i>
                     </span> 
-                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
-                    <iframe
-                        style="margin-left: 2px; margin-bottom:-5px;"
-                        frameborder="0" scrolling="0" width="91px" height="20px"
-                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    re-Ported by <a href="http://beantech.org" rel="external nofollow noopener noreferrer" target="_blank">BeanTech</a> | 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px" src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true">
                     </iframe>
                 </p>
             </div>
@@ -585,10 +575,10 @@
 
 
 	<a id="rocket" href="#top" class=""></a>
-	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
-    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async></script>
 <!-- Image to hack wechat -->
-<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0" />
+<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0">
 <!-- Migrate from head to bottom, no longer block render and still work -->
 
 </body>

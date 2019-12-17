@@ -5,16 +5,16 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA" />
+    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="keyword"  content="">
+    <meta name="keyword" content="">
     <link rel="shortcut icon" href="/images/etc/ironman-draw.png">
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          3) Express 프로젝트 생성하기 - 92Hz | Jongmin&#39;s Blog
+          3) Express 프로젝트 생성하기 - 92Hz
         
     </title>
 
@@ -36,6 +36,9 @@
     <link rel="stylesheet" href="/css/signature.css">
 
     <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- For SEO -->
+    <link rel="canonical" href="https://jongmin92.github.io/2017/05/17/emily/3-make-express-project/">
 
     <!-- Custom Fonts -->
     <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
@@ -79,7 +82,7 @@
     
 </style>
 
-<header class="intro-header" >
+<header class="intro-header">
     <!-- Signature -->
     <div id="signature">
         <div class="container">
@@ -147,14 +150,14 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -213,12 +216,7 @@
 
             <center>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-3921438651818825"
-         data-ad-slot="3015269677"></ins>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -240,7 +238,7 @@
 </ol>
 <hr>
 <p><span id="1"></span></p>
-<h2 id="들어가기-앞서"><a href="#들어가기-앞서" class="headerlink" title="들어가기 앞서"></a>들어가기 앞서</h2><p><strong>옐로아이디 자동응답API</strong> 를 만드는데에는 여러가지 방법이 있습니다. 저는 <strong><code>Express generator</code></strong>를 사용하여 생성한 <strong><code>Express</code></strong> 기반의 프로젝트로 <strong>Emily</strong>를 만들었고 이 방식으로 설명할 예정입니다. 그러나 간단한 기능만 구현하는 경우 AWS의 Lambda와 API GateWay를 사용해서도 Serverless하게 만들 수 있습니다. 해당 내용은 <a href="http://gun0912.tistory.com/63" target="_blank" rel="noopener">박상권의 삽질블로그</a>를 참고하면 좋을것 같습니다.</p>
+<h2 id="들어가기-앞서"><a href="#들어가기-앞서" class="headerlink" title="들어가기 앞서"></a>들어가기 앞서</h2><p><strong>옐로아이디 자동응답API</strong> 를 만드는데에는 여러가지 방법이 있습니다. 저는 <strong><code>Express generator</code></strong>를 사용하여 생성한 <strong><code>Express</code></strong> 기반의 프로젝트로 <strong>Emily</strong>를 만들었고 이 방식으로 설명할 예정입니다. 그러나 간단한 기능만 구현하는 경우 AWS의 Lambda와 API GateWay를 사용해서도 Serverless하게 만들 수 있습니다. 해당 내용은 <a href="http://gun0912.tistory.com/63" rel="external nofollow noopener noreferrer" target="_blank">박상권의 삽질블로그</a>를 참고하면 좋을것 같습니다.</p>
 <hr>
 <p><span id="2"></span></p>
 <h2 id="express-프로젝트-생성하기"><a href="#Express-프로젝트-생성하기" class="headerlink" title="Express 프로젝트 생성하기"></a>Express 프로젝트 생성하기</h2><blockquote>
@@ -250,11 +248,11 @@
 <p>npm을 통해 <strong><code>Express generator</code></strong>를 먼저 설치합니다. (global로 추가하기 위해 -g 옵션을 사용합니다.)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install express-generator -g</span><br></pre></td></tr></table></figure></p>
 <p><strong>Express generator</strong>를 사용해서 프로젝트를 생성합니다. 저는 Emily라는 이름으로 프로젝트를 생성했습니다.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ express Emily</span><br></pre></td></tr></table></figure></p>
 <p>생성된 프로젝트 폴더로 이동하여 모듈을 설치합니다.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd Emily</span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure></p>
-<p>생성된 프로젝트는 다음과 같은 구조입니다. 이제 <a href="https://github.com/plusfriend/auto_reply" target="_blank" rel="noopener">옐로아이디 API 문서</a>를 참고해서 간단한 봇을 만들어보겠습니다.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── app.js</span><br><span class="line">├── bin</span><br><span class="line">│   └── www</span><br><span class="line">├── package.json</span><br><span class="line">├── public</span><br><span class="line">│   ├── images</span><br><span class="line">│   ├── javascripts</span><br><span class="line">│   └── stylesheets</span><br><span class="line">│       └── style.css</span><br><span class="line">├── routes</span><br><span class="line">│   ├── index.js</span><br><span class="line">│   └── users.js</span><br><span class="line">└── views</span><br><span class="line">    ├── error.jade</span><br><span class="line">    ├── index.jade</span><br><span class="line">    └── layout.jade</span><br></pre></td></tr></table></figure></p>
+<p>생성된 프로젝트는 다음과 같은 구조입니다. 이제 <a href="https://github.com/plusfriend/auto_reply" rel="external nofollow noopener noreferrer" target="_blank">옐로아이디 API 문서</a>를 참고해서 간단한 봇을 만들어보겠습니다.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── app.js</span><br><span class="line">├── bin</span><br><span class="line">│   └── www</span><br><span class="line">├── package.json</span><br><span class="line">├── public</span><br><span class="line">│   ├── images</span><br><span class="line">│   ├── javascripts</span><br><span class="line">│   └── stylesheets</span><br><span class="line">│       └── style.css</span><br><span class="line">├── routes</span><br><span class="line">│   ├── index.js</span><br><span class="line">│   └── users.js</span><br><span class="line">└── views</span><br><span class="line">    ├── error.jade</span><br><span class="line">    ├── index.jade</span><br><span class="line">    └── layout.jade</span><br></pre></td></tr></table></figure></p>
 <hr>
 <p><span id="3"></span></p>
 <h2 id="api-문서-살펴보기"><a href="#API-문서-살펴보기" class="headerlink" title="API 문서 살펴보기"></a>API 문서 살펴보기</h2><p>카카오톡 이용자가 플러스친구, 옐로아이디에게 보낸 메세지를 카카오톡 서버를 통해 저희가 전달 받은 후 다시 카카오톡 서버로 응답 메시지를 전달해야하기 때문에 카카오톡에서 정의하고 있는 API 문서에 맞게 코드를 작성해야 합니다.</p>
-<p>지금부터 <a href="https://github.com/plusfriend/auto_reply" target="_blank" rel="noopener">옐로아이디 API 문서</a>를 살펴보겠습니다. 본 포스팅에서는 <strong>[이용에 대한 참고사항, 개인정보 수집 및 이용에 대한 주의사항]</strong>에 대해서는 따로 설명하지 않습니다. 그러나 개발전에 한번쯤은 꼭 읽어보셔야합니다.</p>
+<p>지금부터 <a href="https://github.com/plusfriend/auto_reply" rel="external nofollow noopener noreferrer" target="_blank">옐로아이디 API 문서</a>를 살펴보겠습니다. 본 포스팅에서는 <strong>[이용에 대한 참고사항, 개인정보 수집 및 이용에 대한 주의사항]</strong>에 대해서는 따로 설명하지 않습니다. 그러나 개발전에 한번쯤은 꼭 읽어보셔야합니다.</p>
 <h4 id="1-용어"><a href="#1-용어" class="headerlink" title="1. 용어"></a>1. 용어</h4><p>먼저 API 문서에서 사용되는 용어에 대해서 살펴보겠습니다.</p>
 <p><strong>(1) 수신 API</strong><br>카카오톡 이용자가 플러스친구, 옐로아이디에게 보낸 메시지를 전달 받은 후 응답을 할 수 있는 API 입니다.<br><strong>http(s) restful api를 통하여</strong> 카카오 API 서버 -&gt; 파트너 서버를 호출합니다.</p>
 <p><strong>(2) app_key</strong><br>플러스친구/옐로아이디에서 <strong>자동응답을 위한 앱 등록시 프로필별로 발급되는 고유 키 값</strong>입니다.<br>자동응답 기능만 이용하시는 경우 사용되지 않으며, 일부 app_secret을 통한 별도 인증이 필요한 일부 프로필에만 사용됩니다.</p>
@@ -312,7 +310,7 @@
 <hr>
 <p><span id="5"></span></p>
 <h2 id="서버-실행-amp-api-연동하기"><a href="#서버-실행-amp-API-연동하기" class="headerlink" title="서버 실행 &amp; API 연동하기"></a>서버 실행 &amp; API 연동하기</h2><p>서버는 해당 프로젝트 경로에서 <strong>npm start</strong> 혹은 <strong>node bin/www</strong> 로 실행할 수 있습니다. 그러나 해당 서버는 외부에서 접근 가능해야 합니다. 즉, AWS의 EC2와 같은 클라우드 자원을 사용하거나(추천), 본인의 컴퓨터 혹은 노트북에서 서버를 실행한다면 포트포워딩을 통해 <strong>외부에서 접근할 수 있도록 설정이 필요합니다.</strong></p>
-<p>외부에서 접근할 수 있도록 설정이 끝난 후에는 <a href="https://yellowid.kakao.com/login" target="_blank" rel="noopener">옐로아이디 홈페이지</a>에서 해당 서버의 URL을 기재합니다.</p>
+<p>외부에서 접근할 수 있도록 설정이 끝난 후에는 <a href="https://yellowid.kakao.com/login" rel="external nofollow noopener noreferrer" target="_blank">옐로아이디 홈페이지</a>에서 해당 서버의 URL을 기재합니다.</p>
 <p><img src="/images/post/2017-05-17/yellowid_1.png" alt="옐로아이디 자동응답 API 등록-1"></p>
 <p><img src="/images/post/2017-05-17/yellowid_2.png" alt="옐로아이디 자동응답 API 등록-2"></p>
 <p>앱 URL을 기재하고 <strong>API TEST</strong> 버튼을 누르면 카카오에서 해당 URL에 test request를 요청합니다. test request의 결과를 통해 잘 작동하는지 확인이 가능합니다.</p>
@@ -344,12 +342,7 @@
 
                 <center>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-3921438651818825"
-         data-ad-slot="3015269677"></ins>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -481,7 +474,7 @@
 
                 
                     <li>
-                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420">
+                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -492,7 +485,7 @@
 
                 
                     <li>
-                        <a target="_blank"  href="https://github.com/jongmin92">
+                        <a target="_blank" href="https://github.com/jongmin92" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -507,15 +500,12 @@
                 <p class="copyright text-muted">
                     Copyright &copy; KimJongMin 2019 
                     <br>
-                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    Theme by <a href="http://huangxuan.me" rel="external nofollow noopener noreferrer" target="_blank">Hux</a> 
                     <span style="display: inline-block; margin: 0 5px;">
                         <i class="fa fa-heart"></i>
                     </span> 
-                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
-                    <iframe
-                        style="margin-left: 2px; margin-bottom:-5px;"
-                        frameborder="0" scrolling="0" width="91px" height="20px"
-                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    re-Ported by <a href="http://beantech.org" rel="external nofollow noopener noreferrer" target="_blank">BeanTech</a> | 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px" src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true">
                     </iframe>
                 </p>
             </div>
@@ -616,10 +606,10 @@
 
 
 	<a id="rocket" href="#top" class=""></a>
-	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
-    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async></script>
 <!-- Image to hack wechat -->
-<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0" />
+<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0">
 <!-- Migrate from head to bottom, no longer block render and still work -->
 
 </body>

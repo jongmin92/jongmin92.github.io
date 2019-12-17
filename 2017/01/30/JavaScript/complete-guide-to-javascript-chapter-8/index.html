@@ -5,16 +5,16 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA" />
+    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="keyword"  content="">
+    <meta name="keyword" content="">
     <link rel="shortcut icon" href="/images/etc/ironman-draw.png">
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          자바스크립트 완벽가이드 8장 (함수) - 92Hz | Jongmin&#39;s Blog
+          자바스크립트 완벽가이드 8장 (함수) - 92Hz
         
     </title>
 
@@ -36,6 +36,9 @@
     <link rel="stylesheet" href="/css/signature.css">
 
     <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- For SEO -->
+    <link rel="canonical" href="https://jongmin92.github.io/2017/01/30/javascript/complete-guide-to-javascript-chapter-8/">
 
     <!-- Custom Fonts -->
     <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
@@ -79,7 +82,7 @@
     
 </style>
 
-<header class="intro-header" >
+<header class="intro-header">
     <!-- Signature -->
     <div id="signature">
         <div class="container">
@@ -147,14 +150,14 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -213,12 +216,7 @@
 
             <center>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-3921438651818825"
-         data-ad-slot="3015269677"></ins>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -272,7 +270,7 @@
 <p>counter() 함수는 지역 변수를 정의하지 않지만, 프로퍼티 접근 메서드들이 공유하는 내부 상태를 보관하기 위해 매개변수 n을 사용한다. 이로써 counter()를 호출하는 쪽에서 내부 변수의 초기 값을 지정할 수 있다.</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 0-9 값을 반환하는 함수들의 배열을 반환</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">constfuncs</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> funcs = [];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">        funcs[i] = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="keyword">return</span> i; &#125;;</span><br><span class="line">    <span class="keyword">return</span> funcs;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> funcs = constfuncs();</span><br><span class="line">funcs[<span class="number">5</span>]()         <span class="comment">// 무엇이 반환될까?</span></span><br></pre></td></tr></table></figure>
 <p>위의 코드는 열 개의 클로저를 생성하고, 생성한 클로저들을 배열에 저장한다. 모든 클로저는 같은 함수 내에서 정의되고, 따라서 클로저들은 변수 i에 대한 접근을 <strong>공유</strong>한다. constfuncs() 실해잉 끝나면, 변수 i의 값은 10이고, 열 개의 클로저 모두 이 값을 공유한다. 클로저와 연관된 유효범위 체인이 ‘살아 있다’는 사실을 기억해야 한다. <strong>중첩 함수는 유효범위에 대한 내부 사본이나 변수 바인딩의 스냅샷 따위는 만들지 않는다.</strong></p>
-<p>더 자세한 내용은 다음을 참고<br><a href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Guide/Closures" target="_blank" rel="noopener">클로저(MDN)</a><br><a href="http://meetup.toast.com/posts/86" target="_blank" rel="noopener">자바스크립트의 스코프와 클로저</a></p>
+<p>더 자세한 내용은 다음을 참고<br><a href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Guide/Closures" rel="external nofollow noopener noreferrer" target="_blank">클로저(MDN)</a><br><a href="http://meetup.toast.com/posts/86" rel="external nofollow noopener noreferrer" target="_blank">자바스크립트의 스코프와 클로저</a></p>
 <hr>
 <h2 id="87-함수-프로퍼티-메서드-생성자"><a href="#8-7-함수-프로퍼티-메서드-생성자" class="headerlink" title="8.7 함수 프로퍼티, 메서드, 생성자"></a>8.7 함수 프로퍼티, 메서드, 생성자</h2><p>자바스크립트에서 함수는 일종의 값이다. typeof 연산자를 사용하면 “function” 문자열을 얻을 수 있지만, 함수는 정말 독특한 <strong>자바스크립트 객체</strong>다. 함수는 객체이기 때문에 프로퍼티와 메서드를 가질 수 있으며 Function() 이라는 생성자도 갖고 있다.</p>
 <h4 id="872-prototype-프로퍼티"><a href="#8-7-2-prototype-프로퍼티" class="headerlink" title="8.7.2 prototype 프로퍼티"></a>8.7.2 prototype 프로퍼티</h4><p>모든 함수에는 prototype 프로퍼티가 있는데, 이 프로퍼티는 프로토타입 객체를 참조한다. 모든 함수는 서로 다른 프로토타입 객체를 갖고 있고, 함수가 생성자로 사용될 때, 새로 생성된 객체는 함수의 프로토타입 객체로부터 프로퍼티들을 상속받는다.</p>
@@ -280,7 +278,7 @@
 <p>call()의 첫 번째 호출 컨텍스트 다음에 있는 모든 인자는 호출되는 함수로 전달된다. apply() 메서드는 call() 메서드와 비슷하지만, 함수에 전달할 인자는 배열 형태여야 한다. apply()는 실제 배열과 마찬가지로 유사 배열 객체와도 잘 작동한다. 특히 arguments 배열을 직접 apply()에 넘김으로써, 다른 함수를 호출할 때 현재 함수에 전달된 인자와 같은 인자를 전달할 수 있다.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 객체 o의 메서드 m을, 원본 메서드 호출 전후에 로그 메시지를 남긴다.</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">trace</span>(<span class="params">o, m</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> original o[m];          <span class="comment">// 원본 메서드를 클로저에 기억</span></span><br><span class="line">    o[m] = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">new</span> <span class="built_in">Date</span>(), <span class="string">"Entering:"</span>, m);</span><br><span class="line">        <span class="keyword">var</span> result = original.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>);   <span class="comment">// 원본 메서드 호출</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">new</span> <span class="built_in">Date</span>(), <span class="string">"Exiting:"</span>, m);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h4 id="874-bind-메서드"><a href="#8-7-4-bind-메서드" class="headerlink" title="8.7.4 bind() 메서드"></a><span style="color:red">8.7.4 bind() 메서드</span></h4><p>bind() 메서드는 ECMAScript 5에 추가되었다. <strong><code>bind()</code>의 주요 목적은 함수와 객체를 서로 묶는 것이다. 함수 f의 bind() 메서드를 호출하면서 객체 o를 전달하면, bind() 메서드는 새로운 함수를 반환한다. 반환된 새 함수를 호출하면, 원래 함수 f가 o의 메서드로 호출된다.</strong> 새로운 함수에 전달한 모든 인자는 원래 함수에도 전달된다.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">y</span>) </span>&#123; <span class="keyword">return</span> <span class="keyword">this</span>.x + y; &#125;     <span class="comment">// 바인드되어야 하는 함수</span></span><br><span class="line"><span class="keyword">var</span> o = &#123; <span class="attr">x</span> : <span class="number">1</span> &#125;;                       <span class="comment">// 바인드 될 객체</span></span><br><span class="line"><span class="keyword">var</span> g = f.bind(o);                       <span class="comment">// g(x)를 호출하면 o.f(x)가 호출된다.</span></span><br><span class="line">g(<span class="number">2</span>)                                     <span class="comment">// =&gt; 3</span></span><br></pre></td></tr></table></figure></p>
 <p>ECMAScript 5의 bind() 메서드는 함수를 객체에 바인딩하는 것보다 더 많은 일을 한다. bind()에 전달하는 인자 중 첫 번째 이후의 모든 인자는 this 값과 함께 해당 함수의 인자로 바인딩된다. 이를 <code>커링(currying)</code>이라 부르기도 한다.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> sum = <span class="function"><span class="keyword">function</span>(<span class="params">x, y</span>) </span>&#123; <span class="keyword">return</span> x + y &#125;;</span><br><span class="line"><span class="comment">// 첫 번째 인자는 1로 바인딩된다. 새로운 함수는 단지 하나의 인자만 요구한다.</span></span><br><span class="line"><span class="keyword">var</span> succ = sum.bind(<span class="literal">null</span>, <span class="number">1</span>);</span><br><span class="line">succ(<span class="number">2</span>)            <span class="comment">// =&gt; 3: x는 1에 바인딩되고 y 인자로 2를 넘긴다.</span></span><br></pre></td></tr></table></figure></p>
-<p><br><br><strong>출처 : <a href="http://book.naver.com/bookdb/book_detail.nhn?bid=10338797" target="_blank" rel="noopener">“JavaScript: The Definitive Guide, by David Flanagan (O’Reilly). Copyright 2011 David Flanagan, 978-0-596-80552-4”</a></strong></p>
+<p><br><br><strong>출처 : <a href="http://book.naver.com/bookdb/book_detail.nhn?bid=10338797" rel="external nofollow noopener noreferrer" target="_blank">“JavaScript: The Definitive Guide, by David Flanagan (O’Reilly). Copyright 2011 David Flanagan, 978-0-596-80552-4”</a></strong></p>
 
                 
 
@@ -294,7 +292,7 @@
                     
                     
                         <li class="next">
-                            <a href="/2017/01/30/JavaScript/complete-guide-to-javascript-chapter-9/" data-toggle="tooltip" data-placement="top" title="자바스크립트 완벽가이드 9장 (클래스와 모듈)">Next Post &rarr;</a>
+                            <a href="/2017/01/30/JavaScript/complete-guide-to-javascript-chapter-10/" data-toggle="tooltip" data-placement="top" title="자바스크립트 완벽가이드 10장 (정규 표현식을 사용한 패턴 매칭)">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -305,12 +303,7 @@
 
                 <center>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-3921438651818825"
-         data-ad-slot="3015269677"></ins>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -442,7 +435,7 @@
 
                 
                     <li>
-                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420">
+                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -453,7 +446,7 @@
 
                 
                     <li>
-                        <a target="_blank"  href="https://github.com/jongmin92">
+                        <a target="_blank" href="https://github.com/jongmin92" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -468,15 +461,12 @@
                 <p class="copyright text-muted">
                     Copyright &copy; KimJongMin 2019 
                     <br>
-                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    Theme by <a href="http://huangxuan.me" rel="external nofollow noopener noreferrer" target="_blank">Hux</a> 
                     <span style="display: inline-block; margin: 0 5px;">
                         <i class="fa fa-heart"></i>
                     </span> 
-                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
-                    <iframe
-                        style="margin-left: 2px; margin-bottom:-5px;"
-                        frameborder="0" scrolling="0" width="91px" height="20px"
-                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    re-Ported by <a href="http://beantech.org" rel="external nofollow noopener noreferrer" target="_blank">BeanTech</a> | 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px" src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true">
                     </iframe>
                 </p>
             </div>
@@ -577,10 +567,10 @@
 
 
 	<a id="rocket" href="#top" class=""></a>
-	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
-    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async></script>
 <!-- Image to hack wechat -->
-<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0" />
+<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0">
 <!-- Migrate from head to bottom, no longer block render and still work -->
 
 </body>

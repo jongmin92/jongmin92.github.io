@@ -5,16 +5,16 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA" />
+    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="keyword"  content="">
+    <meta name="keyword" content="">
     <link rel="shortcut icon" href="/images/etc/ironman-draw.png">
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          [번역] Java Reactor Pattern - 92Hz | Jongmin&#39;s Blog
+          [번역] Java Reactor Pattern - 92Hz
         
     </title>
 
@@ -36,6 +36,9 @@
     <link rel="stylesheet" href="/css/signature.css">
 
     <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- For SEO -->
+    <link rel="canonical" href="https://jongmin92.github.io/2019/03/05/java/java-reactor-pattern/">
 
     <!-- Custom Fonts -->
     <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
@@ -79,7 +82,7 @@
     
 </style>
 
-<header class="intro-header" >
+<header class="intro-header">
     <!-- Signature -->
     <div id="signature">
         <div class="container">
@@ -151,14 +154,14 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -217,12 +220,7 @@
 
             <center>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-3921438651818825"
-         data-ad-slot="3015269677"></ins>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -236,9 +234,9 @@
 
                 <p>해당 글은 아래의 Reactor Pattern Explained 시리즈를 번역하였습니다.</p>
 <ul>
-<li><a href="http://jeewanthad.blogspot.com/2013/02/reactor-pattern-explained-part-1.html" target="_blank" rel="noopener">Reactor Pattern Explained - Part 1</a></li>
-<li><a href="http://jeewanthad.blogspot.com/2013/02/reactor-pattern-explained-part-2.html" target="_blank" rel="noopener">Reactor Pattern Explained - Part 2</a></li>
-<li><a href="http://jeewanthad.blogspot.com/2013/03/reacter-pattern-explained-part-3.html" target="_blank" rel="noopener">Reactor Pattern Explained - Part 3</a></li>
+<li><a href="http://jeewanthad.blogspot.com/2013/02/reactor-pattern-explained-part-1.html" rel="external nofollow noopener noreferrer" target="_blank">Reactor Pattern Explained - Part 1</a></li>
+<li><a href="http://jeewanthad.blogspot.com/2013/02/reactor-pattern-explained-part-2.html" rel="external nofollow noopener noreferrer" target="_blank">Reactor Pattern Explained - Part 2</a></li>
+<li><a href="http://jeewanthad.blogspot.com/2013/03/reacter-pattern-explained-part-3.html" rel="external nofollow noopener noreferrer" target="_blank">Reactor Pattern Explained - Part 3</a></li>
 </ul>
 <h1 id="part-1"><a href="#Part-1" class="headerlink" title="Part 1"></a>Part 1</h1><p>서버가 동시에 요청(이벤트)을 받을 때, 보통 요청을 처리하기 위한 이벤트 리스너를 각 스레드마다 할당해 처리하곤 합니다.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Server</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            ServerSocket ss = <span class="keyword">new</span> ServerSocket(PORT);</span><br><span class="line">        <span class="keyword">while</span> (!Thread.interrupted())</span><br><span class="line">            <span class="keyword">new</span> Thread(<span class="keyword">new</span> Handler(ss.accept())).start();</span><br><span class="line">            <span class="comment">// or, single-threaded, or a thread pool</span></span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException ex) &#123; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Handler</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> Socket socket;</span><br><span class="line">    Handler(Socket s) &#123; socket = s; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">byte</span>[] input = <span class="keyword">new</span> <span class="keyword">byte</span>[MAX_INPUT];</span><br><span class="line">            socket.getInputStream().read(input);</span><br><span class="line">            <span class="keyword">byte</span>[] output = process(input);</span><br><span class="line">            socket.getOutputStream().write(output);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException ex) &#123; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">byte</span>[] process(<span class="keyword">byte</span>[] cmd) &#123; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>요청마다 처리를 위해 이벤트 리스너를 별도의 스레드로 만들어 사용하는 것의 단점은 <code>컨텍스트 전환(context switching)의 오버 헤드</code>가 크다는 것입니다. 최악의 경우, 데이터를 자주 읽거나 쓰지 않는 이벤트 리스너를 처리하는 일부 스레드는 유용한 작업을 하지 않고 주기적으로 컨텍스트를 전환할 것입니다. 스케줄러가 이러한 스레드를 CPU에 디스패치(dispatch) 할 때마다 I/O 이벤트가 발생할 때까지 스레드는 차단되어 I/O 이벤트를 기다리는 데 소비되는 모든 시간이 낭비됩니다.</p>
@@ -282,7 +280,7 @@
 <h1 id="part-3"><a href="#Part-3" class="headerlink" title="Part 3"></a>Part 3</h1><p>이번 파트에서는 Handler의 스레드 풀에 대해서 설명합니다. HandlerWithThreadPool은 Handler 클래스의 확장 버전입니다.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HandlerWithThreadPool</span> <span class="keyword">extends</span> <span class="title">Handler</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> ExecutorService pool = Executors.newFixedThreadPool(<span class="number">2</span>);</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> PROCESSING = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">HandlerWithThreadPool</span><span class="params">(Selector sel, SocketChannel c)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(sel, c);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">read</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> readCount = socketChannel.read(input);</span><br><span class="line">        <span class="keyword">if</span> (readCount &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            state = PROCESSING;</span><br><span class="line">            pool.execute(<span class="keyword">new</span> Processer(readCount));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// We are interested in writing back to the client soon after read processing is done.</span></span><br><span class="line">        selectionKey.interestOps(SelectionKey.OP_WRITE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Start processing in a new Processer Thread and Hand off to the reactor thread.</span></span><br><span class="line">    <span class="function"><span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">processAndHandOff</span><span class="params">(<span class="keyword">int</span> readCount)</span> </span>&#123;</span><br><span class="line">        readProcess(readCount);</span><br><span class="line">        <span class="comment">// Read processing done. Now the server is ready to send a message to the client.</span></span><br><span class="line">        state = SENDING;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Processer</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> readCount;</span><br><span class="line">        Processer(<span class="keyword">int</span> readCount) &#123;</span><br><span class="line">            <span class="keyword">this</span>.readCount =  readCount;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            processAndHandOff(readCount);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>PROCESSING이 새로 도입되었으며 read() 메서드가 override 되었습니다. 이제 Read 이벤트가 Handler에 dispatch되면 데이터를 읽지만 상태를 SENDING으로 변경하지는 않습니다. 메시지를 처리하고 스레드 풀의 다른 스레드에서 실행하고 관련 작업을 OP_WRITE로 설정하는 Processer를 생성합니다. 이 시점에서 채널에 Write 준비가 되어 있더라도 Handler는 아직 PROCESSING 상태이기 때문에 write하지 않습니다.</p>
-<h1 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h1><p><a href="http://i5on9i.blogspot.com/2013/11/reactor-pattern.html" target="_blank" rel="noopener">Reactor Pattern 에 대해 알아보자</a></p>
+<h1 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h1><p><a href="http://i5on9i.blogspot.com/2013/11/reactor-pattern.html" rel="external nofollow noopener noreferrer" target="_blank">Reactor Pattern 에 대해 알아보자</a></p>
 
                 
 
@@ -307,12 +305,7 @@
 
                 <center>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-3921438651818825"
-         data-ad-slot="3015269677"></ins>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -459,7 +452,7 @@
 
                 
                     <li>
-                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420">
+                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -470,7 +463,7 @@
 
                 
                     <li>
-                        <a target="_blank"  href="https://github.com/jongmin92">
+                        <a target="_blank" href="https://github.com/jongmin92" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -485,15 +478,12 @@
                 <p class="copyright text-muted">
                     Copyright &copy; KimJongMin 2019 
                     <br>
-                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    Theme by <a href="http://huangxuan.me" rel="external nofollow noopener noreferrer" target="_blank">Hux</a> 
                     <span style="display: inline-block; margin: 0 5px;">
                         <i class="fa fa-heart"></i>
                     </span> 
-                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
-                    <iframe
-                        style="margin-left: 2px; margin-bottom:-5px;"
-                        frameborder="0" scrolling="0" width="91px" height="20px"
-                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    re-Ported by <a href="http://beantech.org" rel="external nofollow noopener noreferrer" target="_blank">BeanTech</a> | 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px" src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true">
                     </iframe>
                 </p>
             </div>
@@ -594,10 +584,10 @@
 
 
 	<a id="rocket" href="#top" class=""></a>
-	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
-    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async></script>
 <!-- Image to hack wechat -->
-<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0" />
+<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0">
 <!-- Migrate from head to bottom, no longer block render and still work -->
 
 </body>

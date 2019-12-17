@@ -5,16 +5,16 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA" />
+    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="keyword"  content="">
+    <meta name="keyword" content="">
     <link rel="shortcut icon" href="/images/etc/ironman-draw.png">
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          Retrofit2 + OkHttp3 사용하기 - 92Hz | Jongmin&#39;s Blog
+          Retrofit2 + OkHttp3 사용하기 - 92Hz
         
     </title>
 
@@ -36,6 +36,9 @@
     <link rel="stylesheet" href="/css/signature.css">
 
     <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- For SEO -->
+    <link rel="canonical" href="https://jongmin92.github.io/2018/01/29/programming/android-retrofit2-okhttp3/">
 
     <!-- Custom Fonts -->
     <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
@@ -79,7 +82,7 @@
     
 </style>
 
-<header class="intro-header" >
+<header class="intro-header">
     <!-- Signature -->
     <div id="signature">
         <div class="container">
@@ -147,14 +150,14 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -213,12 +216,7 @@
 
             <center>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-3921438651818825"
-         data-ad-slot="3015269677"></ins>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -230,8 +228,8 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>신입사원 프로젝트로 간만에 안드로이드 개발을 하게됐습니다. 서버와 통신하기위해 Square에서 만든 Retrofit 라이브러리를 사용했는데, 기존에 사용하던 버전(1.x)과 변경된 부분이 많아 새롭게 사용법을 알아보고자 합니다.<br>Retrofit 테스트는 <a href="https://reqres.in/" target="_blank" rel="noopener">API 테스트 사이트</a>를 통해서 Fake data를 가져오는 실습을 해보겠습니다. 해당 글의 대부분은 <a href="https://www.journaldev.com/13639/retrofit-android-example-tutorial" target="_blank" rel="noopener">Retrofit 2.0 Example</a>을 참고했습니다.</p>
-<h2 id="retrofit2"><a href="#Retrofit2" class="headerlink" title="Retrofit2"></a>Retrofit2</h2><p>Retrofit 의외에 다른 라이브러리도 있지만, Retrofit을 사용하기로 한 이유는 성능과 간단한 구현방법 때문입니다. 아래 보시는것과 같이 응답속도가 매우 빠른것으로 나와있습니다. 더 자세한 비교는 <a href="http://instructure.github.io/blog/2013/12/09/volley-vs-retrofit/" target="_blank" rel="noopener">Android Async HTTP Clients: Volley vs Retrofit</a>에서 볼 수 있습니다.</p>
+                <p>신입사원 프로젝트로 간만에 안드로이드 개발을 하게됐습니다. 서버와 통신하기위해 Square에서 만든 Retrofit 라이브러리를 사용했는데, 기존에 사용하던 버전(1.x)과 변경된 부분이 많아 새롭게 사용법을 알아보고자 합니다.<br>Retrofit 테스트는 <a href="https://reqres.in/" rel="external nofollow noopener noreferrer" target="_blank">API 테스트 사이트</a>를 통해서 Fake data를 가져오는 실습을 해보겠습니다. 해당 글의 대부분은 <a href="https://www.journaldev.com/13639/retrofit-android-example-tutorial" rel="external nofollow noopener noreferrer" target="_blank">Retrofit 2.0 Example</a>을 참고했습니다.</p>
+<h2 id="retrofit2"><a href="#Retrofit2" class="headerlink" title="Retrofit2"></a>Retrofit2</h2><p>Retrofit 의외에 다른 라이브러리도 있지만, Retrofit을 사용하기로 한 이유는 성능과 간단한 구현방법 때문입니다. 아래 보시는것과 같이 응답속도가 매우 빠른것으로 나와있습니다. 더 자세한 비교는 <a href="http://instructure.github.io/blog/2013/12/09/volley-vs-retrofit/" rel="external nofollow noopener noreferrer" target="_blank">Android Async HTTP Clients: Volley vs Retrofit</a>에서 볼 수 있습니다.</p>
 <p><img src="/images/post/2018-01-29/retrofit_benchmark.png" alt="Retrofit Benchmark"></p>
 <p>Retrofit2는 기본적으로 OkHttp를 네트워킹 계층으로 활용하며 그 위에 구축됩니다.</p>
 <p>Retrofit은 자동적으로 JSON 응답을 사전에 정의된 POJO를 통해 직렬화 할 수 있습니다. JSON을 직렬화 하기 위해서는 먼저 Gson converter가 필요합니다. <strong><code>build.gradle</code></strong>에 다음의 dependencies를 추가합니다.<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">compile</span> <span class="string">'com.squareup.retrofit2:retrofit:2.3.0'</span></span><br><span class="line"><span class="keyword">compile</span> <span class="string">'com.google.code.gson:gson:2.8.0'</span></span><br><span class="line"><span class="keyword">compile</span> <span class="string">'com.squareup.retrofit2:converter-gson:2.1.0'</span></span><br></pre></td></tr></table></figure></p>
@@ -245,11 +243,11 @@
 <h2 id="retrofit-interface-설정"><a href="#Retrofit-Interface-설정" class="headerlink" title="Retrofit Interface 설정"></a>Retrofit Interface 설정</h2><h3 id="apiclientjava"><a href="#APIClient-java" class="headerlink" title="APIClient.java"></a>APIClient.java</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.journaldev.retrofitintro;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> okhttp3.OkHttpClient;</span><br><span class="line"><span class="keyword">import</span> okhttp3.logging.HttpLoggingInterceptor;</span><br><span class="line"><span class="keyword">import</span> retrofit2.Retrofit;</span><br><span class="line"><span class="keyword">import</span> retrofit2.converter.gson.GsonConverterFactory;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">APIClient</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Retrofit retrofit = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> Retrofit <span class="title">getClient</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        HttpLoggingInterceptor interceptor = <span class="keyword">new</span> HttpLoggingInterceptor();</span><br><span class="line">        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);</span><br><span class="line">        OkHttpClient client = <span class="keyword">new</span> OkHttpClient.Builder().addInterceptor(interceptor).build();</span><br><span class="line"></span><br><span class="line">        retrofit = <span class="keyword">new</span> Retrofit.Builder()</span><br><span class="line">                .baseUrl(<span class="string">"https://reqres.in/"</span>)</span><br><span class="line">                .addConverterFactory(GsonConverterFactory.create())</span><br><span class="line">                .client(client)</span><br><span class="line">                .build();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> retrofit;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><code>getClient()</code> 메서드는 Retrofit 인터페이스를 설정할 때마다 호출됩니다. Retrofit은 <strong><code>@GET, @POST, @PUT, @DELETE, @PATCH or @HEAD</code></strong>와 같은 <strong>annotation</strong>을 통해 HTTP method를 이용합니다.</p>
 <h3 id="apiinterfacejava"><a href="#APIInterface-java" class="headerlink" title="APIInterface.java"></a>APIInterface.java</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.journaldev.retrofitintro;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.journaldev.retrofitintro.pojo.MultipleResource;</span><br><span class="line"><span class="keyword">import</span> com.journaldev.retrofitintro.pojo.User;</span><br><span class="line"><span class="keyword">import</span> com.journaldev.retrofitintro.pojo.UserList;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> retrofit2.Call;</span><br><span class="line"><span class="keyword">import</span> retrofit2.http.Body;</span><br><span class="line"><span class="keyword">import</span> retrofit2.http.Field;</span><br><span class="line"><span class="keyword">import</span> retrofit2.http.FormUrlEncoded;</span><br><span class="line"><span class="keyword">import</span> retrofit2.http.GET;</span><br><span class="line"><span class="keyword">import</span> retrofit2.http.POST;</span><br><span class="line"><span class="keyword">import</span> retrofit2.http.Query;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">APIInterface</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GET</span>(<span class="string">"api/unknown"</span>)</span><br><span class="line">    <span class="function">Call&lt;MultipleResource&gt; <span class="title">doGetListResources</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@POST</span>(<span class="string">"api/users"</span>)</span><br><span class="line">    <span class="function">Call&lt;User&gt; <span class="title">createUser</span><span class="params">(@Body User user)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GET</span>(<span class="string">"api/users?"</span>)</span><br><span class="line">    <span class="function">Call&lt;UserList&gt; <span class="title">doGetUserList</span><span class="params">(@Query(<span class="string">"page"</span>)</span> String page)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@FormUrlEncoded</span></span><br><span class="line">    <span class="meta">@POST</span>(<span class="string">"api/users?"</span>)</span><br><span class="line">    <span class="function">Call&lt;UserList&gt; <span class="title">doCreateUserWithField</span><span class="params">(@Field(<span class="string">"name"</span>)</span> String name, @<span class="title">Field</span><span class="params">(<span class="string">"job"</span>)</span> String job)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>위의 클래스에서 Annotation을 통해 테스트 HTTP request를 작성했습니다. 해당 API로 <a href="https://reqres.in/" target="_blank" rel="noopener">이곳</a>을 통해 테스트 할 것입니다.</p>
+<p>위의 클래스에서 Annotation을 통해 테스트 HTTP request를 작성했습니다. 해당 API로 <a href="https://reqres.in/" rel="external nofollow noopener noreferrer" target="_blank">이곳</a>을 통해 테스트 할 것입니다.</p>
 <p><code>@GET(&quot;api/unknown&quot;)</code>은  <code>doGetListResources()</code>를 호출합니다.<br><code>doGetListResources()</code>은 메서드 이름입니다. <code>MultipleResource.java</code>는 응답 객체의 Model POJO 클래스로서 Response parameter를 각각의 변수에 매핑하는 데 사용됩니다. 이러한 POJO 클래스는 메소드 리턴 유형으로 동작합니다.</p>
 <h3 id="multipleresourcesjava"><a href="#MultipleResources-java" class="headerlink" title="MultipleResources.java"></a>MultipleResources.java</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.journaldev.retrofitintro.pojo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.google.gson.annotations.SerializedName;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MultipleResource</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@SerializedName</span>(<span class="string">"page"</span>)</span><br><span class="line">    <span class="keyword">public</span> Integer page;</span><br><span class="line">    <span class="meta">@SerializedName</span>(<span class="string">"per_page"</span>)</span><br><span class="line">    <span class="keyword">public</span> Integer perPage;</span><br><span class="line">    <span class="meta">@SerializedName</span>(<span class="string">"total"</span>)</span><br><span class="line">    <span class="keyword">public</span> Integer total;</span><br><span class="line">    <span class="meta">@SerializedName</span>(<span class="string">"total_pages"</span>)</span><br><span class="line">    <span class="keyword">public</span> Integer totalPages;</span><br><span class="line">    <span class="meta">@SerializedName</span>(<span class="string">"data"</span>)</span><br><span class="line">    <span class="keyword">public</span> List&lt;Datum&gt; data = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Datum</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@SerializedName</span>(<span class="string">"id"</span>)</span><br><span class="line">        <span class="keyword">public</span> Integer id;</span><br><span class="line">        <span class="meta">@SerializedName</span>(<span class="string">"name"</span>)</span><br><span class="line">        <span class="keyword">public</span> String name;</span><br><span class="line">        <span class="meta">@SerializedName</span>(<span class="string">"year"</span>)</span><br><span class="line">        <span class="keyword">public</span> Integer year;</span><br><span class="line">        <span class="meta">@SerializedName</span>(<span class="string">"pantone_value"</span>)</span><br><span class="line">        <span class="keyword">public</span> String pantoneValue;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><code>@SerializedName</code> 어노테이션은 JSON 응답에서 각각의 필드를 구분하기 위해 사용합니다.</p>
-<p><strong># Tip)</strong> <a href="http://www.jsonschema2pojo.org/" target="_blank" rel="noopener">jsonschema2pojo</a> 에서 json 응답의 구조를 바탕으로 해당 응답에 대한 POJO 클래스를 쉽게 만들 수 있습니다.</p>
+<p><strong># Tip)</strong> <a href="http://www.jsonschema2pojo.org/" rel="external nofollow noopener noreferrer" target="_blank">jsonschema2pojo</a> 에서 json 응답의 구조를 바탕으로 해당 응답에 대한 POJO 클래스를 쉽게 만들 수 있습니다.</p>
 <p><img src="/images/post/2018-01-29/jsonschema2pojo.png" alt="Json Schema -&gt; POJO"></p>
 <p>POJO 클래스는 Retrofit Call 클래스로 래핑됩니다. (JSONArray는 POJO 클래스의 객체 목록으로 직렬화됩니다.)</p>
 <p><strong>Method Parameters</strong> : 메서드 내에서 전달할 수 있는 다양한 매개 변수 옵션이 있습니다.</p>
@@ -270,8 +268,8 @@
 <p><code>apiInterface = APIClient.getClient().create(APIInterface.class);</code>는 APIClient를 인스턴스화 하기위해 사용됩니다.<br>API 응답에 Model 클래스를 매핑하기 위해서는 다음과 같이 사용합니다.<br><code>MultipleResource resource = response.body();</code></p>
 <p>이제 앱을 실행하면 각 API를 호출하고 이에 따라 토스트 메시지를 표시합니다.</p>
 <h2 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h2><ul>
-<li><a href="http://instructure.github.io/blog/2013/12/09/volley-vs-retrofit/" target="_blank" rel="noopener">Volley vs Retrofit</a></li>
-<li><a href="https://www.journaldev.com/13629/okhttp-android-example-tutorial" target="_blank" rel="noopener">OkHttp Example</a></li>
+<li><a href="http://instructure.github.io/blog/2013/12/09/volley-vs-retrofit/" rel="external nofollow noopener noreferrer" target="_blank">Volley vs Retrofit</a></li>
+<li><a href="https://www.journaldev.com/13629/okhttp-android-example-tutorial" rel="external nofollow noopener noreferrer" target="_blank">OkHttp Example</a></li>
 </ul>
 
                 
@@ -297,12 +295,7 @@
 
                 <center>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-3921438651818825"
-         data-ad-slot="3015269677"></ins>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -445,7 +438,7 @@
 
                 
                     <li>
-                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420">
+                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -456,7 +449,7 @@
 
                 
                     <li>
-                        <a target="_blank"  href="https://github.com/jongmin92">
+                        <a target="_blank" href="https://github.com/jongmin92" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -471,15 +464,12 @@
                 <p class="copyright text-muted">
                     Copyright &copy; KimJongMin 2019 
                     <br>
-                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    Theme by <a href="http://huangxuan.me" rel="external nofollow noopener noreferrer" target="_blank">Hux</a> 
                     <span style="display: inline-block; margin: 0 5px;">
                         <i class="fa fa-heart"></i>
                     </span> 
-                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
-                    <iframe
-                        style="margin-left: 2px; margin-bottom:-5px;"
-                        frameborder="0" scrolling="0" width="91px" height="20px"
-                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    re-Ported by <a href="http://beantech.org" rel="external nofollow noopener noreferrer" target="_blank">BeanTech</a> | 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px" src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true">
                     </iframe>
                 </p>
             </div>
@@ -580,10 +570,10 @@
 
 
 	<a id="rocket" href="#top" class=""></a>
-	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
-    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async></script>
 <!-- Image to hack wechat -->
-<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0" />
+<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0">
 <!-- Migrate from head to bottom, no longer block render and still work -->
 
 </body>

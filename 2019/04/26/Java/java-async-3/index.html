@@ -5,16 +5,16 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA" />
+    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="keyword"  content="">
+    <meta name="keyword" content="">
     <link rel="shortcut icon" href="/images/etc/ironman-draw.png">
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          AsyncRestTemplate의 콜백 헬과 중복 작업 문제 - 92Hz | Jongmin&#39;s Blog
+          AsyncRestTemplate의 콜백 헬과 중복 작업 문제 - 92Hz
         
     </title>
 
@@ -36,6 +36,9 @@
     <link rel="stylesheet" href="/css/signature.css">
 
     <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- For SEO -->
+    <link rel="canonical" href="https://jongmin92.github.io/2019/04/26/java/java-async-3/">
 
     <!-- Custom Fonts -->
     <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
@@ -79,7 +82,7 @@
     
 </style>
 
-<header class="intro-header" >
+<header class="intro-header">
     <!-- Signature -->
     <div id="signature">
         <div class="container">
@@ -145,14 +148,14 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -211,12 +214,7 @@
 
             <center>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-3921438651818825"
-         data-ad-slot="3015269677"></ins>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -228,7 +226,7 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>해당 포스팅은 토비님의 <strong><a href="https://www.youtube.com/watch?v=Tb43EyWTSlQ" target="_blank" rel="noopener">토비의 봄 TV 10회 스프링 리액티브 프로그래밍 (6) AsyncRestTemplate의 콜백 헬과 중복 작업 문제</a></strong> 라이브 코딩을 보며 따라했던 실습 내용을 바탕으로 정리한 글입니다.</p>
+                <p>해당 포스팅은 토비님의 <strong><a href="https://www.youtube.com/watch?v=Tb43EyWTSlQ" rel="external nofollow noopener noreferrer" target="_blank">토비의 봄 TV 10회 스프링 리액티브 프로그래밍 (6) AsyncRestTemplate의 콜백 헬과 중복 작업 문제</a></strong> 라이브 코딩을 보며 따라했던 실습 내용을 바탕으로 정리한 글입니다.</p>
 <p>실습 코드들은 IntelliJ를 이용해 <strong>SpringBoot 2.1.3.RELEASE 버전</strong> 기반으로 프로젝트를 생성 후(web, lombok 포함) 진행했습니다.</p>
 <p>이번에는 포스팅에서는 지난번 ListenableFuture를 사용하면서 발생한 콜백헬을 어떻게 개선할지에 대해서 이야기합니다. <strong>ListenableFuture를 Wrapping 하는 Completion이라는 클래스를 만들어, chainable하게 사용할 수 있는 방식으로 코드를 만들어봅니다.</strong><br>콜백헬의 문제로는 에러를 처리하는 코드가 중복이 된다는 것도 있는데, 이 부분도 해결해봅니다.</p>
 <h1 id="completion-클래스-추가"><a href="#Completion-클래스-추가" class="headerlink" title="Completion 클래스 추가"></a>Completion 클래스 추가</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableAsync</span></span><br><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StudyApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RestController</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">MyController</span> </span>&#123;</span><br><span class="line">        AsyncRestTemplate rt = <span class="keyword">new</span> AsyncRestTemplate(<span class="keyword">new</span> Netty4ClientHttpRequestFactory(<span class="keyword">new</span> NioEventLoopGroup(<span class="number">1</span>)));</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Autowired</span></span><br><span class="line">        MyService myService;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">static</span> <span class="keyword">final</span> String URL1 = <span class="string">"http://localhost:8081/service?req=&#123;req&#125;"</span>;</span><br><span class="line">        <span class="keyword">static</span> <span class="keyword">final</span> String URL2 = <span class="string">"http://localhost:8081/service2?req=&#123;req&#125;"</span>;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@GetMapping</span>(<span class="string">"/rest"</span>)</span><br><span class="line">        <span class="function"><span class="keyword">public</span> DeferredResult&lt;String&gt; <span class="title">rest</span><span class="params">(<span class="keyword">int</span> idx)</span> </span>&#123;</span><br><span class="line">            DeferredResult&lt;String&gt; dr = <span class="keyword">new</span> DeferredResult&lt;&gt;();</span><br><span class="line"></span><br><span class="line">            Completion</span><br><span class="line">                    .from(rt.getForEntity(URL1, String.class, <span class="string">"hello"</span> + idx))</span><br><span class="line">                    .andAccept(s -&gt; dr.setResult(s.getBody()));</span><br><span class="line"></span><br><span class="line">            <span class="comment">/*</span></span><br><span class="line"><span class="comment">            ListenableFuture&lt;ResponseEntity&lt;String&gt;&gt; f1 = rt.getForEntity("http://localhost:8081/service?req=&#123;req&#125;", String.class, "hello" + idx);</span></span><br><span class="line"><span class="comment">            f1.addCallback(s -&gt; &#123;</span></span><br><span class="line"><span class="comment">                ListenableFuture&lt;ResponseEntity&lt;String&gt;&gt; f2 = rt.getForEntity("http://localhost:8081/service2?req=&#123;req&#125;", String.class, s.getBody());</span></span><br><span class="line"><span class="comment">                f2.addCallback(s2 -&gt; &#123;</span></span><br><span class="line"><span class="comment">                    ListenableFuture&lt;String&gt; f3 = myService.work(s2.getBody());</span></span><br><span class="line"><span class="comment">                    f3.addCallback(s3 -&gt; &#123;</span></span><br><span class="line"><span class="comment">                        dr.setResult(s3);</span></span><br><span class="line"><span class="comment">                    &#125;, e -&gt; &#123;</span></span><br><span class="line"><span class="comment">                        dr.setErrorResult(e.getMessage());</span></span><br><span class="line"><span class="comment">                    &#125;);</span></span><br><span class="line"><span class="comment">                &#125;, e -&gt; &#123;</span></span><br><span class="line"><span class="comment">                    dr.setErrorResult(e.getMessage());</span></span><br><span class="line"><span class="comment">                &#125;);</span></span><br><span class="line"><span class="comment">            &#125;, e -&gt; &#123;</span></span><br><span class="line"><span class="comment">                dr.setErrorResult(e.getMessage());</span></span><br><span class="line"><span class="comment">            &#125;);</span></span><br><span class="line"><span class="comment">            */</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> dr;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Completion</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        Consumer&lt;ResponseEntity&lt;String&gt;&gt; con;</span><br><span class="line"></span><br><span class="line">        Completion next;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Completion</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Completion</span><span class="params">(Consumer&lt;ResponseEntity&lt;String&gt;&gt; con)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.con = con;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Completion <span class="title">from</span><span class="params">(ListenableFuture&lt;ResponseEntity&lt;String&gt;&gt; lf)</span> </span>&#123;</span><br><span class="line">            Completion c = <span class="keyword">new</span> Completion();</span><br><span class="line">            lf.addCallback(s -&gt; &#123;</span><br><span class="line">                c.complete(s);</span><br><span class="line">            &#125;, e -&gt; &#123;</span><br><span class="line">                c.error(e);</span><br><span class="line">            &#125;);</span><br><span class="line">            <span class="keyword">return</span> c;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">andAccept</span><span class="params">(Consumer&lt;ResponseEntity&lt;String&gt;&gt; con)</span> </span>&#123;</span><br><span class="line">            Completion c = <span class="keyword">new</span> Completion(con);</span><br><span class="line">            <span class="keyword">this</span>.next = c;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">complete</span><span class="params">(ResponseEntity&lt;String&gt; s)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (next != <span class="keyword">null</span>) next.run(s);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">(ResponseEntity&lt;String&gt; value)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (con != <span class="keyword">null</span>) con.accept(value);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">error</span><span class="params">(Throwable e)</span> </span>&#123;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Service</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">MyService</span> </span>&#123;</span><br><span class="line">        <span class="meta">@Async</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> ListenableFuture&lt;String&gt; <span class="title">work</span><span class="params">(String req)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> AsyncResult&lt;&gt;(req + <span class="string">"/asyncwork"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ThreadPoolTaskExecutor <span class="title">myThreadPool</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        ThreadPoolTaskExecutor te = <span class="keyword">new</span> ThreadPoolTaskExecutor();</span><br><span class="line">        te.setCorePoolSize(<span class="number">1</span>);</span><br><span class="line">        te.setMaxPoolSize(<span class="number">1</span>);</span><br><span class="line">        te.initialize();</span><br><span class="line">        <span class="keyword">return</span> te;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(StudyApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -260,12 +258,7 @@
 
                 <center>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-3921438651818825"
-         data-ad-slot="3015269677"></ins>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -406,7 +399,7 @@
 
                 
                     <li>
-                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420">
+                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -417,7 +410,7 @@
 
                 
                     <li>
-                        <a target="_blank"  href="https://github.com/jongmin92">
+                        <a target="_blank" href="https://github.com/jongmin92" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -432,15 +425,12 @@
                 <p class="copyright text-muted">
                     Copyright &copy; KimJongMin 2019 
                     <br>
-                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    Theme by <a href="http://huangxuan.me" rel="external nofollow noopener noreferrer" target="_blank">Hux</a> 
                     <span style="display: inline-block; margin: 0 5px;">
                         <i class="fa fa-heart"></i>
                     </span> 
-                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
-                    <iframe
-                        style="margin-left: 2px; margin-bottom:-5px;"
-                        frameborder="0" scrolling="0" width="91px" height="20px"
-                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    re-Ported by <a href="http://beantech.org" rel="external nofollow noopener noreferrer" target="_blank">BeanTech</a> | 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px" src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true">
                     </iframe>
                 </p>
             </div>
@@ -541,10 +531,10 @@
 
 
 	<a id="rocket" href="#top" class=""></a>
-	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
-    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async></script>
 <!-- Image to hack wechat -->
-<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0" />
+<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0">
 <!-- Migrate from head to bottom, no longer block render and still work -->
 
 </body>

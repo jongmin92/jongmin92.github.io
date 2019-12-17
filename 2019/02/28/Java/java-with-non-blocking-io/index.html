@@ -5,16 +5,16 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA" />
+    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="keyword"  content="">
+    <meta name="keyword" content="">
     <link rel="shortcut icon" href="/images/etc/ironman-draw.png">
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          멀티플렉싱 기반의 다중 접속 서버로 가기까지 - 92Hz | Jongmin&#39;s Blog
+          멀티플렉싱 기반의 다중 접속 서버로 가기까지 - 92Hz
         
     </title>
 
@@ -36,6 +36,9 @@
     <link rel="stylesheet" href="/css/signature.css">
 
     <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- For SEO -->
+    <link rel="canonical" href="https://jongmin92.github.io/2019/02/28/java/java-with-non-blocking-io/">
 
     <!-- Custom Fonts -->
     <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
@@ -79,7 +82,7 @@
     
 </style>
 
-<header class="intro-header" >
+<header class="intro-header">
     <!-- Signature -->
     <div id="signature">
         <div class="container">
@@ -153,14 +156,14 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -219,12 +222,7 @@
 
             <center>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-3921438651818825"
-         data-ad-slot="3015269677"></ins>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -239,7 +237,7 @@
                 <h1 id="소켓이란"><a href="#소켓이란" class="headerlink" title="소켓이란?"></a>소켓이란?</h1><p><code>소켓</code>은 네트워크 상에서 서버와 클라이언트 두개의 프로그램이 특정 포트를 통해 양방향 통신이 가능하도록 만들어주는 추상화된 장치입니다. <strong>메모리의 유저 공간에 존재하는 프로세스(서버, 클라이언트)는 커널 공간에 생성된 소켓을 통해 데이터를 송수신할 수 있습니다.</strong><br><img src="/images/post/2019-02-21/socket_1.png" alt="socket"></p>
 <p>소켓은 아래와 같이 지역(로컬) IP 주소, Port 번호와 상대방의 IP 주소와 Port 번호, 그리고 <code>수신 버퍼</code>와 <code>송신 버퍼</code>가 존재합니다. <strong>서버와 클라이언트의 소켓이 서로 연결된 후, 데이터가 들어오면 수신 버퍼로 수신 데이터가 쓰이고, 반대로 데이터를 내 보낼 때는 송신 버퍼에 데이터가 쓰입니다.</strong><br><img src="/images/post/2019-02-21/socket_2.png" alt="socket"></p>
 <h1 id="c언어로-간단한-서버-amp-클라이언트-구현"><a href="#C언어로-간단한-서버-amp-클라이언트-구현" class="headerlink" title="C언어로 간단한 서버 &amp; 클라이언트 구현"></a>C언어로 간단한 서버 &amp; 클라이언트 구현</h1><p>C언어를 이용해 linux와 window에서 간단하게 소켓을 이용해 echo server와 client를 만들어 보겠습니다.<br><strong>코드 한줄 한줄을 전부 해석하기 보다는 주석을 참고해 server와 client에서 어떤 순서로 소켓이 만들어지고 통신이 이루어지는지에 중점을 두어 보겠습니다.</strong></p>
-<h2 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h2><p><a href="https://en.wikipedia.org/wiki/Everything_is_a_file" target="_blank" rel="noopener">“Everything is a File”</a>라는 말이 있습니다. linux에서는 소켓도 하나의 파일(File), 더 정확히는 <a href="https://en.wikipedia.org/wiki/File_descriptor" target="_blank" rel="noopener">파일 디스크립터(File descriptor)</a>로 생성되어 관리됩니다. 그러므로 저 수준 파일 입출력 함수를 기반으로 소켓 기반의 데이터 송수신이 가능합니다.</p>
+<h2 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h2><p><a href="https://en.wikipedia.org/wiki/Everything_is_a_file" rel="external nofollow noopener noreferrer" target="_blank">“Everything is a File”</a>라는 말이 있습니다. linux에서는 소켓도 하나의 파일(File), 더 정확히는 <a href="https://en.wikipedia.org/wiki/File_descriptor" rel="external nofollow noopener noreferrer" target="_blank">파일 디스크립터(File descriptor)</a>로 생성되어 관리됩니다. 그러므로 저 수준 파일 입출력 함수를 기반으로 소켓 기반의 데이터 송수신이 가능합니다.</p>
 <blockquote>
 <p><code>파일 디스크립터(File descriptor)</code></p>
 <ul>
@@ -367,7 +365,7 @@
 </li>
 </ul>
 <blockquote>
-<p><a href="https://ko.wikipedia.org/wiki/POSIX" target="_blank" rel="noopener">POSIX란?</a></p>
+<p><a href="https://ko.wikipedia.org/wiki/POSIX" rel="external nofollow noopener noreferrer" target="_blank">POSIX란?</a></p>
 <p>POSIX(Portable Operating System Interface)는 이식 가능 운영 체제 인터페이스의 약자로, 서로 다른 UNIX OS의 공통 API를 정리하여 이식성이 높은 유닉스 응용 프로그램을 개발하기 위한 목적으로 IEEE가 책정한 애플리케이션 인터페이스 규격입니다.</p>
 </blockquote>
 <h2 id="poll"><a href="#poll" class="headerlink" title="poll"></a>poll</h2><p>poll도 select와 마찬가지로 멀티플렉싱을 구현하기 위한 방법입니다. poll이 여러 개의 파일을 다루는 방법은 select와 마찬가지로 fd(파일 디스크립터)의 이벤트를 기다리다가 이벤트가 발생하면, poll에서의 block이 해제되고, 다음 루틴에서 어떤 fd에 이벤트가 발생했는지 검사하는 방식을 사용합니다.</p>
@@ -408,9 +406,9 @@
 </li>
 </ul>
 <h1 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h1><ul>
-<li><a href="http://www.masterraghu.com/subjects/np/introduction/unix_network_programming_v1.3/ch06lev1sec2.html" target="_blank" rel="noopener">I/O Models</a></li>
-<li><a href="https://notes.shichao.io/unp/ch6/" target="_blank" rel="noopener">I/O Multiplexing: The select and poll Functions</a> </li>
-<li><a href="http://www.hanbit.co.kr/store/books/look.php?p_code=B2142415021" target="_blank" rel="noopener">뇌를 자극하는 TCP/IP 소켓 프로그래밍</a></li>
+<li><a href="http://www.masterraghu.com/subjects/np/introduction/unix_network_programming_v1.3/ch06lev1sec2.html" rel="external nofollow noopener noreferrer" target="_blank">I/O Models</a></li>
+<li><a href="https://notes.shichao.io/unp/ch6/" rel="external nofollow noopener noreferrer" target="_blank">I/O Multiplexing: The select and poll Functions</a> </li>
+<li><a href="http://www.hanbit.co.kr/store/books/look.php?p_code=B2142415021" rel="external nofollow noopener noreferrer" target="_blank">뇌를 자극하는 TCP/IP 소켓 프로그래밍</a></li>
 </ul>
 
                 
@@ -436,12 +434,7 @@
 
                 <center>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-3921438651818825"
-         data-ad-slot="3015269677"></ins>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -590,7 +583,7 @@
 
                 
                     <li>
-                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420">
+                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -601,7 +594,7 @@
 
                 
                     <li>
-                        <a target="_blank"  href="https://github.com/jongmin92">
+                        <a target="_blank" href="https://github.com/jongmin92" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -616,15 +609,12 @@
                 <p class="copyright text-muted">
                     Copyright &copy; KimJongMin 2019 
                     <br>
-                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    Theme by <a href="http://huangxuan.me" rel="external nofollow noopener noreferrer" target="_blank">Hux</a> 
                     <span style="display: inline-block; margin: 0 5px;">
                         <i class="fa fa-heart"></i>
                     </span> 
-                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
-                    <iframe
-                        style="margin-left: 2px; margin-bottom:-5px;"
-                        frameborder="0" scrolling="0" width="91px" height="20px"
-                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    re-Ported by <a href="http://beantech.org" rel="external nofollow noopener noreferrer" target="_blank">BeanTech</a> | 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px" src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true">
                     </iframe>
                 </p>
             </div>
@@ -725,10 +715,10 @@
 
 
 	<a id="rocket" href="#top" class=""></a>
-	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
-    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async></script>
 <!-- Image to hack wechat -->
-<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0" />
+<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0">
 <!-- Migrate from head to bottom, no longer block render and still work -->
 
 </body>

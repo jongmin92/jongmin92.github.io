@@ -5,16 +5,16 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA" />
+    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="keyword"  content="">
+    <meta name="keyword" content="">
     <link rel="shortcut icon" href="/images/etc/ironman-draw.png">
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          자바스크립트 완벽가이드 10장 (정규 표현식을 사용한 패턴 매칭) - 92Hz | Jongmin&#39;s Blog
+          자바스크립트 완벽가이드 10장 (정규 표현식을 사용한 패턴 매칭) - 92Hz
         
     </title>
 
@@ -36,6 +36,9 @@
     <link rel="stylesheet" href="/css/signature.css">
 
     <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- For SEO -->
+    <link rel="canonical" href="https://jongmin92.github.io/2017/01/30/javascript/complete-guide-to-javascript-chapter-10/">
 
     <!-- Custom Fonts -->
     <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
@@ -79,7 +82,7 @@
     
 </style>
 
-<header class="intro-header" >
+<header class="intro-header">
     <!-- Signature -->
     <div id="signature">
         <div class="container">
@@ -147,14 +150,14 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -213,12 +216,7 @@
 
             <center>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-3921438651818825"
-         data-ad-slot="3015269677"></ins>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -255,7 +253,7 @@
 <h2 id="102-패턴-매칭을-위한-문자열-메서드"><a href="#10-2-패턴-매칭을-위한-문자열-메서드" class="headerlink" title="10.2 패턴 매칭을 위한 문자열 메서드"></a>10.2 패턴 매칭을 위한 문자열 메서드</h2><p>문자열에는 정규 표현식을 사용하는 메서드가 <strong>네 개</strong> 있다. 가장 간단한 것은 <code>search()</code> 메서드다. 이 메서드는 정규 표현식을 인자로 받고, 가장 처음 매칭되는 부분 문자열의 위치를 반환한다. 만약 매칭되는 문자열이 없다면 -1을 반환한다.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"JavaScript"</span>.search(<span class="regexp">/script/i</span>);         <span class="comment">// 4를 반환한다.</span></span><br></pre></td></tr></table></figure></p>
 <p>search()에 넘기는 인자가 정규 표현식이 아니라면, 이 인자는 먼저 RegExp 생성자로 넘겨지고 정규 표현식으로 변환된다. search()는 전역 검색을 지원하지 않기 때문에, 정규 표현식 인자의 g플래그는 무시된다.<br><code>replace()</code> 메서드는 <strong>‘검색 후 바꾸기’</strong>를 수행한다. 첫 번째 인자로는 정규 표현식을 받고, 두 번째 인자로는 교체할 문자열을 받는다. replace() 메서드는 g플래그 사용이 가능하다. replace()의 첫 번째 인자가 정규 표현식이 아니라 일반 문자열인 경우에는 RegExp() 생성자를 사용하여 정규 표현식으로 변환하지 않고 전달된 문자열을 문자열 그대로 찾는다.(search() 와는 반대)<br><code>match()</code> 메서드는 정규 표현식 하나만을 인자로 받고 매치 결과를 배열로 반환한다. g플래그가 설정되어 있으면, 문자열 내의 모든 매치 부분을 배열로 반환한다. g플래그가 설정되어 있지 않으면, match()는 전역 검색을 수행하지 않고 단순히 첫 번째 매칭만 찾는다. 그러나 결과는 항상 배열로 반환된다.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> url = <span class="regexp">/(\w+):\/\/([\w.]+)\/(\S*)/</span>;</span><br><span class="line"><span class="keyword">var</span> text = <span class="string">"Visit my blog at http://www.example.com/~david"</span>;</span><br><span class="line"><span class="keyword">var</span> result = text.match(url);</span><br><span class="line"><span class="keyword">if</span> (result != <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> fullurl = result[<span class="number">0</span>];        <span class="comment">// http:/www.example.com/~david</span></span><br><span class="line">    <span class="keyword">var</span> protocol = result[<span class="number">1</span>];       <span class="comment">// http</span></span><br><span class="line">    <span class="keyword">var</span> host = result[<span class="number">2</span>];           <span class="comment">// www.example.com</span></span><br><span class="line">    <span class="keyword">var</span> path = result[<span class="number">3</span>];           <span class="comment">// ~david</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p><code>split()</code> 메서드는 주어진 인자를 구분자로 삼아, 메서드가 호출된 문자열을 부분 문자열로 쪼갠다.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"123,456,789"</span>.split(<span class="string">","</span>)        <span class="comment">// ["123", "456", "789"]</span></span><br></pre></td></tr></table></figure></p>
-<p><br><br><strong>출처 : <a href="http://book.naver.com/bookdb/book_detail.nhn?bid=10338797" target="_blank" rel="noopener">“JavaScript: The Definitive Guide, by David Flanagan (O’Reilly). Copyright 2011 David Flanagan, 978-0-596-80552-4”</a></strong></p>
+<p><br><br><strong>출처 : <a href="http://book.naver.com/bookdb/book_detail.nhn?bid=10338797" rel="external nofollow noopener noreferrer" target="_blank">“JavaScript: The Definitive Guide, by David Flanagan (O’Reilly). Copyright 2011 David Flanagan, 978-0-596-80552-4”</a></strong></p>
 
                 
 
@@ -264,12 +262,12 @@
                 <ul class="pager">
                     
                         <li class="previous">
-                            <a href="/2017/01/30/JavaScript/complete-guide-to-javascript-chapter-9/" data-toggle="tooltip" data-placement="top" title="자바스크립트 완벽가이드 9장 (클래스와 모듈)">&larr; Previous Post</a>
+                            <a href="/2017/01/30/JavaScript/complete-guide-to-javascript-chapter-8/" data-toggle="tooltip" data-placement="top" title="자바스크립트 완벽가이드 8장 (함수)">&larr; Previous Post</a>
                         </li>
                     
                     
                         <li class="next">
-                            <a href="/2017/01/28/JavaScript/complete-guide-to-javascript-chapter-7/" data-toggle="tooltip" data-placement="top" title="자바스크립트 완벽가이드 7장 (배열)">Next Post &rarr;</a>
+                            <a href="/2017/01/30/JavaScript/complete-guide-to-javascript-chapter-9/" data-toggle="tooltip" data-placement="top" title="자바스크립트 완벽가이드 9장 (클래스와 모듈)">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -280,12 +278,7 @@
 
                 <center>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-3921438651818825"
-         data-ad-slot="3015269677"></ins>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -417,7 +410,7 @@
 
                 
                     <li>
-                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420">
+                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -428,7 +421,7 @@
 
                 
                     <li>
-                        <a target="_blank"  href="https://github.com/jongmin92">
+                        <a target="_blank" href="https://github.com/jongmin92" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -443,15 +436,12 @@
                 <p class="copyright text-muted">
                     Copyright &copy; KimJongMin 2019 
                     <br>
-                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    Theme by <a href="http://huangxuan.me" rel="external nofollow noopener noreferrer" target="_blank">Hux</a> 
                     <span style="display: inline-block; margin: 0 5px;">
                         <i class="fa fa-heart"></i>
                     </span> 
-                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
-                    <iframe
-                        style="margin-left: 2px; margin-bottom:-5px;"
-                        frameborder="0" scrolling="0" width="91px" height="20px"
-                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    re-Ported by <a href="http://beantech.org" rel="external nofollow noopener noreferrer" target="_blank">BeanTech</a> | 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px" src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true">
                     </iframe>
                 </p>
             </div>
@@ -552,10 +542,10 @@
 
 
 	<a id="rocket" href="#top" class=""></a>
-	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
-    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async></script>
 <!-- Image to hack wechat -->
-<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0" />
+<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0">
 <!-- Migrate from head to bottom, no longer block render and still work -->
 
 </body>

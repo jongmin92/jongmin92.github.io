@@ -5,16 +5,16 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA" />
+    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="keyword"  content="">
+    <meta name="keyword" content="">
     <link rel="shortcut icon" href="/images/etc/ironman-draw.png">
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          (Gradle dependency) api와 implementation 차이 - 92Hz | Jongmin&#39;s Blog
+          (Gradle dependency) api와 implementation 차이 - 92Hz
         
     </title>
 
@@ -36,6 +36,9 @@
     <link rel="stylesheet" href="/css/signature.css">
 
     <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- For SEO -->
+    <link rel="canonical" href="https://jongmin92.github.io/2019/05/09/gradle/gradle-api-vs-implementation/">
 
     <!-- Custom Fonts -->
     <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
@@ -79,7 +82,7 @@
     
 </style>
 
-<header class="intro-header" >
+<header class="intro-header">
     <!-- Signature -->
     <div id="signature">
         <div class="container">
@@ -143,14 +146,14 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -209,12 +212,7 @@
 
             <center>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-3921438651818825"
-         data-ad-slot="3015269677"></ins>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -227,7 +225,7 @@
                 post-container">
 
                 <p><strong>build script의 <code>dependencies</code> 블록에 여러 가지 다양한 종속성 구성(api, implementation, compileOnly, runtimeOnly, annotationProcessor)을 사용하여 라이브러리 종속성을 선언할 수 있습니다.</strong> 다양한 종속성 구성 중 api와 implementation의 차이에 대해서 알아봅니다.</p>
-<h1 id="api-amp-implementation"><a href="#api-amp-implementation" class="headerlink" title="api &amp; implementation"></a>api &amp; implementation</h1><p><a href="https://docs.gradle.org/current/userguide/dependency_management_for_java_projects.html#sec:configurations_java_tutorial" target="_blank" rel="noopener">Gradle document</a>에서는 api와 implementation에 대해서 다음과 같이 설명하고 있습니다.</p>
+<h1 id="api-amp-implementation"><a href="#api-amp-implementation" class="headerlink" title="api &amp; implementation"></a>api &amp; implementation</h1><p><a href="https://docs.gradle.org/current/userguide/dependency_management_for_java_projects.html#sec:configurations_java_tutorial" rel="external nofollow noopener noreferrer" target="_blank">Gradle document</a>에서는 api와 implementation에 대해서 다음과 같이 설명하고 있습니다.</p>
 <ul>
 <li><strong>api</strong><blockquote>
 <p><strong>The dependencies required to compile the production source of the project which are part of the API exposed by the project.</strong> For example the project uses Guava and exposes public interfaces with Guava classes in their method signatures.</p>
@@ -240,7 +238,7 @@
 </blockquote>
 </li>
 </ul>
-<p>위 설명만 가지고는 이해하기가 쉽지 않습니다. <a href="https://developer.android.com/studio/build/dependencies?utm_source=android-studio#dependency_configurations" target="_blank" rel="noopener">Android Developers document</a>에서는 같은 내용을 다음과 같이 한글로 설명하고 있습니다.</p>
+<p>위 설명만 가지고는 이해하기가 쉽지 않습니다. <a href="https://developer.android.com/studio/build/dependencies?utm_source=android-studio#dependency_configurations" rel="external nofollow noopener noreferrer" target="_blank">Android Developers document</a>에서는 같은 내용을 다음과 같이 한글로 설명하고 있습니다.</p>
 <ul>
 <li><strong>api</strong><blockquote>
 <p>Gradle은 컴파일 클래스 경로 및 빌드 출력에 종속성을 추가합니다. <strong>모듈에 api 종속성을 포함하면 다른 모듈에 그 종속성을 과도적으로 내보내기를 원하며 따라서 런타임과 컴파일 시 모두 종속성을 사용할 수 있다는 사실을 Gradle에 알려줄 수 있습니다.</strong></p>
@@ -267,9 +265,9 @@
 </li>
 </ul>
 <h1 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h1><ul>
-<li><a href="https://stackoverflow.com/a/44419574" target="_blank" rel="noopener">https://stackoverflow.com/a/44419574</a></li>
-<li><a href="https://medium.com/mindorks/implementation-vs-api-in-gradle-3-0-494c817a6fa" target="_blank" rel="noopener">https://medium.com/mindorks/implementation-vs-api-in-gradle-3-0-494c817a6fa</a></li>
-<li><a href="https://www.youtube.com/watch?v=7ll-rkLCtyk&amp;feature=youtu.be&amp;t=29m35s" target="_blank" rel="noopener">https://www.youtube.com/watch?v=7ll-rkLCtyk&amp;feature=youtu.be&amp;t=29m35s</a></li>
+<li><a href="https://stackoverflow.com/a/44419574" rel="external nofollow noopener noreferrer" target="_blank">https://stackoverflow.com/a/44419574</a></li>
+<li><a href="https://medium.com/mindorks/implementation-vs-api-in-gradle-3-0-494c817a6fa" rel="external nofollow noopener noreferrer" target="_blank">https://medium.com/mindorks/implementation-vs-api-in-gradle-3-0-494c817a6fa</a></li>
+<li><a href="https://www.youtube.com/watch?v=7ll-rkLCtyk&amp;feature=youtu.be&amp;t=29m35s" rel="external nofollow noopener noreferrer" target="_blank">https://www.youtube.com/watch?v=7ll-rkLCtyk&amp;feature=youtu.be&amp;t=29m35s</a></li>
 </ul>
 
                 
@@ -295,12 +293,7 @@
 
                 <center>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-3921438651818825"
-         data-ad-slot="3015269677"></ins>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -428,7 +421,7 @@
 
                 
                     <li>
-                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420">
+                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -439,7 +432,7 @@
 
                 
                     <li>
-                        <a target="_blank"  href="https://github.com/jongmin92">
+                        <a target="_blank" href="https://github.com/jongmin92" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -454,15 +447,12 @@
                 <p class="copyright text-muted">
                     Copyright &copy; KimJongMin 2019 
                     <br>
-                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    Theme by <a href="http://huangxuan.me" rel="external nofollow noopener noreferrer" target="_blank">Hux</a> 
                     <span style="display: inline-block; margin: 0 5px;">
                         <i class="fa fa-heart"></i>
                     </span> 
-                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
-                    <iframe
-                        style="margin-left: 2px; margin-bottom:-5px;"
-                        frameborder="0" scrolling="0" width="91px" height="20px"
-                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    re-Ported by <a href="http://beantech.org" rel="external nofollow noopener noreferrer" target="_blank">BeanTech</a> | 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px" src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true">
                     </iframe>
                 </p>
             </div>
@@ -563,10 +553,10 @@
 
 
 	<a id="rocket" href="#top" class=""></a>
-	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
-    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async></script>
 <!-- Image to hack wechat -->
-<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0" />
+<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0">
 <!-- Migrate from head to bottom, no longer block render and still work -->
 
 </body>

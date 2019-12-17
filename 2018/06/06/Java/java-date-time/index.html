@@ -5,16 +5,16 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA" />
+    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="keyword"  content="">
+    <meta name="keyword" content="">
     <link rel="shortcut icon" href="/images/etc/ironman-draw.png">
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          날짜와 시간 &amp; 형식화 - 92Hz | Jongmin&#39;s Blog
+          날짜와 시간 &amp; 형식화 - 92Hz
         
     </title>
 
@@ -36,6 +36,9 @@
     <link rel="stylesheet" href="/css/signature.css">
 
     <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- For SEO -->
+    <link rel="canonical" href="https://jongmin92.github.io/2018/06/06/java/java-date-time/">
 
     <!-- Custom Fonts -->
     <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
@@ -79,7 +82,7 @@
     
 </style>
 
-<header class="intro-header" >
+<header class="intro-header">
     <!-- Signature -->
     <div id="signature">
         <div class="container">
@@ -143,14 +146,14 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -209,12 +212,7 @@
 
             <center>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-3921438651818825"
-         data-ad-slot="3015269677"></ins>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -227,7 +225,7 @@
                 post-container">
 
                 <blockquote>
-<p><strong>해당 포스팅의 내용은 <a href="http://www.kyobobook.co.kr/product/detailViewKor.laf?barcode=9788995379431" target="_blank" rel="noopener">Java의 정석 2권 - Chapter 10 날짜와 시간 &amp; 형식화</a>에 있는 내용을 요약한 것입니다. 해당 책으로 복습하며 정리한 내용이고 문제가 된다면 바로 해당 포스팅을 삭제하도록 하겠습니다.</strong></p>
+<p><strong>해당 포스팅의 내용은 <a href="http://www.kyobobook.co.kr/product/detailViewKor.laf?barcode=9788995379431" rel="external nofollow noopener noreferrer" target="_blank">Java의 정석 2권 - Chapter 10 날짜와 시간 &amp; 형식화</a>에 있는 내용을 요약한 것입니다. 해당 책으로 복습하며 정리한 내용이고 문제가 된다면 바로 해당 포스팅을 삭제하도록 하겠습니다.</strong></p>
 </blockquote>
 <h1 id="날짜와-시간-amp-형식화"><a href="#날짜와-시간-amp-형식화" class="headerlink" title="날짜와 시간 &amp; 형식화"></a>날짜와 시간 &amp; 형식화</h1><h2 id="타임존-포함-iso-8601-문자열의-표현"><a href="#타임존-포함-ISO-8601-문자열의-표현" class="headerlink" title="타임존 포함 ISO 8601 문자열의 표현"></a>타임존 포함 ISO 8601 문자열의 표현</h2><p>날짜/시간 및 타임존을 다루는 국제적인 규약은 다양하다. <strong>RFC 822, 1036, 1123, 2822, 3339, ISO 8601</strong> 등이 있다. 여기서는 <code>ISO 8601</code>과 <code>RFC 3339</code>와 관련된 표기법을 알아본다.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 로컬 시간을 의미하는 ISO 8601 문자열</span><br><span class="line">2017-11-06T15:00:00.000</span><br><span class="line"></span><br><span class="line">// UTC(GMT) 시간을 의미하는 ISO 8601 문자열</span><br><span class="line">2017-11-06T06:00:00.000Z</span><br><span class="line"></span><br><span class="line">// 로컬 시간을 의미하면서 UTC(GMT) 대비 +09:00 임을 의미하는 ISO 8601 문자열</span><br><span class="line">2017-11-06T15:00:00.000+09:00</span><br></pre></td></tr></table></figure>
@@ -344,9 +342,9 @@
 <p>문자열을 날짜 또는 시간으로 변환하려면 static 메서드 parse()를 사용하면 된다. 자주 사용되는 기본적인 형식의 문자열은 ISO_LOCAL_DATE와 같은 형식화 상수를 사용하지 않고도 파싱이 가능하다.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">LocalDate date = LocalDate.parse(<span class="string">"2018-06-06"</span>, DateTimeFormatter.ISO_LOCAL_DATE);</span><br><span class="line">LocalDate newDate = LocalDate.parse(<span class="string">"2018-06-06"</span>);</span><br><span class="line">LocalTime newTime = LocalTime.parse(<span class="string">"23:59:59"</span>);</span><br><span class="line">LocalDateTime newDateTime = LocalDateTime.parse(<span class="string">"2018-06-06T23:59:59"</span>);</span><br></pre></td></tr></table></figure>
 <h1 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h1><ul>
-<li><a href="http://jsonobject.tistory.com/403" target="_blank" rel="noopener">Java 8, 타임존이 포함된 ISO 8601 문자열을 LocalDateTime으로 변환하기</a></li>
-<li><a href="https://wickso.me/2018/02/20/time-zone-with-java8/#Java8%EC%9D%98-%ED%83%80%EC%9E%84%EC%A1%B4" target="_blank" rel="noopener">Java8에서 타임존(Time-Zone) 다루기</a></li>
-<li><a href="http://www.kyobobook.co.kr/product/detailViewKor.laf?barcode=9788995379431" target="_blank" rel="noopener">Java의 정석 - 2</a></li>
+<li><a href="http://jsonobject.tistory.com/403" rel="external nofollow noopener noreferrer" target="_blank">Java 8, 타임존이 포함된 ISO 8601 문자열을 LocalDateTime으로 변환하기</a></li>
+<li><a href="https://wickso.me/2018/02/20/time-zone-with-java8/#Java8%EC%9D%98-%ED%83%80%EC%9E%84%EC%A1%B4" rel="external nofollow noopener noreferrer" target="_blank">Java8에서 타임존(Time-Zone) 다루기</a></li>
+<li><a href="http://www.kyobobook.co.kr/product/detailViewKor.laf?barcode=9788995379431" rel="external nofollow noopener noreferrer" target="_blank">Java의 정석 - 2</a></li>
 </ul>
 
                 
@@ -372,12 +370,7 @@
 
                 <center>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-3921438651818825"
-         data-ad-slot="3015269677"></ins>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -516,7 +509,7 @@
 
                 
                     <li>
-                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420">
+                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -527,7 +520,7 @@
 
                 
                     <li>
-                        <a target="_blank"  href="https://github.com/jongmin92">
+                        <a target="_blank" href="https://github.com/jongmin92" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -542,15 +535,12 @@
                 <p class="copyright text-muted">
                     Copyright &copy; KimJongMin 2019 
                     <br>
-                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    Theme by <a href="http://huangxuan.me" rel="external nofollow noopener noreferrer" target="_blank">Hux</a> 
                     <span style="display: inline-block; margin: 0 5px;">
                         <i class="fa fa-heart"></i>
                     </span> 
-                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
-                    <iframe
-                        style="margin-left: 2px; margin-bottom:-5px;"
-                        frameborder="0" scrolling="0" width="91px" height="20px"
-                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    re-Ported by <a href="http://beantech.org" rel="external nofollow noopener noreferrer" target="_blank">BeanTech</a> | 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px" src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true">
                     </iframe>
                 </p>
             </div>
@@ -651,10 +641,10 @@
 
 
 	<a id="rocket" href="#top" class=""></a>
-	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
-    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async></script>
 <!-- Image to hack wechat -->
-<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0" />
+<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0">
 <!-- Migrate from head to bottom, no longer block render and still work -->
 
 </body>

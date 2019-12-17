@@ -5,16 +5,16 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA" />
+    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="keyword"  content="">
+    <meta name="keyword" content="">
     <link rel="shortcut icon" href="/images/etc/ironman-draw.png">
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          Prototype 이제는 이해하자 - 92Hz | Jongmin&#39;s Blog
+          Prototype 이제는 이해하자 - 92Hz
         
     </title>
 
@@ -36,6 +36,9 @@
     <link rel="stylesheet" href="/css/signature.css">
 
     <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- For SEO -->
+    <link rel="canonical" href="https://jongmin92.github.io/2017/03/14/javascript/understand-prototype/">
 
     <!-- Custom Fonts -->
     <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
@@ -79,7 +82,7 @@
     
 </style>
 
-<header class="intro-header" >
+<header class="intro-header">
     <!-- Signature -->
     <div id="signature">
         <div class="container">
@@ -147,14 +150,14 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -213,12 +216,7 @@
 
             <center>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-3921438651818825"
-         data-ad-slot="3015269677"></ins>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -247,7 +245,7 @@
 <p>먼저 프로토타입에 대해 이해하기 위해서는 <code>객체(object)는 함수(function)로부터 시작된다</code>라는 것을 알아야 합니다. 이는 prototype을 이해하는데 많은 도움을 줍니다.</p>
 <hr>
 <p><span id="2"></span></p>
-<h2 id="객체object는-함수function로부터-시작된다"><a href="#객체-object-는-함수-function-로부터-시작된다" class="headerlink" title=" 객체(object)는 함수(function)로부터 시작된다"></a><span style="color:red"> 객체(object)는 함수(function)로부터 시작된다</span></h2><p><strong>자바스크립트에서 <a href="https://developer.mozilla.org/ko/docs/Glossary/Primitive" target="_blank" rel="noopener">primitive</a>를 제외하고는 모두 객체(object)입니다.</strong><br> <strong>앞으로 등장하는 Object와 Function은 function(즉, 생성자)입니다. object는 객체를 의미합니다.</strong></p>
+<h2 id="객체object는-함수function로부터-시작된다"><a href="#객체-object-는-함수-function-로부터-시작된다" class="headerlink" title=" 객체(object)는 함수(function)로부터 시작된다"></a><span style="color:red"> 객체(object)는 함수(function)로부터 시작된다</span></h2><p><strong>자바스크립트에서 <a href="https://developer.mozilla.org/ko/docs/Glossary/Primitive" rel="external nofollow noopener noreferrer" target="_blank">primitive</a>를 제외하고는 모두 객체(object)입니다.</strong><br> <strong>앞으로 등장하는 Object와 Function은 function(즉, 생성자)입니다. object는 객체를 의미합니다.</strong></p>
 <p>다음의 코드를 분석하기 전 <code>객체(object)는 함수(function)로부터 시작된다</code>라는걸 다시한번 기억하겠습니다.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Book</span>(<span class="params"></span>) </span>&#123; &#125;                <span class="comment">// 함수</span></span><br><span class="line"><span class="keyword">var</span> jsBook = <span class="keyword">new</span> Book();           <span class="comment">// 객체 생성</span></span><br></pre></td></tr></table></figure></p>
 <p>위의 코드에서 <strong>Book이라는 함수를 통해서 jsBook이라는 객체</strong>를 생성했습니다. 이때 Book 함수를 <code>생성자</code>라고 합니다. 생성자는 새로 생성된 객체를 초기화하는 역할을 합니다. 코어 자바스크립트는 기본 타입에 대한 생성자를 내장하고 있는데 이는 다음 코드를 통해 확인이 가능합니다.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> cssBook = &#123;&#125;;                  <span class="comment">// 생성자 선언 없이 객체 생성</span></span><br></pre></td></tr></table></figure></p>
 <p>위에서는 리터럴 방식을 사용하여 객체를 생성하였습니다. 리터럴 방식 또한 결과적으로는 함수를 통하여 객체를 생성하게 됩니다. <strong>자바스크립트 엔진</strong>이 해당 리터럴을 다음과 같이 해석합니다.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> cssBook = <span class="keyword">new</span> <span class="built_in">Object</span>();        <span class="comment">// 객체 생성</span></span><br></pre></td></tr></table></figure></p>
@@ -316,12 +314,7 @@
 
                 <center>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-3921438651818825"
-         data-ad-slot="3015269677"></ins>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -453,7 +446,7 @@
 
                 
                     <li>
-                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420">
+                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -464,7 +457,7 @@
 
                 
                     <li>
-                        <a target="_blank"  href="https://github.com/jongmin92">
+                        <a target="_blank" href="https://github.com/jongmin92" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -479,15 +472,12 @@
                 <p class="copyright text-muted">
                     Copyright &copy; KimJongMin 2019 
                     <br>
-                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    Theme by <a href="http://huangxuan.me" rel="external nofollow noopener noreferrer" target="_blank">Hux</a> 
                     <span style="display: inline-block; margin: 0 5px;">
                         <i class="fa fa-heart"></i>
                     </span> 
-                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
-                    <iframe
-                        style="margin-left: 2px; margin-bottom:-5px;"
-                        frameborder="0" scrolling="0" width="91px" height="20px"
-                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    re-Ported by <a href="http://beantech.org" rel="external nofollow noopener noreferrer" target="_blank">BeanTech</a> | 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px" src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true">
                     </iframe>
                 </p>
             </div>
@@ -588,10 +578,10 @@
 
 
 	<a id="rocket" href="#top" class=""></a>
-	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
-    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async></script>
 <!-- Image to hack wechat -->
-<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0" />
+<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0">
 <!-- Migrate from head to bottom, no longer block render and still work -->
 
 </body>

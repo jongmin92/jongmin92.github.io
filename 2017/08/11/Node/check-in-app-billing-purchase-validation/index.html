@@ -5,16 +5,16 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA" />
+    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="keyword"  content="">
+    <meta name="keyword" content="">
     <link rel="shortcut icon" href="/images/etc/ironman-draw.png">
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          Android In-App Purchase Validation - 92Hz | Jongmin&#39;s Blog
+          Android In-App Purchase Validation - 92Hz
         
     </title>
 
@@ -36,6 +36,9 @@
     <link rel="stylesheet" href="/css/signature.css">
 
     <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- For SEO -->
+    <link rel="canonical" href="https://jongmin92.github.io/2017/08/11/node/check-in-app-billing-purchase-validation/">
 
     <!-- Custom Fonts -->
     <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
@@ -79,7 +82,7 @@
     
 </style>
 
-<header class="intro-header" >
+<header class="intro-header">
     <!-- Signature -->
     <div id="signature">
         <div class="container">
@@ -149,14 +152,14 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -215,12 +218,7 @@
 
             <center>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-3921438651818825"
-         data-ad-slot="3015269677"></ins>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -241,7 +239,7 @@
 </ol>
 <hr>
 <p>얼마전 아랍어 번역을 마치고 몇개 국가에 앱을 출시하게 되면서 <strong><code>결제 관련</code></strong> 문제가 발생하기 시작했습니다. 앱과 서버의 결제 관련 코드를 모두 제가 맡아 작성했기 때문에 계속해서 발생하는 문제로 인해 정신적 충격이 상당했습니다…</p>
-<p><a href="http://theeye.pe.kr/archives/2130" target="_blank" rel="noopener">“Android In-App Billing 보안 완벽 정리”</a>의 글을 참고해 결국에는 앱내 구매(In-App Billing)시 <a href="https://in-appstore.com/android/" target="_blank" rel="noopener">프리덤(Freedom)</a>과 같은 <strong><code>결제 해킹 앱</code></strong>에 의해 문제가 발생하게 된다는것을 알게 되었습니다.</p>
+<p><a href="http://theeye.pe.kr/archives/2130" rel="external nofollow noopener noreferrer" target="_blank">“Android In-App Billing 보안 완벽 정리”</a>의 글을 참고해 결국에는 앱내 구매(In-App Billing)시 <a href="https://in-appstore.com/android/" rel="external nofollow noopener noreferrer" target="_blank">프리덤(Freedom)</a>과 같은 <strong><code>결제 해킹 앱</code></strong>에 의해 문제가 발생하게 된다는것을 알게 되었습니다.</p>
 <p>이에 서버에서 <strong><code>In-App Purchase Validation(앱내 구매 유효성 검사)</code></strong>을 하는 코드를 추가했고 위의 문제를 해결할 수 있었습니다. 이번 포스팅에서는 <strong>In-App Purchase Validation</strong>에 대해서 알아보겠습니다. (In-App 결제 구현에 대한 내용은 다루지 않습니다!)</p>
 <hr>
 <p><span id="1"></span></p>
@@ -254,12 +252,12 @@
 <hr>
 <p><span id="2"></span></p>
 <h2 id="2-subscriptions-and-in-app-purchases-api"><a href="#2-Subscriptions-and-In-App-Purchases-API" class="headerlink" title="2. Subscriptions and In-App Purchases API"></a>2. Subscriptions and In-App Purchases API</h2><p>Google에서는 <strong><code>Subscriptions and In-App Purchases API</code></strong>를 제공하고 있습니다. (전에는 이 API를 “Purchase Status API” 라고 불렀습니다.)</p>
-<p><a href="https://developer.android.com/google/play/developer-api.html?hl=ko#subscriptions_api_overview" target="_blank" rel="noopener">Document</a>를 참고하면 해당 API를 <strong>인앱 상품과 구독으로 구성된 앱의 카탈로그를 관리할 수 있으며, 개별 구매에 대한 정보, 구매와 구독의 만료 확인 등, 여러 가지 용도로 사용할 수 있음을 알 수 있습니다.</strong></p>
+<p><a href="https://developer.android.com/google/play/developer-api.html?hl=ko#subscriptions_api_overview" rel="external nofollow noopener noreferrer" target="_blank">Document</a>를 참고하면 해당 API를 <strong>인앱 상품과 구독으로 구성된 앱의 카탈로그를 관리할 수 있으며, 개별 구매에 대한 정보, 구매와 구독의 만료 확인 등, 여러 가지 용도로 사용할 수 있음을 알 수 있습니다.</strong></p>
 <p>따라서 실제 결제가 이루어졌고, Google Play Console의 주문 관리에 그 내역이 있는지 확인이 가능한 것입니다. 해당 API는 Google Play Developer API로서 허용되는 사용 할당량이 <strong>매일 200,000개의 요청</strong>으로 제한됩니다. 이 정도면 충분한 구독, 결제 유효성 검사 요구를 충족시킬 수 있으며, 만약 더 많은 요청이 필요하다면 Google Developer Console에서 요청할 수 있다고 합니다.</p>
 <hr>
 <p><span id="3"></span></p>
 <h2 id="3-api-사용을-위한-서비스-계정-연결"><a href="#3-API-사용을-위한-서비스-계정-연결" class="headerlink" title="3. API 사용을 위한 서비스 계정 연결"></a>3. API 사용을 위한 서비스 계정 연결</h2><p>API를 사용하기 위해서는 Google Developer Console에서 서비스 계정을 생성한 후 API 엑세스 권한을 부여해주어야 합니다. 몇가지 단계를 거쳐야 하는데 같이 해보겠습니다.</p>
-<p>1.<a href="https://play.google.com/apps/publish/?hl=ko" target="_blank" rel="noopener">Google Play Console</a>에 <strong>관리자 계정</strong>으로 로그인합니다.</p>
+<p>1.<a href="https://play.google.com/apps/publish/?hl=ko" rel="external nofollow noopener noreferrer" target="_blank">Google Play Console</a>에 <strong>관리자 계정</strong>으로 로그인합니다.</p>
 <p>2.<strong>설정 - API 액세스</strong>로 이동합니다. (서비스 약관은 수락합니다.)<br><img src="/images/post/2017-08-11/1.jpg" alt=""></p>
 <p>3.<strong>새 프로젝트 만들기</strong> 후 하단의 <strong>서비스 계정 만들기</strong>를 선택합니다.<br><img src="/images/post/2017-08-11/2.jpg" alt=""></p>
 <p>4.<strong>Google API 콘솔</strong>로 이동합니다.<br><img src="/images/post/2017-08-11/3.jpg" alt=""></p>
@@ -270,8 +268,8 @@
 <p>9.역할을 <strong>금융</strong>으로 선택한 후, <strong>재무 데이터 보기</strong> 권한을 설정합니다.<br>(구매내역 및 영수증 검증을 하기 위해서는 재무 보고서 보기 권한이 필요합니다 . 역할을 금융으로 선택해 주면 해당 권한이 자동으로 선택됩니다. 영수증 검증을 위해서는 금융 역할을 갖는 서비스 계정이 필요합니다.)<br><img src="/images/post/2017-08-11/6.jpg" alt=""></p>
 <hr>
 <p><span id="4"></span></p>
-<h2 id="4-api-사용하기-with-node-iap"><a href="#4-API-사용하기-With-node-iap" class="headerlink" title="4. API 사용하기 (With node-iap)"></a>4. API 사용하기 (With node-iap)</h2><p>복잡하게 토큰을 관리하며 HTTP/REST API를 사용할것 없이 <strong>Google은 다양한 언어에 맞게 Client 라이브러리를 제공</strong>하고 있습니다. <a href="https://developers.google.com/api-client-library/" target="_blank" rel="noopener">Access Google APIs more easily</a>를 통해서 다양한 언어의 라이브러리를 찾아 사용할 수 있습니다.</p>
-<p><a href="https://github.com/google/google-api-nodejs-client/#google-apis-nodejs-client" target="_blank" rel="noopener">google-api-nodejs-client</a>를 사용하면 되지만, <strong>다른 Platform(apple)</strong>에도 대응할 수 있는 <a href="https://github.com/Wizcorp/node-iap" target="_blank" rel="noopener">node-iap(In-app purchase verification for Apple App Store and Google Play)</a>를 사용하겠습니다.</p>
+<h2 id="4-api-사용하기-with-node-iap"><a href="#4-API-사용하기-With-node-iap" class="headerlink" title="4. API 사용하기 (With node-iap)"></a>4. API 사용하기 (With node-iap)</h2><p>복잡하게 토큰을 관리하며 HTTP/REST API를 사용할것 없이 <strong>Google은 다양한 언어에 맞게 Client 라이브러리를 제공</strong>하고 있습니다. <a href="https://developers.google.com/api-client-library/" rel="external nofollow noopener noreferrer" target="_blank">Access Google APIs more easily</a>를 통해서 다양한 언어의 라이브러리를 찾아 사용할 수 있습니다.</p>
+<p><a href="https://github.com/google/google-api-nodejs-client/#google-apis-nodejs-client" rel="external nofollow noopener noreferrer" target="_blank">google-api-nodejs-client</a>를 사용하면 되지만, <strong>다른 Platform(apple)</strong>에도 대응할 수 있는 <a href="https://github.com/Wizcorp/node-iap" rel="external nofollow noopener noreferrer" target="_blank">node-iap(In-app purchase verification for Apple App Store and Google Play)</a>를 사용하겠습니다.</p>
 <p>사용방법은 생각보다 정말 간단합니다.</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> iap = <span class="built_in">require</span>(<span class="string">'iap'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> platform = <span class="string">'google'</span>;</span><br><span class="line"><span class="keyword">let</span> payment = &#123;</span><br><span class="line">	receipt: <span class="string">'receipt data'</span>, <span class="comment">// always required (purchaseToken)</span></span><br><span class="line">	productId: <span class="string">'abc'</span>,</span><br><span class="line">	packageName: <span class="string">'my.app'</span>,</span><br><span class="line">	keyObject: <span class="string">''</span>, <span class="comment">// always required (user auth key)</span></span><br><span class="line">	subscription: <span class="literal">false</span>,	<span class="comment">// optional, if google play subscription</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">iap.verifyPayment(platform, payment, <span class="function"><span class="keyword">function</span> (<span class="params">error, response</span>) </span>&#123;</span><br><span class="line">	<span class="comment">/* your code */</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>node-iap는 google과 apple에서 모두 사용가능하기 때문에 platform을 명시해야 합니다. payment에는 확인하고자 하는 인앱결제 내역을 넣습니다.</p>
@@ -286,9 +284,9 @@
 <p>제가 지금까지 회사에서 일하며 발생했던 가장 크리티컬했던 부분이라고 생각하는데 혹시나 이 글을 읽으시는 분중 아직 purchase validation을 하지 않고 계시다면 지금이라도 꼭 코드를 추가하셨으면 합니다.</p>
 <hr>
 <h2 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h2><ul>
-<li><a href="https://developer.android.com/google/play/developer-api.html?hl=ko" target="_blank" rel="noopener">Google Play Developer API</a></li>
-<li><a href="http://theeye.pe.kr/archives/2130" target="_blank" rel="noopener">Android In-App Billing 보안 완벽 정리</a></li>
-<li><a href="http://theeye.pe.kr/archives/tag/purchasestate" target="_blank" rel="noopener">Android In-App Billing 서버사이드 보안 완벽 정리</a></li>
+<li><a href="https://developer.android.com/google/play/developer-api.html?hl=ko" rel="external nofollow noopener noreferrer" target="_blank">Google Play Developer API</a></li>
+<li><a href="http://theeye.pe.kr/archives/2130" rel="external nofollow noopener noreferrer" target="_blank">Android In-App Billing 보안 완벽 정리</a></li>
+<li><a href="http://theeye.pe.kr/archives/tag/purchasestate" rel="external nofollow noopener noreferrer" target="_blank">Android In-App Billing 서버사이드 보안 완벽 정리</a></li>
 </ul>
 
                 
@@ -314,12 +312,7 @@
 
                 <center>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-3921438651818825"
-         data-ad-slot="3015269677"></ins>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -453,7 +446,7 @@
 
                 
                     <li>
-                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420">
+                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -464,7 +457,7 @@
 
                 
                     <li>
-                        <a target="_blank"  href="https://github.com/jongmin92">
+                        <a target="_blank" href="https://github.com/jongmin92" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -479,15 +472,12 @@
                 <p class="copyright text-muted">
                     Copyright &copy; KimJongMin 2019 
                     <br>
-                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    Theme by <a href="http://huangxuan.me" rel="external nofollow noopener noreferrer" target="_blank">Hux</a> 
                     <span style="display: inline-block; margin: 0 5px;">
                         <i class="fa fa-heart"></i>
                     </span> 
-                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
-                    <iframe
-                        style="margin-left: 2px; margin-bottom:-5px;"
-                        frameborder="0" scrolling="0" width="91px" height="20px"
-                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    re-Ported by <a href="http://beantech.org" rel="external nofollow noopener noreferrer" target="_blank">BeanTech</a> | 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px" src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true">
                     </iframe>
                 </p>
             </div>
@@ -588,10 +578,10 @@
 
 
 	<a id="rocket" href="#top" class=""></a>
-	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
-    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async></script>
 <!-- Image to hack wechat -->
-<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0" />
+<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0">
 <!-- Migrate from head to bottom, no longer block render and still work -->
 
 </body>

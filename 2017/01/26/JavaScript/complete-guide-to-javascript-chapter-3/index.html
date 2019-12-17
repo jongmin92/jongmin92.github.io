@@ -5,16 +5,16 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA" />
+    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="keyword"  content="">
+    <meta name="keyword" content="">
     <link rel="shortcut icon" href="/images/etc/ironman-draw.png">
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          자바스크립트 완벽가이드 3장 (타입, 값, 변수) - 92Hz | Jongmin&#39;s Blog
+          자바스크립트 완벽가이드 3장 (타입, 값, 변수) - 92Hz
         
     </title>
 
@@ -36,6 +36,9 @@
     <link rel="stylesheet" href="/css/signature.css">
 
     <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- For SEO -->
+    <link rel="canonical" href="https://jongmin92.github.io/2017/01/26/javascript/complete-guide-to-javascript-chapter-3/">
 
     <!-- Custom Fonts -->
     <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
@@ -79,7 +82,7 @@
     
 </style>
 
-<header class="intro-header" >
+<header class="intro-header">
     <!-- Signature -->
     <div id="signature">
         <div class="container">
@@ -147,14 +150,14 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -213,12 +216,7 @@
 
             <center>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-3921438651818825"
-         data-ad-slot="3015269677"></ins>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -282,7 +280,7 @@
 <p>위의 함수는 실제로 다음 코드와 같다.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> scope;                <span class="comment">// 지역 변수는 함수 맨 꼭대기에서 선언한다.</span></span><br><span class="line">  <span class="built_in">console</span>.log(scope);       <span class="comment">// scope 변수는 존재하지만 아직 "undefined" 값이다.</span></span><br><span class="line">  scope = <span class="string">"local"</span>;          <span class="comment">// 이제 scope 변수가 초기화되고 제대로 된 값이 있다.</span></span><br><span class="line">  <span class="built_in">console</span>.log(scope);       <span class="comment">// 여기서는 기대한 값이 들어있다.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>함수의 유효범위 규칙 때문에 지역 변수는 함수 전체에 걸쳐 정의된다. 지역 변수가 함수 전체에 걸쳐 정의되었더라도 var 문이 실행되고 나서야 실제로 초기화 된다. 따라서 변수 선언은 함수 맨 위로 <strong>‘끌어올려(hoisting)’</strong>지고 초기화는 나중에 이루어지게 된다.<br><br>블록 유효범위를 가진 프로그래밍 언어에서 일반적으로 변수를 선언하는 좋은 프로그래밍 방법은, <strong>가능한 한 그 변수가 사용되는 가장 가까운 곳에서 선언하는 것이다. 하지만 자바스크립트는 블록 유효범위를 가지고 있지 않기 때문에 함수의 맨 위에 선언해야할지도 모른다.</strong></p>
 <h4 id="3103-유효범위-체인"><a href="#3-10-3-유효범위-체인" class="headerlink" title="3.10.3 유효범위 체인"></a><span style="color:red">3.10.3 유효범위 체인</span></h4><p><strong>자바스크립트는 언어적으로 유효범위를 갖고 있는 언어다.</strong> 변수의 유효범위란 정의된 변수를 사용 가능한 소스코드의 집합으로 생각할 수 있다.<br><br>지역 변수를 객체의 프로퍼티로 생각한다면, 변수 유효범위를 다른 관점으로 볼 수도 있다. 자바스크립트의 모든 코드 무더기는 그것과 연관된 유효범위 체인을 갖고 있다. 이 유효범위 체인은 해당 코드 무더기의 ‘범위 안’에 있는 변수를 정의하는 <strong>객체의 체인, 리스트</strong>다.<br><br>최상위 자바스크립트 코드의 경우, 유효범위 체인은 단 하나의 ‘전역 객체’만으로 이루어진다. 중첩되지 않은 함수의 유효 범위 체인은 두 개의 객체로 이루어진다. 하나는 함수 매개변수와 지역 변수를 정의하는 객체고, 다른 하나는 전역 객체다. 중첩된 함수에서 유효범위 체인은 세 개 이상의 객체를 갖는다. 함수가 호출될 때, 해당 함수의 지역변수를 저장하기 위해서 새로운 객체를 하나 생성하고, 해당 객체를 기존에 저장된 유효범위 체인에 추가한다. 중첩 함수의 경우에는 외부에서 함수를 호출할 때마다 중첩된 함수가 매번 선언된다.</p>
-<p><br><br><strong>출처 : <a href="http://book.naver.com/bookdb/book_detail.nhn?bid=10338797" target="_blank" rel="noopener">“JavaScript: The Definitive Guide, by David Flanagan (O’Reilly). Copyright 2011 David Flanagan, 978-0-596-80552-4”</a></strong></p>
+<p><br><br><strong>출처 : <a href="http://book.naver.com/bookdb/book_detail.nhn?bid=10338797" rel="external nofollow noopener noreferrer" target="_blank">“JavaScript: The Definitive Guide, by David Flanagan (O’Reilly). Copyright 2011 David Flanagan, 978-0-596-80552-4”</a></strong></p>
 
                 
 
@@ -307,12 +305,7 @@
 
                 <center>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-3921438651818825"
-         data-ad-slot="3015269677"></ins>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -444,7 +437,7 @@
 
                 
                     <li>
-                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420">
+                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -455,7 +448,7 @@
 
                 
                     <li>
-                        <a target="_blank"  href="https://github.com/jongmin92">
+                        <a target="_blank" href="https://github.com/jongmin92" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -470,15 +463,12 @@
                 <p class="copyright text-muted">
                     Copyright &copy; KimJongMin 2019 
                     <br>
-                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    Theme by <a href="http://huangxuan.me" rel="external nofollow noopener noreferrer" target="_blank">Hux</a> 
                     <span style="display: inline-block; margin: 0 5px;">
                         <i class="fa fa-heart"></i>
                     </span> 
-                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
-                    <iframe
-                        style="margin-left: 2px; margin-bottom:-5px;"
-                        frameborder="0" scrolling="0" width="91px" height="20px"
-                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    re-Ported by <a href="http://beantech.org" rel="external nofollow noopener noreferrer" target="_blank">BeanTech</a> | 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px" src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true">
                     </iframe>
                 </p>
             </div>
@@ -579,10 +569,10 @@
 
 
 	<a id="rocket" href="#top" class=""></a>
-	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
-    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async></script>
 <!-- Image to hack wechat -->
-<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0" />
+<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0">
 <!-- Migrate from head to bottom, no longer block render and still work -->
 
 </body>

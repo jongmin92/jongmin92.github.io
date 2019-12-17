@@ -5,16 +5,16 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA" />
+    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="keyword"  content="">
+    <meta name="keyword" content="">
     <link rel="shortcut icon" href="/images/etc/ironman-draw.png">
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          비동기 RestTemplate과 비동기 MVC/Serlvet - 92Hz | Jongmin&#39;s Blog
+          비동기 RestTemplate과 비동기 MVC/Serlvet - 92Hz
         
     </title>
 
@@ -36,6 +36,9 @@
     <link rel="stylesheet" href="/css/signature.css">
 
     <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- For SEO -->
+    <link rel="canonical" href="https://jongmin92.github.io/2019/04/13/java/java-async-2/">
 
     <!-- Custom Fonts -->
     <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
@@ -79,7 +82,7 @@
     
 </style>
 
-<header class="intro-header" >
+<header class="intro-header">
     <!-- Signature -->
     <div id="signature">
         <div class="container">
@@ -153,14 +156,14 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -219,12 +222,7 @@
 
             <center>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-3921438651818825"
-         data-ad-slot="3015269677"></ins>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -236,14 +234,14 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>해당 포스팅은 토비님의 <strong><a href="https://www.youtube.com/watch?v=ExUfZkh7Puk" target="_blank" rel="noopener">토비의 봄 TV 9회 스프링 리액티브 프로그래밍 (5) 비동기 RestTemplate과 비동기 MVC/Serlvet</a></strong> 라이브 코딩을 보며 따라했던 실습 내용을 바탕으로 정리한 글입니다.</p>
+                <p>해당 포스팅은 토비님의 <strong><a href="https://www.youtube.com/watch?v=ExUfZkh7Puk" rel="external nofollow noopener noreferrer" target="_blank">토비의 봄 TV 9회 스프링 리액티브 프로그래밍 (5) 비동기 RestTemplate과 비동기 MVC/Serlvet</a></strong> 라이브 코딩을 보며 따라했던 실습 내용을 바탕으로 정리한 글입니다.</p>
 <p>실습 코드들은 IntelliJ를 이용해 <strong>SpringBoot 2.1.3.RELEASE 버전</strong> 기반으로 프로젝트를 생성 후(web, lombok 포함) 진행했습니다.</p>
 <h1 id="thread-pool-hell"><a href="#Thread-Pool-Hell" class="headerlink" title="Thread Pool Hell"></a>Thread Pool Hell</h1><p><strong><a href="https://jongmin92.github.io/2019/03/31/Java/java-async-1/#servlet-async">스프링의 비동기 기술</a></strong> 을 이용해 클라이언트로부터 요청을 받은 후 실제 작업은 작업 스레드 풀에 위임하고 현재의 서블릿 스레드는 서블릿 스레드 풀에 반환 후, 다음 요청이 들어올 경우 바로 사용할 수 있게 효율적으로 처리하도록 만들었습니다.<br>그러나 아직 문제가 있습니다. </p>
 <p>아주 빠르게 무언가를 계산하고 해당 처리를 끝내는 경우라면 굳이 비동기 MVC(서블릿)를 사용하지 않아도 문제가 없지만, <strong>하나의 요청에 대한 처리를 수행하면서 외부의 서비스들을 호출하는 작업이 많이 있는 경우, 문제는 단순히 비동기를 서블릿을 사용하는 것만으로 해결할 수 없는 경우가 많이 있습니다.</strong> (서블릿 요청은 바로 사용 가능하더라도 워커 스레드가 I/O 같은 작업으로 인해 블록되기 때문입니다.)</p>
 <p><strong><code>Thread Pool Hell</code>이란 풀 안에 있는 스레드에 대한 사용 요청이 급격하게 증가해 추가적인 요청이 들어올 때, 사용 가능한 스레드 풀의 스레드가 없기 때문에 대기 상태에 빠져 요청에 대한 응답이 느려지게 되는 상태를 말합니다.</strong><br><img src="/images/post/2019-04-13/thread_pool_hell.png" alt="thread pool hell"></p>
 <p>최근 서비스들은 아래의 그럼처럼 하나의 요청을 처리함에 있어 다른 서버로의 요청(Network I/O)이 많아졌습니다. 조금전 설명한 것처럼 비동기 서블릿을 사용하더라도 하나의 요청을 처리하는 동안 하나의 작업(워커) 스레드는 그 시간동안 대기상태에 빠지게 되어 결국에는 스레드 풀의 가용성이 떨어지게 됩니다. 이번 포스팅에서는 해당 문제를 해결해가는 과정을 다루고 있습니다.</p>
 <p><img src="/images/post/2019-04-13/service_oriented_architecture.png" alt="service oriented architecture"></p>
-<h1 id="upgrade-client-for-load-test"><a href="#Upgrade-Client-For-Load-Test" class="headerlink" title="Upgrade Client (For Load Test)"></a>Upgrade Client (For Load Test)</h1><p>지난 번에 작성했던 Client를 조금 수정하도록 합니다. 기존의 Client는 100개의 스레드를 순차적으로 만들면서 서버로의 Request를 만들었던 문제가 있었습니다. 이제는 100개의 스레드를 만들고 <a href="https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/CyclicBarrier.html" target="_blank" rel="noopener">CyclicBarrier</a>를 이용해 100개의 스레드에서 동시에 Request를 만들도록 변경해보겠습니다. </p>
+<h1 id="upgrade-client-for-load-test"><a href="#Upgrade-Client-For-Load-Test" class="headerlink" title="Upgrade Client (For Load Test)"></a>Upgrade Client (For Load Test)</h1><p>지난 번에 작성했던 Client를 조금 수정하도록 합니다. 기존의 Client는 100개의 스레드를 순차적으로 만들면서 서버로의 Request를 만들었던 문제가 있었습니다. 이제는 100개의 스레드를 만들고 <a href="https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/CyclicBarrier.html" rel="external nofollow noopener noreferrer" target="_blank">CyclicBarrier</a>를 이용해 100개의 스레드에서 동시에 Request를 만들도록 변경해보겠습니다. </p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoadTest</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> AtomicInteger counter = <span class="keyword">new</span> AtomicInteger(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException, BrokenBarrierException </span>&#123;</span><br><span class="line">        ExecutorService es = Executors.newFixedThreadPool(<span class="number">100</span>);</span><br><span class="line"></span><br><span class="line">        RestTemplate rt = <span class="keyword">new</span> RestTemplate();</span><br><span class="line">        String url = <span class="string">"http://localhost:8080/rest?idx=&#123;idx&#125;"</span>;</span><br><span class="line"></span><br><span class="line">        CyclicBarrier barrier = <span class="keyword">new</span> CyclicBarrier(<span class="number">101</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++) &#123;</span><br><span class="line">            <span class="comment">// submit이 받는 callable은 return을 가질 수 있으며, exception도 던질 수 있다.</span></span><br><span class="line">            es.submit(() -&gt; &#123;</span><br><span class="line">                <span class="keyword">int</span> idx = counter.addAndGet(<span class="number">1</span>);</span><br><span class="line">                log.info(<span class="string">"Thread &#123;&#125;"</span>, idx);</span><br><span class="line">                barrier.await();</span><br><span class="line"></span><br><span class="line">                StopWatch sw = <span class="keyword">new</span> StopWatch();</span><br><span class="line">                sw.start();</span><br><span class="line"></span><br><span class="line">                String res = rt.getForObject(url, String.class, idx);</span><br><span class="line"></span><br><span class="line">                sw.stop();</span><br><span class="line">                log.info(<span class="string">"idx: &#123;&#125;, Elapsed: &#123;&#125; -&gt; res: &#123;&#125;"</span>, idx, sw.getTotalTimeSeconds(), res);</span><br><span class="line">                <span class="comment">// IDE가 funtional interface가 callable임을 인식할 수 있도록 의미없는 return을 넣어준다.</span></span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// await을 만난 스레드가 101번째가 될 때, 모든 스레드들도 await에서 풀려나 이후 로직을 수행한다. </span></span><br><span class="line">        <span class="comment">// 메인 스레드 1개, Executors.newFixedThreadPool로 생성한 스레드 100개</span></span><br><span class="line">        barrier.await();</span><br><span class="line">        StopWatch main = <span class="keyword">new</span> StopWatch();</span><br><span class="line">        main.start();</span><br><span class="line"></span><br><span class="line">        es.shutdown();</span><br><span class="line">        <span class="comment">// 지정된 시간이 타임아웃 걸리기 전이라면 대기작업이 진행될 때까지 기다린다.</span></span><br><span class="line">        <span class="comment">// (100초안에 작업이 끝날때까지 기다리거나, 100초가 초과되면 종료)</span></span><br><span class="line">        es.awaitTermination(<span class="number">100</span>, TimeUnit.SECONDS);</span><br><span class="line">        main.stop();</span><br><span class="line">        log.info(<span class="string">"Total: &#123;&#125;"</span>, main.getTotalTimeSeconds());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="외부-서비스-호출-테스트"><a href="#외부-서비스-호출-테스트" class="headerlink" title="외부 서비스 호출 테스트"></a>외부 서비스 호출 테스트</h1><p>클라이언트의 요청을 받아 외부 서비스를 호출하고 해당 결과를 이용해서 응답을 돌려주는 테스트를 진행합니다. 테스트를 진행하기 위해서는 2개의 스프링 애플리케이션이 필요합니다. 2개의 스프링 애플리케이션의 설정은 다음과 같습니다.</p>
 <ul>
@@ -258,7 +256,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="main-application"><a href="#Main-Application" class="headerlink" title="Main Application"></a>Main Application</h2><p>먼저 하나의 스프링 애플리케이션에 컨트롤러를 하나 준비합니다. 이 컨트롤러는 클라이언트로부터 요청을 받아 해당 요청으로부터 받은 값을 이용해 다른 외부 서비스(<a href="http://localhost:8081/service?req={req})를" target="_blank" rel="noopener">http://localhost:8081/service?req={req})를</a> 호출합니다.</p>
+<h2 id="main-application"><a href="#Main-Application" class="headerlink" title="Main Application"></a>Main Application</h2><p>먼저 하나의 스프링 애플리케이션에 컨트롤러를 하나 준비합니다. 이 컨트롤러는 클라이언트로부터 요청을 받아 해당 요청으로부터 받은 값을 이용해 다른 외부 서비스(<a href="http://localhost:8081/service?req={req})를" rel="external nofollow noopener noreferrer" target="_blank">http://localhost:8081/service?req={req})를</a> 호출합니다.</p>
 <p><strong>결국 해당 서블릿은 클라이언트 요청을 처리하면서 외부 서비스로의 Networking I/O 작업을 수행하기 때문에 외부 서비스로부터의 요청에 대한 응답을 받기 전까지는 blocking 상태가 됩니다.</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RestController</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">MainController</span> </span>&#123;</span><br><span class="line">        RestTemplate rt = <span class="keyword">new</span> RestTemplate();</span><br><span class="line"></span><br><span class="line">        <span class="meta">@GetMapping</span>(<span class="string">"/rest"</span>)</span><br><span class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">rest</span><span class="params">(<span class="keyword">int</span> idx)</span> </span>&#123;</span><br><span class="line">            String res = rt.getForObject(<span class="string">"http://localhost:8081/service?req=&#123;req&#125;"</span>,</span><br><span class="line">                    String.class, <span class="string">"hello"</span> + idx);        </span><br><span class="line">            <span class="keyword">return</span> res;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(MainApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p><code>application.properties</code> 파일에서 다음과 같이 Tomcat의 스레드 개수를 1개로 설정합니다.<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">server.tomcat.max-threads=1</span></span><br></pre></td></tr></table></figure></p>
 <h2 id="remote-application"><a href="#Remote-Application" class="headerlink" title="Remote Application"></a>Remote Application</h2><p>다른 하나의 스프링 애플리케이션을 생성하고 이전에 만들었던 스프링 애플리케이션의 컨트롤러 내부에서 만들었던 요청을 받아 처리할 수 있도록 컨트롤러 추가합니다. 8080 포트가 아닌 8081 포트를 사용하고 tomcat 스레드를 1000개로 설정합니다. RemoteApplication은 application.properties의 값을 사용하게 하지 않고 직접 프로퍼티를 설정해줍니다. </p>
@@ -269,7 +267,7 @@
 <p>이런 결과가 나오게 된 이유는 클라이언트로부터의 요청을 받아 처리하는 Main Application의 tomcat thread가 1개이고, 1개의 서블릿 스레드를 이용해 클라이언트의 요청을 처리하는 과정에서 Remote Application에 대한 요청(Network I/O)에서 응답을 받기까지 약 2초간 스레드가 block되기 때문입니다.</p>
 <h1 id="asyncresttemplate"><a href="#AsyncRestTemplate" class="headerlink" title="AsyncRestTemplate"></a>AsyncRestTemplate</h1><p><strong>위의 문제는 MainApplication의 tomcat 스레드는 클라이언트의 요청을 처리하며 외부 서비스(RemoteApplication)로 요청(Network I/O)을 보낸 후, 응답이 올 때까지 대기하고 있는 상태라는 점입니다. 해당 시간동안 CPU는 아무 일을 처리하지 않기때문에 자원이 소모되고 있습니다.</strong></p>
 <p><strong>이 문제를 해결하기 위해서는 API를 호출하는 작업을 비동기적으로 바꿔야합니다. tomcat 스레드는 요청에 대한 작업을 다 끝내기 전에 반환을 해서 바로 다음 요청을 처리하도록 사용합니다. 그리고 외부 서비스로부터 실제 결과를 받고 클라이언트의 요청에 응답을 보내기 위해서는 새로운 스레드를 할당 받아 사용합니다.</strong> (외부 서비스로부터 실제 결과를 받고 클라이언트에 응답을 보내기 위해서는 새로운 스레드를 할당 받아야 하지만, 외부 API를 호출하는 동안은 스레드(tomcat) 자원을 낭비하고 싶지 않다는 것이 목적이다.)</p>
-<p>스프링 3.x 버전에서는 이 문제를 간단히 해결하기 어려웠지만 스프링 4 부터 제공하는 <a href="https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/client/AsyncRestTemplate.html" target="_blank" rel="noopener">AsyncRestTemplate</a>을 사용하면 이 문제를 쉽게 해결할 수 있습니다. <strong>AsyncRestTemplate은 비동기 클라이언트를 제공하는 클래스이며 ListenableFuture를 반환합니다. 스프링은 컨트롤러에서 ListenableFuture를 리턴하면 해당 스레드는 즉시 반납하고, 스프링 MVC가 자동으로 등록해준 콜백에 의해 결과가 처리됩니다.</strong></p>
+<p>스프링 3.x 버전에서는 이 문제를 간단히 해결하기 어려웠지만 스프링 4 부터 제공하는 <a href="https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/client/AsyncRestTemplate.html" rel="external nofollow noopener noreferrer" target="_blank">AsyncRestTemplate</a>을 사용하면 이 문제를 쉽게 해결할 수 있습니다. <strong>AsyncRestTemplate은 비동기 클라이언트를 제공하는 클래스이며 ListenableFuture를 반환합니다. 스프링은 컨트롤러에서 ListenableFuture를 리턴하면 해당 스레드는 즉시 반납하고, 스프링 MVC가 자동으로 등록해준 콜백에 의해 결과가 처리됩니다.</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RestController</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">MainController</span> </span>&#123;</span><br><span class="line">        <span class="comment">// asynchronous</span></span><br><span class="line">        AsyncRestTemplate rt = <span class="keyword">new</span> AsyncRestTemplate();</span><br><span class="line"></span><br><span class="line">        <span class="meta">@GetMapping</span>(<span class="string">"/rest"</span>)</span><br><span class="line">        <span class="keyword">public</span> ListenableFuture&lt;ResponseEntity&lt;String&gt;&gt; rest(<span class="keyword">int</span> idx) &#123;</span><br><span class="line">            <span class="keyword">return</span> rt.getForEntity(<span class="string">"http://localhost:8081/service?req=&#123;req&#125;"</span>,</span><br><span class="line">                    String.class, <span class="string">"hello"</span> + idx);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(MainApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>실행 결과를 살펴보면 100개의 요청을 동시에 처리하는데 약 2.6초의 시간이 걸렸습니다.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line"><span class="number">16</span>:<span class="number">55</span>:<span class="number">49.088</span> [pool-<span class="number">1</span>-thread-<span class="number">4</span>] DEBUG org.springframework.web.client.RestTemplate - Response <span class="number">200</span> OK</span><br><span class="line"><span class="number">16</span>:<span class="number">55</span>:<span class="number">49.089</span> [pool-<span class="number">1</span>-thread-<span class="number">4</span>] DEBUG org.springframework.web.client.RestTemplate - Reading to [java.lang.String] as <span class="string">"text/plain;charset=UTF-8"</span></span><br><span class="line"><span class="number">16</span>:<span class="number">55</span>:<span class="number">49.089</span> [pool-<span class="number">1</span>-thread-<span class="number">4</span>] INFO com.example.study.LoadTest - idx: <span class="number">4</span>, Elapsed: <span class="number">2.658</span> -&gt; res: hello4/service</span><br><span class="line"><span class="number">16</span>:<span class="number">55</span>:<span class="number">49.090</span> [pool-<span class="number">1</span>-thread-<span class="number">44</span>] DEBUG org.springframework.web.client.RestTemplate - Response <span class="number">200</span> OK</span><br><span class="line"><span class="number">16</span>:<span class="number">55</span>:<span class="number">49.090</span> [pool-<span class="number">1</span>-thread-<span class="number">44</span>] DEBUG org.springframework.web.client.RestTemplate - Reading to [java.lang.String] as <span class="string">"text/plain;charset=UTF-8"</span></span><br><span class="line"><span class="number">16</span>:<span class="number">55</span>:<span class="number">49.090</span> [pool-<span class="number">1</span>-thread-<span class="number">44</span>] INFO com.example.study.LoadTest - idx: <span class="number">44</span>, Elapsed: <span class="number">2.659</span> -&gt; res: hello44/service</span><br><span class="line"><span class="number">16</span>:<span class="number">55</span>:<span class="number">49.091</span> [pool-<span class="number">1</span>-thread-<span class="number">93</span>] DEBUG org.springframework.web.client.RestTemplate - Response <span class="number">200</span> OK</span><br><span class="line"><span class="number">16</span>:<span class="number">55</span>:<span class="number">49.091</span> [pool-<span class="number">1</span>-thread-<span class="number">93</span>] DEBUG org.springframework.web.client.RestTemplate - Reading to [java.lang.String] as <span class="string">"text/plain;charset=UTF-8"</span></span><br><span class="line"><span class="number">16</span>:<span class="number">55</span>:<span class="number">49.091</span> [pool-<span class="number">1</span>-thread-<span class="number">93</span>] INFO com.example.study.LoadTest - idx: <span class="number">93</span>, Elapsed: <span class="number">2.658</span> -&gt; res: hello93/service</span><br><span class="line"><span class="number">16</span>:<span class="number">55</span>:<span class="number">49.095</span> [pool-<span class="number">1</span>-thread-<span class="number">66</span>] DEBUG org.springframework.web.client.RestTemplate - Response <span class="number">200</span> OK</span><br><span class="line"><span class="number">16</span>:<span class="number">55</span>:<span class="number">49.096</span> [pool-<span class="number">1</span>-thread-<span class="number">66</span>] DEBUG org.springframework.web.client.RestTemplate - Reading to [java.lang.String] as <span class="string">"text/plain;charset=UTF-8"</span></span><br><span class="line"><span class="number">16</span>:<span class="number">55</span>:<span class="number">49.096</span> [pool-<span class="number">1</span>-thread-<span class="number">66</span>] INFO com.example.study.LoadTest - idx: <span class="number">66</span>, Elapsed: <span class="number">2.664</span> -&gt; res: hello66/service</span><br><span class="line"><span class="number">16</span>:<span class="number">55</span>:<span class="number">49.098</span> [pool-<span class="number">1</span>-thread-<span class="number">16</span>] DEBUG org.springframework.web.client.RestTemplate - Response <span class="number">200</span> OK</span><br><span class="line"><span class="number">16</span>:<span class="number">55</span>:<span class="number">49.098</span> [pool-<span class="number">1</span>-thread-<span class="number">16</span>] DEBUG org.springframework.web.client.RestTemplate - Reading to [java.lang.String] as <span class="string">"text/plain;charset=UTF-8"</span></span><br><span class="line"><span class="number">16</span>:<span class="number">55</span>:<span class="number">49.098</span> [pool-<span class="number">1</span>-thread-<span class="number">16</span>] INFO com.example.study.LoadTest - idx: <span class="number">16</span>, Elapsed: <span class="number">2.667</span> -&gt; res: hello16/service</span><br><span class="line"><span class="number">16</span>:<span class="number">55</span>:<span class="number">49.101</span> [pool-<span class="number">1</span>-thread-<span class="number">57</span>] DEBUG org.springframework.web.client.RestTemplate - Response <span class="number">200</span> OK</span><br><span class="line"><span class="number">16</span>:<span class="number">55</span>:<span class="number">49.101</span> [pool-<span class="number">1</span>-thread-<span class="number">57</span>] DEBUG org.springframework.web.client.RestTemplate - Reading to [java.lang.String] as <span class="string">"text/plain;charset=UTF-8"</span></span><br><span class="line"><span class="number">16</span>:<span class="number">55</span>:<span class="number">49.101</span> [pool-<span class="number">1</span>-thread-<span class="number">57</span>] INFO com.example.study.LoadTest - idx: <span class="number">57</span>, Elapsed: <span class="number">2.669</span> -&gt; res: hello57/service</span><br><span class="line"><span class="number">16</span>:<span class="number">55</span>:<span class="number">49.104</span> [pool-<span class="number">1</span>-thread-<span class="number">2</span>] DEBUG org.springframework.web.client.RestTemplate - Response <span class="number">200</span> OK</span><br><span class="line"><span class="number">16</span>:<span class="number">55</span>:<span class="number">49.104</span> [pool-<span class="number">1</span>-thread-<span class="number">2</span>] DEBUG org.springframework.web.client.RestTemplate - Reading to [java.lang.String] as <span class="string">"text/plain;charset=UTF-8"</span></span><br><span class="line"><span class="number">16</span>:<span class="number">55</span>:<span class="number">49.105</span> [pool-<span class="number">1</span>-thread-<span class="number">2</span>] INFO com.example.study.LoadTest - idx: <span class="number">2</span>, Elapsed: <span class="number">2.674</span> -&gt; res: hello2/service</span><br><span class="line"><span class="number">16</span>:<span class="number">55</span>:<span class="number">49.105</span> [pool-<span class="number">1</span>-thread-<span class="number">15</span>] DEBUG org.springframework.web.client.RestTemplate - Response <span class="number">200</span> OK</span><br><span class="line"><span class="number">16</span>:<span class="number">55</span>:<span class="number">49.105</span> [pool-<span class="number">1</span>-thread-<span class="number">15</span>] DEBUG org.springframework.web.client.RestTemplate - Reading to [java.lang.String] as <span class="string">"text/plain;charset=UTF-8"</span></span><br><span class="line"><span class="number">16</span>:<span class="number">55</span>:<span class="number">49.105</span> [pool-<span class="number">1</span>-thread-<span class="number">15</span>] INFO com.example.study.LoadTest - idx: <span class="number">15</span>, Elapsed: <span class="number">2.674</span> -&gt; res: hello15/service</span><br><span class="line"><span class="number">16</span>:<span class="number">55</span>:<span class="number">49.106</span> [main] INFO com.example.study.LoadTest - Total: <span class="number">2.673</span></span><br></pre></td></tr></table></figure></p>
 <p>클라이언트의 요청이 들어 올 때, MainApplication의 스레드 상태를 살펴보면, tomcat 스레드는 그대로 1개 입니다.(http-nio-8080-exec-1) 그러나 비동기 작업을 처리하기 위해서 순간적으로 백그라운드에 100개의 스레드 새로 생성되는것을 확인할 수 있습니다.<br><img src="/images/post/2019-04-13/async_rest_template_result.png" alt="async rest template result"></p>
@@ -314,12 +312,7 @@
 
                 <center>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-3921438651818825"
-         data-ad-slot="3015269677"></ins>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -468,7 +461,7 @@
 
                 
                     <li>
-                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420">
+                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -479,7 +472,7 @@
 
                 
                     <li>
-                        <a target="_blank"  href="https://github.com/jongmin92">
+                        <a target="_blank" href="https://github.com/jongmin92" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -494,15 +487,12 @@
                 <p class="copyright text-muted">
                     Copyright &copy; KimJongMin 2019 
                     <br>
-                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    Theme by <a href="http://huangxuan.me" rel="external nofollow noopener noreferrer" target="_blank">Hux</a> 
                     <span style="display: inline-block; margin: 0 5px;">
                         <i class="fa fa-heart"></i>
                     </span> 
-                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
-                    <iframe
-                        style="margin-left: 2px; margin-bottom:-5px;"
-                        frameborder="0" scrolling="0" width="91px" height="20px"
-                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    re-Ported by <a href="http://beantech.org" rel="external nofollow noopener noreferrer" target="_blank">BeanTech</a> | 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px" src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true">
                     </iframe>
                 </p>
             </div>
@@ -603,10 +593,10 @@
 
 
 	<a id="rocket" href="#top" class=""></a>
-	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
-    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async></script>
 <!-- Image to hack wechat -->
-<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0" />
+<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0">
 <!-- Migrate from head to bottom, no longer block render and still work -->
 
 </body>

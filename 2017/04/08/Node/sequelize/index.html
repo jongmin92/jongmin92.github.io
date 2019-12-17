@@ -5,16 +5,16 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA" />
+    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="keyword"  content="">
+    <meta name="keyword" content="">
     <link rel="shortcut icon" href="/images/etc/ironman-draw.png">
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          Sequelize 사용하기 - 92Hz | Jongmin&#39;s Blog
+          Sequelize 사용하기 - 92Hz
         
     </title>
 
@@ -36,6 +36,9 @@
     <link rel="stylesheet" href="/css/signature.css">
 
     <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- For SEO -->
+    <link rel="canonical" href="https://jongmin92.github.io/2017/04/08/node/sequelize/">
 
     <!-- Custom Fonts -->
     <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
@@ -79,7 +82,7 @@
     
 </style>
 
-<header class="intro-header" >
+<header class="intro-header">
     <!-- Signature -->
     <div id="signature">
         <div class="container">
@@ -147,14 +150,14 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -213,12 +216,7 @@
 
             <center>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-3921438651818825"
-         data-ad-slot="3015269677"></ins>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -251,11 +249,11 @@
 <p><img src="/images/post/2017-04-08/orm.png" alt="ORM"></p>
 <hr>
 <p><span id="2"></span></p>
-<h2 id="sequelize-설치하기"><a href="#Sequelize-설치하기" class="headerlink" title="Sequelize 설치하기"></a>Sequelize 설치하기</h2><p><strong><a href="http://docs.sequelizejs.com/en/v3/" target="_blank" rel="noopener">Sequelize</a></strong>는 Node에서 가장 많이 사용되는 ORM 입니다.</p>
+<h2 id="sequelize-설치하기"><a href="#Sequelize-설치하기" class="headerlink" title="Sequelize 설치하기"></a>Sequelize 설치하기</h2><p><strong><a href="http://docs.sequelizejs.com/en/v3/" rel="external nofollow noopener noreferrer" target="_blank">Sequelize</a></strong>는 Node에서 가장 많이 사용되는 ORM 입니다.</p>
 <p><strong>RDS로  PostgresSQL, MySQL, MariaDB, SQLite, MSSQL</strong>을 지원하고 transaction, read replication등 다양한 기능을 제공하고 있으며. 또한 <strong>Promise</strong>를 기본으로 동작하기 때문에 비동기 코드를 보기좋게 작성할 수 있습니다.</p>
 <p>실습을 위해 express-generator를 통해 Express 프로젝트를 생성후 <code>sequelize</code>와 <code>mysql</code> module을 설치합니다. (Express 프로젝트를 생성하는 부분은 생략합니다.)</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save sequelize mysql</span><br></pre></td></tr></table></figure>
-<p><strong><a href="https://github.com/sequelize/cli" target="_blank" rel="noopener">Sequelize Command Line Interface(CLI)</a></strong>를 사용하기 위해서 <code>sequelize-cli</code> module을 설치합니다.</p>
+<p><strong><a href="https://github.com/sequelize/cli" rel="external nofollow noopener noreferrer" target="_blank">Sequelize Command Line Interface(CLI)</a></strong>를 사용하기 위해서 <code>sequelize-cli</code> module을 설치합니다.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g sequelize-cli</span><br></pre></td></tr></table></figure>
 <hr>
 <p><span id="3"></span></p>
@@ -268,8 +266,8 @@
 <hr>
 <p><span id="4"></span></p>
 <h2 id="sequelize-config-설정하기"><a href="#Sequelize-config-설정하기" class="headerlink" title="Sequelize config 설정하기"></a>Sequelize config 설정하기</h2><p>sequelize cli를 통해 생성한 <code>config/sequelize.json</code>파일에 데이터베이스에 관련된 설정 값을 입력합니다.</p>
-<p> <strong><code>NODE_ENV</code></strong> 에 따라 각기 다른 값을 사용하기 때문에 상황에 맞게 설정할 수 있습니다. NODE_ENV에 대해 잘 알지 못한다면 <a href="http://inspiredjw.com/entry/Nodejs-%EC%97%90%EC%84%9C-NODEENV-%EA%B0%92%EC%9C%BC%EB%A1%9C-%ED%99%98%EA%B2%BD-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0" target="_blank" rel="noopener">이곳</a>을 참고하세요.</p>
-<p>데이터베이스를 사용한 프로젝트 경험이 있다면 대부분의 config 값은 입력할 수 있습니다. config 값중 <code>dialect</code>에는 사용하는 RDB 이름을 입력해야 합니다. diaect에 사용 가능한 값은 <a href="http://docs.sequelizejs.com/en/1.7.0/docs/usage/" target="_blank" rel="noopener">sequelize docs</a>를 참고하세요. 현재 사용 가능한 RDB 로는 ‘mysql’, ‘sqlite’, ‘postgress’, ‘mariadb’가 있습니다.</p>
+<p> <strong><code>NODE_ENV</code></strong> 에 따라 각기 다른 값을 사용하기 때문에 상황에 맞게 설정할 수 있습니다. NODE_ENV에 대해 잘 알지 못한다면 <a href="http://inspiredjw.com/entry/Nodejs-%EC%97%90%EC%84%9C-NODEENV-%EA%B0%92%EC%9C%BC%EB%A1%9C-%ED%99%98%EA%B2%BD-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0" rel="external nofollow noopener noreferrer" target="_blank">이곳</a>을 참고하세요.</p>
+<p>데이터베이스를 사용한 프로젝트 경험이 있다면 대부분의 config 값은 입력할 수 있습니다. config 값중 <code>dialect</code>에는 사용하는 RDB 이름을 입력해야 합니다. diaect에 사용 가능한 값은 <a href="http://docs.sequelizejs.com/en/1.7.0/docs/usage/" rel="external nofollow noopener noreferrer" target="_blank">sequelize docs</a>를 참고하세요. 현재 사용 가능한 RDB 로는 ‘mysql’, ‘sqlite’, ‘postgress’, ‘mariadb’가 있습니다.</p>
 <p>추가적으로 커넥션 풀과 로깅 기능을 사용한다면 해당 값을 추가합니다. 추가적으로 필요한 옵션은 docs를 참고하세요.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"pool"</span>: &#123;</span><br><span class="line">    <span class="string">"max"</span>: <span class="number">20</span>,</span><br><span class="line">    <span class="string">"min"</span>: <span class="number">0</span>,</span><br><span class="line">    <span class="string">"idle"</span>: <span class="number">5000</span></span><br><span class="line">&#125;,</span><br><span class="line"><span class="string">"logging"</span>: <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
 <hr>
 <p><span id="5"></span></p>
@@ -288,22 +286,22 @@
 <p><span id="7"></span></p>
 <h2 id="sequelize-예제-select"><a href="#Sequelize-예제-SELECT" class="headerlink" title="Sequelize 예제 (SELECT)"></a>Sequelize 예제 (SELECT)</h2><p>이제 Sequelize를 사용하여 SELECT를 사용해보겠습니다. 유저 리스트를 가져오는 query는 다음과 같습니다.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">models.User.findAll()</span><br><span class="line">  .then(results) &#123;</span><br><span class="line">     res.json(results);</span><br><span class="line">  &#125;)</span><br><span class="line">  .catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">     <span class="built_in">console</span>.error(err);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure></p>
 <p>User 테이블에 있는 모든 row를 가져오는 query입니다. Sequelize는 결과를 Promise로 리턴하기 때문에 <strong><code>findAll</code></strong> 메서드 역시 Promise를 리턴합니다. 따라서 query의 결과는 then에서 받고, catch문에서 상황에 맞게 error 처리(handling)를 하면됩니다.</p>
-<p>findAll의 더 자세한 사용법은 <a href="http://sequelize.readthedocs.io/en/latest/api/model/#findalloptions-promisearrayinstance" target="_blank" rel="noopener">Sequelize-model-findAll 설명</a>을 참고합니다.</p>
+<p>findAll의 더 자세한 사용법은 <a href="http://sequelize.readthedocs.io/en/latest/api/model/#findalloptions-promisearrayinstance" rel="external nofollow noopener noreferrer" target="_blank">Sequelize-model-findAll 설명</a>을 참고합니다.</p>
 <hr>
 <p><span id="8"></span></p>
 <h2 id="sequelize-예제-insert"><a href="#Sequelize-예제-INSERT" class="headerlink" title="Sequelize 예제 (INSERT)"></a>Sequelize 예제 (INSERT)</h2><p>Sequelize를 사용하여 INSERT를 하는 방법은 다음과 같습니다.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">models.User.create(&#123;<span class="attr">userID</span>: <span class="string">'유저ID'</span>, <span class="attr">password</span>: <span class="string">'유저PW'</span>&#125;)</span><br><span class="line">  .then(<span class="function"><span class="params">result</span> =&gt;</span> &#123;</span><br><span class="line">     res.json(result);</span><br><span class="line">  &#125;)</span><br><span class="line">  .catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">     <span class="built_in">console</span>.error(err);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure></p>
 <p><strong><code>create</code></strong> 메서드의 매개변수에 model에서 매핑한 내용을 토대로 데이터를 넣으면 query를 실행 후 insert된 row정보가 반환됩니다.</p>
-<p>create의 더 자세한 사용법은 <a href="http://sequelize.readthedocs.io/en/latest/api/model/#createvalues-options-promiseinstance" target="_blank" rel="noopener">Sequelize-model-create 설명</a>을 참고합니다.</p>
+<p>create의 더 자세한 사용법은 <a href="http://sequelize.readthedocs.io/en/latest/api/model/#createvalues-options-promiseinstance" rel="external nofollow noopener noreferrer" target="_blank">Sequelize-model-create 설명</a>을 참고합니다.</p>
 <hr>
 <p><span id="9"></span></p>
 <h2 id="sequelize-예제-update"><a href="#Sequelize-예제-UPDATE" class="headerlink" title="Sequelize 예제 (UPDATE)"></a>Sequelize 예제 (UPDATE)</h2><p>User 테이블의 데이터를 수정할때는 다음과 같이 사용합니다.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">models.User.update(&#123;<span class="attr">password</span>: <span class="string">'새로운 유저PW'</span>&#125;, &#123;<span class="attr">where</span>: &#123;<span class="attr">userID</span>: <span class="string">'유저ID'</span>&#125;&#125;)</span><br><span class="line">  .then(<span class="function"><span class="params">result</span> =&gt;</span> &#123;</span><br><span class="line">     res.json(result);</span><br><span class="line">  &#125;)</span><br><span class="line">  .catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">     <span class="built_in">console</span>.error(err);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure></p>
 <p><strong><code>update</code></strong> 메서드의 매개변수에는 update할 데이터를 입력합니다.</p>
-<p>update 더 자세한 사용법은 <a href="http://sequelize.readthedocs.io/en/latest/api/model/#updatevalues-options-promisearrayaffectedcount-affectedrows" target="_blank" rel="noopener">Sequelize-model-update 설명</a>을 참고합니다.</p>
+<p>update 더 자세한 사용법은 <a href="http://sequelize.readthedocs.io/en/latest/api/model/#updatevalues-options-promisearrayaffectedcount-affectedrows" rel="external nofollow noopener noreferrer" target="_blank">Sequelize-model-update 설명</a>을 참고합니다.</p>
 <hr>
 <p><span id="10"></span></p>
 <h2 id="sequelize-예제-delete"><a href="#Sequelize-예제-DELETE" class="headerlink" title="Sequelize 예제 (DELETE)"></a>Sequelize 예제 (DELETE)</h2><p>User 테이블의 데이터를 삭제할때는 다음과 같이 사용합니다.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">models.User.destroy(&#123;<span class="attr">where</span>: &#123;<span class="attr">userID</span>: <span class="string">'유저ID'</span>&#125;&#125;)</span><br><span class="line">  .then(<span class="function"><span class="params">result</span> =&gt;</span> &#123;</span><br><span class="line">     res.json(&#123;&#125;);</span><br><span class="line">  &#125;)</span><br><span class="line">  .catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">     <span class="built_in">console</span>.error(err);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure></p>
 <p><strong><code>destroy</code></strong> 메서드의 매개변수에는 where 조건을 입력합니다.<strong>(where 조건을 입력하지 않을 경우 테이블의 모든 row가 삭제되기 때문에 주의해야 합니다.)</strong></p>
-<p>destroy 더 자세한 사용법은 <a href="http://sequelize.readthedocs.io/en/latest/api/model/#destroyoptions-promiseinteger" target="_blank" rel="noopener">Sequelize-model-update 설명</a>을 참고합니다.</p>
+<p>destroy 더 자세한 사용법은 <a href="http://sequelize.readthedocs.io/en/latest/api/model/#destroyoptions-promiseinteger" rel="external nofollow noopener noreferrer" target="_blank">Sequelize-model-update 설명</a>을 참고합니다.</p>
 
                 
 
@@ -328,12 +326,7 @@
 
                 <center>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-3921438651818825"
-         data-ad-slot="3015269677"></ins>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -465,7 +458,7 @@
 
                 
                     <li>
-                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420">
+                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -476,7 +469,7 @@
 
                 
                     <li>
-                        <a target="_blank"  href="https://github.com/jongmin92">
+                        <a target="_blank" href="https://github.com/jongmin92" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -491,15 +484,12 @@
                 <p class="copyright text-muted">
                     Copyright &copy; KimJongMin 2019 
                     <br>
-                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    Theme by <a href="http://huangxuan.me" rel="external nofollow noopener noreferrer" target="_blank">Hux</a> 
                     <span style="display: inline-block; margin: 0 5px;">
                         <i class="fa fa-heart"></i>
                     </span> 
-                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
-                    <iframe
-                        style="margin-left: 2px; margin-bottom:-5px;"
-                        frameborder="0" scrolling="0" width="91px" height="20px"
-                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    re-Ported by <a href="http://beantech.org" rel="external nofollow noopener noreferrer" target="_blank">BeanTech</a> | 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px" src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true">
                     </iframe>
                 </p>
             </div>
@@ -600,10 +590,10 @@
 
 
 	<a id="rocket" href="#top" class=""></a>
-	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
-    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async></script>
 <!-- Image to hack wechat -->
-<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0" />
+<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0">
 <!-- Migrate from head to bottom, no longer block render and still work -->
 
 </body>

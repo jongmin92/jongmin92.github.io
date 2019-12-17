@@ -5,16 +5,16 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA" />
+    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="keyword"  content="">
+    <meta name="keyword" content="">
     <link rel="shortcut icon" href="/images/etc/ironman-draw.png">
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          정적 이미지 사용하기 - 92Hz | Jongmin&#39;s Blog
+          정적 이미지 사용하기 - 92Hz
         
     </title>
 
@@ -36,6 +36,9 @@
     <link rel="stylesheet" href="/css/signature.css">
 
     <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- For SEO -->
+    <link rel="canonical" href="https://jongmin92.github.io/2017/01/22/reactnative/image-res-management(1)/">
 
     <!-- Custom Fonts -->
     <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
@@ -79,7 +82,7 @@
     
 </style>
 
-<header class="intro-header" >
+<header class="intro-header">
     <!-- Signature -->
     <div id="signature">
         <div class="container">
@@ -145,14 +148,14 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -211,12 +214,7 @@
 
             <center>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-3921438651818825"
-         data-ad-slot="3015269677"></ins>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -243,7 +241,7 @@
 <p>React Native는 <strong>웹뷰</strong>를 통해 인터페이스를 구축하는 하이브리드 방식(예를 들면 Ionic)과는 달리 자바스크립트로 작성한 코드가 <strong>Native UI 컴포넌트</strong>로 만들어집니다. React Native에서 이미지를 사용하는 코드는 iOS와 Android 모두 통합되어 있지만, 정적인 이미지 파일을 추가하는 부분은 <strong>Naming</strong>에 있어 차이가 있습니다. 이번에는 React Native에서 정적 이미지를 사용하는 방법과, 정적 이미지 추가 시 반복되는 작업을 좀 더 효율적으로 할 수 있도록 Node를 사용하여 스크립트를 작성하는 부분을 다뤄보도록 하겠습니다. 글 작성 기준 React Native의 최신버전은 0.4입니다.</p>
 <hr>
 <p><span id="1"></span></p>
-<h2 id="react-native-정적-이미지-사용하기"><a href="#React-Native-정적-이미지-사용하기" class="headerlink" title="React Native 정적 이미지 사용하기"></a>React Native 정적 이미지 사용하기</h2><p>React Native에서 <strong>정적 이미지</strong>를 추가하는 방법은 <a href="https://facebook.github.io/react-native/docs/images.html" target="_blank" rel="noopener">공식홈페이지</a>에서도 잘 설명되어 있지만 한번 더 살펴보겠습니다.</p>
+<h2 id="react-native-정적-이미지-사용하기"><a href="#React-Native-정적-이미지-사용하기" class="headerlink" title="React Native 정적 이미지 사용하기"></a>React Native 정적 이미지 사용하기</h2><p>React Native에서 <strong>정적 이미지</strong>를 추가하는 방법은 <a href="https://facebook.github.io/react-native/docs/images.html" rel="external nofollow noopener noreferrer" target="_blank">공식홈페이지</a>에서도 잘 설명되어 있지만 한번 더 살펴보겠습니다.</p>
 <p>다음과 같이 react-native 의 기본적인 <code>Image</code> 컴포넌트를 통해 정적인 이미지 파일을 사용할 수 있습니다. 아래의 코드는 작성된 컴포넌트의 파일과 같은 경로에 있는 <code>gold.png</code>라는 파일을 사용합니다.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Image source=&#123;require(&apos;./gold.png&apos;)&#125; /&gt;</span><br></pre></td></tr></table></figure></p>
 <p>하나의 파일을 두개의 플랫폼(iOS와 Android)에서 같이 사용할 수 있지만 만약 플랫폼에 따라 다른 이미지를 사용하고 싶다면 <code>gold.png</code>라는 파일을 <code>gold.android.png</code>와 <code>gold.ios.png</code>로 각각 저장하여 사용할 수 있습니다.  이와 같은 경우는 주로 Android와 iOS에서 같은 목적으로 사용되는 이미지가 다를 경우 유용합니다. (React Native에서 iOS와 Android의 Entry file이 index.ios.js와 index.android.js 인것과 같은 개념입니다.)</p>
 <p>또한 React Native의 <code>packager</code>는 <strong>플랫폼</strong> 뿐만 아니라 <strong>디바이스 스크린의 해상도</strong>에 따라서도 다른 이미지를 제공할 수 있습니다. 따라서 다음과 같이 이미지 파일의 이름을 해상도에 따라 달리하여 사용할 수 있습니다.</p>
@@ -251,7 +249,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;/* Test.js 코드의 render 부분 */&#125;</span><br><span class="line">&lt;Image source=&#123;require(&apos;./img/gold.png&apos;)&#125; /&gt;</span><br></pre></td></tr></table></figure>
 <p>파일 구조와 Test.js의 코드가 위와 같을 때 iPhone 6와 iPhone 6 Plus는 각각 gold@2x.png와 gold@3x.png 파일을 사용합니다. 만약 디바이스 스크린의 해상도에 해당하는 파일이 없다면 <strong>가장 밀접한 해상도를 가진 파일</strong>을 사용합니다.</p>
 <p>정리하면 <strong>디바이스의 플랫폼과 해상도</strong>에 따라 파일을 사용하고 싶을 경우 다음과 같이 사용할 수 있습니다.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">├─ Test.js</span><br><span class="line">└── img/</span><br><span class="line">    ├── gold@2x.android.png</span><br><span class="line">    ├── gold@2x.ios.png</span><br><span class="line">    ├── gold@3x.android.png</span><br><span class="line">    └── gold@3x.ios.png</span><br></pre></td></tr></table></figure></p>
-<p>React Native에서 정적인 이미지를 사용할 경우 주의해야할 점은 <a href="https://facebook.github.io/react-native/docs/images.html" target="_blank" rel="noopener">공식홈페이지</a>를 참고하시면 좋을것 같습니다.</p>
+<p>React Native에서 정적인 이미지를 사용할 경우 주의해야할 점은 <a href="https://facebook.github.io/react-native/docs/images.html" rel="external nofollow noopener noreferrer" target="_blank">공식홈페이지</a>를 참고하시면 좋을것 같습니다.</p>
 <hr>
 <p><span id="2"></span></p>
 <h2 id="native-측면에서-바라보기"><a href="#Native-측면에서-바라보기" class="headerlink" title="Native 측면에서 바라보기"></a>Native 측면에서 바라보기</h2><p>React Native는 기존 Android와 iOS에서 이미지를 추가하여 사용하는 방법을 그대로 사용할 수도 있습니다. 이미 위의 방법으로 해결이 가능하며 이 방법이 좀 더 복잡하기에 사용을 권장드리지 않지만 이런방법으로도 가능하다는걸 알고계시면 좋을것 같습니다. Native에서 Android와 iOS의 이미지 파일은 다음과 같은 경로에 저장하여 사용합니다.</p>
@@ -309,7 +307,7 @@
                     
                     
                         <li class="next">
-                            <a href="/2016/12/13/Linux & Ubuntu/ls-result-color-change/" data-toggle="tooltip" data-placement="top" title="ls 명령어 결과 색상 변경하기">Next Post &rarr;</a>
+                            <a href="/2016/12/13/Linux & Ubuntu/bashrc-bash_profile/" data-toggle="tooltip" data-placement="top" title=".bashrc 와 .bash_profile 의 차이">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -320,12 +318,7 @@
 
                 <center>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-3921438651818825"
-         data-ad-slot="3015269677"></ins>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -455,7 +448,7 @@
 
                 
                     <li>
-                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420">
+                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -466,7 +459,7 @@
 
                 
                     <li>
-                        <a target="_blank"  href="https://github.com/jongmin92">
+                        <a target="_blank" href="https://github.com/jongmin92" rel="external nofollow noopener noreferrer">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -481,15 +474,12 @@
                 <p class="copyright text-muted">
                     Copyright &copy; KimJongMin 2019 
                     <br>
-                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    Theme by <a href="http://huangxuan.me" rel="external nofollow noopener noreferrer" target="_blank">Hux</a> 
                     <span style="display: inline-block; margin: 0 5px;">
                         <i class="fa fa-heart"></i>
                     </span> 
-                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
-                    <iframe
-                        style="margin-left: 2px; margin-bottom:-5px;"
-                        frameborder="0" scrolling="0" width="91px" height="20px"
-                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    re-Ported by <a href="http://beantech.org" rel="external nofollow noopener noreferrer" target="_blank">BeanTech</a> | 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px" src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true">
                     </iframe>
                 </p>
             </div>
@@ -590,10 +580,10 @@
 
 
 	<a id="rocket" href="#top" class=""></a>
-	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
-    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async></script>
 <!-- Image to hack wechat -->
-<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0" />
+<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0">
 <!-- Migrate from head to bottom, no longer block render and still work -->
 
 </body>
