@@ -134,9 +134,9 @@
     
       <category term="Spring Boot" scheme="https://jongmin92.github.io/tags/Spring-Boot/"/>
     
-      <category term="Micrometer" scheme="https://jongmin92.github.io/tags/Micrometer/"/>
-    
       <category term="Actuator" scheme="https://jongmin92.github.io/tags/Actuator/"/>
+    
+      <category term="Micrometer" scheme="https://jongmin92.github.io/tags/Micrometer/"/>
     
       <category term="Prometheus" scheme="https://jongmin92.github.io/tags/Prometheus/"/>
     
@@ -578,13 +578,13 @@
     
       <category term="Async" scheme="https://jongmin92.github.io/tags/Async/"/>
     
-      <category term="DeferredResult" scheme="https://jongmin92.github.io/tags/DeferredResult/"/>
-    
       <category term="RestTemplate" scheme="https://jongmin92.github.io/tags/RestTemplate/"/>
     
       <category term="AsyncRestTemplate" scheme="https://jongmin92.github.io/tags/AsyncRestTemplate/"/>
     
       <category term="Netty" scheme="https://jongmin92.github.io/tags/Netty/"/>
+    
+      <category term="DeferredResult" scheme="https://jongmin92.github.io/tags/DeferredResult/"/>
     
   </entry>
   
@@ -615,6 +615,8 @@
     
       <category term="Async" scheme="https://jongmin92.github.io/tags/Async/"/>
     
+      <category term="DeferredResult" scheme="https://jongmin92.github.io/tags/DeferredResult/"/>
+    
       <category term="ExecutorService" scheme="https://jongmin92.github.io/tags/ExecutorService/"/>
     
       <category term="Future" scheme="https://jongmin92.github.io/tags/Future/"/>
@@ -622,8 +624,6 @@
       <category term="FutureTask" scheme="https://jongmin92.github.io/tags/FutureTask/"/>
     
       <category term="ListenableFuture" scheme="https://jongmin92.github.io/tags/ListenableFuture/"/>
-    
-      <category term="DeferredResult" scheme="https://jongmin92.github.io/tags/DeferredResult/"/>
     
       <category term="ResponseBodyEmitter" scheme="https://jongmin92.github.io/tags/ResponseBodyEmitter/"/>
     
