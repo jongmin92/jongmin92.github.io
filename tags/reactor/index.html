@@ -1,0 +1,2826 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA">
+    <meta name="naver-site-verification" content="4468fb67994f2c880ea59d43b7f9a03be45d43d8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <link rel="shortcut icon" href="/images/etc/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          92Hz
+        
+    </title>
+
+    <link rel="canonical" href="https://jongmin92.github.io/tags/reactor/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- For SEO -->
+    <link rel="canonical" href="https://jongmin92.github.io/tags/reactor/">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('/undefined')
+            /*page*/
+        
+    }
+    
+</style>
+
+<header class="intro-header">
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="site-heading">
+                        <h1>92Hz</h1>
+                        <!--<hr class="small">-->
+                        <span class="subheading">Continue to learn!</span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">92Hz</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Main Content -->
+<div class="container">
+    <center>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</center>
+
+    <div class="row">
+        
+
+<!-- USE SIDEBAR -->
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-1
+                col-md-8 col-md-offset-1
+                col-sm-12
+                col-xs-12
+                post-container
+            ">
+            
+                
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <!-- 归档列表 -->
+            
+            
+
+             <!-- 归档列表 -->
+
+            
+            <div class="one-tag-list">
+                <span class="fa fa-calendar-times-o listing-seperator" id="2019">
+                    <span class="tag-text">2019</span>
+                </span>
+                <ul>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    12-18
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2019/12/18/Java/hash/" style="color: #0085a1">
+                        <span>
+                            Hash - MD5와 SHA256
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    12-07
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2019/12/07/Gradle/gradle-implementation/" style="color: #0085a1">
+                        <span>
+                            Gradle에서 Dependency Pollution 문제 해결하기
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    12-05
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2019/12/05/Java/nosuchmethod/" style="color: #0085a1">
+                        <span>
+                            NoSuchMethodException & NoSuchMethodError 해결하기
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    12-04
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2019/12/04/Spring/prometheus/" style="color: #0085a1">
+                        <span>
+                            SpringBoot Application의 monitoring 시스템 구축하기
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    12-03
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2019/12/03/Spring/micrometer/" style="color: #0085a1">
+                        <span>
+                            Micrometer
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    11-21
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2019/11/21/Spring/bean-validation-2/" style="color: #0085a1">
+                        <span>
+                            Spring Boot에서의 Bean Validation (2)
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    11-18
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2019/11/18/Spring/bean-validation-1/" style="color: #0085a1">
+                        <span>
+                            Spring Boot에서의 Bean Validation (1)
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    11-13
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2019/11/13/Database/mysql-replication/" style="color: #0085a1">
+                        <span>
+                            MySQL - Replication
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    11-10
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2019/11/10/Java/reactive-3/" style="color: #0085a1">
+                        <span>
+                            Reactive Streams (3)
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    11-07
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2019/11/07/Java/reactive-2/" style="color: #0085a1">
+                        <span>
+                            Reactive Streams (2)
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    11-05
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2019/11/05/Java/reactive-1/" style="color: #0085a1">
+                        <span>
+                            Reactive Streams (1)
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    05-21
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2019/05/21/Spring/spring-bean-life-cycle/" style="color: #0085a1">
+                        <span>
+                            Spring Bean LifeCycle
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    05-18
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2019/05/18/Etc/open-source-experience/" style="color: #0085a1">
+                        <span>
+                            오픈소스 컷 컨트리뷰트 경험기
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    05-09
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2019/05/09/Gradle/gradle-api-vs-implementation/" style="color: #0085a1">
+                        <span>
+                            (Gradle dependency) api와 implementation 차이
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    05-05
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2019/05/05/Java/java-async-4/" style="color: #0085a1">
+                        <span>
+                            CompletableFuture
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    04-30
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2019/04/30/Spring/spring-bean-lite-mode/" style="color: #0085a1">
+                        <span>
+                            @Bean Lite Mode & inter-bean references
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    04-26
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2019/04/26/Java/java-async-3/" style="color: #0085a1">
+                        <span>
+                            AsyncRestTemplate의 콜백 헬과 중복 작업 문제
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    04-13
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2019/04/13/Java/java-async-2/" style="color: #0085a1">
+                        <span>
+                            비동기 RestTemplate과 비동기 MVC/Serlvet
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    03-31
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2019/03/31/Java/java-async-1/" style="color: #0085a1">
+                        <span>
+                            자바와 스프링의 비동기 기술
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    03-05
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2019/03/05/Java/java-reactor-pattern/" style="color: #0085a1">
+                        <span>
+                            [번역] Java Reactor Pattern
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    03-03
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2019/03/03/Java/java-nio/" style="color: #0085a1">
+                        <span>
+                            Java NIO와 멀티플렉싱 기반의 다중 접속 서버
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    02-28
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2019/02/28/Java/java-with-non-blocking-io/" style="color: #0085a1">
+                        <span>
+                            멀티플렉싱 기반의 다중 접속 서버로 가기까지
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    02-18
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2019/02/18/Programming/computer-structure/" style="color: #0085a1">
+                        <span>
+                            컴퓨터 구조와 I/O
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    02-10
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2019/02/10/Programming/object_oriented_facts_and_misunderstandings/" style="color: #0085a1">
+                        <span>
+                            <객체지향의 사실과="" 오해=""> 정리
+                        </객체지향의></span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    02-10
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2019/02/10/Java/mockito-anotation-field-initialize/" style="color: #0085a1">
+                        <span>
+                            Mockito annotation을 사용하는 field 초기화 하기
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                </ul>
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-calendar-times-o listing-seperator" id="2018">
+                    <span class="tag-text">2018</span>
+                </span>
+                <ul>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    08-20
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/08/20/Java/design-pattern-adapter/" style="color: #0085a1">
+                        <span>
+                            Design Pattern - Adapter
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    08-18
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/08/18/Book/servlet_container_review/" style="color: #0085a1">
+                        <span>
+                            <웹 프로그래머를="" 위한="" 서블릿="" 컨테이너의="" 이해=""> 리뷰
+                        </웹></span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    08-18
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/08/18/Java/design-pattern-iterator/" style="color: #0085a1">
+                        <span>
+                            Design Pattern - Iterator
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    08-12
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/08/12/Tool/sonarqube/" style="color: #0085a1">
+                        <span>
+                            소나큐브
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    08-09
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/08/09/Tool/jenkins/" style="color: #0085a1">
+                        <span>
+                            젠킨스
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    08-08
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/08/08/Tool/gradle_basic/" style="color: #0085a1">
+                        <span>
+                            그레이들 기초
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    08-06
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/08/06/Tool/maven_basic/" style="color: #0085a1">
+                        <span>
+                            빌드 도구와 메이븐
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    08-05
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/08/05/Book/effective_java_2e_review/" style="color: #0085a1">
+                        <span>
+                            <이펙티브 자바="" 2판=""> 리뷰
+                        </이펙티브></span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    07-31
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/07/31/Tip/intellij-shortcut/" style="color: #0085a1">
+                        <span>
+                            Intellij IDEA 단축키
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    07-03
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/07/03/Java/java-lambda-stream/" style="color: #0085a1">
+                        <span>
+                            람다 & 스트림
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    06-10
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/06/10/Java/java-collection-framework/" style="color: #0085a1">
+                        <span>
+                            Collection Framework
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    06-06
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/06/06/Java/java-date-time/" style="color: #0085a1">
+                        <span>
+                            날짜와 시간 & 형식화
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    05-20
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/05/20/Spring/toby-8/" style="color: #0085a1">
+                        <span>
+                            토비의 스프링 8장 (스프링이란 무엇인가?)
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    04-15
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/04/15/Spring/toby-6/" style="color: #0085a1">
+                        <span>
+                            토비의 스프링 6장 (AOP)
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    04-08
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/04/08/Spring/toby-5/" style="color: #0085a1">
+                        <span>
+                            토비의 스프링 5장 (서비스 추상화)
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    04-07
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/04/07/Java/java-lang-package-and-useful-class/" style="color: #0085a1">
+                        <span>
+                            java.lang 패키지와 유용한 클래스
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    04-07
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/04/07/Java/java-basic/" style="color: #0085a1">
+                        <span>
+                            자주 보지 않으면 잊게되는 Java 기초 정리
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    04-04
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/04/04/Spring/toby-4/" style="color: #0085a1">
+                        <span>
+                            토비의 스프링 4장 (예외)
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    04-01
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/04/01/Spring/toby-3/" style="color: #0085a1">
+                        <span>
+                            토비의 스프링 3장 (템플릿)
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    03-31
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/03/31/Git/pull-request-merge/" style="color: #0085a1">
+                        <span>
+                            PR(Pull Request) merge
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    03-29
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/03/29/Linux & Ubuntu/less/" style="color: #0085a1">
+                        <span>
+                            tail -f 보다 효율적인 less +F에 대해 알아보자
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    03-26
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/03/26/Spring/toby-2/" style="color: #0085a1">
+                        <span>
+                            토비의 스프링 2장 (테스트)
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    03-25
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/03/25/Spring/toby-1/" style="color: #0085a1">
+                        <span>
+                            토비의 스프링 1장 (오브젝트와 의존관계)
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    03-12
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/03/12/Spring/spring-mvc/" style="color: #0085a1">
+                        <span>
+                            Spring - MVC
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    03-02
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/03/02/Spring/spring-requestbody-responsebody/" style="color: #0085a1">
+                        <span>
+                            Spring - RequestBody & ResponseBody
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    02-17
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/02/17/Spring/spring-aop/" style="color: #0085a1">
+                        <span>
+                            Spring - AOP
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    02-11
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/02/11/Spring/spring-ioc-di/" style="color: #0085a1">
+                        <span>
+                            Spring - IoC & DI
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    02-05
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/02/05/Spring/web-with-java/" style="color: #0085a1">
+                        <span>
+                            Java와 함께하는 Web
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    02-04
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/02/04/Spring/springboot-start/" style="color: #0085a1">
+                        <span>
+                            IntelliJ에서 SpringBoot 프로젝트 생성하기
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    01-31
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/01/31/Programming/android-customize-network-timeouts/" style="color: #0085a1">
+                        <span>
+                            Retrofit2 네트워크 타임아웃 시간 설정하기
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    01-29
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/01/29/Programming/android-retrofit2-okhttp3/" style="color: #0085a1">
+                        <span>
+                            Retrofit2 + OkHttp3 사용하기
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    01-20
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/01/20/Programming/android-naver-login/" style="color: #0085a1">
+                        <span>
+                            OAuth 2.0과 네이버로 로그인
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                </ul>
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-calendar-times-o listing-seperator" id="2017">
+                    <span class="tag-text">2017</span>
+                </span>
+                <ul>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    12-14
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/12/14/Etc/prepare-for-employment/" style="color: #0085a1">
+                        <span>
+                            신입 개발자의 취준 후기
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    11-20
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/11/20/Algorithm/Concept/priority-queue/" style="color: #0085a1">
+                        <span>
+                            힙 응용 - 우선순위 큐 (Priority queue)
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    11-19
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/11/19/Algorithm/Concept/heap-sort-2/" style="color: #0085a1">
+                        <span>
+                            힙 정렬 (Heap sort) - 2
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    11-19
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/11/19/Algorithm/Concept/heap-sort-1/" style="color: #0085a1">
+                        <span>
+                            힙 정렬 (Heap sort) - 1
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    11-07
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/11/07/Algorithm/Concept/quick-sort/" style="color: #0085a1">
+                        <span>
+                            퀵 정렬 (Quick sort)
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    11-06
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/11/06/Algorithm/Concept/merge-sort/" style="color: #0085a1">
+                        <span>
+                            합병 정렬 (Merge sort)
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    11-06
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/11/06/Algorithm/Concept/basic-sort/" style="color: #0085a1">
+                        <span>
+                            기본적인 정렬 알고리즘 (선택, 삽입, 버블)
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    11-05
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/11/05/Algorithm/Concept/prime/" style="color: #0085a1">
+                        <span>
+                            소수 구하기 (에라토스테네스의 체)
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    10-23
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/10/23/Algorithm/Concept/binary-search/" style="color: #0085a1">
+                        <span>
+                            이진 탐색 (Binary Search)
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    10-12
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/10/12/Algorithm/boj-12100/" style="color: #0085a1">
+                        <span>
+                            <12100> 2048 (Easy)
+                        </12100></span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    10-11
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/10/11/Algorithm/boj-13460/" style="color: #0085a1">
+                        <span>
+                            <13460> 째로탈출 2
+                        </13460></span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    10-02
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/10/02/Algorithm/boj-11054/" style="color: #0085a1">
+                        <span>
+                            <11054> 가장 긴 바이토닉 부분 수열
+                        </11054></span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    10-02
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/10/02/Algorithm/boj-2632/" style="color: #0085a1">
+                        <span>
+                            <2632> 피자판매
+                        </2632></span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    10-01
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/10/01/Algorithm/boj-5014/" style="color: #0085a1">
+                        <span>
+                            <5014> 스타트링크
+                        </5014></span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    09-29
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/09/29/Algorithm/boj-14501/" style="color: #0085a1">
+                        <span>
+                            <14501> 퇴사
+                        </14501></span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    08-11
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/08/11/Node/check-in-app-billing-purchase-validation/" style="color: #0085a1">
+                        <span>
+                            Android In-App Purchase Validation
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    08-08
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/08/08/Book/raspberry-cookbook/" style="color: #0085a1">
+                        <span>
+                            <라즈베리파이 쿡북=""> 리뷰
+                        </라즈베리파이></span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    08-01
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/08/01/Programming/5th-uniton/" style="color: #0085a1">
+                        <span>
+                            Uniton 후기
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    07-20
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/07/20/ReactNative/create-react-native-app/" style="color: #0085a1">
+                        <span>
+                            create-react-native-app (crna) 사용하기
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    07-18
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/07/18/Tip/google-translator/" style="color: #0085a1">
+                        <span>
+                            크롬 확장프로그램 구글 번역기 활용하기
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    07-17
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/07/17/Emily/6-aws-s3-static-web-hosting/" style="color: #0085a1">
+                        <span>
+                            6) AWS S3를 이용한 웹 호스팅
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    07-13
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/07/13/Node/require/" style="color: #0085a1">
+                        <span>
+                            require는 어떻게 동작할까?
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    07-13
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/07/13/Tip/change-visited-link-color/" style="color: #0085a1">
+                        <span>
+                            크롬에서 방문한 링크 색상 변경하기
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    07-10
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/07/10/RaspberryPi/7-jasper/" style="color: #0085a1">
+                        <span>
+                            7. Jasper
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    07-10
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/07/10/RaspberryPi/6-extra-gpio/" style="color: #0085a1">
+                        <span>
+                            6. Extra GPIO
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    07-10
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/07/10/RaspberryPi/5-gpio_led_breadboard/" style="color: #0085a1">
+                        <span>
+                            5. GPIO, LED, BreadBoard
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    07-10
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/07/10/RaspberryPi/4-bash_vim_gist/" style="color: #0085a1">
+                        <span>
+                            4. bash 설정, vim 설정, gist 사용하기
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    07-10
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/07/10/RaspberryPi/3-user-management/" style="color: #0085a1">
+                        <span>
+                            3. 사용자 관리, 원격접속 vi 편집기
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    07-09
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/07/09/RaspberryPi/2-unix-linux/" style="color: #0085a1">
+                        <span>
+                            2. Unix / Linux 소개
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    07-07
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/07/07/RaspberryPi/1-os-install/" style="color: #0085a1">
+                        <span>
+                            1. 라즈베리파이 OS 설치 & 설정
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    07-06
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/07/06/RaspberryPi/0-Intro/" style="color: #0085a1">
+                        <span>
+                            0. 라즈베리파이 강의 소개
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    06-18
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/06/18/JavaScript/class/" style="color: #0085a1">
+                        <span>
+                            ES6 Class 파헤치기
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    06-14
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/06/14/JavaScript/memoization/" style="color: #0085a1">
+                        <span>
+                            메모이제이션 (Memoization)
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    06-10
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/06/10/JavaScript/promise/" style="color: #0085a1">
+                        <span>
+                            다시 공부하는 Promise
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    06-06
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/06/06/JavaScript/client-side-rendering-vs-server-side-rendering/" style="color: #0085a1">
+                        <span>
+                            [번역] Client-side rendering VS. Server-sde rendering
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    05-28
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/05/28/Emily/5-aws-lambda/" style="color: #0085a1">
+                        <span>
+                            5) AWS Lambda 사용하기
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    05-26
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/05/26/Emily/4-crawling/" style="color: #0085a1">
+                        <span>
+                            4) 학식 메뉴 크롤링 하기
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    05-17
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/05/17/Emily/3-make-express-project/" style="color: #0085a1">
+                        <span>
+                            3) Express 프로젝트 생성하기
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    04-08
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/04/08/Node/sequelize/" style="color: #0085a1">
+                        <span>
+                            Sequelize 사용하기
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    03-21
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/03/21/Emily/2-make-kakao-yellow/" style="color: #0085a1">
+                        <span>
+                            2) 카카오 옐로아이디 만들기
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    03-14
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/03/14/JavaScript/understand-prototype/" style="color: #0085a1">
+                        <span>
+                            Prototype 이제는 이해하자
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    03-10
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/03/10/Emily/1-start-emily/" style="color: #0085a1">
+                        <span>
+                            1) 에밀리 개발 시작하기
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    02-26
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/02/26/Linux & Ubuntu/screen/" style="color: #0085a1">
+                        <span>
+                            Screen 사용하기
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    02-12
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/02/12/ReactNative/redux-for-starter/" style="color: #0085a1">
+                        <span>
+                            Redux 사용하기
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    02-10
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/02/10/ReactNative/useful-post-collection/" style="color: #0085a1">
+                        <span>
+                            시작하며 읽기 좋은 글 모음
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    02-09
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/02/09/HTML/viewport/" style="color: #0085a1">
+                        <span>
+                            모바일 화면을 위해 Viewport 사용하기
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    01-30
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/01/30/JavaScript/complete-guide-to-javascript-chapter-8/" style="color: #0085a1">
+                        <span>
+                            자바스크립트 완벽가이드 8장 (함수)
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    01-30
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/01/30/JavaScript/complete-guide-to-javascript-chapter-9/" style="color: #0085a1">
+                        <span>
+                            자바스크립트 완벽가이드 9장 (클래스와 모듈)
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    01-30
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/01/30/JavaScript/complete-guide-to-javascript-chapter-10/" style="color: #0085a1">
+                        <span>
+                            자바스크립트 완벽가이드 10장 (정규 표현식을 사용한 패턴 매칭)
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    01-28
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/01/28/JavaScript/complete-guide-to-javascript-chapter-6/" style="color: #0085a1">
+                        <span>
+                            자바스크립트 완벽가이드 6장 (객체)
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    01-28
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/01/28/JavaScript/complete-guide-to-javascript-chapter-7/" style="color: #0085a1">
+                        <span>
+                            자바스크립트 완벽가이드 7장 (배열)
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    01-27
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/01/27/JavaScript/complete-guide-to-javascript-chapter-5/" style="color: #0085a1">
+                        <span>
+                            자바스크립트 완벽가이드 5장 (문장)
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    01-27
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/01/27/JavaScript/complete-guide-to-javascript-chapter-4/" style="color: #0085a1">
+                        <span>
+                            자바스크립트 완벽가이드 4장 (표현식과 연산자)
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    01-26
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/01/26/JavaScript/complete-guide-to-javascript-chapter-3/" style="color: #0085a1">
+                        <span>
+                            자바스크립트 완벽가이드 3장 (타입, 값, 변수)
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    01-26
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/01/26/JavaScript/complete-guide-to-javascript-chapter-2/" style="color: #0085a1">
+                        <span>
+                            자바스크립트 완벽가이드 2장 (어휘 구조)
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    01-26
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/01/26/JavaScript/complete-guide-to-javascript-chapter-1/" style="color: #0085a1">
+                        <span>
+                            자바스크립트 완벽가이드 1장 (자바스크립트 소개)
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    01-22
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2017/01/22/ReactNative/image-res-management(1)/" style="color: #0085a1">
+                        <span>
+                            정적 이미지 사용하기
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                </ul>
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-calendar-times-o listing-seperator" id="2016">
+                    <span class="tag-text">2016</span>
+                </span>
+                <ul>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    12-13
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2016/12/13/Linux & Ubuntu/bashrc-bash_profile/" style="color: #0085a1">
+                        <span>
+                            .bashrc 와 .bash_profile 의 차이
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    12-13
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2016/12/13/Linux & Ubuntu/ls-result-color-change/" style="color: #0085a1">
+                        <span>
+                            ls 명령어 결과 색상 변경하기
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    09-29
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2016/09/29/AWS/qvic_aws_architecture/" style="color: #0085a1">
+                        <span>
+                            Qvic 서비스 아키텍처 설계
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    09-20
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2016/09/20/Node/nvm-(Node-Version-Manager)/" style="color: #0085a1">
+                        <span>
+                            NVM (Node Version Manager) 사용하기
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    09-20
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2016/09/20/Linux & Ubuntu/add_user/" style="color: #0085a1">
+                        <span>
+                            Linux & Ubuntu 계정 추가 & 설정
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    08-25
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2016/08/25/Node/module-exports_exports/" style="color: #0085a1">
+                        <span>
+                            module.exports와 exports 차이 이해하기
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                </ul>
+            </div>
+            
+
+
+        </div>
+    </div>
+</div>
+
+                <!-- 如果开启评论功能 -->
+                
+            </div>
+
+          <!-- Sidebar Container -->
+<div class="
+    col-lg-3 col-lg-offset-0
+    col-md-3 col-md-offset-0
+    col-sm-12
+    col-xs-12
+    sidebar-container
+">
+    
+        <!-- Short About -->
+<section class="visible-md visible-lg">
+    <h5><a href="/about/">ABOUT ME</a></h5>
+    <div class="short-about">
+
+        
+            <img id="avatar_pic" src="/images/etc/profile.png">
+        
+
+        
+            <p>Hi, i&#39;m JongMin</p>
+        
+
+        <!-- SNS Link -->
+        <ul class="list-inline">
+            
+            
+            
+
+            
+
+            
+                <li>
+                    <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420" rel="external nofollow noopener noreferrer">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </li>
+            
+
+            
+                <li>
+                    <a target="_blank" href="https://github.com/jongmin92" rel="external nofollow noopener noreferrer">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </li>
+            
+            
+            
+            
+        </ul>
+    </div>
+</section>
+        <hr>
+    
+        <!-- Categories -->
+
+    <h5>categories
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><span class="category-list-count">14</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/BOJ/">BOJ</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Concept/">Concept</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Book/">Book</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Database/">Database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/">Programming</a><span class="category-list-count">92</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/AWS/">AWS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Gradle/">Gradle</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/HTML/">HTML</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Java/">Java</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/JavaScript/">JavaScript</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Linux-Ubuntu/">Linux & Ubuntu</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Node/">Node</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/RaspberryPi/">RaspberryPi</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/React-Native/">React Native</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Spring/">Spring</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Tool/">Tool</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project/">Project</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project/Emily/">Emily</a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tip/">Tip</a><span class="category-list-count">3</span></li></ul>
+    </div>
+
+</h5>
+        <hr>
+    
+        <!-- Featured Tags -->
+
+<section>
+    <!-- no hr -->
+    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+            
+            <a href="/tags/#Algorithm" title="Algorithm" rel="14">Algorithm</a>
+            
+        
+            
+            <a href="/tags/#BOJ" title="BOJ" rel="6">BOJ</a>
+            
+        
+            
+            <a href="/tags/#백준" title="백준" rel="6">백준</a>
+            
+        
+            
+            <a href="/tags/#AWS" title="AWS" rel="4">AWS</a>
+            
+        
+            
+            <a href="/tags/#book" title="book" rel="4">book</a>
+            
+        
+            
+            <a href="/tags/#RaspberryPi" title="RaspberryPi" rel="9">RaspberryPi</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#java" title="java" rel="6">java</a>
+            
+        
+            
+            <a href="/tags/#review" title="review" rel="3">review</a>
+            
+        
+            
+            <a href="/tags/#Emily" title="Emily" rel="6">Emily</a>
+            
+        
+            
+            <a href="/tags/#bot" title="bot" rel="6">bot</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Java" title="Java" rel="20">Java</a>
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Gradle" title="Gradle" rel="2">Gradle</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#design pattern" title="design pattern" rel="2">design pattern</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Async" title="Async" rel="4">Async</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#DeferredResult" title="DeferredResult" rel="2">DeferredResult</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#nio" title="nio" rel="2">nio</a>
+            
+        
+            
+            <a href="/tags/#select" title="select" rel="3">select</a>
+            
+        
+            
+            <a href="/tags/#multiplexing" title="multiplexing" rel="3">multiplexing</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Reactive" title="Reactive" rel="3">Reactive</a>
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#TIL" title="TIL" rel="14">TIL</a>
+            
+        
+            
+            <a href="/tags/#JavaScript" title="JavaScript" rel="14">JavaScript</a>
+            
+        
+            
+            <a href="/tags/#JavaScript 완벽가이드" title="JavaScript 완벽가이드" rel="10">JavaScript 완벽가이드</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Linux &amp; Ubuntu" title="Linux &amp; Ubuntu" rel="5">Linux &amp; Ubuntu</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Node" title="Node" rel="5">Node</a>
+            
+        
+            
+            <a href="/tags/#Android" title="Android" rel="4">Android</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Module" title="Module" rel="2">Module</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Jasper" title="Jasper" rel="2">Jasper</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Retrofit2" title="Retrofit2" rel="2">Retrofit2</a>
+            
+        
+            
+            <a href="/tags/#OkHttp3" title="OkHttp3" rel="2">OkHttp3</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#GPIO" title="GPIO" rel="2">GPIO</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#React Native" title="React Native" rel="4">React Native</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Spring" title="Spring" rel="17">Spring</a>
+            
+        
+            
+            <a href="/tags/#Spring Boot" title="Spring Boot" rel="4">Spring Boot</a>
+            
+        
+            
+            <a href="/tags/#Bean Validation" title="Bean Validation" rel="2">Bean Validation</a>
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Micrometer" title="Micrometer" rel="2">Micrometer</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#AOP" title="AOP" rel="2">AOP</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#MVC" title="MVC" rel="2">MVC</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#IoC" title="IoC" rel="2">IoC</a>
+            
+        
+            
+            <a href="/tags/#DI" title="DI" rel="2">DI</a>
+            
+        
+            
+            <a href="/tags/#Toby" title="Toby" rel="7">Toby</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#IntelliJ" title="IntelliJ" rel="2">IntelliJ</a>
+            
+        
+            
+            <a href="/tags/#jenkins" title="jenkins" rel="2">jenkins</a>
+            
+        
+            
+            <a href="/tags/#ci &amp; cd" title="ci &amp; cd" rel="2">ci &amp; cd</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Chrome" title="Chrome" rel="2">Chrome</a>
+            
+        
+            
+            <a href="/tags/#Chrome Extension" title="Chrome Extension" rel="2">Chrome Extension</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#build tool" title="build tool" rel="2">build tool</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Sort" title="Sort" rel="6">Sort</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Heap sort" title="Heap sort" rel="3">Heap sort</a>
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+</section>
+
+        <hr>
+    
+        <!-- Friends Blog -->
+
+<h5>FRIENDS</h5>
+<ul class="list-inline">
+
+    
+</ul>
+
+        <hr>
+    
+</div>
+
+        
+    </div>
+</div>
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420" rel="external nofollow noopener noreferrer">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://github.com/jongmin92" rel="external nofollow noopener noreferrer">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; KimJongMin 2019 
+                    <br>
+                    Theme by <a href="http://huangxuan.me" rel="external nofollow noopener noreferrer" target="_blank">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org" rel="external nofollow noopener noreferrer" target="_blank">BeanTech</a> | 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px" src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true">
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://jongmin92.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-90389042-1';
+    var _gaDomain = 'auto';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async></script>
+<!-- Image to hack wechat -->
+<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0">
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

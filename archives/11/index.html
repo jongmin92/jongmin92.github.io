@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA">
+    <meta name="naver-site-verification" content="4468fb67994f2c880ea59d43b7f9a03be45d43d8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <link rel="shortcut icon" href="/images/etc/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          92Hz
+        
+    </title>
+
+    <link rel="canonical" href="https://jongmin92.github.io/archives/11/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- For SEO -->
+    <link rel="canonical" href="https://jongmin92.github.io/archives/11/">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('/images/etc/home.jpg') 
+            /*config*/
+        
+    }
+    
+</style>
+
+<header class="intro-header">
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="site-heading">
+                        <h1>92Hz</h1>
+                        <!--<hr class="small">-->
+                        <span class="subheading">Continue to learn!</span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">92Hz</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Main Content -->
+<div class="container">
+    <center>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</center>
+
+    <div class="row">
+        
+
+<!-- USE SIDEBAR -->
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-1
+                col-md-8 col-md-offset-1
+                col-sm-12
+                col-xs-12
+                post-container
+            ">
+            
+                <!-- Main Content -->
+
+
+<div class="post-preview">
+
+    <a href="/2017/11/19/Algorithm/Concept/heap-sort-1/">
+        <h2 class="post-title">
+            힙 정렬 (Heap sort) - 1
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            힙 정렬은 힙, 바이너리 힙, 이진 힙이라고 부르는 자료구조를 이용하는 정렬 알고리즘입니다.
+힙 정렬의 특징은 다음과 같습니다.
+1.최악의 경우에도 시간 복잡도가 nlogn이 되는 빠른 정렬이다.
+2.힙 정렬은 알고리즘을 구현하는데 추가적인 배열이 필요하지 않다.
+3.이진 힙(바이너리 힙) 자료구조를 사용한다.
+먼저 힙 정렬을 구현하기 전에, 힙 이라......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by KimJongMin on
+            2017-11-19
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Algorithm" title="Algorithm">Algorithm</a>
+            
+              <a href="/tags/#Sort" title="Sort">Sort</a>
+            
+              <a href="/tags/#Heap sort" title="Heap sort">Heap sort</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/11/07/Algorithm/Concept/quick-sort/">
+        <h2 class="post-title">
+            퀵 정렬 (Quick sort)
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            분할정복법과 퀵 정렬 (Quick sort)
+퀵 정렬은 합병 정렬과 마찬가지로 분할정복법을 사용하지만 그 방법에 있어서 차이가 있습니다.
+퀵 정렬에서는 정렬할 데이터가 주어지면 하나의 값을 기준값(pivot)으로 사용하여 정렬을 합니다. 어떤 값을 기준값으로 설정하는지가 퀵정렬의 성능을 좌우합니다.
+분할정복법 3단계를 바탕으로 퀵정렬의 과정을 알아보겠......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by KimJongMin on
+            2017-11-07
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Algorithm" title="Algorithm">Algorithm</a>
+            
+              <a href="/tags/#Sort" title="Sort">Sort</a>
+            
+              <a href="/tags/#Quick sort" title="Quick sort">Quick sort</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/11/06/Algorithm/Concept/merge-sort/">
+        <h2 class="post-title">
+            합병 정렬 (Merge sort)
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            분할정복법과 합병 정렬 (Merge sort)
+합병 정렬은 앞서 알아본 선택, 삽입, 버블 정렬과는 다르게 분할정복법이라는 개념을 사용합니다.
+**분할정복법(Divide-And-Conquer)**이라는 것은 주어진 문제를 다음과 같은 3단계의 절차를 통해 해결하는 방법입니다.
+
+분할 : 해결하고자 하는 문제를 작은 크기의 동일한 문제들로 분할한다.
+정......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by KimJongMin on
+            2017-11-06
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Algorithm" title="Algorithm">Algorithm</a>
+            
+              <a href="/tags/#Sort" title="Sort">Sort</a>
+            
+              <a href="/tags/#Merge sort" title="Merge sort">Merge sort</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/11/06/Algorithm/Concept/basic-sort/">
+        <h2 class="post-title">
+            기본적인 정렬 알고리즘 (선택, 삽입, 버블)
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            정렬 알고리즘 종류와 특징
+
+선택 정렬
+선택 정렬은 해당 순서에 원소를 넣을 위치는 이미 정해져 있고, 어떤 원소를 넣을지 선택한다라고 생각하면 이해하기 쉽습니다.
+
+현재 위의 예시에서는 각 순서마다 정렬되지 않은 범위에서 가장 큰 원소를 찾아 맨 마지막 값의 자리와 변경합니다. 가장 큰값을 찾아 맨 오른쪽 원소와 변경해 오름차순으로 정렬했지만, 매 ......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by KimJongMin on
+            2017-11-06
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Algorithm" title="Algorithm">Algorithm</a>
+            
+              <a href="/tags/#Sort" title="Sort">Sort</a>
+            
+              <a href="/tags/#Bubble sort" title="Bubble sort">Bubble sort</a>
+            
+              <a href="/tags/#Insert sort" title="Insert sort">Insert sort</a>
+            
+              <a href="/tags/#Slection sort" title="Slection sort">Slection sort</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/11/05/Algorithm/Concept/prime/">
+        <h2 class="post-title">
+            소수 구하기 (에라토스테네스의 체)
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            소수(Prime Number)는 약수로 1과 자기 자신만을 가지는 정수입니다. 정수론의 기본 정리에 의해 모든 자연수는 단 하나의 소수들의 곱으로 표현됩니다.
+소수 구하는 알고리즘
+1. 기본적인 접근
+소수는 1과 N만을 약수로 가진다. 그럼 2부터 N-1까지의 수로는 나눠져서는 안된다.
+123456789101112131415161718192021222......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by KimJongMin on
+            2017-11-05
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Algorithm" title="Algorithm">Algorithm</a>
+            
+              <a href="/tags/#Prime" title="Prime">Prime</a>
+            
+              <a href="/tags/#소수 구하기" title="소수 구하기">소수 구하기</a>
+            
+              <a href="/tags/#에라토스테네스의 체" title="에라토스테네스의 체">에라토스테네스의 체</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/10/23/Algorithm/Concept/binary-search/">
+        <h2 class="post-title">
+            이진 탐색 (Binary Search)
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            주어진 배열에서 특정한 요소(target) 을 찾아내는 상황을 가정해 봅시다. 가장 쉬운 방법은 각각의 배열 요소와 target 값을 같은지 순차적으로 모두 비교하는 것입니다. 만약 배열의 크기가 n이라고 했을때, 이 알고리즘의 시간복잡도를 Big-O notation을 이용해 나타낸다면 **O(n)**이 될 것 입니다.
+그러나 더 효율적이고 빠르게 t......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by KimJongMin on
+            2017-10-23
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Algorithm" title="Algorithm">Algorithm</a>
+            
+              <a href="/tags/#Search" title="Search">Search</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+
+
+<!-- Pager -->
+
+<ul class="pager">
+    
+        <li class="previous">
+            <a href="/archives/10/">&larr; Newer Posts</a>
+        </li>
+    
+    
+        <li class="next">
+            <a href="/archives/12/">Older Posts &rarr;</a>
+        </li>
+    
+</ul>
+
+
+
+                <!-- 如果开启评论功能 -->
+                
+            </div>
+
+          <!-- Sidebar Container -->
+<div class="
+    col-lg-3 col-lg-offset-0
+    col-md-3 col-md-offset-0
+    col-sm-12
+    col-xs-12
+    sidebar-container
+">
+    
+        <!-- Short About -->
+<section class="visible-md visible-lg">
+    <h5><a href="/about/">ABOUT ME</a></h5>
+    <div class="short-about">
+
+        
+            <img id="avatar_pic" src="/images/etc/profile.png">
+        
+
+        
+            <p>Hi, i&#39;m JongMin</p>
+        
+
+        <!-- SNS Link -->
+        <ul class="list-inline">
+            
+            
+            
+
+            
+
+            
+                <li>
+                    <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420" rel="external nofollow noopener noreferrer">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </li>
+            
+
+            
+                <li>
+                    <a target="_blank" href="https://github.com/jongmin92" rel="external nofollow noopener noreferrer">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </li>
+            
+            
+            
+            
+        </ul>
+    </div>
+</section>
+        <hr>
+    
+        <!-- Categories -->
+
+    <h5>categories
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><span class="category-list-count">14</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/BOJ/">BOJ</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Concept/">Concept</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Book/">Book</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Database/">Database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/">Programming</a><span class="category-list-count">92</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/AWS/">AWS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Gradle/">Gradle</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/HTML/">HTML</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Java/">Java</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/JavaScript/">JavaScript</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Linux-Ubuntu/">Linux & Ubuntu</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Node/">Node</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/RaspberryPi/">RaspberryPi</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/React-Native/">React Native</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Spring/">Spring</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Tool/">Tool</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project/">Project</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project/Emily/">Emily</a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tip/">Tip</a><span class="category-list-count">3</span></li></ul>
+    </div>
+
+</h5>
+        <hr>
+    
+        <!-- Featured Tags -->
+
+<section>
+    <!-- no hr -->
+    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+            
+            <a href="/tags/#Algorithm" title="Algorithm" rel="14">Algorithm</a>
+            
+        
+            
+            <a href="/tags/#BOJ" title="BOJ" rel="6">BOJ</a>
+            
+        
+            
+            <a href="/tags/#백준" title="백준" rel="6">백준</a>
+            
+        
+            
+            <a href="/tags/#AWS" title="AWS" rel="4">AWS</a>
+            
+        
+            
+            <a href="/tags/#book" title="book" rel="4">book</a>
+            
+        
+            
+            <a href="/tags/#RaspberryPi" title="RaspberryPi" rel="9">RaspberryPi</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#java" title="java" rel="6">java</a>
+            
+        
+            
+            <a href="/tags/#review" title="review" rel="3">review</a>
+            
+        
+            
+            <a href="/tags/#Emily" title="Emily" rel="6">Emily</a>
+            
+        
+            
+            <a href="/tags/#bot" title="bot" rel="6">bot</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Java" title="Java" rel="20">Java</a>
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Gradle" title="Gradle" rel="2">Gradle</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#design pattern" title="design pattern" rel="2">design pattern</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Async" title="Async" rel="4">Async</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#DeferredResult" title="DeferredResult" rel="2">DeferredResult</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#nio" title="nio" rel="2">nio</a>
+            
+        
+            
+            <a href="/tags/#select" title="select" rel="3">select</a>
+            
+        
+            
+            <a href="/tags/#multiplexing" title="multiplexing" rel="3">multiplexing</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Reactive" title="Reactive" rel="3">Reactive</a>
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#TIL" title="TIL" rel="14">TIL</a>
+            
+        
+            
+            <a href="/tags/#JavaScript" title="JavaScript" rel="14">JavaScript</a>
+            
+        
+            
+            <a href="/tags/#JavaScript 완벽가이드" title="JavaScript 완벽가이드" rel="10">JavaScript 완벽가이드</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Linux &amp; Ubuntu" title="Linux &amp; Ubuntu" rel="5">Linux &amp; Ubuntu</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Node" title="Node" rel="5">Node</a>
+            
+        
+            
+            <a href="/tags/#Android" title="Android" rel="4">Android</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Module" title="Module" rel="2">Module</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Jasper" title="Jasper" rel="2">Jasper</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Retrofit2" title="Retrofit2" rel="2">Retrofit2</a>
+            
+        
+            
+            <a href="/tags/#OkHttp3" title="OkHttp3" rel="2">OkHttp3</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#GPIO" title="GPIO" rel="2">GPIO</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#React Native" title="React Native" rel="4">React Native</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Spring" title="Spring" rel="17">Spring</a>
+            
+        
+            
+            <a href="/tags/#Spring Boot" title="Spring Boot" rel="4">Spring Boot</a>
+            
+        
+            
+            <a href="/tags/#Bean Validation" title="Bean Validation" rel="2">Bean Validation</a>
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Micrometer" title="Micrometer" rel="2">Micrometer</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#AOP" title="AOP" rel="2">AOP</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#MVC" title="MVC" rel="2">MVC</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#IoC" title="IoC" rel="2">IoC</a>
+            
+        
+            
+            <a href="/tags/#DI" title="DI" rel="2">DI</a>
+            
+        
+            
+            <a href="/tags/#Toby" title="Toby" rel="7">Toby</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#IntelliJ" title="IntelliJ" rel="2">IntelliJ</a>
+            
+        
+            
+            <a href="/tags/#jenkins" title="jenkins" rel="2">jenkins</a>
+            
+        
+            
+            <a href="/tags/#ci &amp; cd" title="ci &amp; cd" rel="2">ci &amp; cd</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Chrome" title="Chrome" rel="2">Chrome</a>
+            
+        
+            
+            <a href="/tags/#Chrome Extension" title="Chrome Extension" rel="2">Chrome Extension</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#build tool" title="build tool" rel="2">build tool</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Sort" title="Sort" rel="6">Sort</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Heap sort" title="Heap sort" rel="3">Heap sort</a>
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+</section>
+
+        <hr>
+    
+        <!-- Friends Blog -->
+
+<h5>FRIENDS</h5>
+<ul class="list-inline">
+
+    
+</ul>
+
+        <hr>
+    
+</div>
+
+        
+    </div>
+</div>
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420" rel="external nofollow noopener noreferrer">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://github.com/jongmin92" rel="external nofollow noopener noreferrer">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; KimJongMin 2019 
+                    <br>
+                    Theme by <a href="http://huangxuan.me" rel="external nofollow noopener noreferrer" target="_blank">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org" rel="external nofollow noopener noreferrer" target="_blank">BeanTech</a> | 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px" src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true">
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://jongmin92.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-90389042-1';
+    var _gaDomain = 'auto';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async></script>
+<!-- Image to hack wechat -->
+<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0">
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

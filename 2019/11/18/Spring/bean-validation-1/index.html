@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA">
+    <meta name="naver-site-verification" content="4468fb67994f2c880ea59d43b7f9a03be45d43d8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <link rel="shortcut icon" href="/images/etc/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          Spring Boot에서의 Bean Validation (1) - 92Hz
+        
+    </title>
+
+    <link rel="canonical" href="https://jongmin92.github.io/2019/11/18/Spring/bean-validation-1/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- For SEO -->
+    <link rel="canonical" href="https://jongmin92.github.io/2019/11/18/spring/bean-validation-1/">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            /* 기본 포스트 헤더 이미지 (페이지 이미지 || 기본 헤더 이미지) */
+            /* background-image: url('undefined') */
+            /* background-image: url('/images/etc/home.jpg') */
+            background-image: url('/images/etc/home.jpg')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header">
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#Java" title="Java">Java</a>
+                            
+                              <a class="tag" href="/tags/#Spring" title="Spring">Spring</a>
+                            
+                              <a class="tag" href="/tags/#Spring Boot" title="Spring Boot">Spring Boot</a>
+                            
+                              <a class="tag" href="/tags/#Bean Validation" title="Bean Validation">Bean Validation</a>
+                            
+                        </div>
+                        <h1>Spring Boot에서의 Bean Validation (1)</h1>
+                        <h2 class="subheading">Controller, Service, Repository에서의 Validation</h2>
+                        <span class="meta">
+                            Posted by KimJongMin on
+                            2019-11-18
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">92Hz</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <center>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</center>
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p><a href="https://beanvalidation.org/news/2018/02/26/bean-validation-2-0-whats-in-it/" rel="external nofollow noopener noreferrer" target="_blank">Bean Validation</a>은 Java 생태계에서 유효성(Validation) 검증 로직을 구현하기위한 사실상의 표준이다. Bean Validation은 Spring과 Spring Boot에도 잘 통합되어 있다.</p>
+<blockquote>
+<p>해당 포스팅에서 사용된 예제 코드는 <a href="https://github.com/jongmin92/code-examples/tree/master/spring-boot/validation" rel="external nofollow noopener noreferrer" target="_blank">spring-boot validation example</a>에서 확인 가능합니다.</p>
+</blockquote>
+<h1 id="validation-설정">Validation 설정</h1>
+<p>Spring Boot에서의 Bean Validation은 <code>spring-boot-starter-validation</code>를 추가함으로써 사용할 수 있다.
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">implementation(<span class="string">'org.springframework.boot:spring-boot-starter-validation'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>Spring Dependency Management Gradle 플러그인(&quot;io.spring.dependency-management&quot;)을 사용한다면 현재 사용중인 Spring Boot 버전에서 자동으로 의존성(버전)을 가져오기 때문에 별도로 버전을 명시할 필요가 없다.</p>
+<p>만약 <code>spring-boot-starter-web</code>를 포함하고 있다면 Validation Starter도 포함되어 있기 때문에 따로 추가할 필요는 없다.
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">implementation(<span class="string">'org.springframework.boot:spring-boot-starter-web'</span>)</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>Validation Starter는 Bean Validation Specification 구현체 중 가장 널리 사용되고 있는 <a href="https://hibernate.org/validator/" rel="external nofollow noopener noreferrer" target="_blank">hibernate validator</a>를 포함하고 있다.</p>
+</blockquote>
+<h1 id="bean-validation-기본">Bean Validation 기본</h1>
+<p><strong>기본적으로 Bean Validation은 클래스 필드에 특정 어노테이션(annotation)을 달아 제약 조건을 정의하는 방식으로 동작한다.</strong> 그 후 해당 클래스 객체를 <a href="https://docs.jboss.org/hibernate/beanvalidation/spec/2.0/api/javax/validation/Validator.html" rel="external nofollow noopener noreferrer" target="_blank">Validator</a>를 이용해 제약 조건의 충족 여부를 확인한다.</p>
+<h1 id="spring-mvc-controller의-validation">Spring MVC Controller의 Validation</h1>
+<p>Spring RestController를 통해 Client로부터 전달받은 요청(request, input)에 대해 유효성을 검사하고자 한다. Client로부터 들어오는 다음의 3가지 요청 형식에 대해서 유효성 검사를 할 수 있다.</p>
+<ul>
+<li><strong>request body</strong></li>
+<li><strong>path에 포함된 variables</strong> (ex. /foos/{id}의 id)</li>
+<li><strong>query parameters</strong></li>
+</ul>
+<h2 id="request-body">Request Body</h2>
+<p>POST 혹은 PUT 요청에서 request body에 JSON 형식의 데이터를 전달하는 것은 일반적이며, Spring은 JSON 형식의 데이터를 Java 객체에 자동으로 매핑한다. 이 과정에서 매핑되는 Java 객체가 요구 사항을 충족하는지 확인하려 한다.
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InputRequest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Min</span>(<span class="number">1</span>)</span><br><span class="line">    <span class="meta">@Max</span>(<span class="number">10</span>)</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> numberBetweenOneAndTen;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@NotEmpty</span></span><br><span class="line">    <span class="keyword">private</span> String notEmptyString;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Pattern</span>(regexp = <span class="string">"^[0-9]&#123;6&#125;$"</span>)</span><br><span class="line">    <span class="keyword">private</span> String pinCode;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>numberBetweenOneAndTen는 1에서 10 사이의 값을 가져야 하며, notEmptyString은 빈 문자열(&quot;&quot;)이 아니어야 하고, pinCode는 6자리의 숫자를 가져야 한다.</p>
+<p>request body에서 <code>InputRequest</code> 객체를 가져와 유효성 검사를 하는 RestController는 다음과 같다.
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ValidateRequestBodyController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@PostMapping</span>(<span class="string">"/validateBody"</span>)</span><br><span class="line">    <span class="function">ResponseEntity&lt;String&gt; <span class="title">validateBody</span><span class="params">(@Valid @RequestBody InputRequest request)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> ResponseEntity.ok(<span class="string">"valid"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>@RequestBody 어노테이션을 사용하고 있는 Input 매개변수에 <code>@Valid</code> 어노테이션만 추가하면 된다.</strong> 이로인해 Spring은 다른 작업을 수행하기 전에 먼저 객체를 Validator에 전달해서 유효성을 검사하게 된다.</p>
+<blockquote>
+<p>만약 <code>InputRequest</code> 클래스에 유효성을 검사해야하는 다른 객체가 필드로 포함된 경우, 이 필드에도 @Valid 어노테이션을 추가해야한다. 이러한 경우를 <strong>Complex Type</strong>이라고 부른다.</p>
+</blockquote>
+<p>유효성 검사에 실패할 경우 <code>MethodArgumentNotValidException</code> 예외가 발생한다. 기본적으로 Spring은 이 예외에 대해서 HTTP status code 400(Bad Request)으로 변환한다.</p>
+<p>아래의 테스트 코드를 통해 동작을 확인할 수 있다.</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ExtendWith</span>(SpringExtension.class)</span><br><span class="line"><span class="meta">@WebMvcTest</span>(controllers = ValidateRequestBodyController.class)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ValidateRequestBodyControllerTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> MockMvc mvc;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> ObjectMapper objectMapper;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">whenInputRequestIsInvalid_thenReturnStatus400</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> InputRequest request = <span class="keyword">new</span> InputRequest();</span><br><span class="line">        request.setNumberBetweenOneAndTen(<span class="number">50</span>);</span><br><span class="line">        request.setNotEmptyString(<span class="string">""</span>);</span><br><span class="line">        request.setPinCode(<span class="string">"1234"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">final</span> String body = objectMapper.writeValueAsString(request);</span><br><span class="line"></span><br><span class="line">        mvc.perform(post(<span class="string">"/validateBody"</span>)</span><br><span class="line">                            .contentType(<span class="string">"application/json"</span>)</span><br><span class="line">                            .content(body))</span><br><span class="line">           .andExpect(status().isBadRequest());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="path-variables-amp-request-parameters">Path Variables &amp; Request Parameters</h2>
+<p>path에 포함된 variables과 query parameters에 대한 유효성 검사는 조금 다르게 동작한다.</p>
+<p>Path Variable과 Request Parameter의 경우는 int와 같은 primitive type이거나 Integer 혹은 String과 같은 객체이기 때문에 복잡한 유효성 검사를 하지 않는다.</p>
+<p>클래스 필드에 직접 어노테이션을 추가하지 않고 다음과 같이 Controller 메소드 매개 변수에 직접 제약 조건을 추가한다.
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Validated</span></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ValidateParametersController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/validatePathVariable/&#123;id&#125;"</span>)</span><br><span class="line">    <span class="function">ResponseEntity&lt;String&gt; <span class="title">validatePathVariable</span><span class="params">(@PathVariable(<span class="string">"id"</span>)</span> @<span class="title">Min</span><span class="params">(<span class="number">5</span>)</span> <span class="keyword">int</span> id) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> ResponseEntity.ok(<span class="string">"valid"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/validateRequestParameter"</span>)</span><br><span class="line">    <span class="function">ResponseEntity&lt;String&gt; <span class="title">validateRequestParameter</span><span class="params">(@RequestParam(<span class="string">"param"</span>)</span> @<span class="title">Min</span><span class="params">(<span class="number">5</span>)</span> <span class="keyword">int</span> param) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> ResponseEntity.ok(<span class="string">"valid"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong><code>@Validated</code> 어노테이션을 클래스 레벨의 Controller에 추가해 Spring이 메서드 매개 변수에 대한 제한 조건 annotation을 평가하게 해야한다.</strong></p>
+<p>request body 유효성 검사와 달리 실패할 경우 <code>MethodArgumentNotValidException</code> 예외가 아닌 <code>ConstraintViolationException</code> 예외가 발생한다. 주의할 것으로는 Spring은 <code>ConstraintViolationException</code> 예외에 대해서는 기본적으로 exception을 handling 하지 않기 때문에 HTTP status code 500(Internal Server Error)로 처리한다.</p>
+<p>만약 HTTP status code 400(Bad Request)으로 처리하고자 한다면, custom exception handler를 사용하면 된다.
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Validated</span></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ValidateParametersController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// request mapping method omitted</span></span><br><span class="line">    </span><br><span class="line">    <span class="meta">@ExceptionHandler</span>(ConstraintViolationException.class)</span><br><span class="line">    <span class="meta">@ResponseStatus</span>(HttpStatus.BAD_REQUEST)</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function">String <span class="title">handleConstraintViolationException</span><span class="params">(ConstraintViolationException e)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"not valid due to validation error: "</span> + e.getMessage();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>테스트 코드를 통해 동작을 확인해보자.
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ExtendWith</span>(SpringExtension.class)</span><br><span class="line"><span class="meta">@WebMvcTest</span>(controllers = ValidateParametersController.class)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ValidateParametersControllerTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> MockMvc mvc;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">whenPathVariableIsInValid_thenReturnStatus400</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        mvc.perform(get(<span class="string">"/validatePathVariable/1"</span>))</span><br><span class="line">           .andExpect(status().isBadRequest());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">whenRequestParameterIsInvalid_thenReturnStatus400</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        mvc.perform(get(<span class="string">"/validateRequestParameter"</span>)</span><br><span class="line">                            .param(<span class="string">"param"</span>, <span class="string">"1"</span>))</span><br><span class="line">           .andExpect(status().isBadRequest());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="spring-service의-validation">Spring Service의 Validation</h1>
+<p>Controller 레벨에서 입력을 검증하는것 뿐만 아니라 <code>@Validated</code>와 <code>@Valid</code> 어노테이션을 이용해 다른 Spring component에서도 입력에 대해 유효성을 검증할 수 있다.
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="meta">@Validated</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ValidateService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">validateInputRequest</span><span class="params">(@Valid InputRequest input)</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>@Validated</code> 어노테이션은 클래스 수준에서만 평가되기 때문에 메서드에는 추가하지 말아야 한다.</p>
+<p>테스트 코드는 다음과 같다.
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ExtendWith</span>(SpringExtension.class)</span><br><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ValidateServiceTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> ValidateService service;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">whenInputRequestIsInvalid_thenThrowException</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> InputRequest request = <span class="keyword">new</span> InputRequest();</span><br><span class="line">        request.setNumberBetweenOneAndTen(<span class="number">50</span>);</span><br><span class="line">        request.setNotEmptyString(<span class="string">""</span>);</span><br><span class="line">        request.setPinCode(<span class="string">"1234"</span>);</span><br><span class="line"></span><br><span class="line">        assertThrows(ConstraintViolationException.class, () -&gt; &#123;</span><br><span class="line">            service.validateInputRequest(request);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="spring-repository의-validation">Spring Repository의 Validation</h1>
+<p>유효성 검사를 위한 가장 마지막 계층은 persistence layer이다. 기본적으로 Spring Data는 Hibernate를 사용하여 Bean Validation을 지원한다.</p>
+<h2 id="jpa-entities">JPA Entities</h2>
+<p><code>InputEntity</code> 클래스의 객체를 DB에 저장하려고 한다. 먼저 필요한 JPA 어노테이션들을 추가한다.
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@Entity</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InputEntity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Id</span></span><br><span class="line">    <span class="meta">@GeneratedValue</span></span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Min</span>(<span class="number">1</span>)</span><br><span class="line">    <span class="meta">@Max</span>(<span class="number">10</span>)</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> numberBetweenOneAndTen;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@NotEmpty</span></span><br><span class="line">    <span class="keyword">private</span> String notEmptyString;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Pattern</span>(regexp = <span class="string">"^[0-9]&#123;6&#125;$"</span>)</span><br><span class="line">    <span class="keyword">private</span> String pinCode;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>위의 Entity를 관리하는 CRUE Repository도 생성한다.</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ValidateRepository</span> <span class="keyword">extends</span> <span class="title">CrudRepository</span>&lt;<span class="title">InputEntity</span>, <span class="title">Long</span>&gt; </span>&#123;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>기본적으로 제약 조건을 위반한 <code>InputEntity</code> 객체를 저장할 때 <code>ConstraintViolationException</code>이 발생한다.</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ExtendWith</span>(SpringExtension.class)</span><br><span class="line"><span class="meta">@DataJpaTest</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ValidateRepositoryTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> ValidateRepository repository;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> EntityManager entityManager;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">whenInputEntityIsInvalid_thenThrowsException</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> InputEntity inputEntity = <span class="keyword">new</span> InputEntity();</span><br><span class="line">        inputEntity.setNumberBetweenOneAndTen(<span class="number">50</span>);</span><br><span class="line">        inputEntity.setNotEmptyString(<span class="string">""</span>);</span><br><span class="line">        inputEntity.setPinCode(<span class="string">"1234"</span>);</span><br><span class="line"></span><br><span class="line">        assertThrows(ConstraintViolationException.class, () -&gt; &#123;</span><br><span class="line">            repository.save(inputEntity);</span><br><span class="line">            entityManager.flush();</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>Bean Validation은 <code>EntityManager</code>가 flush된 후에 트리거 된다.</strong> Hibernate는 특정 상황에서 <code>EntityManager</code>를 자동으로 flush하지만 integration test의 경우에는 직접 수행해야한다.</p>
+<p>만약 Spring Data Repository에서 Bean Validation을 비활성화하려면 Spring Boot property인 <code>spring.jpa.properties.javax.persistence.validation.mode</code> 값을 <code>none</code>으로 설정하면 된다.</p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2019/11/21/Spring/bean-validation-2/" data-toggle="tooltip" data-placement="top" title="Spring Boot에서의 Bean Validation (2)">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2019/11/13/Database/mysql-replication/" data-toggle="tooltip" data-placement="top" title="MySQL - Replication">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <center>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</center>
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#validation-설정"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Validation 설정</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#bean-validation-기본"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Bean Validation 기본</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#spring-mvc-controller의-validation"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Spring MVC Controller의 Validation</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#request-body"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">Request Body</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#path-variables-amp-request-parameters"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">Path Variables &amp; Request Parameters</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#spring-service의-validation"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">Spring Service의 Validation</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#spring-repository의-validation"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">Spring Repository의 Validation</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#jpa-entities"><span class="toc-nav-number">5.1.</span> <span class="toc-nav-text">JPA Entities</span></a></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#Java" title="Java">Java</a>
+                        
+                          <a class="tag" href="/tags/#Spring" title="Spring">Spring</a>
+                        
+                          <a class="tag" href="/tags/#Spring Boot" title="Spring Boot">Spring Boot</a>
+                        
+                          <a class="tag" href="/tags/#Bean Validation" title="Bean Validation">Bean Validation</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "https-jongmin92-github-io";
+    var disqus_identifier = "https://jongmin92.github.io/2019/11/18/Spring/bean-validation-1/";
+    var disqus_url = "https://jongmin92.github.io/2019/11/18/Spring/bean-validation-1/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'left',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: 0.6em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420" rel="external nofollow noopener noreferrer">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://github.com/jongmin92" rel="external nofollow noopener noreferrer">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; KimJongMin 2019 
+                    <br>
+                    Theme by <a href="http://huangxuan.me" rel="external nofollow noopener noreferrer" target="_blank">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org" rel="external nofollow noopener noreferrer" target="_blank">BeanTech</a> | 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px" src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true">
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://jongmin92.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-90389042-1';
+    var _gaDomain = 'auto';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async></script>
+<!-- Image to hack wechat -->
+<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0">
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

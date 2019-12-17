@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA">
+    <meta name="naver-site-verification" content="4468fb67994f2c880ea59d43b7f9a03be45d43d8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <link rel="shortcut icon" href="/images/etc/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          [번역] Java Reactor Pattern - 92Hz
+        
+    </title>
+
+    <link rel="canonical" href="https://jongmin92.github.io/2019/03/05/Java/java-reactor-pattern/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- For SEO -->
+    <link rel="canonical" href="https://jongmin92.github.io/2019/03/05/java/java-reactor-pattern/">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            /* 기본 포스트 헤더 이미지 (페이지 이미지 || 기본 헤더 이미지) */
+            /* background-image: url('undefined') */
+            /* background-image: url('/images/etc/home.jpg') */
+            background-image: url('/images/etc/home.jpg')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header">
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#nio" title="nio">nio</a>
+                            
+                              <a class="tag" href="/tags/#select" title="select">select</a>
+                            
+                              <a class="tag" href="/tags/#multiplexing" title="multiplexing">multiplexing</a>
+                            
+                              <a class="tag" href="/tags/#non-blocking io" title="non-blocking io">non-blocking io</a>
+                            
+                              <a class="tag" href="/tags/#reactor" title="reactor">reactor</a>
+                            
+                        </div>
+                        <h1>[번역] Java Reactor Pattern</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by KimJongMin on
+                            2019-03-05
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">92Hz</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <center>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</center>
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>해당 글은 아래의 Reactor Pattern Explained 시리즈를 번역하였습니다.</p>
+<ul>
+<li><a href="http://jeewanthad.blogspot.com/2013/02/reactor-pattern-explained-part-1.html" rel="external nofollow noopener noreferrer" target="_blank">Reactor Pattern Explained - Part 1</a></li>
+<li><a href="http://jeewanthad.blogspot.com/2013/02/reactor-pattern-explained-part-2.html" rel="external nofollow noopener noreferrer" target="_blank">Reactor Pattern Explained - Part 2</a></li>
+<li><a href="http://jeewanthad.blogspot.com/2013/03/reacter-pattern-explained-part-3.html" rel="external nofollow noopener noreferrer" target="_blank">Reactor Pattern Explained - Part 3</a></li>
+</ul>
+<h1 id="part-1">Part 1</h1>
+<p>서버가 동시에 요청(이벤트)을 받을 때, 보통 요청을 처리하기 위한 이벤트 리스너를 각 스레드마다 할당해 처리하곤 합니다.
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Server</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            ServerSocket ss = <span class="keyword">new</span> ServerSocket(PORT);</span><br><span class="line">        <span class="keyword">while</span> (!Thread.interrupted())</span><br><span class="line">            <span class="keyword">new</span> Thread(<span class="keyword">new</span> Handler(ss.accept())).start();</span><br><span class="line">            <span class="comment">// or, single-threaded, or a thread pool</span></span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException ex) &#123; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Handler</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> Socket socket;</span><br><span class="line">    Handler(Socket s) &#123; socket = s; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">byte</span>[] input = <span class="keyword">new</span> <span class="keyword">byte</span>[MAX_INPUT];</span><br><span class="line">            socket.getInputStream().read(input);</span><br><span class="line">            <span class="keyword">byte</span>[] output = process(input);</span><br><span class="line">            socket.getOutputStream().write(output);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException ex) &#123; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">byte</span>[] process(<span class="keyword">byte</span>[] cmd) &#123; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>요청마다 처리를 위해 이벤트 리스너를 별도의 스레드로 만들어 사용하는 것의 단점은 <code>컨텍스트 전환(context switching)의 오버 헤드</code>가 크다는 것입니다. 최악의 경우, 데이터를 자주 읽거나 쓰지 않는 이벤트 리스너를 처리하는 일부 스레드는 유용한 작업을 하지 않고 주기적으로 컨텍스트를 전환할 것입니다. 스케줄러가 이러한 스레드를 CPU에 디스패치(dispatch) 할 때마다 I/O 이벤트가 발생할 때까지 스레드는 차단되어 I/O 이벤트를 기다리는 데 소비되는 모든 시간이 낭비됩니다.</p>
+<p>위의 코드에서 <code>ss.accept()</code>는 클라이언트가 연결될 때까지 서버 스레드를 차단하는 블로킹 호출입니다. 서버 스레드는 <code>ss.accept()</code> 호출이 반환 될 때까지 이벤트 리스너를 위한 새로운 스레드의 <code>start()</code> 메서드를 호출 할 수 없습니다. 불필요한 컨텍스트 전환으로 인한 CPU 시간 낭비를 줄이기 위해 non-blocking I/O 개념이 탄생했습니다.</p>
+<p>**<code>Reactor Pattern</code>**은 이 문제를 해결하기 위한 <strong>이벤트 처리(event handling) 디자인 패턴</strong>입니다. 하나의 Reactor가 계속 이벤트를 찾고 이벤트가 발생(trigger)하면 해당 이벤트 처리기(event handler)에게 이를 알립니다.</p>
+<p>자바는 non-blocking 시스템을 설계하는 데 사용할 수 있는 **표준 API (java.nio)**를 제공합니다. 클라이언트가 서버로 이름(데이터)을 보내면 서버는 Hello 메시지로 응답하는 간단한 예제를 통해 Reactor 패턴에 대해서 알아보겠습니다.</p>
+<p>Reactor 패턴의 아키텍처에는 두 가지 중요한 참여자가 있습니다.</p>
+<ol>
+<li><strong><code>Reactor</code></strong>
+: Reactor는 별도의 스레드에서 실행되며 발생한 I/O 이벤트는 dispatching되어 해당 이벤트 처리기로 보내 처리합니다.</li>
+<li><strong><code>Handlers</code></strong>
+: Handler는 Reactor로부터 I/O 이벤트를 받아 실제 작업을 수행합니다.</li>
+</ol>
+<p>java.nio 패키지를 이용해서 Reactor 패턴을 구현할 것이기 때문에 nio 패키지에 속한 몇가지 class에 대한 이해가 필요합니다.</p>
+<ul>
+<li><strong><code>Channels</code></strong>
+: 소켓을 통해 non-blocking read를 할 수 있도록 지원하는 connection.</li>
+<li><strong><code>Buffers</code></strong>
+: 채널에 의해 직접 read되거나 write될 수 있는 배열과 같은 객체.</li>
+<li><strong><code>Selectors</code></strong>
+: Selector 는 어느 channel set 이 IO event 를 가지고 있는지를 알려준다. Selector.select() 는 I/O 이벤트가 발생한 채널 set을 return한다. return할 channel이 없다면 계속 기다리게(block) 된다. 이 block된 것을 바로 return 시켜주는 것이 Selector.wakeup()이다.
+Selector.selectedKeys()는 Selection Key 를 return 해 준다. Reactor는 이 Selection Key를 보고 어떤 handler로 넘겨줄 지를 결정한다.</li>
+<li><strong><code>Selection Keys</code></strong>
+: Selector와 Channel간의 관계를 표현해주는 객체이다. Selector가 제공한 Selection Key를 이용해 Reactor는 채널에서 발생하는 I/O 이벤트로 수행할 작업을 선택할 수 있다. ServerSocketChannel에 selector를 등록하면 key를 준다. 이 key가 SelectionKey 이다.</li>
+</ul>
+<p><img src="/images/post/2019-03-05/reactor_pattern_1.png" alt="Reactor pattern"></p>
+<p><strong>Selector는 계속해서 I/O 이벤트가 발생하기를 대기합니다. Reactor가 Selector.select() 메소드를 호출하면 Selector는 등록된 채널에 대해서 발생한 이벤트 정보가 들어있는 SelectionKey Set을 반환합니다.</strong> (SelectionKey는 해당 채널과 Selector와의 관계에 대한 모든 정보를 갖고 있습니다. 또한 Handler에 대한 정보도 갖고 있습니다.)</p>
+<p>Selector에 등록된 하나의 ServerSocketChannel이 있습니다. ServerSocketChannel은 클라이언트에서 들어오는 연결 요청으로부터 이벤트를 수신해야합니다. 클라이언트가 연결을 요청할 때, ServerSocketChhannel은 I/O 이벤트를 받아 클라이언트에 SocketChannel을 할당해야 합니다. SelectionKey0은 ServerSocketChannel을 가지고 무엇을 해야하는지에 대한 이벤트 정보를 갖고 있습니다. SocketChhannel을 만들기 위해서는 Reactor가 SelectionKey0의 이벤트를 Acceptor에 전달해 Acceptor가 클라이언트와의 연결 요청을 수락하고 SocketChannel을 만들도록 해야합니다.</p>
+<p>Acceptor가 클라이언트1의 연결을 수락하면 클라이언트1에 대한 SocketChannel이 생성됩니다. 이 SocketChannel역시 Selector에 등록되고 해당 채널에서 이벤트가 발생하면 해당 이벤트에 대한 정보를 포함한 SelectionKey1을 반환합니다. 이 SelectionKey1을 이용해서 해당 채널로부터 데이터를 읽고 쓸 수 있습니다. 따라서 SelectionKey1은 읽기와 쓰기를 처리하는 Handler1 객체에 바인딩 됩니다.</p>
+<p>이후로 Reactor가 Selector.selector()를 호출했을 때 반환된 SelectionKey Set에 SelectionKey1이 있으면 SocketChannel1이 이벤트와 함께 트리거됨을 의미합니다. 이제 SelectionKey1을 보면, Reactor는 Handler1이 SelectionKey1에 바인딩되어 있으므로 Handler1에 이벤트를 전달해야한다는 것을 알고 있습니다. 반환 된 SelectionKey Set에 SelectionKey0이 있으면 ServerSocketChannel이 다른 클라이언트에서 이벤트를 수신했으며 SelectionKey0을 보고 Reactor는 해당 이벤트를 다시 Acceptor에 전달해야 함을 알고 있습니다. 이벤트가 Acceptor에 전달되면 클라이언트2에 대해 SocketChannel2를 만들고 SelectionKey2로 Selector로 SocketChannel2를 등록합니다.</p>
+<p><img src="/images/post/2019-03-05/selection_key_table.png" alt="Selection Key table"></p>
+<p>따라서 이 시나리오에서는 3가지 유형의 이벤트에 관심이 있습니다.</p>
+<ol>
+<li>accept 해야하는 ServerSocketChannel에서 트리거되는 연결 요청 이벤트.</li>
+<li>클라이언트로 부터 송신된 데이터를 수신할 수 있을 때, SocketChannel로부터 트리거 되는 이벤트.</li>
+<li>서버에서 클라이언트로 데이터를 송신할 때, 송신할 수 있는 준비가 되면 SocketChannel로부터 트리거 되는 이벤트.</li>
+</ol>
+<p>그럼 스레드 풀은 이 작업과 어떤 관련이 있을까요? non-blocking 아키텍처의 장점은 클라이언트의 모든 요청을 처리하는 동시에 단일 스레드에서 실행되도록 서버를 작성할 수 있다는 것입니다. 서버를 설계하는 데 동시성 개념을 적용하지 않으면 이벤트에 대한 반응성이 떨어집니다. 단일 스레드일 때는 reactor가 이벤트를 handler에 전달해 처리될 때 까지는 다른 이벤트에 응답할 수 없기 때문입니다. 왜냐하면 하나의 스레드를 사용하여 모든 이벤트를 처리하기 때문입니다.</p>
+<p>위의 아키텍처에 동시성을 추가해서 시스템의 응답 속도를 향상시킬 수 있습니다. <strong>Reactor가 이벤트를 Handler에 전달하고 새로운 Thread에서 Handler를 이용해 이벤트를 처리하면 Reacgtor는 계속해서 다른 이벤트에 응답할 수 있습니다.</strong> 또한 스레드 풀을 이용하면 시스템의 스레드 수를 제한하면서 더 효율적으로 사용할 수 있을 것 입니다.</p>
+<h1 id="part-2">Part 2</h1>
+<p>간단한 Reactor 패턴의 예시를 살펴보겠습니다. 클라이언트는 서버로 이름을 넣은 메시지를 전송하고 서버는 클라이언트에 Hello 메시지로 응답합니다. 스레드 풀은 Part3에서 살펴보겠습니다.</p>
+<p>클라이언트는 java.nio를 사용하여 Socket을 생성하지 않고 java.net.Socket을 사용합니다.</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line">    String hostIp;</span><br><span class="line">    <span class="keyword">int</span> hostPort;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Client</span><span class="params">(String hostIp, <span class="keyword">int</span> hostPort)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.hostIp = hostIp;</span><br><span class="line">        <span class="keyword">this</span>.hostPort = hostPort;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">runClient</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        Socket clientSocket = <span class="keyword">null</span>;</span><br><span class="line">        PrintWriter out = <span class="keyword">null</span>;</span><br><span class="line">        BufferedReader in = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            clientSocket = <span class="keyword">new</span> Socket(hostIp, hostPort);</span><br><span class="line">            out = <span class="keyword">new</span> PrintWriter(clientSocket.getOutputStream(), <span class="keyword">true</span>);</span><br><span class="line">            in = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(clientSocket.getInputStream()));</span><br><span class="line">        &#125; <span class="keyword">catch</span> (UnknownHostException e) &#123;</span><br><span class="line">            System.err.println(<span class="string">"Unknown host: "</span> + hostIp);</span><br><span class="line">            System.exit(<span class="number">1</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            System.err.println(<span class="string">"Couldn't connect to: "</span> + hostIp);</span><br><span class="line">            System.exit(<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        BufferedReader stdIn = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(System.in));</span><br><span class="line">        String userInput;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"Client connected to host : "</span> + hostIp + <span class="string">" port: "</span> + hostPort);</span><br><span class="line">        System.out.println(<span class="string">"Type (\"Bye\" to quit)"</span>);</span><br><span class="line">        System.out.println(<span class="string">"Tell what your name is to the Server....."</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> ((userInput = stdIn.readLine()) != <span class="keyword">null</span>) &#123;</span><br><span class="line"></span><br><span class="line">            out.println(userInput);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// Break when client says Bye.</span></span><br><span class="line">            <span class="keyword">if</span> (userInput.equalsIgnoreCase(<span class="string">"Bye"</span>))</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">            System.out.println(<span class="string">"Server says: "</span> + in.readLine());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        out.close();</span><br><span class="line">        in.close();</span><br><span class="line">        stdIn.close();</span><br><span class="line">        clientSocket.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line"></span><br><span class="line">        Client client = <span class="keyword">new</span> Client(<span class="string">"127.0.0.1"</span>, <span class="number">9900</span>);</span><br><span class="line">        client.runClient();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>서버는 Reactor 패턴을 이용해 구현합니다.
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Reactor</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">final</span> Selector selector;</span><br><span class="line">    <span class="keyword">final</span> ServerSocketChannel serverSocketChannel;</span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">boolean</span> isWithThreadPool;</span><br><span class="line"></span><br><span class="line">    Reactor(<span class="keyword">int</span> port, <span class="keyword">boolean</span> isWithThreadPool) <span class="keyword">throws</span> IOException &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>.isWithThreadPool = isWithThreadPool;</span><br><span class="line">        selector = Selector.open();</span><br><span class="line">        serverSocketChannel = ServerSocketChannel.open();</span><br><span class="line">        serverSocketChannel.socket().bind(<span class="keyword">new</span> InetSocketAddress(port));</span><br><span class="line">        serverSocketChannel.configureBlocking(<span class="keyword">false</span>);</span><br><span class="line">        SelectionKey selectionKey0 = serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);</span><br><span class="line">        selectionKey0.attach(<span class="keyword">new</span> Acceptor());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Server listening to port: "</span> + serverSocketChannel.socket().getLocalPort());</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">while</span> (!Thread.interrupted()) &#123;</span><br><span class="line">                selector.select();</span><br><span class="line">                Set selected = selector.selectedKeys();</span><br><span class="line">                Iterator it = selected.iterator();</span><br><span class="line">                <span class="keyword">while</span> (it.hasNext()) &#123;</span><br><span class="line">                    dispatch((SelectionKey) (it.next()));</span><br><span class="line">                &#125;</span><br><span class="line">                selected.clear();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException ex) &#123;</span><br><span class="line">            ex.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dispatch</span><span class="params">(SelectionKey k)</span> </span>&#123;</span><br><span class="line">        Runnable r = (Runnable) (k.attachment());</span><br><span class="line">        <span class="keyword">if</span> (r != <span class="keyword">null</span>) &#123;</span><br><span class="line">            r.run();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Acceptor</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                SocketChannel socketChannel = serverSocketChannel.accept();</span><br><span class="line">                <span class="keyword">if</span> (socketChannel != <span class="keyword">null</span>) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (isWithThreadPool)</span><br><span class="line">                        <span class="keyword">new</span> HandlerWithThreadPool(selector, socketChannel);</span><br><span class="line">                    <span class="keyword">else</span></span><br><span class="line">                        <span class="keyword">new</span> Handler(selector, socketChannel);</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(<span class="string">"Connection Accepted by Reactor"</span>);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException ex) &#123;</span><br><span class="line">                ex.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Reactor는 Runnable을 구현하고 있으며, run() 메서드에서는 while 루프를 돌며 selector.select()를 호출하여 처리할 수 있는 이벤트 정보가 담긴 SelectionKey Set을 가져옵니다. SelectionKey에 바인드 되어있는 Handler를 가져와 dispatch합니다.</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Handler</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">final</span> SocketChannel socketChannel;</span><br><span class="line">    <span class="keyword">final</span> SelectionKey selectionKey;</span><br><span class="line">    ByteBuffer input = ByteBuffer.allocate(<span class="number">1024</span>);</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> READING = <span class="number">0</span>, SENDING = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> state = READING;</span><br><span class="line">    String clientName = <span class="string">""</span>;</span><br><span class="line"></span><br><span class="line">    Handler(Selector selector, SocketChannel c) <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        socketChannel = c;</span><br><span class="line">        c.configureBlocking(<span class="keyword">false</span>);</span><br><span class="line">        selectionKey = socketChannel.register(selector, <span class="number">0</span>);</span><br><span class="line">        selectionKey.attach(<span class="keyword">this</span>);</span><br><span class="line">        selectionKey.interestOps(SelectionKey.OP_READ);</span><br><span class="line">        selector.wakeup();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (state == READING) &#123;</span><br><span class="line">                read();</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (state == SENDING) &#123;</span><br><span class="line">                send();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException ex) &#123;</span><br><span class="line">            ex.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">read</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> readCount = socketChannel.read(input);</span><br><span class="line">        <span class="keyword">if</span> (readCount &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            readProcess(readCount);</span><br><span class="line">        &#125;</span><br><span class="line">        state = SENDING;</span><br><span class="line">        <span class="comment">// Interested in writing</span></span><br><span class="line">        selectionKey.interestOps(SelectionKey.OP_WRITE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Processing of the read message. This only prints the message to stdOut.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> readCount</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">readProcess</span><span class="params">(<span class="keyword">int</span> readCount)</span> </span>&#123;</span><br><span class="line">        StringBuilder sb = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">        input.flip();</span><br><span class="line">        <span class="keyword">byte</span>[] subStringBytes = <span class="keyword">new</span> <span class="keyword">byte</span>[readCount];</span><br><span class="line">        <span class="keyword">byte</span>[] array = input.array();</span><br><span class="line">        System.arraycopy(array, <span class="number">0</span>, subStringBytes, <span class="number">0</span>, readCount);</span><br><span class="line">        <span class="comment">// Assuming ASCII (bad assumption but simplifies the example)</span></span><br><span class="line">        sb.append(<span class="keyword">new</span> String(subStringBytes));</span><br><span class="line">        input.clear();</span><br><span class="line">        clientName = sb.toString().trim();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">send</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Saying hello to "</span> + clientName);</span><br><span class="line">        ByteBuffer output = ByteBuffer.wrap((<span class="string">"Hello "</span> + clientName + <span class="string">"\n"</span>).getBytes());</span><br><span class="line">        socketChannel.write(output);</span><br><span class="line">        selectionKey.interestOps(SelectionKey.OP_READ);</span><br><span class="line">        state = READING;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Handler에는 READING, SENDING 2가지 상태가 있습니다. 채널은 한 번에 하나의 작업만 지원하기 때문에 동시에 처리할 수 없습니다. Handler가 SelectionKey에 어떻게 attach 되는지와 관심있는 연산이 OP_READ로 설정되는 부분에 유의해야합니다. Selector는 Read 이벤트가 발생할 때만 SelectionKey를 select해야 합니다. READ 프로세스가 완료되면 Handler는 상태를 SENDING으로 변경하고 관심 대상 연산을 OP_WRITE로 변경합니다. 이제 Selector는 채널이 데이터를 전송할 준비가 되었을 때 SelectionKey를 select 합니다. Write 이벤트가 Handler에 dispatch될 때, 상태가 SENDING이므로 Hello 메시지를 출력 버퍼에 씁니다. 전송이 완료되면 관심있는 작업을 OP_READ로 다시 변경하면서 Handler의 상태가 READING으로 변경됩니다.</p>
+<p>결과적으로 서버는 단일 스레드에서 실행되지만 서버에 연결하는 클라이언트 수에 상관없이 응답합니다.</p>
+<h1 id="part-3">Part 3</h1>
+<p>이번 파트에서는 Handler의 스레드 풀에 대해서 설명합니다. HandlerWithThreadPool은 Handler 클래스의 확장 버전입니다.</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HandlerWithThreadPool</span> <span class="keyword">extends</span> <span class="title">Handler</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> ExecutorService pool = Executors.newFixedThreadPool(<span class="number">2</span>);</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> PROCESSING = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">HandlerWithThreadPool</span><span class="params">(Selector sel, SocketChannel c)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(sel, c);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">read</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> readCount = socketChannel.read(input);</span><br><span class="line">        <span class="keyword">if</span> (readCount &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            state = PROCESSING;</span><br><span class="line">            pool.execute(<span class="keyword">new</span> Processer(readCount));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// We are interested in writing back to the client soon after read processing is done.</span></span><br><span class="line">        selectionKey.interestOps(SelectionKey.OP_WRITE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Start processing in a new Processer Thread and Hand off to the reactor thread.</span></span><br><span class="line">    <span class="function"><span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">processAndHandOff</span><span class="params">(<span class="keyword">int</span> readCount)</span> </span>&#123;</span><br><span class="line">        readProcess(readCount);</span><br><span class="line">        <span class="comment">// Read processing done. Now the server is ready to send a message to the client.</span></span><br><span class="line">        state = SENDING;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Processer</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> readCount;</span><br><span class="line">        Processer(<span class="keyword">int</span> readCount) &#123;</span><br><span class="line">            <span class="keyword">this</span>.readCount =  readCount;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            processAndHandOff(readCount);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>PROCESSING이 새로 도입되었으며 read() 메서드가 override 되었습니다. 이제 Read 이벤트가 Handler에 dispatch되면 데이터를 읽지만 상태를 SENDING으로 변경하지는 않습니다. 메시지를 처리하고 스레드 풀의 다른 스레드에서 실행하고 관련 작업을 OP_WRITE로 설정하는 Processer를 생성합니다. 이 시점에서 채널에 Write 준비가 되어 있더라도 Handler는 아직 PROCESSING 상태이기 때문에 write하지 않습니다.</p>
+<h1 id="참고">참고</h1>
+<p><a href="http://i5on9i.blogspot.com/2013/11/reactor-pattern.html" rel="external nofollow noopener noreferrer" target="_blank">Reactor Pattern 에 대해 알아보자</a></p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2019/03/31/Java/java-async-1/" data-toggle="tooltip" data-placement="top" title="자바와 스프링의 비동기 기술">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2019/03/03/Java/java-nio/" data-toggle="tooltip" data-placement="top" title="Java NIO와 멀티플렉싱 기반의 다중 접속 서버">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <center>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</center>
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#part-1"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Part 1</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#part-2"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Part 2</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#part-3"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Part 3</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#참고"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">참고</span></a></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#nio" title="nio">nio</a>
+                        
+                          <a class="tag" href="/tags/#select" title="select">select</a>
+                        
+                          <a class="tag" href="/tags/#multiplexing" title="multiplexing">multiplexing</a>
+                        
+                          <a class="tag" href="/tags/#non-blocking io" title="non-blocking io">non-blocking io</a>
+                        
+                          <a class="tag" href="/tags/#reactor" title="reactor">reactor</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "https-jongmin92-github-io";
+    var disqus_identifier = "https://jongmin92.github.io/2019/03/05/Java/java-reactor-pattern/";
+    var disqus_url = "https://jongmin92.github.io/2019/03/05/Java/java-reactor-pattern/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'left',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: 0.6em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420" rel="external nofollow noopener noreferrer">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://github.com/jongmin92" rel="external nofollow noopener noreferrer">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; KimJongMin 2019 
+                    <br>
+                    Theme by <a href="http://huangxuan.me" rel="external nofollow noopener noreferrer" target="_blank">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org" rel="external nofollow noopener noreferrer" target="_blank">BeanTech</a> | 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px" src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true">
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://jongmin92.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-90389042-1';
+    var _gaDomain = 'auto';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async></script>
+<!-- Image to hack wechat -->
+<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0">
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

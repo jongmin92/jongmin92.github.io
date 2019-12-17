@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA">
+    <meta name="naver-site-verification" content="4468fb67994f2c880ea59d43b7f9a03be45d43d8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <link rel="shortcut icon" href="/images/etc/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          NVM (Node Version Manager) 사용하기 - 92Hz
+        
+    </title>
+
+    <link rel="canonical" href="https://jongmin92.github.io/2016/09/20/Node/nvm-(Node-Version-Manager)/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- For SEO -->
+    <link rel="canonical" href="https://jongmin92.github.io/2016/09/20/node/nvm-(node-version-manager)/">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            /* 기본 포스트 헤더 이미지 (페이지 이미지 || 기본 헤더 이미지) */
+            /* background-image: url('/images/post/bg/node.png') */
+            /* background-image: url('/images/etc/home.jpg') */
+            background-image: url('/images/post/bg/node.png')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header">
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#Node" title="Node">Node</a>
+                            
+                              <a class="tag" href="/tags/#NVM" title="NVM">NVM</a>
+                            
+                              <a class="tag" href="/tags/#Node Version" title="Node Version">Node Version</a>
+                            
+                        </div>
+                        <h1>NVM (Node Version Manager) 사용하기</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by KimJongMin on
+                            2016-09-20
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">92Hz</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <center>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</center>
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h2 id="index">Index</h2>
+<ol>
+<li><a href="#1">NVM (Node Version Manager)</a></li>
+<li><a href="#2">NVM 사용시 이점</a></li>
+<li><a href="#3">NVM 설치</a></li>
+<li><a href="#4">NVM 명령어</a></li>
+<li><a href="#5">모듈 설치</a></li>
+<li><a href="#6">기존에 설치되어 있던 Node 제거</a></li>
+</ol>
+<hr>
+<p>오늘은 NVM에 대해서 알아보겠습니다. 저는 회사에서 Ionic 을 통해서 하이브리드 앱을 개발하고 있습니다. Ionic의 개발환경은 기본적으로 Node.js를 필요로 합니다. 당시 처음 입사하였을때는 회사에서 사용중인 Node v4.4.0을 설치하여 사용하고 있었습니다. 그러나 후에 여러개의 프로젝트를 하며 ES6 문법을 사용하기 위해 상위 버전의 Node를 사용해야하 하는 일이 생겼습니다. 이런 경우 보통 Node를 제거한 후 상위 버전을 사용하게 된다면 후에 다시 Ionic 프로젝트를 할때 문제가 됩니다. 이럴때 NVM을 사용한다면 여러개의 Node 를 버전별로 쉽게 관리하고 사용할 수 있습니다. 지금부터 NVM을 사용했을때의 이점과 설치 및 사용방법에 대해 알아보겠습니다.</p>
+<p>&lt;span id='1'&gt;</p>
+<h2 id="nvm-node-version-manager">NVM (Node Version Manager)</h2>
+<p><a href="https://github.com/creationix/nvm" rel="external nofollow noopener noreferrer" target="_blank">NVM</a>은 말 그대로 Node의 버전을 관리해주는 매니저입니다. Ruby에는 RVM이 있듯이 Node에서는 NVM을 사용합니다. 한 사용자 계정에 여러개의 Node 버전을 설치하여 선택하여 사용할 수 있습니다.</p>
+<p>&lt;span id='2'&gt;</p>
+<h3 id="nvm-사용시-이점">NVM 사용시 이점</h3>
+<ul>
+<li>여러 버전의 Node를 쉽게 사용할 수 있습니다. (기존의 버전을 삭제할 필요가 없습니다.)</li>
+<li>NVM을 사용하지 않고 설치한 Node는 <code>/usr/local/bin/</code> 경로에 설치되지만 NVM을 사용하여 설치했을 경우에는 <code>/User/kimjongmin/.nvm/versions/node/</code> 경로에 설치됩니다. NVM을 사용했을 경우 사용자의 종속되어 설치되기 때문에 npm을 통하여 모듈을 설치할 때도 기존과는 달리 <code>-g</code> 옵션을 주지 않아도 설치 가능합니다. (npm또한 Node와 같이 설치되기 때문에 Node 버전마다 다르게 설치됩니다.)</li>
+<li>Node 버전에 따라 npm도 다르게 설치되기 때문에 모듈의 버전들도 각기 다르게 관리할 수 있습니다. 예를들어, Node v4.4.0 에서는 cordova v5.7.1을 Node v6.6.0 에서는 cordova v6.1.1을 설치하여 사용할 수 있습니다.</li>
+</ul>
+<p>&lt;span id='3'&gt;</p>
+<h3 id="nvm-설치">NVM 설치</h3>
+<p>NVM 설치전 기존에 설치되어 있던 Node를 제거하는것을 권장하지만 NVM 설치 후 제거하여도 괜찮습니다.</p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl을 이용하여 설치</span><br><span class="line">$ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.4/install.sh | bash</span><br></pre></td></tr></table></figure></p>
+<p>설치 후 PATH 정보는 <code>.bashrc</code>에 저장되므로 재로그인 없이 사용하려면 변경된 <code>.bashrc</code>를 다시 적용시켜주어야 합니다.
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure></p>
+<p>&lt;span id='4'&gt;</p>
+<h3 id="nvm-명령어">NVM 명령어</h3>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 현재 최신 버전의 Node 설치 (별도의 버전을 지정하지 않고 현재 최신 버전으로 설치합니다.)</span><br><span class="line">$ nvm install node</span><br><span class="line">$ node -v (버전확인)</span><br></pre></td></tr></table></figure></p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 설치된 Node 특정 버전 삭제하기</span><br><span class="line">$ nvm uninstall v4.4.0</span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">// 설치된 Node는 ~/.nvm/versions/ 경로에서 확인 가능합니다.</span><br><span class="line">$ <span class="built_in">which</span> node</span><br></pre></td></tr></table></figure></p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// NVM에서 지원하는 Node의 버전을 확인할 수 있습니다.</span><br><span class="line">$ nvm ls-remote</span><br></pre></td></tr></table></figure></p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 특정 Node 버전 설치는 다음과 같이 가능합니다.</span><br><span class="line">$ nvm install v4.4.0</span><br></pre></td></tr></table></figure></p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 설치되어 사용가능한 Node 버전 확인</span><br><span class="line">$ nvm ls</span><br></pre></td></tr></table></figure></p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 특정 Node 버전 사용</span><br><span class="line">$ nvm use v6.6.0</span><br></pre></td></tr></table></figure></p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 터미널 시작시 노드 기본버전 설정</span><br><span class="line">$ nvm <span class="built_in">alias</span> default v6.6.0</span><br></pre></td></tr></table></figure></p>
+<p><strong>Tip) 자주쓰는 명령어 alias 등록하기</strong>
+저는 NVM을 통해 Node v4.4.0과 v6.6.0을 설치하여 사용하고 있습니다. 프로젝트마다 Node 버전이 달라 프로젝트 변경시 Node의 버전도 변경해 주어야 하는 번거로움이 있어 <code>~.bash_custom</code>에 alias 로 등록하여 사용하고 있습니다. <code>(~.bashrc, ~.bash_profile )</code> 저는 다음과 같이 사용합니다. (파일에 추가 후 source 명령어로 변경된 파일을 적용하거나 새로운 쉘을 열어야 적용됩니다.)
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">alias</span> nv=<span class="string">'node -v'</span></span><br><span class="line"><span class="built_in">alias</span> n4=<span class="string">'nvm use v4.4.0'</span></span><br><span class="line"><span class="built_in">alias</span> n6=<span class="string">'nvm use v6.6.0'</span></span><br></pre></td></tr></table></figure></p>
+<p>&lt;span id='5'&gt;</p>
+<h3 id="모듈-설치">모듈 설치</h3>
+<p>NVM use 명령어를 통해 원하는 Node 버전을 선택 후 npm install 을 통해 필요한 모듈을 설치할 수 있습니다. 기존 사용법과 동일하나 NVM 은 <code>/User</code>에 설치되기 때문에 더이상 sudo 명령어를 사용하지 않아도 됩니다. 또한 하나의 Node 버전에서 필요한 모듈을 설치 후 새로운 Node 버전을 생성할 때 특정 버전 npm 패키지를 마이그레이션 할 수 있습니다.
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nvm install v6.6.0 --reinstall-packages-from=4.4.0</span><br></pre></td></tr></table></figure></p>
+<p>&lt;span id='6'&gt;</p>
+<h3 id="기존에-설치되어-있던-node-제거">기존에 설치되어 있던 Node 제거</h3>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo rm -rf /usr/<span class="built_in">local</span>/lib/node /usr/<span class="built_in">local</span>/lib/node_modules /var/db/receipts/org.nodejs.*</span><br></pre></td></tr></table></figure></p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2016/09/29/AWS/qvic_aws_architecture/" data-toggle="tooltip" data-placement="top" title="Qvic 서비스 아키텍처 설계">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2016/09/20/Linux & Ubuntu/add_user/" data-toggle="tooltip" data-placement="top" title="Linux & Ubuntu 계정 추가 & 설정">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <center>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</center>
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#Node" title="Node">Node</a>
+                        
+                          <a class="tag" href="/tags/#NVM" title="NVM">NVM</a>
+                        
+                          <a class="tag" href="/tags/#Node Version" title="Node Version">Node Version</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "https-jongmin92-github-io";
+    var disqus_identifier = "https://jongmin92.github.io/2016/09/20/Node/nvm-(Node-Version-Manager)/";
+    var disqus_url = "https://jongmin92.github.io/2016/09/20/Node/nvm-(Node-Version-Manager)/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'left',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: 0.6em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420" rel="external nofollow noopener noreferrer">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://github.com/jongmin92" rel="external nofollow noopener noreferrer">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; KimJongMin 2019 
+                    <br>
+                    Theme by <a href="http://huangxuan.me" rel="external nofollow noopener noreferrer" target="_blank">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org" rel="external nofollow noopener noreferrer" target="_blank">BeanTech</a> | 
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px" src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true">
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://jongmin92.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-90389042-1';
+    var _gaDomain = 'auto';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async></script>
+<!-- Image to hack wechat -->
+<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0">
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
