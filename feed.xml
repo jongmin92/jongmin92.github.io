@@ -137,9 +137,9 @@ Spring Boot를 사용하고 있는 애플리케이션에서 &lt;a href=&quot;htt
     
       <category term="Spring Boot" scheme="https://jongmin92.github.io/tags/Spring-Boot/"/>
     
-      <category term="Actuator" scheme="https://jongmin92.github.io/tags/Actuator/"/>
-    
       <category term="Micrometer" scheme="https://jongmin92.github.io/tags/Micrometer/"/>
+    
+      <category term="Actuator" scheme="https://jongmin92.github.io/tags/Actuator/"/>
     
       <category term="Prometheus" scheme="https://jongmin92.github.io/tags/Prometheus/"/>
     
@@ -585,13 +585,13 @@ Spring Boot를 사용하고 있는 애플리케이션에서 &lt;a href=&quot;htt
     
       <category term="Async" scheme="https://jongmin92.github.io/tags/Async/"/>
     
-      <category term="DeferredResult" scheme="https://jongmin92.github.io/tags/DeferredResult/"/>
-    
       <category term="RestTemplate" scheme="https://jongmin92.github.io/tags/RestTemplate/"/>
     
       <category term="AsyncRestTemplate" scheme="https://jongmin92.github.io/tags/AsyncRestTemplate/"/>
     
       <category term="Netty" scheme="https://jongmin92.github.io/tags/Netty/"/>
+    
+      <category term="DeferredResult" scheme="https://jongmin92.github.io/tags/DeferredResult/"/>
     
   </entry>
   
@@ -622,6 +622,8 @@ Spring Boot를 사용하고 있는 애플리케이션에서 &lt;a href=&quot;htt
     
       <category term="Async" scheme="https://jongmin92.github.io/tags/Async/"/>
     
+      <category term="DeferredResult" scheme="https://jongmin92.github.io/tags/DeferredResult/"/>
+    
       <category term="ExecutorService" scheme="https://jongmin92.github.io/tags/ExecutorService/"/>
     
       <category term="Future" scheme="https://jongmin92.github.io/tags/Future/"/>
@@ -629,8 +631,6 @@ Spring Boot를 사용하고 있는 애플리케이션에서 &lt;a href=&quot;htt
       <category term="FutureTask" scheme="https://jongmin92.github.io/tags/FutureTask/"/>
     
       <category term="ListenableFuture" scheme="https://jongmin92.github.io/tags/ListenableFuture/"/>
-    
-      <category term="DeferredResult" scheme="https://jongmin92.github.io/tags/DeferredResult/"/>
     
       <category term="ResponseBodyEmitter" scheme="https://jongmin92.github.io/tags/ResponseBodyEmitter/"/>
     
@@ -661,11 +661,11 @@ Spring Boot를 사용하고 있는 애플리케이션에서 &lt;a href=&quot;htt
       <category term="Java" scheme="https://jongmin92.github.io/categories/Programming/Java/"/>
     
     
-      <category term="nio" scheme="https://jongmin92.github.io/tags/nio/"/>
-    
       <category term="select" scheme="https://jongmin92.github.io/tags/select/"/>
     
       <category term="multiplexing" scheme="https://jongmin92.github.io/tags/multiplexing/"/>
+    
+      <category term="nio" scheme="https://jongmin92.github.io/tags/nio/"/>
     
       <category term="non-blocking io" scheme="https://jongmin92.github.io/tags/non-blocking-io/"/>
     

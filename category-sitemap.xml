@@ -21,6 +21,13 @@
     </url>
 
     <url>
+        <loc>https://jongmin92.github.io/categories/Project/</loc>
+        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://jongmin92.github.io/categories/Programming/AWS/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -28,7 +35,7 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/categories/Project/</loc>
+        <loc>https://jongmin92.github.io/categories/Programming/JavaScript/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -43,13 +50,6 @@
 
     <url>
         <loc>https://jongmin92.github.io/categories/Project/Emily/</loc>
-        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/categories/Programming/JavaScript/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
