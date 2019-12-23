@@ -136,13 +136,6 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/tags/">Tags</a>
                         </li>
                         
@@ -151,6 +144,13 @@
                         
                         <li>
                             <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -221,6 +221,42 @@
 
 <div class="post-preview">
 
+    <a href="/2019/05/21/Spring/spring-bean-life-cycle/">
+        <h2 class="post-title">
+            Spring Bean LifeCycle
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            최근 사내에서 Kafka 관련된 설정을 리팩토링하는 작업을 했습니다. SpringBoot를 도입하며 Kafka 설정 관련된 부분들을 SpringBoot의 @ConfigurationProperties를 이용하도록 변경하고, XML 기반의 빈 생성 부분을 Java Config 기반으로 변경했습니다.현재 프로젝트에서는 여러가지 이유로 기존의 Kafka Pr......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by KimJongMin on
+            2019-05-21
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Spring" title="Spring">Spring</a>
+            
+              <a href="/tags/#Bean" title="Bean">Bean</a>
+            
+              <a href="/tags/#Closeable" title="Closeable">Closeable</a>
+            
+              <a href="/tags/#AutoClosable" title="AutoClosable">AutoClosable</a>
+            
+              <a href="/tags/#DisposableBeanAdapter" title="DisposableBeanAdapter">DisposableBeanAdapter</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2019/05/18/Etc/open-source-experience/">
         <h2 class="post-title">
             오픈소스 컷 컨트리뷰트 경험기
@@ -230,8 +266,7 @@
         </h3>
         <div class="post-content-preview">
             얼마 전 개발자 생에 처음으로 오픈소스에 컨트리뷰트를 하는 경험을 하였습니다. 이번 포스팅에서는 오픈소스 첫 컨트리뷰트 관련해 이야기 해보려 합니다.
-어떻게 시작하게 되었는가?
-개발자라면 한 번쯤 오픈소스에 기여하고 컨트리뷰터가 되어보고 싶다는 생각을 가져봅니다. 저 역시 언젠가 한 번쯤... 이라는 생각은 오래 전 부터 갖고 있었지만 막상 실행에 옮......
+어떻게 시작하게 되었는가?개발자라면 한 번쯤 오픈소스에 기여하고 컨트리뷰터가 되어보고 싶다는 생각을 가져봅니다. 저 역시 언젠가 한 번쯤… 이라는 생각은 오래 전 부터 갖고 있었지만 막상 실행에 옮기기 ......
         </div>
     </a>
     
@@ -293,8 +328,8 @@ api......
         </토비의></h3>
         <div class="post-content-preview">
             해당 포스팅은 토비님의 토비의 봄 TV 11회 스프링 리액티브 프로그래밍 (7) CompletableFuture 라이브 코딩을 보며 따라했던 실습 내용을 바탕으로 정리한 글입니다.
-실습 코드들은 IntelliJ를 이용해 SpringBoot 2.1.3.RELEASE 버전 기반으로 프로젝트를 생성 후(web, lombok 포함) 진행했습니다.
-이번에는 자......
+실습 코드들은 IntelliJ를 이용해 SpringBoot 2.1.3.RELEASE 버전 기반으로 프로젝트를 생성 후(web, lombok 포함) 진행했습니다. 
+ 이번에는......
         </div>
     </a>
     
@@ -326,8 +361,7 @@ api......
             
         </h3>
         <div class="post-content-preview">
-            @Bean Methods in @Configuration Classes
-일반적으로 @Bean 어노테이션은 @Configuration 어노테이션이 사용된 클래스 내의 메서드에 선언이 됩니다. 이 경우 @Bean 어노테이션을 사용하는 메서드는 같은 클래스의 다른 @Bean 메소드를 직접 호출하여 참조할 수 있습니다. 이렇게하면 bean 간의 참조(refe......
+            @Bean Methods in @Configuration Classes일반적으로 @Bean 어노테이션은 @Configuration 어노테이션이 사용된 클래스 내의 메서드에 선언이 됩니다. 이 경우 @Bean 어노테이션을 사용하는 메서드는 같은 클래스의 다른 @Bean 메소드를 직접 호출하여 참조할 수 있습니다. 이렇게하면 bean 간의 참조(refer......
         </div>
     </a>
     
@@ -377,45 +411,6 @@ api......
               <a href="/tags/#Java" title="Java">Java</a>
             
               <a href="/tags/#Async" title="Async">Async</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2019/04/13/Java/java-async-2/">
-        <h2 class="post-title">
-            비동기 RestTemplate과 비동기 MVC/Serlvet
-        </h2>
-        <h3 class="post-subtitle">
-            <토비의 봄="" tv="" 9회="" 스프링="" 리액티브="" 프로그래밍="" (5)="" 비동기="" resttemplate과="" mvc="" serlvet=""> 정리
-        </토비의></h3>
-        <div class="post-content-preview">
-            해당 포스팅은 토비님의 토비의 봄 TV 9회 스프링 리액티브 프로그래밍 (5) 비동기 RestTemplate과 비동기 MVC/Serlvet 라이브 코딩을 보며 따라했던 실습 내용을 바탕으로 정리한 글입니다.
-실습 코드들은 IntelliJ를 이용해 SpringBoot 2.1.3.RELEASE 버전 기반으로 프로젝트를 생성 후(web, lombok 포함)......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by KimJongMin on
-            2019-04-13
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Java" title="Java">Java</a>
-            
-              <a href="/tags/#Async" title="Async">Async</a>
-            
-              <a href="/tags/#RestTemplate" title="RestTemplate">RestTemplate</a>
-            
-              <a href="/tags/#AsyncRestTemplate" title="AsyncRestTemplate">AsyncRestTemplate</a>
-            
-              <a href="/tags/#Netty" title="Netty">Netty</a>
-            
-              <a href="/tags/#DeferredResult" title="DeferredResult">DeferredResult</a>
             
         </div>
     
@@ -509,7 +504,7 @@ api......
 
     <h5>categories
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><span class="category-list-count">14</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/BOJ/">BOJ</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Concept/">Concept</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Book/">Book</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Database/">Database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/">Programming</a><span class="category-list-count">92</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/AWS/">AWS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Gradle/">Gradle</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/HTML/">HTML</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Java/">Java</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/JavaScript/">JavaScript</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Linux-Ubuntu/">Linux & Ubuntu</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Node/">Node</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/RaspberryPi/">RaspberryPi</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/React-Native/">React Native</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Spring/">Spring</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Tool/">Tool</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project/">Project</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project/Emily/">Emily</a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tip/">Tip</a><span class="category-list-count">3</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a><span class="category-list-count">14</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/BOJ/">BOJ</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/Concept/">Concept</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Book/">Book</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Database/">Database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/">Programming</a><span class="category-list-count">93</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/AWS/">AWS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Gradle/">Gradle</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/HTML/">HTML</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Java/">Java</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/JavaScript/">JavaScript</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Linux-Ubuntu/">Linux & Ubuntu</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Node/">Node</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/RaspberryPi/">RaspberryPi</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/React-Native/">React Native</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Spring/">Spring</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/Tool/">Tool</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project/">Project</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project/Emily/">Emily</a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tip/">Tip</a><span class="category-list-count">3</span></li></ul>
     </div>
 
 </h5>
@@ -523,11 +518,7 @@ api......
     <div class="tags">
         
             
-            <a href="/tags/#book" title="book" rel="4">book</a>
-            
-        
-            
-            <a href="/tags/#RaspberryPi" title="RaspberryPi" rel="9">RaspberryPi</a>
+            <a href="/tags/#AWS" title="AWS" rel="4">AWS</a>
             
         
             
@@ -547,17 +538,17 @@ api......
             
         
             
+            <a href="/tags/#book" title="book" rel="4">book</a>
+            
+        
+            
             <a href="/tags/#review" title="review" rel="3">review</a>
             
         
             
         
             
-            <a href="/tags/#AWS" title="AWS" rel="4">AWS</a>
-            
-        
-            
-        
+            <a href="/tags/#RaspberryPi" title="RaspberryPi" rel="9">RaspberryPi</a>
             
         
             
@@ -572,6 +563,14 @@ api......
         
             
             <a href="/tags/#bot" title="bot" rel="6">bot</a>
+            
+        
+            
+        
+            
+        
+            
+        
             
         
             
@@ -591,39 +590,7 @@ api......
             
         
             
-        
-            
-        
-            
-            <a href="/tags/#TIL" title="TIL" rel="14">TIL</a>
-            
-        
-            
-            <a href="/tags/#JavaScript" title="JavaScript" rel="14">JavaScript</a>
-            
-        
-            
-            <a href="/tags/#JavaScript 완벽가이드" title="JavaScript 완벽가이드" rel="10">JavaScript 완벽가이드</a>
-            
-        
-            
             <a href="/tags/#Gradle" title="Gradle" rel="2">Gradle</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
             
         
             
@@ -649,7 +616,21 @@ api......
             
         
             
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#SHA256" title="SHA256" rel="2">SHA256</a>
+            
+        
+            
             <a href="/tags/#Async" title="Async" rel="4">Async</a>
+            
+        
             
         
             
@@ -675,27 +656,11 @@ api......
             
         
             
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
+            <a href="/tags/#nio" title="nio" rel="2">nio</a>
             
         
             
             <a href="/tags/#select" title="select" rel="3">select</a>
-            
-        
-            
-        
             
         
             
@@ -707,7 +672,15 @@ api......
             
         
             
-            <a href="/tags/#nio" title="nio" rel="2">nio</a>
+        
+            
+        
+            
+        
+            
+        
+            
+        
             
         
             
@@ -737,11 +710,41 @@ api......
             
         
             
+            <a href="/tags/#TIL" title="TIL" rel="14">TIL</a>
+            
+        
+            
+            <a href="/tags/#JavaScript" title="JavaScript" rel="14">JavaScript</a>
+            
+        
+            
+            <a href="/tags/#JavaScript 완벽가이드" title="JavaScript 완벽가이드" rel="10">JavaScript 완벽가이드</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
             <a href="/tags/#Node" title="Node" rel="5">Node</a>
             
         
             
             <a href="/tags/#Module" title="Module" rel="2">Module</a>
+            
+        
+            
+        
             
         
             
@@ -757,7 +760,65 @@ api......
             
         
             
+        
+            
+            <a href="/tags/#Retrofit2" title="Retrofit2" rel="2">Retrofit2</a>
+            
+        
+            
+            <a href="/tags/#OkHttp3" title="OkHttp3" rel="2">OkHttp3</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#React Native" title="React Native" rel="4">React Native</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
             <a href="/tags/#Jasper" title="Jasper" rel="2">Jasper</a>
+            
+        
+            
+        
+            
+        
             
         
             
@@ -801,43 +862,11 @@ api......
             
         
             
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
             <a href="/tags/#Chrome" title="Chrome" rel="2">Chrome</a>
             
         
             
             <a href="/tags/#Chrome Extension" title="Chrome Extension" rel="2">Chrome Extension</a>
-            
-        
-            
-        
-            
-            <a href="/tags/#IntelliJ" title="IntelliJ" rel="2">IntelliJ</a>
-            
-        
-            
-        
-            
-            <a href="/tags/#React Native" title="React Native" rel="4">React Native</a>
-            
-        
-            
-        
             
         
             
@@ -851,15 +880,11 @@ api......
             
         
             
-            <a href="/tags/#Micrometer" title="Micrometer" rel="2">Micrometer</a>
-            
-        
-            
             <a href="/tags/#Bean Validation" title="Bean Validation" rel="2">Bean Validation</a>
             
         
             
-        
+            <a href="/tags/#IntelliJ" title="IntelliJ" rel="2">IntelliJ</a>
             
         
             
@@ -867,7 +892,7 @@ api......
             
         
             
-        
+            <a href="/tags/#Micrometer" title="Micrometer" rel="2">Micrometer</a>
             
         
             
@@ -885,17 +910,19 @@ api......
             
         
             
-        
-            
-            <a href="/tags/#Toby" title="Toby" rel="7">Toby</a>
-            
-        
-            
             <a href="/tags/#IoC" title="IoC" rel="2">IoC</a>
             
         
             
             <a href="/tags/#DI" title="DI" rel="2">DI</a>
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Toby" title="Toby" rel="7">Toby</a>
             
         
             
@@ -925,11 +952,11 @@ api......
             
         
             
-            <a href="/tags/#jenkins" title="jenkins" rel="2">jenkins</a>
+        
             
         
             
-            <a href="/tags/#ci &amp; cd" title="ci &amp; cd" rel="2">ci &amp; cd</a>
+        
             
         
             
@@ -947,39 +974,11 @@ api......
             
         
             
-        
+            <a href="/tags/#jenkins" title="jenkins" rel="2">jenkins</a>
             
         
             
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-            <a href="/tags/#Retrofit2" title="Retrofit2" rel="2">Retrofit2</a>
-            
-        
-            
-            <a href="/tags/#OkHttp3" title="OkHttp3" rel="2">OkHttp3</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
+            <a href="/tags/#ci &amp; cd" title="ci &amp; cd" rel="2">ci &amp; cd</a>
             
         
             
@@ -1001,11 +1000,11 @@ api......
             
         
             
-        
-            
-        
-            
             <a href="/tags/#Heap sort" title="Heap sort" rel="3">Heap sort</a>
+            
+        
+            
+        
             
         
             

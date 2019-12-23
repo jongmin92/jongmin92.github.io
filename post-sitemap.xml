@@ -7,8 +7,48 @@
     </url>
 
     <url>
+        <loc>https://jongmin92.github.io/2019/12/23/Programming/hmac/</loc>
+        <lastmod>2019-12-23T14:33:37.471Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://jongmin92.github.io/2019/12/18/Java/hash/</loc>
-        <lastmod>2019-12-17T17:03:23.212Z</lastmod>
+        <lastmod>2019-12-18T14:37:34.881Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/2017/08/08/Book/raspberry-cookbook/</loc>
+        <lastmod>2019-12-18T14:31:05.844Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/2018/08/05/Book/effective_java_2e_review/</loc>
+        <lastmod>2019-12-18T14:30:02.797Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/2018/08/18/Book/servlet_container_review/</loc>
+        <lastmod>2019-12-18T14:29:47.178Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/2019/02/10/Programming/object_oriented_facts_and_misunderstandings/</loc>
+        <lastmod>2019-12-18T14:29:01.037Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -207,14 +247,6 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/2019/02/10/Programming/object_oriented_facts_and_misunderstandings/</loc>
-        <lastmod>2019-02-10T12:32:41.034Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>https://jongmin92.github.io/2018/08/18/Java/design-pattern-iterator/</loc>
         <lastmod>2018-08-20T13:30:27.330Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -225,30 +257,6 @@
     <url>
         <loc>https://jongmin92.github.io/2018/08/20/Java/design-pattern-adapter/</loc>
         <lastmod>2018-08-20T13:30:12.885Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/2018/08/18/Book/servlet_container_review/</loc>
-        <lastmod>2018-08-18T04:19:07.827Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/2018/08/05/Book/effective_java_2e_review/</loc>
-        <lastmod>2018-08-18T04:02:57.595Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/2017/08/08/Book/raspberry-cookbook/</loc>
-        <lastmod>2018-08-18T04:02:51.155Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -447,31 +455,15 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/2017/10/02/Algorithm/boj-11054/</loc>
-        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/2017/10/12/Algorithm/boj-12100/</loc>
-        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/2017/09/29/Algorithm/boj-14501/</loc>
-        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>https://jongmin92.github.io/2016/09/29/AWS/qvic_aws_architecture/</loc>
+        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/2017/10/02/Algorithm/boj-11054/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -487,7 +479,7 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/2017/10/01/Algorithm/boj-5014/</loc>
+        <loc>https://jongmin92.github.io/2017/10/12/Algorithm/boj-12100/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -503,7 +495,7 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/2017/12/14/Etc/prepare-for-employment/</loc>
+        <loc>https://jongmin92.github.io/2017/10/01/Algorithm/boj-5014/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -511,7 +503,7 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/2017/03/10/Emily/1-start-emily/</loc>
+        <loc>https://jongmin92.github.io/2017/09/29/Algorithm/boj-14501/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -527,23 +519,7 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/2017/07/17/Emily/6-aws-s3-static-web-hosting/</loc>
-        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/2017/05/28/Emily/5-aws-lambda/</loc>
-        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/2017/05/26/Emily/4-crawling/</loc>
+        <loc>https://jongmin92.github.io/2017/03/10/Emily/1-start-emily/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -559,7 +535,31 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/2017/01/26/JavaScript/complete-guide-to-javascript-chapter-2/</loc>
+        <loc>https://jongmin92.github.io/2017/05/26/Emily/4-crawling/</loc>
+        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/2017/05/28/Emily/5-aws-lambda/</loc>
+        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/2017/07/17/Emily/6-aws-s3-static-web-hosting/</loc>
+        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/2017/12/14/Etc/prepare-for-employment/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -575,111 +575,7 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/2017/06/18/JavaScript/class/</loc>
-        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/2017/01/26/JavaScript/complete-guide-to-javascript-chapter-1/</loc>
-        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/2017/01/30/JavaScript/complete-guide-to-javascript-chapter-10/</loc>
-        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/2017/06/06/JavaScript/client-side-rendering-vs-server-side-rendering/</loc>
-        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/2017/01/26/JavaScript/complete-guide-to-javascript-chapter-3/</loc>
-        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/2017/01/27/JavaScript/complete-guide-to-javascript-chapter-4/</loc>
-        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/2017/01/27/JavaScript/complete-guide-to-javascript-chapter-5/</loc>
-        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/2017/01/28/JavaScript/complete-guide-to-javascript-chapter-6/</loc>
-        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/2017/06/10/JavaScript/promise/</loc>
-        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/2017/06/14/JavaScript/memoization/</loc>
-        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/2017/01/30/JavaScript/complete-guide-to-javascript-chapter-9/</loc>
-        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/2017/03/14/JavaScript/understand-prototype/</loc>
-        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/2017/01/30/JavaScript/complete-guide-to-javascript-chapter-8/</loc>
-        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/2017/01/28/JavaScript/complete-guide-to-javascript-chapter-7/</loc>
+        <loc>https://jongmin92.github.io/2016/09/20/Linux%20&%20Ubuntu/add_user/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -688,14 +584,6 @@
 
     <url>
         <loc>https://jongmin92.github.io/2016/12/13/Linux%20&%20Ubuntu/bashrc-bash_profile/</loc>
-        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/2016/09/20/Linux%20&%20Ubuntu/add_user/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -719,31 +607,119 @@
     </url>
 
     <url>
+        <loc>https://jongmin92.github.io/2017/01/26/JavaScript/complete-guide-to-javascript-chapter-1/</loc>
+        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/2017/06/06/JavaScript/client-side-rendering-vs-server-side-rendering/</loc>
+        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/2017/01/30/JavaScript/complete-guide-to-javascript-chapter-10/</loc>
+        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/2017/06/18/JavaScript/class/</loc>
+        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/2017/01/26/JavaScript/complete-guide-to-javascript-chapter-2/</loc>
+        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/2017/01/27/JavaScript/complete-guide-to-javascript-chapter-4/</loc>
+        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/2017/01/27/JavaScript/complete-guide-to-javascript-chapter-5/</loc>
+        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/2017/01/28/JavaScript/complete-guide-to-javascript-chapter-7/</loc>
+        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/2017/01/28/JavaScript/complete-guide-to-javascript-chapter-6/</loc>
+        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/2017/06/14/JavaScript/memoization/</loc>
+        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/2017/01/30/JavaScript/complete-guide-to-javascript-chapter-9/</loc>
+        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/2017/01/30/JavaScript/complete-guide-to-javascript-chapter-8/</loc>
+        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/2017/06/10/JavaScript/promise/</loc>
+        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/2017/01/26/JavaScript/complete-guide-to-javascript-chapter-3/</loc>
+        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://jongmin92.github.io/2016/08/25/Node/module-exports_exports/</loc>
-        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/2017/08/11/Node/check-in-app-billing-purchase-validation/</loc>
-        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/2017/07/06/RaspberryPi/0-Intro/</loc>
-        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/2017/07/13/Node/require/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -759,7 +735,7 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/2017/07/09/RaspberryPi/2-unix-linux/</loc>
+        <loc>https://jongmin92.github.io/2017/08/11/Node/check-in-app-billing-purchase-validation/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -767,7 +743,39 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/2017/07/10/RaspberryPi/5-gpio_led_breadboard/</loc>
+        <loc>https://jongmin92.github.io/2017/03/14/JavaScript/understand-prototype/</loc>
+        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/2017/07/13/Node/require/</loc>
+        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/2018/01/31/Programming/android-customize-network-timeouts/</loc>
+        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/2017/08/01/Programming/5th-uniton/</loc>
+        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/2018/01/20/Programming/android-naver-login/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -776,70 +784,6 @@
 
     <url>
         <loc>https://jongmin92.github.io/2017/04/08/Node/sequelize/</loc>
-        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/2017/07/07/RaspberryPi/1-os-install/</loc>
-        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/2017/07/10/RaspberryPi/3-user-management/</loc>
-        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/2017/07/10/RaspberryPi/7-jasper/</loc>
-        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/2017/07/10/RaspberryPi/6-extra-gpio/</loc>
-        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/2017/07/10/RaspberryPi/4-bash_vim_gist/</loc>
-        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/2017/07/18/Tip/google-translator/</loc>
-        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/2017/07/13/Tip/change-visited-link-color/</loc>
-        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/2017/02/10/ReactNative/useful-post-collection/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -863,6 +807,86 @@
     </url>
 
     <url>
+        <loc>https://jongmin92.github.io/2018/01/29/Programming/android-retrofit2-okhttp3/</loc>
+        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/2017/07/06/RaspberryPi/0-Intro/</loc>
+        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/2017/02/10/ReactNative/useful-post-collection/</loc>
+        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/2017/07/07/RaspberryPi/1-os-install/</loc>
+        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/2017/07/09/RaspberryPi/2-unix-linux/</loc>
+        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/2017/07/10/RaspberryPi/3-user-management/</loc>
+        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/2017/07/10/RaspberryPi/5-gpio_led_breadboard/</loc>
+        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/2017/07/10/RaspberryPi/4-bash_vim_gist/</loc>
+        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/2017/07/10/RaspberryPi/6-extra-gpio/</loc>
+        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/2017/07/10/RaspberryPi/7-jasper/</loc>
+        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://jongmin92.github.io/2017/02/12/ReactNative/redux-for-starter/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -871,7 +895,7 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/2017/08/01/Programming/5th-uniton/</loc>
+        <loc>https://jongmin92.github.io/2017/07/13/Tip/change-visited-link-color/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -879,23 +903,7 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/2018/01/31/Programming/android-customize-network-timeouts/</loc>
-        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/2018/01/20/Programming/android-naver-login/</loc>
-        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/2018/01/29/Programming/android-retrofit2-okhttp3/</loc>
+        <loc>https://jongmin92.github.io/2017/07/18/Tip/google-translator/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -911,7 +919,7 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/2017/10/23/Algorithm/Concept/binary-search/</loc>
+        <loc>https://jongmin92.github.io/2017/11/19/Algorithm/Concept/heap-sort-1/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -919,7 +927,7 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/2017/11/06/Algorithm/Concept/merge-sort/</loc>
+        <loc>https://jongmin92.github.io/2017/10/23/Algorithm/Concept/binary-search/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -935,14 +943,6 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/2017/11/07/Algorithm/Concept/quick-sort/</loc>
-        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>https://jongmin92.github.io/2017/11/05/Algorithm/Concept/prime/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -951,7 +951,7 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/2017/11/20/Algorithm/Concept/priority-queue/</loc>
+        <loc>https://jongmin92.github.io/2017/11/06/Algorithm/Concept/merge-sort/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -959,7 +959,15 @@
     </url>
 
     <url>
-        <loc>https://jongmin92.github.io/2017/11/19/Algorithm/Concept/heap-sort-1/</loc>
+        <loc>https://jongmin92.github.io/2017/11/07/Algorithm/Concept/quick-sort/</loc>
+        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/2017/11/20/Algorithm/Concept/priority-queue/</loc>
         <lastmod>2018-02-05T01:06:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>

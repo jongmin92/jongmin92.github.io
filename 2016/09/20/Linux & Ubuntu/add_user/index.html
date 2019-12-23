@@ -151,13 +151,6 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/tags/">Tags</a>
                         </li>
                         
@@ -166,6 +159,13 @@
                         
                         <li>
                             <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -235,35 +235,18 @@
 <p>그러나 최초 EC2 인스턴스를 생성하며 만들었던 key pair를 모든 사용자가 공유한다던가, password 기반의 로그인을 활성화 하여 ssh key를 사용하지 않고 password 기반으로 로그인을 할 수도 있습니다.</p>
 <p>이번 포스팅에서는 <strong>(1) 사용자를 시스템에 추가</strong>한 후 <strong>(2-1) EC2 인스턴스를 생성하며 사용했던 key pair(기본 사용자 로그인시 사용하는 key pair)를 사용하거나, (2-2) password 기반의 로그인을 활성화하여 ssh key를 사용하지않고 로그인</strong>할 수 있도록하는 방법에 대해 정리합니다.</p>
 <hr>
-<h4 id="1-root-password-설정">1. root password 설정</h4>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ubuntu ~] $ sudo passwd root</span><br></pre></td></tr></table></figure></p>
-<h4 id="2-password-기반의-로그인을-활성화하기">2. password 기반의 로그인을 활성화하기</h4>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ubuntu ~] $ sudo vi /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure></p>
-<p>다음을 수정합니다. no를 yes로 변경합니다.
-# Change to no to disable tunnelled clear text passwords
-<code>PasswordAuthentication no</code></p>
-<h4 id="3-root-계정으로-로그인">3. root 계정으로 로그인</h4>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ubuntu ~] $ su - root</span><br></pre></td></tr></table></figure></p>
-<h4 id="4-다른-사용자-계정-추가">4. 다른 사용자 계정 추가</h4>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root ~] $ adduser newuser</span><br></pre></td></tr></table></figure></p>
-<h4 id="5-새로-생성한-사용자-계정의-비밀번호-변경">5. 새로 생성한 사용자 계정의 비밀번호 변경</h4>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root ~] $ sudo passwd newuser</span><br></pre></td></tr></table></figure></p>
-<h4 id="6-새로-생성한-사용자-계정에-root-권한을-사용할-수-있도록-설정">6. 새로 생성한 사용자 계정에 root 권한을 사용할 수 있도록 설정</h4>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root ~] $ sudo visudo</span><br></pre></td></tr></table></figure></p>
-<p>다음을 수정합니다.
-root ALL=(ALL) ALL 아래에
-newuser ALL=(ALL) ALL을 추가합니다.</p>
-<h4 id="7-같은-key-pair로-로그인-할-수-있도록-새로-생성한-사용자-계정으로-ubuntu-의-것을-복사">7. 같은 key pair로 로그인 할 수 있도록 새로 생성한 사용자 계정으로 ubuntu 의 것을 복사</h4>
-<p>* 이부분에 대한 자세한 내용은 SSH KEY 에 대하여 알아야합니다.
-* ubuntu 계정의 .ssh 폴더를 복사해 newuser 계정에 복사합니다.
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root ~] $ ssudo cp /home/ubuntu/.ssh /home/newuser/.ssh</span><br></pre></td></tr></table></figure></p>
-<h4 id="8-복사한-key-pair의-소유자를-jmkim으로-변경-r-하위-폴더까지-모두-소유권을-바꿔줌">8. 복사한 key pair의 소유자를 jmkim으로 변경 (-R : 하위 폴더까지 모두 소유권을 바꿔줌)</h4>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root ~] $ sudo chown -R newuser:newuser /home/newuser/.ssh</span><br></pre></td></tr></table></figure></p>
-<h4 id="9-sshd-서비스-재시작">9. sshd 서비스 재시작</h4>
-<p><code>-Ubuntu</code>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root ~] $ sudo service ssh restart</span><br></pre></td></tr></table></figure></p>
-<p><code>-Linux</code>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root ~] $ sudo service sshd restart</span><br></pre></td></tr></table></figure></p>
+<h4 id="1-root-password-설정"><a href="#1-root-password-설정" class="headerlink" title="1. root password 설정"></a>1. root password 설정</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ubuntu ~] $ sudo passwd root</span><br></pre></td></tr></table></figure>
+<h4 id="2-password-기반의-로그인을-활성화하기"><a href="#2-password-기반의-로그인을-활성화하기" class="headerlink" title="2. password 기반의 로그인을 활성화하기"></a>2. password 기반의 로그인을 활성화하기</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ubuntu ~] $ sudo vi /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
+<p>다음을 수정합니다. no를 yes로 변경합니다.<br># Change to no to disable tunnelled clear text passwords<br><code>PasswordAuthentication no</code></p>
+<h4 id="3-root-계정으로-로그인"><a href="#3-root-계정으로-로그인" class="headerlink" title="3. root 계정으로 로그인"></a>3. root 계정으로 로그인</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ubuntu ~] $ su - root</span><br></pre></td></tr></table></figure>
+<h4 id="4-다른-사용자-계정-추가"><a href="#4-다른-사용자-계정-추가" class="headerlink" title="4. 다른 사용자 계정 추가"></a>4. 다른 사용자 계정 추가</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root ~] $ adduser newuser</span><br></pre></td></tr></table></figure>
+<h4 id="5-새로-생성한-사용자-계정의-비밀번호-변경"><a href="#5-새로-생성한-사용자-계정의-비밀번호-변경" class="headerlink" title="5. 새로 생성한 사용자 계정의 비밀번호 변경"></a>5. 새로 생성한 사용자 계정의 비밀번호 변경</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root ~] $ sudo passwd newuser</span><br></pre></td></tr></table></figure>
+<h4 id="6-새로-생성한-사용자-계정에-root-권한을-사용할-수-있도록-설정"><a href="#6-새로-생성한-사용자-계정에-root-권한을-사용할-수-있도록-설정" class="headerlink" title="6. 새로 생성한 사용자 계정에 root 권한을 사용할 수 있도록 설정"></a>6. 새로 생성한 사용자 계정에 root 권한을 사용할 수 있도록 설정</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root ~] $ sudo visudo</span><br></pre></td></tr></table></figure>
+<p>다음을 수정합니다.<br>root ALL=(ALL) ALL 아래에<br>newuser ALL=(ALL) ALL을 추가합니다.</p>
+<h4 id="7-같은-key-pair로-로그인-할-수-있도록-새로-생성한-사용자-계정으로-ubuntu-의-것을-복사"><a href="#7-같은-key-pair로-로그인-할-수-있도록-새로-생성한-사용자-계정으로-ubuntu-의-것을-복사" class="headerlink" title="7. 같은 key pair로 로그인 할 수 있도록 새로 생성한 사용자 계정으로 ubuntu 의 것을 복사"></a>7. 같은 key pair로 로그인 할 수 있도록 새로 생성한 사용자 계정으로 ubuntu 의 것을 복사</h4><p>* 이부분에 대한 자세한 내용은 SSH KEY 에 대하여 알아야합니다.<br>* ubuntu 계정의 .ssh 폴더를 복사해 newuser 계정에 복사합니다.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root ~] $ ssudo cp /home/ubuntu/.ssh /home/newuser/.ssh</span><br></pre></td></tr></table></figure></p>
+<h4 id="8-복사한-key-pair의-소유자를-jmkim으로-변경-r-하위-폴더까지-모두-소유권을-바꿔줌"><a href="#8-복사한-key-pair의-소유자를-jmkim으로-변경-R-하위-폴더까지-모두-소유권을-바꿔줌" class="headerlink" title="8. 복사한 key pair의 소유자를 jmkim으로 변경 (-R : 하위 폴더까지 모두 소유권을 바꿔줌)"></a>8. 복사한 key pair의 소유자를 jmkim으로 변경 (-R : 하위 폴더까지 모두 소유권을 바꿔줌)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root ~] $ sudo chown -R newuser:newuser /home/newuser/.ssh</span><br></pre></td></tr></table></figure>
+<h4 id="9-sshd-서비스-재시작"><a href="#9-sshd-서비스-재시작" class="headerlink" title="9. sshd 서비스 재시작"></a>9. sshd 서비스 재시작</h4><p><code>-Ubuntu</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root ~] $ sudo service ssh restart</span><br></pre></td></tr></table></figure></p>
+<p><code>-Linux</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root ~] $ sudo service sshd restart</span><br></pre></td></tr></table></figure></p>
 <p>이제 EC2 instance를 생성할때 만들었던 .pem 파일과 설정한 비밀번호를 통해 새로 생성한 계정으로 서버에 접속할 수 있습니다.</p>
 <hr>
 <p>참고 : <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/managing-users.html" rel="external nofollow noopener noreferrer" target="_blank">AWS 공식 사이트 - Managing User Accounts on Your Linux Instance</a></p>
