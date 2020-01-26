@@ -147,14 +147,14 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -226,25 +226,33 @@
                 post-container">
 
                 <p>벌써 LINE에 입사한지 2년이 다 되어간다. 올해는 정말 시간이 어떻게 지나갔는지 모르겠다. 정신 차리고 보니 2020년이 코앞이다. 올해는 작년에 하지 못했던 회고를 해보려한다.</p>
-<h1 id="블로그-포스팅"><a href="#블로그-포스팅" class="headerlink" title="블로그 포스팅"></a>블로그 포스팅</h1><p>어떻게 회고를 시작할까 생각하다가 올해 포스팅한 글들을 확인해보았다. 올해는 26개의 글을 포스팅을 했다. 올해 작성한 글들을 통해서 어떤 일들이 있었고 무엇을 느끼고 배우게 되었는지 정리해보려 한다.<br><img src="/images/post/2019-12-26/2019-article.png" alt="2019-article"></p>
-<h1 id="non-blocking-asynchronous-관련-기술-공부"><a href="#Non-blocking-Asynchronous-관련-기술-공부" class="headerlink" title="Non-blocking / Asynchronous 관련 기술 공부"></a>Non-blocking / Asynchronous 관련 기술 공부</h1><p>사내에서 팀원분들의 PR을 리뷰하면서 Non-blocking/Asynchronous에 관련된 내용을 많이 접하게 되었다. Webflux나 Armeria와 같은 프레임워크들을 처음 공부하면서 <strong>Reactive라는 용어와 함께 그 기반이 되는 Non-blocking/Asynchronous에 대한 내용을 접하게 되었고, Netty를 거쳐 Java NIO와 멀티플렉싱까지 관심을 갖고 공부하게된 계기가 되었다.</strong></p>
-<p>개인적으로 무언가 새로운 기술을 접하고 사용하게 될 때, 그 기술이 만들어지게 된 배경과 기반이 되는 기술 또한 공부하는 것을 매우 중요하게 생각한다.<br>실제로는 하나의 흐름으로 이어질 수 있는 내용들인데 매번 새로운 기술이 등장할때면 그 기술 자체에 집중하느라 흐름을 따라 파악하기가 쉽지 않은 것 같다. 또한 이러한 부분을 정리하는 것도 갈수록 어려워지는것 같다.</p>
+<h1 id="블로그-포스팅">블로그 포스팅</h1>
+<p>어떻게 회고를 시작할까 생각하다가 올해 포스팅한 글들을 확인해보았다. 올해는 26개의 글을 포스팅을 했다. 올해 작성한 글들을 통해서 어떤 일들이 있었고 무엇을 느끼고 배우게 되었는지 정리해보려 한다.
+<img src="/images/post/2019-12-26/2019-article.png" alt="2019-article"></p>
+<h1 id="non-blocking-asynchronous-관련-기술-공부">Non-blocking / Asynchronous 관련 기술 공부</h1>
+<p>사내에서 팀원분들의 PR을 리뷰하면서 Non-blocking/Asynchronous에 관련된 내용을 많이 접하게 되었다. Webflux나 Armeria와 같은 프레임워크들을 처음 공부하면서 <strong>Reactive라는 용어와 함께 그 기반이 되는 Non-blocking/Asynchronous에 대한 내용을 접하게 되었고, Netty를 거쳐 Java NIO와 멀티플렉싱까지 관심을 갖고 공부하게된 계기가 되었다.</strong></p>
+<p>개인적으로 무언가 새로운 기술을 접하고 사용하게 될 때, 그 기술이 만들어지게 된 배경과 기반이 되는 기술 또한 공부하는 것을 매우 중요하게 생각한다.
+실제로는 하나의 흐름으로 이어질 수 있는 내용들인데 매번 새로운 기술이 등장할때면 그 기술 자체에 집중하느라 흐름을 따라 파악하기가 쉽지 않은 것 같다. 또한 이러한 부분을 정리하는 것도 갈수록 어려워지는것 같다.</p>
 <p>결과적으로 이와 관련된 내용은 후에 팀내에서 Webflux 관련 스터디를 진행하면서도 개인적으로 큰 도움이 되었다.</p>
-<h1 id="오픈소스-첫-컨트리뷰트"><a href="#오픈소스-첫-컨트리뷰트" class="headerlink" title="오픈소스 첫 컨트리뷰트"></a>오픈소스 첫 컨트리뷰트</h1><p><strong>올해는 처음으로 오픈소스에 컨트리뷰트를 해보았다.</strong> <a href="https://github.com/line/armeria" rel="external nofollow noopener noreferrer" target="_blank">Armeria</a>는 Java 개발자라면 누구나 한번 쯤 들어보았을 <a href="https://github.com/netty/netty" rel="external nofollow noopener noreferrer" target="_blank">Netty</a>를 만드신 희승님께서 개발하고 계신 오픈소스이다. 어느날 사내에서 Armeria Sprint라는 행사를 진행하게 되었고 이 행사에 참여해 처음으로 오픈소스에 기여하는 경험을 하게 되었다. (자세한 내용이 궁금하다면 <a href="https://jongmin92.github.io/2019/05/18/Etc/open-source-experience/">&lt;오픈소스 컷 컨트리뷰트 경험기&gt;</a>를 보면 좋을 것 같다!)</p>
+<h1 id="오픈소스-첫-컨트리뷰트">오픈소스 첫 컨트리뷰트</h1>
+<p><strong>올해는 처음으로 오픈소스에 컨트리뷰트를 해보았다.</strong> <a href="https://github.com/line/armeria" rel="external nofollow noopener noreferrer" target="_blank">Armeria</a>는 Java 개발자라면 누구나 한번 쯤 들어보았을 <a href="https://github.com/netty/netty" rel="external nofollow noopener noreferrer" target="_blank">Netty</a>를 만드신 희승님께서 개발하고 계신 오픈소스이다. 어느날 사내에서 Armeria Sprint라는 행사를 진행하게 되었고 이 행사에 참여해 처음으로 오픈소스에 기여하는 경험을 하게 되었다. (자세한 내용이 궁금하다면 <a href="https://jongmin92.github.io/2019/05/18/Etc/open-source-experience/">&lt;오픈소스 컷 컨트리뷰트 경험기&gt;</a>를 보면 좋을 것 같다!)</p>
 <p>평소 오픈소스에 컨트리뷰트를 해보고 싶었지만 어떻게 해야하는 것인지, 내가 할 수 있을까에 대한 막연한 두려움이 있었다면, 이번 첫 컨트리뷰트를 통해 이러한 부분들을 많이 해소할 수 있었던 것 같다.</p>
 <p>첫 컨트리뷰트 이후로도 꾸준히 해보겠다고 다짐했지만 실행에 옮기지는 못했다. 내년에는 꾸준히 하지는 못하더라도 오픈소스에 관심 갖고 기여하는 시간을 조금 더 가져보려고 한다.</p>
 <p><img src="/images/post/2019-12-26/armeria.png" alt="armeria"></p>
-<h1 id="공부-방식의-변화"><a href="#공부-방식의-변화" class="headerlink" title="공부 방식의 변화"></a>공부 방식의 변화</h1><p>작년에는 32개의 글을 포스팅을 했는데, 올해 작성했던 글들은 작년에 작성했던 글들과 조금 차이가 있다.</p>
+<h1 id="공부-방식의-변화">공부 방식의 변화</h1>
+<p>작년에는 32개의 글을 포스팅을 했는데, 올해 작성했던 글들은 작년에 작성했던 글들과 조금 차이가 있다.</p>
 <p>작년에 작성했던 글들은 대부분이 회사에 입사해 처음으로 접하는 기술들을 공부하며 관련된 내용을 정리하는 내용의 글들이었다. 말로만 듣다가 처음 접하게 된 Spring과 학부생 수업때 이후로 사용하지 않던 Java 뿐만 아니라 Gradle, Jenkins, SonarQube와 같은 것들에 대해서 전반적으로 다루었다.</p>
 <p>각각에 대해서 깊은 내용을 다루기 보다는 당장 회사에서 사용하는 기술들에 대해 파악하고 업무를 진행할 수 있는 정도로 공부하고 정리하며 글을 작성했던것 같다.</p>
 <p>이에 반해, 올해 작성했던 글들은 회사에서 업무를 진행하며 겪었던 문제에 대한 내용 혹은 PR review에서 받았던 코멘트들에 대한 내용을 위주로 작성했다. 앞으로도 업무를 하면서 새로 알게된 내용들 위주로 작성하게 될 것 같다.</p>
 <p>또한, 한가지 더 변한 것이 있다면 작년에는 기술 서적을 최대한 많이 읽기 위해 노력했지만 <strong>올해는 조금이라도 직접 코드를 작성하는 시간을 더 많이 갖기위해 노력하고 있다.</strong> 확실히 책을 여러번 아무리 많이 보아도 직접 코딩하는게 학습에는 제일 효과가 좋은 것 같다.</p>
-<h1 id="실무에서-배운-것"><a href="#실무에서-배운-것" class="headerlink" title="실무에서 배운 것"></a>실무에서 배운 것</h1><p>근무하고 있는 LINE의 개발 문화에 대해서는 동기가 잘 작성한 글로 대신한다. <a href="https://engineering.linecorp.com/ko/blog/new-server-developer-at-line/" rel="external nofollow noopener noreferrer" target="_blank">(2년차 서버 개발자가 바라본 LINE의 개발 문화)</a></p>
+<h1 id="실무에서-배운-것">실무에서 배운 것</h1>
+<p>근무하고 있는 LINE의 개발 문화에 대해서는 동기가 잘 작성한 글로 대신한다. <a href="https://engineering.linecorp.com/ko/blog/new-server-developer-at-line/" rel="external nofollow noopener noreferrer" target="_blank">(2년차 서버 개발자가 바라본 LINE의 개발 문화)</a></p>
 <p>올해는 기존의 feature 하나를 새롭게 리뉴얼하면서(설계부터 릴리즈까지) 정말 너무나도 많은 것들을 배웠다. 아주 간략히 정리하면 아래와 같다.</p>
 <ul>
 <li>기존 legacy 코드의 문제점을 파악하고 개선</li>
 <li>다른 부서(기획팀, 클라이언트 개발팀, 서버팀)와의 협업</li>
-<li>이미 서비스 되고 있는 client에 대해서는 어떻게 다룰 것인지<ul>
+<li>이미 서비스 되고 있는 client에 대해서는 어떻게 다룰 것인지
+<ul>
 <li>backward compatibility (하위 호환성) 지원</li>
 </ul>
 </li>
@@ -260,6 +268,10 @@
                 <hr>
                 <!-- Pager -->
                 <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2020/01/02/Java/rsa/" data-toggle="tooltip" data-placement="top" title="Encryption - RSA">&larr; Previous Post</a>
+                        </li>
                     
                     
                         <li class="next">

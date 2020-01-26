@@ -149,14 +149,14 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -228,7 +228,8 @@
                 post-container">
 
                 <p>지난번에 <a href="https://jongmin92.github.io/2019/12/18/Java/hash/">Hash</a>에 대한 내용을 살펴보았다. 이번에는 Hash의 개념을 이용한 HMAC에 대해서 알아보자.</p>
-<h1 id="hmachash-based-message-authentication-code"><a href="#HMAC-Hash-based-Message-Authentication-Code" class="headerlink" title="HMAC(Hash-based Message Authentication Code)"></a>HMAC(Hash-based Message Authentication Code)</h1><p><strong><code>메시지 인증 코드(Message Authentication Code, MAC)</code>는 메시지의 인증에 쓰이는 정보(코드)이다. 메시지의 무결성 및 신뢰성을 보장하는 용도로 MAC을 사용한다.</strong></p>
+<h1 id="hmachash-based-message-authentication-code">HMAC(Hash-based Message Authentication Code)</h1>
+<p><strong><code>메시지 인증 코드(Message Authentication Code, MAC)</code>는 메시지의 인증에 쓰이는 정보(코드)이다. 메시지의 무결성 및 신뢰성을 보장하는 용도로 MAC을 사용한다.</strong></p>
 <blockquote>
 <p>무결성이란, 서버 입장에서 클라이언트로부터 API 요청을 받았을 때, 이 요청이 신뢰할 수 있는 것인지 (정보가 중간에 변경없이 그대로 전달된 것인지)에 대한 성질을 말한다.</p>
 </blockquote>
@@ -238,7 +239,8 @@
 <li><strong>Message</strong>: 클라이언트가 전송하는 요청의 전체(Header + Body)가 될 수도 있고, URL만 될 수도 있다.</li>
 </ul>
 <blockquote>
-<p>만약 Message를 변경하지 않고, 중간에 Message를 취득한 공격자가 변조 없이 동일한 요청을 계속 보낸다면, Message를 변조하지 않았기 때문에 서버는 이를 유효한 요청으로 인식할 것이다. 이것을 <strong>Replay Attack</strong>이라고 하는데 이를 방지하기 위해서 MAC을 생성할 때 <strong>timestamp</strong>를 추가해서 사용하는 방법이 있다.<br>이렇게 하면 서버는 이 Message가 생성된 시간을 알 수 있고, 생성된 시간부터 일정 시간내의 호출만 정상적인 호출로 사용하면 된다.</p>
+<p>만약 Message를 변경하지 않고, 중간에 Message를 취득한 공격자가 변조 없이 동일한 요청을 계속 보낸다면, Message를 변조하지 않았기 때문에 서버는 이를 유효한 요청으로 인식할 것이다. 이것을 <strong>Replay Attack</strong>이라고 하는데 이를 방지하기 위해서 MAC을 생성할 때 <strong>timestamp</strong>를 추가해서 사용하는 방법이 있다.
+이렇게 하면 서버는 이 Message가 생성된 시간을 알 수 있고, 생성된 시간부터 일정 시간내의 호출만 정상적인 호출로 사용하면 된다.</p>
 </blockquote>
 <p>전체 과정은 아래와 같다.</p>
 <p><img src="/images/post/2019-12-23/hmac.png" alt="hmac"></p>

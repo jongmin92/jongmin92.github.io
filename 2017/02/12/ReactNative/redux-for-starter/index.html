@@ -149,14 +149,14 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -227,25 +227,22 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h2 id="index"><a href="#Index" class="headerlink" title="Index"></a>Index</h2><ol>
-<li><a href="#1">Flux와 Redux</a><ol>
+                <h2 id="index">Index</h2>
+<ol>
+<li><a href="#1">Flux와 Redux</a></li>
 <li><a href="#1-1">Redux의 시작은 Flux</a></li>
 <li><a href="#1-2">리듀서(Reducer)</a></li>
 <li><a href="#1-3">스토어(Store)</a></li>
-</ol>
-</li>
-<li><a href="#2">Redux 구성요소</a><ol>
+<li><a href="#2">Redux 구성요소</a></li>
 <li><a href="#2-1">액션(Action)</a></li>
 <li><a href="#2-22">액션 생성자(Action Creator)</a></li>
 <li><a href="#2-3">리듀서(Reducer)</a></li>
 <li><a href="#2-4">스토어(Store)</a></li>
 <li><a href="#2-5">뷰 레이어 바인딩(The view layer binding)</a></li>
 <li><a href="#2-6">루트 컴포넌트</a></li>
-</ol>
-</li>
 <li><a href="#3">Redux 사용 준비</a></li>
 <li><a href="#4">Redux 데이터 흐름</a></li>
-<li><a href="#5">React Native에서 Redux 사용하기</a><ol>
+<li><a href="#5">React Native에서 Redux 사용하기</a></li>
 <li><a href="#5-1">프로젝트 생성</a></li>
 <li><a href="#5-2">루트 컴포넌트 생성 &amp; 설정</a></li>
 <li><a href="#5-3">Count 컴포넌트 생성</a></li>
@@ -253,35 +250,42 @@
 <li><a href="#5-5">Count 리듀서 생성</a></li>
 <li><a href="#5-6">루트 컴포넌트에 스토어 연결</a></li>
 <li><a href="#5-7">Count 컴포넌트 바인딩</a></li>
-</ol>
-</li>
 <li><a href="#6">포스팅 마치며</a></li>
 </ol>
 <hr>
-<p>공부하고 반복해서 복습하고 마지막에는 스스로 정리해보는 시간을 갖는것이 스스로에게 많은 도움이 되는것 같습니다. 그래서 이번에는 <strong><code>ReactNative에서 Redux를 사용하기</code></strong>라는 주제로 포스팅을 하려합니다. Flux에서 Redux 그리고 ReactNative까지 정말 자세하고 친절하게 설명해주신 분들이 많습니다. 제가 공부하며 참고했던 좋은 글들과 강의는 <a href="https://jongmin92.github.io/reactnative/2017/02/10/React-Native-%EC%8B%9C%EC%9E%91%ED%95%98%EB%A9%B0-%EC%9D%BD%EA%B8%B0-%EC%A2%8B%EC%9D%80-%EA%B8%80-%EB%AA%A8%EC%9D%8C/">React Native 글 모음</a>에 따로 정리를 하였습니다. <strong>이 글에서는 제가 그동안 Redux 공부하며 이해가 잘 되지 않았던 부분들에 중점을 맞춰서 정리해보고 React Native에 Redux를 적용시키는 것으로 마무리하려 합니다.</strong> 아직은 Redux에 대해 잘 안다고 말할 수 없지만, 이번 기회로 정리하며 다시 다잡으려 합니다. 혹시나 제가 잘못이하거나 틀린 부분이 있다면 댓글로 알려주시면 감사하겠습니다.</p>
-<p><span id="1"></span></p>
-<h2 id="flux와-redux"><a href="#Flux와-Redux" class="headerlink" title="Flux와 Redux"></a>Flux와 Redux</h2><p><span id="1-1"></span></p>
-<h4 id="redux의-시작은-flux"><a href="#Redux의-시작은-Flux" class="headerlink" title="Redux의 시작은 Flux"></a>Redux의 시작은 Flux</h4><p><code>Redux</code>는 페이스북에서 MVC 패턴의 단점을 보완하고자 만든 아키텍처인 <strong>Flux의 구현체중 하나</strong>입니다. Flux의 구현체는 Redux 외에도 Reflux, rx-flux 등… 여러 구현체가 있지만 그중 Redux가 가장 널리 사용되고 있습니다.</p>
-<p>저는 Redux를 처음 접했을때 Flux와 많이 혼동했습니다. Redux와 Flux의 <strong>구성 요소와 역할</strong>에 대해 혼란스러웠고 정리가 잘 되지 않았는데 이는 Redux와 Flux의 다른점에 대해 집중하지 않았기 때문입니다. Redux는 Flux와 마찬가지로 <strong>애플리케이션의 상태를 예측 가능</strong>하게 합니다. 그러나 Redux는 Flux와 다른 특징이 있습니다. 바로 <strong><code>핫 리로딩(hot reloading)</code></strong>과 <strong><code>시간 여행 디버깅(time travel debugging)</code></strong>입니다. 이 두가지의 특징으로 인해 Redux는 Flux의 구성요소에는 없는 <code>리듀서(reducer)</code>가 생겨나고, <code>스토어(Store)의 역할</code>이 조금 변하게 됩니다.</p>
-<p><span id="1-2"></span></p>
-<h4 id="리듀서reducer"><a href="#리듀서-Reducer" class="headerlink" title="리듀서(Reducer)"></a>리듀서(Reducer)</h4><p>Flux에서 스토어는 <strong>(1) 상태 변환을 위한 로직, (2) 현재 애플리케이션의 상태를 포함</strong>하고 있습니다. 스토어가 이 두 가지를 모두 갖고 있기 때문에 핫 리로딩시 문제가 발생합니다. 상태 변환을 위한 로직을 수정하기 위해 스토어 객체를 리로딩하면 스토어에 저장된 기존의 상태와 뷰를 비롯한 나머지 시스템과의 이벤트 구독이 사라지게 되어 문제가되기 때문입니다. 이를 해결하기 위해 Redux에서는 <code>리듀서(reducer)</code>가 새로운 구성요소로 추가됩니다.</p>
+<p>공부하고 반복해서 복습하고 마지막에는 스스로 정리해보는 시간을 갖는것이 스스로에게 많은 도움이 되는것 같습니다. 그래서 이번에는 **<code>ReactNative에서 Redux를 사용하기</code>**라는 주제로 포스팅을 하려합니다. Flux에서 Redux 그리고 ReactNative까지 정말 자세하고 친절하게 설명해주신 분들이 많습니다. 제가 공부하며 참고했던 좋은 글들과 강의는 <a href="https://jongmin92.github.io/reactnative/2017/02/10/React-Native-%EC%8B%9C%EC%9E%91%ED%95%98%EB%A9%B0-%EC%9D%BD%EA%B8%B0-%EC%A2%8B%EC%9D%80-%EA%B8%80-%EB%AA%A8%EC%9D%8C/">React Native 글 모음</a>에 따로 정리를 하였습니다. <strong>이 글에서는 제가 그동안 Redux 공부하며 이해가 잘 되지 않았던 부분들에 중점을 맞춰서 정리해보고 React Native에 Redux를 적용시키는 것으로 마무리하려 합니다.</strong> 아직은 Redux에 대해 잘 안다고 말할 수 없지만, 이번 기회로 정리하며 다시 다잡으려 합니다. 혹시나 제가 잘못이하거나 틀린 부분이 있다면 댓글로 알려주시면 감사하겠습니다.</p>
+<p>&lt;span id='1'&gt;</p>
+<h2 id="flux와-redux">Flux와 Redux</h2>
+<p>&lt;span id='1-1'&gt;</p>
+<h4 id="redux의-시작은-flux">Redux의 시작은 Flux</h4>
+<p><code>Redux</code>는 페이스북에서 MVC 패턴의 단점을 보완하고자 만든 아키텍처인 <strong>Flux의 구현체중 하나</strong>입니다. Flux의 구현체는 Redux 외에도 Reflux, rx-flux 등... 여러 구현체가 있지만 그중 Redux가 가장 널리 사용되고 있습니다.</p>
+<p>저는 Redux를 처음 접했을때 Flux와 많이 혼동했습니다. Redux와 Flux의 <strong>구성 요소와 역할</strong>에 대해 혼란스러웠고 정리가 잘 되지 않았는데 이는 Redux와 Flux의 다른점에 대해 집중하지 않았기 때문입니다. Redux는 Flux와 마찬가지로 <strong>애플리케이션의 상태를 예측 가능</strong>하게 합니다. 그러나 Redux는 Flux와 다른 특징이 있습니다. 바로 **<code>핫 리로딩(hot reloading)</code>**과 **<code>시간 여행 디버깅(time travel debugging)</code>**입니다. 이 두가지의 특징으로 인해 Redux는 Flux의 구성요소에는 없는 <code>리듀서(reducer)</code>가 생겨나고, <code>스토어(Store)의 역할</code>이 조금 변하게 됩니다.</p>
+<p>&lt;span id='1-2'&gt;</p>
+<h4 id="리듀서reducer">리듀서(Reducer)</h4>
+<p>Flux에서 스토어는 <strong>(1) 상태 변환을 위한 로직, (2) 현재 애플리케이션의 상태를 포함</strong>하고 있습니다. 스토어가 이 두 가지를 모두 갖고 있기 때문에 핫 리로딩시 문제가 발생합니다. 상태 변환을 위한 로직을 수정하기 위해 스토어 객체를 리로딩하면 스토어에 저장된 기존의 상태와 뷰를 비롯한 나머지 시스템과의 이벤트 구독이 사라지게 되어 문제가되기 때문입니다. 이를 해결하기 위해 Redux에서는 <code>리듀서(reducer)</code>가 새로운 구성요소로 추가됩니다.</p>
 <p><strong>리듀서는 스토어가 갖고 있던 상태 변환을 위한 로직을 대신 갖게됩니다.</strong> 따라서 스토어는 액션이 발생했을 때 어떤 상태 변화를 만들어야 하는지 알기위해 리듀서에게 요청합니다. 이렇게 기존 스토어에서 상태 변환을 위한 로직이 분리되었기 때문에 이제 <code>핫 리로딩</code>이 가능하게 됩니다.</p>
 <p>리듀서는 첫 번째 인수로 기존 상태의 값 두 번째 인수로는 액션을 가집니다. 리듀서를 작성할 때는 주의사항이 있는데, <strong>첫 번째 인수로서 기존 상태를 갖고 있는 state는 수정하지 않고 상태를 수정할 때는 새롭게 생성</strong>하여야 합니다. 이 주의사항으로 지킴으로써 각각의 액션이 발생할 때마다 새로운 상태의 객체가 생성되어 결과적으로는 Redux의 특징인 <code>시간 여행 디버깅</code>이 가능하게 됩니다.</p>
-<p><span id="1-3"></span></p>
-<h4 id="스토어store"><a href="#스토어-Store" class="headerlink" title="스토어(Store)"></a>스토어(Store)</h4><p>Redux의 스토어는 Flux의 스토어와는 다소 차이가 있습니다. 먼저 Flux에서는 다수의 스토어를 가질 수 있었고, 각 스토어는 자신의 범위에 있는 애플리케이션의 상태를 변환할 수 있는 로직을 포함하고 있었습니다. 그러나 <strong>Redux는 하나의 스토어만</strong>을 가집니다. 또한 Redux의 스토어는 <strong>상태 트리(state tree) 전체를 유지</strong>하는 책임을 가지며, Flux의 <strong>디스패쳐(dispatcher)의 역할</strong>도 대신합니다.(Flux의 디스패쳐는 모든 스토어를 갖고 있고, 액션 생성자로부터 액션을 넘겨받으면 스토어에 전달합니다.) 따라서 Redux에서는 스토어에서 제공하는 dispatch 함수로 디스패쳐의 동작을 대신합니다.</p>
+<p>&lt;span id='1-3'&gt;</p>
+<h4 id="스토어store">스토어(Store)</h4>
+<p>Redux의 스토어는 Flux의 스토어와는 다소 차이가 있습니다. 먼저 Flux에서는 다수의 스토어를 가질 수 있었고, 각 스토어는 자신의 범위에 있는 애플리케이션의 상태를 변환할 수 있는 로직을 포함하고 있었습니다. 그러나 <strong>Redux는 하나의 스토어만</strong>을 가집니다. 또한 Redux의 스토어는 <strong>상태 트리(state tree) 전체를 유지</strong>하는 책임을 가지며, Flux의 <strong>디스패쳐(dispatcher)의 역할</strong>도 대신합니다.(Flux의 디스패쳐는 모든 스토어를 갖고 있고, 액션 생성자로부터 액션을 넘겨받으면 스토어에 전달합니다.) 따라서 Redux에서는 스토어에서 제공하는 dispatch 함수로 디스패쳐의 동작을 대신합니다.</p>
 <hr>
-<p><span id="2"></span></p>
-<h2 id="redux-구성요소"><a href="#Redux-구성요소" class="headerlink" title="Redux 구성요소"></a>Redux 구성요소</h2><p>지금까지 Flux와 Redux의 차이점과 그로 인해 Redux가 가질 수 있게된 특징에 대해 알아보았습니다. 지금부터는 Redux의 구성요소를 살펴보겠습니다.</p>
-<p><span id="2-1"></span></p>
-<h4 id="액션action"><a href="#액션-Action" class="headerlink" title="액션(Action)"></a>액션(Action)</h4><p><code>액션</code>은 애플리케이션의 상태를 갖고 있는 스토어로 전달하는 <strong>데이터 묶음</strong>입니다. <code>store.dispatch()</code> 를 통해 스토어에 액션을 전달할 수 있습니다.</p>
+<p>&lt;span id='2'&gt;</p>
+<h2 id="redux-구성요소">Redux 구성요소</h2>
+<p>지금까지 Flux와 Redux의 차이점과 그로 인해 Redux가 가질 수 있게된 특징에 대해 알아보았습니다. 지금부터는 Redux의 구성요소를 살펴보겠습니다.</p>
+<p>&lt;span id='2-1'&gt;</p>
+<h4 id="액션action">액션(Action)</h4>
+<p><code>액션</code>은 애플리케이션의 상태를 갖고 있는 스토어로 전달하는 <strong>데이터 묶음</strong>입니다. <code>store.dispatch()</code> 를 통해 스토어에 액션을 전달할 수 있습니다.</p>
 <p>액션은 평범한 자바스크립트 객체이며, <strong>type</strong> 속성을 갖고 있습니다. 이 type 속성은 액션을 전달받은 스토어가 애플리케이션의 상태변환 로직을 갖고 있는 리듀서를 참조할때 사용하게 됩니다.</p>
-<p><span id="2-2"></span></p>
-<h4 id="액션-생성자action-creator"><a href="#액션-생성자-Action-Creator" class="headerlink" title="액션 생성자(Action Creator)"></a>액션 생성자(Action Creator)</h4><p><code>액션 생성자</code>는 액션을 만드는 함수입니다. Flux에서는 함수 내부에서 dispatch 함수를 통해 액션을 전달하지만 Redux의 액션 생성자는 단지 <strong>액션을 반환</strong>하기만 합니다. 실제 액션을 전달할때는 결과값을 dispatch 함수에 전달하거나 생성된 액션을 자동으로 보내주는 <strong>바인드된 액션 생성자</strong>를 만듭니다.</p>
-<p><span id="2-3"></span></p>
-<h4 id="리듀서reducer"><a href="#리듀서-Reducer-1" class="headerlink" title="리듀서(Reducer)"></a>리듀서(Reducer)</h4><p>액션은 무언가 일어나 상태가 변할것이라는 사실을 말할뿐, 그 결과 실제 애플리케이션의 상태가 어떻게 바뀌는지는 리듀서가 담당합니다. <code>리듀서</code>는 이전 상태와 액션을 받아서 다음 상태를 반환하는 역할을 하는 <strong>순수 함수</strong>입니다.  따라서 항상 다음 상태를 계산해서 반환하는 역할만 합니다. API 호출이라던가, Date.now()나 Math.random() 과 같은 순수하지 않은 함수를 호출하는 일은 해서는 안됩니다.</p>
-<p>Redux는 처음에 리듀서를 undefined 상태로 호출하여 초기 상태를 반환합니다. 리듀서는 서로 독립적으로 수행된다면 분리될 수 있고, 이 분리된 리듀서는 <em>*루트 리듀서</em>라는 하나의 객체로 조합될 수 있습니다. 결과적으로 처음에 undefined 상태로 호출되면 각각의 자식 리듀서들이 초기 상태를 반환하게 되고, 각각의 리듀서는 전체 상태에서 자신의 부분만을 관리합니다. 모든 리듀서의 state 매개변수는 서로 다르고, 자신이 관리하는 상태 부분에 해당합니다.</p>
-<p><span id="2-4"></span></p>
-<h4 id="스토어store"><a href="#스토어-Store-1" class="headerlink" title="스토어(Store)"></a>스토어(Store)</h4><p><code>스토어</code>는 “무엇이 일어날지”를 표현하는 <strong>액션</strong>과 이 액션에 따라 애플리케이션의 상태를 어떻게 수정할지를 나타는 <strong>리듀서</strong>를 함께 가져오는 객체입니다. 스토어는 다음과 같은 일들을 합니다.</p>
+<p>&lt;span id='2-2'&gt;</p>
+<h4 id="액션-생성자action-creator">액션 생성자(Action Creator)</h4>
+<p><code>액션 생성자</code>는 액션을 만드는 함수입니다. Flux에서는 함수 내부에서 dispatch 함수를 통해 액션을 전달하지만 Redux의 액션 생성자는 단지 <strong>액션을 반환</strong>하기만 합니다. 실제 액션을 전달할때는 결과값을 dispatch 함수에 전달하거나 생성된 액션을 자동으로 보내주는 <strong>바인드된 액션 생성자</strong>를 만듭니다.</p>
+<p>&lt;span id='2-3'&gt;</p>
+<h4 id="리듀서reducer">리듀서(Reducer)</h4>
+<p>액션은 무언가 일어나 상태가 변할것이라는 사실을 말할뿐, 그 결과 실제 애플리케이션의 상태가 어떻게 바뀌는지는 리듀서가 담당합니다. <code>리듀서</code>는 이전 상태와 액션을 받아서 다음 상태를 반환하는 역할을 하는 <strong>순수 함수</strong>입니다.  따라서 항상 다음 상태를 계산해서 반환하는 역할만 합니다. API 호출이라던가, Date.now()나 Math.random() 과 같은 순수하지 않은 함수를 호출하는 일은 해서는 안됩니다.</p>
+<p>Redux는 처음에 리듀서를 undefined 상태로 호출하여 초기 상태를 반환합니다. 리듀서는 서로 독립적으로 수행된다면 분리될 수 있고, 이 분리된 리듀서는 *<em>루트 리듀서</em>라는 하나의 객체로 조합될 수 있습니다. 결과적으로 처음에 undefined 상태로 호출되면 각각의 자식 리듀서들이 초기 상태를 반환하게 되고, 각각의 리듀서는 전체 상태에서 자신의 부분만을 관리합니다. 모든 리듀서의 state 매개변수는 서로 다르고, 자신이 관리하는 상태 부분에 해당합니다.</p>
+<p>&lt;span id='2-4'&gt;</p>
+<h4 id="스토어store">스토어(Store)</h4>
+<p><code>스토어</code>는 &quot;무엇이 일어날지&quot;를 표현하는 <strong>액션</strong>과 이 액션에 따라 애플리케이션의 상태를 어떻게 수정할지를 나타는 <strong>리듀서</strong>를 함께 가져오는 객체입니다. 스토어는 다음과 같은 일들을 합니다.</p>
 <ul>
 <li>애플리케이션의 상태를 저장</li>
 <li>getState()를 통해 상태에 접근</li>
@@ -289,81 +293,101 @@
 <li>subscribe(listener)를 통해 리스너를 등록</li>
 </ul>
 <p>Redux의 스토어는 Flux와는 달리 하나의 스토어만을 가질 수 있기 때문에 데이터를 다루는 로직을 나누고 싶다면 여러개의 리듀서를 조합하여 대신할 수 있습니다.</p>
-<p><span id="2-5"></span></p>
-<h4 id="뷰-레이어-바인딩the-view-layer-binding"><a href="#뷰-레이어-바인딩-The-view-layer-binding" class="headerlink" title="뷰 레이어 바인딩(The view layer binding)"></a>뷰 레이어 바인딩(The view layer binding)</h4><p><code>뷰 레이어 바인딩</code>은 생성된 <strong>스토어를 뷰에 연결하기 위해 필요</strong>합니다. 뷰 레이어 바인딩은 <strong>connect()</strong> 을 통해 컴포넌트(뷰)가 애플리케이션의 상태 업데이트를 받을 수 있도록 모든 연결을 만들어줍니다.</p>
-<p><span id="2-6"></span></p>
-<h4 id="루트-컴포넌트root-component"><a href="#루트-컴포넌트-Root-component" class="headerlink" title="루트 컴포넌트(Root component)"></a>루트 컴포넌트(Root component)</h4><p>모든 React 애플리케이션은 루트 컴포넌트를 가집니다. 루트 컴포넌트는 계층 구조에서 가장 위에 위치하는 컴포넌트이며, 스토어를 생성하고 어떤 리듀서를 사용할지 알려주며 뷰 레이어 바인딩과 뷰를 불러옵니다.</p>
+<p>&lt;span id='2-5'&gt;</p>
+<h4 id="뷰-레이어-바인딩the-view-layer-binding">뷰 레이어 바인딩(The view layer binding)</h4>
+<p><code>뷰 레이어 바인딩</code>은 생성된 <strong>스토어를 뷰에 연결하기 위해 필요</strong>합니다. 뷰 레이어 바인딩은 <strong>connect()</strong> 을 통해 컴포넌트(뷰)가 애플리케이션의 상태 업데이트를 받을 수 있도록 모든 연결을 만들어줍니다.</p>
+<p>&lt;span id='2-6'&gt;</p>
+<h4 id="루트-컴포넌트root-component">루트 컴포넌트(Root component)</h4>
+<p>모든 React 애플리케이션은 루트 컴포넌트를 가집니다. 루트 컴포넌트는 계층 구조에서 가장 위에 위치하는 컴포넌트이며, 스토어를 생성하고 어떤 리듀서를 사용할지 알려주며 뷰 레이어 바인딩과 뷰를 불러옵니다.</p>
 <hr>
-<p><span id="3"></span></p>
-<h2 id="redux-사용-준비"><a href="#Redux-사용-준비" class="headerlink" title="Redux 사용 준비"></a>Redux 사용 준비</h2><p>애플리케이션을 생성하며 Redux의 구성요소들이 서로 연결됩니다.</p>
+<p>&lt;span id='3'&gt;</p>
+<h2 id="redux-사용-준비">Redux 사용 준비</h2>
+<p>애플리케이션을 생성하며 Redux의 구성요소들이 서로 연결됩니다.</p>
 <ol>
-<li><strong>combineReducers()</strong>를 통해 다수의 리듀서를 하나로 묶은 후 루트 컴포넌트가 <strong>createStore()</strong>를 이용해 스토어를 생성할때 전달합니다.</li>
+<li>**combineReducers()**를 통해 다수의 리듀서를 하나로 묶은 후 루트 컴포넌트가 **createStore()**를 이용해 스토어를 생성할때 전달합니다.</li>
 <li>루트 컴포넌트는 공급 컴포넌트와 스토어 사이를 연결함으로써 스토어와 컴포넌트 사이의 커뮤니케이션을 준비합니다. (이후 컴포넌트에서 connect()를 통해 상태 업데이트를 받을 수 있습니다.)</li>
 </ol>
 <hr>
-<p><span id="4"></span></p>
-<h2 id="redux-데이터-흐름"><a href="#Redux-데이터-흐름" class="headerlink" title="Redux 데이터 흐름"></a>Redux 데이터 흐름</h2><p>Redux의 아키텍쳐는 <strong>엄격한 일방향 데이터 흐름</strong>에 따라 전개되며 데이터의 흐름은 4단계에 따라 진행됩니다.</p>
-<p><strong>1. 액션 생성 후 스토어에 전달</strong><br>액션은 무언가 일어나 상태가 변할 것이라는 내용을 담고 있는 객체입니다. 액션 생성자를 통해 액션을 생성한 후 <code>store.dispatch(action)</code>을 통해 스토어에 전달합니다.</p>
-<p><strong>2. 스토어가 리듀서를 호출</strong><br>스토어는 리듀서에 현재의 상태 트리와 전달받은 액션을 두 가지 인수로 전달합니다.</p>
-<p><strong>3. 루트 리듀서가 각 리듀서의 출력을 합쳐 하나의 상태 트리 생성</strong><br>각각의 상태를 다루는 리듀서에 의해 생성된 결과를 하나로 합쳐 <strong>루트 리듀서가 하나의 상태 트리를 생성</strong>합니다.</p>
-<p><strong>4. Redux 스토어가 루트 리듀서에 의해 반환된 상태 트리를 저장</strong><br>새로운 상태 트리가 앱의 다음 상태입니다. store.subscribe(listener)를 통해 등록된 모든 리스너가 불러내지고 이들은 현재 상태를 얻기 위해 store.getState()를 호출합니다. connect()를 통해 컴포넌트에 스토어가 연결되어 있다면 컴포넌트는 이를 반영하고 자신의 setState()나 forceUpdate() 메소드를 실행해 <strong>자동적으로 <code>render()</code> 메소드를 호출</strong>합니다.</p>
+<p>&lt;span id='4'&gt;</p>
+<h2 id="redux-데이터-흐름">Redux 데이터 흐름</h2>
+<p>Redux의 아키텍쳐는 <strong>엄격한 일방향 데이터 흐름</strong>에 따라 전개되며 데이터의 흐름은 4단계에 따라 진행됩니다.</p>
+<p><strong>1. 액션 생성 후 스토어에 전달</strong>
+액션은 무언가 일어나 상태가 변할 것이라는 내용을 담고 있는 객체입니다. 액션 생성자를 통해 액션을 생성한 후 <code>store.dispatch(action)</code>을 통해 스토어에 전달합니다.</p>
+<p><strong>2. 스토어가 리듀서를 호출</strong>
+스토어는 리듀서에 현재의 상태 트리와 전달받은 액션을 두 가지 인수로 전달합니다.</p>
+<p><strong>3. 루트 리듀서가 각 리듀서의 출력을 합쳐 하나의 상태 트리 생성</strong>
+각각의 상태를 다루는 리듀서에 의해 생성된 결과를 하나로 합쳐 <strong>루트 리듀서가 하나의 상태 트리를 생성</strong>합니다.</p>
+<p><strong>4. Redux 스토어가 루트 리듀서에 의해 반환된 상태 트리를 저장</strong>
+새로운 상태 트리가 앱의 다음 상태입니다. store.subscribe(listener)를 통해 등록된 모든 리스너가 불러내지고 이들은 현재 상태를 얻기 위해 store.getState()를 호출합니다. connect()를 통해 컴포넌트에 스토어가 연결되어 있다면 컴포넌트는 이를 반영하고 자신의 setState()나 forceUpdate() 메소드를 실행해 <strong>자동적으로 <code>render()</code> 메소드를 호출</strong>합니다.</p>
 <hr>
-<p><span id="5"></span></p>
-<h2 id="react-native에서-redux-사용하기"><a href="#React-Native에서-Redux-사용하기" class="headerlink" title="React Native에서 Redux 사용하기"></a>React Native에서 Redux 사용하기</h2><p>이제 React Native에서 Redux를 사용해보겠습니다. React Native를 위한 개발환경 설정은 <a href="http://facebook.github.io/react-native/docs/getting-started.html" rel="external nofollow noopener noreferrer" target="_blank">공식홈페이지</a>를 참조하시기 바랍니다. 이 예제 프로젝트에서는 간단하게 Redux를 사용하는 법에 초점을 맞춰 진행해보겠습니다.<br>간단히 카운팅하는 앱을 만들어보려 합니다. 완성 화면은 다음과 같습니다.<br><img src="/images/post/2017-02-12/result.png" alt="result"></p>
-<p><span id="5-1"></span></p>
-<h4 id="프로젝트-생성"><a href="#프로젝트-생성" class="headerlink" title="프로젝트 생성"></a>프로젝트 생성</h4><p> 먼저 React Native 프로젝트를 생성합니다. (현재 버전은 0.41.2 입니다)<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">react-native init example</span><br></pre></td></tr></table></figure></p>
-<p>다음으로 redux를 사용하기 위해 필요한 모듈들을 설치합니다.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install redux react-redux --save</span><br></pre></td></tr></table></figure></p>
-<p>이제 Redux의 구성요소를 참고하여 다음과 같이 새로운 폴더 구조를 생성합니다. (앞으로 사용할 폴더와 파일만 명시하였습니다.)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">example</span><br><span class="line">    ├── __tests__/</span><br><span class="line">    ├── android/</span><br><span class="line">    ├── ios/</span><br><span class="line">    ├── node_modules/</span><br><span class="line">    └── src/</span><br><span class="line">        ├── actions/</span><br><span class="line">            ├── index.js</span><br><span class="line">            ├── countAction.js</span><br><span class="line">            └── types.js</span><br><span class="line">        ├── components/</span><br><span class="line">            └── Count.js</span><br><span class="line">        ├── reducers/</span><br><span class="line">            ├── index.js</span><br><span class="line">            └── countReducer.js</span><br><span class="line">        └── app.js</span><br><span class="line">    ├── index.android.js</span><br><span class="line">    ├── index.ios.js</span><br><span class="line">    └── package.json</span><br></pre></td></tr></table></figure></p>
-<p><span id="5-2"></span></p>
-<h4 id="루트-컴포넌트-생성-amp-설정"><a href="#루트-컴포넌트-생성-amp-설정" class="headerlink" title="루트 컴포넌트 생성 &amp; 설정"></a>루트 컴포넌트 생성 &amp; 설정</h4><p>먼저 <code>app.js</code> 파일을 작성합니다. App 컴포넌트는 루트 컴포넌트로 사용될 것이며, 액션과 리듀서 파일을 작성후 스토어를 추가할것입니다.</p>
-<script src="https://gist.github.com/jongmin92/f0938ac4c479af82dedc715d6e40efdd.js"></script>
-
-<p>다음은 Android와 iOS의 진입파일인 <code>index.android.js</code>와 <code>index.ios.js</code>을 수정하여 App 컴포넌트를 <strong>루트 컴포넌트</strong>로 등록합니다.</p>
-<script src="https://gist.github.com/jongmin92/05d571340819d8d1fcfdbfec6ae21465.js"></script>
-
-<p>지금까지의 코드를 작성한 후 화면은 다음과 같습니다.<br><img src="/images/post/2017-02-12/result1.png" alt="result1"></p>
-<p><span id="5-3"></span></p>
-<h4 id="count-컴포넌트-생성"><a href="#Count-컴포넌트-생성" class="headerlink" title="Count 컴포넌트 생성"></a>Count 컴포넌트 생성</h4><p>이제 <code>Count.js</code> 파일을 작성하여 Count 컴포넌트를 생성하겠습니다. Count 컴포넌트는 현재 카운트 되고 있는 숫자를 보여주는 텍스트와 카운트를 증가시키는 버튼으로 구성됩니다.</p>
-<script src="https://gist.github.com/jongmin92/3457f6cc230bdb380578e8141b2d13a5.js"></script>
-
-<p>Count 컴포넌트를 <code>app.js</code>에서 사용합니다.</p>
-<script src="https://gist.github.com/jongmin92/092b3138decf73c3be088c495d2f2b8a.js"></script>
-
-<p>Count 컴포넌트를 추가한 후 화면입니다.<br><img src="/images/post/2017-02-12/result2.png" alt="result2"></p>
-<p><span id="5-4"></span></p>
-<h4 id="count-액션-생성"><a href="#Count-액션-생성" class="headerlink" title="Count 액션 생성"></a>Count 액션 생성</h4><p><code>액션</code>은 애플리케이션의 상태를 갖고 있는 스토어로 전달하는 <strong>데이터 묶음</strong>이라고 했습니다. 이 카운팅 앱에서는 액션 객체의 <code>type</code>을 통해서 <strong>증가인지 감소인지</strong>, <code>payload</code>를 통해서는 <strong>증가 혹은 감소할 값</strong>을 전달할 것입니다.</p>
-<p>먼저 <code>actions/types.js</code>를 작성합니다. types.js 에는 액션의 타입으로 사용될 값을 상수로 정의합니다. 타입은 후에 리듀서에서도 사용되기 때문에 미리 상수로 정의하는것이 실수를 줄일수도 있고, 후에 액션을 관리하는데에도 유용합니다.</p>
-<script src="https://gist.github.com/jongmin92/2116596bb8ef6e851212cc03833b8532.js"></script>
-
-<p>이제 <code>countAction.js</code>를 작성합니다. type과 payload로 이루어진 액션 객체 액션 생성자를 통해 생성되어 스토어로 전달됩니다.</p>
-<script src="https://gist.github.com/jongmin92/fa28375571a544ea49edfedf27f18595.js"></script>
-
-<p>마지막으로 <code>index.js</code>를 작성합니다. index.js 에서는 여러개의 액션을 하나의 객체로 묶어 컴포넌트 파일에서 쉽게 사용할 수 있도록 해주는 역할을 합니다.</p>
-<script src="https://gist.github.com/jongmin92/d17d6cee53c084bd27be749062afca2a.js"></script>
-
-<p><span id="5-5"></span></p>
-<h4 id="count-리듀서-생성"><a href="#Count-리듀서-생성" class="headerlink" title="Count 리듀서 생성"></a>Count 리듀서 생성</h4><p>액션을 전달받은 스토어가 상태를 변경하기 위해 리듀서에게 어떠한 상태변환을 해야하는지 요청합니다. 리듀서에서는 이 요청을 처리할 수 있도록 코드를 작성해야 합니다.<br><code>countReducer.js</code>를 작성합니다. 리듀서는 함수입니다. 첫 번째 인자로 <strong>이전의 상태</strong>를 전달받고, 두 번째 인자로는 <strong>액션</strong>을 전달받습니다. 전달 받은 액션의 type을 통해 새로운 상태를 반환하는것이 리듀서의 역할입니다.<br>애플리케이션 실행 후 Redux는 처음에 리듀서를 undefined 상태로 호출합니다. swtich문에서 default인 상태에서 초기 상태를 설정합니다.</p>
-<script src="https://gist.github.com/jongmin92/efd6d626ad9e2ee4bc0c547fa22693f5.js"></script>
-
-<p>액션과 마찬가지로 <code>index.js</code>를 작성합니다. 여러개의 리듀서를 묶어 컴포넌트 파일에서 쉽게 사용할 수 있도록 해주는 역할입니다.<br>redux 모듈의  <strong>combineReducer</strong>는 트리 구조로 분리된 여러개의 상태를 하나의 단일 상태 트리로 조합합니다.</p>
-<script src="https://gist.github.com/jongmin92/b50a64d390ca615a4839ac9cf741a23a.js"></script>
-
-<p><span id="5-6"></span></p>
-<h4 id="루트-컴포넌트에-스토어-연결"><a href="#루트-컴포넌트에-스토어-연결" class="headerlink" title="루트 컴포넌트에 스토어 연결"></a>루트 컴포넌트에 스토어 연결</h4><p>생성한 액션과 리듀서를 애플리케이션에서 사용할 수 있도록 루트 컴포넌트에 설정해주어야 합니다. 처음 작성했던 <code>app.js</code>를 다음과 같이 수정합니다.<br><code>redux</code> 모듈에 있는 <strong>createStore</strong>를 통해 스토어를 생성할 수 있습니다. store 생성시 인자로 리듀서를 필요로 합니다.<br>생성된 스토어를 React 에서 사용하기 위해 <code>react-redux</code> 모듈에서 <strong>Provider</strong>를 사용합니다.</p>
-<script src="https://gist.github.com/jongmin92/d042325f829d326a47ae3f8c1173acbe.js"></script>
-
-<p><span id="5-7"></span></p>
-<h4 id="count-컴포넌트-바인딩"><a href="#Count-컴포넌트-바인딩" class="headerlink" title="Count 컴포넌트 바인딩"></a>Count 컴포넌트 바인딩</h4><p>뷰 레이어 바인딩은 생성된 스토어를 뷰에 연결하기 위해 필요하다고 설명했습니다. 이제 생성한 액션과 리듀서를 Count 컴포넌트에서 사용할 수 있도록 <strong>connect</strong>를 통해 연결을 만들어줍니다.<br>connect 메서드는 Store의 state를 컴포넌트의 props로 전달하고 상태의 변화가 있을 때 자동으로 컴포넌트의 render를 재호출합니다. connect 메서드는 다음의 인자를 가집니다.</p>
+<p>&lt;span id='5'&gt;</p>
+<h2 id="react-native에서-redux-사용하기">React Native에서 Redux 사용하기</h2>
+<p>이제 React Native에서 Redux를 사용해보겠습니다. React Native를 위한 개발환경 설정은 <a href="http://facebook.github.io/react-native/docs/getting-started.html" rel="external nofollow noopener noreferrer" target="_blank">공식홈페이지</a>를 참조하시기 바랍니다. 이 예제 프로젝트에서는 간단하게 Redux를 사용하는 법에 초점을 맞춰 진행해보겠습니다.
+간단히 카운팅하는 앱을 만들어보려 합니다. 완성 화면은 다음과 같습니다.
+<img src="/images/post/2017-02-12/result.png" alt="result"></p>
+<p>&lt;span id='5-1'&gt;</p>
+<h4 id="프로젝트-생성">프로젝트 생성</h4>
+<p>먼저 React Native 프로젝트를 생성합니다. (현재 버전은 0.41.2 입니다)
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">react-native init example</span><br></pre></td></tr></table></figure></p>
+<p>다음으로 redux를 사용하기 위해 필요한 모듈들을 설치합니다.
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install redux react-redux --save</span><br></pre></td></tr></table></figure></p>
+<p>이제 Redux의 구성요소를 참고하여 다음과 같이 새로운 폴더 구조를 생성합니다. (앞으로 사용할 폴더와 파일만 명시하였습니다.)
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">example</span><br><span class="line">    ├── __tests__/</span><br><span class="line">    ├── android/</span><br><span class="line">    ├── ios/</span><br><span class="line">    ├── node_modules/</span><br><span class="line">    └── src/</span><br><span class="line">        ├── actions/</span><br><span class="line">            ├── index.js</span><br><span class="line">            ├── countAction.js</span><br><span class="line">            └── types.js</span><br><span class="line">        ├── components/</span><br><span class="line">            └── Count.js</span><br><span class="line">        ├── reducers/</span><br><span class="line">            ├── index.js</span><br><span class="line">            └── countReducer.js</span><br><span class="line">        └── app.js</span><br><span class="line">    ├── index.android.js</span><br><span class="line">    ├── index.ios.js</span><br><span class="line">    └── package.json</span><br></pre></td></tr></table></figure></p>
+<p>&lt;span id='5-2'&gt;</p>
+<h4 id="루트-컴포넌트-생성-amp-설정">루트 컴포넌트 생성 &amp; 설정</h4>
+<p>먼저 <code>app.js</code> 파일을 작성합니다. App 컴포넌트는 루트 컴포넌트로 사용될 것이며, 액션과 리듀서 파일을 작성후 스토어를 추가할것입니다.
+&lt;script src=&quot;https://gist.github.com/jongmin92/f0938ac4c479af82dedc715d6e40efdd.js&quot;&gt;&lt;/script&gt;</p>
+<p>다음은 Android와 iOS의 진입파일인 <code>index.android.js</code>와 <code>index.ios.js</code>을 수정하여 App 컴포넌트를 <strong>루트 컴포넌트</strong>로 등록합니다.
+&lt;script src=&quot;https://gist.github.com/jongmin92/05d571340819d8d1fcfdbfec6ae21465.js&quot;&gt;&lt;/script&gt;</p>
+<p>지금까지의 코드를 작성한 후 화면은 다음과 같습니다.
+<img src="/images/post/2017-02-12/result1.png" alt="result1"></p>
+<p>&lt;span id='5-3'&gt;</p>
+<h4 id="count-컴포넌트-생성">Count 컴포넌트 생성</h4>
+<p>이제 <code>Count.js</code> 파일을 작성하여 Count 컴포넌트를 생성하겠습니다. Count 컴포넌트는 현재 카운트 되고 있는 숫자를 보여주는 텍스트와 카운트를 증가시키는 버튼으로 구성됩니다.
+&lt;script src=&quot;https://gist.github.com/jongmin92/3457f6cc230bdb380578e8141b2d13a5.js&quot;&gt;&lt;/script&gt;</p>
+<p>Count 컴포넌트를 <code>app.js</code>에서 사용합니다.
+&lt;script src=&quot;https://gist.github.com/jongmin92/092b3138decf73c3be088c495d2f2b8a.js&quot;&gt;&lt;/script&gt;</p>
+<p>Count 컴포넌트를 추가한 후 화면입니다.
+<img src="/images/post/2017-02-12/result2.png" alt="result2"></p>
+<p>&lt;span id='5-4'&gt;</p>
+<h4 id="count-액션-생성">Count 액션 생성</h4>
+<p><code>액션</code>은 애플리케이션의 상태를 갖고 있는 스토어로 전달하는 <strong>데이터 묶음</strong>이라고 했습니다. 이 카운팅 앱에서는 액션 객체의 <code>type</code>을 통해서 <strong>증가인지 감소인지</strong>, <code>payload</code>를 통해서는 <strong>증가 혹은 감소할 값</strong>을 전달할 것입니다.</p>
+<p>먼저 <code>actions/types.js</code>를 작성합니다. types.js 에는 액션의 타입으로 사용될 값을 상수로 정의합니다. 타입은 후에 리듀서에서도 사용되기 때문에 미리 상수로 정의하는것이 실수를 줄일수도 있고, 후에 액션을 관리하는데에도 유용합니다.
+&lt;script src=&quot;https://gist.github.com/jongmin92/2116596bb8ef6e851212cc03833b8532.js&quot;&gt;&lt;/script&gt;</p>
+<p>이제 <code>countAction.js</code>를 작성합니다. type과 payload로 이루어진 액션 객체 액션 생성자를 통해 생성되어 스토어로 전달됩니다.
+&lt;script src=&quot;https://gist.github.com/jongmin92/fa28375571a544ea49edfedf27f18595.js&quot;&gt;&lt;/script&gt;</p>
+<p>마지막으로 <code>index.js</code>를 작성합니다. index.js 에서는 여러개의 액션을 하나의 객체로 묶어 컴포넌트 파일에서 쉽게 사용할 수 있도록 해주는 역할을 합니다.
+&lt;script src=&quot;https://gist.github.com/jongmin92/d17d6cee53c084bd27be749062afca2a.js&quot;&gt;&lt;/script&gt;</p>
+<p>&lt;span id='5-5'&gt;</p>
+<h4 id="count-리듀서-생성">Count 리듀서 생성</h4>
+<p>액션을 전달받은 스토어가 상태를 변경하기 위해 리듀서에게 어떠한 상태변환을 해야하는지 요청합니다. 리듀서에서는 이 요청을 처리할 수 있도록 코드를 작성해야 합니다.
+<code>countReducer.js</code>를 작성합니다. 리듀서는 함수입니다. 첫 번째 인자로 <strong>이전의 상태</strong>를 전달받고, 두 번째 인자로는 <strong>액션</strong>을 전달받습니다. 전달 받은 액션의 type을 통해 새로운 상태를 반환하는것이 리듀서의 역할입니다.
+애플리케이션 실행 후 Redux는 처음에 리듀서를 undefined 상태로 호출합니다. swtich문에서 default인 상태에서 초기 상태를 설정합니다.
+&lt;script src=&quot;https://gist.github.com/jongmin92/efd6d626ad9e2ee4bc0c547fa22693f5.js&quot;&gt;&lt;/script&gt;</p>
+<p>액션과 마찬가지로 <code>index.js</code>를 작성합니다. 여러개의 리듀서를 묶어 컴포넌트 파일에서 쉽게 사용할 수 있도록 해주는 역할입니다.
+redux 모듈의  <strong>combineReducer</strong>는 트리 구조로 분리된 여러개의 상태를 하나의 단일 상태 트리로 조합합니다.
+&lt;script src=&quot;https://gist.github.com/jongmin92/b50a64d390ca615a4839ac9cf741a23a.js&quot;&gt;&lt;/script&gt;</p>
+<p>&lt;span id='5-6'&gt;</p>
+<h4 id="루트-컴포넌트에-스토어-연결">루트 컴포넌트에 스토어 연결</h4>
+<p>생성한 액션과 리듀서를 애플리케이션에서 사용할 수 있도록 루트 컴포넌트에 설정해주어야 합니다. 처음 작성했던 <code>app.js</code>를 다음과 같이 수정합니다.
+<code>redux</code> 모듈에 있는 <strong>createStore</strong>를 통해 스토어를 생성할 수 있습니다. store 생성시 인자로 리듀서를 필요로 합니다.
+생성된 스토어를 React 에서 사용하기 위해 <code>react-redux</code> 모듈에서 <strong>Provider</strong>를 사용합니다.
+&lt;script src=&quot;https://gist.github.com/jongmin92/d042325f829d326a47ae3f8c1173acbe.js&quot;&gt;&lt;/script&gt;</p>
+<p>&lt;span id='5-7'&gt;</p>
+<h4 id="count-컴포넌트-바인딩">Count 컴포넌트 바인딩</h4>
+<p>뷰 레이어 바인딩은 생성된 스토어를 뷰에 연결하기 위해 필요하다고 설명했습니다. 이제 생성한 액션과 리듀서를 Count 컴포넌트에서 사용할 수 있도록 <strong>connect</strong>를 통해 연결을 만들어줍니다.
+connect 메서드는 Store의 state를 컴포넌트의 props로 전달하고 상태의 변화가 있을 때 자동으로 컴포넌트의 render를 재호출합니다. connect 메서드는 다음의 인자를 가집니다.</p>
 <ul>
 <li><strong>mapStateToProps</strong> : 스토어의 state를 해당 컴포넌트의 props로 전달(mapping)합니다.</li>
 <li><strong>mapDispatchToProps</strong> : 스토어의 dispatch를 props에 전달합니다. dispatch를 통해 액션생성자에서 생성한 액션을 스토어로 전달할 수 있습니다.</li>
 </ul>
-<script src="https://gist.github.com/jongmin92/9197ec9dc499b6fa89cf1d8570d77bda.js"></script>
-
+<p>&lt;script src=&quot;https://gist.github.com/jongmin92/9197ec9dc499b6fa89cf1d8570d77bda.js&quot;&gt;&lt;/script&gt;</p>
 <p>간단한 카운팅앱이 완성되었습니다. 버튼을 통해 count의 값을 변경할 수 있습니다.</p>
 <hr>
-<p><span id="6"></span></p>
-<h2 id="포스팅을-마치며"><a href="#포스팅을-마치며" class="headerlink" title="포스팅을 마치며"></a>포스팅을 마치며</h2><p>MVC 패턴에 익숙해져있던 저에게 Redux는 머리로는 이해할 수 있었지만 가슴으로는? 이해기 쉽지 않았었습니다. 이번 기회에 다시 하번 정리를 하며 제가 처음에 혼란스러워했던 부분들을 최대한 설명해드리려 노력했습니다. 위의 예제가 좋은 예제라고는 말할 수 없지만 그래도 React Native에서 Redux가 어떻게 사용되는지 전체적인 구조를 보는데에는 나쁘지 않다고 생각합니다.<br>액션과 리듀서를 생성하고 사용하는 부분에 있어서는 여러가지의 방법이 있지만 최대한 Redux를 쉽게 이해할 수 있도록 작성해보았습니다. 좀 더 효율적으로 작성하는 법은 다음에 기회가 된다면 포스팅해보겠습니다.</p>
+<p>&lt;span id='6'&gt;</p>
+<h2 id="포스팅을-마치며">포스팅을 마치며</h2>
+<p>MVC 패턴에 익숙해져있던 저에게 Redux는 머리로는 이해할 수 있었지만 가슴으로는? 이해기 쉽지 않았었습니다. 이번 기회에 다시 하번 정리를 하며 제가 처음에 혼란스러워했던 부분들을 최대한 설명해드리려 노력했습니다. 위의 예제가 좋은 예제라고는 말할 수 없지만 그래도 React Native에서 Redux가 어떻게 사용되는지 전체적인 구조를 보는데에는 나쁘지 않다고 생각합니다.
+액션과 리듀서를 생성하고 사용하는 부분에 있어서는 여러가지의 방법이 있지만 최대한 Redux를 쉽게 이해할 수 있도록 작성해보았습니다. 좀 더 효율적으로 작성하는 법은 다음에 기회가 된다면 포스팅해보겠습니다.</p>
 
                 
 

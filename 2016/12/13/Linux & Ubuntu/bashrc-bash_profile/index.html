@@ -149,14 +149,14 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -227,29 +227,39 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h2 id="index"><a href="#Index" class="headerlink" title="Index"></a>Index</h2><ol>
+                <h2 id="index">Index</h2>
+<ol>
 <li><a href="#1">bash 쉘(Shell) 이란?</a></li>
 <li><a href="#2">Login Shell 과 Non-Login Shell</a></li>
 <li><a href="#3">.bashrc 와 .bash_profile 의 차이</a></li>
 </ol>
 <hr>
-<p><span id="1"></span></p>
-<h2 id="bash-쉘shell-이란"><a href="#bash-쉘-Shell-이란" class="headerlink" title="bash 쉘(Shell) 이란?"></a>bash 쉘(Shell) 이란?</h2><p><code>쉘(Shell)</code>은 운영체제에서 <strong>사용자가 입력하는 명령을 읽고 해석하여 대신 실행해주는 프로그램</strong>입니다. 운영체제 상에서 다양한 운영체제 기능과 서비스를 구현하는 인터페이스를 제공하며, 사용자와 운영체제의 <code>내부(커널)</code> 사이의 인터페이스를 감싸는 층이기 때문에 셸이라는 이름이 붙었습니다. 쉘은 운영체제에서 필수적으로 존재합니다.</p>
+<p>&lt;span id='1'&gt;</p>
+<h2 id="bash-쉘shell-이란">bash 쉘(Shell) 이란?</h2>
+<p><code>쉘(Shell)</code>은 운영체제에서 <strong>사용자가 입력하는 명령을 읽고 해석하여 대신 실행해주는 프로그램</strong>입니다. 운영체제 상에서 다양한 운영체제 기능과 서비스를 구현하는 인터페이스를 제공하며, 사용자와 운영체제의 <code>내부(커널)</code> 사이의 인터페이스를 감싸는 층이기 때문에 셸이라는 이름이 붙었습니다. 쉘은 운영체제에서 필수적으로 존재합니다.</p>
 <p>운영체제는 로그인한 사용자가 없다면 하나의 쉘도 실행되지 않은 상태이며, 사용자가 로그인을 시도하면 운영체제는 ID와 패스워드를 받아들이는 로기은 프로그램을 실행하고, 사용자가 입력한 ID와 패스워드를 검증한 후 인증된 사용자라면 쉘을 실행하여 사용자 세션을 쉘에게 전달합니다.</p>
 <p>쉘의 역할은 사용자가 입력한 명령을 해석하여 대신 실행해주는 것입니다. 쉘의 내부 명령어라면 스스로 실행한 뒤 화면에 표시해주고 내부 명령어가 아니라면 <code>PATH 환경변수</code>에 지정된 경로에서 입력받은 명령과 같은 파일을 찾아 <code>exec() 시스템콜</code>을 호출하여 실행한 뒤 키보드와 마우스 등의 입력장치와 모니터에 해당하는 표준 출력장치의 제어권을 해당 프로그램에 넘겨준 뒤 프로그램이 끝날 때 까지 대기하는 역할을 합니다.</p>
-<p><code>bash 쉘</code>은 유닉스에서 사용하는 커맨드 쉘의 일종으로 <a href="https://ko.wikipedia.org/wiki/GNU" rel="external nofollow noopener noreferrer" target="_blank">GNU 프로젝트</a>를 위해 만들어졌습니다. 초기의 유닉스 쉘인 본 쉘(Bourne Shell)과 새로 태어났다는 뜻의 영어 ‘born again’을 합쳐 <strong>본 어게인 쉘(Bourne-again Shell)</strong>이라고 불렸으나, 일반적으로 <code>bash</code>로 줄여 부릅니다.</p>
+<p><code>bash 쉘</code>은 유닉스에서 사용하는 커맨드 쉘의 일종으로 <a href="https://ko.wikipedia.org/wiki/GNU" rel="external nofollow noopener noreferrer" target="_blank">GNU 프로젝트</a>를 위해 만들어졌습니다. 초기의 유닉스 쉘인 본 쉘(Bourne Shell)과 새로 태어났다는 뜻의 영어 'born again'을 합쳐 **본 어게인 쉘(Bourne-again Shell)**이라고 불렸으나, 일반적으로 <code>bash</code>로 줄여 부릅니다.</p>
 <hr>
-<p><span id="2"></span></p>
-<h2 id="login-shell-과-non-login-shell"><a href="#Login-Shell-과-Non-Login-Shell" class="headerlink" title="Login Shell 과 Non-Login Shell"></a>Login Shell 과 Non-Login Shell</h2><h4 id="login-shell"><a href="#Login-Shell" class="headerlink" title="Login Shell"></a>Login Shell</h4><p>Login은 ID와 패스워드를 입력해서 Shell을 실행하는 것을 말합니다. 따라서 ssh로 접속하거나 로컬에서 GUI를 통해 Shell을 실행하는 것은 Login Shell 입니다.<br><code>.profile</code>, <code>.bash_profile</code> 이 두 파일은 Login할 때 로드되는 파일입니다. <code>.profile</code>은 꼭 bash가 아니더라도 로그인하면 로드되며, <code>.bash_profile</code>은 꼭 <strong>bash로 로그인 할 때</strong>만 실행됩니다.</p>
-<h4 id="non-login-shell"><a href="#Non-Login-Shell" class="headerlink" title="Non-Login Shell"></a>Non-Login Shell</h4><p>Non-Login Shell은 로그인 없이 실행하는 Shell을 말합니다. ssh로 접속하고 나서 다시 bash를 실행하는 경우나, GUI 세션에서 터미널을 띄우는 것도 여기 해당합니다. ‘sudo bash’나  ‘su’같은 것도 해당합니다.</p>
+<p>&lt;span id='2'&gt;</p>
+<h2 id="login-shell-과-non-login-shell">Login Shell 과 Non-Login Shell</h2>
+<h4 id="login-shell">Login Shell</h4>
+<p>Login은 ID와 패스워드를 입력해서 Shell을 실행하는 것을 말합니다. 따라서 ssh로 접속하거나 로컬에서 GUI를 통해 Shell을 실행하는 것은 Login Shell 입니다.
+<code>.profile</code>, <code>.bash_profile</code> 이 두 파일은 Login할 때 로드되는 파일입니다. <code>.profile</code>은 꼭 bash가 아니더라도 로그인하면 로드되며, <code>.bash_profile</code>은 꼭 <strong>bash로 로그인 할 때</strong>만 실행됩니다.</p>
+<h4 id="non-login-shell">Non-Login Shell</h4>
+<p>Non-Login Shell은 로그인 없이 실행하는 Shell을 말합니다. ssh로 접속하고 나서 다시 bash를 실행하는 경우나, GUI 세션에서 터미널을 띄우는 것도 여기 해당합니다. 'sudo bash'나  'su'같은 것도 해당합니다.</p>
 <hr>
-<p><span id="3"></span></p>
-<h2 id="bashrc-와-bash_profile-의-차이"><a href="#bashrc-와-bash-profile-의-차이" class="headerlink" title=".bashrc 와 .bash_profile 의 차이"></a>.bashrc 와 .bash_profile 의 차이</h2><h4 id="bashrc"><a href="#bashrc" class="headerlink" title=".bashrc"></a>.bashrc</h4><p>이미 로그인 한 상태에서 새 터미널 창을 열 때마다 로드됩니다. (Non-Login Shell에서 실행됩니다.)</p>
-<h4 id="bash_profile"><a href="#bash-profile" class="headerlink" title=".bash_profile"></a>.bash_profile</h4><p>시스템에 로그인할 때마다 로드됩니다. (Login Shell에서 실행됩니다.) 대부분 <strong>개별 사용자에 대한 설정에 대한 코드</strong>들이 들어갑니다. 예를 들면 nvm(Node Version Manager)은 기본적으로 nvm을 사용하지 않고 Node를 설치할 때와는 다르게 각 사용자의 경로에 설치되게 되는데, 이럴때 nvm의 PATH를 .bash_profile 파일에 기재합니다.</p>
-<h4 id="profile"><a href="#profile" class="headerlink" title=".profile"></a>.profile</h4><p>로그인할 때 로드됩니다. 개별 사용자에 대한 설정 코드들 중 bash와는 관계없는 부분을 기재합니다.</p>
+<p>&lt;span id='3'&gt;</p>
+<h2 id="bashrc-와-bash_profile-의-차이">.bashrc 와 .bash_profile 의 차이</h2>
+<h4 id="bashrc">.bashrc</h4>
+<p>이미 로그인 한 상태에서 새 터미널 창을 열 때마다 로드됩니다. (Non-Login Shell에서 실행됩니다.)</p>
+<h4 id="bash_profile">.bash_profile</h4>
+<p>시스템에 로그인할 때마다 로드됩니다. (Login Shell에서 실행됩니다.) 대부분 <strong>개별 사용자에 대한 설정에 대한 코드</strong>들이 들어갑니다. 예를 들면 nvm(Node Version Manager)은 기본적으로 nvm을 사용하지 않고 Node를 설치할 때와는 다르게 각 사용자의 경로에 설치되게 되는데, 이럴때 nvm의 PATH를 .bash_profile 파일에 기재합니다.</p>
+<h4 id="profile">.profile</h4>
+<p>로그인할 때 로드됩니다. 개별 사용자에 대한 설정 코드들 중 bash와는 관계없는 부분을 기재합니다.</p>
 <ul>
-<li>만약 Mac에서 새 터미널 창을 열 때마다 <code>.bashrc</code>를 로드하고 싶다면 <code>.bash_profile</code>에서 .bashrc를 로드하면 됩니다.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Source bashrc</span></span><br><span class="line"><span class="keyword">if</span> [ -f ~/.bashrc ]; <span class="keyword">then</span></span><br><span class="line">    . ~/.bashrc</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
-</li>
+<li>만약 Mac에서 새 터미널 창을 열 때마다 <code>.bashrc</code>를 로드하고 싶다면 <code>.bash_profile</code>에서 .bashrc를 로드하면 됩니다.
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Source bashrc</span></span><br><span class="line"><span class="keyword">if</span> [ -f ~/.bashrc ]; <span class="keyword">then</span></span><br><span class="line">    . ~/.bashrc</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure></li>
 </ul>
 
                 
@@ -259,12 +269,12 @@
                 <ul class="pager">
                     
                         <li class="previous">
-                            <a href="/2016/12/13/Linux & Ubuntu/ls-result-color-change/" data-toggle="tooltip" data-placement="top" title="ls 명령어 결과 색상 변경하기">&larr; Previous Post</a>
+                            <a href="/2017/01/22/ReactNative/image-res-management(1)/" data-toggle="tooltip" data-placement="top" title="정적 이미지 사용하기">&larr; Previous Post</a>
                         </li>
                     
                     
                         <li class="next">
-                            <a href="/2016/09/29/AWS/qvic_aws_architecture/" data-toggle="tooltip" data-placement="top" title="Qvic 서비스 아키텍처 설계">Next Post &rarr;</a>
+                            <a href="/2016/12/13/Linux & Ubuntu/ls-result-color-change/" data-toggle="tooltip" data-placement="top" title="ls 명령어 결과 색상 변경하기">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
