@@ -217,9 +217,9 @@
     
       <category term="Spring Boot" scheme="https://jongmin92.github.io/tags/Spring-Boot/"/>
     
-      <category term="Micrometer" scheme="https://jongmin92.github.io/tags/Micrometer/"/>
-    
       <category term="Actuator" scheme="https://jongmin92.github.io/tags/Actuator/"/>
+    
+      <category term="Micrometer" scheme="https://jongmin92.github.io/tags/Micrometer/"/>
     
       <category term="Prometheus" scheme="https://jongmin92.github.io/tags/Prometheus/"/>
     
