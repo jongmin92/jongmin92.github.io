@@ -2,7 +2,7 @@
 <html lang="en">
 
 <!-- Head tag -->
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA">
@@ -237,32 +237,23 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p><img src="/images/post/2019-12-04/system.png" alt="system">
-Spring Boot를 사용하고 있는 애플리케이션에서 <a href="https://jongmin92.github.io/2019/12/03/Spring/micrometer/">이전에 살펴본 Micrometer</a>를 이용해서 metric을 생성하고 Prometheus를 이용해 수집, 그리고 Grafana로 시각화하는 시스템을 만들어보자.</p>
+                <p><img src="/images/post/2019-12-04/system.png" alt="system"><br>Spring Boot를 사용하고 있는 애플리케이션에서 <a href="https://jongmin92.github.io/2019/12/03/Spring/micrometer/">이전에 살펴본 Micrometer</a>를 이용해서 metric을 생성하고 Prometheus를 이용해 수집, 그리고 Grafana로 시각화하는 시스템을 만들어보자.</p>
 <blockquote>
 <p><a href="https://prometheus.io/" rel="external nofollow noopener noreferrer" target="_blank">Prometheus</a>는 metric을 수집하고 모니터링 및 알람에 사용되는 오픈소스 애플리케이션이다. time series database를 사용해 metric을 저장하고 flexible한 query를 사용하 metric을 조회할 수 있다.</p>
+<p><a href="https://grafana.com/" rel="external nofollow noopener noreferrer" target="_blank">Grafana</a>는 데이터 시각화, 모니터링 및 분석을 위한 오픈소스 플랫폼이다. 사용자는 Grafana에서 패널(panel)을 사용해 설정된 기간 동안 특정 metric을 나타내는 dashboard를 만들 수 있다.<br>Grafana는 그래프, 테이블 같은 것들을 지원할 뿐만 아니라 시각화를 위한 별도의 플러그인을 추가해서 사용할 수도 있다.</p>
 </blockquote>
-<blockquote>
-<p><a href="https://grafana.com/" rel="external nofollow noopener noreferrer" target="_blank">Grafana</a>는 데이터 시각화, 모니터링 및 분석을 위한 오픈소스 플랫폼이다. 사용자는 Grafana에서 패널(panel)을 사용해 설정된 기간 동안 특정 metric을 나타내는 dashboard를 만들 수 있다.
-Grafana는 그래프, 테이블 같은 것들을 지원할 뿐만 아니라 시각화를 위한 별도의 플러그인을 추가해서 사용할 수도 있다.</p>
-</blockquote>
-<h1 id="spring-boot-dependency">Spring Boot Dependency</h1>
-<p><strong>Spring Boot 2.0 이상</strong>부터는 애플리케이션의 metric 측정을 위해서 <code>Micrometer</code>를 제공한다. Micrometer는 Spring Boot 2의 <a href="https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html#production-ready-metrics" rel="external nofollow noopener noreferrer" target="_blank">Actuator에 포함</a>되어 있기 때문에 <code>spring-boot-starter-actuator</code>를 dependency에 추가해주면 쉽게 사용할 수 있다.</p>
-<p>추가적으로 <code>micrometer-registry-prometheus</code> dependency가 필요하다. 이 dependency는 Micrometer가 만들어내는 metric을 Prometheus 서버에서 사용할 수 있는 metric format으로 변경한다.</p>
-<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    implementation <span class="string">'org.springframework.boot:spring-boot-starter-actuator'</span></span><br><span class="line">    implementation <span class="string">'io.micrometer:micrometer-registry-prometheus'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h1 id="actuator-endpoint-설정">Actuator Endpoint 설정</h1>
-<p>Actuator는 Spring MVC 혹은 Spring WebFlux를 사용하는 경우, Micrometer를 통해 생성된 애플리케이션의 metric을 <code>Prometheus 서버</code>에서 가져갈(Pull)수 있도록 <a href="https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html#production-ready-metrics-export-prometheus" rel="external nofollow noopener noreferrer" target="_blank">추가적인 endpoint를 제공</a>해준다.</p>
-<p>Spring Boot 2.0 이상부터 사용하는 Actuator는 1.x 버전에서 사용하던 것과는 달리 대부분의 endpoint가 disabled로 설정되어 있다. 기본적으로 <code>/health</code>와 <code>/info</code> 2가지 endpoint만 default로 사용 가능하다. 따라서 <code>/Prometheus</code> endpoint를 사용할 수 있도록 다음과 같이 <code>application.yml</code>에서 설정이 필요하다.
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">management:</span></span><br><span class="line"><span class="attr">  endpoints:</span></span><br><span class="line"><span class="attr">    web:</span></span><br><span class="line"><span class="attr">      exposure:</span></span><br><span class="line"><span class="attr">        include:</span> <span class="string">health,</span> <span class="string">info,</span> <span class="string">prometheus</span></span><br></pre></td></tr></table></figure></p>
-<p>애플리케이션을 실행하고 http://localhost:8080/actuator 를 통해 Actuator가 제공하는 endpoint들을 확인할 수 있다.
-<img src="/images/post/2019-12-04/endpoint.png" alt="endpoint"></p>
-<p>http://localhost:8080/actuator/prometheus 에서는 Micrometer를 통해 수집된 metric들을 확인할 수 있다.</p>
+<h1 id="spring-boot-dependency"><a href="#Spring-Boot-Dependency" class="headerlink" title="Spring Boot Dependency"></a>Spring Boot Dependency</h1><p><strong>Spring Boot 2.0 이상</strong>부터는 애플리케이션의 metric 측정을 위해서 <code>Micrometer</code>를 제공한다. Micrometer는 Spring Boot 2의 <a href="https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html#production-ready-metrics" rel="external nofollow noopener noreferrer" target="_blank">Actuator에 포함</a>되어 있기 때문에 <code>spring-boot-starter-actuator</code>를 dependency에 추가해주면 쉽게 사용할 수 있다.</p>
+<p>추가적으로 <code>micrometer-registry-prometheus</code> dependency가 필요하다. 이 dependency는 Micrometer가 만들어내는 metric을 Prometheus 서버에서 사용할 수 있는 metric format으로 변경한다.  </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    implementation <span class="string">'org.springframework.boot:spring-boot-starter-actuator'</span></span><br><span class="line">    implementation <span class="string">'io.micrometer:micrometer-registry-prometheus'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="actuator-endpoint-설정"><a href="#Actuator-Endpoint-설정" class="headerlink" title="Actuator Endpoint 설정"></a>Actuator Endpoint 설정</h1><p>Actuator는 Spring MVC 혹은 Spring WebFlux를 사용하는 경우, Micrometer를 통해 생성된 애플리케이션의 metric을 <code>Prometheus 서버</code>에서 가져갈(Pull)수 있도록 <a href="https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html#production-ready-metrics-export-prometheus" rel="external nofollow noopener noreferrer" target="_blank">추가적인 endpoint를 제공</a>해준다.</p>
+<p>Spring Boot 2.0 이상부터 사용하는 Actuator는 1.x 버전에서 사용하던 것과는 달리 대부분의 endpoint가 disabled로 설정되어 있다. 기본적으로 <code>/health</code>와 <code>/info</code> 2가지 endpoint만 default로 사용 가능하다. 따라서 <code>/Prometheus</code> endpoint를 사용할 수 있도록 다음과 같이 <code>application.yml</code>에서 설정이 필요하다.<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">management:</span></span><br><span class="line"><span class="attr">  endpoints:</span></span><br><span class="line"><span class="attr">    web:</span></span><br><span class="line"><span class="attr">      exposure:</span></span><br><span class="line"><span class="attr">        include:</span> <span class="string">health,</span> <span class="string">info,</span> <span class="string">prometheus</span></span><br></pre></td></tr></table></figure></p>
+<p>애플리케이션을 실행하고 <a href="http://localhost:8080/actuator" rel="external nofollow noopener noreferrer" target="_blank">http://localhost:8080/actuator</a> 를 통해 Actuator가 제공하는 endpoint들을 확인할 수 있다.<br><img src="/images/post/2019-12-04/endpoint.png" alt="endpoint"></p>
+<p><a href="http://localhost:8080/actuator/prometheus" rel="external nofollow noopener noreferrer" target="_blank">http://localhost:8080/actuator/prometheus</a> 에서는 Micrometer를 통해 수집된 metric들을 확인할 수 있다.</p>
 <p><img src="/images/post/2019-12-04/prometheus_endpoint.png" alt="prometheus_endpoint"></p>
 <blockquote>
 <p><strong>Spring Boot 2는 기본적으로 다음과 같은 metric들을 제공하고 있다.</strong></p>
 <ul>
-<li>JVM, report utilization of:
-<ul>
+<li>JVM, report utilization of:<ul>
 <li>Various memory and buffer pools</li>
 <li>Statistics related to garbage collection</li>
 <li>Thread utilization</li>
@@ -281,55 +272,33 @@ Grafana는 그래프, 테이블 같은 것들을 지원할 뿐만 아니라 시�
 <li>Tomcat usage</li>
 </ul>
 </blockquote>
-<h1 id="prometheus-설치-및-설정">Prometheus 설치 및 설정</h1>
-<p>애플리케이션에서의 설정은 끝났으니 애플리케이션에서 생성하는 metric을 수집하기 위한 Prometheus Server를 준비해보자.</p>
-<p>테스트를 할 때는 역시나 docker(<a href="https://hub.docker.com/r/prom/prometheus" rel="external nofollow noopener noreferrer" target="_blank">prometheus image</a>)를 이용하면 간편하다. 만약 실제 로컬 환경 혹은 별도의 서버 환경에서 설치해서 사용하고 싶다면 https://prometheus.io/download/#prometheus 에서 다운받아 설치하자.</p>
-<p>Prometheus Server는 기동시 <code>/etc/prometheus/prometheus.yml</code> 설정 파일을 사용한다. docker volume mount를 이용해 Prometheus Server에서 사용할 설정 <code>prometheus.yml</code> 파일을 만들어보자.
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">global:</span></span><br><span class="line"><span class="attr">  scrape_interval:</span> <span class="number">10</span><span class="string">s</span> <span class="comment"># 10초 마다 Metric을 Pulling</span></span><br><span class="line"><span class="attr">  evaluation_interval:</span> <span class="number">10</span><span class="string">s</span></span><br><span class="line"><span class="attr">scrape_configs:</span></span><br><span class="line"><span class="attr">  - job_name:</span> <span class="string">'spring-boot-app'</span></span><br><span class="line"><span class="attr">    metrics_path:</span> <span class="string">'/actuator/prometheus'</span> <span class="comment"># Application prometheus endpoint</span></span><br><span class="line"><span class="attr">    static_configs:</span></span><br><span class="line"><span class="attr">      - targets:</span> <span class="string">['host.docker.internal:8080']</span> <span class="comment"># Application host:port</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="prometheus-설치-및-설정"><a href="#Prometheus-설치-및-설정" class="headerlink" title="Prometheus 설치 및 설정"></a>Prometheus 설치 및 설정</h1><p>애플리케이션에서의 설정은 끝났으니 애플리케이션에서 생성하는 metric을 수집하기 위한 Prometheus Server를 준비해보자.</p>
+<p>테스트를 할 때는 역시나 docker(<a href="https://hub.docker.com/r/prom/prometheus" rel="external nofollow noopener noreferrer" target="_blank">prometheus image</a>)를 이용하면 간편하다. 만약 실제 로컬 환경 혹은 별도의 서버 환경에서 설치해서 사용하고 싶다면 <a href="https://prometheus.io/download/#prometheus" rel="external nofollow noopener noreferrer" target="_blank">https://prometheus.io/download/#prometheus</a> 에서 다운받아 설치하자.</p>
+<p>Prometheus Server는 기동시 <code>/etc/prometheus/prometheus.yml</code> 설정 파일을 사용한다. docker volume mount를 이용해 Prometheus Server에서 사용할 설정 <code>prometheus.yml</code> 파일을 만들어보자.<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">global:</span></span><br><span class="line"><span class="attr">  scrape_interval:</span> <span class="number">10</span><span class="string">s</span> <span class="comment"># 10초 마다 Metric을 Pulling</span></span><br><span class="line"><span class="attr">  evaluation_interval:</span> <span class="number">10</span><span class="string">s</span></span><br><span class="line"><span class="attr">scrape_configs:</span></span><br><span class="line"><span class="attr">  - job_name:</span> <span class="string">'spring-boot-app'</span></span><br><span class="line"><span class="attr">    metrics_path:</span> <span class="string">'/actuator/prometheus'</span> <span class="comment"># Application prometheus endpoint</span></span><br><span class="line"><span class="attr">    static_configs:</span></span><br><span class="line"><span class="attr">      - targets:</span> <span class="string">['host.docker.internal:8080']</span> <span class="comment"># Application host:port</span></span><br></pre></td></tr></table></figure></p>
 <blockquote>
 <p>docker에서 <code>host.docker.internal</code>은 특별한 DNS name으로 사용되며 docker를 실행하는 host를 가리킨다. 개발용으로만 사용해야 하며, Docker Desktop(Mac) 외부의 환경에서는 동작하지 않는다.</p>
 </blockquote>
 <p>파일 생성을 완료했다면 prom/prometheus 이미지를 이용해 docker로 prometheus를 실행한다.</p>
-<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">pwd</span></span><br><span class="line">/Users/user/work/prometheus</span><br><span class="line"></span><br><span class="line">$ docker run -p 9090:9090 -v /Users/user/work/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml --name prometheus -d prom/prometheus --config.file=/etc/prometheus/prometheus.yml</span><br></pre></td></tr></table></figure></p>
-<p>문제 없이 실행되었다면 http://localhost:9090 에 접속해보자. 다음과 같이 Prometheus main 화면을 볼 수 있다.
-<img src="/images/post/2019-12-04/prometheus_main.png" alt="prometheus_main.png"></p>
-<p>docker로 Prometheus를 실행하면서 설정 파일이 잘 적용되었는지도 확인해보자.
-<img src="/images/post/2019-12-04/prometheus_configuration.png" alt="prometheus_configuration.png"></p>
-<p>Status -&gt; Targets 메뉴에서는 Application의 상태를 확인할 수 있다.
-<img src="/images/post/2019-12-04/prometheus_targets.png" alt="prometheus_targets.png"></p>
-<p>Application의 상태(Status)가 DOWN인 경우에는 Application이 현재 기동중인지, prometheus.yml에서 targets의 값이 제대로 되어있는지 확인이 필요하다.
-<img src="/images/post/2019-12-04/prometheus_targets_2.png" alt="prometheus_targets_2.png"></p>
-<p>여기까지 문제가 없다면 아래와 같이 수집된 metric 중 하나를 선택해 값이 잘 나오는지 확인해보자.
-<img src="/images/post/2019-12-04/prometheus_graph.png" alt="prometheus_graph.png"></p>
-<h1 id="prometheus에서-수집한-metric을-grafana로-시각화하기">Prometheus에서 수집한 metric을 Grafana로 시각화하기</h1>
-<p>Prometheus의 웹 페이지에서 쿼리를 실행해 원하는 metric을 그래프로 시각화할 수 있다. 하지만 매번 모니터링을 위해 수동으로 쿼리를 실행하는 것은 비효율적이고 기본적으로 제공하는 대시보드 또한 간단하게 그래프를 볼 수 있는 정도이다.
-<strong>Prometheus가 제공하는 것만으로는 시각화하는데 한계가 있기 때문에 보통 별도의 시각화 도구를 이용해서 metric들을 모니터링한다.</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">pwd</span></span><br><span class="line">/Users/user/work/prometheus</span><br><span class="line"></span><br><span class="line">$ docker run -p 9090:9090 -v /Users/user/work/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml --name prometheus -d prom/prometheus --config.file=/etc/prometheus/prometheus.yml</span><br></pre></td></tr></table></figure>
+<p>문제 없이 실행되었다면 <a href="http://localhost:9090" rel="external nofollow noopener noreferrer" target="_blank">http://localhost:9090</a> 에 접속해보자. 다음과 같이 Prometheus main 화면을 볼 수 있다.<br><img src="/images/post/2019-12-04/prometheus_main.png" alt="prometheus_main.png"></p>
+<p>docker로 Prometheus를 실행하면서 설정 파일이 잘 적용되었는지도 확인해보자.<br><img src="/images/post/2019-12-04/prometheus_configuration.png" alt="prometheus_configuration.png"></p>
+<p>Status -&gt; Targets 메뉴에서는 Application의 상태를 확인할 수 있다.<br><img src="/images/post/2019-12-04/prometheus_targets.png" alt="prometheus_targets.png"></p>
+<p>Application의 상태(Status)가 DOWN인 경우에는 Application이 현재 기동중인지, prometheus.yml에서 targets의 값이 제대로 되어있는지 확인이 필요하다.<br><img src="/images/post/2019-12-04/prometheus_targets_2.png" alt="prometheus_targets_2.png"></p>
+<p>여기까지 문제가 없다면 아래와 같이 수집된 metric 중 하나를 선택해 값이 잘 나오는지 확인해보자.<br><img src="/images/post/2019-12-04/prometheus_graph.png" alt="prometheus_graph.png"></p>
+<h1 id="prometheus에서-수집한-metric을-grafana로-시각화하기"><a href="#Prometheus에서-수집한-metric을-Grafana로-시각화하기" class="headerlink" title="Prometheus에서 수집한 metric을 Grafana로 시각화하기"></a>Prometheus에서 수집한 metric을 Grafana로 시각화하기</h1><p>Prometheus의 웹 페이지에서 쿼리를 실행해 원하는 metric을 그래프로 시각화할 수 있다. 하지만 매번 모니터링을 위해 수동으로 쿼리를 실행하는 것은 비효율적이고 기본적으로 제공하는 대시보드 또한 간단하게 그래프를 볼 수 있는 정도이다.<br><strong>Prometheus가 제공하는 것만으로는 시각화하는데 한계가 있기 때문에 보통 별도의 시각화 도구를 이용해서 metric들을 모니터링한다.</strong></p>
 <p>이번에는 별도의 시각화 도구로 Grafana를 사용해보자. 역시나 docker(<a href="https://hub.docker.com/r/grafana/grafana/" rel="external nofollow noopener noreferrer" target="_blank">grafana/grafana</a>)를 사용한다.</p>
-<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -d --name=grafana -p 3000:3000 grafana/grafana</span><br></pre></td></tr></table></figure></p>
-<p>실행 후 http://localhost:3000 에 접속해보자. 다음과 같이 Grafana login 화면을 볼 수 있다.
-기본 설정된 ID/PW인 <code>admin/admin</code> 으로 로그인할 수 있다.
-<img src="/images/post/2019-12-04/grafana_login.png" alt="grafana_login.png"></p>
-<p>Home Dashboard에서 <code>Add data source</code>를 클릭해 Data Source 추가하자.
-<img src="/images/post/2019-12-04/grafana_add_datasource.png" alt="grafana_add_datasource.png"></p>
-<p>Grafana에서 시각화할 데이터로서 Prometheus에 수집되고 있는 metric을 사용할 것이기 때문에 Prometheus를 선택한다.
-<img src="/images/post/2019-12-04/grafana_add_datasource_2.png" alt="grafana_add_datasource_2.png"></p>
-<p>Name과 URL(Prometheus Server)을 설정하고 Save &amp; Test를 클릭한다.
-<img src="/images/post/2019-12-04/grafana_add_datasource_3.png" alt="grafana_add_datasource_3.png"></p>
-<p>Prometheus가 Data Source로 추가되었다.
-<img src="/images/post/2019-12-04/grafana_add_datasource_4.png" alt="grafana_add_datasource_4.png"></p>
-<p>다음으로는 Data Source를 이용해 Dashboard를 생성해보자.
-<img src="/images/post/2019-12-04/grafana_new_dashboard.png" alt="grafana_new_dashboard.png"></p>
-<p>그래프를 이용해볼 것이기 때문에 <code>Choose Visualization</code>을 클릭한다.
-<img src="/images/post/2019-12-04/grafana_new_dashboard_2.png" alt="grafana_new_dashboard_2.png"></p>
-<p>Metrics로 이전에 Prometheus에서도 확인해보았던 jvm_memoruy_used_bytes를 선택한다.
-<img src="/images/post/2019-12-04/grafana_new_dashboard_3.png" alt="grafana_new_dashboard_3.png"></p>
-<p>작업한 Dashboard를 저장한다.
-<img src="/images/post/2019-12-04/grafana_new_dashboard_4.png" alt="grafana_new_dashboard_4.png"></p>
-<p>추가된 Dashboard를 확인할 수 있다.
-<img src="/images/post/2019-12-04/grafana_new_dashboard_5.png" alt="grafana_new_dashboard_5.png"></p>
-<p>Spring Boot Application에서 생성하는 metric을 Prometheus를 통해 수집하고, Grafana로 시각화하는 것까지 마무리했다.
-실제로는 애플리케이션에서 기본적으로 제공하는 Metric 뿐만 아니라 Micrometer를 이용해 직접 필요한 Metric을 추가할 수도 있다.
-또한 Grafana에는 소개하지 않은 더 많은 유용한 기능들이 있다. 필요한 기능은 문서를 통해 찾아가며 사용해보자.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -d --name=grafana -p 3000:3000 grafana/grafana</span><br></pre></td></tr></table></figure>
+<p>실행 후 <a href="http://localhost:3000" rel="external nofollow noopener noreferrer" target="_blank">http://localhost:3000</a> 에 접속해보자. 다음과 같이 Grafana login 화면을 볼 수 있다.<br>기본 설정된 ID/PW인 <code>admin/admin</code> 으로 로그인할 수 있다.<br><img src="/images/post/2019-12-04/grafana_login.png" alt="grafana_login.png"></p>
+<p>Home Dashboard에서 <code>Add data source</code>를 클릭해 Data Source 추가하자.<br><img src="/images/post/2019-12-04/grafana_add_datasource.png" alt="grafana_add_datasource.png"></p>
+<p>Grafana에서 시각화할 데이터로서 Prometheus에 수집되고 있는 metric을 사용할 것이기 때문에 Prometheus를 선택한다.<br><img src="/images/post/2019-12-04/grafana_add_datasource_2.png" alt="grafana_add_datasource_2.png"></p>
+<p>Name과 URL(Prometheus Server)을 설정하고 Save &amp; Test를 클릭한다.<br><img src="/images/post/2019-12-04/grafana_add_datasource_3.png" alt="grafana_add_datasource_3.png"></p>
+<p>Prometheus가 Data Source로 추가되었다.<br><img src="/images/post/2019-12-04/grafana_add_datasource_4.png" alt="grafana_add_datasource_4.png"></p>
+<p>다음으로는 Data Source를 이용해 Dashboard를 생성해보자.<br><img src="/images/post/2019-12-04/grafana_new_dashboard.png" alt="grafana_new_dashboard.png"></p>
+<p>그래프를 이용해볼 것이기 때문에 <code>Choose Visualization</code>을 클릭한다.<br><img src="/images/post/2019-12-04/grafana_new_dashboard_2.png" alt="grafana_new_dashboard_2.png"></p>
+<p>Metrics로 이전에 Prometheus에서도 확인해보았던 jvm_memoruy_used_bytes를 선택한다.<br><img src="/images/post/2019-12-04/grafana_new_dashboard_3.png" alt="grafana_new_dashboard_3.png"></p>
+<p>작업한 Dashboard를 저장한다.<br><img src="/images/post/2019-12-04/grafana_new_dashboard_4.png" alt="grafana_new_dashboard_4.png"></p>
+<p>추가된 Dashboard를 확인할 수 있다.<br><img src="/images/post/2019-12-04/grafana_new_dashboard_5.png" alt="grafana_new_dashboard_5.png"></p>
+<p>Spring Boot Application에서 생성하는 metric을 Prometheus를 통해 수집하고, Grafana로 시각화하는 것까지 마무리했다.<br>실제로는 애플리케이션에서 기본적으로 제공하는 Metric 뿐만 아니라 Micrometer를 이용해 직접 필요한 Metric을 추가할 수도 있다.<br>또한 Grafana에는 소개하지 않은 더 많은 유용한 기능들이 있다. 필요한 기능은 문서를 통해 찾아가며 사용해보자.</p>
 
                 
 
@@ -420,13 +389,6 @@ Grafana는 그래프, 테이블 같은 것들을 지원할 뿐만 아니라 시�
                 
 
                 <!-- Friends Blog -->
-                
-                <hr>
-                <h5>FRIENDS</h5>
-                <ul class="list-inline">
-
-                    
-                </ul>
                 
             </div>
         </div>

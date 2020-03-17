@@ -2,7 +2,7 @@
 <html lang="en">
 
 <!-- Head tag -->
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA">
@@ -233,21 +233,14 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1 id="해시hash와-암호화encryption의-차이">해시(Hash)와 암호화(Encryption)의 차이</h1>
-<p>먼저 혼동하기 쉬운 <code>해시</code>와 <code>암호화</code>의 차이에 대해서 알아보자.</p>
-<h2 id="해시">해시</h2>
-<p><img src="/images/post/2019-12-18/hash.png" alt="hash">
-<strong>해시는 가변 길이의 데이터를 해시 함수를 사용해 고정 길이의 해시 값을 만들어 내는 방법이다.</strong> 만약 해시 값이 다르면 그 해시 값을 만들기 위해 사용했던 원래의 데이터도 달라야한다. 또한 해시 값에서 원래의 데이터를 구하는 것은 매우 어렵다.</p>
-<h2 id="암호화">암호화</h2>
-<p><img src="/images/post/2019-12-18/encryption.png" alt="encryption">
-<strong>암호화는 복호화(Decryption)을 할 수 있는 Key를 소유하고 있는 사람은 제외하고는 원래의 데이터를 읽어볼 수 없도록 암호화 알고리즘을 이용해 데이터를 전달하는 것이다.</strong> 암호화된 정보는 복호화하여 다시 원래의 데이터를 구할 수 있다.</p>
+                <h1 id="해시hash와-암호화encryption의-차이"><a href="#해시-Hash-와-암호화-Encryption-의-차이" class="headerlink" title="해시(Hash)와 암호화(Encryption)의 차이"></a>해시(Hash)와 암호화(Encryption)의 차이</h1><p>먼저 혼동하기 쉬운 <code>해시</code>와 <code>암호화</code>의 차이에 대해서 알아보자.</p>
+<h2 id="해시"><a href="#해시" class="headerlink" title="해시"></a>해시</h2><p><img src="/images/post/2019-12-18/hash.png" alt="hash"><br><strong>해시는 가변 길이의 데이터를 해시 함수를 사용해 고정 길이의 해시 값을 만들어 내는 방법이다.</strong> 만약 해시 값이 다르면 그 해시 값을 만들기 위해 사용했던 원래의 데이터도 달라야한다. 또한 해시 값에서 원래의 데이터를 구하는 것은 매우 어렵다.</p>
+<h2 id="암호화"><a href="#암호화" class="headerlink" title="암호화"></a>암호화</h2><p><img src="/images/post/2019-12-18/encryption.png" alt="encryption"><br><strong>암호화는 복호화(Decryption)을 할 수 있는 Key를 소유하고 있는 사람은 제외하고는 원래의 데이터를 읽어볼 수 없도록 암호화 알고리즘을 이용해 데이터를 전달하는 것이다.</strong> 암호화된 정보는 복호화하여 다시 원래의 데이터를 구할 수 있다.</p>
 <p><strong>즉, 암호화를 통해 생성된 값은 복호화를 통해 원래의 데이터를 알 수 있지만, 해시를 통해 만들어진 고정된 길이의 해시 값의 경우는 원래의 데이터를 알 수 없다.</strong></p>
-<h1 id="해시">해시</h1>
-<p>이제 해시에 대해서 조금 더 자세히 알아보자. <strong>해시 함수는 가변 길이의 데이터를 이용해 고정 길이의 해시 값을 생성하는데, 같은 입력 값에 대해서는 같은 출력 값을 보장한다.</strong></p>
+<h1 id="해시"><a href="#해시-1" class="headerlink" title="해시"></a>해시</h1><p>이제 해시에 대해서 조금 더 자세히 알아보자. <strong>해시 함수는 가변 길이의 데이터를 이용해 고정 길이의 해시 값을 생성하는데, 같은 입력 값에 대해서는 같은 출력 값을 보장한다.</strong></p>
 <p>해시는 보안 분야에서도 널리 사용된다. 해시 함수를 통해 생성된 해시 값을 이용해서 원래의 데이터를 알 수 없도록 만든다는 특성을 갖고 있기 때문이다. 해시 함수의 결과물은 고정된 길이의 숫자이므로, 원래의 정보는 손실된다. 또한 이런 특성 때문에 하나의 원본 데이터는 하나의 해시 값만 가지지만, 하나의 해시 값을 만들어낼 수 있는 원본 데이터는 매우 많다. 그렇기 때문에 <strong>해시 값만 가지고는 원본 데이터를 복원해내는 것은 불가능하다. 따라서 비밀번호, 전자서명, 전자투표, 전자상거래와 같은 민감한 입력의 무결성을 검증할 때 사용된다.</strong></p>
 <p>비밀번호: 보통 유저의 비밀번호를 암호화해서 저장한다고 한다. 그러나 암호화의 경우는 복호화를 통해 실제 비밀번호를 알아낼 수 있으므로 암호화가 아닌 해시 함수를 이용해 생성된 해시 값을 저장해야한다.</p>
-<h2 id="md5">MD5</h2>
-<p><strong><code>MD5(Message-Digest algorithm 5)</code>는 128비트의 해시 값을 생성하는 해시 함수이다.</strong> 주로 프로그램이나 파일이 원본 그대로인지를 확인하는 무결성 검사 등에 사용된다. 이전에 쓰이던 MD4를 대체하기 위해 만들어졌다.</p>
+<h2 id="md5"><a href="#MD5" class="headerlink" title="MD5"></a>MD5</h2><p><strong><code>MD5(Message-Digest algorithm 5)</code>는 128비트의 해시 값을 생성하는 해시 함수이다.</strong> 주로 프로그램이나 파일이 원본 그대로인지를 확인하는 무결성 검사 등에 사용된다. 이전에 쓰이던 MD4를 대체하기 위해 만들어졌다.</p>
 <p>그러나 현재는 아래와 같은 결함이 발견되었기 때문에 사용하는 것을 권장하지 않는다.</p>
 <blockquote>
 <p>1996년에 설계상 결함이 발견되었다. 이것은 매우 치명적인 결함은 아니었지만, 암호학자들은 해시 용도로 SHA-1과 같이 다른 안전한 알고리즘을 사용할 것을 권장하기 시작했다. 2004년에는 더욱 심한 암호화 결함이 발견되었고. 2006년에는 노트북 컴퓨터 한 대의 계산 능력으로 1분 내에 해시 충돌을 찾을 정도로 빠른 알고리즘이 발표되기도 하였다. 현재는 MD5 알고리즘을 보안 관련 용도로 쓰는 것은 권장하지 않으며, 심각한 보안 문제를 야기할 수도 있다.</p>
@@ -255,14 +248,12 @@
 <p>kotlin으로 작성한 코드를 통해 간단히 확인해보자. java에서 제공하는 <code>MessageDigest</code>를 사용하면 쉽게 MD5 해시 함수를 통한 해시 값을 만들 수 있다.</p>
 <p>아래 코드에서는 MD5 해시 함수를 통해 해시 값(128비트)을 생성하고 Hex string으로 변환하였다.</p>
 <p><a href="https://www.md5hashgenerator.com/" rel="external nofollow noopener noreferrer" target="_blank">Online MD5 Hash Generator</a>를 이용해서도 테스트할 수 있다.</p>
-<p><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">val</span> planText = <span class="string">"password1!2@3#"</span></span><br><span class="line">    <span class="keyword">val</span> md = MessageDigest.getInstance(<span class="string">"MD5"</span>)</span><br><span class="line">    md.update(planText.toByteArray())</span><br><span class="line"></span><br><span class="line">    <span class="keyword">val</span> digest = DatatypeConverter.printHexBinary(md.digest())</span><br><span class="line">    println(<span class="string">"planText: <span class="subst">$&#123;planText&#125;</span>"</span>)</span><br><span class="line">    println(<span class="string">"MD5 encoding result: <span class="subst">$&#123;digest&#125;</span>"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">----------실행 결과----------</span><br><span class="line">planText: password1!<span class="number">2</span>@<span class="number">3</span>#</span><br><span class="line">MD5 encoding result: E9C4736A0963EB81C0C85AF48CF2F3F2</span><br></pre></td></tr></table></figure></p>
-<h2 id="sha-256">SHA-256</h2>
-<p><strong><code>SHA-256</code>은 SHA(Secure Hash Algorithm) 알고리즘의 한 종류로서 256비트의 해시 값을 생성하는 해시 함수이다.</strong> SHA-256은 미국의 국립표준기술연구소(NIST; National Institute of Standards and Technology)에 의해 공표된 표준 해시 알고리즘인 SHA-2 계열 중 하나이며 블록체인에서 가장 많이 채택하여 사용하고 있다.</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">val</span> planText = <span class="string">"password1!2@3#"</span></span><br><span class="line">    <span class="keyword">val</span> md = MessageDigest.getInstance(<span class="string">"MD5"</span>)</span><br><span class="line">    md.update(planText.toByteArray())</span><br><span class="line"></span><br><span class="line">    <span class="keyword">val</span> digest = DatatypeConverter.printHexBinary(md.digest())</span><br><span class="line">    println(<span class="string">"planText: <span class="subst">$&#123;planText&#125;</span>"</span>)</span><br><span class="line">    println(<span class="string">"MD5 encoding result: <span class="subst">$&#123;digest&#125;</span>"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">----------실행 결과----------</span><br><span class="line">planText: password1!<span class="number">2</span>@<span class="number">3</span>#</span><br><span class="line">MD5 encoding result: E9C4736A0963EB81C0C85AF48CF2F3F2</span><br></pre></td></tr></table></figure>
+<h2 id="sha-256"><a href="#SHA-256" class="headerlink" title="SHA-256"></a>SHA-256</h2><p><strong><code>SHA-256</code>은 SHA(Secure Hash Algorithm) 알고리즘의 한 종류로서 256비트의 해시 값을 생성하는 해시 함수이다.</strong> SHA-256은 미국의 국립표준기술연구소(NIST; National Institute of Standards and Technology)에 의해 공표된 표준 해시 알고리즘인 SHA-2 계열 중 하나이며 블록체인에서 가장 많이 채택하여 사용하고 있다.</p>
 <p>개인용 컴퓨터로 무차별 대입을 수행해 해시 충돌 사례를 찾으려고 할 때 많은 시간이 소요될 정도로 큰 숫자이므로 충돌로부터 비교적 안전하다고 평가된다.</p>
 <p>아래 코드에서는 SHA-256 해시 함수를 통해 해시 값(256비트)을 생성하고 Hex string으로 변환하였다.</p>
 <p><a href="https://www.cleancss.com/sha256-hash-generator" rel="external nofollow noopener noreferrer" target="_blank">Online SHA-256 Hash Generator</a>를 이용해서도 테스트할 수 있다.</p>
-<p><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">val</span> planText = <span class="string">"password1!2@3#"</span></span><br><span class="line">    <span class="keyword">val</span> md = MessageDigest.getInstance(<span class="string">"SHA-256"</span>)</span><br><span class="line">    md.update(planText.toByteArray())</span><br><span class="line"></span><br><span class="line">    <span class="keyword">val</span> digest = DatatypeConverter.printHexBinary(md.digest())</span><br><span class="line">    println(<span class="string">"planText: <span class="subst">$&#123;planText&#125;</span>"</span>)</span><br><span class="line">    println(<span class="string">"SHA-256 encoding result: <span class="subst">$&#123;digest&#125;</span>"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">----------실행 결과----------</span><br><span class="line">planText: password1!<span class="number">2</span>@<span class="number">3</span>#</span><br><span class="line">SHA<span class="number">-256</span> encoding result: <span class="number">0979334</span>AF544553966CB7AF741869C971C716A6879C562FDFE781B50F2F5862E</span><br></pre></td></tr></table></figure></p>
-
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">val</span> planText = <span class="string">"password1!2@3#"</span></span><br><span class="line">    <span class="keyword">val</span> md = MessageDigest.getInstance(<span class="string">"SHA-256"</span>)</span><br><span class="line">    md.update(planText.toByteArray())</span><br><span class="line"></span><br><span class="line">    <span class="keyword">val</span> digest = DatatypeConverter.printHexBinary(md.digest())</span><br><span class="line">    println(<span class="string">"planText: <span class="subst">$&#123;planText&#125;</span>"</span>)</span><br><span class="line">    println(<span class="string">"SHA-256 encoding result: <span class="subst">$&#123;digest&#125;</span>"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">----------실행 결과----------</span><br><span class="line">planText: password1!<span class="number">2</span>@<span class="number">3</span>#</span><br><span class="line">SHA<span class="number">-256</span> encoding result: <span class="number">0979334</span>AF544553966CB7AF741869C971C716A6879C562FDFE781B50F2F5862E</span><br></pre></td></tr></table></figure>
                 
 
                 <hr>
@@ -348,13 +339,6 @@
                 
 
                 <!-- Friends Blog -->
-                
-                <hr>
-                <h5>FRIENDS</h5>
-                <ul class="list-inline">
-
-                    
-                </ul>
                 
             </div>
         </div>

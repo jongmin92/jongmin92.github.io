@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="sitemap.xsl"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
+
     <sitemap>
         <loc>https://jongmin92.github.io/post-sitemap.xml</loc>
         <lastmod>2020-01-26T09:02:44.163Z</lastmod>
@@ -13,12 +14,12 @@
 
     <sitemap>
         <loc>https://jongmin92.github.io/category-sitemap.xml</loc>
-        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
+        <lastmod>2020-01-26T09:02:44.163Z</lastmod>
     </sitemap>
 
     <sitemap>
         <loc>https://jongmin92.github.io/tag-sitemap.xml</loc>
-        <lastmod>2018-02-05T01:06:40.000Z</lastmod>
+        <lastmod>2020-01-26T09:02:44.163Z</lastmod>
     </sitemap>
 
 </sitemapindex>
