@@ -228,10 +228,14 @@
                 <p>회사에서 새로운 서비스를 준비하며 이번 9-b 스프린트동안 구축한 Qvic의 AWS 구조는 다음과 같습니다. 각각의 서비스에 대한 자세한 내용은 AWS 사이트와, 책을 참조 하였고, 이번 글에서는 이와 같은 환경을 구축하며 생겼던 문제들과 앞으로는 조금 더 쉽게 구축 할 수 있도록 일련의 과정에 대해 설명하고자 합니다.</p>
 <p><img src="/images/post/2016-09-29/aws_architecture.png" alt="Qvic AWS Architecture"></p>
 <hr>
-<h2 id="1-iam-생성"><a href="#1-IAM-생성" class="headerlink" title="1. IAM 생성"></a>1. IAM 생성</h2><p>IAM은 Identity and Access Management(식별 및 접근 관리)의 약어로 사용자와 그룹을 생성하고 <strong>AWS의 각 리소스에 대해 접근제어와 권한관리를 제공</strong>한다. 이러한 IAM 을 EC2 Instance를 생성하며 설정할 수가 있는데 이미 만들어진 EC2 Instance에는 IAM 역할을 설정할 수가 없다. (처음에 모르고 하다가 나중에 지우고 다시 EC2를 생성하며 IAM을 설정하는 일이 생길 수 있다.) 물론 IAM 을 설정하지 않아도 EC2 Instance에서 API로 액세스 키와 시크릿 키를 설정해서 AWS 리소스에는 접근할 수 있지만 나중에 Auto Scaling 기능으로 자동으로 생성되는 EC2 인스턴스에 액세스키와 시크릿키를 일일이 설정해주는 것은 상당히 귀찮은 일이다. 이를 위해 <strong>먼저 IAM 을 생성한 후 EC2를 생성하는 것이 좋다.</strong><br><code>* IAM 생성 후 생성 된 IAM에 권한을 부여하는 것은 나중에도 가능하므로 자세한 내용을 알지 못한다면 일단 생성 후 EC2에 적용만 해놓아도 된다.</code></p>
+<h2 id="1-iam-생성">1. IAM 생성</h2>
+<p>IAM은 Identity and Access Management(식별 및 접근 관리)의 약어로 사용자와 그룹을 생성하고 <strong>AWS의 각 리소스에 대해 접근제어와 권한관리를 제공</strong>한다. 이러한 IAM 을 EC2 Instance를 생성하며 설정할 수가 있는데 이미 만들어진 EC2 Instance에는 IAM 역할을 설정할 수가 없다. (처음에 모르고 하다가 나중에 지우고 다시 EC2를 생성하며 IAM을 설정하는 일이 생길 수 있다.) 물론 IAM 을 설정하지 않아도 EC2 Instance에서 API로 액세스 키와 시크릿 키를 설정해서 AWS 리소스에는 접근할 수 있지만 나중에 Auto Scaling 기능으로 자동으로 생성되는 EC2 인스턴스에 액세스키와 시크릿키를 일일이 설정해주는 것은 상당히 귀찮은 일이다. 이를 위해 <strong>먼저 IAM 을 생성한 후 EC2를 생성하는 것이 좋다.</strong><br>
+<code>* IAM 생성 후 생성 된 IAM에 권한을 부여하는 것은 나중에도 가능하므로 자세한 내용을 알지 못한다면 일단 생성 후 EC2에 적용만 해놓아도 된다.</code></p>
 <hr>
-<h2 id="2-ec2-생성-gt-개발환경-구축-gt-ami-생성"><a href="#2-EC2-생성-gt-개발환경-구축-gt-AMI-생성" class="headerlink" title="2. EC2 생성 -&gt; 개발환경 구축 -&gt; AMI 생성"></a>2. EC2 생성 -&gt; 개발환경 구축 -&gt; AMI 생성</h2><p>사용중인 AWS 계정이 Free Tier 라면 t2.micro (1달 750시간 무료) Instance로 생성하여 AMI(Amazon Machine Image)를 생성하는 것도 효율적인 방법이다. 추후에 AMI를 사용하여 EC2를 새로 생성할 수도 있고, 이미 생성된 EC2 Type을 변경할 수도 있다.</p>
-<p>EC2의 Instance는 다음과 같이 생성하였다. (모두 Ubuntu Image를 사용하였다. EC2를 생성할때 만들어지는 .pem 파일의 백업은 중요하다!)<br>Express를 사용하여 프로젝트를 진행하였기 때문에 3000번 포트가 필요하여 <strong>Security Group 설정</strong>에서 Add Rule을 통해 3000번 포트를 추가해 주었다.</p>
+<h2 id="2-ec2-생성-gt-개발환경-구축-gt-ami-생성">2. EC2 생성 -&gt; 개발환경 구축 -&gt; AMI 생성</h2>
+<p>사용중인 AWS 계정이 Free Tier 라면 t2.micro (1달 750시간 무료) Instance로 생성하여 AMI(Amazon Machine Image)를 생성하는 것도 효율적인 방법이다. 추후에 AMI를 사용하여 EC2를 새로 생성할 수도 있고, 이미 생성된 EC2 Type을 변경할 수도 있다.</p>
+<p>EC2의 Instance는 다음과 같이 생성하였다. (모두 Ubuntu Image를 사용하였다. EC2를 생성할때 만들어지는 .pem 파일의 백업은 중요하다!)<br>
+Express를 사용하여 프로젝트를 진행하였기 때문에 3000번 포트가 필요하여 <strong>Security Group 설정</strong>에서 Add Rule을 통해 3000번 포트를 추가해 주었다.</p>
 <ul>
 <li><strong>Blue-Green Deployment</strong> 를 위해 Auto Scaling (자동으로 EC2 인스턴스를 생성하여 서비스를 확장하는 기능) 을 적용한 Prod 용 Instance 2개</li>
 <li>Dev 용 Instance 1개</li>
@@ -250,12 +254,16 @@
 <li>git 다운로드 및 ssh 설정</li>
 <li>bash script 파일</li>
 </ul>
-<p>Auto Scaling 그룹을 생성기 전에 설정하는 EC2 생성 옵션 설정에서 <strong><code>&#39;User data&#39;</code></strong> 라는 칸에 자동으로 EC2가 생성된 후 <strong>root 권한으로 실행할 스크립트를 작성</strong>한다. 이때 git에서 프로젝트를 clone 한 후 자동으로 서비스를 시작하도록 하는 코드가 작성되어야 한다. 이 부분이 어려운 부분은 아니지만 경로 등… 여러가지 설정을 한 후 Auto Scaling이 잘 적용되는지 확인하기 위해서는 생성한 Auto Scaling에 인위적으로 부하를 걸어 Instance가 생성되도록 하고 ‘User data’에 작성한 스크립트가 잘 실행되는지 까지 확인해야 한다. 생각보다 시간이 걸리고 인스턴스를 반복적으로 생성하고 삭제 (과금…) 하는 부분이 부담스러워서 직접 EC2 에 bash script 파일을 작성한 후 ‘User data’ 에서는 이 script를 실행하도록만 작성하였다. 작성한 script는 먼저 만들어 두었던 Dev Instance 에서 테스트 한 후 잘 작동하는 것을 확인한 후 Prod Instance로 옮겼다.<br>이렇게 생성한 Dev와 Prod 용 Instance를 사용하여 AMI를 생성한다.</p>
+<p>Auto Scaling 그룹을 생성기 전에 설정하는 EC2 생성 옵션 설정에서 <strong><code>'User data'</code></strong> 라는 칸에 자동으로 EC2가 생성된 후 <strong>root 권한으로 실행할 스크립트를 작성</strong>한다. 이때 git에서 프로젝트를 clone 한 후 자동으로 서비스를 시작하도록 하는 코드가 작성되어야 한다. 이 부분이 어려운 부분은 아니지만 경로 등… 여러가지 설정을 한 후 Auto Scaling이 잘 적용되는지 확인하기 위해서는 생성한 Auto Scaling에 인위적으로 부하를 걸어 Instance가 생성되도록 하고 'User data’에 작성한 스크립트가 잘 실행되는지 까지 확인해야 한다. 생각보다 시간이 걸리고 인스턴스를 반복적으로 생성하고 삭제 (과금…) 하는 부분이 부담스러워서 직접 EC2 에 bash script 파일을 작성한 후 ‘User data’ 에서는 이 script를 실행하도록만 작성하였다. 작성한 script는 먼저 만들어 두었던 Dev Instance 에서 테스트 한 후 잘 작동하는 것을 확인한 후 Prod Instance로 옮겼다.<br>
+이렇게 생성한 Dev와 Prod 용 Instance를 사용하여 AMI를 생성한다.</p>
 <hr>
-<h2 id="3-elb-elastic-load-balancing-사용"><a href="#3-ELB-Elastic-Load-Balancing-사용" class="headerlink" title="3. ELB (Elastic Load Balancing) 사용"></a>3. ELB (Elastic Load Balancing) 사용</h2><p>Auto Scaling 그룹을 생성 하면서 ELB 를 선택하는 부분이 있기 때문에 ELB를 먼저 생성해야 한다. <strong>AWS에서 제공하는 ELB는 2가지가 있다.</strong></p>
+<h2 id="3-elb-elastic-load-balancing-사용">3. ELB (Elastic Load Balancing) 사용</h2>
+<p>Auto Scaling 그룹을 생성 하면서 ELB 를 선택하는 부분이 있기 때문에 ELB를 먼저 생성해야 한다. <strong>AWS에서 제공하는 ELB는 2가지가 있다.</strong></p>
 <p><img src="/images/post/2016-09-29/aws_elb.png" alt="AWS - ELB"></p>
-<p><strong>1. Application load balancer</strong><br><strong><code>Layer 7 로드밸런싱</code></strong>을 통해 패킷을 조사하고, HTTP 및 HTTPS 헤더에 접근해서 좀 더 지능적인 부하 분산 작업이 가능하다. 예를들어, URL에 /api 라는 경로를 포함하고 있는 경우, 다른 서버 그룹으로 요청을 보낼 수 있으며 /mobile은 또 다른 서버 그룹으로 보낼 수 있다. 각 애플리케이션 로드밸런서는 10개의 URL 규칙을 만들 수 있으며 이를 통해 여러 개의 마이크로서비스를 독립적으로 실행하고 확장할 수 있다.</p>
-<p><strong>2. Classic load balancer</strong><br><strong><code>Layer 4 로드밸런싱</code></strong>을 사용하여 네트워크 프로토콜 레벨에서 제공 되며, 실제 패킷을 살펴 보지는 못하기 때문에 HTTP나 HTTPS 같은 특정 프로토콜을 인지하지 않고 부하를 분산한다.</p>
+<p><strong>1. Application load balancer</strong><br>
+**<code>Layer 7 로드밸런싱</code>**을 통해 패킷을 조사하고, HTTP 및 HTTPS 헤더에 접근해서 좀 더 지능적인 부하 분산 작업이 가능하다. 예를들어, URL에 /api 라는 경로를 포함하고 있는 경우, 다른 서버 그룹으로 요청을 보낼 수 있으며 /mobile은 또 다른 서버 그룹으로 보낼 수 있다. 각 애플리케이션 로드밸런서는 10개의 URL 규칙을 만들 수 있으며 이를 통해 여러 개의 마이크로서비스를 독립적으로 실행하고 확장할 수 있다.</p>
+<p><strong>2. Classic load balancer</strong><br>
+**<code>Layer 4 로드밸런싱</code>**을 사용하여 네트워크 프로토콜 레벨에서 제공 되며, 실제 패킷을 살펴 보지는 못하기 때문에 HTTP나 HTTPS 같은 특정 프로토콜을 인지하지 않고 부하를 분산한다.</p>
 <p>ELB 생성시 주의할 점은 다음과 같다.</p>
 <ul>
 <li>Express를 사용하기 때문에 3000번 포트를 추가해 준다. (Security Group 설정에서도 추가)</li>
@@ -265,16 +273,19 @@
 </ul>
 <p>혹시 Elastic IP가 적용되어 있었다면 제거한다. 앞으로 서비스에 접속할 때는 EC2 Instance에 바로 접속하지 않고 ELB 의 URL로 접속한다. (후에 Route 53에서 자신의 도메인으로 설정할 수 있다.)</p>
 <hr>
-<h2 id="4-auto-scaling-적용"><a href="#4-Auto-Scaling-적용" class="headerlink" title="4. Auto Scaling 적용"></a>4. Auto Scaling 적용</h2><p>EC2 Instace 생성 옵션을 설정하고, Auto Scaling 그룹을 생성한다. EC2 Instance 생성 옵션을 설정하면서 주의할 점이 몇가지 있다.</p>
+<h2 id="4-auto-scaling-적용">4. Auto Scaling 적용</h2>
+<p>EC2 Instace 생성 옵션을 설정하고, Auto Scaling 그룹을 생성한다. EC2 Instance 생성 옵션을 설정하면서 주의할 점이 몇가지 있다.</p>
 <ul>
 <li>IAM role 은 자동으로 생성되는 EC2 Instance에서 사용할 IAM 역할이다. IAM 역할을 사용하면 액세스 키와 시크릿 키 없이 AWS API를 사용할 수 있으므로 당장은 AWS API 를 사용하지 않더라도 설정해 두는것이 좋다.</li>
 <li>Advanced Details를 누르면 나오는 User data는 EC2 Instance가 생성된 후 root 권한으로 자동으로 실행할 script를 입력하는 곳이다. AMI를 생성하며 작성했던 script가 실행되도록 작성한다.</li>
-<li>#!/bin/bash<br>/home/ubuntu/auto_start.sh</li>
+<li>#!/bin/bash<br>
+/home/ubuntu/auto_start.sh</li>
 <li>Express를 사용하기 때문에 Security Group 설정에서 Add Rule을 통해 3000번 포트를 추가해 준다.</li>
 <li>미리 생성해 두었던 ELB를 적용한다.</li>
 </ul>
 <p>여러가지 설정들이 있는데 이는 나중에 수정이 가능하므로 처음 생성시에 너무 고민하지 않아도 된다. 필요할 때 수정해주고 모르는것은 좀 더 조사해보면서 수정하면 된다.</p>
-<p><strong>&lt;종료정책 설정&gt;</strong><br>처음 Auto Scaling을 만들고 테스트를 하면서 당황했던 것이있다. 처음에 유지되고 있던 1개의 Instance에 인위적으로 부하를 걸면 내가 설정해놓은 정책에 따라 Instance가 자동으로 생성되고, 삭제되게 되는데 마지막에 생성된 Instance가 그대로 남고 원래 존재하던 Instance가 제거 되는 것이다. Auto Scaling이 적용된 Instance에는 자동 생성되는 Instance의 AMI 와는 조금 다르게 환경 구축이 되어있는데 사라져서 당황했었다. 이는 Auto Scaling의 종료정책 때문인데 종료정책의 종류는 다음과 같다.</p>
+<p><strong>&lt;종료정책 설정&gt;</strong><br>
+처음 Auto Scaling을 만들고 테스트를 하면서 당황했던 것이있다. 처음에 유지되고 있던 1개의 Instance에 인위적으로 부하를 걸면 내가 설정해놓은 정책에 따라 Instance가 자동으로 생성되고, 삭제되게 되는데 마지막에 생성된 Instance가 그대로 남고 원래 존재하던 Instance가 제거 되는 것이다. Auto Scaling이 적용된 Instance에는 자동 생성되는 Instance의 AMI 와는 조금 다르게 환경 구축이 되어있는데 사라져서 당황했었다. 이는 Auto Scaling의 종료정책 때문인데 종료정책의 종류는 다음과 같다.</p>
 <ul>
 <li><strong>OldestInstance</strong> : Auto Scaling은 그룹에서 가장 오래된 Instance를 종료한다.</li>
 <li><strong>NewestInstance</strong> : Auto Scaling은 그룹에서 가장 새로운 Instance를 종료한다.</li>
@@ -284,9 +295,12 @@
 </ul>
 <p>위와 같은 종료정책은 Auto Scaling 설정시 설정하는 부분이 아니고 생성한 후 변경해 주어야 하는 부분이라 놓칠 수 있다. 기본 종료 정책이 아닌 다른 정책이 필요하다면 변경해 주어야한다.</p>
 <hr>
-<h2 id="5-route-53"><a href="#5-Route-53" class="headerlink" title="5. Route 53"></a>5. Route 53</h2><p>Route 53은 EC2, ELB, S3, CloudFront와 연동 가능한 DNS 서비스이다. Free Tier에서도 무료로 사용이 불가능하다. Route 53을 사용하기 위해서는 도메인이 필요한데 아직 구매하지 않았다면 Route 53 에서 구매하는 것을 추천한다. 외부에서 구매한 도메인은 네임서버를 따로 설정해 주어야한다.<br>A 레코드를 통해 미리 생성했던 ELB를 쉽게 설정해 줄 수 있다. (후에 Blue-Green Deployment시 2개의 ELB를 서로 교체해주면 된다.)</p>
+<h2 id="5-route-53">5. Route 53</h2>
+<p>Route 53은 EC2, ELB, S3, CloudFront와 연동 가능한 DNS 서비스이다. Free Tier에서도 무료로 사용이 불가능하다. Route 53을 사용하기 위해서는 도메인이 필요한데 아직 구매하지 않았다면 Route 53 에서 구매하는 것을 추천한다. 외부에서 구매한 도메인은 네임서버를 따로 설정해 주어야한다.<br>
+A 레코드를 통해 미리 생성했던 ELB를 쉽게 설정해 줄 수 있다. (후에 Blue-Green Deployment시 2개의 ELB를 서로 교체해주면 된다.)</p>
 <hr>
-<h2 id="6-그외-여러-주의사항"><a href="#6-그외-여러-주의사항" class="headerlink" title="6. 그외 여러 주의사항"></a>6. 그외 여러 주의사항</h2><ul>
+<h2 id="6-그외-여러-주의사항">6. 그외 여러 주의사항</h2>
+<ul>
 <li>Free Tier 에서 한달에 EC2 Instance는 750시간 무료이고 EBS는 30GB가 무료이다. 보통 EC2 Instance만 신경써서 4~5개를 한번에 만들고 후에 제거하고 하는데 EC2 Instance 생성시 따로 EBS 크기를 정해주지 않으면 기본이 8GB이기 때문에 4개만 생성해도 EBS로 인해 과금이 된다. (정지해도 과금이 된다.)</li>
 <li>Elastic IP는 EC2 Instance 1개에 대해 할당하고 있을때만 무료이다. 만약 EC2 Instance를 중지하거나 제거한다면 Elastic IP도 제거해 주어야 한다.</li>
 <li>Free Tier 사용시 CloudWatch 의 주기는 5분일때 무료이다. 주기를 줄이면 과금된다.</li>
@@ -306,7 +320,7 @@
                     
                     
                         <li class="next">
-                            <a href="/2016/09/20/Node/nvm-(Node-Version-Manager)/" data-toggle="tooltip" data-placement="top" title="NVM (Node Version Manager) 사용하기">Next Post &rarr;</a>
+                            <a href="/2016/09/20/Linux & Ubuntu/add_user/" data-toggle="tooltip" data-placement="top" title="Linux & Ubuntu 계정 추가 & 설정">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
