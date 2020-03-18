@@ -8,6 +8,13 @@
     </url>
 
     <url>
+        <loc>https://jongmin92.github.io/categories/Database/</loc>
+        <lastmod>2020-03-17T16:18:37.131Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://jongmin92.github.io/categories/Programming/Java/</loc>
         <lastmod>2020-01-26T09:02:44.163Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -45,13 +52,6 @@
     <url>
         <loc>https://jongmin92.github.io/categories/Programming/Tool/</loc>
         <lastmod>2019-11-18T14:21:51.968Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/categories/Database/</loc>
-        <lastmod>2019-11-17T15:15:00.004Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
