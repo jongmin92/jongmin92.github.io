@@ -1,236 +1,178 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<!-- Head tag -->
-<head><meta name="generator" content="Hexo 3.9.0">
+<html lang="ko">
+<head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA">
-    <meta name="naver-site-verification" content="4468fb67994f2c880ea59d43b7f9a03be45d43d8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="keyword" content="">
-    <link rel="shortcut icon" href="/images/etc/ironman-draw.png">
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <title>
-        
-          Prototype 이제는 이해하자 - 92Hz
-        
-    </title>
 
-    <link rel="canonical" href="https://jongmin92.github.io/2017/03/14/JavaScript/understand-prototype/">
+<meta name="generator" content="Hexo 3.9.0">
 
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <!-- Custom CSS --> 
-    <link rel="stylesheet" href="/css/beantech.min.css">
+<title>Prototype 이제는 이해하자 - 92Hz</title>
+
+<!-- For SEO -->
+<link rel="canonical" href="https://jongmin92.github.io/2017/03/14/javascript/understand-prototype/">
+
+
+    <meta name="description" content="Index prototype은 왜 어려울까? 객체(object)는 함수(function)로부터 시작된다 함수(function) 생성시 발생하는 일 객체(object) 생성시 발생하는 일 프로토타입 체인(Prototype Chain) 번외    prototype은 왜 어려울까?C++, Java와 같은 클래스 기반 객체지향 언어와 달리 자바스크립트는 프로토타입">
+<meta name="keywords" content="TIL,JavaScript,Prototype">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Prototype 이제는 이해하자">
+<meta property="og:url" content="https://jongmin92.github.io/2017/03/14/JavaScript/understand-prototype/index.html">
+<meta property="og:site_name" content="92Hz">
+<meta property="og:description" content="Index prototype은 왜 어려울까? 객체(object)는 함수(function)로부터 시작된다 함수(function) 생성시 발생하는 일 객체(object) 생성시 발생하는 일 프로토타입 체인(Prototype Chain) 번외    prototype은 왜 어려울까?C++, Java와 같은 클래스 기반 객체지향 언어와 달리 자바스크립트는 프로토타입">
+<meta property="og:locale" content="ko">
+<meta property="og:image" content="https://jongmin92.github.io/images/og_image.png">
+<meta property="og:updated_time" content="2020-03-20T17:25:58.508Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Prototype 이제는 이해하자">
+<meta name="twitter:description" content="Index prototype은 왜 어려울까? 객체(object)는 함수(function)로부터 시작된다 함수(function) 생성시 발생하는 일 객체(object) 생성시 발생하는 일 프로토타입 체인(Prototype Chain) 번외    prototype은 왜 어려울까?C++, Java와 같은 클래스 기반 객체지향 언어와 달리 자바스크립트는 프로토타입">
+<meta name="twitter:image" content="https://jongmin92.github.io/images/og_image.png">
+
+
+
+
+
+<link rel="alternative" href="rss2.xml" title="Prototype 이제는 이해하자" type="application/atom+xml">
+
+
+
+<link rel="icon" href="/images/favicon.png">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
     
-    <!-- Pygments Highlight CSS -->
-    <link rel="stylesheet" href="/css/highlight.css">
-
-    <link rel="stylesheet" href="/css/widget.css">
-
-    <link rel="stylesheet" href="/css/rocket.css">
-
-    <link rel="stylesheet" href="/css/signature.css">
-
-    <link rel="stylesheet" href="/css/toc.css">
-
-    <!-- For SEO -->
-    <link rel="canonical" href="https://jongmin92.github.io/2017/03/14/javascript/understand-prototype/">
-
-    <!-- Custom Fonts -->
-    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
-    <!-- Hux change font-awesome CDN to qiniu -->
-    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-
-    <!-- Hux Delete, sad but pending in China
-    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
-    css'>
-    -->
-
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <!-- ga & ba script hoook -->
-    <script></script>
-</head>
-
-
-<!-- hack iOS CSS :active style -->
-<body ontouchstart="">
-	<!-- Modified by Yu-Hsuan Yen -->
-<!-- Post Header -->
-<style type="text/css">
-    header.intro-header{
-        
-            /* 기본 포스트 헤더 이미지 (페이지 이미지 || 기본 헤더 이미지) */
-            /* background-image: url('/images/post/bg/javascript.jpg') */
-            /* background-image: url('/images/etc/home.jpg') */
-            background-image: url('/images/post/bg/javascript.jpg')
-            /*post*/
-        
-    }
     
-</style>
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
 
-<header class="intro-header">
-    <!-- Signature -->
-    <div id="signature">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                
-                    <div class="post-heading">
-                        <div class="tags">
-                            
-                              <a class="tag" href="/tags/#TIL" title="TIL">TIL</a>
-                            
-                              <a class="tag" href="/tags/#JavaScript" title="JavaScript">JavaScript</a>
-                            
-                              <a class="tag" href="/tags/#Prototype" title="Prototype">Prototype</a>
-                            
-                        </div>
-                        <h1>Prototype 이제는 이해하자</h1>
-                        <h2 class="subheading"></h2>
-                        <span class="meta">
-                            Posted by KimJongMin on
-                            2017-03-14
-                        </span>
-                    </div>
-                
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
 
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
 
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
 
-	
-    <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">92Hz</a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <!-- Known Issue, found by Hux:
-            <nav>'s height woule be hold on by its content.
-            so, when navbar scale out, the <nav> will cover tags.
-            also mask any touch event of tags, unfortunately.
-        -->
-        <div id="huxblog_navbar">
-            <div class="navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="/">Home</a>
-                    </li>
-
-                    
-
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/about/">About</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/tags/">Tags</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/archive/">Archives</a>
-                        </li>
-                        
-                    
-                    
-                </ul>
-            </div>
-        </div>
-        <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container -->
-</nav>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-90389042-1"></script>
 <script>
-    // Drop Bootstarp low-performance Navbar
-    // Use customize navbar with high-quality material design animation
-    // in high-perf jank-free CSS3 implementation
-    var $body   = document.body;
-    var $toggle = document.querySelector('.navbar-toggle');
-    var $navbar = document.querySelector('#huxblog_navbar');
-    var $collapse = document.querySelector('.navbar-collapse');
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-    $toggle.addEventListener('click', handleMagic)
-    function handleMagic(e){
-        if ($navbar.className.indexOf('in') > 0) {
-        // CLOSE
-            $navbar.className = " ";
-            // wait until animation end.
-            setTimeout(function(){
-                // prevent frequently toggle
-                if($navbar.className.indexOf('in') < 0) {
-                    $collapse.style.height = "0px"
-                }
-            },400)
-        }else{
-        // OPEN
-            $collapse.style.height = "auto"
-            $navbar.className += " in";
-        }
-    }
+    gtag('config', 'UA-90389042-1');
 </script>
 
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    
+    
 
-    <!-- Main Content -->
-    <!-- Modify by Yu-Hsuan Yen -->
 
-<!-- Post Content -->
-<article>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-2-column">
+    <nav class="navbar navbar-main">
     <div class="container">
-        <div class="row">
-
-            <center>
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-</center>
-
-            <!-- Post Container -->
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                post-container">
-
-                <h2 id="index">Index</h2>
-<ol>
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.png" alt="Prototype 이제는 이해하자" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" rel="external nofollow noopener noreferrer" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="카탈로그" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="검색" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-03-13T15:15:30.000Z">2017-03-14</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Programming/">Programming</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/Programming/JavaScript/">JavaScript</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    16분 읽기 (대략 2418 단어)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Prototype 이제는 이해하자
+            
+        </h1>
+        <div class="content">
+            <h2 id="index"><a href="#Index" class="headerlink" title="Index"></a>Index</h2><ol>
 <li><a href="#1">prototype은 왜 어려울까?</a></li>
 <li><a href="#2">객체(object)는 함수(function)로부터 시작된다</a></li>
 <li><a href="#3">함수(function) 생성시 발생하는 일</a></li>
@@ -239,360 +181,552 @@
 <li><a href="#6">번외</a></li>
 </ol>
 <hr>
-<span id="1">
-## prototype은 왜 어려울까?
-C++, Java와 같은 `클래스` 기반 객체지향 언어와 달리 자바스크립트는 `프로토타입` 기반 객체지향 언어입니다. 프로토타입을 사용하여 객체지향을 추구하기 때문에 자바스크립트를 사용함에 있어 프로토타입을 이해하는 것은 중요합니다. 최근 ECMA6 표준에서 `Class` 문법이 추가되었지만 C++, Java에서 말하는 클래스가 아닌 `프로토타입`을 기반으로 하여 만들어진 문법입니다.
-<p>자바스크립트의 프로토타입을 처음 공부하면서 <strong>prototype, [[prototype]], _<em>proto_</em>, 객체, 함수, prototype chain</strong> 과 같은 용어들을 접하게 되는데 공부할수록 서로 뒤엉켜지고, 모르는 것도 아닌 그렇다고 제대로 알고 있는것도 아닌 어중간한 상태가 됩니다.</p>
+<p><span id="1"></span></p>
+<h2 id="prototype은-왜-어려울까"><a href="#prototype은-왜-어려울까" class="headerlink" title="prototype은 왜 어려울까?"></a>prototype은 왜 어려울까?</h2><p>C++, Java와 같은 <code>클래스</code> 기반 객체지향 언어와 달리 자바스크립트는 <code>프로토타입</code> 기반 객체지향 언어입니다. 프로토타입을 사용하여 객체지향을 추구하기 때문에 자바스크립트를 사용함에 있어 프로토타입을 이해하는 것은 중요합니다. 최근 ECMA6 표준에서 <code>Class</code> 문법이 추가되었지만 C++, Java에서 말하는 클래스가 아닌 <code>프로토타입</code>을 기반으로 하여 만들어진 문법입니다.</p>
+<p>자바스크립트의 프로토타입을 처음 공부하면서 <strong>prototype, [[prototype]], __proto__, 객체, 함수, prototype chain</strong> 과 같은 용어들을 접하게 되는데 공부할수록 서로 뒤엉켜지고, 모르는 것도 아닌 그렇다고 제대로 알고 있는것도 아닌 어중간한 상태가 됩니다.</p>
 <p>자바스크립트를 사용한 경험이 있으시다면 아래의 코드와 같은 형태를 경험한적이 있으실겁니다. 지금부터 아래의 코드가 어떤 원리로 동작하게 되는지 알아보겠습니다.</p>
 <p><img src="/images/post/2017-03-14/prototype_example_1.png" alt="prototype에 property 추가"></p>
 <p>먼저 프로토타입에 대해 이해하기 위해서는 <code>객체(object)는 함수(function)로부터 시작된다</code>라는 것을 알아야 합니다. 이는 prototype을 이해하는데 많은 도움을 줍니다.</p>
 <hr>
-<span id="2">
-## <span style="color:red"> 객체(object)는 함수(function)로부터 시작된다</span>
-**자바스크립트에서 [primitive](https://developer.mozilla.org/ko/docs/Glossary/Primitive)를 제외하고는 모두 객체(object)입니다.**
- **앞으로 등장하는 Object와 Function은 function(즉, 생성자)입니다. object는 객체를 의미합니다.**
-<p>다음의 코드를 분석하기 전 <code>객체(object)는 함수(function)로부터 시작된다</code>라는걸 다시한번 기억하겠습니다.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Book</span>(<span class="params"></span>) </span>&#123; &#125;                <span class="comment">// 함수</span></span><br><span class="line"><span class="keyword">var</span> jsBook = <span class="keyword">new</span> Book();           <span class="comment">// 객체 생성</span></span><br></pre></td></tr></table></figure>
-<p>위의 코드에서 <strong>Book이라는 함수를 통해서 jsBook이라는 객체</strong>를 생성했습니다. 이때 Book 함수를 <code>생성자</code>라고 합니다. 생성자는 새로 생성된 객체를 초기화하는 역할을 합니다. 코어 자바스크립트는 기본 타입에 대한 생성자를 내장하고 있는데 이는 다음 코드를 통해 확인이 가능합니다.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> cssBook = &#123;&#125;;                  <span class="comment">// 생성자 선언 없이 객체 생성</span></span><br></pre></td></tr></table></figure>
-<p>위에서는 리터럴 방식을 사용하여 객체를 생성하였습니다. 리터럴 방식 또한 결과적으로는 함수를 통하여 객체를 생성하게 됩니다. <strong>자바스크립트 엔진</strong>이 해당 리터럴을 다음과 같이 해석합니다.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> cssBook = <span class="keyword">new</span> <span class="built_in">Object</span>();        <span class="comment">// 객체 생성</span></span><br></pre></td></tr></table></figure>
+<p><span id="2"></span></p>
+<h2 id="객체object는-함수function로부터-시작된다"><a href="#객체-object-는-함수-function-로부터-시작된다" class="headerlink" title=" 객체(object)는 함수(function)로부터 시작된다"></a><span style="color:red"> 객체(object)는 함수(function)로부터 시작된다</span></h2><p><strong>자바스크립트에서 <a href="https://developer.mozilla.org/ko/docs/Glossary/Primitive" rel="external nofollow noopener noreferrer" target="_blank">primitive</a>를 제외하고는 모두 객체(object)입니다.</strong><br> <strong>앞으로 등장하는 Object와 Function은 function(즉, 생성자)입니다. object는 객체를 의미합니다.</strong></p>
+<p>다음의 코드를 분석하기 전 <code>객체(object)는 함수(function)로부터 시작된다</code>라는걸 다시한번 기억하겠습니다.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Book</span>(<span class="params"></span>) </span>&#123; &#125;                <span class="comment">// 함수</span></span><br><span class="line"><span class="keyword">var</span> jsBook = <span class="keyword">new</span> Book();           <span class="comment">// 객체 생성</span></span><br></pre></td></tr></table></figure></p>
+<p>위의 코드에서 <strong>Book이라는 함수를 통해서 jsBook이라는 객체</strong>를 생성했습니다. 이때 Book 함수를 <code>생성자</code>라고 합니다. 생성자는 새로 생성된 객체를 초기화하는 역할을 합니다. 코어 자바스크립트는 기본 타입에 대한 생성자를 내장하고 있는데 이는 다음 코드를 통해 확인이 가능합니다.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> cssBook = &#123;&#125;;                  <span class="comment">// 생성자 선언 없이 객체 생성</span></span><br></pre></td></tr></table></figure></p>
+<p>위에서는 리터럴 방식을 사용하여 객체를 생성하였습니다. 리터럴 방식 또한 결과적으로는 함수를 통하여 객체를 생성하게 됩니다. <strong>자바스크립트 엔진</strong>이 해당 리터럴을 다음과 같이 해석합니다.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> cssBook = <span class="keyword">new</span> <span class="built_in">Object</span>();        <span class="comment">// 객체 생성</span></span><br></pre></td></tr></table></figure></p>
 <p>따라서 결과적으로는 리터럴 방식으로 객체를 생성할때도 Object라는 함수(생성자)를 통해서 객체를 생성하게 됩니다. <strong>Object 뿐만 아니라 Array, Function, Date, RegExp 모두 함수입니다.</strong></p>
 <p><img src="/images/post/2017-03-14/various_function.png" alt="Object, Array, Function, Date, RegExp - 모두 함수(function)이다"></p>
-<p>배열도 객체이기 때문에(자바스크립트 배열은 객체의 특별한 형태입니다. 프로퍼티 이름이 정수로 사용되며, length 프로퍼티를 가집니다.) 객체를 생성할때와 마찬가지로 배열(객체)의 생성에도 함수가 관여하게 됩니다. 따라서 무심코 사용했던 배열의 리터럴 표현도 결국에는 자바스크립트 엔진이 다음과 같이 해석합니다.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> books = [<span class="string">'html'</span>, <span class="string">'css'</span>, <span class="string">'js'</span>];                  <span class="comment">// 배열(객체) 생성</span></span><br><span class="line"><span class="comment">// 엔진이 다음과 같이 해석합니다.</span></span><br><span class="line"><span class="keyword">var</span> books = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="string">'html'</span>, <span class="string">'css'</span>, <span class="string">'js'</span>);         <span class="comment">// 배열(객체) 생성</span></span><br></pre></td></tr></table></figure>
+<p>배열도 객체이기 때문에(자바스크립트 배열은 객체의 특별한 형태입니다. 프로퍼티 이름이 정수로 사용되며, length 프로퍼티를 가집니다.) 객체를 생성할때와 마찬가지로 배열(객체)의 생성에도 함수가 관여하게 됩니다. 따라서 무심코 사용했던 배열의 리터럴 표현도 결국에는 자바스크립트 엔진이 다음과 같이 해석합니다.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> books = [<span class="string">'html'</span>, <span class="string">'css'</span>, <span class="string">'js'</span>];                  <span class="comment">// 배열(객체) 생성</span></span><br><span class="line"><span class="comment">// 엔진이 다음과 같이 해석합니다.</span></span><br><span class="line"><span class="keyword">var</span> books = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="string">'html'</span>, <span class="string">'css'</span>, <span class="string">'js'</span>);         <span class="comment">// 배열(객체) 생성</span></span><br></pre></td></tr></table></figure></p>
 <p>이제 <code>객체(object)는 함수(function)로부터 시작된다</code>라는 것을 알 수 있습니다.</p>
 <hr>
-<span id="3">
-## <span style="color:red"> 함수(function) 생성시 발생하는 일</span>
-객체(object)는 함수(function)로부터 시작되기 때문에 사용자가 객체를 생성하기 위해 먼저 함수를 정의하게 됩니다. 이때 **발생하는 일**에 대해 알아보겠습니다. 여기서는 2가지를 기억해야 합니다.
+<p><span id="3"></span></p>
+<h2 id="함수function-생성시-발생하는-일"><a href="#함수-function-생성시-발생하는-일" class="headerlink" title=" 함수(function) 생성시 발생하는 일"></a><span style="color:red"> 함수(function) 생성시 발생하는 일</span></h2><p>객체(object)는 함수(function)로부터 시작되기 때문에 사용자가 객체를 생성하기 위해 먼저 함수를 정의하게 됩니다. 이때 <strong>발생하는 일</strong>에 대해 알아보겠습니다. 여기서는 2가지를 기억해야 합니다.</p>
 <p>1.<strong>함수를 정의하면 함수가 생성되며 <code>Prototype object</code>가 같이 생성 됩니다. 생성된 Prototype object는 함수의 <code>prototype</code> 속성을 통해 접근할 수 있습니다.</strong> (Prototype object같은 경우 함수 생성시에만 됩니다. 일반 객체 생성시에는 생성되지 않습니다.)</p>
 <p><img src="/images/post/2017-03-14/function_property.png" alt="함수 prototype property"></p>
-<p>2.함수의 생성과 함께 생성된 <code>Prototype object</code>는 <code>constructor</code>와 <code>__proto__</code>를 갖고 있습니다. (cover property를 추가한것 처럼 사용자 임의로 추가 가능합니다.) <strong>constructor</strong>는 생성된 함수를 가리키며(여기서는 function Book을 가리킵니다.) **_<em>proto_</em>**는 <code>Prototype Link</code>로서 <strong>객체가 생성될 때 사용된 생성자(함수)의 Prototype object를 가리킵니다.</strong> Prototype Link는 뒤에서 자세하게 알아보겠습니다.</p>
+<p>2.함수의 생성과 함께 생성된 <code>Prototype object</code>는 <code>constructor</code>와 <code>__proto__</code>를 갖고 있습니다. (cover property를 추가한것 처럼 사용자 임의로 추가 가능합니다.) <strong>constructor</strong>는 생성된 함수를 가리키며(여기서는 function Book을 가리킵니다.) <strong>__proto__</strong>는 <code>Prototype Link</code>로서 <strong>객체가 생성될 때 사용된 생성자(함수)의 Prototype object를 가리킵니다.</strong> Prototype Link는 뒤에서 자세하게 알아보겠습니다.</p>
 <p><img src="/images/post/2017-03-14/prototype_object.png" alt="함수와 함께 생성된 Prototype object"></p>
 <p>다이어그램을 통해 확인하면 다음과 같습니다.</p>
 <p><img src="/images/post/2017-03-14/make_function_diagram.png" alt="함수와 Prototype object의 관계"></p>
 <hr>
-<span id="4">
-## <span style="color:red"> 객체(object) 생성시 발생하는 일</span>
-이번에는 객체 생성시 발생하는 일에 대해 알아보겠습니다. 조금 전에 정의한 Book 함수(생성자)를 사용하여 jsBook이라는 객체를 생성해 보겠습니다.
+<p><span id="4"></span></p>
+<h2 id="객체object-생성시-발생하는-일"><a href="#객체-object-생성시-발생하는-일" class="headerlink" title=" 객체(object) 생성시 발생하는 일"></a><span style="color:red"> 객체(object) 생성시 발생하는 일</span></h2><p>이번에는 객체 생성시 발생하는 일에 대해 알아보겠습니다. 조금 전에 정의한 Book 함수(생성자)를 사용하여 jsBook이라는 객체를 생성해 보겠습니다.</p>
 <p><img src="/images/post/2017-03-14/make_object.png" alt="Book 함수로 생성한 객체"></p>
 <p>생성자(함수)의 몸체 부분에 어떠한 코드도 작성하지 않았는데 이를 통해 생성한 jsBook 객체가 <code>__proto__</code>라는 프로퍼티를 갖고있습니다.</p>
-<p>여기서 <strong>_<em>proto_</em></strong> 는 <code>Prototype Link</code>로서 **객체의 생성에 쓰인 생성자 함수의 <code>Prototype object</code>**를 가리키고 있습니다. 그렇기 때문에 Book 생성자 함수와 함께 생성된 Prototype object에 추가한 cover라는 프로퍼티가 보이는것을 확인할 수 있습니다.</p>
+<p>여기서 <strong>__proto__</strong> 는 <code>Prototype Link</code>로서 <strong>객체의 생성에 쓰인 생성자 함수의 <code>Prototype object</code></strong>를 가리키고 있습니다. 그렇기 때문에 Book 생성자 함수와 함께 생성된 Prototype object에 추가한 cover라는 프로퍼티가 보이는것을 확인할 수 있습니다.</p>
 <p>조금 더 이해하기 쉽게 다이어그램으로 확인하면 다음과 같습니다.</p>
 <p><img src="/images/post/2017-03-14/make_object_diagram.png" alt="함수, Prototype object, 객체의 관계"></p>
 <p>다이어그램에서도 확인할 수 있다시피 <code>prototype</code> property(함수 생성시 함께 생성된 Prototype object를 가리킴)는 함수객체만 가지며 <code>__proto__</code>는 객체라면 모두 갖고 있습니다.</p>
 <p>이제 프로토타입 체인(Prototype Chain)에 대해 이해할 수 있는 준비가 되었습니다.</p>
 <hr>
-<span id="5">
-## <span style="color:red"> 프로토타입 체인(Prototype Chain)</span>
-결론부터 말씀드리면 `프로토타입 체인`은 객체의 property를 사용할때 해당 property가 없다면, `__proto__` property를 이용해 자신의 생성에 관여한 함수(생성자 함수)의 `Prototype object`에서 property를 찾습니다. 만약 Prototype object에도 해당 property가 없다면 다시 Prototype object의 **\__proto\__** property를 이용해 Prototype object에서 property를 찾습니다. 이렇게 계속 반복이 이루어지며 해당 property를 찾게 된다면 **값을 반환**하고 찾지 못한다면 **undefined**를 반환합니다. 이렇게 **`__proto__` property를 통해 상위 프로토타입과 연결되어 있는 형태를 프로토타입 체인(Chain)이라고 합니다.**
+<p><span id="5"></span></p>
+<h2 id="프로토타입-체인prototype-chain"><a href="#프로토타입-체인-Prototype-Chain" class="headerlink" title=" 프로토타입 체인(Prototype Chain)"></a><span style="color:red"> 프로토타입 체인(Prototype Chain)</span></h2><p>결론부터 말씀드리면 <code>프로토타입 체인</code>은 객체의 property를 사용할때 해당 property가 없다면, <code>__proto__</code> property를 이용해 자신의 생성에 관여한 함수(생성자 함수)의 <code>Prototype object</code>에서 property를 찾습니다. 만약 Prototype object에도 해당 property가 없다면 다시 Prototype object의 <strong>__proto__</strong> property를 이용해 Prototype object에서 property를 찾습니다. 이렇게 계속 반복이 이루어지며 해당 property를 찾게 된다면 <strong>값을 반환</strong>하고 찾지 못한다면 <strong>undefined</strong>를 반환합니다. 이렇게 <strong><code>__proto__</code> property를 통해 상위 프로토타입과 연결되어 있는 형태를 프로토타입 체인(Chain)이라고 합니다.</strong></p>
 <p>프로토타입 체인에 대해 알게되었으니 다시한번 처음 코드를 살펴보겠습니다.</p>
 <p><img src="/images/post/2017-03-14/prototype_example_1.png" alt="프로토타입 체인 예제"></p>
 <p>이제 어떻게 jsBook에 cover라는 property를 추가하지 않았는데도 결과가 출력되는지 이해할 수 있습니다. 다음과 같이 동작할 것입니다.</p>
 <p><img src="/images/post/2017-03-14/prototype_diagram_1.png" alt="프로토타입 체인 예제(cover property 찾는 과정)"></p>
-<p>또한 다음과 같이 <strong>프로토타입 체인의 최상위는 Object이기 때문에 Object.prototype의 property들을 모두 사용할 수 있습니다.</strong> 자주 사용하는 toString()과 valueOf() 모두 Object.prototype에 선언되어 있습니다.<br>
-(Book Prototype object는 <strong>객체</strong>이기 때문에 Object 생성자가 사용될 것입니다. 따라서 Book Prototype object의 **_<em>proto_</em>**는 Object Prototype object를 가리키게 됩니다.)</p>
-<p><img src="/images/post/2017-03-14/prototype_diagram_2.png" alt="프로토타입 체인의 최상위 object"><br>
-<img src="/images/post/2017-03-14/Object_prototype.png" alt="Object.prototype"></p>
+<p>또한 다음과 같이 <strong>프로토타입 체인의 최상위는 Object이기 때문에 Object.prototype의 property들을 모두 사용할 수 있습니다.</strong> 자주 사용하는 toString()과 valueOf() 모두 Object.prototype에 선언되어 있습니다.<br>(Book Prototype object는 <strong>객체</strong>이기 때문에 Object 생성자가 사용될 것입니다. 따라서 Book Prototype object의 <strong>__proto__</strong>는 Object Prototype object를 가리키게 됩니다.)</p>
+<p><img src="/images/post/2017-03-14/prototype_diagram_2.png" alt="프로토타입 체인의 최상위 object"><br><img src="/images/post/2017-03-14/Object_prototype.png" alt="Object.prototype"></p>
 <p><code>Prototype object</code>와 <code>__proto__</code> 그리고 <code>프로토타입 체인</code>에 대해 이해하였으니 다음과 같은 코드도 이해할 수 있습니다. 잘 이해가 되지 않는다면 위의 다이어그램을 참고해보시기 바랍니다.</p>
 <p><img src="/images/post/2017-03-14/prototype_chain_test.png" alt="__proto__와 Prototype object의 관계"></p>
 <hr>
-<span id="6">
-## 번외
-![프로토타입 체인의 최상위 object](/images/post/2017-03-14/prototype_diagram_2_check.png)
-혹시 다이어그램을 보면서 function Book의 **\__proto\__** 는 무엇을 가리키고 있는지 궁금해 하셨을 분들을 위해 추적해보았습니다.
-<p><img src="/images/post/2017-03-14/function_proto.png" alt="function(생성자)의 proto 추적"></p>
+<p><span id="6"></span></p>
+<h2 id="번외"><a href="#번외" class="headerlink" title="번외"></a>번외</h2><p><img src="/images/post/2017-03-14/prototype_diagram_2_check.png" alt="프로토타입 체인의 최상위 object"><br>혹시 다이어그램을 보면서 function Book의 <strong>__proto__</strong> 는 무엇을 가리키고 있는지 궁금해 하셨을 분들을 위해 추적해보았습니다.</p>
+<p><img src="/images/post/2017-03-14/function_proto.png" alt="function(생성자)의 __proto__ 추적"></p>
 <p>다음 코드를 도식화 하면 다음과 같은 다이어그램이 나오게 됩니다.</p>
-<p><img src="/images/post/2017-03-14/function_proto_diagram.png" alt="function(생성자)의 proto 추적"></p>
+<p><img src="/images/post/2017-03-14/function_proto_diagram.png" alt="function(생성자)의 __proto__ 추적"></p>
 <p>간단하게 포스팅을 하려했는데 주제가 주제인지라 길어졌습니다. 저도 프로토타입을 처음 공부하면서 어려움을 많이 겪었는데 조금이나마 도움이 되었으면 좋겠습니다.</p>
-</span></span></span></span></span></span>
-                
 
-                <hr>
-                <!-- Pager -->
-                <ul class="pager">
-                    
-                        <li class="previous">
-                            <a href="/2017/03/21/Emily/2-make-kakao-yellow/" data-toggle="tooltip" data-placement="top" title="2) 카카오 옐로아이디 만들기">&larr; Previous Post</a>
-                        </li>
-                    
-                    
-                        <li class="next">
-                            <a href="/2017/03/10/Emily/1-start-emily/" data-toggle="tooltip" data-placement="top" title="1) 에밀리 개발 시작하기">Next Post &rarr;</a>
-                        </li>
-                    
-                </ul>
-
-                <!-- duoshuo Share start -->
-                
-                <!-- 多说 Share end-->
-
-                <center>
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-</center>
-
-                <!-- 多说评论框 start -->
-                
-                <!-- 多说评论框 end -->
-
-                <!-- disqus comment start -->
-                
-                    <div class="comment">
-                        <div id="disqus_thread" class="disqus-thread"></div>
-                    </div>
-                
-                <!-- disqus comment end -->
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/JavaScript/">JavaScript</a>, <a class="has-link-grey -link" href="/tags/Prototype/">Prototype</a>, <a class="has-link-grey -link" href="/tags/TIL/">TIL</a>
+                </div>
             </div>
-            
-            <!-- Tabe of Content -->
-            <!-- Table of Contents -->
+        </div>
+        
+        
+        
+    </div>
+</div>
 
-                
-            <!-- Sidebar Container -->
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
 
-                <!-- Featured Tags -->
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2017/03/21/Emily/2-make-kakao-yellow/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">2) 카카오 옐로아이디 만들기</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2017/03/10/Emily/1-start-emily/">
+                <span class="level-item">1) 에밀리 개발 시작하기</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">댓글</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://jongmin92.github.io/2017/03/14/JavaScript/understand-prototype/';
+        this.page.identifier = '2017/03/14/JavaScript/understand-prototype/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'https-jongmin92-github-io' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
+
+
+<!-- For Google Adsense -->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</div>
                 
-                <section>
-                    <!-- no hr -->
-                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
-                    <div class="tags">
-                       
-                          <a class="tag" href="/tags/#TIL" title="TIL">TIL</a>
-                        
-                          <a class="tag" href="/tags/#JavaScript" title="JavaScript">JavaScript</a>
-                        
-                          <a class="tag" href="/tags/#Prototype" title="Prototype">Prototype</a>
-                        
-                    </div>
-                </section>
                 
 
-                <!-- Friends Blog -->
-                
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-3 column-right is-sticky">
+    
+        
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    카탈로그
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#index">
+        <span class="has-mr-6">1</span>
+        <span>Index</span>
+        </a></li><li>
+        <a class="is-flex" href="#prototype은-왜-어려울까">
+        <span class="has-mr-6">2</span>
+        <span>prototype은 왜 어려울까?</span>
+        </a></li><li>
+        <a class="is-flex" href="#객체object는-함수function로부터-시작된다">
+        <span class="has-mr-6">3</span>
+        <span> 객체(object)는 함수(function)로부터 시작된다</span>
+        </a></li><li>
+        <a class="is-flex" href="#함수function-생성시-발생하는-일">
+        <span class="has-mr-6">4</span>
+        <span> 함수(function) 생성시 발생하는 일</span>
+        </a></li><li>
+        <a class="is-flex" href="#객체object-생성시-발생하는-일">
+        <span class="has-mr-6">5</span>
+        <span> 객체(object) 생성시 발생하는 일</span>
+        </a></li><li>
+        <a class="is-flex" href="#프로토타입-체인prototype-chain">
+        <span class="has-mr-6">6</span>
+        <span> 프로토타입 체인(Prototype Chain)</span>
+        </a></li><li>
+        <a class="is-flex" href="#번외">
+        <span class="has-mr-6">7</span>
+        <span>번외</span>
+        </a></li></ul>
             </div>
         </div>
     </div>
-</article>
 
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                카테고리
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Algorithm/">
+            <span class="level-start">
+                <span class="level-item">Algorithm</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">14</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Algorithm/BOJ/">
+            <span class="level-start">
+                <span class="level-item">BOJ</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Algorithm/Concept/">
+            <span class="level-start">
+                <span class="level-item">Concept</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Book/">
+            <span class="level-start">
+                <span class="level-item">Book</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Database/">
+            <span class="level-start">
+                <span class="level-item">Database</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/">
+            <span class="level-start">
+                <span class="level-item">Programming</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">95</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Programming/AWS/">
+            <span class="level-start">
+                <span class="level-item">AWS</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Git/">
+            <span class="level-start">
+                <span class="level-item">Git</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Gradle/">
+            <span class="level-start">
+                <span class="level-item">Gradle</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/HTML/">
+            <span class="level-start">
+                <span class="level-item">HTML</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Java/">
+            <span class="level-start">
+                <span class="level-item">Java</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">21</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/JavaScript/">
+            <span class="level-start">
+                <span class="level-item">JavaScript</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">15</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Linux-Ubuntu/">
+            <span class="level-start">
+                <span class="level-item">Linux & Ubuntu</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Node/">
+            <span class="level-start">
+                <span class="level-item">Node</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/RaspberryPi/">
+            <span class="level-start">
+                <span class="level-item">RaspberryPi</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/React-Native/">
+            <span class="level-start">
+                <span class="level-item">React Native</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Spring/">
+            <span class="level-start">
+                <span class="level-item">Spring</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">19</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Tool/">
+            <span class="level-start">
+                <span class="level-item">Tool</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Project/">
+            <span class="level-start">
+                <span class="level-item">Project</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Project/Emily/">
+            <span class="level-start">
+                <span class="level-item">Emily</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Tip/">
+            <span class="level-start">
+                <span class="level-item">Tip</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
 
-
-
-<!-- disqus embedded js code start (one page only need to embed once) -->
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = "https-jongmin92-github-io";
-    var disqus_identifier = "https://jongmin92.github.io/2017/03/14/JavaScript/understand-prototype/";
-    var disqus_url = "https://jongmin92.github.io/2017/03/14/JavaScript/understand-prototype/";
-
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<!-- disqus embedded js code start end -->
-
-
-
-
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
-    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'always',
-          placement: 'left',
-          icon: '#'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-</script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: 0.6em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
-
-
-
-    <!-- Footer -->
-    <!-- Footer -->
-<footer>
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <ul class="list-inline text-center">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
                 
+                    <img src="/images/logo.png" alt="Prototype 이제는 이해하자" height="28">
                 
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 KimJongMin&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="external nofollow noopener noreferrer">Icarus</a>
                 
-
-                
-
-                
-                    <li>
-                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420" rel="external nofollow noopener noreferrer">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                
-
-                
-                    <li>
-                        <a target="_blank" href="https://github.com/jongmin92" rel="external nofollow noopener noreferrer">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                
-
-                
-
-                </ul>
-                <p class="copyright text-muted">
-                    Copyright &copy; KimJongMin 2020 
-                    <br>
-                    Theme by <a href="http://huangxuan.me" rel="external nofollow noopener noreferrer" target="_blank">Hux</a> 
-                    <span style="display: inline-block; margin: 0 5px;">
-                        <i class="fa fa-heart"></i>
-                    </span> 
-                    re-Ported by <a href="http://beantech.org" rel="external nofollow noopener noreferrer" target="_blank">BeanTech</a> | 
-                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px" src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true">
-                    </iframe>
                 </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
             </div>
         </div>
     </div>
 </footer>
-
-<!-- jQuery -->
-<script src="/js/jquery.min.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="/js/bootstrap.min.js"></script>
-
-<!-- Custom Theme JavaScript -->
-<script src="/js/hux-blog.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("ko");</script>
 
 
-<!-- async load function -->
 <script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
+var IcarusThemeSettings = {
+    site: {
+        url: 'https://jongmin92.github.io',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
     }
+};
 </script>
 
-<!-- 
-     Because of the native support for backtick-style fenced code blocks 
-     right within the Markdown is landed in Github Pages, 
-     From V1.6, There is no need for Highlight.js, 
-     so Huxblog drops it officially.
 
-     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
-     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
--->
-<!--
-    <script>
-        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
-            hljs.initHighlightingOnLoad();
-        })
-    </script>
-    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
--->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
 
 
-<!-- jquery.tagcloud.js -->
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" rel="external nofollow noopener noreferrer" target="_blank">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
 <script>
-    // only load tagcloud.js in tag.html
-    if($('#tag_cloud').length !== 0){
-        async("https://jongmin92.github.io/js/jquery.tagcloud.js",function(){
-            $.fn.tagcloud.defaults = {
-                //size: {start: 1, end: 1, unit: 'em'},
-                color: {start: '#bbbbee', end: '#0085a1'},
-            };
-            $('#tag_cloud a').tagcloud();
-        })
-    }
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
 </script>
 
-<!--fastClick.js -->
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
 <script>
-    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
-        var $nav = document.querySelector("nav");
-        if($nav) FastClick.attach($nav);
-    })
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
 </script>
 
 
-<!-- Google Analytics -->
+<a id="back-to-top" title="Zurück nach oben" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="입력 하세요...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
 <script>
-    // dynamic User by Hux
-    var _gaId = 'UA-90389042-1';
-    var _gaDomain = 'auto';
-
-    // Originial
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', _gaId, _gaDomain);
-    ga('send', 'pageview');
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '포스트',
+                PAGES: '페이지',
+                CATEGORIES: '카테고리',
+                TAGS: '태그',
+                UNTITLED: '(제목없음)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
 </script>
-
-
-
-
-<!-- Baidu Tongji -->
-
-
-
-
-
-
-	<a id="rocket" href="#top" class=""></a>
-	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script>
-    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async></script>
-<!-- Image to hack wechat -->
-<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0">
-<!-- Migrate from head to bottom, no longer block render and still work -->
-
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
 </body>
-
 </html>

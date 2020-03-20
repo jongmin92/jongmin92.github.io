@@ -1,540 +1,673 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<!-- Head tag -->
-<head><meta name="generator" content="Hexo 3.9.0">
+<html lang="ko">
+<head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA">
-    <meta name="naver-site-verification" content="4468fb67994f2c880ea59d43b7f9a03be45d43d8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="keyword" content="">
-    <link rel="shortcut icon" href="/images/etc/ironman-draw.png">
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <title>
-        
-          시작하며 읽기 좋은 글 모음 - 92Hz
-        
-    </title>
 
-    <link rel="canonical" href="https://jongmin92.github.io/2017/02/10/ReactNative/useful-post-collection/">
+<meta name="generator" content="Hexo 3.9.0">
 
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <!-- Custom CSS --> 
-    <link rel="stylesheet" href="/css/beantech.min.css">
+<title>시작하며 읽기 좋은 글 모음 - 92Hz</title>
+
+<!-- For SEO -->
+<link rel="canonical" href="https://jongmin92.github.io/2017/02/10/reactnative/useful-post-collection/">
+
+
+    <meta name="description" content="React Native를 공부하고 사용하면서 도움이 되었던 글들을 모아놓았습니다. 각 카테고리별로 분류하였으며 처음 공부하시는 분들은 카테고리에서 위에서 아래로 순서대로 읽으시면 많은 도움이 될거라 생각합니다. 앞으로도 지속적으로 업데이트 할 예정입니다.  최근 업데이트 -  2017 / 05 / 30 React Velopert님의 React Tutoria">
+<meta name="keywords" content="React Native">
+<meta property="og:type" content="article">
+<meta property="og:title" content="시작하며 읽기 좋은 글 모음">
+<meta property="og:url" content="https://jongmin92.github.io/2017/02/10/ReactNative/useful-post-collection/index.html">
+<meta property="og:site_name" content="92Hz">
+<meta property="og:description" content="React Native를 공부하고 사용하면서 도움이 되었던 글들을 모아놓았습니다. 각 카테고리별로 분류하였으며 처음 공부하시는 분들은 카테고리에서 위에서 아래로 순서대로 읽으시면 많은 도움이 될거라 생각합니다. 앞으로도 지속적으로 업데이트 할 예정입니다.  최근 업데이트 -  2017 / 05 / 30 React Velopert님의 React Tutoria">
+<meta property="og:locale" content="ko">
+<meta property="og:image" content="https://jongmin92.github.io/images/og_image.png">
+<meta property="og:updated_time" content="2020-03-20T17:29:42.620Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="시작하며 읽기 좋은 글 모음">
+<meta name="twitter:description" content="React Native를 공부하고 사용하면서 도움이 되었던 글들을 모아놓았습니다. 각 카테고리별로 분류하였으며 처음 공부하시는 분들은 카테고리에서 위에서 아래로 순서대로 읽으시면 많은 도움이 될거라 생각합니다. 앞으로도 지속적으로 업데이트 할 예정입니다.  최근 업데이트 -  2017 / 05 / 30 React Velopert님의 React Tutoria">
+<meta name="twitter:image" content="https://jongmin92.github.io/images/og_image.png">
+
+
+
+
+
+<link rel="alternative" href="rss2.xml" title="시작하며 읽기 좋은 글 모음" type="application/atom+xml">
+
+
+
+<link rel="icon" href="/images/favicon.png">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
     
-    <!-- Pygments Highlight CSS -->
-    <link rel="stylesheet" href="/css/highlight.css">
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
 
-    <link rel="stylesheet" href="/css/widget.css">
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
 
-    <link rel="stylesheet" href="/css/rocket.css">
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
 
-    <link rel="stylesheet" href="/css/signature.css">
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
 
-    <link rel="stylesheet" href="/css/toc.css">
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-90389042-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-    <!-- For SEO -->
-    <link rel="canonical" href="https://jongmin92.github.io/2017/02/10/reactnative/useful-post-collection/">
+    gtag('config', 'UA-90389042-1');
+</script>
 
-    <!-- Custom Fonts -->
-    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
-    <!-- Hux change font-awesome CDN to qiniu -->
-    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    
+    
 
 
-    <!-- Hux Delete, sad but pending in China
-    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
-    css'>
-    -->
-
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <!-- ga & ba script hoook -->
-    <script></script>
+<link rel="stylesheet" href="/css/style.css">
 </head>
-
-
-<!-- hack iOS CSS :active style -->
-<body ontouchstart="">
-	<!-- Modified by Yu-Hsuan Yen -->
-<!-- Post Header -->
-<style type="text/css">
-    header.intro-header{
-        
-            /* 기본 포스트 헤더 이미지 (페이지 이미지 || 기본 헤더 이미지) */
-            /* background-image: url('/images/post/bg/react_native.jpg') */
-            /* background-image: url('/images/etc/home.jpg') */
-            background-image: url('/images/post/bg/react_native.jpg')
-            /*post*/
-        
-    }
+<body class="is-2-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.png" alt="시작하며 읽기 좋은 글 모음" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" rel="external nofollow noopener noreferrer" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="카탈로그" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="검색" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
     
-</style>
-
-<header class="intro-header">
-    <!-- Signature -->
-    <div id="signature">
+    <section class="section">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-02-09T15:00:00.000Z">2017-02-10</time>
                 
-                    <div class="post-heading">
-                        <div class="tags">
-                            
-                              <a class="tag" href="/tags/#React Native" title="React Native">React Native</a>
-                            
-                        </div>
-                        <h1>시작하며 읽기 좋은 글 모음</h1>
-                        <h2 class="subheading"></h2>
-                        <span class="meta">
-                            Posted by KimJongMin on
-                            2017-02-10
-                        </span>
-                    </div>
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Programming/">Programming</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/Programming/React-Native/">React Native</a>
+                </div>
                 
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    3분 읽기 (대략 488 단어)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                시작하며 읽기 좋은 글 모음
+            
+        </h1>
+        <div class="content">
+            <p>React Native를 공부하고 사용하면서 도움이 되었던 글들을 모아놓았습니다. 각 카테고리별로 분류하였으며 처음 공부하시는 분들은 카테고리에서 <strong>위에서 아래로 순서대로</strong> 읽으시면 많은 도움이 될거라 생각합니다. 앞으로도 지속적으로 업데이트 할 예정입니다.</p>
+<hr>
+<p><strong>최근 업데이트 -  2017 / 05 / 30</strong></p>
+<h2 id="react"><a href="#React" class="headerlink" title="React"></a>React</h2><ul>
+<li><strong><a href="https://velopert.com/reactjs-tutorials" rel="external nofollow noopener noreferrer" target="_blank">Velopert님의 React Tutorial</a> - velopert’s dev blog</strong><br>React를 처음 공부할때 큰 도움이 됩니다.</li>
+</ul>
+<hr>
+<h2 id="flux"><a href="#Flux" class="headerlink" title="Flux"></a>Flux</h2><ul>
+<li><strong><a href="http://bestalign.github.io/2015/10/06/cartoon-guide-to-flux/" rel="external nofollow noopener noreferrer" target="_blank">Flux로의 카툰 안내서</a> - bestalign’s dev blog</strong><br>Redux는 Flux 아키텍처의 구현체중 하나 입니다. Redux를 공부하기전 Flux에 대해 알아볼 수 있습니다.</li>
+</ul>
+<hr>
+<h2 id="redux"><a href="#Redux" class="headerlink" title="Redux"></a>Redux</h2><ul>
+<li><strong><a href="http://redux.js.org/" rel="external nofollow noopener noreferrer" target="_blank">Redux 공식홈페이지(영문)</a> - redux.js.org</strong></li>
+<li><strong><a href="http://dobbit.github.io/redux/" rel="external nofollow noopener noreferrer" target="_blank">Redux 공식홈페이지(한글 번역)</a> - dobbit</strong></li>
+<li><strong><a href="http://bestalign.github.io/2015/10/26/cartoon-intro-to-redux/" rel="external nofollow noopener noreferrer" target="_blank">Redux로의 카툰 안내서</a> - bestalign’s dev blog</strong><br>React Native를 시작하며 Redux를 처음 공부할때 도움이 많이 되었습니다. Redux의 시스템을 잘게 나누어 여러 캐릭터로 비유하여 설명하신 부분이 인상깊었습니다.</li>
+<li><strong><a href="https://taegon.kim/archives/5288" rel="external nofollow noopener noreferrer" target="_blank">Flux와 Redux(MVC의 한계를 극복한 단순한 데이터 모델)</a> - 코드쓰는사람(taegon.kim)</strong><br>MVC 패턴의 문제점 부터 시작하여 Flux가 어떻게 나오게 되었는지 마지막으로 Redux 까지 정리해주셨습니다.</li>
+<li><strong><a href="http://d2.naver.com/helloworld/1848131" rel="external nofollow noopener noreferrer" target="_blank">React 적용 가이드 - React와 Redux</a> - NAVER D2</strong></li>
+<li><strong><a href="http://huns.me/development/1953" rel="external nofollow noopener noreferrer" target="_blank">리덕스(Redux) 애플리케이션 설계에 대한 생각</a> - 김코딩님이 코딩 잘하고 싶어서 만든 블로그</strong><br>Redux를 사용하여 애플리케이션을 개발하시면서 고민하셨던 생각을 정리한 글. Redux를 사용한다면 읽어보기에 정말 좋은 글입니다.</li>
+</ul>
 
-
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/React-Native/">React Native</a>
                 </div>
             </div>
         </div>
+        
+        
+        
     </div>
-</header>
+</div>
 
-	
-    <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">92Hz</a>
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2017/02/12/ReactNative/redux-for-starter/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Redux 사용하기</span>
+            </a>
         </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <!-- Known Issue, found by Hux:
-            <nav>'s height woule be hold on by its content.
-            so, when navbar scale out, the <nav> will cover tags.
-            also mask any touch event of tags, unfortunately.
-        -->
-        <div id="huxblog_navbar">
-            <div class="navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="/">Home</a>
-                    </li>
-
-                    
-
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/about/">About</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/tags/">Tags</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/archive/">Archives</a>
-                        </li>
-                        
-                    
-                    
-                </ul>
-            </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2017/02/09/HTML/viewport/">
+                <span class="level-item">모바일 화면을 위해 Viewport 사용하기</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
         </div>
-        <!-- /.navbar-collapse -->
+        
     </div>
-    <!-- /.container -->
-</nav>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">댓글</h3>
+        
 <script>
-    // Drop Bootstarp low-performance Navbar
-    // Use customize navbar with high-quality material design animation
-    // in high-perf jank-free CSS3 implementation
-    var $body   = document.body;
-    var $toggle = document.querySelector('.navbar-toggle');
-    var $navbar = document.querySelector('#huxblog_navbar');
-    var $collapse = document.querySelector('.navbar-collapse');
-
-    $toggle.addEventListener('click', handleMagic)
-    function handleMagic(e){
-        if ($navbar.className.indexOf('in') > 0) {
-        // CLOSE
-            $navbar.className = " ";
-            // wait until animation end.
-            setTimeout(function(){
-                // prevent frequently toggle
-                if($navbar.className.indexOf('in') < 0) {
-                    $collapse.style.height = "0px"
-                }
-            },400)
-        }else{
-        // OPEN
-            $collapse.style.height = "auto"
-            $navbar.className += " in";
-        }
-    }
-</script>
-
-
-    <!-- Main Content -->
-    <!-- Modify by Yu-Hsuan Yen -->
-
-<!-- Post Content -->
-<article>
-    <div class="container">
-        <div class="row">
-
-            <center>
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-</center>
-
-            <!-- Post Container -->
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                post-container">
-
-                <p>React Native를 공부하고 사용하면서 도움이 되었던 글들을 모아놓았습니다. 각 카테고리별로 분류하였으며 처음 공부하시는 분들은 카테고리에서 <strong>위에서 아래로 순서대로</strong> 읽으시면 많은 도움이 될거라 생각합니다. 앞으로도 지속적으로 업데이트 할 예정입니다.</p>
-<hr>
-<p><strong>최근 업데이트 -  2017 / 05 / 30</strong></p>
-<h2 id="react">React</h2>
-<ul>
-<li><strong><a href="https://velopert.com/reactjs-tutorials" rel="external nofollow noopener noreferrer" target="_blank">Velopert님의 React Tutorial</a> - velopert’s dev blog</strong><br>
-React를 처음 공부할때 큰 도움이 됩니다.</li>
-</ul>
-<hr>
-<h2 id="flux">Flux</h2>
-<ul>
-<li><strong><a href="http://bestalign.github.io/2015/10/06/cartoon-guide-to-flux/" rel="external nofollow noopener noreferrer" target="_blank">Flux로의 카툰 안내서</a> - bestalign’s dev blog</strong><br>
-Redux는 Flux 아키텍처의 구현체중 하나 입니다. Redux를 공부하기전 Flux에 대해 알아볼 수 있습니다.</li>
-</ul>
-<hr>
-<h2 id="redux">Redux</h2>
-<ul>
-<li><strong><a href="http://redux.js.org/" rel="external nofollow noopener noreferrer" target="_blank">Redux 공식홈페이지(영문)</a> - <a href="http://redux.js.org" rel="external nofollow noopener noreferrer" target="_blank">redux.js.org</a></strong></li>
-<li><strong><a href="http://dobbit.github.io/redux/" rel="external nofollow noopener noreferrer" target="_blank">Redux 공식홈페이지(한글 번역)</a> - dobbit</strong></li>
-<li><strong><a href="http://bestalign.github.io/2015/10/26/cartoon-intro-to-redux/" rel="external nofollow noopener noreferrer" target="_blank">Redux로의 카툰 안내서</a> - bestalign’s dev blog</strong><br>
-React Native를 시작하며 Redux를 처음 공부할때 도움이 많이 되었습니다. Redux의 시스템을 잘게 나누어 여러 캐릭터로 비유하여 설명하신 부분이 인상깊었습니다.</li>
-<li><strong><a href="https://taegon.kim/archives/5288" rel="external nofollow noopener noreferrer" target="_blank">Flux와 Redux(MVC의 한계를 극복한 단순한 데이터 모델)</a> - 코드쓰는사람(taegon.kim)</strong><br>
-MVC 패턴의 문제점 부터 시작하여 Flux가 어떻게 나오게 되었는지 마지막으로 Redux 까지 정리해주셨습니다.</li>
-<li><strong><a href="http://d2.naver.com/helloworld/1848131" rel="external nofollow noopener noreferrer" target="_blank">React 적용 가이드 - React와 Redux</a> - NAVER D2</strong></li>
-<li><strong><a href="http://huns.me/development/1953" rel="external nofollow noopener noreferrer" target="_blank">리덕스(Redux) 애플리케이션 설계에 대한 생각</a> - 김코딩님이 코딩 잘하고 싶어서 만든 블로그</strong><br>
-Redux를 사용하여 애플리케이션을 개발하시면서 고민하셨던 생각을 정리한 글. Redux를 사용한다면 읽어보기에 정말 좋은 글입니다.</li>
-</ul>
-
-                
-
-                <hr>
-                <!-- Pager -->
-                <ul class="pager">
-                    
-                        <li class="previous">
-                            <a href="/2017/02/12/ReactNative/redux-for-starter/" data-toggle="tooltip" data-placement="top" title="Redux 사용하기">&larr; Previous Post</a>
-                        </li>
-                    
-                    
-                        <li class="next">
-                            <a href="/2017/02/09/HTML/viewport/" data-toggle="tooltip" data-placement="top" title="모바일 화면을 위해 Viewport 사용하기">Next Post &rarr;</a>
-                        </li>
-                    
-                </ul>
-
-                <!-- duoshuo Share start -->
-                
-                <!-- 多说 Share end-->
-
-                <center>
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-</center>
-
-                <!-- 多说评论框 start -->
-                
-                <!-- 多说评论框 end -->
-
-                <!-- disqus comment start -->
-                
-                    <div class="comment">
-                        <div id="disqus_thread" class="disqus-thread"></div>
-                    </div>
-                
-                <!-- disqus comment end -->
-            </div>
-            
-            <!-- Tabe of Content -->
-            <!-- Table of Contents -->
-
-                
-            <!-- Sidebar Container -->
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
-
-                <!-- Featured Tags -->
-                
-                <section>
-                    <!-- no hr -->
-                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
-                    <div class="tags">
-                       
-                          <a class="tag" href="/tags/#React Native" title="React Native">React Native</a>
-                        
-                    </div>
-                </section>
-                
-
-                <!-- Friends Blog -->
-                
-            </div>
-        </div>
-    </div>
-</article>
-
-
-
-
-<!-- disqus embedded js code start (one page only need to embed once) -->
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = "https-jongmin92-github-io";
-    var disqus_identifier = "https://jongmin92.github.io/2017/02/10/ReactNative/useful-post-collection/";
-    var disqus_url = "https://jongmin92.github.io/2017/02/10/ReactNative/useful-post-collection/";
-
+    var disqus_config = function () {
+        this.page.url = 'https://jongmin92.github.io/2017/02/10/ReactNative/useful-post-collection/';
+        this.page.identifier = '2017/02/10/ReactNative/useful-post-collection/';
+    };
     (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'https-jongmin92-github-io' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
     })();
 </script>
-<!-- disqus embedded js code start end -->
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
 
 
-
-
-<!-- async load function -->
+<!-- For Google Adsense -->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
 <script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
+  (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
-    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'always',
-          placement: 'left',
-          icon: '#'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-</script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: 0.6em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
+
+</div>
+                
+                
 
 
 
-    <!-- Footer -->
-    <!-- Footer -->
-<footer>
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-3 column-right is-sticky">
+    
+        
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    카탈로그
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#react">
+        <span class="has-mr-6">1</span>
+        <span>React</span>
+        </a></li><li>
+        <a class="is-flex" href="#flux">
+        <span class="has-mr-6">2</span>
+        <span>Flux</span>
+        </a></li><li>
+        <a class="is-flex" href="#redux">
+        <span class="has-mr-6">3</span>
+        <span>Redux</span>
+        </a></li></ul>
+            </div>
+        </div>
+    </div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                카테고리
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Algorithm/">
+            <span class="level-start">
+                <span class="level-item">Algorithm</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">14</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Algorithm/BOJ/">
+            <span class="level-start">
+                <span class="level-item">BOJ</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Algorithm/Concept/">
+            <span class="level-start">
+                <span class="level-item">Concept</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Book/">
+            <span class="level-start">
+                <span class="level-item">Book</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Database/">
+            <span class="level-start">
+                <span class="level-item">Database</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/">
+            <span class="level-start">
+                <span class="level-item">Programming</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">95</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Programming/AWS/">
+            <span class="level-start">
+                <span class="level-item">AWS</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Git/">
+            <span class="level-start">
+                <span class="level-item">Git</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Gradle/">
+            <span class="level-start">
+                <span class="level-item">Gradle</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/HTML/">
+            <span class="level-start">
+                <span class="level-item">HTML</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Java/">
+            <span class="level-start">
+                <span class="level-item">Java</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">21</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/JavaScript/">
+            <span class="level-start">
+                <span class="level-item">JavaScript</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">15</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Linux-Ubuntu/">
+            <span class="level-start">
+                <span class="level-item">Linux & Ubuntu</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Node/">
+            <span class="level-start">
+                <span class="level-item">Node</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/RaspberryPi/">
+            <span class="level-start">
+                <span class="level-item">RaspberryPi</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/React-Native/">
+            <span class="level-start">
+                <span class="level-item">React Native</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Spring/">
+            <span class="level-start">
+                <span class="level-item">Spring</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">19</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Tool/">
+            <span class="level-start">
+                <span class="level-item">Tool</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Project/">
+            <span class="level-start">
+                <span class="level-item">Project</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Project/Emily/">
+            <span class="level-start">
+                <span class="level-item">Emily</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Tip/">
+            <span class="level-start">
+                <span class="level-item">Tip</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <ul class="list-inline text-center">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
                 
+                    <img src="/images/logo.png" alt="시작하며 읽기 좋은 글 모음" height="28">
                 
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 KimJongMin&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="external nofollow noopener noreferrer">Icarus</a>
                 
-
-                
-
-                
-                    <li>
-                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420" rel="external nofollow noopener noreferrer">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                
-
-                
-                    <li>
-                        <a target="_blank" href="https://github.com/jongmin92" rel="external nofollow noopener noreferrer">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                
-
-                
-
-                </ul>
-                <p class="copyright text-muted">
-                    Copyright &copy; KimJongMin 2020 
-                    <br>
-                    Theme by <a href="http://huangxuan.me" rel="external nofollow noopener noreferrer" target="_blank">Hux</a> 
-                    <span style="display: inline-block; margin: 0 5px;">
-                        <i class="fa fa-heart"></i>
-                    </span> 
-                    re-Ported by <a href="http://beantech.org" rel="external nofollow noopener noreferrer" target="_blank">BeanTech</a> | 
-                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px" src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true">
-                    </iframe>
                 </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
             </div>
         </div>
     </div>
 </footer>
-
-<!-- jQuery -->
-<script src="/js/jquery.min.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="/js/bootstrap.min.js"></script>
-
-<!-- Custom Theme JavaScript -->
-<script src="/js/hux-blog.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("ko");</script>
 
 
-<!-- async load function -->
 <script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
+var IcarusThemeSettings = {
+    site: {
+        url: 'https://jongmin92.github.io',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
     }
+};
 </script>
 
-<!-- 
-     Because of the native support for backtick-style fenced code blocks 
-     right within the Markdown is landed in Github Pages, 
-     From V1.6, There is no need for Highlight.js, 
-     so Huxblog drops it officially.
 
-     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
-     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
--->
-<!--
-    <script>
-        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
-            hljs.initHighlightingOnLoad();
-        })
-    </script>
-    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
--->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
 
 
-<!-- jquery.tagcloud.js -->
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" rel="external nofollow noopener noreferrer" target="_blank">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
 <script>
-    // only load tagcloud.js in tag.html
-    if($('#tag_cloud').length !== 0){
-        async("https://jongmin92.github.io/js/jquery.tagcloud.js",function(){
-            $.fn.tagcloud.defaults = {
-                //size: {start: 1, end: 1, unit: 'em'},
-                color: {start: '#bbbbee', end: '#0085a1'},
-            };
-            $('#tag_cloud a').tagcloud();
-        })
-    }
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
 </script>
 
-<!--fastClick.js -->
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
 <script>
-    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
-        var $nav = document.querySelector("nav");
-        if($nav) FastClick.attach($nav);
-    })
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
 </script>
 
 
-<!-- Google Analytics -->
+<a id="back-to-top" title="Zurück nach oben" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="입력 하세요...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
 <script>
-    // dynamic User by Hux
-    var _gaId = 'UA-90389042-1';
-    var _gaDomain = 'auto';
-
-    // Originial
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', _gaId, _gaDomain);
-    ga('send', 'pageview');
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '포스트',
+                PAGES: '페이지',
+                CATEGORIES: '카테고리',
+                TAGS: '태그',
+                UNTITLED: '(제목없음)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
 </script>
-
-
-
-
-<!-- Baidu Tongji -->
-
-
-
-
-
-
-	<a id="rocket" href="#top" class=""></a>
-	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script>
-    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async></script>
-<!-- Image to hack wechat -->
-<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0">
-<!-- Migrate from head to bottom, no longer block render and still work -->
-
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
 </body>
-
 </html>

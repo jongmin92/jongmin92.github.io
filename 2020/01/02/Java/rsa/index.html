@@ -1,236 +1,179 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<!-- Head tag -->
-<head><meta name="generator" content="Hexo 3.9.0">
+<html lang="ko">
+<head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA">
-    <meta name="naver-site-verification" content="4468fb67994f2c880ea59d43b7f9a03be45d43d8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="keyword" content="">
-    <link rel="shortcut icon" href="/images/etc/ironman-draw.png">
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <title>
-        
-          Encryption - RSA - 92Hz
-        
-    </title>
 
-    <link rel="canonical" href="https://jongmin92.github.io/2020/01/02/Java/rsa/">
+<meta name="generator" content="Hexo 3.9.0">
 
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <!-- Custom CSS --> 
-    <link rel="stylesheet" href="/css/beantech.min.css">
+<title>Encryption - RSA - 92Hz</title>
+
+<!-- For SEO -->
+<link rel="canonical" href="https://jongmin92.github.io/2020/01/02/java/rsa/">
+
+
+    <meta name="description" content="이전에 에서 해시(Hash)에 대해 설명하며 암호화(Encryption)와 다른점에 대해 간략히 알아보았다.이번에는 암호화에 대해서 조금 더 자세히 알아보자.">
+<meta name="keywords" content="Encryption,RSA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Encryption - RSA">
+<meta property="og:url" content="https://jongmin92.github.io/2020/01/02/Java/rsa/index.html">
+<meta property="og:site_name" content="92Hz">
+<meta property="og:description" content="이전에 에서 해시(Hash)에 대해 설명하며 암호화(Encryption)와 다른점에 대해 간략히 알아보았다.이번에는 암호화에 대해서 조금 더 자세히 알아보자.">
+<meta property="og:locale" content="ko">
+<meta property="og:image" content="https://jongmin92.github.io/images/og_image.png">
+<meta property="og:updated_time" content="2020-03-20T14:21:40.394Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Encryption - RSA">
+<meta name="twitter:description" content="이전에 에서 해시(Hash)에 대해 설명하며 암호화(Encryption)와 다른점에 대해 간략히 알아보았다.이번에는 암호화에 대해서 조금 더 자세히 알아보자.">
+<meta name="twitter:image" content="https://jongmin92.github.io/images/og_image.png">
+
+
+
+
+
+<link rel="alternative" href="rss2.xml" title="Encryption - RSA" type="application/atom+xml">
+
+
+
+<link rel="icon" href="/images/favicon.png">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
     
-    <!-- Pygments Highlight CSS -->
-    <link rel="stylesheet" href="/css/highlight.css">
-
-    <link rel="stylesheet" href="/css/widget.css">
-
-    <link rel="stylesheet" href="/css/rocket.css">
-
-    <link rel="stylesheet" href="/css/signature.css">
-
-    <link rel="stylesheet" href="/css/toc.css">
-
-    <!-- For SEO -->
-    <link rel="canonical" href="https://jongmin92.github.io/2020/01/02/java/rsa/">
-
-    <!-- Custom Fonts -->
-    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
-    <!-- Hux change font-awesome CDN to qiniu -->
-    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-
-    <!-- Hux Delete, sad but pending in China
-    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
-    css'>
-    -->
-
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <!-- ga & ba script hoook -->
-    <script></script>
-</head>
-
-
-<!-- hack iOS CSS :active style -->
-<body ontouchstart="">
-	<!-- Modified by Yu-Hsuan Yen -->
-<!-- Post Header -->
-<style type="text/css">
-    header.intro-header{
-        
-            /* 기본 포스트 헤더 이미지 (페이지 이미지 || 기본 헤더 이미지) */
-            /* background-image: url('undefined') */
-            /* background-image: url('/images/etc/home.jpg') */
-            background-image: url('/images/etc/home.jpg')
-            /*post*/
-        
-    }
     
-</style>
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
 
-<header class="intro-header">
-    <!-- Signature -->
-    <div id="signature">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                
-                    <div class="post-heading">
-                        <div class="tags">
-                            
-                              <a class="tag" href="/tags/#Encryption" title="Encryption">Encryption</a>
-                            
-                              <a class="tag" href="/tags/#RSA" title="RSA">RSA</a>
-                            
-                        </div>
-                        <h1>Encryption - RSA</h1>
-                        <h2 class="subheading">비 대칭키 암호화(Asymmetric Encryption) - RSA</h2>
-                        <span class="meta">
-                            Posted by KimJongMin on
-                            2020-01-02
-                        </span>
-                    </div>
-                
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
 
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
 
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
 
-	
-    <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">92Hz</a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <!-- Known Issue, found by Hux:
-            <nav>'s height woule be hold on by its content.
-            so, when navbar scale out, the <nav> will cover tags.
-            also mask any touch event of tags, unfortunately.
-        -->
-        <div id="huxblog_navbar">
-            <div class="navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="/">Home</a>
-                    </li>
-
-                    
-
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/about/">About</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/tags/">Tags</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/archive/">Archives</a>
-                        </li>
-                        
-                    
-                    
-                </ul>
-            </div>
-        </div>
-        <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container -->
-</nav>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-90389042-1"></script>
 <script>
-    // Drop Bootstarp low-performance Navbar
-    // Use customize navbar with high-quality material design animation
-    // in high-perf jank-free CSS3 implementation
-    var $body   = document.body;
-    var $toggle = document.querySelector('.navbar-toggle');
-    var $navbar = document.querySelector('#huxblog_navbar');
-    var $collapse = document.querySelector('.navbar-collapse');
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-    $toggle.addEventListener('click', handleMagic)
-    function handleMagic(e){
-        if ($navbar.className.indexOf('in') > 0) {
-        // CLOSE
-            $navbar.className = " ";
-            // wait until animation end.
-            setTimeout(function(){
-                // prevent frequently toggle
-                if($navbar.className.indexOf('in') < 0) {
-                    $collapse.style.height = "0px"
-                }
-            },400)
-        }else{
-        // OPEN
-            $collapse.style.height = "auto"
-            $navbar.className += " in";
-        }
-    }
+    gtag('config', 'UA-90389042-1');
 </script>
 
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    
+    
 
-    <!-- Main Content -->
-    <!-- Modify by Yu-Hsuan Yen -->
 
-<!-- Post Content -->
-<article>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-2-column">
+    <nav class="navbar navbar-main">
     <div class="container">
-        <div class="row">
-
-            <center>
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-</center>
-
-            <!-- Post Container -->
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                post-container">
-
-                <p>이전에 <a href="https://jongmin92.github.io/2019/12/18/Java/hash/">&lt;Hash - MD5와 SHA256&gt;</a>에서 해시(Hash)에 대해 설명하며 암호화(Encryption)와 다른점에 대해 간략히 알아보았다.<br>
-이번에는 암호화에 대해서 조금 더 자세히 알아보자.</p>
-<h1 id="암호화-encryption">암호화 (Encryption)</h1>
-<p><strong><code>암호화(Encryption)</code>은 <code>평문(PlanText)</code>을 <code>암호문(CipherText)</code>으로 변환하는 과정을 말한다. 반대로 <code>복호화(Decryption)</code>은 암호문을 평문으로 변환하는 과정을 말한다.</strong></p>
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.png" alt="Encryption - RSA" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" rel="external nofollow noopener noreferrer" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="카탈로그" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="검색" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-01-02T13:29:00.000Z">2020-01-02</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Programming/">Programming</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/Programming/Java/">Java</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    17분 읽기 (대략 2483 단어)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Encryption - RSA
+            
+        </h1>
+        <div class="content">
+            <p>이전에 <a href="https://jongmin92.github.io/2019/12/18/Java/hash/"><hash -="" md5와="" sha256=""></hash></a>에서 해시(Hash)에 대해 설명하며 암호화(Encryption)와 다른점에 대해 간략히 알아보았다.<br>이번에는 암호화에 대해서 조금 더 자세히 알아보자.<br><a id="more"></a></p>
+<h1 id="암호화-encryption"><a href="#암호화-Encryption" class="headerlink" title="암호화 (Encryption)"></a>암호화 (Encryption)</h1><p><strong><code>암호화(Encryption)</code>은 <code>평문(PlanText)</code>을 <code>암호문(CipherText)</code>으로 변환하는 과정을 말한다. 반대로 <code>복호화(Decryption)</code>은 암호문을 평문으로 변환하는 과정을 말한다.</strong></p>
 <ul>
 <li>암호화: 평문 -&gt; 암호문</li>
 <li>복호화: 암호문 -&gt; 평문</li>
@@ -241,15 +184,12 @@
 <li>대칭키 암호화: 암호화와 복호화에 같은 키를 사용</li>
 <li>비대칭키 암호화: 암호화와 복호화에 서로 다른 키를 사용 (공개캐, 비공개키)</li>
 </ul>
-<h1 id="대칭키-암호화-symmetric-key-encryption">대칭키 암호화 (Symmetric Key Encryption)</h1>
-<p>대칭키 암호화는 오래전부터 사용되어온 방식이다. 암호화와 복호화에 같은 키를 사용하는데 보통 PSK(Pre-Shared Key)라고도 표현한다. 영문 그대로 미리 공유된 키를 말한다. 대칭키 암호화를 위해서는  <strong>평문을 암호화해서 전달하는 송신자와 암호문을 받아 평문으로 복호화하려는 수신자가 서로 동일한 키를 암호화가 시작되기 전에 서로 공유해야 한다.</strong></p>
+<h1 id="대칭키-암호화-symmetric-key-encryption"><a href="#대칭키-암호화-Symmetric-Key-Encryption" class="headerlink" title="대칭키 암호화 (Symmetric Key Encryption)"></a>대칭키 암호화 (Symmetric Key Encryption)</h1><p>대칭키 암호화는 오래전부터 사용되어온 방식이다. 암호화와 복호화에 같은 키를 사용하는데 보통 PSK(Pre-Shared Key)라고도 표현한다. 영문 그대로 미리 공유된 키를 말한다. 대칭키 암호화를 위해서는  <strong>평문을 암호화해서 전달하는 송신자와 암호문을 받아 평문으로 복호화하려는 수신자가 서로 동일한 키를 암호화가 시작되기 전에 서로 공유해야 한다.</strong></p>
 <p>대칭키 암호화에는 <a href="https://ko.wikipedia.org/wiki/%EB%8D%B0%EC%9D%B4%ED%84%B0_%EC%95%94%ED%98%B8%ED%99%94_%ED%91%9C%EC%A4%80" rel="external nofollow noopener noreferrer" target="_blank">DES(Data Encryption Standard)</a>, <a href="https://ko.wikipedia.org/wiki/%EA%B3%A0%EA%B8%89_%EC%95%94%ED%98%B8%ED%99%94_%ED%91%9C%EC%A4%80" rel="external nofollow noopener noreferrer" target="_blank">AES(Advanced Encryption Standard)</a>와 같은 알고리즘이 대표적으로 사용된다.</p>
 <p>그러나 대칭키 암호화 방식에는 문제가 있다. <strong>처음 서로 키를 공유하는 과정에서 만약 누군가 중간에서 이 키를 가로챌 수 있다면, 그 후에 해당 키를 이용해 암호화되어 전달되는 암호문들은 중간에서 쉽게 복호화되어 그 내용이 전부 노출될 수 있다.</strong></p>
 <p>이런 문제를 근본적으로 해결하고 암호키를 쉽게 전달하기 위해 나온 방법이 비대칭키 암호화이다.</p>
-<h1 id="비대칭키-암호화-asymmetric-key-encryption">비대칭키 암호화 (Asymmetric Key Encryption)</h1>
-<p>비대칭키 암호화는 암호화와 복호화에 서로 다른 키(공개캐, 비공개키)를 사용 한다. 비대칭키 알고리즘에는 대표적으로 <a href="https://ko.wikipedia.org/wiki/RSA_%EC%95%94%ED%98%B8" rel="external nofollow noopener noreferrer" target="_blank">RSA(Rivest–Shamir–Adleman)</a>가 사용된다.</p>
-<h2 id="rsa-rivestshamiradleman">RSA (Rivest–Shamir–Adleman)</h2>
-<p>RSA는 수학적인 기법을 통해 한 쌍의 키를 생성한다. 보통 한 쌍의 키를 각각 공개키와 비공개키라고 부르며 다음과 같은 용도로 사용된다.</p>
+<h1 id="비대칭키-암호화-asymmetric-key-encryption"><a href="#비대칭키-암호화-Asymmetric-Key-Encryption" class="headerlink" title="비대칭키 암호화 (Asymmetric Key Encryption)"></a>비대칭키 암호화 (Asymmetric Key Encryption)</h1><p>비대칭키 암호화는 암호화와 복호화에 서로 다른 키(공개캐, 비공개키)를 사용 한다. 비대칭키 알고리즘에는 대표적으로 <a href="https://ko.wikipedia.org/wiki/RSA_%EC%95%94%ED%98%B8" rel="external nofollow noopener noreferrer" target="_blank">RSA(Rivest–Shamir–Adleman)</a>가 사용된다.</p>
+<h2 id="rsa-rivestshamiradleman"><a href="#RSA-Rivest–Shamir–Adleman" class="headerlink" title="RSA (Rivest–Shamir–Adleman)"></a>RSA (Rivest–Shamir–Adleman)</h2><p>RSA는 수학적인 기법을 통해 한 쌍의 키를 생성한다. 보통 한 쌍의 키를 각각 공개키와 비공개키라고 부르며 다음과 같은 용도로 사용된다.</p>
 <ul>
 <li>공개키(Publick Key): 누구에게나 공개될 수 있으며 데이터를 보내는 발신자는 공개키를 통해 정보를 암호화한다.</li>
 <li>비공개키(Private Key, 비밀키): 수신자는 비밀키를 암호화된 메세지를 복호화 하는데 사용한다. 외부에 노출되지 않도록 안전하게 보관해야 한다.</li>
@@ -262,14 +202,10 @@
 <blockquote>
 <p><strong>RSA는 암호화뿐만 아니라 <a href="https://ko.wikipedia.org/wiki/%EC%A0%84%EC%9E%90%EC%84%9C%EB%AA%85" rel="external nofollow noopener noreferrer" target="_blank">전자서명</a>이 가능한 최초의 알고리즘으로 알려져 있다.</strong> RSA가 갖는 전자서명 기능은 인증을 요구하는 전자 상거래와 같은 곳에서 사용된다.</p>
 </blockquote>
-<h1 id="예제">예제</h1>
-<p>kotlin을 이용해 간단히 RSA(public key, private key) 키를 생성하고, 이를 이용해 암복호화를 해보자.</p>
-<h2 id="키-생성">키 생성</h2>
-<p><a href="https://docs.oracle.com/javase/7/docs/api/java/security/KeyPairGenerator.html" rel="external nofollow noopener noreferrer" target="_blank">java.security.KeyPairGenerator</a>를 이용하면 쉽게 RSA 키를 생성할 수 있다.</p>
+<h1 id="예제"><a href="#예제" class="headerlink" title="예제"></a>예제</h1><p>kotlin을 이용해 간단히 RSA(public key, private key) 키를 생성하고, 이를 이용해 암복호화를 해보자.</p>
+<h2 id="키-생성"><a href="#키-생성" class="headerlink" title="키 생성"></a>키 생성</h2><p><a href="https://docs.oracle.com/javase/7/docs/api/java/security/KeyPairGenerator.html" rel="external nofollow noopener noreferrer" target="_blank">java.security.KeyPairGenerator</a>를 이용하면 쉽게 RSA 키를 생성할 수 있다.</p>
 <blockquote>
-<p>The <strong>KeyPairGenerator</strong> class is used to generate pairs of public and private keys. Key pair generators are constructed using the getInstance factory methods (static methods that return instances of a given class).<br>
-A Key pair generator for a particular algorithm creates a public/private key pair that can be used with this algorithm. It also associates algorithm-specific parameters with each of the generated keys.<br>
-There are two ways to generate a key pair: in an algorithm-independent manner, and in an algorithm-specific manner. The only difference between the two is the initialization of the object:</p>
+<p>The <strong>KeyPairGenerator</strong> class is used to generate pairs of public and private keys. Key pair generators are constructed using the getInstance factory methods (static methods that return instances of a given class).<br>A Key pair generator for a particular algorithm creates a public/private key pair that can be used with this algorithm. It also associates algorithm-specific parameters with each of the generated keys.<br>There are two ways to generate a key pair: in an algorithm-independent manner, and in an algorithm-specific manner. The only difference between the two is the initialization of the object:</p>
 </blockquote>
 <p>공개키는 <a href="https://ko.wikipedia.org/wiki/X.509" rel="external nofollow noopener noreferrer" target="_blank">X.509</a> 형식으로 생성된다.</p>
 <blockquote>
@@ -280,299 +216,508 @@ There are two ways to generate a key pair: in an algorithm-independent manner, a
 <p><strong>PKCS #8</strong>는 <strong>개인키 정보 문법 표준</strong>으로 RFC 5208에 기술되었다. 공개키 암호에서 사용되는 비밀키 값에 대한 문법을 정의한다.</p>
 </blockquote>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RSAKeyPairGenerator</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> privateKey: PrivateKey</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> publicKey: PublicKey</span><br><span class="line"></span><br><span class="line">    init &#123;</span><br><span class="line">        <span class="keyword">val</span> keyGen = KeyPairGenerator.getInstance(<span class="string">"RSA"</span>)</span><br><span class="line">        keyGen.initialize(<span class="number">1024</span>)</span><br><span class="line">        <span class="keyword">val</span> keyPair = keyGen.generateKeyPair()</span><br><span class="line">        <span class="keyword">this</span>.privateKey = keyPair.<span class="keyword">private</span></span><br><span class="line">        <span class="keyword">this</span>.publicKey = keyPair.<span class="keyword">public</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">writeToFile</span><span class="params">(path: <span class="type">String</span>, key: <span class="type">String</span>)</span></span> &#123;</span><br><span class="line">        <span class="keyword">val</span> file = File(path)</span><br><span class="line">        file.parentFile.mkdir();</span><br><span class="line"></span><br><span class="line">        file.bufferedWriter().use &#123;</span><br><span class="line">            it.write(key)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">getPrivateKey</span><span class="params">()</span></span>: PrivateKey &#123;</span><br><span class="line">        <span class="keyword">return</span> privateKey</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">getPublicKey</span><span class="params">()</span></span>: PublicKey &#123;</span><br><span class="line">        <span class="keyword">return</span> publicKey</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">val</span> keyPairGenerator = RSAKeyPairGenerator()</span><br><span class="line">    <span class="keyword">val</span> publicKey = keyPairGenerator.getPublicKey().encoded</span><br><span class="line">    <span class="keyword">val</span> privateKey = keyPairGenerator.getPrivateKey().encoded</span><br><span class="line"></span><br><span class="line">    <span class="keyword">val</span> base64PublicKey = Base64.getEncoder().encodeToString(publicKey)</span><br><span class="line">    <span class="keyword">val</span> base64PrivateKey = Base64.getEncoder().encodeToString(privateKey)</span><br><span class="line"></span><br><span class="line">    keyPairGenerator.writeToFile(<span class="string">"RSA/publicKey"</span>, base64PublicKey)</span><br><span class="line">    keyPairGenerator.writeToFile(<span class="string">"RSA/privateKey"</span>, base64PrivateKey)</span><br><span class="line"></span><br><span class="line">    println(<span class="string">"public key: <span class="variable">$base64PublicKey</span>"</span>)</span><br><span class="line">    println(<span class="string">"private key: <span class="variable">$base64PrivateKey</span>"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="privatekey">privateKey</h3>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAKxfz0f6BTZVergW5tZxHgUIbVmApXb01ozq11fukFsJx2WbfvxddyxU3P6NEZjoSYCM5NPjvtscMtvfErL93qa3cVrKgBXumclfMAe7ijHeesiC/0RUnSoV7ytdz9AXn0TvjzIxAibGL8HxdGGMgAtYERM7/NYJ/JU7o7jYWhKFAgMBAAECgYBIiwXUF8+rvyunX9QEOZTVr2c9vJtmRcIpigfYtMjB14q4I0m88aTe3lQnOL1IKbINTL5cwkMnOWXaDLZ058yUkfDdahjaCxg9z9/jY2cxREvMR/oWtY5FwrodDKvoTURC8Hz+TZg4a9S1NofKY8W4YBqxpW3PKvBkIVl6beECfQJBAOEW9VdkwT/zgXwUXvivZAqlbFkOkr9zBE+tvQ+QEY6rLMgIoEa1NK/xx1gWt+c6xLMjE8f7GS7HEkCbQOtlvXcCQQDEC6MnswfK7arpv02odhc92ViHCGI1W8rvFlG4SL0RHI+VxAIBaEL+1RN9k4aCSWLrCLtLzaSa+8ArFp2r0f7jAkEA3Ck+k9qjAtBEqH6sXgX/jkI7dehBNS1k3CKNt/kskyVuycFWM5LuE+IjH1ApVOwwlR8MLCC4gv6IJdU1bIm5BQJBAIr/PUSueL32WJG2Y1cnsz7U1SGYXhk65d0yU+p3GCYDvAIRoOJii+2mIVWNvXaulYXTAQiz2xtPl2Z1eIEUOMUCQEdR7nswIOfV71fp1sTngUM3GpLDrT3uA9M8/2ND3QnfrVDc+gFWkj+OmKeDsLx7Rhs+liVP9qgFppC9IJxcmyI=</span><br></pre></td></tr></table></figure>
-<h3 id="publickey">publicKey</h3>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCsX89H+gU2VXq4FubWcR4FCG1ZgKV29NaM6tdX7pBbCcdlm378XXcsVNz+jRGY6EmAjOTT477bHDLb3xKy/d6mt3FayoAV7pnJXzAHu4ox3nrIgv9EVJ0qFe8rXc/QF59E748yMQImxi/B8XRhjIALWBETO/zWCfyVO6O42FoShQIDAQAB</span><br></pre></td></tr></table></figure>
-<h2 id="암복호화">암복호화</h2>
-<p>X.509 형식의 데이터를 다시 RSA 공개키로 변환하기 위해서는 <a href="https://docs.oracle.com/javase/7/docs/api/java/security/spec/X509EncodedKeySpec.html" rel="external nofollow noopener noreferrer" target="_blank">X509EncodedKeySpec</a>을 사용한다.<br>
-PKCS #8 형식의 데이터를 RSA 비공개키로 변환하기 위해서는 <a href="https://docs.oracle.com/javase/7/docs/api/java/security/spec/PKCS8EncodedKeySpec.html" rel="external nofollow noopener noreferrer" target="_blank">PKCS8EncodedKeySpec</a>를 사용한다.</p>
+<h3 id="privatekey"><a href="#privateKey" class="headerlink" title="privateKey"></a>privateKey</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAKxfz0f6BTZVergW5tZxHgUIbVmApXb01ozq11fukFsJx2WbfvxddyxU3P6NEZjoSYCM5NPjvtscMtvfErL93qa3cVrKgBXumclfMAe7ijHeesiC/0RUnSoV7ytdz9AXn0TvjzIxAibGL8HxdGGMgAtYERM7/NYJ/JU7o7jYWhKFAgMBAAECgYBIiwXUF8+rvyunX9QEOZTVr2c9vJtmRcIpigfYtMjB14q4I0m88aTe3lQnOL1IKbINTL5cwkMnOWXaDLZ058yUkfDdahjaCxg9z9/jY2cxREvMR/oWtY5FwrodDKvoTURC8Hz+TZg4a9S1NofKY8W4YBqxpW3PKvBkIVl6beECfQJBAOEW9VdkwT/zgXwUXvivZAqlbFkOkr9zBE+tvQ+QEY6rLMgIoEa1NK/xx1gWt+c6xLMjE8f7GS7HEkCbQOtlvXcCQQDEC6MnswfK7arpv02odhc92ViHCGI1W8rvFlG4SL0RHI+VxAIBaEL+1RN9k4aCSWLrCLtLzaSa+8ArFp2r0f7jAkEA3Ck+k9qjAtBEqH6sXgX/jkI7dehBNS1k3CKNt/kskyVuycFWM5LuE+IjH1ApVOwwlR8MLCC4gv6IJdU1bIm5BQJBAIr/PUSueL32WJG2Y1cnsz7U1SGYXhk65d0yU+p3GCYDvAIRoOJii+2mIVWNvXaulYXTAQiz2xtPl2Z1eIEUOMUCQEdR7nswIOfV71fp1sTngUM3GpLDrT3uA9M8/2ND3QnfrVDc+gFWkj+OmKeDsLx7Rhs+liVP9qgFppC9IJxcmyI=</span><br></pre></td></tr></table></figure>
+<h3 id="publickey"><a href="#publicKey" class="headerlink" title="publicKey"></a>publicKey</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCsX89H+gU2VXq4FubWcR4FCG1ZgKV29NaM6tdX7pBbCcdlm378XXcsVNz+jRGY6EmAjOTT477bHDLb3xKy/d6mt3FayoAV7pnJXzAHu4ox3nrIgv9EVJ0qFe8rXc/QF59E748yMQImxi/B8XRhjIALWBETO/zWCfyVO6O42FoShQIDAQAB</span><br></pre></td></tr></table></figure>
+<h2 id="암복호화"><a href="#암복호화" class="headerlink" title="암복호화"></a>암복호화</h2><p>X.509 형식의 데이터를 다시 RSA 공개키로 변환하기 위해서는 <a href="https://docs.oracle.com/javase/7/docs/api/java/security/spec/X509EncodedKeySpec.html" rel="external nofollow noopener noreferrer" target="_blank">X509EncodedKeySpec</a>을 사용한다.<br>PKCS #8 형식의 데이터를 RSA 비공개키로 변환하기 위해서는 <a href="https://docs.oracle.com/javase/7/docs/api/java/security/spec/PKCS8EncodedKeySpec.html" rel="external nofollow noopener noreferrer" target="_blank">PKCS8EncodedKeySpec</a>를 사용한다.</p>
 <ul>
 <li>공개키: X.509 -&gt; X509EncodedKeySpec</li>
 <li>비공개키: PKCS #8 -&gt; PKCS8EncodedKeySpec</li>
 </ul>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">object</span> RSAUtil &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> keyFactory = KeyFactory.getInstance(<span class="string">"RSA"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">getPublicKey</span><span class="params">(base64PublicKey: <span class="type">String</span>)</span></span>: PublicKey &#123;</span><br><span class="line">        <span class="keyword">val</span> keySpec = X509EncodedKeySpec(Base64.getDecoder().decode(base64PublicKey.toByteArray()))</span><br><span class="line">        <span class="keyword">return</span> keyFactory.generatePublic(keySpec)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">getPrivateKey</span><span class="params">(base64PrivateKey: <span class="type">String</span>)</span></span>: PrivateKey &#123;</span><br><span class="line">        <span class="keyword">val</span> keySpec = PKCS8EncodedKeySpec(Base64.getDecoder().decode(base64PrivateKey.toByteArray()))</span><br><span class="line">        <span class="keyword">return</span> keyFactory.generatePrivate(keySpec)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">encrypt</span><span class="params">(<span class="keyword">data</span>: <span class="type">String</span>, base64PublicKey: <span class="type">String</span>)</span></span>: ByteArray &#123;</span><br><span class="line">        <span class="keyword">val</span> cipher = Cipher.getInstance(<span class="string">"RSA/ECB/PKCS1Padding"</span>)</span><br><span class="line">        cipher.init(Cipher.ENCRYPT_MODE, getPublicKey(base64PublicKey))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> cipher.doFinal(<span class="keyword">data</span>.toByteArray())</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">decrypt</span><span class="params">(<span class="keyword">data</span>: <span class="type">ByteArray</span>, privateKey: <span class="type">PrivateKey</span>)</span></span>: String &#123;</span><br><span class="line">        <span class="keyword">val</span> cipher = Cipher.getInstance(<span class="string">"RSA/ECB/PKCS1Padding"</span>)</span><br><span class="line">        cipher.init(Cipher.DECRYPT_MODE, privateKey)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> String(cipher.doFinal(<span class="keyword">data</span>))</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">decrypt</span><span class="params">(<span class="keyword">data</span>: <span class="type">String</span>, base64PrivateKey: <span class="type">String</span>)</span></span>: String &#123;</span><br><span class="line">        <span class="keyword">return</span> decrypt(Base64.getDecoder().decode(<span class="keyword">data</span>.toByteArray()), getPrivateKey(base64PrivateKey))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">val</span> publicKey =</span><br><span class="line">        <span class="string">"MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCya66h9+mG6z3/3lSV/IjfXFxH/Y0CPgc+YLIjui5JmbNgPC2EQ4GJPsT0CbxjcMTnrSvyj7JzBbJhzmsTBD+HuKEiQOOlGNhPS0HIDvpk+J4DDyuGoTVHnWkuxNC9+IlbkWZQMWHcQ42VCFJwvduESOhs01vSFQCRBYNzYL54HQIDAQAB"</span></span><br><span class="line">    <span class="keyword">val</span> privateKey =</span><br><span class="line">        <span class="string">"MIICeAIBADANBgkqhkiG9w0BAQEFAASCAmIwggJeAgEAAoGBALJrrqH36YbrPf/eVJX8iN9cXEf9jQI+Bz5gsiO6LkmZs2A8LYRDgYk+xPQJvGNwxOetK/KPsnMFsmHOaxMEP4e4oSJA46UY2E9LQcgO+mT4ngMPK4ahNUedaS7E0L34iVuRZlAxYdxDjZUIUnC924RI6GzTW9IVAJEFg3NgvngdAgMBAAECgYEAmAd/Z03ac/dQ/gxRYPgtHL4Td9hJ5eY6v+EfCahkNpy8Jr1AP5pR70NICXWeS9FURuDdOLNO6AmrpQGBZVPSWQODDXq47CJO4bHMk55DXzPue31jva7Kk7l2ydmm2K6h3s9b+4pkYOtN3f/8tnQsbundqIXI2Uz6E8LP8ksGilUCQQDjZt8sMa9nkZ7RC5SqF8QecMKXErsf5iZroYHt+2HHaakoV+Exy+eXBgREPO7cZMC+BIglTciHFD5grCrdwQBLAkEAyNvgViJI0XUsiLlsg9RHA0DciErEkjzXMd6LcND1KspXFM6y484uN6B07SDeqG1Dyn/C+pQarpt5xER9UEU4NwJBAIiqe7fYyH0rJFKobhlnnSNaS2h2BmYecLrA3xCCwvoQw2wOnLXLwQyfvhKwuDFWkAvjN1uMCtc70F1TO5P4eU8CQGJof8ATqhOdUgVmu4jXPzeT1rib0TVIw7I2M6FBb2zYl9Ok9bZw9OniHodzfEOOzRDwianVWEFGAWGsoKzsTP8CQQDZrzW16AnCQrmr1ENCQoQonEZTAAS5FI1XhfIH4VvGq+yCyYMdB7WtQ0kUS3Qm20VfDhim55NjlZd2BPpPBmxL"</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">val</span> text = <span class="string">"Please encrypt this data"</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">val</span> encryptedString = Base64.getEncoder().encodeToString(RSAUtil.encrypt(text, publicKey))</span><br><span class="line">    println(<span class="string">"encryptedString: <span class="variable">$encryptedString</span>"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">val</span> decryptedString = RSAUtil.decrypt(encryptedString, privateKey)</span><br><span class="line">    println(<span class="string">"decryptedString: <span class="variable">$decryptedString</span>"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-                
-
-                <hr>
-                <!-- Pager -->
-                <ul class="pager">
-                    
-                    
-                        <li class="next">
-                            <a href="/2019/12/26/Programming/2019-retrospect/" data-toggle="tooltip" data-placement="top" title="2년차 LINE 서버 개발자의 2019년 회고">Next Post &rarr;</a>
-                        </li>
-                    
-                </ul>
-
-                <!-- duoshuo Share start -->
-                
-                <!-- 多说 Share end-->
-
-                <center>
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-</center>
-
-                <!-- 多说评论框 start -->
-                
-                <!-- 多说评论框 end -->
-
-                <!-- disqus comment start -->
-                
-                    <div class="comment">
-                        <div id="disqus_thread" class="disqus-thread"></div>
-                    </div>
-                
-                <!-- disqus comment end -->
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/Encryption/">Encryption</a>, <a class="has-link-grey -link" href="/tags/RSA/">RSA</a>
+                </div>
             </div>
-            
-            <!-- Tabe of Content -->
-            <!-- Table of Contents -->
+        </div>
+        
+        
+        
+    </div>
+</div>
 
-                
-            <!-- Sidebar Container -->
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
 
-                <!-- Featured Tags -->
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/12/26/Programming/2019-retrospect/">
+                <span class="level-item">2년차 LINE 서버 개발자의 2019년 회고</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">댓글</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://jongmin92.github.io/2020/01/02/Java/rsa/';
+        this.page.identifier = '2020/01/02/Java/rsa/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'https-jongmin92-github-io' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
+
+
+<!-- For Google Adsense -->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</div>
                 
-                <section>
-                    <!-- no hr -->
-                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
-                    <div class="tags">
-                       
-                          <a class="tag" href="/tags/#Encryption" title="Encryption">Encryption</a>
-                        
-                          <a class="tag" href="/tags/#RSA" title="RSA">RSA</a>
-                        
-                    </div>
-                </section>
                 
 
-                <!-- Friends Blog -->
-                
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-3 column-right is-sticky">
+    
+        
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    카탈로그
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#암호화-encryption">
+        <span class="has-mr-6">1</span>
+        <span>암호화 (Encryption)</span>
+        </a></li><li>
+        <a class="is-flex" href="#대칭키-암호화-symmetric-key-encryption">
+        <span class="has-mr-6">2</span>
+        <span>대칭키 암호화 (Symmetric Key Encryption)</span>
+        </a></li><li>
+        <a class="is-flex" href="#비대칭키-암호화-asymmetric-key-encryption">
+        <span class="has-mr-6">3</span>
+        <span>비대칭키 암호화 (Asymmetric Key Encryption)</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#rsa-rivestshamiradleman">
+        <span class="has-mr-6">3.1</span>
+        <span>RSA (Rivest–Shamir–Adleman)</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#예제">
+        <span class="has-mr-6">4</span>
+        <span>예제</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#키-생성">
+        <span class="has-mr-6">4.1</span>
+        <span>키 생성</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#privatekey">
+        <span class="has-mr-6">4.1.1</span>
+        <span>privateKey</span>
+        </a></li><li>
+        <a class="is-flex" href="#publickey">
+        <span class="has-mr-6">4.1.2</span>
+        <span>publicKey</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#암복호화">
+        <span class="has-mr-6">4.2</span>
+        <span>암복호화</span>
+        </a></li></ul></li></ul>
             </div>
         </div>
     </div>
-</article>
 
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                카테고리
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Algorithm/">
+            <span class="level-start">
+                <span class="level-item">Algorithm</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">14</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Algorithm/BOJ/">
+            <span class="level-start">
+                <span class="level-item">BOJ</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Algorithm/Concept/">
+            <span class="level-start">
+                <span class="level-item">Concept</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Book/">
+            <span class="level-start">
+                <span class="level-item">Book</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Database/">
+            <span class="level-start">
+                <span class="level-item">Database</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/">
+            <span class="level-start">
+                <span class="level-item">Programming</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">95</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Programming/AWS/">
+            <span class="level-start">
+                <span class="level-item">AWS</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Git/">
+            <span class="level-start">
+                <span class="level-item">Git</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Gradle/">
+            <span class="level-start">
+                <span class="level-item">Gradle</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/HTML/">
+            <span class="level-start">
+                <span class="level-item">HTML</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Java/">
+            <span class="level-start">
+                <span class="level-item">Java</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">21</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/JavaScript/">
+            <span class="level-start">
+                <span class="level-item">JavaScript</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">15</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Linux-Ubuntu/">
+            <span class="level-start">
+                <span class="level-item">Linux & Ubuntu</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Node/">
+            <span class="level-start">
+                <span class="level-item">Node</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/RaspberryPi/">
+            <span class="level-start">
+                <span class="level-item">RaspberryPi</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/React-Native/">
+            <span class="level-start">
+                <span class="level-item">React Native</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Spring/">
+            <span class="level-start">
+                <span class="level-item">Spring</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">19</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Tool/">
+            <span class="level-start">
+                <span class="level-item">Tool</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Project/">
+            <span class="level-start">
+                <span class="level-item">Project</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Project/Emily/">
+            <span class="level-start">
+                <span class="level-item">Emily</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Tip/">
+            <span class="level-start">
+                <span class="level-item">Tip</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
 
-
-
-<!-- disqus embedded js code start (one page only need to embed once) -->
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = "https-jongmin92-github-io";
-    var disqus_identifier = "https://jongmin92.github.io/2020/01/02/Java/rsa/";
-    var disqus_url = "https://jongmin92.github.io/2020/01/02/Java/rsa/";
-
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<!-- disqus embedded js code start end -->
-
-
-
-
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
-    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'always',
-          placement: 'left',
-          icon: '#'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-</script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: 0.6em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
-
-
-
-    <!-- Footer -->
-    <!-- Footer -->
-<footer>
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <ul class="list-inline text-center">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
                 
+                    <img src="/images/logo.png" alt="Encryption - RSA" height="28">
                 
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 KimJongMin&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="external nofollow noopener noreferrer">Icarus</a>
                 
-
-                
-
-                
-                    <li>
-                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420" rel="external nofollow noopener noreferrer">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                
-
-                
-                    <li>
-                        <a target="_blank" href="https://github.com/jongmin92" rel="external nofollow noopener noreferrer">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                
-
-                
-
-                </ul>
-                <p class="copyright text-muted">
-                    Copyright &copy; KimJongMin 2020 
-                    <br>
-                    Theme by <a href="http://huangxuan.me" rel="external nofollow noopener noreferrer" target="_blank">Hux</a> 
-                    <span style="display: inline-block; margin: 0 5px;">
-                        <i class="fa fa-heart"></i>
-                    </span> 
-                    re-Ported by <a href="http://beantech.org" rel="external nofollow noopener noreferrer" target="_blank">BeanTech</a> | 
-                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px" src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true">
-                    </iframe>
                 </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
             </div>
         </div>
     </div>
 </footer>
-
-<!-- jQuery -->
-<script src="/js/jquery.min.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="/js/bootstrap.min.js"></script>
-
-<!-- Custom Theme JavaScript -->
-<script src="/js/hux-blog.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("ko");</script>
 
 
-<!-- async load function -->
 <script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
+var IcarusThemeSettings = {
+    site: {
+        url: 'https://jongmin92.github.io',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
     }
+};
 </script>
 
-<!-- 
-     Because of the native support for backtick-style fenced code blocks 
-     right within the Markdown is landed in Github Pages, 
-     From V1.6, There is no need for Highlight.js, 
-     so Huxblog drops it officially.
 
-     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
-     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
--->
-<!--
-    <script>
-        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
-            hljs.initHighlightingOnLoad();
-        })
-    </script>
-    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
--->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
 
 
-<!-- jquery.tagcloud.js -->
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" rel="external nofollow noopener noreferrer" target="_blank">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
 <script>
-    // only load tagcloud.js in tag.html
-    if($('#tag_cloud').length !== 0){
-        async("https://jongmin92.github.io/js/jquery.tagcloud.js",function(){
-            $.fn.tagcloud.defaults = {
-                //size: {start: 1, end: 1, unit: 'em'},
-                color: {start: '#bbbbee', end: '#0085a1'},
-            };
-            $('#tag_cloud a').tagcloud();
-        })
-    }
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
 </script>
 
-<!--fastClick.js -->
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
 <script>
-    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
-        var $nav = document.querySelector("nav");
-        if($nav) FastClick.attach($nav);
-    })
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
 </script>
 
 
-<!-- Google Analytics -->
+<a id="back-to-top" title="Zurück nach oben" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="입력 하세요...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
 <script>
-    // dynamic User by Hux
-    var _gaId = 'UA-90389042-1';
-    var _gaDomain = 'auto';
-
-    // Originial
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', _gaId, _gaDomain);
-    ga('send', 'pageview');
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '포스트',
+                PAGES: '페이지',
+                CATEGORIES: '카테고리',
+                TAGS: '태그',
+                UNTITLED: '(제목없음)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
 </script>
-
-
-
-
-<!-- Baidu Tongji -->
-
-
-
-
-
-
-	<a id="rocket" href="#top" class=""></a>
-	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script>
-    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async></script>
-<!-- Image to hack wechat -->
-<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0">
-<!-- Migrate from head to bottom, no longer block render and still work -->
-
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
 </body>
-
 </html>

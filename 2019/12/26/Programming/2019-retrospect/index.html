@@ -1,258 +1,197 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<!-- Head tag -->
-<head><meta name="generator" content="Hexo 3.9.0">
+<html lang="ko">
+<head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA">
-    <meta name="naver-site-verification" content="4468fb67994f2c880ea59d43b7f9a03be45d43d8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="keyword" content="">
-    <link rel="shortcut icon" href="/images/etc/ironman-draw.png">
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <title>
-        
-          2년차 LINE 서버 개발자의 2019년 회고 - 92Hz
-        
-    </title>
 
-    <link rel="canonical" href="https://jongmin92.github.io/2019/12/26/Programming/2019-retrospect/">
+<meta name="generator" content="Hexo 3.9.0">
 
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <!-- Custom CSS --> 
-    <link rel="stylesheet" href="/css/beantech.min.css">
+<title>2년차 LINE 서버 개발자의 2019년 회고 - 92Hz</title>
+
+<!-- For SEO -->
+<link rel="canonical" href="https://jongmin92.github.io/2019/12/26/programming/2019-retrospect/">
+
+
+    <meta name="description" content="벌써 LINE에 입사한지 2년이 다 되어간다. 올해는 정말 시간이 어떻게 지나갔는지 모르겠다. 정신 차리고 보니 2020년이 코앞이다. 올해는 작년에 하지 못했던 회고를 해보려한다.">
+<meta name="keywords" content="Retrospect">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2년차 LINE 서버 개발자의 2019년 회고">
+<meta property="og:url" content="https://jongmin92.github.io/2019/12/26/Programming/2019-retrospect/index.html">
+<meta property="og:site_name" content="92Hz">
+<meta property="og:description" content="벌써 LINE에 입사한지 2년이 다 되어간다. 올해는 정말 시간이 어떻게 지나갔는지 모르겠다. 정신 차리고 보니 2020년이 코앞이다. 올해는 작년에 하지 못했던 회고를 해보려한다.">
+<meta property="og:locale" content="ko">
+<meta property="og:image" content="https://jongmin92.github.io/images/og_image.png">
+<meta property="og:updated_time" content="2020-03-20T17:33:47.783Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2년차 LINE 서버 개발자의 2019년 회고">
+<meta name="twitter:description" content="벌써 LINE에 입사한지 2년이 다 되어간다. 올해는 정말 시간이 어떻게 지나갔는지 모르겠다. 정신 차리고 보니 2020년이 코앞이다. 올해는 작년에 하지 못했던 회고를 해보려한다.">
+<meta name="twitter:image" content="https://jongmin92.github.io/images/og_image.png">
+
+
+
+
+
+<link rel="alternative" href="rss2.xml" title="2년차 LINE 서버 개발자의 2019년 회고" type="application/atom+xml">
+
+
+
+<link rel="icon" href="/images/favicon.png">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
     
-    <!-- Pygments Highlight CSS -->
-    <link rel="stylesheet" href="/css/highlight.css">
-
-    <link rel="stylesheet" href="/css/widget.css">
-
-    <link rel="stylesheet" href="/css/rocket.css">
-
-    <link rel="stylesheet" href="/css/signature.css">
-
-    <link rel="stylesheet" href="/css/toc.css">
-
-    <!-- For SEO -->
-    <link rel="canonical" href="https://jongmin92.github.io/2019/12/26/programming/2019-retrospect/">
-
-    <!-- Custom Fonts -->
-    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
-    <!-- Hux change font-awesome CDN to qiniu -->
-    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-
-    <!-- Hux Delete, sad but pending in China
-    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
-    css'>
-    -->
-
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <!-- ga & ba script hoook -->
-    <script></script>
-</head>
-
-
-<!-- hack iOS CSS :active style -->
-<body ontouchstart="">
-	<!-- Modified by Yu-Hsuan Yen -->
-<!-- Post Header -->
-<style type="text/css">
-    header.intro-header{
-        
-            /* 기본 포스트 헤더 이미지 (페이지 이미지 || 기본 헤더 이미지) */
-            /* background-image: url('undefined') */
-            /* background-image: url('/images/etc/home.jpg') */
-            background-image: url('/images/etc/home.jpg')
-            /*post*/
-        
-    }
     
-</style>
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
 
-<header class="intro-header">
-    <!-- Signature -->
-    <div id="signature">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                
-                    <div class="post-heading">
-                        <div class="tags">
-                            
-                              <a class="tag" href="/tags/#Retrospect" title="Retrospect">Retrospect</a>
-                            
-                        </div>
-                        <h1>2년차 LINE 서버 개발자의 2019년 회고</h1>
-                        <h2 class="subheading"></h2>
-                        <span class="meta">
-                            Posted by KimJongMin on
-                            2019-12-26
-                        </span>
-                    </div>
-                
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
 
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
 
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
 
-	
-    <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">92Hz</a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <!-- Known Issue, found by Hux:
-            <nav>'s height woule be hold on by its content.
-            so, when navbar scale out, the <nav> will cover tags.
-            also mask any touch event of tags, unfortunately.
-        -->
-        <div id="huxblog_navbar">
-            <div class="navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="/">Home</a>
-                    </li>
-
-                    
-
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/about/">About</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/tags/">Tags</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/archive/">Archives</a>
-                        </li>
-                        
-                    
-                    
-                </ul>
-            </div>
-        </div>
-        <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container -->
-</nav>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-90389042-1"></script>
 <script>
-    // Drop Bootstarp low-performance Navbar
-    // Use customize navbar with high-quality material design animation
-    // in high-perf jank-free CSS3 implementation
-    var $body   = document.body;
-    var $toggle = document.querySelector('.navbar-toggle');
-    var $navbar = document.querySelector('#huxblog_navbar');
-    var $collapse = document.querySelector('.navbar-collapse');
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-    $toggle.addEventListener('click', handleMagic)
-    function handleMagic(e){
-        if ($navbar.className.indexOf('in') > 0) {
-        // CLOSE
-            $navbar.className = " ";
-            // wait until animation end.
-            setTimeout(function(){
-                // prevent frequently toggle
-                if($navbar.className.indexOf('in') < 0) {
-                    $collapse.style.height = "0px"
-                }
-            },400)
-        }else{
-        // OPEN
-            $collapse.style.height = "auto"
-            $navbar.className += " in";
-        }
-    }
+    gtag('config', 'UA-90389042-1');
 </script>
 
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    
+    
 
-    <!-- Main Content -->
-    <!-- Modify by Yu-Hsuan Yen -->
 
-<!-- Post Content -->
-<article>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-2-column">
+    <nav class="navbar navbar-main">
     <div class="container">
-        <div class="row">
-
-            <center>
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-</center>
-
-            <!-- Post Container -->
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                post-container">
-
-                <p>벌써 LINE에 입사한지 2년이 다 되어간다. 올해는 정말 시간이 어떻게 지나갔는지 모르겠다. 정신 차리고 보니 2020년이 코앞이다. 올해는 작년에 하지 못했던 회고를 해보려한다.</p>
-<h1 id="블로그-포스팅">블로그 포스팅</h1>
-<p>어떻게 회고를 시작할까 생각하다가 올해 포스팅한 글들을 확인해보았다. 올해는 26개의 글을 포스팅을 했다. 올해 작성한 글들을 통해서 어떤 일들이 있었고 무엇을 느끼고 배우게 되었는지 정리해보려 한다.<br>
-<img src="/images/post/2019-12-26/2019-article.png" alt="2019-article"></p>
-<h1 id="non-blocking-asynchronous-관련-기술-공부">Non-blocking / Asynchronous 관련 기술 공부</h1>
-<p>사내에서 팀원분들의 PR을 리뷰하면서 Non-blocking/Asynchronous에 관련된 내용을 많이 접하게 되었다. Webflux나 Armeria와 같은 프레임워크들을 처음 공부하면서 <strong>Reactive라는 용어와 함께 그 기반이 되는 Non-blocking/Asynchronous에 대한 내용을 접하게 되었고, Netty를 거쳐 Java NIO와 멀티플렉싱까지 관심을 갖고 공부하게된 계기가 되었다.</strong></p>
-<p>개인적으로 무언가 새로운 기술을 접하고 사용하게 될 때, 그 기술이 만들어지게 된 배경과 기반이 되는 기술 또한 공부하는 것을 매우 중요하게 생각한다.<br>
-실제로는 하나의 흐름으로 이어질 수 있는 내용들인데 매번 새로운 기술이 등장할때면 그 기술 자체에 집중하느라 흐름을 따라 파악하기가 쉽지 않은 것 같다. 또한 이러한 부분을 정리하는 것도 갈수록 어려워지는것 같다.</p>
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.png" alt="2년차 LINE 서버 개발자의 2019년 회고" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" rel="external nofollow noopener noreferrer" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="카탈로그" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="검색" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-12-26T13:23:00.000Z">2019-12-26</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Programming/">Programming</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    12분 읽기 (대략 1819 단어)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                2년차 LINE 서버 개발자의 2019년 회고
+            
+        </h1>
+        <div class="content">
+            <p>벌써 LINE에 입사한지 2년이 다 되어간다. 올해는 정말 시간이 어떻게 지나갔는지 모르겠다. 정신 차리고 보니 2020년이 코앞이다. 올해는 작년에 하지 못했던 회고를 해보려한다.<br><a id="more"></a></p>
+<h1 id="블로그-포스팅"><a href="#블로그-포스팅" class="headerlink" title="블로그 포스팅"></a>블로그 포스팅</h1><p>어떻게 회고를 시작할까 생각하다가 올해 포스팅한 글들을 확인해보았다. 올해는 26개의 글을 포스팅을 했다. 올해 작성한 글들을 통해서 어떤 일들이 있었고 무엇을 느끼고 배우게 되었는지 정리해보려 한다.<br><img src="/images/post/2019-12-26/2019-article.png" alt="2019-article"></p>
+<h1 id="non-blocking-asynchronous-관련-기술-공부"><a href="#Non-blocking-Asynchronous-관련-기술-공부" class="headerlink" title="Non-blocking / Asynchronous 관련 기술 공부"></a>Non-blocking / Asynchronous 관련 기술 공부</h1><p>사내에서 팀원분들의 PR을 리뷰하면서 Non-blocking/Asynchronous에 관련된 내용을 많이 접하게 되었다. Webflux나 Armeria와 같은 프레임워크들을 처음 공부하면서 <strong>Reactive라는 용어와 함께 그 기반이 되는 Non-blocking/Asynchronous에 대한 내용을 접하게 되었고, Netty를 거쳐 Java NIO와 멀티플렉싱까지 관심을 갖고 공부하게된 계기가 되었다.</strong></p>
+<p>개인적으로 무언가 새로운 기술을 접하고 사용하게 될 때, 그 기술이 만들어지게 된 배경과 기반이 되는 기술 또한 공부하는 것을 매우 중요하게 생각한다.<br>실제로는 하나의 흐름으로 이어질 수 있는 내용들인데 매번 새로운 기술이 등장할때면 그 기술 자체에 집중하느라 흐름을 따라 파악하기가 쉽지 않은 것 같다. 또한 이러한 부분을 정리하는 것도 갈수록 어려워지는것 같다.</p>
 <p>결과적으로 이와 관련된 내용은 후에 팀내에서 Webflux 관련 스터디를 진행하면서도 개인적으로 큰 도움이 되었다.</p>
-<h1 id="오픈소스-첫-컨트리뷰트">오픈소스 첫 컨트리뷰트</h1>
-<p><strong>올해는 처음으로 오픈소스에 컨트리뷰트를 해보았다.</strong> <a href="https://github.com/line/armeria" rel="external nofollow noopener noreferrer" target="_blank">Armeria</a>는 Java 개발자라면 누구나 한번 쯤 들어보았을 <a href="https://github.com/netty/netty" rel="external nofollow noopener noreferrer" target="_blank">Netty</a>를 만드신 희승님께서 개발하고 계신 오픈소스이다. 어느날 사내에서 Armeria Sprint라는 행사를 진행하게 되었고 이 행사에 참여해 처음으로 오픈소스에 기여하는 경험을 하게 되었다. (자세한 내용이 궁금하다면 <a href="https://jongmin92.github.io/2019/05/18/Etc/open-source-experience/">&lt;오픈소스 컷 컨트리뷰트 경험기&gt;</a>를 보면 좋을 것 같다!)</p>
+<h1 id="오픈소스-첫-컨트리뷰트"><a href="#오픈소스-첫-컨트리뷰트" class="headerlink" title="오픈소스 첫 컨트리뷰트"></a>오픈소스 첫 컨트리뷰트</h1><p><strong>올해는 처음으로 오픈소스에 컨트리뷰트를 해보았다.</strong> <a href="https://github.com/line/armeria" rel="external nofollow noopener noreferrer" target="_blank">Armeria</a>는 Java 개발자라면 누구나 한번 쯤 들어보았을 <a href="https://github.com/netty/netty" rel="external nofollow noopener noreferrer" target="_blank">Netty</a>를 만드신 희승님께서 개발하고 계신 오픈소스이다. 어느날 사내에서 Armeria Sprint라는 행사를 진행하게 되었고 이 행사에 참여해 처음으로 오픈소스에 기여하는 경험을 하게 되었다. (자세한 내용이 궁금하다면 <a href="https://jongmin92.github.io/2019/05/18/Etc/open-source-experience/">&lt;오픈소스 컷 컨트리뷰트 경험기&gt;</a>를 보면 좋을 것 같다!)</p>
 <p>평소 오픈소스에 컨트리뷰트를 해보고 싶었지만 어떻게 해야하는 것인지, 내가 할 수 있을까에 대한 막연한 두려움이 있었다면, 이번 첫 컨트리뷰트를 통해 이러한 부분들을 많이 해소할 수 있었던 것 같다.</p>
 <p>첫 컨트리뷰트 이후로도 꾸준히 해보겠다고 다짐했지만 실행에 옮기지는 못했다. 내년에는 꾸준히 하지는 못하더라도 오픈소스에 관심 갖고 기여하는 시간을 조금 더 가져보려고 한다.</p>
 <p><img src="/images/post/2019-12-26/armeria.png" alt="armeria"></p>
-<h1 id="공부-방식의-변화">공부 방식의 변화</h1>
-<p>작년에는 32개의 글을 포스팅을 했는데, 올해 작성했던 글들은 작년에 작성했던 글들과 조금 차이가 있다.</p>
+<h1 id="공부-방식의-변화"><a href="#공부-방식의-변화" class="headerlink" title="공부 방식의 변화"></a>공부 방식의 변화</h1><p>작년에는 32개의 글을 포스팅을 했는데, 올해 작성했던 글들은 작년에 작성했던 글들과 조금 차이가 있다.</p>
 <p>작년에 작성했던 글들은 대부분이 회사에 입사해 처음으로 접하는 기술들을 공부하며 관련된 내용을 정리하는 내용의 글들이었다. 말로만 듣다가 처음 접하게 된 Spring과 학부생 수업때 이후로 사용하지 않던 Java 뿐만 아니라 Gradle, Jenkins, SonarQube와 같은 것들에 대해서 전반적으로 다루었다.</p>
 <p>각각에 대해서 깊은 내용을 다루기 보다는 당장 회사에서 사용하는 기술들에 대해 파악하고 업무를 진행할 수 있는 정도로 공부하고 정리하며 글을 작성했던것 같다.</p>
 <p>이에 반해, 올해 작성했던 글들은 회사에서 업무를 진행하며 겪었던 문제에 대한 내용 혹은 PR review에서 받았던 코멘트들에 대한 내용을 위주로 작성했다. 앞으로도 업무를 하면서 새로 알게된 내용들 위주로 작성하게 될 것 같다.</p>
 <p>또한, 한가지 더 변한 것이 있다면 작년에는 기술 서적을 최대한 많이 읽기 위해 노력했지만 <strong>올해는 조금이라도 직접 코드를 작성하는 시간을 더 많이 갖기위해 노력하고 있다.</strong> 확실히 책을 여러번 아무리 많이 보아도 직접 코딩하는게 학습에는 제일 효과가 좋은 것 같다.</p>
-<h1 id="실무에서-배운-것">실무에서 배운 것</h1>
-<p>근무하고 있는 LINE의 개발 문화에 대해서는 동기가 잘 작성한 글로 대신한다. <a href="https://engineering.linecorp.com/ko/blog/new-server-developer-at-line/" rel="external nofollow noopener noreferrer" target="_blank">(2년차 서버 개발자가 바라본 LINE의 개발 문화)</a></p>
+<h1 id="실무에서-배운-것"><a href="#실무에서-배운-것" class="headerlink" title="실무에서 배운 것"></a>실무에서 배운 것</h1><p>근무하고 있는 LINE의 개발 문화에 대해서는 동기가 잘 작성한 글로 대신한다. <a href="https://engineering.linecorp.com/ko/blog/new-server-developer-at-line/" rel="external nofollow noopener noreferrer" target="_blank">(2년차 서버 개발자가 바라본 LINE의 개발 문화)</a></p>
 <p>올해는 기존의 feature 하나를 새롭게 리뉴얼하면서(설계부터 릴리즈까지) 정말 너무나도 많은 것들을 배웠다. 아주 간략히 정리하면 아래와 같다.</p>
 <ul>
 <li>기존 legacy 코드의 문제점을 파악하고 개선</li>
 <li>다른 부서(기획팀, 클라이언트 개발팀, 서버팀)와의 협업</li>
-<li>이미 서비스 되고 있는 client에 대해서는 어떻게 다룰 것인지
-<ul>
+<li>이미 서비스 되고 있는 client에 대해서는 어떻게 다룰 것인지<ul>
 <li>backward compatibility (하위 호환성) 지원</li>
 </ul>
 </li>
@@ -263,288 +202,490 @@
 <p>그러나 많은 준비를 했음에도 불구하고 릴리즈 후 예상하지 못한 부분에서 장애가 발생했었고 <a href="https://engineering.linecorp.com/ko/blog/line-failure-reporting-and-follow-up-process-culture/" rel="external nofollow noopener noreferrer" target="_blank">LINE의 장애 보고와 후속 절차 문화</a>에 따라 어떻게 하면 앞으로 같은 장애를 겪지 않을 수 있을지에 대해서도 생각해보게 되었다.</p>
 <p>약 6개월간 진행했던 feature 리뉴얼을 진행하며 배운것을 아주 간략히 정리해보았다. 지나고나니 아쉬웠던 부분들도 생각이 난다. 다음번에는 이런 부분들도 잘 고려해서 문제없이 마무리할 수 있도록 노력하자.</p>
 
-                
-
-                <hr>
-                <!-- Pager -->
-                <ul class="pager">
-                    
-                        <li class="previous">
-                            <a href="/2020/01/02/Java/rsa/" data-toggle="tooltip" data-placement="top" title="Encryption - RSA">&larr; Previous Post</a>
-                        </li>
-                    
-                    
-                        <li class="next">
-                            <a href="/2019/12/23/Programming/hmac/" data-toggle="tooltip" data-placement="top" title="HMAC을 이용한 무결성 보장">Next Post &rarr;</a>
-                        </li>
-                    
-                </ul>
-
-                <!-- duoshuo Share start -->
-                
-                <!-- 多说 Share end-->
-
-                <center>
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-</center>
-
-                <!-- 多说评论框 start -->
-                
-                <!-- 多说评论框 end -->
-
-                <!-- disqus comment start -->
-                
-                    <div class="comment">
-                        <div id="disqus_thread" class="disqus-thread"></div>
-                    </div>
-                
-                <!-- disqus comment end -->
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/Retrospect/">Retrospect</a>
+                </div>
             </div>
-            
-            <!-- Tabe of Content -->
-            <!-- Table of Contents -->
+        </div>
+        
+        
+        
+    </div>
+</div>
 
-                
-            <!-- Sidebar Container -->
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
 
-                <!-- Featured Tags -->
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2020/01/02/Java/rsa/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Encryption - RSA</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/12/23/Programming/hmac/">
+                <span class="level-item">HMAC을 이용한 무결성 보장</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">댓글</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://jongmin92.github.io/2019/12/26/Programming/2019-retrospect/';
+        this.page.identifier = '2019/12/26/Programming/2019-retrospect/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'https-jongmin92-github-io' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
+
+
+<!-- For Google Adsense -->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</div>
                 
-                <section>
-                    <!-- no hr -->
-                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
-                    <div class="tags">
-                       
-                          <a class="tag" href="/tags/#Retrospect" title="Retrospect">Retrospect</a>
-                        
-                    </div>
-                </section>
                 
 
-                <!-- Friends Blog -->
-                
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-3 column-right is-sticky">
+    
+        
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    카탈로그
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#블로그-포스팅">
+        <span class="has-mr-6">1</span>
+        <span>블로그 포스팅</span>
+        </a></li><li>
+        <a class="is-flex" href="#non-blocking-asynchronous-관련-기술-공부">
+        <span class="has-mr-6">2</span>
+        <span>Non-blocking / Asynchronous 관련 기술 공부</span>
+        </a></li><li>
+        <a class="is-flex" href="#오픈소스-첫-컨트리뷰트">
+        <span class="has-mr-6">3</span>
+        <span>오픈소스 첫 컨트리뷰트</span>
+        </a></li><li>
+        <a class="is-flex" href="#공부-방식의-변화">
+        <span class="has-mr-6">4</span>
+        <span>공부 방식의 변화</span>
+        </a></li><li>
+        <a class="is-flex" href="#실무에서-배운-것">
+        <span class="has-mr-6">5</span>
+        <span>실무에서 배운 것</span>
+        </a></li></ul>
             </div>
         </div>
     </div>
-</article>
 
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                카테고리
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Algorithm/">
+            <span class="level-start">
+                <span class="level-item">Algorithm</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">14</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Algorithm/BOJ/">
+            <span class="level-start">
+                <span class="level-item">BOJ</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Algorithm/Concept/">
+            <span class="level-start">
+                <span class="level-item">Concept</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Book/">
+            <span class="level-start">
+                <span class="level-item">Book</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Database/">
+            <span class="level-start">
+                <span class="level-item">Database</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/">
+            <span class="level-start">
+                <span class="level-item">Programming</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">95</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Programming/AWS/">
+            <span class="level-start">
+                <span class="level-item">AWS</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Git/">
+            <span class="level-start">
+                <span class="level-item">Git</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Gradle/">
+            <span class="level-start">
+                <span class="level-item">Gradle</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/HTML/">
+            <span class="level-start">
+                <span class="level-item">HTML</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Java/">
+            <span class="level-start">
+                <span class="level-item">Java</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">21</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/JavaScript/">
+            <span class="level-start">
+                <span class="level-item">JavaScript</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">15</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Linux-Ubuntu/">
+            <span class="level-start">
+                <span class="level-item">Linux & Ubuntu</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Node/">
+            <span class="level-start">
+                <span class="level-item">Node</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/RaspberryPi/">
+            <span class="level-start">
+                <span class="level-item">RaspberryPi</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/React-Native/">
+            <span class="level-start">
+                <span class="level-item">React Native</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Spring/">
+            <span class="level-start">
+                <span class="level-item">Spring</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">19</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Tool/">
+            <span class="level-start">
+                <span class="level-item">Tool</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Project/">
+            <span class="level-start">
+                <span class="level-item">Project</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Project/Emily/">
+            <span class="level-start">
+                <span class="level-item">Emily</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Tip/">
+            <span class="level-start">
+                <span class="level-item">Tip</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
 
-
-
-<!-- disqus embedded js code start (one page only need to embed once) -->
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = "https-jongmin92-github-io";
-    var disqus_identifier = "https://jongmin92.github.io/2019/12/26/Programming/2019-retrospect/";
-    var disqus_url = "https://jongmin92.github.io/2019/12/26/Programming/2019-retrospect/";
-
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<!-- disqus embedded js code start end -->
-
-
-
-
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
-    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'always',
-          placement: 'left',
-          icon: '#'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-</script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: 0.6em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
-
-
-
-    <!-- Footer -->
-    <!-- Footer -->
-<footer>
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <ul class="list-inline text-center">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
                 
+                    <img src="/images/logo.png" alt="2년차 LINE 서버 개발자의 2019년 회고" height="28">
                 
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 KimJongMin&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="external nofollow noopener noreferrer">Icarus</a>
                 
-
-                
-
-                
-                    <li>
-                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420" rel="external nofollow noopener noreferrer">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                
-
-                
-                    <li>
-                        <a target="_blank" href="https://github.com/jongmin92" rel="external nofollow noopener noreferrer">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                
-
-                
-
-                </ul>
-                <p class="copyright text-muted">
-                    Copyright &copy; KimJongMin 2020 
-                    <br>
-                    Theme by <a href="http://huangxuan.me" rel="external nofollow noopener noreferrer" target="_blank">Hux</a> 
-                    <span style="display: inline-block; margin: 0 5px;">
-                        <i class="fa fa-heart"></i>
-                    </span> 
-                    re-Ported by <a href="http://beantech.org" rel="external nofollow noopener noreferrer" target="_blank">BeanTech</a> | 
-                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px" src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true">
-                    </iframe>
                 </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
             </div>
         </div>
     </div>
 </footer>
-
-<!-- jQuery -->
-<script src="/js/jquery.min.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="/js/bootstrap.min.js"></script>
-
-<!-- Custom Theme JavaScript -->
-<script src="/js/hux-blog.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("ko");</script>
 
 
-<!-- async load function -->
 <script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
+var IcarusThemeSettings = {
+    site: {
+        url: 'https://jongmin92.github.io',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
     }
+};
 </script>
 
-<!-- 
-     Because of the native support for backtick-style fenced code blocks 
-     right within the Markdown is landed in Github Pages, 
-     From V1.6, There is no need for Highlight.js, 
-     so Huxblog drops it officially.
 
-     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
-     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
--->
-<!--
-    <script>
-        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
-            hljs.initHighlightingOnLoad();
-        })
-    </script>
-    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
--->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
 
 
-<!-- jquery.tagcloud.js -->
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" rel="external nofollow noopener noreferrer" target="_blank">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
 <script>
-    // only load tagcloud.js in tag.html
-    if($('#tag_cloud').length !== 0){
-        async("https://jongmin92.github.io/js/jquery.tagcloud.js",function(){
-            $.fn.tagcloud.defaults = {
-                //size: {start: 1, end: 1, unit: 'em'},
-                color: {start: '#bbbbee', end: '#0085a1'},
-            };
-            $('#tag_cloud a').tagcloud();
-        })
-    }
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
 </script>
 
-<!--fastClick.js -->
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
 <script>
-    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
-        var $nav = document.querySelector("nav");
-        if($nav) FastClick.attach($nav);
-    })
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
 </script>
 
 
-<!-- Google Analytics -->
+<a id="back-to-top" title="Zurück nach oben" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="입력 하세요...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
 <script>
-    // dynamic User by Hux
-    var _gaId = 'UA-90389042-1';
-    var _gaDomain = 'auto';
-
-    // Originial
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', _gaId, _gaDomain);
-    ga('send', 'pageview');
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '포스트',
+                PAGES: '페이지',
+                CATEGORIES: '카테고리',
+                TAGS: '태그',
+                UNTITLED: '(제목없음)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
 </script>
-
-
-
-
-<!-- Baidu Tongji -->
-
-
-
-
-
-
-	<a id="rocket" href="#top" class=""></a>
-	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script>
-    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async></script>
-<!-- Image to hack wechat -->
-<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0">
-<!-- Migrate from head to bottom, no longer block render and still work -->
-
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
 </body>
-
 </html>

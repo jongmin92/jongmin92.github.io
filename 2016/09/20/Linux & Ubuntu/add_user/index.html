@@ -1,559 +1,699 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<!-- Head tag -->
-<head><meta name="generator" content="Hexo 3.9.0">
+<html lang="ko">
+<head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA">
-    <meta name="naver-site-verification" content="4468fb67994f2c880ea59d43b7f9a03be45d43d8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="keyword" content="">
-    <link rel="shortcut icon" href="/images/etc/ironman-draw.png">
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <title>
-        
-          Linux &amp; Ubuntu 계정 추가 &amp; 설정 - 92Hz
-        
-    </title>
 
-    <link rel="canonical" href="https://jongmin92.github.io/2016/09/20/Linux &amp; Ubuntu/add_user/">
+<meta name="generator" content="Hexo 3.9.0">
 
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <!-- Custom CSS --> 
-    <link rel="stylesheet" href="/css/beantech.min.css">
+<title>Linux &amp; Ubuntu 계정 추가 &amp; 설정 - 92Hz</title>
+
+<!-- For SEO -->
+<link rel="canonical" href="https://jongmin92.github.io/2016/09/20/linux & ubuntu/add_user/">
+
+
+    <meta name="description" content="AWS의 EC2를 사용하면서 ubuntu에 사용자를 추가해주는 경우가 빈번히 생겨 그 과정을 정리해보려 합니다. 각각의 유저가 자신의 사용자 계정을 사용한다면 자신만의 파일과 작업 공간을 가질 수 있고, 잘못사용해서 시스템에 피해가 생기는 일도 어느정도 예방할 수 있습니다. EC2 인스턴스에 사용자를 추가하는 작업에는 (1) 사용자를 시스템에 추가하고 (2">
+<meta name="keywords" content="AWS,Linux &amp; Ubuntu,EC2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux &amp; Ubuntu 계정 추가 &amp; 설정">
+<meta property="og:url" content="https://jongmin92.github.io/2016/09/20/Linux & Ubuntu/add_user/index.html">
+<meta property="og:site_name" content="92Hz">
+<meta property="og:description" content="AWS의 EC2를 사용하면서 ubuntu에 사용자를 추가해주는 경우가 빈번히 생겨 그 과정을 정리해보려 합니다. 각각의 유저가 자신의 사용자 계정을 사용한다면 자신만의 파일과 작업 공간을 가질 수 있고, 잘못사용해서 시스템에 피해가 생기는 일도 어느정도 예방할 수 있습니다. EC2 인스턴스에 사용자를 추가하는 작업에는 (1) 사용자를 시스템에 추가하고 (2">
+<meta property="og:locale" content="ko">
+<meta property="og:image" content="https://jongmin92.github.io/images/og_image.png">
+<meta property="og:updated_time" content="2020-03-20T17:26:03.323Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux &amp; Ubuntu 계정 추가 &amp; 설정">
+<meta name="twitter:description" content="AWS의 EC2를 사용하면서 ubuntu에 사용자를 추가해주는 경우가 빈번히 생겨 그 과정을 정리해보려 합니다. 각각의 유저가 자신의 사용자 계정을 사용한다면 자신만의 파일과 작업 공간을 가질 수 있고, 잘못사용해서 시스템에 피해가 생기는 일도 어느정도 예방할 수 있습니다. EC2 인스턴스에 사용자를 추가하는 작업에는 (1) 사용자를 시스템에 추가하고 (2">
+<meta name="twitter:image" content="https://jongmin92.github.io/images/og_image.png">
+
+
+
+
+
+<link rel="alternative" href="rss2.xml" title="Linux &amp; Ubuntu 계정 추가 &amp; 설정" type="application/atom+xml">
+
+
+
+<link rel="icon" href="/images/favicon.png">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
     
-    <!-- Pygments Highlight CSS -->
-    <link rel="stylesheet" href="/css/highlight.css">
-
-    <link rel="stylesheet" href="/css/widget.css">
-
-    <link rel="stylesheet" href="/css/rocket.css">
-
-    <link rel="stylesheet" href="/css/signature.css">
-
-    <link rel="stylesheet" href="/css/toc.css">
-
-    <!-- For SEO -->
-    <link rel="canonical" href="https://jongmin92.github.io/2016/09/20/linux & ubuntu/add_user/">
-
-    <!-- Custom Fonts -->
-    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
-    <!-- Hux change font-awesome CDN to qiniu -->
-    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-
-    <!-- Hux Delete, sad but pending in China
-    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
-    css'>
-    -->
-
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <!-- ga & ba script hoook -->
-    <script></script>
-</head>
-
-
-<!-- hack iOS CSS :active style -->
-<body ontouchstart="">
-	<!-- Modified by Yu-Hsuan Yen -->
-<!-- Post Header -->
-<style type="text/css">
-    header.intro-header{
-        
-            /* 기본 포스트 헤더 이미지 (페이지 이미지 || 기본 헤더 이미지) */
-            /* background-image: url('undefined') */
-            /* background-image: url('/images/etc/home.jpg') */
-            background-image: url('/images/etc/home.jpg')
-            /*post*/
-        
-    }
     
-</style>
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
 
-<header class="intro-header">
-    <!-- Signature -->
-    <div id="signature">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                
-                    <div class="post-heading">
-                        <div class="tags">
-                            
-                              <a class="tag" href="/tags/#AWS" title="AWS">AWS</a>
-                            
-                              <a class="tag" href="/tags/#Linux &amp; Ubuntu" title="Linux &amp; Ubuntu">Linux &amp; Ubuntu</a>
-                            
-                              <a class="tag" href="/tags/#EC2" title="EC2">EC2</a>
-                            
-                        </div>
-                        <h1>Linux &amp; Ubuntu 계정 추가 &amp; 설정</h1>
-                        <h2 class="subheading"></h2>
-                        <span class="meta">
-                            Posted by KimJongMin on
-                            2016-09-20
-                        </span>
-                    </div>
-                
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
 
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
 
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
 
-	
-    <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">92Hz</a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <!-- Known Issue, found by Hux:
-            <nav>'s height woule be hold on by its content.
-            so, when navbar scale out, the <nav> will cover tags.
-            also mask any touch event of tags, unfortunately.
-        -->
-        <div id="huxblog_navbar">
-            <div class="navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="/">Home</a>
-                    </li>
-
-                    
-
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/about/">About</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/tags/">Tags</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/archive/">Archives</a>
-                        </li>
-                        
-                    
-                    
-                </ul>
-            </div>
-        </div>
-        <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container -->
-</nav>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-90389042-1"></script>
 <script>
-    // Drop Bootstarp low-performance Navbar
-    // Use customize navbar with high-quality material design animation
-    // in high-perf jank-free CSS3 implementation
-    var $body   = document.body;
-    var $toggle = document.querySelector('.navbar-toggle');
-    var $navbar = document.querySelector('#huxblog_navbar');
-    var $collapse = document.querySelector('.navbar-collapse');
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-    $toggle.addEventListener('click', handleMagic)
-    function handleMagic(e){
-        if ($navbar.className.indexOf('in') > 0) {
-        // CLOSE
-            $navbar.className = " ";
-            // wait until animation end.
-            setTimeout(function(){
-                // prevent frequently toggle
-                if($navbar.className.indexOf('in') < 0) {
-                    $collapse.style.height = "0px"
-                }
-            },400)
-        }else{
-        // OPEN
-            $collapse.style.height = "auto"
-            $navbar.className += " in";
-        }
-    }
+    gtag('config', 'UA-90389042-1');
 </script>
 
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    
+    
 
-    <!-- Main Content -->
-    <!-- Modify by Yu-Hsuan Yen -->
 
-<!-- Post Content -->
-<article>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-2-column">
+    <nav class="navbar navbar-main">
     <div class="container">
-        <div class="row">
-
-            <center>
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-</center>
-
-            <!-- Post Container -->
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                post-container">
-
-                <p>AWS의 EC2를 사용하면서 ubuntu에 사용자를 추가해주는 경우가 빈번히 생겨 그 과정을 정리해보려 합니다. 각각의 유저가 자신의 사용자 계정을 사용한다면 자신만의 파일과 작업 공간을 가질 수 있고, 잘못사용해서 시스템에 피해가 생기는 일도 어느정도 예방할 수 있습니다.</p>
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.png" alt="Linux &amp; Ubuntu 계정 추가 &amp; 설정" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" rel="external nofollow noopener noreferrer" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="카탈로그" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="검색" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2016-09-19T15:00:00.000Z">2016-09-20</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Programming/">Programming</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/Programming/Linux-Ubuntu/">Linux & Ubuntu</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    5분 읽기 (대략 774 단어)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Linux &amp; Ubuntu 계정 추가 &amp; 설정
+            
+        </h1>
+        <div class="content">
+            <p>AWS의 EC2를 사용하면서 ubuntu에 사용자를 추가해주는 경우가 빈번히 생겨 그 과정을 정리해보려 합니다. 각각의 유저가 자신의 사용자 계정을 사용한다면 자신만의 파일과 작업 공간을 가질 수 있고, 잘못사용해서 시스템에 피해가 생기는 일도 어느정도 예방할 수 있습니다.</p>
 <p>EC2 인스턴스에 사용자를 추가하는 작업에는 <code>(1) 사용자를 시스템에 추가</code>하고 <code>(2) 해당 사용자에게 원격으로 로그인하는 방법을 제공</code>하는 두 가지 작업이 포함됩니다.</p>
 <p><strong>올바른 방법은 하나의 EC2에서 생성한 각각의 사용자 계정마다 <code>key pair</code>를 생성해 주고, 각 계정에 맞게 설정된 key pair를 통해서만 접속 할 수 있도록 설정을 해야합니다.</strong></p>
 <p>그러나 최초 EC2 인스턴스를 생성하며 만들었던 key pair를 모든 사용자가 공유한다던가, password 기반의 로그인을 활성화 하여 ssh key를 사용하지 않고 password 기반으로 로그인을 할 수도 있습니다.</p>
 <p>이번 포스팅에서는 <strong>(1) 사용자를 시스템에 추가</strong>한 후 <strong>(2-1) EC2 인스턴스를 생성하며 사용했던 key pair(기본 사용자 로그인시 사용하는 key pair)를 사용하거나, (2-2) password 기반의 로그인을 활성화하여 ssh key를 사용하지않고 로그인</strong>할 수 있도록하는 방법에 대해 정리합니다.</p>
 <hr>
-<h4 id="1-root-password-설정">1. root password 설정</h4>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ubuntu ~] $ sudo passwd root</span><br></pre></td></tr></table></figure>
-<h4 id="2-password-기반의-로그인을-활성화하기">2. password 기반의 로그인을 활성화하기</h4>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ubuntu ~] $ sudo vi /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
-<p>다음을 수정합니다. no를 yes로 변경합니다.<br>
-# Change to no to disable tunnelled clear text passwords<br>
-<code>PasswordAuthentication no</code></p>
-<h4 id="3-root-계정으로-로그인">3. root 계정으로 로그인</h4>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ubuntu ~] $ su - root</span><br></pre></td></tr></table></figure>
-<h4 id="4-다른-사용자-계정-추가">4. 다른 사용자 계정 추가</h4>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root ~] $ adduser newuser</span><br></pre></td></tr></table></figure>
-<h4 id="5-새로-생성한-사용자-계정의-비밀번호-변경">5. 새로 생성한 사용자 계정의 비밀번호 변경</h4>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root ~] $ sudo passwd newuser</span><br></pre></td></tr></table></figure>
-<h4 id="6-새로-생성한-사용자-계정에-root-권한을-사용할-수-있도록-설정">6. 새로 생성한 사용자 계정에 root 권한을 사용할 수 있도록 설정</h4>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root ~] $ sudo visudo</span><br></pre></td></tr></table></figure>
-<p>다음을 수정합니다.<br>
-root ALL=(ALL) ALL 아래에<br>
-newuser ALL=(ALL) ALL을 추가합니다.</p>
-<h4 id="7-같은-key-pair로-로그인-할-수-있도록-새로-생성한-사용자-계정으로-ubuntu-의-것을-복사">7. 같은 key pair로 로그인 할 수 있도록 새로 생성한 사용자 계정으로 ubuntu 의 것을 복사</h4>
-<p>* 이부분에 대한 자세한 내용은 SSH KEY 에 대하여 알아야합니다.<br>
-* ubuntu 계정의 .ssh 폴더를 복사해 newuser 계정에 복사합니다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root ~] $ ssudo cp /home/ubuntu/.ssh /home/newuser/.ssh</span><br></pre></td></tr></table></figure>
-<h4 id="8-복사한-key-pair의-소유자를-jmkim으로-변경-r-하위-폴더까지-모두-소유권을-바꿔줌">8. 복사한 key pair의 소유자를 jmkim으로 변경 (-R : 하위 폴더까지 모두 소유권을 바꿔줌)</h4>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root ~] $ sudo chown -R newuser:newuser /home/newuser/.ssh</span><br></pre></td></tr></table></figure>
-<h4 id="9-sshd-서비스-재시작">9. sshd 서비스 재시작</h4>
-<p><code>-Ubuntu</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root ~] $ sudo service ssh restart</span><br></pre></td></tr></table></figure>
-<p><code>-Linux</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root ~] $ sudo service sshd restart</span><br></pre></td></tr></table></figure>
+<h4 id="1-root-password-설정"><a href="#1-root-password-설정" class="headerlink" title="1. root password 설정"></a>1. root password 설정</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ubuntu ~] $ sudo passwd root</span><br></pre></td></tr></table></figure>
+<h4 id="2-password-기반의-로그인을-활성화하기"><a href="#2-password-기반의-로그인을-활성화하기" class="headerlink" title="2. password 기반의 로그인을 활성화하기"></a>2. password 기반의 로그인을 활성화하기</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ubuntu ~] $ sudo vi /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
+<p>다음을 수정합니다. no를 yes로 변경합니다.<br># Change to no to disable tunnelled clear text passwords<br><code>PasswordAuthentication no</code></p>
+<h4 id="3-root-계정으로-로그인"><a href="#3-root-계정으로-로그인" class="headerlink" title="3. root 계정으로 로그인"></a>3. root 계정으로 로그인</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ubuntu ~] $ su - root</span><br></pre></td></tr></table></figure>
+<h4 id="4-다른-사용자-계정-추가"><a href="#4-다른-사용자-계정-추가" class="headerlink" title="4. 다른 사용자 계정 추가"></a>4. 다른 사용자 계정 추가</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root ~] $ adduser newuser</span><br></pre></td></tr></table></figure>
+<h4 id="5-새로-생성한-사용자-계정의-비밀번호-변경"><a href="#5-새로-생성한-사용자-계정의-비밀번호-변경" class="headerlink" title="5. 새로 생성한 사용자 계정의 비밀번호 변경"></a>5. 새로 생성한 사용자 계정의 비밀번호 변경</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root ~] $ sudo passwd newuser</span><br></pre></td></tr></table></figure>
+<h4 id="6-새로-생성한-사용자-계정에-root-권한을-사용할-수-있도록-설정"><a href="#6-새로-생성한-사용자-계정에-root-권한을-사용할-수-있도록-설정" class="headerlink" title="6. 새로 생성한 사용자 계정에 root 권한을 사용할 수 있도록 설정"></a>6. 새로 생성한 사용자 계정에 root 권한을 사용할 수 있도록 설정</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root ~] $ sudo visudo</span><br></pre></td></tr></table></figure>
+<p>다음을 수정합니다.<br>root ALL=(ALL) ALL 아래에<br>newuser ALL=(ALL) ALL을 추가합니다.</p>
+<h4 id="7-같은-key-pair로-로그인-할-수-있도록-새로-생성한-사용자-계정으로-ubuntu-의-것을-복사"><a href="#7-같은-key-pair로-로그인-할-수-있도록-새로-생성한-사용자-계정으로-ubuntu-의-것을-복사" class="headerlink" title="7. 같은 key pair로 로그인 할 수 있도록 새로 생성한 사용자 계정으로 ubuntu 의 것을 복사"></a>7. 같은 key pair로 로그인 할 수 있도록 새로 생성한 사용자 계정으로 ubuntu 의 것을 복사</h4><p>* 이부분에 대한 자세한 내용은 SSH KEY 에 대하여 알아야합니다.<br>* ubuntu 계정의 .ssh 폴더를 복사해 newuser 계정에 복사합니다.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root ~] $ ssudo cp /home/ubuntu/.ssh /home/newuser/.ssh</span><br></pre></td></tr></table></figure></p>
+<h4 id="8-복사한-key-pair의-소유자를-jmkim으로-변경-r-하위-폴더까지-모두-소유권을-바꿔줌"><a href="#8-복사한-key-pair의-소유자를-jmkim으로-변경-R-하위-폴더까지-모두-소유권을-바꿔줌" class="headerlink" title="8. 복사한 key pair의 소유자를 jmkim으로 변경 (-R : 하위 폴더까지 모두 소유권을 바꿔줌)"></a>8. 복사한 key pair의 소유자를 jmkim으로 변경 (-R : 하위 폴더까지 모두 소유권을 바꿔줌)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root ~] $ sudo chown -R newuser:newuser /home/newuser/.ssh</span><br></pre></td></tr></table></figure>
+<h4 id="9-sshd-서비스-재시작"><a href="#9-sshd-서비스-재시작" class="headerlink" title="9. sshd 서비스 재시작"></a>9. sshd 서비스 재시작</h4><p><code>-Ubuntu</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root ~] $ sudo service ssh restart</span><br></pre></td></tr></table></figure></p>
+<p><code>-Linux</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root ~] $ sudo service sshd restart</span><br></pre></td></tr></table></figure></p>
 <p>이제 EC2 instance를 생성할때 만들었던 .pem 파일과 설정한 비밀번호를 통해 새로 생성한 계정으로 서버에 접속할 수 있습니다.</p>
 <hr>
 <p>참고 : <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/managing-users.html" rel="external nofollow noopener noreferrer" target="_blank">AWS 공식 사이트 - Managing User Accounts on Your Linux Instance</a></p>
 
-                
-
-                <hr>
-                <!-- Pager -->
-                <ul class="pager">
-                    
-                        <li class="previous">
-                            <a href="/2016/09/20/Node/nvm-(Node-Version-Manager)/" data-toggle="tooltip" data-placement="top" title="NVM (Node Version Manager) 사용하기">&larr; Previous Post</a>
-                        </li>
-                    
-                    
-                        <li class="next">
-                            <a href="/2016/08/25/Node/module-exports_exports/" data-toggle="tooltip" data-placement="top" title="module.exports와 exports 차이 이해하기">Next Post &rarr;</a>
-                        </li>
-                    
-                </ul>
-
-                <!-- duoshuo Share start -->
-                
-                <!-- 多说 Share end-->
-
-                <center>
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-</center>
-
-                <!-- 多说评论框 start -->
-                
-                <!-- 多说评论框 end -->
-
-                <!-- disqus comment start -->
-                
-                    <div class="comment">
-                        <div id="disqus_thread" class="disqus-thread"></div>
-                    </div>
-                
-                <!-- disqus comment end -->
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/AWS/">AWS</a>, <a class="has-link-grey -link" href="/tags/EC2/">EC2</a>, <a class="has-link-grey -link" href="/tags/Linux-Ubuntu/">Linux & Ubuntu</a>
+                </div>
             </div>
-            
-            <!-- Tabe of Content -->
-            <!-- Table of Contents -->
+        </div>
+        
+        
+        
+    </div>
+</div>
 
-                
-            <!-- Sidebar Container -->
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
 
-                <!-- Featured Tags -->
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2016/09/29/AWS/qvic_aws_architecture/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Qvic 서비스 아키텍처 설계</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2016/09/20/Node/nvm-(Node-Version-Manager)/">
+                <span class="level-item">NVM (Node Version Manager) 사용하기</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">댓글</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://jongmin92.github.io/2016/09/20/Linux &amp; Ubuntu/add_user/';
+        this.page.identifier = '2016/09/20/Linux &amp; Ubuntu/add_user/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'https-jongmin92-github-io' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
+
+
+<!-- For Google Adsense -->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</div>
                 
-                <section>
-                    <!-- no hr -->
-                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
-                    <div class="tags">
-                       
-                          <a class="tag" href="/tags/#AWS" title="AWS">AWS</a>
-                        
-                          <a class="tag" href="/tags/#Linux &amp; Ubuntu" title="Linux &amp; Ubuntu">Linux &amp; Ubuntu</a>
-                        
-                          <a class="tag" href="/tags/#EC2" title="EC2">EC2</a>
-                        
-                    </div>
-                </section>
                 
 
-                <!-- Friends Blog -->
-                
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-3 column-right is-sticky">
+    
+        
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    카탈로그
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#1-root-password-설정">
+        <span class="has-mr-6">1</span>
+        <span>1. root password 설정</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-password-기반의-로그인을-활성화하기">
+        <span class="has-mr-6">2</span>
+        <span>2. password 기반의 로그인을 활성화하기</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-root-계정으로-로그인">
+        <span class="has-mr-6">3</span>
+        <span>3. root 계정으로 로그인</span>
+        </a></li><li>
+        <a class="is-flex" href="#4-다른-사용자-계정-추가">
+        <span class="has-mr-6">4</span>
+        <span>4. 다른 사용자 계정 추가</span>
+        </a></li><li>
+        <a class="is-flex" href="#5-새로-생성한-사용자-계정의-비밀번호-변경">
+        <span class="has-mr-6">5</span>
+        <span>5. 새로 생성한 사용자 계정의 비밀번호 변경</span>
+        </a></li><li>
+        <a class="is-flex" href="#6-새로-생성한-사용자-계정에-root-권한을-사용할-수-있도록-설정">
+        <span class="has-mr-6">6</span>
+        <span>6. 새로 생성한 사용자 계정에 root 권한을 사용할 수 있도록 설정</span>
+        </a></li><li>
+        <a class="is-flex" href="#7-같은-key-pair로-로그인-할-수-있도록-새로-생성한-사용자-계정으로-ubuntu-의-것을-복사">
+        <span class="has-mr-6">7</span>
+        <span>7. 같은 key pair로 로그인 할 수 있도록 새로 생성한 사용자 계정으로 ubuntu 의 것을 복사</span>
+        </a></li><li>
+        <a class="is-flex" href="#8-복사한-key-pair의-소유자를-jmkim으로-변경-r-하위-폴더까지-모두-소유권을-바꿔줌">
+        <span class="has-mr-6">8</span>
+        <span>8. 복사한 key pair의 소유자를 jmkim으로 변경 (-R : 하위 폴더까지 모두 소유권을 바꿔줌)</span>
+        </a></li><li>
+        <a class="is-flex" href="#9-sshd-서비스-재시작">
+        <span class="has-mr-6">9</span>
+        <span>9. sshd 서비스 재시작</span>
+        </a></li></ul>
             </div>
         </div>
     </div>
-</article>
 
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                카테고리
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Algorithm/">
+            <span class="level-start">
+                <span class="level-item">Algorithm</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">14</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Algorithm/BOJ/">
+            <span class="level-start">
+                <span class="level-item">BOJ</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Algorithm/Concept/">
+            <span class="level-start">
+                <span class="level-item">Concept</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Book/">
+            <span class="level-start">
+                <span class="level-item">Book</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Database/">
+            <span class="level-start">
+                <span class="level-item">Database</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/">
+            <span class="level-start">
+                <span class="level-item">Programming</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">95</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Programming/AWS/">
+            <span class="level-start">
+                <span class="level-item">AWS</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Git/">
+            <span class="level-start">
+                <span class="level-item">Git</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Gradle/">
+            <span class="level-start">
+                <span class="level-item">Gradle</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/HTML/">
+            <span class="level-start">
+                <span class="level-item">HTML</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Java/">
+            <span class="level-start">
+                <span class="level-item">Java</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">21</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/JavaScript/">
+            <span class="level-start">
+                <span class="level-item">JavaScript</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">15</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Linux-Ubuntu/">
+            <span class="level-start">
+                <span class="level-item">Linux & Ubuntu</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Node/">
+            <span class="level-start">
+                <span class="level-item">Node</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/RaspberryPi/">
+            <span class="level-start">
+                <span class="level-item">RaspberryPi</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/React-Native/">
+            <span class="level-start">
+                <span class="level-item">React Native</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Spring/">
+            <span class="level-start">
+                <span class="level-item">Spring</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">19</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Tool/">
+            <span class="level-start">
+                <span class="level-item">Tool</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Project/">
+            <span class="level-start">
+                <span class="level-item">Project</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Project/Emily/">
+            <span class="level-start">
+                <span class="level-item">Emily</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Tip/">
+            <span class="level-start">
+                <span class="level-item">Tip</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
 
-
-
-<!-- disqus embedded js code start (one page only need to embed once) -->
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = "https-jongmin92-github-io";
-    var disqus_identifier = "https://jongmin92.github.io/2016/09/20/Linux &amp; Ubuntu/add_user/";
-    var disqus_url = "https://jongmin92.github.io/2016/09/20/Linux &amp; Ubuntu/add_user/";
-
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<!-- disqus embedded js code start end -->
-
-
-
-
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
-    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'always',
-          placement: 'left',
-          icon: '#'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-</script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: 0.6em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
-
-
-
-    <!-- Footer -->
-    <!-- Footer -->
-<footer>
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <ul class="list-inline text-center">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
                 
+                    <img src="/images/logo.png" alt="Linux &amp; Ubuntu 계정 추가 &amp; 설정" height="28">
                 
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 KimJongMin&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="external nofollow noopener noreferrer">Icarus</a>
                 
-
-                
-
-                
-                    <li>
-                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420" rel="external nofollow noopener noreferrer">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                
-
-                
-                    <li>
-                        <a target="_blank" href="https://github.com/jongmin92" rel="external nofollow noopener noreferrer">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                
-
-                
-
-                </ul>
-                <p class="copyright text-muted">
-                    Copyright &copy; KimJongMin 2020 
-                    <br>
-                    Theme by <a href="http://huangxuan.me" rel="external nofollow noopener noreferrer" target="_blank">Hux</a> 
-                    <span style="display: inline-block; margin: 0 5px;">
-                        <i class="fa fa-heart"></i>
-                    </span> 
-                    re-Ported by <a href="http://beantech.org" rel="external nofollow noopener noreferrer" target="_blank">BeanTech</a> | 
-                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px" src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true">
-                    </iframe>
                 </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
             </div>
         </div>
     </div>
 </footer>
-
-<!-- jQuery -->
-<script src="/js/jquery.min.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="/js/bootstrap.min.js"></script>
-
-<!-- Custom Theme JavaScript -->
-<script src="/js/hux-blog.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("ko");</script>
 
 
-<!-- async load function -->
 <script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
+var IcarusThemeSettings = {
+    site: {
+        url: 'https://jongmin92.github.io',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
     }
+};
 </script>
 
-<!-- 
-     Because of the native support for backtick-style fenced code blocks 
-     right within the Markdown is landed in Github Pages, 
-     From V1.6, There is no need for Highlight.js, 
-     so Huxblog drops it officially.
 
-     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
-     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
--->
-<!--
-    <script>
-        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
-            hljs.initHighlightingOnLoad();
-        })
-    </script>
-    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
--->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
 
 
-<!-- jquery.tagcloud.js -->
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" rel="external nofollow noopener noreferrer" target="_blank">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
 <script>
-    // only load tagcloud.js in tag.html
-    if($('#tag_cloud').length !== 0){
-        async("https://jongmin92.github.io/js/jquery.tagcloud.js",function(){
-            $.fn.tagcloud.defaults = {
-                //size: {start: 1, end: 1, unit: 'em'},
-                color: {start: '#bbbbee', end: '#0085a1'},
-            };
-            $('#tag_cloud a').tagcloud();
-        })
-    }
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
 </script>
 
-<!--fastClick.js -->
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
 <script>
-    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
-        var $nav = document.querySelector("nav");
-        if($nav) FastClick.attach($nav);
-    })
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
 </script>
 
 
-<!-- Google Analytics -->
+<a id="back-to-top" title="Zurück nach oben" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="입력 하세요...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
 <script>
-    // dynamic User by Hux
-    var _gaId = 'UA-90389042-1';
-    var _gaDomain = 'auto';
-
-    // Originial
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', _gaId, _gaDomain);
-    ga('send', 'pageview');
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '포스트',
+                PAGES: '페이지',
+                CATEGORIES: '카테고리',
+                TAGS: '태그',
+                UNTITLED: '(제목없음)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
 </script>
-
-
-
-
-<!-- Baidu Tongji -->
-
-
-
-
-
-
-	<a id="rocket" href="#top" class=""></a>
-	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script>
-    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async></script>
-<!-- Image to hack wechat -->
-<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0">
-<!-- Migrate from head to bottom, no longer block render and still work -->
-
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
 </body>
-
 </html>

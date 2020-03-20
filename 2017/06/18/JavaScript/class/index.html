@@ -1,238 +1,178 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<!-- Head tag -->
-<head><meta name="generator" content="Hexo 3.9.0">
+<html lang="ko">
+<head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA">
-    <meta name="naver-site-verification" content="4468fb67994f2c880ea59d43b7f9a03be45d43d8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="keyword" content="">
-    <link rel="shortcut icon" href="/images/etc/ironman-draw.png">
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <title>
-        
-          ES6 Class 파헤치기 - 92Hz
-        
-    </title>
 
-    <link rel="canonical" href="https://jongmin92.github.io/2017/06/18/JavaScript/class/">
+<meta name="generator" content="Hexo 3.9.0">
 
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <!-- Custom CSS --> 
-    <link rel="stylesheet" href="/css/beantech.min.css">
+<title>ES6 Class 파헤치기 - 92Hz</title>
+
+<!-- For SEO -->
+<link rel="canonical" href="https://jongmin92.github.io/2017/06/18/javascript/class/">
+
+
+    <meta name="description" content="Index ES6 Class 문법 Class 정의 constructor Prototype 기반 상속(ES5)과 Class 기반 상속(ES6) 비교 super 키워드 static 키워드 마치며    ES6 Class 문법JavaScript Class는 ECMAScript 6을 통해 소개되었습니다. ES6의 Class는 기존 prototype 기반의 상속을 보">
+<meta name="keywords" content="TIL,JavaScript,ES6,Class">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6 Class 파헤치기">
+<meta property="og:url" content="https://jongmin92.github.io/2017/06/18/JavaScript/class/index.html">
+<meta property="og:site_name" content="92Hz">
+<meta property="og:description" content="Index ES6 Class 문법 Class 정의 constructor Prototype 기반 상속(ES5)과 Class 기반 상속(ES6) 비교 super 키워드 static 키워드 마치며    ES6 Class 문법JavaScript Class는 ECMAScript 6을 통해 소개되었습니다. ES6의 Class는 기존 prototype 기반의 상속을 보">
+<meta property="og:locale" content="ko">
+<meta property="og:image" content="https://jongmin92.github.io/images/og_image.png">
+<meta property="og:updated_time" content="2020-03-20T17:25:20.919Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ES6 Class 파헤치기">
+<meta name="twitter:description" content="Index ES6 Class 문법 Class 정의 constructor Prototype 기반 상속(ES5)과 Class 기반 상속(ES6) 비교 super 키워드 static 키워드 마치며    ES6 Class 문법JavaScript Class는 ECMAScript 6을 통해 소개되었습니다. ES6의 Class는 기존 prototype 기반의 상속을 보">
+<meta name="twitter:image" content="https://jongmin92.github.io/images/og_image.png">
+
+
+
+
+
+<link rel="alternative" href="rss2.xml" title="ES6 Class 파헤치기" type="application/atom+xml">
+
+
+
+<link rel="icon" href="/images/favicon.png">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
     
-    <!-- Pygments Highlight CSS -->
-    <link rel="stylesheet" href="/css/highlight.css">
-
-    <link rel="stylesheet" href="/css/widget.css">
-
-    <link rel="stylesheet" href="/css/rocket.css">
-
-    <link rel="stylesheet" href="/css/signature.css">
-
-    <link rel="stylesheet" href="/css/toc.css">
-
-    <!-- For SEO -->
-    <link rel="canonical" href="https://jongmin92.github.io/2017/06/18/javascript/class/">
-
-    <!-- Custom Fonts -->
-    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
-    <!-- Hux change font-awesome CDN to qiniu -->
-    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-
-    <!-- Hux Delete, sad but pending in China
-    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
-    css'>
-    -->
-
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <!-- ga & ba script hoook -->
-    <script></script>
-</head>
-
-
-<!-- hack iOS CSS :active style -->
-<body ontouchstart="">
-	<!-- Modified by Yu-Hsuan Yen -->
-<!-- Post Header -->
-<style type="text/css">
-    header.intro-header{
-        
-            /* 기본 포스트 헤더 이미지 (페이지 이미지 || 기본 헤더 이미지) */
-            /* background-image: url('/images/post/bg/javascript.jpg') */
-            /* background-image: url('/images/etc/home.jpg') */
-            background-image: url('/images/post/bg/javascript.jpg')
-            /*post*/
-        
-    }
     
-</style>
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
 
-<header class="intro-header">
-    <!-- Signature -->
-    <div id="signature">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                
-                    <div class="post-heading">
-                        <div class="tags">
-                            
-                              <a class="tag" href="/tags/#TIL" title="TIL">TIL</a>
-                            
-                              <a class="tag" href="/tags/#JavaScript" title="JavaScript">JavaScript</a>
-                            
-                              <a class="tag" href="/tags/#ES6" title="ES6">ES6</a>
-                            
-                              <a class="tag" href="/tags/#Class" title="Class">Class</a>
-                            
-                        </div>
-                        <h1>ES6 Class 파헤치기</h1>
-                        <h2 class="subheading"></h2>
-                        <span class="meta">
-                            Posted by KimJongMin on
-                            2017-06-18
-                        </span>
-                    </div>
-                
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
 
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
 
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
 
-	
-    <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">92Hz</a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <!-- Known Issue, found by Hux:
-            <nav>'s height woule be hold on by its content.
-            so, when navbar scale out, the <nav> will cover tags.
-            also mask any touch event of tags, unfortunately.
-        -->
-        <div id="huxblog_navbar">
-            <div class="navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="/">Home</a>
-                    </li>
-
-                    
-
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/about/">About</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/tags/">Tags</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/archive/">Archives</a>
-                        </li>
-                        
-                    
-                    
-                </ul>
-            </div>
-        </div>
-        <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container -->
-</nav>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-90389042-1"></script>
 <script>
-    // Drop Bootstarp low-performance Navbar
-    // Use customize navbar with high-quality material design animation
-    // in high-perf jank-free CSS3 implementation
-    var $body   = document.body;
-    var $toggle = document.querySelector('.navbar-toggle');
-    var $navbar = document.querySelector('#huxblog_navbar');
-    var $collapse = document.querySelector('.navbar-collapse');
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-    $toggle.addEventListener('click', handleMagic)
-    function handleMagic(e){
-        if ($navbar.className.indexOf('in') > 0) {
-        // CLOSE
-            $navbar.className = " ";
-            // wait until animation end.
-            setTimeout(function(){
-                // prevent frequently toggle
-                if($navbar.className.indexOf('in') < 0) {
-                    $collapse.style.height = "0px"
-                }
-            },400)
-        }else{
-        // OPEN
-            $collapse.style.height = "auto"
-            $navbar.className += " in";
-        }
-    }
+    gtag('config', 'UA-90389042-1');
 </script>
 
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    
+    
 
-    <!-- Main Content -->
-    <!-- Modify by Yu-Hsuan Yen -->
 
-<!-- Post Content -->
-<article>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-2-column">
+    <nav class="navbar navbar-main">
     <div class="container">
-        <div class="row">
-
-            <center>
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-</center>
-
-            <!-- Post Container -->
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                post-container">
-
-                <h2 id="index">Index</h2>
-<ol>
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.png" alt="ES6 Class 파헤치기" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" rel="external nofollow noopener noreferrer" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="카탈로그" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="검색" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-06-17T15:00:00.000Z">2017-06-18</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Programming/">Programming</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/Programming/JavaScript/">JavaScript</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    15분 읽기 (대략 2239 단어)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                ES6 Class 파헤치기
+            
+        </h1>
+        <div class="content">
+            <h2 id="index"><a href="#Index" class="headerlink" title="Index"></a>Index</h2><ol>
 <li><a href="#1">ES6 Class 문법</a></li>
 <li><a href="#2">Class 정의</a></li>
 <li><a href="#3">constructor</a></li>
@@ -242,31 +182,25 @@
 <li><a href="#7">마치며</a></li>
 </ol>
 <hr>
-<span id="1">
-## ES6 Class 문법
-JavaScript **`Class`**는 ECMAScript 6을 통해 소개되었습니다. ES6의 Class는 기존 **`prototype`** 기반의 상속을 보다 명료하게 사용할 수 있도록 문법을 제공합니다. 이를  **Syntatic Sugar**라고 부르기도 합니다.
+<p><span id="1"></span></p>
+<h2 id="es6-class-문법"><a href="#ES6-Class-문법" class="headerlink" title="ES6 Class 문법"></a>ES6 Class 문법</h2><p>JavaScript <strong><code>Class</code></strong>는 ECMAScript 6을 통해 소개되었습니다. ES6의 Class는 기존 <strong><code>prototype</code></strong> 기반의 상속을 보다 명료하게 사용할 수 있도록 문법을 제공합니다. 이를  <strong>Syntatic Sugar</strong>라고 부르기도 합니다.</p>
 <blockquote>
 <p><a href="https://en.wikipedia.org/wiki/Syntactic_sugar" rel="external nofollow noopener noreferrer" target="_blank">Syntatic Sugar</a> : 읽고 표현하는것을 더 쉽게 하기 위해서 고안된 프로그래밍 언어 문법을 말합니다.</p>
 </blockquote>
-<p>JavaScript를 ES6를 통해 처음 접하시는 분들은 알아두셔야할 것이 JavaScript의 Class는 다른 객체지향 언어(C++, C#, Java, Python, Ruby 등…)에서 사용되는 Class 문법과는 다르다는 것입니다. JavaScript에는 Class라는 개념이 없습니다.<br>
-Class가 없기 때문에 기본적으로 Class 기반의 상속도 불가능합니다. 대신 다른 언어에는 존재하지 않는 <a href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Guide/Inheritance_and_the_prototype_chain" rel="external nofollow noopener noreferrer" target="_blank">프로토타입(Prototype)</a>이라는 것이 존재합니다. JavaScript는 이 <strong>prototype을 기반으로 상속을 흉내내도록 구현해 사용</strong>합니다. Prototype을 처음 접하시는 분은 <a href="https://jongmin92.github.io/2017/03/14/JavaScript/understand-prototype/">&quot;Prototype 이제는 이해하자&quot;</a>를 참고하시면 도움이 될것같습니다.</p>
+<p>JavaScript를 ES6를 통해 처음 접하시는 분들은 알아두셔야할 것이 JavaScript의 Class는 다른 객체지향 언어(C++, C#, Java, Python, Ruby 등…)에서 사용되는 Class 문법과는 다르다는 것입니다. JavaScript에는 Class라는 개념이 없습니다.<br>Class가 없기 때문에 기본적으로 Class 기반의 상속도 불가능합니다. 대신 다른 언어에는 존재하지 않는 <a href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Guide/Inheritance_and_the_prototype_chain" rel="external nofollow noopener noreferrer" target="_blank">프로토타입(Prototype)</a>이라는 것이 존재합니다. JavaScript는 이 <strong>prototype을 기반으로 상속을 흉내내도록 구현해 사용</strong>합니다. Prototype을 처음 접하시는 분은 <a href="https://jongmin92.github.io/2017/03/14/JavaScript/understand-prototype/">“Prototype 이제는 이해하자”</a>를 참고하시면 도움이 될것같습니다.</p>
 <hr>
-<span id="2">
-## Class 정의
-JavaScript에서 Class는 사실 **함수**입니다. 함수를 **함수 선언**과 **함수 표현식**으로 정의할 수 있듯이 class 문법도 **class 선언**과 **class 표현식** 두가지 방법으로 정의가 가능합니다.
+<p><span id="2"></span></p>
+<h2 id="class-정의"><a href="#Class-정의" class="headerlink" title="Class 정의"></a>Class 정의</h2><p>JavaScript에서 Class는 사실 <strong>함수</strong>입니다. 함수를 <strong>함수 선언</strong>과 <strong>함수 표현식</strong>으로 정의할 수 있듯이 class 문법도 <strong>class 선언</strong>과 <strong>class 표현식</strong> 두가지 방법으로 정의가 가능합니다.</p>
 <p>JavaScript 엔진은 function 키워드를 만나면 Function 오브젝트를 생성하듯, class 키워드를 만나면 Class 오브젝트를 생성합니다. class는 클래스를 선언하는 키워드이고 Class 오브젝트는 엔진이 class 키워드로 생성한 오브젝트입니다.</p>
-<h4 id="class-선언">Class 선언</h4>
-<p>함수 선언과 달리 클래스 선언은 <strong>호이스팅</strong>이 일어나지 않기 때문에, 클래스를 사용하기 위해서는 먼저 선언을 해야합니다. 그렇지 않으면 <strong>ReferenceError</strong> 가 발생합니다.</p>
+<h4 id="class-선언"><a href="#Class-선언" class="headerlink" title="Class 선언"></a>Class 선언</h4><p>함수 선언과 달리 클래스 선언은 <strong>호이스팅</strong>이 일어나지 않기 때문에, 클래스를 사용하기 위해서는 먼저 선언을 해야합니다. 그렇지 않으면 <strong>ReferenceError</strong> 가 발생합니다.</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">People</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(name) &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    say() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'My name is '</span> + <span class="keyword">this</span>.name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="class-표현식">Class 표현식</h4>
-<p>Class 표현식은 이름을 가질 수도 있고 갖지 않을 수도 있습니다.</p>
+<h4 id="class-표현식"><a href="#Class-표현식" class="headerlink" title="Class 표현식"></a>Class 표현식</h4><p>Class 표현식은 이름을 가질 수도 있고 갖지 않을 수도 있습니다.</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> People = <span class="class"><span class="keyword">class</span> <span class="title">People</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(name) &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    say() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'My name is '</span> + <span class="keyword">this</span>.name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> People = <span class="class"><span class="keyword">class</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(name) &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    say() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'My name is '</span> + <span class="keyword">this</span>.name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
-<span id="3">
-## constructor
-constructor는 클래스 인스턴스를 생성하고 생성한 인스턴스를 초기화하는 역할을 합니다. **new People()** 코드를 실행하면 **People.prototype.constructor**가 호출됩니다. 이를 default constructor라고 하며 constructor가 없으면 인스턴스를 생성할 수 없습니다.
+<p><span id="3"></span></p>
+<h2 id="constructor"><a href="#constructor-NaN" class="headerlink" title="constructor"></a>constructor</h2><p>constructor는 클래스 인스턴스를 생성하고 생성한 인스턴스를 초기화하는 역할을 합니다. <strong>new People()</strong> 코드를 실행하면 <strong>People.prototype.constructor</strong>가 호출됩니다. 이를 default constructor라고 하며 constructor가 없으면 인스턴스를 생성할 수 없습니다.</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> people = <span class="keyword">new</span> People(<span class="string">'KimJongMin'</span>);</span><br></pre></td></tr></table></figure>
-<p>new People(‘KimJongMin’)을 실행하면 People 클래스에 작성한 constructor가 자동으로 호출되고 파라미터 값으로 'KimJongMin’을 넘겨 줍니다.</p>
+<p>new People(‘KimJongMin’)을 실행하면 People 클래스에 작성한 constructor가 자동으로 호출되고 파라미터 값으로 ‘KimJongMin’을 넘겨 줍니다.</p>
 <p>new 연산자가 인스턴스를 생성하는 것처럼 보이지만, 사실 new 연산자는 constructor를 호출하면서 파라미터를 넘겨주는 역할만 합니다. 호출된 constructor가 인스턴스를 생성하여 반환하면 new 연산자가 받아 new를 실행한 곳으로 반환합니다. 과정은 다음과 같습니다.</p>
 <ol>
 <li>new People(‘KimJongMin’)을 실행</li>
@@ -279,21 +213,18 @@ constructor는 클래스 인스턴스를 생성하고 생성한 인스턴스를 
 <p>다음은 생성된 인스턴스의 구조입니다.</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.dir(people);</span><br></pre></td></tr></table></figure>
 <p><img src="/images/post/2017-06-18/instance-structure.png" alt=""></p>
-<p>people 인스턴스의 **_<em>proto_</em>**는 People Class 오브젝트와 함께 생성된 <strong>Prototype object</strong>를 가리키고 있습니다. 결국 Class 문법을 이용한 코드를 prototype 기반의 코드로 변경하면 다음과 같습니다.</p>
+<p>people 인스턴스의 <strong>__proto__</strong>는 People Class 오브젝트와 함께 생성된 <strong>Prototype object</strong>를 가리키고 있습니다. 결국 Class 문법을 이용한 코드를 prototype 기반의 코드로 변경하면 다음과 같습니다.</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">People</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">People.prototype.say = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'My name is '</span> + <span class="keyword">this</span>.name);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <hr>
-<span id="4">
-## Prototype 기반 상속(ES5)과 Class 기반 상속(ES6) 비교
-먼저 ES5에서 Prototype을 사용하여 상속을 구현하는 방법을 살펴보고, 그 후 ES6에서 Class로 상속을 구현하는 형태를 보겠습니다.
-<h4 id="es5-prototype-기반-상속">ES5 Prototype 기반 상속</h4>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Cat</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Cat.prototype.speak = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.name + <span class="string">' makes a noise.'</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Lion</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// `super()` 호출</span></span><br><span class="line">  Cat.call(<span class="keyword">this</span>, name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// `Cat` 클래스 상속</span></span><br><span class="line">Lion.prototype = <span class="built_in">Object</span>.create(Cat.prototype);</span><br><span class="line">Lion.prototype.constructor = Lion;</span><br><span class="line"></span><br><span class="line"><span class="comment">// `speak()` 메서드 오버라이드</span></span><br><span class="line">Lion.prototype.speak = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  Cat.prototype.speak.call(<span class="keyword">this</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.name + <span class="string">' roars.'</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> lion = <span class="keyword">new</span> Lion(<span class="string">'Samba'</span>);</span><br><span class="line">lion.speak();</span><br><span class="line"></span><br><span class="line">[결과]</span><br><span class="line">Sambda makes a noise.</span><br><span class="line">Sambda roars.</span><br></pre></td></tr></table></figure>
+<p><span id="4"></span></p>
+<h2 id="prototype-기반-상속es5과-class-기반-상속es6-비교"><a href="#Prototype-기반-상속-ES5-과-Class-기반-상속-ES6-비교" class="headerlink" title="Prototype 기반 상속(ES5)과 Class 기반 상속(ES6) 비교"></a>Prototype 기반 상속(ES5)과 Class 기반 상속(ES6) 비교</h2><p>먼저 ES5에서 Prototype을 사용하여 상속을 구현하는 방법을 살펴보고, 그 후 ES6에서 Class로 상속을 구현하는 형태를 보겠습니다.</p>
+<h4 id="es5-prototype-기반-상속"><a href="#ES5-Prototype-기반-상속" class="headerlink" title="ES5 Prototype 기반 상속"></a>ES5 Prototype 기반 상속</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Cat</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Cat.prototype.speak = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.name + <span class="string">' makes a noise.'</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Lion</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// `super()` 호출</span></span><br><span class="line">  Cat.call(<span class="keyword">this</span>, name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// `Cat` 클래스 상속</span></span><br><span class="line">Lion.prototype = <span class="built_in">Object</span>.create(Cat.prototype);</span><br><span class="line">Lion.prototype.constructor = Lion;</span><br><span class="line"></span><br><span class="line"><span class="comment">// `speak()` 메서드 오버라이드</span></span><br><span class="line">Lion.prototype.speak = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  Cat.prototype.speak.call(<span class="keyword">this</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.name + <span class="string">' roars.'</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> lion = <span class="keyword">new</span> Lion(<span class="string">'Samba'</span>);</span><br><span class="line">lion.speak();</span><br><span class="line"></span><br><span class="line">[결과]</span><br><span class="line">Sambda makes a noise.</span><br><span class="line">Sambda roars.</span><br></pre></td></tr></table></figure>
 <p>new Lion()을 실행하면 Lion()이 호출되고, default constructor를 호출합니다. 그래서 Lion()을 생성자(constructor) 함수라고 합니다.</p>
 <p>생성자 함수가 있으면 Cat.prototype.speak와 같이 prototype에 메서드를 연결한 코드가 있습니다. 이와 같이 prototype에 작성하지 않으면 각각의 인스턴스에 메서드가 생성되게 됩니다. 이 형태가 ES5에서 인스턴스를 구현하는 기본 형태 입니다.</p>
 <p><a href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/create" rel="external nofollow noopener noreferrer" target="_blank">Object.create()</a>를 통해 Cat.prototype에 연결된 메서드를 Lion.prototype.__proto__에 첨부합니다. Lion.prototype에는 constructor가 연결되어 있는데 prototype을 재 할당했기 때문에 지워진 constructor를 다시 할당해 줍니다.</p>
 <p>결과적으로 Lion 생성자 함수의 구조는 다음과 같습니다.</p>
 <p><img src="/images/post/2017-06-18/instance-structure2.png" alt=""></p>
-<h4 id="es6-class-기반-상속">ES6 Class 기반 상속</h4>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cat</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(name) &#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  speak() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name + <span class="string">' makes a noise.'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Lion</span> <span class="keyword">extends</span> <span class="title">Cat</span> </span>&#123;</span><br><span class="line">  speak() &#123;</span><br><span class="line">    <span class="keyword">super</span>.speak();</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name + <span class="string">' roars.'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> lion = <span class="keyword">new</span> Lion(<span class="string">'Samba'</span>);</span><br><span class="line">lion.speak();</span><br><span class="line"></span><br><span class="line">[결과]</span><br><span class="line">Sambda makes a noise.</span><br><span class="line">Sambda roars.</span><br></pre></td></tr></table></figure>
+<h4 id="es6-class-기반-상속"><a href="#ES6-Class-기반-상속" class="headerlink" title="ES6 Class 기반 상속"></a>ES6 Class 기반 상속</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cat</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(name) &#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  speak() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name + <span class="string">' makes a noise.'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Lion</span> <span class="keyword">extends</span> <span class="title">Cat</span> </span>&#123;</span><br><span class="line">  speak() &#123;</span><br><span class="line">    <span class="keyword">super</span>.speak();</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name + <span class="string">' roars.'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> lion = <span class="keyword">new</span> Lion(<span class="string">'Samba'</span>);</span><br><span class="line">lion.speak();</span><br><span class="line"></span><br><span class="line">[결과]</span><br><span class="line">Sambda makes a noise.</span><br><span class="line">Sambda roars.</span><br></pre></td></tr></table></figure>
 <p>ES6에서는 <strong><code>extends</code></strong> 키워드로 상속을 구현합니다. Cat 클래스를 상속받은 Lion 클래스의 구조는 다음과 같습니다.</p>
 <p><img src="/images/post/2017-06-18/instance-structure3.png" alt=""></p>
 <p>위의 prototype을 통해 상속을 구현한 Lion 생성자 함수의 구조와 비교했을때 일치합니다. 추가적으로 new Lion(‘Samba’) 를 실행하면 다음의 과정을 거치게됩니다.</p>
@@ -304,314 +235,532 @@ constructor는 클래스 인스턴스를 생성하고 생성한 인스턴스를 
 <li>생성한 인스턴스를 lion에 할당</li>
 </ol>
 <hr>
-<span id="5">
-## super 키워드
-서브 클래스와 슈퍼 클래스에 같은 이름의 메서드가 존재하면 슈퍼 클래스의 메서드는 호출되지 않습니다. 이때 **`super`** 키워드를 사용해서 슈퍼 클래스의 메서드를 호출할 수 있습니다. (서브 클래스의 constructor에 super()를 작성하면 슈퍼 클래스의 constructor가 호출됩니다.)
+<p><span id="5"></span></p>
+<h2 id="super-키워드"><a href="#super-키워드" class="headerlink" title="super 키워드"></a>super 키워드</h2><p>서브 클래스와 슈퍼 클래스에 같은 이름의 메서드가 존재하면 슈퍼 클래스의 메서드는 호출되지 않습니다. 이때 <strong><code>super</code></strong> 키워드를 사용해서 슈퍼 클래스의 메서드를 호출할 수 있습니다. (서브 클래스의 constructor에 super()를 작성하면 슈퍼 클래스의 constructor가 호출됩니다.)</p>
 <hr>
-<span id="6">
-## static 키워드
-static 키워드는 클래스를 위한 정적(static) 메소드를 정의합니다. 정적 메소드는 prototype에 연결되지 않고 클래스에 직접 연결되기 때문에 클래스의 인스턴스화(instantiating) 없이 호출되며, 클래스의 인스턴스에서는 호출할 수 없습니다. 동일한 클래스 내의 다른 정적 메서드 내에서 정적 메서드를 호출하는 경우 키워드 this를 사용할 수 있다.
+<p><span id="6"></span></p>
+<h2 id="static-키워드"><a href="#static-키워드" class="headerlink" title="static 키워드"></a>static 키워드</h2><p>static 키워드는 클래스를 위한 정적(static) 메소드를 정의합니다. 정적 메소드는 prototype에 연결되지 않고 클래스에 직접 연결되기 때문에 클래스의 인스턴스화(instantiating) 없이 호출되며, 클래스의 인스턴스에서는 호출할 수 없습니다. 동일한 클래스 내의 다른 정적 메서드 내에서 정적 메서드를 호출하는 경우 키워드 this를 사용할 수 있다.</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Lion</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> speak() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'Noise~'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Lion.speak();</span><br><span class="line"></span><br><span class="line">[결과]</span><br><span class="line">Noise~</span><br></pre></td></tr></table></figure>
 <p>정적 메소드는 어플리케이션(application)을 위한 유틸리티(utility) 함수를 생성하는데 주로 사용됩니다.</p>
 <hr>
-<span id="7">
-## 마치며
-ES6의 Class 문법에 대해 정리해 보았다. JavaScript 언어를 약 1년전 Node.js 를 시작하며 처음 접하게 되었는데 사실 그 당시 Prototype과 상속에 대해 크게 다룰일이 없었다. (어쩌면 너무 무지해서 사용 필요성을 느끼지 못했을 수도...) 그 후 Node.js 버전을 올리고 ES6를 공부하며 Class 문법을 접하게 되었는데 JavaScript의 Prototype에 대한 이해와 지식이 부족하다 보니 이전에 공부했던 C++과 Java의 Class 처럼 이해했던 것 같다. 그래도 그 후 Prototype과 더불이 Class까지 공부하며 지금은 어느정도 이해하게 된것 같다. 결론은... 역시나 JavaScript에서 Prototype을 이해하는건 중요한것 같다.
+<p><span id="7"></span></p>
+<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>ES6의 Class 문법에 대해 정리해 보았다. JavaScript 언어를 약 1년전 Node.js 를 시작하며 처음 접하게 되었는데 사실 그 당시 Prototype과 상속에 대해 크게 다룰일이 없었다. (어쩌면 너무 무지해서 사용 필요성을 느끼지 못했을 수도…) 그 후 Node.js 버전을 올리고 ES6를 공부하며 Class 문법을 접하게 되었는데 JavaScript의 Prototype에 대한 이해와 지식이 부족하다 보니 이전에 공부했던 C++과 Java의 Class 처럼 이해했던 것 같다. 그래도 그 후 Prototype과 더불이 Class까지 공부하며 지금은 어느정도 이해하게 된것 같다. 결론은… 역시나 JavaScript에서 Prototype을 이해하는건 중요한것 같다.</p>
 <blockquote>
-<p>참고<br>
-<a href="https://gomugom.github.io/is-class-only-a-syntactic-sugar/" rel="external nofollow noopener noreferrer" target="_blank">ES6 Class는 단지 prototype 상속의 문법설탕일 뿐인가?</a><br>
-<a href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Classes" rel="external nofollow noopener noreferrer" target="_blank">MDN - Classes</a><br>
-<a href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Guide/Inheritance_and_the_prototype_chain" rel="external nofollow noopener noreferrer" target="_blank">MDN - 상속과 프로토타입</a></p>
+<p>참고<br><a href="https://gomugom.github.io/is-class-only-a-syntactic-sugar/" rel="external nofollow noopener noreferrer" target="_blank">ES6 Class는 단지 prototype 상속의 문법설탕일 뿐인가?</a><br><a href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Classes" rel="external nofollow noopener noreferrer" target="_blank">MDN - Classes</a><br><a href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Guide/Inheritance_and_the_prototype_chain" rel="external nofollow noopener noreferrer" target="_blank">MDN - 상속과 프로토타입</a></p>
 </blockquote>
-</span></span></span></span></span></span></span>
-                
 
-                <hr>
-                <!-- Pager -->
-                <ul class="pager">
-                    
-                        <li class="previous">
-                            <a href="/2017/07/06/RaspberryPi/0-Intro/" data-toggle="tooltip" data-placement="top" title="0. 라즈베리파이 강의 소개">&larr; Previous Post</a>
-                        </li>
-                    
-                    
-                        <li class="next">
-                            <a href="/2017/06/14/JavaScript/memoization/" data-toggle="tooltip" data-placement="top" title="메모이제이션 (Memoization)">Next Post &rarr;</a>
-                        </li>
-                    
-                </ul>
-
-                <!-- duoshuo Share start -->
-                
-                <!-- 多说 Share end-->
-
-                <center>
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-</center>
-
-                <!-- 多说评论框 start -->
-                
-                <!-- 多说评论框 end -->
-
-                <!-- disqus comment start -->
-                
-                    <div class="comment">
-                        <div id="disqus_thread" class="disqus-thread"></div>
-                    </div>
-                
-                <!-- disqus comment end -->
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/Class/">Class</a>, <a class="has-link-grey -link" href="/tags/ES6/">ES6</a>, <a class="has-link-grey -link" href="/tags/JavaScript/">JavaScript</a>, <a class="has-link-grey -link" href="/tags/TIL/">TIL</a>
+                </div>
             </div>
-            
-            <!-- Tabe of Content -->
-            <!-- Table of Contents -->
+        </div>
+        
+        
+        
+    </div>
+</div>
 
-                
-            <!-- Sidebar Container -->
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
 
-                <!-- Featured Tags -->
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2017/07/06/RaspberryPi/0-Intro/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">0. 라즈베리파이 강의 소개</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2017/06/14/JavaScript/memoization/">
+                <span class="level-item">메모이제이션 (Memoization)</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">댓글</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://jongmin92.github.io/2017/06/18/JavaScript/class/';
+        this.page.identifier = '2017/06/18/JavaScript/class/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'https-jongmin92-github-io' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
+
+
+<!-- For Google Adsense -->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</div>
                 
-                <section>
-                    <!-- no hr -->
-                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
-                    <div class="tags">
-                       
-                          <a class="tag" href="/tags/#TIL" title="TIL">TIL</a>
-                        
-                          <a class="tag" href="/tags/#JavaScript" title="JavaScript">JavaScript</a>
-                        
-                          <a class="tag" href="/tags/#ES6" title="ES6">ES6</a>
-                        
-                          <a class="tag" href="/tags/#Class" title="Class">Class</a>
-                        
-                    </div>
-                </section>
                 
 
-                <!-- Friends Blog -->
-                
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-3 column-right is-sticky">
+    
+        
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    카탈로그
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#index">
+        <span class="has-mr-6">1</span>
+        <span>Index</span>
+        </a></li><li>
+        <a class="is-flex" href="#es6-class-문법">
+        <span class="has-mr-6">2</span>
+        <span>ES6 Class 문법</span>
+        </a></li><li>
+        <a class="is-flex" href="#class-정의">
+        <span class="has-mr-6">3</span>
+        <span>Class 정의</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#class-선언">
+        <span class="has-mr-6">3.1</span>
+        <span>Class 선언</span>
+        </a></li><li>
+        <a class="is-flex" href="#class-표현식">
+        <span class="has-mr-6">3.2</span>
+        <span>Class 표현식</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#constructor">
+        <span class="has-mr-6">4</span>
+        <span>constructor</span>
+        </a></li><li>
+        <a class="is-flex" href="#prototype-기반-상속es5과-class-기반-상속es6-비교">
+        <span class="has-mr-6">5</span>
+        <span>Prototype 기반 상속(ES5)과 Class 기반 상속(ES6) 비교</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#es5-prototype-기반-상속">
+        <span class="has-mr-6">5.1</span>
+        <span>ES5 Prototype 기반 상속</span>
+        </a></li><li>
+        <a class="is-flex" href="#es6-class-기반-상속">
+        <span class="has-mr-6">5.2</span>
+        <span>ES6 Class 기반 상속</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#super-키워드">
+        <span class="has-mr-6">6</span>
+        <span>super 키워드</span>
+        </a></li><li>
+        <a class="is-flex" href="#static-키워드">
+        <span class="has-mr-6">7</span>
+        <span>static 키워드</span>
+        </a></li><li>
+        <a class="is-flex" href="#마치며">
+        <span class="has-mr-6">8</span>
+        <span>마치며</span>
+        </a></li></ul>
             </div>
         </div>
     </div>
-</article>
 
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                카테고리
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Algorithm/">
+            <span class="level-start">
+                <span class="level-item">Algorithm</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">14</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Algorithm/BOJ/">
+            <span class="level-start">
+                <span class="level-item">BOJ</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Algorithm/Concept/">
+            <span class="level-start">
+                <span class="level-item">Concept</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Book/">
+            <span class="level-start">
+                <span class="level-item">Book</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Database/">
+            <span class="level-start">
+                <span class="level-item">Database</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/">
+            <span class="level-start">
+                <span class="level-item">Programming</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">95</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Programming/AWS/">
+            <span class="level-start">
+                <span class="level-item">AWS</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Git/">
+            <span class="level-start">
+                <span class="level-item">Git</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Gradle/">
+            <span class="level-start">
+                <span class="level-item">Gradle</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/HTML/">
+            <span class="level-start">
+                <span class="level-item">HTML</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Java/">
+            <span class="level-start">
+                <span class="level-item">Java</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">21</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/JavaScript/">
+            <span class="level-start">
+                <span class="level-item">JavaScript</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">15</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Linux-Ubuntu/">
+            <span class="level-start">
+                <span class="level-item">Linux & Ubuntu</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Node/">
+            <span class="level-start">
+                <span class="level-item">Node</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/RaspberryPi/">
+            <span class="level-start">
+                <span class="level-item">RaspberryPi</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/React-Native/">
+            <span class="level-start">
+                <span class="level-item">React Native</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Spring/">
+            <span class="level-start">
+                <span class="level-item">Spring</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">19</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Tool/">
+            <span class="level-start">
+                <span class="level-item">Tool</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Project/">
+            <span class="level-start">
+                <span class="level-item">Project</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Project/Emily/">
+            <span class="level-start">
+                <span class="level-item">Emily</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Tip/">
+            <span class="level-start">
+                <span class="level-item">Tip</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
 
-
-
-<!-- disqus embedded js code start (one page only need to embed once) -->
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = "https-jongmin92-github-io";
-    var disqus_identifier = "https://jongmin92.github.io/2017/06/18/JavaScript/class/";
-    var disqus_url = "https://jongmin92.github.io/2017/06/18/JavaScript/class/";
-
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<!-- disqus embedded js code start end -->
-
-
-
-
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
-    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'always',
-          placement: 'left',
-          icon: '#'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-</script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: 0.6em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
-
-
-
-    <!-- Footer -->
-    <!-- Footer -->
-<footer>
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <ul class="list-inline text-center">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
                 
+                    <img src="/images/logo.png" alt="ES6 Class 파헤치기" height="28">
                 
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 KimJongMin&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="external nofollow noopener noreferrer">Icarus</a>
                 
-
-                
-
-                
-                    <li>
-                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420" rel="external nofollow noopener noreferrer">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                
-
-                
-                    <li>
-                        <a target="_blank" href="https://github.com/jongmin92" rel="external nofollow noopener noreferrer">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                
-
-                
-
-                </ul>
-                <p class="copyright text-muted">
-                    Copyright &copy; KimJongMin 2020 
-                    <br>
-                    Theme by <a href="http://huangxuan.me" rel="external nofollow noopener noreferrer" target="_blank">Hux</a> 
-                    <span style="display: inline-block; margin: 0 5px;">
-                        <i class="fa fa-heart"></i>
-                    </span> 
-                    re-Ported by <a href="http://beantech.org" rel="external nofollow noopener noreferrer" target="_blank">BeanTech</a> | 
-                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px" src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true">
-                    </iframe>
                 </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
             </div>
         </div>
     </div>
 </footer>
-
-<!-- jQuery -->
-<script src="/js/jquery.min.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="/js/bootstrap.min.js"></script>
-
-<!-- Custom Theme JavaScript -->
-<script src="/js/hux-blog.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("ko");</script>
 
 
-<!-- async load function -->
 <script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
+var IcarusThemeSettings = {
+    site: {
+        url: 'https://jongmin92.github.io',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
     }
+};
 </script>
 
-<!-- 
-     Because of the native support for backtick-style fenced code blocks 
-     right within the Markdown is landed in Github Pages, 
-     From V1.6, There is no need for Highlight.js, 
-     so Huxblog drops it officially.
 
-     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
-     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
--->
-<!--
-    <script>
-        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
-            hljs.initHighlightingOnLoad();
-        })
-    </script>
-    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
--->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
 
 
-<!-- jquery.tagcloud.js -->
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" rel="external nofollow noopener noreferrer" target="_blank">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
 <script>
-    // only load tagcloud.js in tag.html
-    if($('#tag_cloud').length !== 0){
-        async("https://jongmin92.github.io/js/jquery.tagcloud.js",function(){
-            $.fn.tagcloud.defaults = {
-                //size: {start: 1, end: 1, unit: 'em'},
-                color: {start: '#bbbbee', end: '#0085a1'},
-            };
-            $('#tag_cloud a').tagcloud();
-        })
-    }
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
 </script>
 
-<!--fastClick.js -->
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
 <script>
-    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
-        var $nav = document.querySelector("nav");
-        if($nav) FastClick.attach($nav);
-    })
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
 </script>
 
 
-<!-- Google Analytics -->
+<a id="back-to-top" title="Zurück nach oben" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="입력 하세요...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
 <script>
-    // dynamic User by Hux
-    var _gaId = 'UA-90389042-1';
-    var _gaDomain = 'auto';
-
-    // Originial
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', _gaId, _gaDomain);
-    ga('send', 'pageview');
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '포스트',
+                PAGES: '페이지',
+                CATEGORIES: '카테고리',
+                TAGS: '태그',
+                UNTITLED: '(제목없음)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
 </script>
-
-
-
-
-<!-- Baidu Tongji -->
-
-
-
-
-
-
-	<a id="rocket" href="#top" class=""></a>
-	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script>
-    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async></script>
-<!-- Image to hack wechat -->
-<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0">
-<!-- Migrate from head to bottom, no longer block render and still work -->
-
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
 </body>
-
 </html>

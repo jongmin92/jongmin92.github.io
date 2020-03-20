@@ -1,268 +1,194 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<!-- Head tag -->
-<head><meta name="generator" content="Hexo 3.9.0">
+<html lang="ko">
+<head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="XPweYu29qWs-CX2Byp48Y71yuYCDvBDkR8_PrVUy9UA">
-    <meta name="naver-site-verification" content="4468fb67994f2c880ea59d43b7f9a03be45d43d8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="keyword" content="">
-    <link rel="shortcut icon" href="/images/etc/ironman-draw.png">
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <title>
-        
-          SpringBoot Application의 monitoring 시스템 구축하기 - 92Hz
-        
-    </title>
 
-    <link rel="canonical" href="https://jongmin92.github.io/2019/12/04/Spring/prometheus/">
+<meta name="generator" content="Hexo 3.9.0">
 
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <!-- Custom CSS --> 
-    <link rel="stylesheet" href="/css/beantech.min.css">
+<title>SpringBoot Application의 monitoring 시스템 구축하기 - 92Hz</title>
+
+<!-- For SEO -->
+<link rel="canonical" href="https://jongmin92.github.io/2019/12/04/spring/prometheus/">
+
+
+    <meta name="description" content="Spring Boot를 사용하고 있는 애플리케이션에서 이전에 살펴본 Micrometer를 이용해서 metric을 생성하고 Prometheus를 이용해 수집, 그리고 Grafana로 시각화하는 시스템을 만들어보자.  Prometheus는 metric을 수집하고 모니터링 및 알람에 사용되는 오픈소스 애플리케이션이다. time series database를 사용">
+<meta name="keywords" content="Java,Spring,Spring Boot,Actuator,Micrometer,Prometheus,Grafana">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringBoot Application의 monitoring 시스템 구축하기">
+<meta property="og:url" content="https://jongmin92.github.io/2019/12/04/Spring/prometheus/index.html">
+<meta property="og:site_name" content="92Hz">
+<meta property="og:description" content="Spring Boot를 사용하고 있는 애플리케이션에서 이전에 살펴본 Micrometer를 이용해서 metric을 생성하고 Prometheus를 이용해 수집, 그리고 Grafana로 시각화하는 시스템을 만들어보자.  Prometheus는 metric을 수집하고 모니터링 및 알람에 사용되는 오픈소스 애플리케이션이다. time series database를 사용">
+<meta property="og:locale" content="ko">
+<meta property="og:image" content="https://jongmin92.github.io/images/og_image.png">
+<meta property="og:updated_time" content="2020-03-20T17:30:01.718Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SpringBoot Application의 monitoring 시스템 구축하기">
+<meta name="twitter:description" content="Spring Boot를 사용하고 있는 애플리케이션에서 이전에 살펴본 Micrometer를 이용해서 metric을 생성하고 Prometheus를 이용해 수집, 그리고 Grafana로 시각화하는 시스템을 만들어보자.  Prometheus는 metric을 수집하고 모니터링 및 알람에 사용되는 오픈소스 애플리케이션이다. time series database를 사용">
+<meta name="twitter:image" content="https://jongmin92.github.io/images/og_image.png">
+
+
+
+
+
+<link rel="alternative" href="rss2.xml" title="SpringBoot Application의 monitoring 시스템 구축하기" type="application/atom+xml">
+
+
+
+<link rel="icon" href="/images/favicon.png">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
     
-    <!-- Pygments Highlight CSS -->
-    <link rel="stylesheet" href="/css/highlight.css">
-
-    <link rel="stylesheet" href="/css/widget.css">
-
-    <link rel="stylesheet" href="/css/rocket.css">
-
-    <link rel="stylesheet" href="/css/signature.css">
-
-    <link rel="stylesheet" href="/css/toc.css">
-
-    <!-- For SEO -->
-    <link rel="canonical" href="https://jongmin92.github.io/2019/12/04/spring/prometheus/">
-
-    <!-- Custom Fonts -->
-    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
-    <!-- Hux change font-awesome CDN to qiniu -->
-    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-
-    <!-- Hux Delete, sad but pending in China
-    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
-    css'>
-    -->
-
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <!-- ga & ba script hoook -->
-    <script></script>
-</head>
-
-
-<!-- hack iOS CSS :active style -->
-<body ontouchstart="">
-	<!-- Modified by Yu-Hsuan Yen -->
-<!-- Post Header -->
-<style type="text/css">
-    header.intro-header{
-        
-            /* 기본 포스트 헤더 이미지 (페이지 이미지 || 기본 헤더 이미지) */
-            /* background-image: url('undefined') */
-            /* background-image: url('/images/etc/home.jpg') */
-            background-image: url('/images/etc/home.jpg')
-            /*post*/
-        
-    }
     
-</style>
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
 
-<header class="intro-header">
-    <!-- Signature -->
-    <div id="signature">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                
-                    <div class="post-heading">
-                        <div class="tags">
-                            
-                              <a class="tag" href="/tags/#Java" title="Java">Java</a>
-                            
-                              <a class="tag" href="/tags/#Spring" title="Spring">Spring</a>
-                            
-                              <a class="tag" href="/tags/#Spring Boot" title="Spring Boot">Spring Boot</a>
-                            
-                              <a class="tag" href="/tags/#Micrometer" title="Micrometer">Micrometer</a>
-                            
-                              <a class="tag" href="/tags/#Actuator" title="Actuator">Actuator</a>
-                            
-                              <a class="tag" href="/tags/#Prometheus" title="Prometheus">Prometheus</a>
-                            
-                              <a class="tag" href="/tags/#Grafana" title="Grafana">Grafana</a>
-                            
-                        </div>
-                        <h1>SpringBoot Application의 monitoring 시스템 구축하기</h1>
-                        <h2 class="subheading">SpringBoot에서 Micrometer, Prometheus, Grafana를 이용해 monitoring 시스템을 구축하자</h2>
-                        <span class="meta">
-                            Posted by KimJongMin on
-                            2019-12-04
-                        </span>
-                    </div>
-                
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
 
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
 
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
 
-	
-    <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">92Hz</a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <!-- Known Issue, found by Hux:
-            <nav>'s height woule be hold on by its content.
-            so, when navbar scale out, the <nav> will cover tags.
-            also mask any touch event of tags, unfortunately.
-        -->
-        <div id="huxblog_navbar">
-            <div class="navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="/">Home</a>
-                    </li>
-
-                    
-
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/about/">About</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/tags/">Tags</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/archive/">Archives</a>
-                        </li>
-                        
-                    
-                    
-                </ul>
-            </div>
-        </div>
-        <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container -->
-</nav>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-90389042-1"></script>
 <script>
-    // Drop Bootstarp low-performance Navbar
-    // Use customize navbar with high-quality material design animation
-    // in high-perf jank-free CSS3 implementation
-    var $body   = document.body;
-    var $toggle = document.querySelector('.navbar-toggle');
-    var $navbar = document.querySelector('#huxblog_navbar');
-    var $collapse = document.querySelector('.navbar-collapse');
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-    $toggle.addEventListener('click', handleMagic)
-    function handleMagic(e){
-        if ($navbar.className.indexOf('in') > 0) {
-        // CLOSE
-            $navbar.className = " ";
-            // wait until animation end.
-            setTimeout(function(){
-                // prevent frequently toggle
-                if($navbar.className.indexOf('in') < 0) {
-                    $collapse.style.height = "0px"
-                }
-            },400)
-        }else{
-        // OPEN
-            $collapse.style.height = "auto"
-            $navbar.className += " in";
-        }
-    }
+    gtag('config', 'UA-90389042-1');
 </script>
 
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    
+    
 
-    <!-- Main Content -->
-    <!-- Modify by Yu-Hsuan Yen -->
 
-<!-- Post Content -->
-<article>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-2-column">
+    <nav class="navbar navbar-main">
     <div class="container">
-        <div class="row">
-
-            <center>
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-</center>
-
-            <!-- Post Container -->
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                post-container">
-
-                <p><img src="/images/post/2019-12-04/system.png" alt="system"><br>
-Spring Boot를 사용하고 있는 애플리케이션에서 <a href="https://jongmin92.github.io/2019/12/03/Spring/micrometer/">이전에 살펴본 Micrometer</a>를 이용해서 metric을 생성하고 Prometheus를 이용해 수집, 그리고 Grafana로 시각화하는 시스템을 만들어보자.</p>
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.png" alt="SpringBoot Application의 monitoring 시스템 구축하기" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" rel="external nofollow noopener noreferrer" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="카탈로그" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="검색" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-12-03T17:20:00.000Z">2019-12-04</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Programming/">Programming</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/Programming/Spring/">Spring</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    13분 읽기 (대략 1888 단어)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                SpringBoot Application의 monitoring 시스템 구축하기
+            
+        </h1>
+        <div class="content">
+            <p><img src="/images/post/2019-12-04/system.png" alt="system"><br>Spring Boot를 사용하고 있는 애플리케이션에서 <a href="https://jongmin92.github.io/2019/12/03/Spring/micrometer/">이전에 살펴본 Micrometer</a>를 이용해서 metric을 생성하고 Prometheus를 이용해 수집, 그리고 Grafana로 시각화하는 시스템을 만들어보자.</p>
 <blockquote>
 <p><a href="https://prometheus.io/" rel="external nofollow noopener noreferrer" target="_blank">Prometheus</a>는 metric을 수집하고 모니터링 및 알람에 사용되는 오픈소스 애플리케이션이다. time series database를 사용해 metric을 저장하고 flexible한 query를 사용하 metric을 조회할 수 있다.</p>
+<p><a href="https://grafana.com/" rel="external nofollow noopener noreferrer" target="_blank">Grafana</a>는 데이터 시각화, 모니터링 및 분석을 위한 오픈소스 플랫폼이다. 사용자는 Grafana에서 패널(panel)을 사용해 설정된 기간 동안 특정 metric을 나타내는 dashboard를 만들 수 있다.<br>Grafana는 그래프, 테이블 같은 것들을 지원할 뿐만 아니라 시각화를 위한 별도의 플러그인을 추가해서 사용할 수도 있다.</p>
 </blockquote>
-<blockquote>
-<p><a href="https://grafana.com/" rel="external nofollow noopener noreferrer" target="_blank">Grafana</a>는 데이터 시각화, 모니터링 및 분석을 위한 오픈소스 플랫폼이다. 사용자는 Grafana에서 패널(panel)을 사용해 설정된 기간 동안 특정 metric을 나타내는 dashboard를 만들 수 있다.<br>
-Grafana는 그래프, 테이블 같은 것들을 지원할 뿐만 아니라 시각화를 위한 별도의 플러그인을 추가해서 사용할 수도 있다.</p>
-</blockquote>
-<h1 id="spring-boot-dependency">Spring Boot Dependency</h1>
-<p><strong>Spring Boot 2.0 이상</strong>부터는 애플리케이션의 metric 측정을 위해서 <code>Micrometer</code>를 제공한다. Micrometer는 Spring Boot 2의 <a href="https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html#production-ready-metrics" rel="external nofollow noopener noreferrer" target="_blank">Actuator에 포함</a>되어 있기 때문에 <code>spring-boot-starter-actuator</code>를 dependency에 추가해주면 쉽게 사용할 수 있다.</p>
-<p>추가적으로 <code>micrometer-registry-prometheus</code> dependency가 필요하다. 이 dependency는 Micrometer가 만들어내는 metric을 Prometheus 서버에서 사용할 수 있는 metric format으로 변경한다.</p>
+<h1 id="spring-boot-dependency"><a href="#Spring-Boot-Dependency" class="headerlink" title="Spring Boot Dependency"></a>Spring Boot Dependency</h1><p><strong>Spring Boot 2.0 이상</strong>부터는 애플리케이션의 metric 측정을 위해서 <code>Micrometer</code>를 제공한다. Micrometer는 Spring Boot 2의 <a href="https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html#production-ready-metrics" rel="external nofollow noopener noreferrer" target="_blank">Actuator에 포함</a>되어 있기 때문에 <code>spring-boot-starter-actuator</code>를 dependency에 추가해주면 쉽게 사용할 수 있다.</p>
+<p>추가적으로 <code>micrometer-registry-prometheus</code> dependency가 필요하다. 이 dependency는 Micrometer가 만들어내는 metric을 Prometheus 서버에서 사용할 수 있는 metric format으로 변경한다.  </p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    implementation <span class="string">'org.springframework.boot:spring-boot-starter-actuator'</span></span><br><span class="line">    implementation <span class="string">'io.micrometer:micrometer-registry-prometheus'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="actuator-endpoint-설정">Actuator Endpoint 설정</h1>
-<p>Actuator는 Spring MVC 혹은 Spring WebFlux를 사용하는 경우, Micrometer를 통해 생성된 애플리케이션의 metric을 <code>Prometheus 서버</code>에서 가져갈(Pull)수 있도록 <a href="https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html#production-ready-metrics-export-prometheus" rel="external nofollow noopener noreferrer" target="_blank">추가적인 endpoint를 제공</a>해준다.</p>
-<p>Spring Boot 2.0 이상부터 사용하는 Actuator는 1.x 버전에서 사용하던 것과는 달리 대부분의 endpoint가 disabled로 설정되어 있다. 기본적으로 <code>/health</code>와 <code>/info</code> 2가지 endpoint만 default로 사용 가능하다. 따라서 <code>/Prometheus</code> endpoint를 사용할 수 있도록 다음과 같이 <code>application.yml</code>에서 설정이 필요하다.</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">management:</span></span><br><span class="line"><span class="attr">  endpoints:</span></span><br><span class="line"><span class="attr">    web:</span></span><br><span class="line"><span class="attr">      exposure:</span></span><br><span class="line"><span class="attr">        include:</span> <span class="string">health,</span> <span class="string">info,</span> <span class="string">prometheus</span></span><br></pre></td></tr></table></figure>
-<p>애플리케이션을 실행하고 <a href="http://localhost:8080/actuator" rel="external nofollow noopener noreferrer" target="_blank">http://localhost:8080/actuator</a> 를 통해 Actuator가 제공하는 endpoint들을 확인할 수 있다.<br>
-<img src="/images/post/2019-12-04/endpoint.png" alt="endpoint"></p>
+<h1 id="actuator-endpoint-설정"><a href="#Actuator-Endpoint-설정" class="headerlink" title="Actuator Endpoint 설정"></a>Actuator Endpoint 설정</h1><p>Actuator는 Spring MVC 혹은 Spring WebFlux를 사용하는 경우, Micrometer를 통해 생성된 애플리케이션의 metric을 <code>Prometheus 서버</code>에서 가져갈(Pull)수 있도록 <a href="https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html#production-ready-metrics-export-prometheus" rel="external nofollow noopener noreferrer" target="_blank">추가적인 endpoint를 제공</a>해준다.</p>
+<p>Spring Boot 2.0 이상부터 사용하는 Actuator는 1.x 버전에서 사용하던 것과는 달리 대부분의 endpoint가 disabled로 설정되어 있다. 기본적으로 <code>/health</code>와 <code>/info</code> 2가지 endpoint만 default로 사용 가능하다. 따라서 <code>/Prometheus</code> endpoint를 사용할 수 있도록 다음과 같이 <code>application.yml</code>에서 설정이 필요하다.<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">management:</span></span><br><span class="line"><span class="attr">  endpoints:</span></span><br><span class="line"><span class="attr">    web:</span></span><br><span class="line"><span class="attr">      exposure:</span></span><br><span class="line"><span class="attr">        include:</span> <span class="string">health,</span> <span class="string">info,</span> <span class="string">prometheus</span></span><br></pre></td></tr></table></figure></p>
+<p>애플리케이션을 실행하고 <a href="http://localhost:8080/actuator" rel="external nofollow noopener noreferrer" target="_blank">http://localhost:8080/actuator</a> 를 통해 Actuator가 제공하는 endpoint들을 확인할 수 있다.<br><img src="/images/post/2019-12-04/endpoint.png" alt="endpoint"></p>
 <p><a href="http://localhost:8080/actuator/prometheus" rel="external nofollow noopener noreferrer" target="_blank">http://localhost:8080/actuator/prometheus</a> 에서는 Micrometer를 통해 수집된 metric들을 확인할 수 있다.</p>
 <p><img src="/images/post/2019-12-04/prometheus_endpoint.png" alt="prometheus_endpoint"></p>
 <blockquote>
 <p><strong>Spring Boot 2는 기본적으로 다음과 같은 metric들을 제공하고 있다.</strong></p>
 <ul>
-<li>JVM, report utilization of:
-<ul>
+<li>JVM, report utilization of:<ul>
 <li>Various memory and buffer pools</li>
 <li>Statistics related to garbage collection</li>
 <li>Thread utilization</li>
@@ -281,361 +207,514 @@ Grafana는 그래프, 테이블 같은 것들을 지원할 뿐만 아니라 시�
 <li>Tomcat usage</li>
 </ul>
 </blockquote>
-<h1 id="prometheus-설치-및-설정">Prometheus 설치 및 설정</h1>
-<p>애플리케이션에서의 설정은 끝났으니 애플리케이션에서 생성하는 metric을 수집하기 위한 Prometheus Server를 준비해보자.</p>
+<h1 id="prometheus-설치-및-설정"><a href="#Prometheus-설치-및-설정" class="headerlink" title="Prometheus 설치 및 설정"></a>Prometheus 설치 및 설정</h1><p>애플리케이션에서의 설정은 끝났으니 애플리케이션에서 생성하는 metric을 수집하기 위한 Prometheus Server를 준비해보자.</p>
 <p>테스트를 할 때는 역시나 docker(<a href="https://hub.docker.com/r/prom/prometheus" rel="external nofollow noopener noreferrer" target="_blank">prometheus image</a>)를 이용하면 간편하다. 만약 실제 로컬 환경 혹은 별도의 서버 환경에서 설치해서 사용하고 싶다면 <a href="https://prometheus.io/download/#prometheus" rel="external nofollow noopener noreferrer" target="_blank">https://prometheus.io/download/#prometheus</a> 에서 다운받아 설치하자.</p>
-<p>Prometheus Server는 기동시 <code>/etc/prometheus/prometheus.yml</code> 설정 파일을 사용한다. docker volume mount를 이용해 Prometheus Server에서 사용할 설정 <code>prometheus.yml</code> 파일을 만들어보자.</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">global:</span></span><br><span class="line"><span class="attr">  scrape_interval:</span> <span class="number">10</span><span class="string">s</span> <span class="comment"># 10초 마다 Metric을 Pulling</span></span><br><span class="line"><span class="attr">  evaluation_interval:</span> <span class="number">10</span><span class="string">s</span></span><br><span class="line"><span class="attr">scrape_configs:</span></span><br><span class="line"><span class="attr">  - job_name:</span> <span class="string">'spring-boot-app'</span></span><br><span class="line"><span class="attr">    metrics_path:</span> <span class="string">'/actuator/prometheus'</span> <span class="comment"># Application prometheus endpoint</span></span><br><span class="line"><span class="attr">    static_configs:</span></span><br><span class="line"><span class="attr">      - targets:</span> <span class="string">['host.docker.internal:8080']</span> <span class="comment"># Application host:port</span></span><br></pre></td></tr></table></figure>
+<p>Prometheus Server는 기동시 <code>/etc/prometheus/prometheus.yml</code> 설정 파일을 사용한다. docker volume mount를 이용해 Prometheus Server에서 사용할 설정 <code>prometheus.yml</code> 파일을 만들어보자.<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">global:</span></span><br><span class="line"><span class="attr">  scrape_interval:</span> <span class="number">10</span><span class="string">s</span> <span class="comment"># 10초 마다 Metric을 Pulling</span></span><br><span class="line"><span class="attr">  evaluation_interval:</span> <span class="number">10</span><span class="string">s</span></span><br><span class="line"><span class="attr">scrape_configs:</span></span><br><span class="line"><span class="attr">  - job_name:</span> <span class="string">'spring-boot-app'</span></span><br><span class="line"><span class="attr">    metrics_path:</span> <span class="string">'/actuator/prometheus'</span> <span class="comment"># Application prometheus endpoint</span></span><br><span class="line"><span class="attr">    static_configs:</span></span><br><span class="line"><span class="attr">      - targets:</span> <span class="string">['host.docker.internal:8080']</span> <span class="comment"># Application host:port</span></span><br></pre></td></tr></table></figure></p>
 <blockquote>
 <p>docker에서 <code>host.docker.internal</code>은 특별한 DNS name으로 사용되며 docker를 실행하는 host를 가리킨다. 개발용으로만 사용해야 하며, Docker Desktop(Mac) 외부의 환경에서는 동작하지 않는다.</p>
 </blockquote>
 <p>파일 생성을 완료했다면 prom/prometheus 이미지를 이용해 docker로 prometheus를 실행한다.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">pwd</span></span><br><span class="line">/Users/user/work/prometheus</span><br><span class="line"></span><br><span class="line">$ docker run -p 9090:9090 -v /Users/user/work/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml --name prometheus -d prom/prometheus --config.file=/etc/prometheus/prometheus.yml</span><br></pre></td></tr></table></figure>
-<p>문제 없이 실행되었다면 <a href="http://localhost:9090" rel="external nofollow noopener noreferrer" target="_blank">http://localhost:9090</a> 에 접속해보자. 다음과 같이 Prometheus main 화면을 볼 수 있다.<br>
-<img src="/images/post/2019-12-04/prometheus_main.png" alt="prometheus_main.png"></p>
-<p>docker로 Prometheus를 실행하면서 설정 파일이 잘 적용되었는지도 확인해보자.<br>
-<img src="/images/post/2019-12-04/prometheus_configuration.png" alt="prometheus_configuration.png"></p>
-<p>Status -&gt; Targets 메뉴에서는 Application의 상태를 확인할 수 있다.<br>
-<img src="/images/post/2019-12-04/prometheus_targets.png" alt="prometheus_targets.png"></p>
-<p>Application의 상태(Status)가 DOWN인 경우에는 Application이 현재 기동중인지, prometheus.yml에서 targets의 값이 제대로 되어있는지 확인이 필요하다.<br>
-<img src="/images/post/2019-12-04/prometheus_targets_2.png" alt="prometheus_targets_2.png"></p>
-<p>여기까지 문제가 없다면 아래와 같이 수집된 metric 중 하나를 선택해 값이 잘 나오는지 확인해보자.<br>
-<img src="/images/post/2019-12-04/prometheus_graph.png" alt="prometheus_graph.png"></p>
-<h1 id="prometheus에서-수집한-metric을-grafana로-시각화하기">Prometheus에서 수집한 metric을 Grafana로 시각화하기</h1>
-<p>Prometheus의 웹 페이지에서 쿼리를 실행해 원하는 metric을 그래프로 시각화할 수 있다. 하지만 매번 모니터링을 위해 수동으로 쿼리를 실행하는 것은 비효율적이고 기본적으로 제공하는 대시보드 또한 간단하게 그래프를 볼 수 있는 정도이다.<br>
-<strong>Prometheus가 제공하는 것만으로는 시각화하는데 한계가 있기 때문에 보통 별도의 시각화 도구를 이용해서 metric들을 모니터링한다.</strong></p>
+<p>문제 없이 실행되었다면 <a href="http://localhost:9090" rel="external nofollow noopener noreferrer" target="_blank">http://localhost:9090</a> 에 접속해보자. 다음과 같이 Prometheus main 화면을 볼 수 있다.<br><img src="/images/post/2019-12-04/prometheus_main.png" alt="prometheus_main.png"></p>
+<p>docker로 Prometheus를 실행하면서 설정 파일이 잘 적용되었는지도 확인해보자.<br><img src="/images/post/2019-12-04/prometheus_configuration.png" alt="prometheus_configuration.png"></p>
+<p>Status -&gt; Targets 메뉴에서는 Application의 상태를 확인할 수 있다.<br><img src="/images/post/2019-12-04/prometheus_targets.png" alt="prometheus_targets.png"></p>
+<p>Application의 상태(Status)가 DOWN인 경우에는 Application이 현재 기동중인지, prometheus.yml에서 targets의 값이 제대로 되어있는지 확인이 필요하다.<br><img src="/images/post/2019-12-04/prometheus_targets_2.png" alt="prometheus_targets_2.png"></p>
+<p>여기까지 문제가 없다면 아래와 같이 수집된 metric 중 하나를 선택해 값이 잘 나오는지 확인해보자.<br><img src="/images/post/2019-12-04/prometheus_graph.png" alt="prometheus_graph.png"></p>
+<h1 id="prometheus에서-수집한-metric을-grafana로-시각화하기"><a href="#Prometheus에서-수집한-metric을-Grafana로-시각화하기" class="headerlink" title="Prometheus에서 수집한 metric을 Grafana로 시각화하기"></a>Prometheus에서 수집한 metric을 Grafana로 시각화하기</h1><p>Prometheus의 웹 페이지에서 쿼리를 실행해 원하는 metric을 그래프로 시각화할 수 있다. 하지만 매번 모니터링을 위해 수동으로 쿼리를 실행하는 것은 비효율적이고 기본적으로 제공하는 대시보드 또한 간단하게 그래프를 볼 수 있는 정도이다.<br><strong>Prometheus가 제공하는 것만으로는 시각화하는데 한계가 있기 때문에 보통 별도의 시각화 도구를 이용해서 metric들을 모니터링한다.</strong></p>
 <p>이번에는 별도의 시각화 도구로 Grafana를 사용해보자. 역시나 docker(<a href="https://hub.docker.com/r/grafana/grafana/" rel="external nofollow noopener noreferrer" target="_blank">grafana/grafana</a>)를 사용한다.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -d --name=grafana -p 3000:3000 grafana/grafana</span><br></pre></td></tr></table></figure>
-<p>실행 후 <a href="http://localhost:3000" rel="external nofollow noopener noreferrer" target="_blank">http://localhost:3000</a> 에 접속해보자. 다음과 같이 Grafana login 화면을 볼 수 있다.<br>
-기본 설정된 ID/PW인 <code>admin/admin</code> 으로 로그인할 수 있다.<br>
-<img src="/images/post/2019-12-04/grafana_login.png" alt="grafana_login.png"></p>
-<p>Home Dashboard에서 <code>Add data source</code>를 클릭해 Data Source 추가하자.<br>
-<img src="/images/post/2019-12-04/grafana_add_datasource.png" alt="grafana_add_datasource.png"></p>
-<p>Grafana에서 시각화할 데이터로서 Prometheus에 수집되고 있는 metric을 사용할 것이기 때문에 Prometheus를 선택한다.<br>
-<img src="/images/post/2019-12-04/grafana_add_datasource_2.png" alt="grafana_add_datasource_2.png"></p>
-<p>Name과 URL(Prometheus Server)을 설정하고 Save &amp; Test를 클릭한다.<br>
-<img src="/images/post/2019-12-04/grafana_add_datasource_3.png" alt="grafana_add_datasource_3.png"></p>
-<p>Prometheus가 Data Source로 추가되었다.<br>
-<img src="/images/post/2019-12-04/grafana_add_datasource_4.png" alt="grafana_add_datasource_4.png"></p>
-<p>다음으로는 Data Source를 이용해 Dashboard를 생성해보자.<br>
-<img src="/images/post/2019-12-04/grafana_new_dashboard.png" alt="grafana_new_dashboard.png"></p>
-<p>그래프를 이용해볼 것이기 때문에 <code>Choose Visualization</code>을 클릭한다.<br>
-<img src="/images/post/2019-12-04/grafana_new_dashboard_2.png" alt="grafana_new_dashboard_2.png"></p>
-<p>Metrics로 이전에 Prometheus에서도 확인해보았던 jvm_memoruy_used_bytes를 선택한다.<br>
-<img src="/images/post/2019-12-04/grafana_new_dashboard_3.png" alt="grafana_new_dashboard_3.png"></p>
-<p>작업한 Dashboard를 저장한다.<br>
-<img src="/images/post/2019-12-04/grafana_new_dashboard_4.png" alt="grafana_new_dashboard_4.png"></p>
-<p>추가된 Dashboard를 확인할 수 있다.<br>
-<img src="/images/post/2019-12-04/grafana_new_dashboard_5.png" alt="grafana_new_dashboard_5.png"></p>
-<p>Spring Boot Application에서 생성하는 metric을 Prometheus를 통해 수집하고, Grafana로 시각화하는 것까지 마무리했다.<br>
-실제로는 애플리케이션에서 기본적으로 제공하는 Metric 뿐만 아니라 Micrometer를 이용해 직접 필요한 Metric을 추가할 수도 있다.<br>
-또한 Grafana에는 소개하지 않은 더 많은 유용한 기능들이 있다. 필요한 기능은 문서를 통해 찾아가며 사용해보자.</p>
+<p>실행 후 <a href="http://localhost:3000" rel="external nofollow noopener noreferrer" target="_blank">http://localhost:3000</a> 에 접속해보자. 다음과 같이 Grafana login 화면을 볼 수 있다.<br>기본 설정된 ID/PW인 <code>admin/admin</code> 으로 로그인할 수 있다.<br><img src="/images/post/2019-12-04/grafana_login.png" alt="grafana_login.png"></p>
+<p>Home Dashboard에서 <code>Add data source</code>를 클릭해 Data Source 추가하자.<br><img src="/images/post/2019-12-04/grafana_add_datasource.png" alt="grafana_add_datasource.png"></p>
+<p>Grafana에서 시각화할 데이터로서 Prometheus에 수집되고 있는 metric을 사용할 것이기 때문에 Prometheus를 선택한다.<br><img src="/images/post/2019-12-04/grafana_add_datasource_2.png" alt="grafana_add_datasource_2.png"></p>
+<p>Name과 URL(Prometheus Server)을 설정하고 Save &amp; Test를 클릭한다.<br><img src="/images/post/2019-12-04/grafana_add_datasource_3.png" alt="grafana_add_datasource_3.png"></p>
+<p>Prometheus가 Data Source로 추가되었다.<br><img src="/images/post/2019-12-04/grafana_add_datasource_4.png" alt="grafana_add_datasource_4.png"></p>
+<p>다음으로는 Data Source를 이용해 Dashboard를 생성해보자.<br><img src="/images/post/2019-12-04/grafana_new_dashboard.png" alt="grafana_new_dashboard.png"></p>
+<p>그래프를 이용해볼 것이기 때문에 <code>Choose Visualization</code>을 클릭한다.<br><img src="/images/post/2019-12-04/grafana_new_dashboard_2.png" alt="grafana_new_dashboard_2.png"></p>
+<p>Metrics로 이전에 Prometheus에서도 확인해보았던 jvm_memoruy_used_bytes를 선택한다.<br><img src="/images/post/2019-12-04/grafana_new_dashboard_3.png" alt="grafana_new_dashboard_3.png"></p>
+<p>작업한 Dashboard를 저장한다.<br><img src="/images/post/2019-12-04/grafana_new_dashboard_4.png" alt="grafana_new_dashboard_4.png"></p>
+<p>추가된 Dashboard를 확인할 수 있다.<br><img src="/images/post/2019-12-04/grafana_new_dashboard_5.png" alt="grafana_new_dashboard_5.png"></p>
+<p>Spring Boot Application에서 생성하는 metric을 Prometheus를 통해 수집하고, Grafana로 시각화하는 것까지 마무리했다.<br>실제로는 애플리케이션에서 기본적으로 제공하는 Metric 뿐만 아니라 Micrometer를 이용해 직접 필요한 Metric을 추가할 수도 있다.<br>또한 Grafana에는 소개하지 않은 더 많은 유용한 기능들이 있다. 필요한 기능은 문서를 통해 찾아가며 사용해보자.</p>
 
-                
-
-                <hr>
-                <!-- Pager -->
-                <ul class="pager">
-                    
-                        <li class="previous">
-                            <a href="/2019/12/05/Java/nosuchmethod/" data-toggle="tooltip" data-placement="top" title="NoSuchMethodException & NoSuchMethodError 해결하기">&larr; Previous Post</a>
-                        </li>
-                    
-                    
-                        <li class="next">
-                            <a href="/2019/12/03/Spring/micrometer/" data-toggle="tooltip" data-placement="top" title="Micrometer">Next Post &rarr;</a>
-                        </li>
-                    
-                </ul>
-
-                <!-- duoshuo Share start -->
-                
-                <!-- 多说 Share end-->
-
-                <center>
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-</center>
-
-                <!-- 多说评论框 start -->
-                
-                <!-- 多说评论框 end -->
-
-                <!-- disqus comment start -->
-                
-                    <div class="comment">
-                        <div id="disqus_thread" class="disqus-thread"></div>
-                    </div>
-                
-                <!-- disqus comment end -->
-            </div>
-            
-            <!-- Tabe of Content -->
-            <!-- Table of Contents -->
-
-    
-      <aside id="sidebar">
-        <div id="toc" class="toc-article">
-        <strong class="toc-title">Contents</strong>
-        
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#spring-boot-dependency"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Spring Boot Dependency</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#actuator-endpoint-설정"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Actuator Endpoint 설정</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#prometheus-설치-및-설정"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Prometheus 설치 및 설정</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#prometheus에서-수집한-metric을-grafana로-시각화하기"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">Prometheus에서 수집한 metric을 Grafana로 시각화하기</span></a></li></ol>
-        
         </div>
-      </aside>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/Actuator/">Actuator</a>, <a class="has-link-grey -link" href="/tags/Grafana/">Grafana</a>, <a class="has-link-grey -link" href="/tags/Java/">Java</a>, <a class="has-link-grey -link" href="/tags/Micrometer/">Micrometer</a>, <a class="has-link-grey -link" href="/tags/Prometheus/">Prometheus</a>, <a class="has-link-grey -link" href="/tags/Spring/">Spring</a>, <a class="has-link-grey -link" href="/tags/Spring-Boot/">Spring Boot</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/12/05/Java/nosuchmethod/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">NoSuchMethodException &amp; NoSuchMethodError 해결하기</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/12/03/Spring/micrometer/">
+                <span class="level-item">Micrometer</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">댓글</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://jongmin92.github.io/2019/12/04/Spring/prometheus/';
+        this.page.identifier = '2019/12/04/Spring/prometheus/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'https-jongmin92-github-io' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
     
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
 
-                
-            <!-- Sidebar Container -->
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
 
-                <!-- Featured Tags -->
+<!-- For Google Adsense -->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</div>
                 
-                <section>
-                    <!-- no hr -->
-                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
-                    <div class="tags">
-                       
-                          <a class="tag" href="/tags/#Java" title="Java">Java</a>
-                        
-                          <a class="tag" href="/tags/#Spring" title="Spring">Spring</a>
-                        
-                          <a class="tag" href="/tags/#Spring Boot" title="Spring Boot">Spring Boot</a>
-                        
-                          <a class="tag" href="/tags/#Micrometer" title="Micrometer">Micrometer</a>
-                        
-                          <a class="tag" href="/tags/#Actuator" title="Actuator">Actuator</a>
-                        
-                          <a class="tag" href="/tags/#Prometheus" title="Prometheus">Prometheus</a>
-                        
-                          <a class="tag" href="/tags/#Grafana" title="Grafana">Grafana</a>
-                        
-                    </div>
-                </section>
                 
 
-                <!-- Friends Blog -->
-                
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-3 column-right is-sticky">
+    
+        
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    카탈로그
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#spring-boot-dependency">
+        <span class="has-mr-6">1</span>
+        <span>Spring Boot Dependency</span>
+        </a></li><li>
+        <a class="is-flex" href="#actuator-endpoint-설정">
+        <span class="has-mr-6">2</span>
+        <span>Actuator Endpoint 설정</span>
+        </a></li><li>
+        <a class="is-flex" href="#prometheus-설치-및-설정">
+        <span class="has-mr-6">3</span>
+        <span>Prometheus 설치 및 설정</span>
+        </a></li><li>
+        <a class="is-flex" href="#prometheus에서-수집한-metric을-grafana로-시각화하기">
+        <span class="has-mr-6">4</span>
+        <span>Prometheus에서 수집한 metric을 Grafana로 시각화하기</span>
+        </a></li></ul>
             </div>
         </div>
     </div>
-</article>
 
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                카테고리
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Algorithm/">
+            <span class="level-start">
+                <span class="level-item">Algorithm</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">14</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Algorithm/BOJ/">
+            <span class="level-start">
+                <span class="level-item">BOJ</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Algorithm/Concept/">
+            <span class="level-start">
+                <span class="level-item">Concept</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Book/">
+            <span class="level-start">
+                <span class="level-item">Book</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Database/">
+            <span class="level-start">
+                <span class="level-item">Database</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/">
+            <span class="level-start">
+                <span class="level-item">Programming</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">95</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Programming/AWS/">
+            <span class="level-start">
+                <span class="level-item">AWS</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Git/">
+            <span class="level-start">
+                <span class="level-item">Git</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Gradle/">
+            <span class="level-start">
+                <span class="level-item">Gradle</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/HTML/">
+            <span class="level-start">
+                <span class="level-item">HTML</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Java/">
+            <span class="level-start">
+                <span class="level-item">Java</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">21</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/JavaScript/">
+            <span class="level-start">
+                <span class="level-item">JavaScript</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">15</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Linux-Ubuntu/">
+            <span class="level-start">
+                <span class="level-item">Linux & Ubuntu</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Node/">
+            <span class="level-start">
+                <span class="level-item">Node</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/RaspberryPi/">
+            <span class="level-start">
+                <span class="level-item">RaspberryPi</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/React-Native/">
+            <span class="level-start">
+                <span class="level-item">React Native</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Spring/">
+            <span class="level-start">
+                <span class="level-item">Spring</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">19</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Tool/">
+            <span class="level-start">
+                <span class="level-item">Tool</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Project/">
+            <span class="level-start">
+                <span class="level-item">Project</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Project/Emily/">
+            <span class="level-start">
+                <span class="level-item">Emily</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Tip/">
+            <span class="level-start">
+                <span class="level-item">Tip</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
 
-
-
-<!-- disqus embedded js code start (one page only need to embed once) -->
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = "https-jongmin92-github-io";
-    var disqus_identifier = "https://jongmin92.github.io/2019/12/04/Spring/prometheus/";
-    var disqus_url = "https://jongmin92.github.io/2019/12/04/Spring/prometheus/";
-
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<!-- disqus embedded js code start end -->
-
-
-
-
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
-    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'always',
-          placement: 'left',
-          icon: '#'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-</script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: 0.6em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
-
-
-
-    <!-- Footer -->
-    <!-- Footer -->
-<footer>
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <ul class="list-inline text-center">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
                 
+                    <img src="/images/logo.png" alt="SpringBoot Application의 monitoring 시스템 구축하기" height="28">
                 
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 KimJongMin&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="external nofollow noopener noreferrer">Icarus</a>
                 
-
-                
-
-                
-                    <li>
-                        <a target="_blank" href="https://www.facebook.com/jongmin.kim.7796420" rel="external nofollow noopener noreferrer">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                
-
-                
-                    <li>
-                        <a target="_blank" href="https://github.com/jongmin92" rel="external nofollow noopener noreferrer">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                
-
-                
-
-                </ul>
-                <p class="copyright text-muted">
-                    Copyright &copy; KimJongMin 2020 
-                    <br>
-                    Theme by <a href="http://huangxuan.me" rel="external nofollow noopener noreferrer" target="_blank">Hux</a> 
-                    <span style="display: inline-block; margin: 0 5px;">
-                        <i class="fa fa-heart"></i>
-                    </span> 
-                    re-Ported by <a href="http://beantech.org" rel="external nofollow noopener noreferrer" target="_blank">BeanTech</a> | 
-                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px" src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true">
-                    </iframe>
                 </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
             </div>
         </div>
     </div>
 </footer>
-
-<!-- jQuery -->
-<script src="/js/jquery.min.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="/js/bootstrap.min.js"></script>
-
-<!-- Custom Theme JavaScript -->
-<script src="/js/hux-blog.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("ko");</script>
 
 
-<!-- async load function -->
 <script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
+var IcarusThemeSettings = {
+    site: {
+        url: 'https://jongmin92.github.io',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
     }
+};
 </script>
 
-<!-- 
-     Because of the native support for backtick-style fenced code blocks 
-     right within the Markdown is landed in Github Pages, 
-     From V1.6, There is no need for Highlight.js, 
-     so Huxblog drops it officially.
 
-     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
-     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
--->
-<!--
-    <script>
-        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
-            hljs.initHighlightingOnLoad();
-        })
-    </script>
-    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
--->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
 
 
-<!-- jquery.tagcloud.js -->
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" rel="external nofollow noopener noreferrer" target="_blank">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
 <script>
-    // only load tagcloud.js in tag.html
-    if($('#tag_cloud').length !== 0){
-        async("https://jongmin92.github.io/js/jquery.tagcloud.js",function(){
-            $.fn.tagcloud.defaults = {
-                //size: {start: 1, end: 1, unit: 'em'},
-                color: {start: '#bbbbee', end: '#0085a1'},
-            };
-            $('#tag_cloud a').tagcloud();
-        })
-    }
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
 </script>
 
-<!--fastClick.js -->
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
 <script>
-    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
-        var $nav = document.querySelector("nav");
-        if($nav) FastClick.attach($nav);
-    })
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
 </script>
 
 
-<!-- Google Analytics -->
+<a id="back-to-top" title="Zurück nach oben" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="입력 하세요...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
 <script>
-    // dynamic User by Hux
-    var _gaId = 'UA-90389042-1';
-    var _gaDomain = 'auto';
-
-    // Originial
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', _gaId, _gaDomain);
-    ga('send', 'pageview');
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '포스트',
+                PAGES: '페이지',
+                CATEGORIES: '카테고리',
+                TAGS: '태그',
+                UNTITLED: '(제목없음)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
 </script>
-
-
-
-
-<!-- Baidu Tongji -->
-
-
-
-
-
-
-	<a id="rocket" href="#top" class=""></a>
-	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script>
-    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async></script>
-<!-- Image to hack wechat -->
-<img src="https://jongmin92.github.io/images/etc/icon_wechat.png" width="0" height="0">
-<!-- Migrate from head to bottom, no longer block render and still work -->
-
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
 </body>
-
 </html>
