@@ -141,6 +141,92 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-03-30T18:00:00.000Z">2018-03-31</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Programming/">Programming</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/Programming/Git/">Git</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    5분 읽기 (대략 801 단어)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2018/03/31/Git/pull-request-merge/">PR(Pull Request) merge</a>
+            
+        </h1>
+        <div class="content">
+            <h1 id="prpull-request-merge"><a href="#PR-Pull-Request-merge" class="headerlink" title="PR(Pull Request) merge"></a>PR(Pull Request) merge</h1><p>보통 upstream의 repository를 fork한 후, origin에서 feature branch를 만들어 작업한 후 작업이 완료되면 upstream branch에 반영하기 위해 pull request를 요청해 merge 합니다. (upstream repository에 push 권한이 있는 사람이 merge를 완료할 수 있습니다.)</p>
+<p>merge conflict가 없다면 pull request를 GitHub에서 merge 할 수 있습니다. 만약, pull request를 merge 할 때, conflict가 있다거나 merge를 하기전에 테스트를 하고 싶다면 command line을 이용해 local에서 pull request를 check out하고 merge할 수 있습니다.</p>
+<p>만약, upstream branch에 merge를 원하지 않는다면 pull request를 merge 하지 않고 종료(close)할 수도 있습니다.</p>
+<p><strong>pull request를 merge 할 때는 (1)Feature branch의 모든 커밋을 유지하거나 (2)모든 커밋을 단일 커밋으로 squash하거나 (3)각각의 커밋을 rebase해서 pull request를 merge 할 수 있습니다.</strong> 3가지 방법에 대해서 알아보겠습니다.</p>
+<h2 id="merging-a-pull-request-on-github"><a href="#Merging-a-pull-request-on-GitHub" class="headerlink" title="Merging a pull request on GitHub"></a>Merging a pull request on GitHub</h2><p>GitHub repository에서 사용할 수 있는 merge option은 다음과 같습니다.</p>
+<ul>
+<li>Create a merge commit</li>
+<li>Squash and merge</li>
+<li>Rebase and merge</li>
+</ul>
+<h3 id="create-a-merge-commit"><a href="#Create-a-merge-commit" class="headerlink" title="Create a merge commit"></a>Create a merge commit</h3><blockquote>
+<p> All commits from this branch will be added to the base branch via a merge commit.</p>
+</blockquote>
+<p><img src="/images/post/2018-03-31/pr1.png" alt=""></p>
+<p><strong>default 옵션인 <code>Create a merge commit</code> 은 feature branch의 모든 커밋을 base branch에 merge 커밋으로 추가합니다.</strong> 해당 pull request는 <strong>—no-ff</strong> 옵션을 사용해 merge됩니다.</p>
+<blockquote>
+<p><strong>—no-ff</strong></p>
+<p>fast-forward(ff)가 가능하지만 fast-forward를 하지 않고, merge 커밋을 생성합니다.</p>
+</blockquote>
+<h3 id="squash-and-merge"><a href="#Squash-and-merge" class="headerlink" title="Squash and merge"></a>Squash and merge</h3><blockquote>
+<p>The 4 commits from this branch will be combined into one commit in the base branch.</p>
+</blockquote>
+<p><img src="/images/post/2018-03-31/pr2.png" alt=""></p>
+<p><strong><code>Squash and merge</code> 옵션을 선택하면, pull request의 커밋들이 하나의 커밋으로 squash(압축)됩니다.</strong> 즉, topic branch에서 contributor가 작업한 모든 커밋은 하나의 커밋으로 결합되어 base branch로 merge됩니다. 해당 pull request는 <strong>–ff</strong> 옵션을 사용해 merge합니다.</p>
+<blockquote>
+<p><strong>—ff</strong></p>
+<p>fast-forward(ff)로 merge가 된다면, 새로운 merge 커밋을 만들지 않습니다.</p>
+</blockquote>
+<p>Squash and merge는 repository에서 git history를 조금 더 간소화되게 만들 수 있습니다. (Create a merge commit 옵션 과 비교해보면 새로운 merge 커밋이 없습니다.)</p>
+<h3 id="rebase-and-merge"><a href="#Rebase-and-merge" class="headerlink" title="Rebase and merge"></a>Rebase and merge</h3><blockquote>
+<p>The 4 commits from this branch will be released and added to the base branch.</p>
+</blockquote>
+<p><strong><code>Rebase and merge</code> 옵션을 선택하면, pull request의 커밋들을 하나의 커밋으로 병합하지 않고 개별적으로 base branch에 추가됩니다.</strong> 해당 pull request는 <strong>–ff</strong> 옵션을 사용해 merge합니다.</p>
+<blockquote>
+<p>GitHub에서의 Rebase and merge는 git의 rebase와는 조금 다릅니다. GitHub의 Rebase and merge는 항상 committer의 정보를 업데이트하고 새로운 commit SHA를 생성하지만, git의 rebase는 조상 commit 후에 rebase를 할 경우 committer의 정보를 변경하지 않습니다.</p>
+</blockquote>
+<p>만약, conflict로 인해 GitHub에서 자동적으로 Rebase and merge를 할 수 없다면,  local에서 직접 command line을 이용해서 rebase를 하고 merge conflict를 해결해야 합니다. 그 후 pull request의 topic branch에 Force-push를 하면됩니다.</p>
+<h2 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h2><ul>
+<li><a href="https://help.github.com/articles/about-pull-request-merges/" rel="external nofollow noopener noreferrer" target="_blank">About pull request merges</a></li>
+<li><a href="https://help.github.com/articles/merging-a-pull-request/" rel="external nofollow noopener noreferrer" target="_blank">Merging a pull request</a></li>
+</ul>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2018-03-28T15:30:00.000Z">2018-03-29</time>
                 
                 <div class="level-item">
@@ -627,83 +713,6 @@
 
 
 
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-02-17T10:30:00.000Z">2018-02-17</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Programming/">Programming</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/Programming/Spring/">Spring</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    16분 읽기 (대략 2465 단어)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/02/17/Spring/spring-aop/">Spring - AOP</a>
-            
-        </h1>
-        <div class="content">
-            <h1 id="aop의-등장-배경"><a href="#AOP의-등장-배경" class="headerlink" title="AOP의 등장 배경"></a>AOP의 등장 배경</h1><p>몇 년에 걸쳐 객체지향 프로그래밍(Object Oriented Programming, OOP)은 절차적 프로그래밍 방법론을 거의 완벽히 대체하며 프로그래밍 방법론의 새로운 패러다임으로 떠오르게 되었습니다. 객체지향적 방식의 가장 큰 이점 중 하나는 소프트웨어 시스템이 여러 개의 독립된 클래스들의 집합으로 구성된다는 것입니다. 이들 각각의 클래스들은 잘 정의된 고유 작업을 수행하게 되고, 그 역할 또한 명백히 정의되어 있습니다.</p>
-<p>객체지향 어플리케이션에서는 어플리케이션이 목표한 동작을 수행하기 위해 이런 클래스들이 서로 유기적으로 협력합니다. <strong>하지만 시스템의 어떤 기능들은 특정 한 클래스가 도맡아 처리할 수 없습니다. 이들은 시스템 전체에 걸쳐 존재하며 해당 코드들을 여러 클래스들에서 사용합니다.</strong> 이런 현상을 <code>횡단적(cross-cutting)</code>이라 표현합니다. 분산 어플리케이션에서의 동기화(locking) 문제, 예외 처리, 로깅 등이 그 예입니다. 물론 필요한 모든 클래스들에 관련 코드를 집어 넣으면 해결될 문제입니다. 하지만 이런 행위는 각각의 클래스는 잘 정의된(well-defined) 역할만을 수행한다는 기본 원칙에 위배됩니다. 이런 상황이 바로 <code>Aspect Oriented Programming (AOP)</code>가 생겨난 원인이 되었습니다.</p>
-<p>AOP에서는 aspect라는 새로운 프로그램 구조를 정의해 사용합니다. 쉽게 class, interface 등과 같이 특정한 용도의 구조라 생각하면 됩니다. Aspect 내에는 프로그램의 여러 모듈들에 흩어져 있는 기능(하나의 기능이 여러 모듈에 흩어져 있음을 뜻함)을 모아 정의하게 됩니다. <strong>전체적으로, 어플리케이션의 각각의 클래스는 자신에게 주어진 기능만을 수행하고, 추가된 각 <code>aspect</code>들이 횡단적인 행위(기능)들을 모아 처리하며 전체 프로그램을 이루는 형태가 만들어집니다.</strong></p>
-<h1 id="aop가-필요한-사례"><a href="#AOP가-필요한-사례" class="headerlink" title="AOP가 필요한 사례"></a>AOP가 필요한 사례</h1><p>이해를 돕기 위해 어플리케이션의 여러 스레드들이 하나의 데이터를 공유하는 상황을 가정해봅시다. 공유 데이터는 Data라는 객체(Data 클래스의 인스턴스)로 캡슐화되어 있습니다. 서로 다른 여러 클래스의 인스턴스들이 하나의 Data 객체를 사용하고 있으나, 이 공유 데이터에 접근할 수 있는 객체는 한 번에 하나씩이어야만 합니다. 그렇다면 어떤 형태이건 동기화 메커니즘이 도입되어야 할 것입니다. 즉, 어떤 한 객체가 데이터를 사용중이라면 Data 객체는 잠겨(lock)져야 하며, 사용이 끝났을 때 해제(unlock)되어야 합니다. 전통적인 해결책은 공유 데이터를 사용하는 모든 클래스들이 하나의 공통 부모 클래스(“worker” 라 부르겠습니다)로부터 파생되는 형태로 만드는 것입니다. worker 클래스에는 lock()과 unlock() 메소드를 정의하여 작업의 시작과 끝에 이 메소드를 호출토록 하면 됩니다. 하지만 이런 형태는 다음과 문제들을 파생시킵니다.</p>
-<p>공유 데이터를 사용하는 메소드는 상당히 주의해서 작성되어야 합니다. 동기화 코드를 잘못 삽입하면 데드락(dead-lock)이 발생하거나 데이터 영속성이 깨질 수 있습니다. 또한 메소드 내부는 본래의 기능과 관련 없는 동기화 관련 코드들로 더럽혀질 것입니다.<br>Java와 같은 단일 상속 모델에서는 worker를 만든다는 것이 불가능할 수 있습니다. 어떤 클래스들은 이미 다른 클래스들로부터 확장되었을 수도 있기 때문입니다. 이는 특히 클래스 계층 구조 설계가 마무리된 후, 뒤늦게 동기화의 필요성을 깨달았을 때 흔히 발생합니다. 동기화를 신경 쓰지 않은 범용 클래스 라이브러리를 통해 공유 데이터에 접근하려 하는 경우가 한 예가 될 수 있습니다.<br>앞서 가정한 어플리케이션에서 동기화 개념은 다음과 같은 속성들을 갖습니다.</p>
-<ol>
-<li>동기화는 worker 클래스에 할당된 최우선 작업이 아니다.</li>
-<li>동기화 메커니즘은 worker 클래스의 최우선 작업과 독립적이다.</li>
-<li>한 객체에 대한 동기화 관련 코드가 시스템 전체에 횡단적으로 존재한다. 다수의 클래스와 더 많은 수의 메소드들이 이 동기화 메커니즘에 영향 받는다.</li>
-</ol>
-<p>AOP에서는 이런 형태의 문제를 해결하기 위해 새로운 형태의 접근 방법을 제기하고 있습니다. <strong>AOP는 새로 도입된 프로그램 구조를 통해 시스템에 횡단되어 있는 기능들을 정의해 처리하도록 했습니다.</strong> 이 새로운 구조를 <code>aspect</code>라 부릅니다.</p>
-<p>위의 예시에 Lock이라는 aspect를 도입해보겠습니다. Lock aspect에는 다음과 같은 역할이 할당될 것입니다.</p>
-<ol>
-<li>Data 객체를 사용하는 클래스들을 위해 lock 및 unlock 메커니즘을 제공한다(lock(), unlock()).</li>
-<li>Data 객체를 수정하는 모든 메소드들이 수행 전에 lock()을 호출하고, 수행 후에는 unlock()을 호출함을 보장한다.</li>
-<li>이상의 기능을 Data 객체를 사용하는 클래스의 자바 소스를 변경하지 않고 투명하게 수행한다.</li>
-</ol>
-<h1 id="aspect는-또-어떤-일들을-수행할-수-있을까"><a href="#Aspect는-또-어떤-일들을-수행할-수-있을까" class="headerlink" title="Aspect는 또 어떤 일들을 수행할 수 있을까?"></a>Aspect는 또 어떤 일들을 수행할 수 있을까?</h1><p>특정 메소드(ex. 객체 생성 과정 추적) 호출을 로깅할 경우 aspect가 도움이 될 수 있습니다. 기존 방법대로라면 log() 메소드를 만들어 놓은 후, 자바 소스에서 로깅을 원하는 메소드를 찾아 log()를 호출하는 형태를 취해야할 것입니다. 그러나 여기서 AOP를 사용하면 원본 자바 코드를 수정할 필요 없이 원하는 위치에서 원하는 로깅을 수행할 수 있습니다. 이런 작업 모두는 aspect라는 외부 모듈에 의해 수행됩니다.<br>또 다른 예로 예외 처리가 있습니다. Aspect를 이용해 여러 클래스들의 산재된 메소드들에 영향을 주는 catch() 조항(clause)을 정의해 어플리케이션 전체에 걸쳐 지속적이고 일관적으로 예외를 처리할 수 있습니다.</p>
-<h1 id="aop-용어"><a href="#AOP-용어" class="headerlink" title="AOP 용어"></a>AOP 용어</h1><ul>
-<li><strong>JoinPoint</strong> : 메소드 호출이나 특정 예외를 던지는 것과 프로그램이 실행되는 지점을 이야기한다.</li>
-<li><strong>Advice</strong> : Logging과 같은 횡단관심사의 경우 거의 모든 클래스에 분산되어 있는 것을 볼 수 있다. 이와 같은 횡단관심사를 여러 영역에 분산해 구현하는 것이 아니라 한 곳에 모아서 구현하는 것을 Advice라고 한다. 즉, JoinPoint에서 실행되는 코드를 말한다.</li>
-<li><strong>Point-cut</strong> : 횡단관심사에 해당하는 기능을 구현한 부분이 Advice라고 했다. 그렇다면 이렇게 구현되어 있는 Advice를 어떤 패턴을 가지는 클래스와 메소드에 적용할지를 결정하는 것이 Point-cut이다. 즉 해당 Advice가 적용되어야 하는 곳을 가리키는 것이 Point-cut이다. Point-cut은 JoinPoin와 Advice의 중간에 있으면서 처리가 JoinPoint에 이르렀을 때 Advice를 호출할지를 결정한다.</li>
-<li><strong>Aspect</strong> : Aspect는 Advice와 Point-cut을 합쳐서 하나의 Aspect라고 칭한다. Advice와 Point-cut을 이용하여 Logging이라는 관심사를 분리하여 독립적으로 구현할 수 있었다. 이처럼 Advice와 Point-cut을 이용하여 원하는 관심사를 구현하는 것을 하나의 Aspect라고 한다. 지금까지 살펴본 Logging은 Logging Aspect가 될 것이다.</li>
-<li><strong>Introduction</strong> : 실행되고 있는 클래스에 새로운 인터페이스를 추가하여 원래의 Object가 가지고 있는 속성, 행위 이외의 다른 일이 가능하도록 하게 된다.</li>
-</ul>
-<p>Spring AOP의 Advice는 여러개의 Advice를 가집니다. Spring에서 지원하고 있는 Advice는 다음과 같습니다.</p>
-<ul>
-<li><strong>Before advice</strong> : JoinPoint 앞에서 수행되는 Advice. 하지만 JoinPoint를 위한 수행 흐름 처리(execution flow proceeding)를 막기위한 능력(만약 예외를 던지지 않는다면)을 가지지는 않는다.</li>
-<li><strong>After returning advice</strong> : JoinPoint가 완전히 정상 종료한 다음 실행되는 Advice. (메소드가 예외를 던지는것 없이 반환된다면 완성된 후에 수행되는 advice.)</li>
-<li><strong>Around advice</strong> : JoinPoint 앞뒤에서 실행되는 Advice. Around advice는 메소드 호출 전후에 사용자 지정 행위를 수행한다.</li>
-<li><strong>Throws advice</strong> : JoinPoint에서 예외가 발생했을 때 실행되는 Advice. Spring은 강력한 타입의 Throws advice를 제공한다. 그래서 Throwable 나 Exception으로 부터 형변환 할 필요가 없는 관심가는 예외(그리고 하위클래스)를 처리하는 코드를 쓸 수 있다.</li>
-</ul>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
 <!-- For Google Adsense -->
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -782,7 +791,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            123
+                            124
                         </p>
                     </a>
                 </div>
@@ -794,7 +803,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            21
+                            22
                         </p>
                     </a>
                 </div>
@@ -850,6 +859,25 @@
         <h3 class="menu-label">
             최근 글
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/03/31/Java/use-assertthat/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Unit Test에서 AssertThat을 사용하자">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-30T15:44:27.000Z">2020-03-31</time></div>
+                    <a href="/2020/03/31/Java/use-assertthat/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Unit Test에서 AssertThat을 사용하자</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Java/">Java</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -927,25 +955,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/12/07/Gradle/gradle-implementation/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Gradle에서 Dependency Pollution 문제 해결하기">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-07T04:56:00.000Z">2019-12-07</time></div>
-                    <a href="/2019/12/07/Gradle/gradle-implementation/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Gradle에서 Dependency Pollution 문제 해결하기</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Programming/">Programming</a> / <a class="has-link-grey -link" href="/categories/Programming/Gradle/">Gradle</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -993,6 +1002,14 @@
         <a class="level is-marginless" href="/categories/Database/">
             <span class="level-start">
                 <span class="level-item">Database</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Java/">
+            <span class="level-start">
+                <span class="level-item">Java</span>
             </span>
             <span class="level-end">
                 <span class="level-item tag">1</span>
@@ -1270,7 +1287,7 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 
 
-<a id="back-to-top" title="Zurück nach oben" href="javascript:;">
+<a id="back-to-top" title="Back to Top" href="javascript:;">
     <i class="fas fa-chevron-up"></i>
 </a>
 <script src="/js/back-to-top.js" defer></script>
