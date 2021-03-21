@@ -1,721 +1,78 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="utf-8">
-
-<meta name="generator" content="Hexo 3.9.0">
-
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-<title>메모이제이션 (Memoization) - 92Hz</title>
-
-<!-- For SEO -->
-<link rel="canonical" href="https://jongmin92.github.io/2017/06/14/javascript/memoization/">
-
-
-    <meta name="description" content="Index 메모이제이션 이란? 메모이제이션 적용하기 결과 비교 마치며    메모이제이션 이란?자바 스크립트에서 함수는 객체이기 때문에 프로퍼티를 가질 수 있습니다. 그리고 언제든지 함수에 사용자 정의 프로퍼티를 추가할 수도 있습니다. 함수에 프로퍼티를 추가하여 결과(반환 값)을 캐시하면 다음 호출 시점에 복잡한 연산을 반복하지 않을 수 있습니다. 이런 활">
-<meta name="keywords" content="TIL,JavaScript,Memoization,Design Pattern">
-<meta property="og:type" content="article">
-<meta property="og:title" content="메모이제이션 (Memoization)">
-<meta property="og:url" content="https://jongmin92.github.io/2017/06/14/JavaScript/memoization/index.html">
-<meta property="og:site_name" content="92Hz">
-<meta property="og:description" content="Index 메모이제이션 이란? 메모이제이션 적용하기 결과 비교 마치며    메모이제이션 이란?자바 스크립트에서 함수는 객체이기 때문에 프로퍼티를 가질 수 있습니다. 그리고 언제든지 함수에 사용자 정의 프로퍼티를 추가할 수도 있습니다. 함수에 프로퍼티를 추가하여 결과(반환 값)을 캐시하면 다음 호출 시점에 복잡한 연산을 반복하지 않을 수 있습니다. 이런 활">
-<meta property="og:locale" content="ko">
-<meta property="og:image" content="https://jongmin92.github.io/images/og_image.png">
-<meta property="og:updated_time" content="2020-03-20T17:25:54.011Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="메모이제이션 (Memoization)">
-<meta name="twitter:description" content="Index 메모이제이션 이란? 메모이제이션 적용하기 결과 비교 마치며    메모이제이션 이란?자바 스크립트에서 함수는 객체이기 때문에 프로퍼티를 가질 수 있습니다. 그리고 언제든지 함수에 사용자 정의 프로퍼티를 추가할 수도 있습니다. 함수에 프로퍼티를 추가하여 결과(반환 값)을 캐시하면 다음 호출 시점에 복잡한 연산을 반복하지 않을 수 있습니다. 이런 활">
-<meta name="twitter:image" content="https://jongmin92.github.io/images/og_image.png">
-
-
-
-
-
-<link rel="alternative" href="rss2.xml" title="메모이제이션 (Memoization)" type="application/atom+xml">
-
-
-
-<link rel="icon" href="/images/favicon.png">
-
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
-
-
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>메모이제이션 (Memoization) - 92Hz</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="92Hz"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="92Hz"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="Index 메모이제이션 이란? 메모이제이션 적용하기 결과 비교 마치며    ## 메모이제이션 이란?  자바 스크립트에서 함수는 객체이기 때문에 프로퍼티를 가질 수 있습니다. 그리고 언제든지 함수에 사용자 정의 프로퍼티를 추가할 수도 있습니다. 함수에 프로퍼티를 추가하여 결과(반환 값)을 캐시하면 다음 호출 시점에 복잡한 연산을 반복하지 않을 수 있습니다."><meta property="og:type" content="article"><meta property="og:title" content="메모이제이션 (Memoization)"><meta property="og:url" content="https://jongmin92.github.io/2017/06/14/JavaScript/memoization/"><meta property="og:site_name" content="92Hz"><meta property="og:description" content="Index 메모이제이션 이란? 메모이제이션 적용하기 결과 비교 마치며    ## 메모이제이션 이란?  자바 스크립트에서 함수는 객체이기 때문에 프로퍼티를 가질 수 있습니다. 그리고 언제든지 함수에 사용자 정의 프로퍼티를 추가할 수도 있습니다. 함수에 프로퍼티를 추가하여 결과(반환 값)을 캐시하면 다음 호출 시점에 복잡한 연산을 반복하지 않을 수 있습니다."><meta property="og:locale" content="ko_KR"><meta property="og:image" content="https://jongmin92.github.io/images/post/2017-06-14/bg.jpg"><meta property="og:image" content="https://jongmin92.github.io/images/post/2017-06-14/description_1.png"><meta property="og:image" content="https://jongmin92.github.io/images/post/2017-06-14/db-table.png"><meta property="og:image" content="https://jongmin92.github.io/images/post/2017-06-14/result1.png"><meta property="og:image" content="https://jongmin92.github.io/images/post/2017-06-14/result2.png"><meta property="article:published_time" content="2017-06-13T15:00:00.000Z"><meta property="article:modified_time" content="2021-03-21T11:05:41.815Z"><meta property="article:author" content="KimJongMin"><meta property="article:tag" content="TIL"><meta property="article:tag" content="JavaScript"><meta property="article:tag" content="Memoization"><meta property="article:tag" content="Design Pattern"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/images/post/2017-06-14/bg.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://jongmin92.github.io/2017/06/14/JavaScript/memoization/"},"headline":"메모이제이션 (Memoization)","image":["https://jongmin92.github.io/images/post/2017-06-14/bg.jpg","https://jongmin92.github.io/images/post/2017-06-14/description_1.png","https://jongmin92.github.io/images/post/2017-06-14/db-table.png","https://jongmin92.github.io/images/post/2017-06-14/result1.png","https://jongmin92.github.io/images/post/2017-06-14/result2.png"],"datePublished":"2017-06-13T15:00:00.000Z","dateModified":"2021-03-21T11:05:41.815Z","author":{"@type":"Person","name":"KimJongMin"},"description":"Index 메모이제이션 이란? 메모이제이션 적용하기 결과 비교 마치며    ## 메모이제이션 이란?  자바 스크립트에서 함수는 객체이기 때문에 프로퍼티를 가질 수 있습니다. 그리고 언제든지 함수에 사용자 정의 프로퍼티를 추가할 수도 있습니다. 함수에 프로퍼티를 추가하여 결과(반환 값)을 캐시하면 다음 호출 시점에 복잡한 연산을 반복하지 않을 수 있습니다."}</script><link rel="canonical" href="https://jongmin92.github.io/2017/06/14/JavaScript/memoization/"><link rel="alternate" href="/rss2.xml" title="92Hz" type="application/atom+xml"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=UA-90389042-1" async></script><script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
     
-    
-<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
-
-    
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
-
-    
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
-
-    
-    
-    
-    
-<link rel="stylesheet" href="/css/back-to-top.css">
-
-    
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-90389042-1"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'UA-90389042-1');
-</script>
-
-    
-    
-    
-    
-    
-    <link rel="stylesheet" href="/css/progressbar.css">
-<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
-    
-    
-    
-
-
-<link rel="stylesheet" href="/css/style.css">
-</head>
-<body class="is-2-column">
-    <nav class="navbar navbar-main">
-    <div class="container">
-        <div class="navbar-brand is-flex-center">
-            <a class="navbar-item navbar-logo" href="/">
-            
-                <img src="/images/logo.png" alt="메모이제이션 (Memoization)" height="28">
-            
-            </a>
-        </div>
-        <div class="navbar-menu">
-            
-            <div class="navbar-start">
-                
-                <a class="navbar-item" href="/">Home</a>
-                
-                <a class="navbar-item" href="/archives">Archives</a>
-                
-                <a class="navbar-item" href="/categories">Categories</a>
-                
-                <a class="navbar-item" href="/tags">Tags</a>
-                
-                <a class="navbar-item" href="/about">About</a>
-                
-            </div>
-            
-            <div class="navbar-end">
-                
-                    
-                    <a class="navbar-item" target="_blank" rel="external nofollow noopener noreferrer" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
-                        
-                        <i class="fab fa-github"></i>
-                        
-                    </a>
-                    
-                
-                
-                <a class="navbar-item is-hidden-tablet catalogue" title="카탈로그" href="javascript:;">
-                    <i class="fas fa-list-ul"></i>
-                </a>
-                
-                
-                <a class="navbar-item search" title="검색" href="javascript:;">
-                    <i class="fas fa-search"></i>
-                </a>
-                
-            </div>
-        </div>
-    </div>
-</nav>
-    
-    <section class="section">
-        <div class="container">
-            <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main">
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-06-13T15:00:00.000Z">2017-06-14</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Programming/">Programming</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/Programming/JavaScript/">JavaScript</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    12분 읽기 (대략 1728 단어)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                메모이제이션 (Memoization)
-            
-        </h1>
-        <div class="content">
-            <p><img src="/images/post/2017-06-14/bg.jpg" alt=""></p>
-<h2 id="index"><a href="#Index" class="headerlink" title="Index"></a>Index</h2><ol>
+        gtag('config', 'UA-90389042-1');</script><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><meta name="generator" content="Hexo 5.4.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.png" alt="92Hz" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="external nofollow noopener noreferrer" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="카탈로그" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="검색" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time datetime="2017-06-13T15:00:00.000Z" title="6/14/2017, 12:00:00 AM">2017-06-14</time>&nbsp;게시 됨</span><span class="level-item"><time datetime="2021-03-21T11:05:41.815Z" title="3/21/2021, 8:05:41 PM">2021-03-21</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/Programming/">Programming</a><span> / </span><a class="link-muted" href="/categories/Programming/JavaScript/">JavaScript</a></span><span class="level-item">12분안에 읽기 (약 1728 단어)</span></div></div><h1 class="title is-3 is-size-4-mobile">메모이제이션 (Memoization)</h1><div class="content"><p><img src="/images/post/2017-06-14/bg.jpg"></p>
+<h2><span id="index">Index</span></h2><ol>
 <li><a href="#1">메모이제이션 이란?</a></li>
 <li><a href="#2">메모이제이션 적용하기</a></li>
 <li><a href="#3">결과 비교</a></li>
 <li><a href="#4">마치며</a></li>
 </ol>
 <hr>
-<p><span id="1"></span></p>
-<h2 id="메모이제이션-이란"><a href="#메모이제이션-이란" class="headerlink" title="메모이제이션 이란?"></a>메모이제이션 이란?</h2><p>자바 스크립트에서 함수는 객체이기 때문에 프로퍼티를 가질 수 있습니다. 그리고 언제든지 함수에 사용자 정의 프로퍼티를 추가할 수도 있습니다. 함수에 프로퍼티를 추가하여 <strong>결과(반환 값)을 캐시</strong>하면 다음 호출 시점에 복잡한 연산을 반복하지 않을 수 있습니다. 이런 활용 방법을 <strong><code>메모이제이션 패턴</code></strong>이라고 합니다.</p>
+<span id="1">
+## 메모이제이션 이란?
+
+<p>자바 스크립트에서 함수는 객체이기 때문에 프로퍼티를 가질 수 있습니다. 그리고 언제든지 함수에 사용자 정의 프로퍼티를 추가할 수도 있습니다. 함수에 프로퍼티를 추가하여 <strong>결과(반환 값)을 캐시</strong>하면 다음 호출 시점에 복잡한 연산을 반복하지 않을 수 있습니다. 이런 활용 방법을 **<code>메모이제이션 패턴</code>**이라고 합니다.</p>
 <p>다음 코드에서는 myFunc 함수에 cache 프로퍼티를 생성합니다. 이 프로퍼티는 일반적인 프로퍼티처럼 myFunc.cache와 같은 형태로 접근할 수 있습니다. cache 프로퍼티는 함수로 전달된 param 매개변수를 키로 사용해서 계산의 결과를 값으로 가지는 객체(해시)입니다. 결과 값은 필요에 따라 복잡한 데이터 구조로 저장할 수도 있습니다.</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myFunc = <span class="function"><span class="keyword">function</span> (<span class="params">param</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!myFunc.cache[param]) &#123;</span><br><span class="line">        <span class="keyword">var</span> result = &#123;&#125;;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">        <span class="comment">// 비용이 많이 드는 수행 후 result에 결과 저장</span></span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">        myFunc.cache[param] = result;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> myFunc.cache[param];</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 캐시 저장공간</span></span><br><span class="line">myFunc.cache = &#123;&#125;;</span><br></pre></td></tr></table></figure>
+
 <hr>
-<p><span id="2"></span></p>
-<h2 id="메모이제이션-적용하기"><a href="#메모이제이션-적용하기" class="headerlink" title="메모이제이션 적용하기"></a>메모이제이션 적용하기</h2><p>메모이제이션을 공부한 후 현재 진행중인 <a href="https://jongmin92.github.io/2017/03/10/Emily/1-start-emily/">에밀리(개인 프로젝트)</a>에 적용해 보았습니다. 어느 부분에 적용했는지 적용 전과 적용 후 얼마나 효율이 올라갔는지를 알아보겠습니다.</p>
-<h4 id="1-수정할-부분"><a href="#1-수정할-부분" class="headerlink" title="1. 수정할 부분"></a>1. 수정할 부분</h4><p>메모이제이션 패턴을 적용할 코드가 현재 하고 있는 기능은 다음과 같습니다. 사용자의 요청(학생식당, 카페테리아, 사범대식당, 기숙사식당, 교직원식당)에 따라 미리 크롤링 후 DB에 저장되어 있는 데이터(메뉴)를 가져와 응답합니다.<br><img src="/images/post/2017-06-14/description_1.png" alt="카카오톡 플러스친구 자동응답 봇"><br>메모이제이션 패턴을 사용함으로써 얻을 수 있는 이점은 <strong>비용이 많이 드는 결과를 캐싱하고 그 이후에 재사용함으로써 비용을 줄일 수 있다는 것입니다.</strong> 현재 코드에서 비용이 많이 드는 작업은 <strong>DB를 조회</strong>하는 부분입니다. DB에는 다음과 같이 미리 크롤링한 데이터가 날짜별로 저장되어 있습니다.</p>
+<span id="2">
+## 메모이제이션 적용하기
+
+<p>메모이제이션을 공부한 후 현재 진행중인 <a href="https://jongmin92.github.io/2017/03/10/Emily/1-start-emily/">에밀리(개인 프로젝트)</a>에 적용해 보았습니다. 어느 부분에 적용했는지 적용 전과 적용 후 얼마나 효율이 올라갔는지를 알아보겠습니다.</p>
+<h4><span id="1-수정할-부분">1. 수정할 부분</span></h4><p>메모이제이션 패턴을 적용할 코드가 현재 하고 있는 기능은 다음과 같습니다. 사용자의 요청(학생식당, 카페테리아, 사범대식당, 기숙사식당, 교직원식당)에 따라 미리 크롤링 후 DB에 저장되어 있는 데이터(메뉴)를 가져와 응답합니다.<br><img src="/images/post/2017-06-14/description_1.png" alt="카카오톡 플러스친구 자동응답 봇"><br>메모이제이션 패턴을 사용함으로써 얻을 수 있는 이점은 <strong>비용이 많이 드는 결과를 캐싱하고 그 이후에 재사용함으로써 비용을 줄일 수 있다는 것입니다.</strong> 현재 코드에서 비용이 많이 드는 작업은 <strong>DB를 조회</strong>하는 부분입니다. DB에는 다음과 같이 미리 크롤링한 데이터가 날짜별로 저장되어 있습니다.</p>
 <p><img src="/images/post/2017-06-14/db-table.png" alt="DB 메뉴 table"></p>
 <p>사용자의 요청에 따라 해당 날짜의 데이터를 조회한 후 사용자가 요청한 식당에 맞는 데이터를 결과로 반환합니다. 그렇기 때문에 <strong>해당 날짜의 최초 요청이 이루어진 후 그 하루 동안에는 계속해서 DB에 같은 쿼리를 통해 같은 결과</strong>를 얻게 됩니다. 이 부분이 비용이 많이 드는 작업이기 때문에 메모이제이션 패턴을 통해 개선해보았습니다.</p>
-<h4 id="2-메모이제이션-적용-전"><a href="#2-메모이제이션-적용-전" class="headerlink" title="2. 메모이제이션 적용 전"></a>2. 메모이제이션 적용 전</h4><p>먼저 메모이제이션 패턴을 적용하기 전 코드입니다. menuHandler 클래스의 <strong>getMenu</strong> 함수는 menuService를 통해 DB에서 해당 날짜의 식당 메뉴를 가져와 매개변수로 전달받은 식당의 이름을 사용하여 결과로 반환하는 역할을 합니다.</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> dateUtil = <span class="built_in">require</span>(<span class="string">'util/dateUtil'</span>);</span><br><span class="line"><span class="keyword">const</span> menuService = <span class="built_in">require</span>(<span class="string">'services/menuService'</span>);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">menuHandler</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> getMenu(place) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">_s, _f</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> today = <span class="keyword">new</span> <span class="built_in">Date</span>().yyyymmdd();</span><br><span class="line">      <span class="keyword">let</span> menu = <span class="string">''</span>;</span><br><span class="line"></span><br><span class="line">      menuService.show(today)</span><br><span class="line">        .then(<span class="function"><span class="params">menuList</span> =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">if</span> (!menuList) &#123;</span><br><span class="line">            menu = <span class="string">'데이터가 없습니다. 관리자에게 문의해주세요'</span>;</span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">          <span class="keyword">switch</span> (place) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'학생식당'</span>:</span><br><span class="line">              menu = menuList.student.join(<span class="string">'\n\n'</span>);</span><br><span class="line">              <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'카페테리아'</span>:</span><br><span class="line">              menu = menuList.cafeteria.join(<span class="string">'\n\n'</span>);</span><br><span class="line">              <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'사범대식당'</span>:</span><br><span class="line">              menu = menuList.education.join(<span class="string">'\n\n'</span>);</span><br><span class="line">              <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'기숙사식당'</span>:</span><br><span class="line">              menu = menuList.dormitory.join(<span class="string">'\n\n'</span>);</span><br><span class="line">              <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'교직원식당'</span>:</span><br><span class="line">              menu = menuList.staff.join(<span class="string">'\n\n'</span>);</span><br><span class="line">              <span class="keyword">break</span>;</span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">          _s(menu);</span><br><span class="line">        &#125;)</span><br><span class="line">        .catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">          _f(err);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = menuHandler;</span><br></pre></td></tr></table></figure>
-<h4 id="3-메모이제이션-적용-후"><a href="#3-메모이제이션-적용-후" class="headerlink" title="3. 메모이제이션 적용 후"></a>3. 메모이제이션 적용 후</h4><p>메모이제이션 패턴을 적용 한 후 코드입니다. <strong>setCache, getCache, pickMenu</strong> 함수가 추가되었고, getMenu 함수의 코드도 조금 변경되었습니다. 기존 코드의 getMenu 함수에서는 바로 DB를 조회하여 결과를 반환하였지만, 변경된 코드에서는 <strong>getCache</strong> 함수를 통해 캐시에 저장된 데이터가 있는지 확인 후 분기하여 처리합니다.</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> dateUtil = <span class="built_in">require</span>(<span class="string">'util/dateUtil'</span>);</span><br><span class="line"><span class="keyword">const</span> menuService = <span class="built_in">require</span>(<span class="string">'services/menuService'</span>);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">menuHandler</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> setCache(param, menuList) &#123;</span><br><span class="line">    menuHandler.cache[param] = menuList;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> getCache(param) &#123;</span><br><span class="line">    <span class="keyword">if</span> (menuHandler.cache[param]) &#123;</span><br><span class="line">      <span class="keyword">return</span> menuHandler.cache[param];</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> pickMenu(menuList, place) &#123;</span><br><span class="line">    <span class="keyword">let</span> menu = <span class="string">''</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">switch</span> (place) &#123;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">'학생식당'</span>:</span><br><span class="line">        menu = menuList.student.join(<span class="string">'\n\n'</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">'카페테리아'</span>:</span><br><span class="line">        menu = menuList.cafeteria.join(<span class="string">'\n\n'</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">'사범대식당'</span>:</span><br><span class="line">        menu = menuList.education.join(<span class="string">'\n\n'</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">'기숙사식당'</span>:</span><br><span class="line">        menu = menuList.dormitory.join(<span class="string">'\n\n'</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">'교직원식당'</span>:</span><br><span class="line">        menu = menuList.staff.join(<span class="string">'\n\n'</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> menu;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> getMenu(place) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">_s, _f</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> today = <span class="keyword">new</span> <span class="built_in">Date</span>().yyyymmdd();</span><br><span class="line">      <span class="keyword">const</span> cachedMenuList = <span class="keyword">this</span>.getCache(today);</span><br><span class="line">      <span class="keyword">let</span> menu = <span class="string">''</span>;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (cachedMenuList) &#123;</span><br><span class="line">        menu = <span class="keyword">this</span>.pickMenu(cachedMenuList, place);</span><br><span class="line">        _s(menu);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        menuService.show(today)</span><br><span class="line">          .then(<span class="function"><span class="params">menuList</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (!menuList) &#123;</span><br><span class="line">              menu = <span class="string">'데이터가 없습니다. 관리자에게 문의해주세요'</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">this</span>.setCache(today, menuList);</span><br><span class="line"></span><br><span class="line">            menu = <span class="keyword">this</span>.pickMenu(menuList, place);</span><br><span class="line">            _s(menu);</span><br><span class="line">          &#125;)</span><br><span class="line">          .catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">            _f(err);</span><br><span class="line">          &#125;);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">menuHandler.cache = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = menuHandler;</span><br></pre></td></tr></table></figure>
-<p>Line:70 에서 선언한 menuHandler의 <strong>cache Object</strong>에는 다음과 같이 데이터가 <strong>캐싱</strong>될 것입니다.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">    `2017-06-13`: &#123; ... menuList ...&#125;</span><br><span class="line">    `2017-06-14`: &#123; ... menuList ...&#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4><span id="2-메모이제이션-적용-전">2. 메모이제이션 적용 전</span></h4><p>먼저 메모이제이션 패턴을 적용하기 전 코드입니다. menuHandler 클래스의 <strong>getMenu</strong> 함수는 menuService를 통해 DB에서 해당 날짜의 식당 메뉴를 가져와 매개변수로 전달받은 식당의 이름을 사용하여 결과로 반환하는 역할을 합니다.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> dateUtil = <span class="built_in">require</span>(<span class="string">&#x27;util/dateUtil&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> menuService = <span class="built_in">require</span>(<span class="string">&#x27;services/menuService&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">menuHandler</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> <span class="function"><span class="title">getMenu</span>(<span class="params">place</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">_s, _f</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> today = <span class="keyword">new</span> <span class="built_in">Date</span>().yyyymmdd();</span><br><span class="line">      <span class="keyword">let</span> menu = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line"></span><br><span class="line">      menuService.show(today)</span><br><span class="line">        .then(<span class="function"><span class="params">menuList</span> =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">if</span> (!menuList) &#123;</span><br><span class="line">            menu = <span class="string">&#x27;데이터가 없습니다. 관리자에게 문의해주세요&#x27;</span>;</span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">          <span class="keyword">switch</span> (place) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&#x27;학생식당&#x27;</span>:</span><br><span class="line">              menu = menuList.student.join(<span class="string">&#x27;\n\n&#x27;</span>);</span><br><span class="line">              <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&#x27;카페테리아&#x27;</span>:</span><br><span class="line">              menu = menuList.cafeteria.join(<span class="string">&#x27;\n\n&#x27;</span>);</span><br><span class="line">              <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&#x27;사범대식당&#x27;</span>:</span><br><span class="line">              menu = menuList.education.join(<span class="string">&#x27;\n\n&#x27;</span>);</span><br><span class="line">              <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&#x27;기숙사식당&#x27;</span>:</span><br><span class="line">              menu = menuList.dormitory.join(<span class="string">&#x27;\n\n&#x27;</span>);</span><br><span class="line">              <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&#x27;교직원식당&#x27;</span>:</span><br><span class="line">              menu = menuList.staff.join(<span class="string">&#x27;\n\n&#x27;</span>);</span><br><span class="line">              <span class="keyword">break</span>;</span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">          _s(menu);</span><br><span class="line">        &#125;)</span><br><span class="line">        .catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">          _f(err);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = menuHandler;</span><br></pre></td></tr></table></figure>
+
+<h4><span id="3-메모이제이션-적용-후">3. 메모이제이션 적용 후</span></h4><p>메모이제이션 패턴을 적용 한 후 코드입니다. <strong>setCache, getCache, pickMenu</strong> 함수가 추가되었고, getMenu 함수의 코드도 조금 변경되었습니다. 기존 코드의 getMenu 함수에서는 바로 DB를 조회하여 결과를 반환하였지만, 변경된 코드에서는 <strong>getCache</strong> 함수를 통해 캐시에 저장된 데이터가 있는지 확인 후 분기하여 처리합니다.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> dateUtil = <span class="built_in">require</span>(<span class="string">&#x27;util/dateUtil&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> menuService = <span class="built_in">require</span>(<span class="string">&#x27;services/menuService&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">menuHandler</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> <span class="function"><span class="title">setCache</span>(<span class="params">param, menuList</span>)</span> &#123;</span><br><span class="line">    menuHandler.cache[param] = menuList;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> <span class="function"><span class="title">getCache</span>(<span class="params">param</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (menuHandler.cache[param]) &#123;</span><br><span class="line">      <span class="keyword">return</span> menuHandler.cache[param];</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> <span class="function"><span class="title">pickMenu</span>(<span class="params">menuList, place</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> menu = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">switch</span> (place) &#123;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">&#x27;학생식당&#x27;</span>:</span><br><span class="line">        menu = menuList.student.join(<span class="string">&#x27;\n\n&#x27;</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">&#x27;카페테리아&#x27;</span>:</span><br><span class="line">        menu = menuList.cafeteria.join(<span class="string">&#x27;\n\n&#x27;</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">&#x27;사범대식당&#x27;</span>:</span><br><span class="line">        menu = menuList.education.join(<span class="string">&#x27;\n\n&#x27;</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">&#x27;기숙사식당&#x27;</span>:</span><br><span class="line">        menu = menuList.dormitory.join(<span class="string">&#x27;\n\n&#x27;</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">&#x27;교직원식당&#x27;</span>:</span><br><span class="line">        menu = menuList.staff.join(<span class="string">&#x27;\n\n&#x27;</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> menu;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> <span class="function"><span class="title">getMenu</span>(<span class="params">place</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">_s, _f</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> today = <span class="keyword">new</span> <span class="built_in">Date</span>().yyyymmdd();</span><br><span class="line">      <span class="keyword">const</span> cachedMenuList = <span class="built_in">this</span>.getCache(today);</span><br><span class="line">      <span class="keyword">let</span> menu = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (cachedMenuList) &#123;</span><br><span class="line">        menu = <span class="built_in">this</span>.pickMenu(cachedMenuList, place);</span><br><span class="line">        _s(menu);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        menuService.show(today)</span><br><span class="line">          .then(<span class="function"><span class="params">menuList</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (!menuList) &#123;</span><br><span class="line">              menu = <span class="string">&#x27;데이터가 없습니다. 관리자에게 문의해주세요&#x27;</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="built_in">this</span>.setCache(today, menuList);</span><br><span class="line"></span><br><span class="line">            menu = <span class="built_in">this</span>.pickMenu(menuList, place);</span><br><span class="line">            _s(menu);</span><br><span class="line">          &#125;)</span><br><span class="line">          .catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">            _f(err);</span><br><span class="line">          &#125;);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">menuHandler.cache = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = menuHandler;</span><br></pre></td></tr></table></figure>
+
+<p>Line:70 에서 선언한 menuHandler의 <strong>cache Object</strong>에는 다음과 같이 데이터가 <strong>캐싱</strong>될 것입니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">    &#96;2017-06-13&#96;: &#123; ... menuList ...&#125;</span><br><span class="line">    &#96;2017-06-14&#96;: &#123; ... menuList ...&#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <hr>
-<p><span id="3"></span></p>
-<h2 id="결과-비교"><a href="#결과-비교" class="headerlink" title="결과 비교"></a>결과 비교</h2><p>메모이제이션 패턴을 적용하기 전과 적용한 후의 성능 차이는 아래 보이는것처럼 눈에 띄게 차이가 납니다. 메모이제이션 패턴을 적용한 코드는 첫번째 요청(캐싱 하기 전)때는 메모이제이션 패턴 적용 전과 응답속도가 비슷하지만 그 이후의 응답은 캐싱된 데이터를 이용하기 때문에 비교될 정도로 빨라졌습니다.</p>
+<span id="3">
+## 결과 비교
+
+<p>메모이제이션 패턴을 적용하기 전과 적용한 후의 성능 차이는 아래 보이는것처럼 눈에 띄게 차이가 납니다. 메모이제이션 패턴을 적용한 코드는 첫번째 요청(캐싱 하기 전)때는 메모이제이션 패턴 적용 전과 응답속도가 비슷하지만 그 이후의 응답은 캐싱된 데이터를 이용하기 때문에 비교될 정도로 빨라졌습니다.</p>
 <p><img src="/images/post/2017-06-14/result1.png" alt="메모이제이션 적용 전"></p>
 <p><img src="/images/post/2017-06-14/result2.png" alt="메모이제이션 적용 후"></p>
 <hr>
-<p><span id="4"></span></p>
-<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>메모이제이션을 적용하기 전과 후 모두 같은 기능을 결과를 만들어내는 코드이지만 코드를 작성하는 방법에 따라 더욱 더 빠른 효율적인 서비스를 만들 수 있다는 것을 느끼게 되었습니다.<br>현재 제 상황에서는 캐싱된 데이터도 하루가 지나게되면 쓰이지 않고 계속 메모리에 남아있게 되는데 그 부분에 대한 처리를 추가해야할것 같습니다. 이번에 적용한 코드 뿐만 아니라 아직 프로잭트 내에 메모이제이션 패턴을 적용할 수 있는 부분이 더 있습니다. 앞으로 디자인패턴 공부를 계속하여 새로운 패턴들을 적용시키며 리팩토링을 해야겠습니다.</p>
+<span id="4">
+## 마치며
 
-        </div>
-        
-        <div class="level is-size-7 is-uppercase">
-            <div class="level-start">
-                <div class="level-item">
-                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/Design-Pattern/">Design Pattern</a>, <a class="has-link-grey -link" href="/tags/JavaScript/">JavaScript</a>, <a class="has-link-grey -link" href="/tags/Memoization/">Memoization</a>, <a class="has-link-grey -link" href="/tags/TIL/">TIL</a>
-                </div>
-            </div>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-<div class="card card-transparent">
-    <div class="level post-navigation is-flex-wrap is-mobile">
-        
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2017/06/18/JavaScript/class/">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">ES6 Class 파헤치기</span>
-            </a>
-        </div>
-        
-        
-        <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2017/06/10/JavaScript/promise/">
-                <span class="level-item">다시 공부하는 Promise</span>
-                <i class="level-item fas fa-chevron-right"></i>
-            </a>
-        </div>
-        
-    </div>
-</div>
-
-
-
-<div class="card">
-    <div class="card-content">
-        <h3 class="title is-5 has-text-weight-normal">댓글</h3>
-        
-<script>
-    var disqus_config = function () {
-        this.page.url = 'https://jongmin92.github.io/2017/06/14/JavaScript/memoization/';
-        this.page.identifier = '2017/06/14/JavaScript/memoization/';
-    };
-    (function() {
-        var d = document, s = d.createElement('script');  
-        s.src = '//' + 'https-jongmin92-github-io' + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-
-<div id="disqus_thread">
-    
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-    </div>
-</div>
-
-
-<!-- For Google Adsense -->
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
-<script>
-  (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
-</div>
-                
-                
-
-
-
-
-<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-3 column-right is-sticky">
-    
-        
-
-    <div class="card widget" id="toc">
-        <div class="card-content">
-            <div class="menu">
-                <h3 class="menu-label">
-                    카탈로그
-                </h3>
-                <ul class="menu-list"><li>
-        <a class="is-flex" href="#index">
-        <span class="has-mr-6">1</span>
-        <span>Index</span>
-        </a></li><li>
-        <a class="is-flex" href="#메모이제이션-이란">
-        <span class="has-mr-6">2</span>
-        <span>메모이제이션 이란?</span>
-        </a></li><li>
-        <a class="is-flex" href="#메모이제이션-적용하기">
-        <span class="has-mr-6">3</span>
-        <span>메모이제이션 적용하기</span>
-        </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#1-수정할-부분">
-        <span class="has-mr-6">3.1</span>
-        <span>1. 수정할 부분</span>
-        </a></li><li>
-        <a class="is-flex" href="#2-메모이제이션-적용-전">
-        <span class="has-mr-6">3.2</span>
-        <span>2. 메모이제이션 적용 전</span>
-        </a></li><li>
-        <a class="is-flex" href="#3-메모이제이션-적용-후">
-        <span class="has-mr-6">3.3</span>
-        <span>3. 메모이제이션 적용 후</span>
-        </a></li></ul></li><li>
-        <a class="is-flex" href="#결과-비교">
-        <span class="has-mr-6">4</span>
-        <span>결과 비교</span>
-        </a></li><li>
-        <a class="is-flex" href="#마치며">
-        <span class="has-mr-6">5</span>
-        <span>마치며</span>
-        </a></li></ul>
-            </div>
-        </div>
-    </div>
-
-    
-        
-<div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-            <h3 class="menu-label">
-                카테고리
-            </h3>
-            <ul class="menu-list">
-            <li>
-        <a class="level is-marginless" href="/categories/Algorithm/">
-            <span class="level-start">
-                <span class="level-item">Algorithm</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">14</span>
-            </span>
-        </a><ul><li>
-        <a class="level is-marginless" href="/categories/Algorithm/BOJ/">
-            <span class="level-start">
-                <span class="level-item">BOJ</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">6</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Algorithm/Concept/">
-            <span class="level-start">
-                <span class="level-item">Concept</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">8</span>
-            </span>
-        </a></li></ul></li><li>
-        <a class="level is-marginless" href="/categories/Book/">
-            <span class="level-start">
-                <span class="level-item">Book</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">3</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Database/">
-            <span class="level-start">
-                <span class="level-item">Database</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Java/">
-            <span class="level-start">
-                <span class="level-item">Java</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Kotlin/">
-            <span class="level-start">
-                <span class="level-item">Kotlin</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Programming/">
-            <span class="level-start">
-                <span class="level-item">Programming</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">95</span>
-            </span>
-        </a><ul><li>
-        <a class="level is-marginless" href="/categories/Programming/AWS/">
-            <span class="level-start">
-                <span class="level-item">AWS</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Programming/Git/">
-            <span class="level-start">
-                <span class="level-item">Git</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Programming/Gradle/">
-            <span class="level-start">
-                <span class="level-item">Gradle</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">2</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Programming/HTML/">
-            <span class="level-start">
-                <span class="level-item">HTML</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Programming/Java/">
-            <span class="level-start">
-                <span class="level-item">Java</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">21</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Programming/JavaScript/">
-            <span class="level-start">
-                <span class="level-item">JavaScript</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">15</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Programming/Linux-Ubuntu/">
-            <span class="level-start">
-                <span class="level-item">Linux & Ubuntu</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">5</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Programming/Node/">
-            <span class="level-start">
-                <span class="level-item">Node</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">5</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Programming/RaspberryPi/">
-            <span class="level-start">
-                <span class="level-item">RaspberryPi</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">8</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Programming/React-Native/">
-            <span class="level-start">
-                <span class="level-item">React Native</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">4</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Programming/Spring/">
-            <span class="level-start">
-                <span class="level-item">Spring</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">19</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Programming/Tool/">
-            <span class="level-start">
-                <span class="level-item">Tool</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">4</span>
-            </span>
-        </a></li></ul></li><li>
-        <a class="level is-marginless" href="/categories/Project/">
-            <span class="level-start">
-                <span class="level-item">Project</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">6</span>
-            </span>
-        </a><ul><li>
-        <a class="level is-marginless" href="/categories/Project/Emily/">
-            <span class="level-start">
-                <span class="level-item">Emily</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">6</span>
-            </span>
-        </a></li></ul></li><li>
-        <a class="level is-marginless" href="/categories/Tip/">
-            <span class="level-start">
-                <span class="level-item">Tip</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">3</span>
-            </span>
-        </a></li>
-            </ul>
-        </div>
-    </div>
-</div>
-    
-    
-</div>
-
-            </div>
-        </div>
-    </section>
-    <footer class="footer">
-    <div class="container">
-        <div class="level">
-            <div class="level-start has-text-centered-mobile">
-                <a class="footer-logo is-block has-mb-6" href="/">
-                
-                    <img src="/images/logo.png" alt="메모이제이션 (Memoization)" height="28">
-                
-                </a>
-                <p class="is-size-7">
-                &copy; 2021 KimJongMin&nbsp;
-                Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="external nofollow noopener noreferrer">Icarus</a>
-                
-                </p>
-            </div>
-            <div class="level-end">
-            
-                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Creative Commons" href="https://creativecommons.org/">
-                        
-                        <i class="fab fa-creative-commons"></i>
-                        
-                    </a>
-                </p>
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
-                        
-                        <i class="fab fa-creative-commons-by"></i>
-                        
-                    </a>
-                </p>
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
-                        
-                        <i class="fab fa-github"></i>
-                        
-                    </a>
-                </p>
-                
-                </div>
-            
-            </div>
-        </div>
-    </div>
-</footer>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
-<script>moment.locale("ko");</script>
-
-
-<script>
-var IcarusThemeSettings = {
-    site: {
-        url: 'https://jongmin92.github.io',
-        external_link: {"enable":true,"exclude":[]}
-    },
-    article: {
-        highlight: {
-            clipboard: true,
-            fold: 'unfolded'
-        }
-    }
-};
-</script>
-
-
-<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
-
-
-
-
-
-<script src="/js/animation.js"></script>
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
-<script src="/js/gallery.js" defer></script>
-
-
-
-<div id="outdated">
-    <h6>Your browser is out-of-date!</h6>
-    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" rel="external nofollow noopener noreferrer" target="_blank">Update
-            my browser now </a></p>
-    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        outdatedBrowser({
-            bgColor: '#f25648',
-            color: '#ffffff',
-            lowerThan: 'flex'
-        });
-    });
-</script>
-
-
-<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    MathJax.Hub.Config({
-        'HTML-CSS': {
-            matchFontHeight: false
-        },
-        SVG: {
-            matchFontHeight: false
-        },
-        CommonHTML: {
-            matchFontHeight: false
-        },
-        tex2jax: {
-            inlineMath: [
-                ['$','$'],
-                ['\\(','\\)']
-            ]
-        }
-    });
-});
-</script>
-
-
-<a id="back-to-top" title="Zurück nach oben" href="javascript:;">
-    <i class="fas fa-chevron-up"></i>
-</a>
-<script src="/js/back-to-top.js" defer></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script src="/js/main.js" defer></script>
-
-    
-    <div class="searchbox ins-search">
-    <div class="searchbox-container ins-search-container">
-        <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="입력 하세요...">
-            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
-        </div>
-        <div class="searchbox-result-wrapper ins-section-wrapper">
-            <div class="ins-section-container"></div>
-        </div>
-    </div>
-</div>
-<script>
-    (function (window) {
-        var INSIGHT_CONFIG = {
-            TRANSLATION: {
-                POSTS: '포스트',
-                PAGES: '페이지',
-                CATEGORIES: '카테고리',
-                TAGS: '태그',
-                UNTITLED: '(제목없음)',
-            },
-            CONTENT_URL: '/content.json',
+<p>메모이제이션을 적용하기 전과 후 모두 같은 기능을 결과를 만들어내는 코드이지만 코드를 작성하는 방법에 따라 더욱 더 빠른 효율적인 서비스를 만들 수 있다는 것을 느끼게 되었습니다.<br>현재 제 상황에서는 캐싱된 데이터도 하루가 지나게되면 쓰이지 않고 계속 메모리에 남아있게 되는데 그 부분에 대한 처리를 추가해야할것 같습니다. 이번에 적용한 코드 뿐만 아니라 아직 프로잭트 내에 메모이제이션 패턴을 적용할 수 있는 부분이 더 있습니다. 앞으로 디자인패턴 공부를 계속하여 새로운 패턴들을 적용시키며 리팩토링을 해야겠습니다.</p>
+</span></span></span></span></div><div class="article-licensing box"><div class="licensing-title"><p>메모이제이션 (Memoization)</p><p><a href="https://jongmin92.github.io/2017/06/14/JavaScript/memoization/">https://jongmin92.github.io/2017/06/14/JavaScript/memoization/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>KimJongMin</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2017-06-14</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2021-03-21</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icon" rel="external nofollow noopener noreferrer" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a class="icon" rel="external nofollow noopener noreferrer" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a><a class="icon" rel="external nofollow noopener noreferrer" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/TIL/">TIL</a><a class="link-muted mr-2" rel="tag" href="/tags/JavaScript/">JavaScript</a><a class="link-muted mr-2" rel="tag" href="/tags/Memoization/">Memoization</a><a class="link-muted mr-2" rel="tag" href="/tags/Design-Pattern/">Design Pattern</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2017/06/18/JavaScript/class/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">ES6 Class 파헤치기</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2017/06/10/JavaScript/promise/"><span class="level-item">다시 공부하는 Promise</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">댓글</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'https://jongmin92.github.io/2017/06/14/JavaScript/memoization/';
+            this.page.identifier = '2017/06/14/JavaScript/memoization/';
         };
-        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-    })(window);
-</script>
-<script src="/js/insight.js" defer></script>
-<link rel="stylesheet" href="/css/search.css">
-<link rel="stylesheet" href="/css/insight.css">
-    
-</body>
-</html>
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'https-jongmin92-github-io' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><!--!--><div class="column column-right is-4-tablet is-4-desktop is-4-widescreen  order-3 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">카탈로그</h3><ul class="menu-list"><li><a class="level is-mobile" href="#"><span class="level-left"><span class="level-item">1</span><span class="level-item">Index</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#2"><span class="level-left"><span class="level-item">1.1</span><span class="level-item">3. 메모이제이션 적용 후</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.png" alt="92Hz" height="28"></a><p class="is-size-7"><span>&copy; 2021 KimJongMin</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="external nofollow noopener noreferrer">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("ko");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="맨 위로" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="입력 하세요..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"입력 하세요...","untitled":"(제목 없음)","posts":"포스트","pages":"페이지","categories":"카테고리","tags":"태그"});
+        });</script></body></html>

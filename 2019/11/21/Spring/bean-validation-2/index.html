@@ -1,184 +1,16 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="utf-8">
-
-<meta name="generator" content="Hexo 3.9.0">
-
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-<title>Spring Boot에서의 Bean Validation (2) - 92Hz</title>
-
-<!-- For SEO -->
-<link rel="canonical" href="https://jongmin92.github.io/2019/11/21/spring/bean-validation-2/">
-
-
-    <meta name="description" content="해당 포스팅에서 사용된 예제 코드는 spring-boot validation example에서 확인 가능합니다.  Custom Validator사용 가능한 constraint 어노테이션이 제공하는 제약 조건 외에 필요한 경우, 직접 만들어서 사용할 수 있다. 이전 포스팅에서 InPutRequest와 InputEntity 클래스에서 정규식(Regular E">
-<meta name="keywords" content="Java,Spring,Spring Boot,Bean Validation">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Spring Boot에서의 Bean Validation (2)">
-<meta property="og:url" content="https://jongmin92.github.io/2019/11/21/Spring/bean-validation-2/index.html">
-<meta property="og:site_name" content="92Hz">
-<meta property="og:description" content="해당 포스팅에서 사용된 예제 코드는 spring-boot validation example에서 확인 가능합니다.  Custom Validator사용 가능한 constraint 어노테이션이 제공하는 제약 조건 외에 필요한 경우, 직접 만들어서 사용할 수 있다. 이전 포스팅에서 InPutRequest와 InputEntity 클래스에서 정규식(Regular E">
-<meta property="og:locale" content="ko">
-<meta property="og:image" content="https://jongmin92.github.io/images/og_image.png">
-<meta property="og:updated_time" content="2020-03-20T17:29:51.525Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Spring Boot에서의 Bean Validation (2)">
-<meta name="twitter:description" content="해당 포스팅에서 사용된 예제 코드는 spring-boot validation example에서 확인 가능합니다.  Custom Validator사용 가능한 constraint 어노테이션이 제공하는 제약 조건 외에 필요한 경우, 직접 만들어서 사용할 수 있다. 이전 포스팅에서 InPutRequest와 InputEntity 클래스에서 정규식(Regular E">
-<meta name="twitter:image" content="https://jongmin92.github.io/images/og_image.png">
-
-
-
-
-
-<link rel="alternative" href="rss2.xml" title="Spring Boot에서의 Bean Validation (2)" type="application/atom+xml">
-
-
-
-<link rel="icon" href="/images/favicon.png">
-
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
-
-
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>Spring Boot에서의 Bean Validation (2) - 92Hz</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="92Hz"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="92Hz"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="해당 포스팅에서 사용된 예제 코드는 spring-boot validation example에서 확인 가능합니다.  Custom Validator사용 가능한 constraint 어노테이션이 제공하는 제약 조건 외에 필요한 경우, 직접 만들어서 사용할 수 있다. 이전 포스팅에서 InPutRequest와 InputEntity 클래스에서 정규식(Regular E"><meta property="og:type" content="article"><meta property="og:title" content="Spring Boot에서의 Bean Validation (2)"><meta property="og:url" content="https://jongmin92.github.io/2019/11/21/Spring/bean-validation-2/"><meta property="og:site_name" content="92Hz"><meta property="og:description" content="해당 포스팅에서 사용된 예제 코드는 spring-boot validation example에서 확인 가능합니다.  Custom Validator사용 가능한 constraint 어노테이션이 제공하는 제약 조건 외에 필요한 경우, 직접 만들어서 사용할 수 있다. 이전 포스팅에서 InPutRequest와 InputEntity 클래스에서 정규식(Regular E"><meta property="og:locale" content="ko_KR"><meta property="og:image" content="https://jongmin92.github.io/img/og_image.png"><meta property="article:published_time" content="2019-11-20T15:44:00.000Z"><meta property="article:modified_time" content="2021-03-21T11:07:53.457Z"><meta property="article:author" content="KimJongMin"><meta property="article:tag" content="Java"><meta property="article:tag" content="Spring"><meta property="article:tag" content="Spring Boot"><meta property="article:tag" content="Bean Validation"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://jongmin92.github.io/2019/11/21/Spring/bean-validation-2/"},"headline":"Spring Boot에서의 Bean Validation (2)","image":["https://jongmin92.github.io/img/og_image.png"],"datePublished":"2019-11-20T15:44:00.000Z","dateModified":"2021-03-21T11:07:53.457Z","author":{"@type":"Person","name":"KimJongMin"},"description":"해당 포스팅에서 사용된 예제 코드는 spring-boot validation example에서 확인 가능합니다.  Custom Validator사용 가능한 constraint 어노테이션이 제공하는 제약 조건 외에 필요한 경우, 직접 만들어서 사용할 수 있다. 이전 포스팅에서 InPutRequest와 InputEntity 클래스에서 정규식(Regular E"}</script><link rel="canonical" href="https://jongmin92.github.io/2019/11/21/Spring/bean-validation-2/"><link rel="alternate" href="/rss2.xml" title="92Hz" type="application/atom+xml"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=UA-90389042-1" async></script><script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
     
-    
-<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
-
-    
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
-
-    
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
-
-    
-    
-    
-    
-<link rel="stylesheet" href="/css/back-to-top.css">
-
-    
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-90389042-1"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'UA-90389042-1');
-</script>
-
-    
-    
-    
-    
-    
-    <link rel="stylesheet" href="/css/progressbar.css">
-<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
-    
-    
-    
-
-
-<link rel="stylesheet" href="/css/style.css">
-</head>
-<body class="is-2-column">
-    <nav class="navbar navbar-main">
-    <div class="container">
-        <div class="navbar-brand is-flex-center">
-            <a class="navbar-item navbar-logo" href="/">
-            
-                <img src="/images/logo.png" alt="Spring Boot에서의 Bean Validation (2)" height="28">
-            
-            </a>
-        </div>
-        <div class="navbar-menu">
-            
-            <div class="navbar-start">
-                
-                <a class="navbar-item" href="/">Home</a>
-                
-                <a class="navbar-item" href="/archives">Archives</a>
-                
-                <a class="navbar-item" href="/categories">Categories</a>
-                
-                <a class="navbar-item" href="/tags">Tags</a>
-                
-                <a class="navbar-item" href="/about">About</a>
-                
-            </div>
-            
-            <div class="navbar-end">
-                
-                    
-                    <a class="navbar-item" target="_blank" rel="external nofollow noopener noreferrer" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
-                        
-                        <i class="fab fa-github"></i>
-                        
-                    </a>
-                    
-                
-                
-                <a class="navbar-item is-hidden-tablet catalogue" title="카탈로그" href="javascript:;">
-                    <i class="fas fa-list-ul"></i>
-                </a>
-                
-                
-                <a class="navbar-item search" title="검색" href="javascript:;">
-                    <i class="fas fa-search"></i>
-                </a>
-                
-            </div>
-        </div>
-    </div>
-</nav>
-    
-    <section class="section">
-        <div class="container">
-            <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main">
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-11-20T15:44:00.000Z">2019-11-21</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Programming/">Programming</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/Programming/Spring/">Spring</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    8분 읽기 (대략 1218 단어)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                Spring Boot에서의 Bean Validation (2)
-            
-        </h1>
-        <div class="content">
-            <blockquote>
-<p>해당 포스팅에서 사용된 예제 코드는 <a href="https://github.com/jongmin92/code-examples/tree/master/spring-boot/validation" rel="external nofollow noopener noreferrer" target="_blank">spring-boot validation example</a>에서 확인 가능합니다.</p>
+        gtag('config', 'UA-90389042-1');</script><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><meta name="generator" content="Hexo 5.4.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.png" alt="92Hz" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="external nofollow noopener noreferrer" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="카탈로그" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="검색" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time datetime="2019-11-20T15:44:00.000Z" title="11/21/2019, 12:44:00 AM">2019-11-21</time>&nbsp;게시 됨</span><span class="level-item"><time datetime="2021-03-21T11:07:53.457Z" title="3/21/2021, 8:07:53 PM">2021-03-21</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/Programming/">Programming</a><span> / </span><a class="link-muted" href="/categories/Programming/Spring/">Spring</a></span><span class="level-item">8분안에 읽기 (약 1218 단어)</span></div></div><h1 class="title is-3 is-size-4-mobile">Spring Boot에서의 Bean Validation (2)</h1><div class="content"><blockquote>
+<p>해당 포스팅에서 사용된 예제 코드는 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/jongmin92/code-examples/tree/master/spring-boot/validation">spring-boot validation example</a>에서 확인 가능합니다.</p>
 </blockquote>
-<h1 id="custom-validator"><a href="#Custom-Validator" class="headerlink" title="Custom Validator"></a>Custom Validator</h1><p>사용 가능한 <a href="https://docs.jboss.org/hibernate/beanvalidation/spec/2.0/api/javax/validation/constraints/package-summary.html" rel="external nofollow noopener noreferrer" target="_blank">constraint 어노테이션</a>이 제공하는 제약 조건 외에 필요한 경우, 직접 만들어서 사용할 수 있다.</p>
+<h1><span id="custom-validator">Custom Validator</span></h1><p>사용 가능한 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://docs.jboss.org/hibernate/beanvalidation/spec/2.0/api/javax/validation/constraints/package-summary.html">constraint 어노테이션</a>이 제공하는 제약 조건 외에 필요한 경우, 직접 만들어서 사용할 수 있다.</p>
 <p><a href="https://jongmin92.github.io/2019/11/18/Spring/bean-validation-1/">이전 포스팅</a>에서 <code>InPutRequest</code>와 <code>InputEntity</code> 클래스에서 정규식(Regular Expression)을 사용하여 String이 유효한 PinCode 형식(6자리)인지 확인했었다. 이 부분을 별도의 Validator를 구현해 대체해보려고 한다.</p>
 <p>먼저, custom constraint 어노테이션 <code>PinCode</code>를 생성한다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target</span>(&#123; FIELD &#125;)</span><br><span class="line"><span class="meta">@Retention</span>(RUNTIME)</span><br><span class="line"><span class="meta">@Constraint</span>(validatedBy = PinCodeValidator.class)</span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> PinCode &#123;</span><br><span class="line"></span><br><span class="line">    <span class="function">String <span class="title">message</span><span class="params">()</span> <span class="keyword">default</span> "</span>&#123;PinCode.invalid&#125;<span class="string">";</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Class&lt;?&gt;[] groups() default &#123;&#125;;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Class&lt;? extends Payload&gt;[] payload() default &#123;&#125;;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target(&#123; FIELD &#125;)</span></span><br><span class="line"><span class="meta">@Retention(RUNTIME)</span></span><br><span class="line"><span class="meta">@Constraint(validatedBy = PinCodeValidator.class)</span></span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> PinCode &#123;</span><br><span class="line"></span><br><span class="line">    <span class="function">String <span class="title">message</span><span class="params">()</span> <span class="keyword">default</span> &quot;</span>&#123;PinCode.invalid&#125;<span class="string">&quot;;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Class&lt;?&gt;[] groups() default &#123;&#125;;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Class&lt;? extends Payload&gt;[] payload() default &#123;&#125;;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
 <p>custom constraint 어노테이션에는 다음과 같은 것들이 필요하다.</p>
 <ul>
 <li>parameter <code>message</code>: <code>ValidationMessages.properties</code>에서 특정 property key를 가리키는 메시지 (제약 조건 위반시 메시지로 사용된다.)</li>
@@ -187,18 +19,25 @@
 <li><code>@Constraint</code>: <code>ConstraintValidator</code> interface 구현을 나타내는 어노테이션</li>
 </ul>
 <p>PinCode validator는 다음과 같이 구현한다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PinCodeValidator</span> <span class="keyword">implements</span> <span class="title">ConstraintValidator</span>&lt;<span class="title">PinCode</span>, <span class="title">String</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isValid</span><span class="params">(String value, ConstraintValidatorContext context)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> Pattern pattern = Pattern.compile(<span class="string">"^[0-9]&#123;6&#125;$"</span>);</span><br><span class="line">        <span class="keyword">final</span> Matcher matcher = pattern.matcher(value);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> matcher.matches();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PinCodeValidator</span> <span class="keyword">implements</span> <span class="title">ConstraintValidator</span>&lt;<span class="title">PinCode</span>, <span class="title">String</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isValid</span><span class="params">(String value, ConstraintValidatorContext context)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> Pattern pattern = Pattern.compile(<span class="string">&quot;^[0-9]&#123;6&#125;$&quot;</span>);</span><br><span class="line">        <span class="keyword">final</span> Matcher matcher = pattern.matcher(value);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> matcher.matches();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>이제 다른 constraint 어노테이션과 마찬가지로 @PinCode 어노테이션을 사용할 수 있다.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InputEntityWithCustomValidator</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@PinCode</span></span><br><span class="line">    <span class="keyword">private</span> String pinCode;</span><br><span class="line">  </span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="직접-validator를-생성해-validation-하기"><a href="#직접-Validator를-생성해-Validation-하기" class="headerlink" title="직접 Validator를 생성해 Validation 하기"></a>직접 Validator를 생성해 Validation 하기</h1><p>Spring이 지원하는 Bean Validator에 의존하지 않고 직접 Bean Validation을 하고자하는 경우가 있을 수 있다.</p>
+
+
+<h1><span id="직접-validator를-생성해-validation-하기">직접 Validator를 생성해 Validation 하기</span></h1><p>Spring이 지원하는 Bean Validator에 의존하지 않고 직접 Bean Validation을 하고자하는 경우가 있을 수 있다.</p>
 <p>이 경우, 직접 <code>Validator</code>를 생성하고 validation을 할 수 있다. Spring의 지원이 전혀 필요하지 않다는 것이다.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="meta">@RequiredArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DirectlyValidateService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">validateInput</span><span class="params">(InputEntity inputEntity)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> ValidatorFactory factory = Validation.buildDefaultValidatorFactory();</span><br><span class="line">        <span class="keyword">final</span> Validator validator = factory.getValidator();</span><br><span class="line">        <span class="keyword">final</span> Set&lt;ConstraintViolation&lt;InputEntity&gt;&gt; violations = validator.validate(inputEntity);</span><br><span class="line">        <span class="keyword">if</span> (!violations.isEmpty()) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ConstraintViolationException(violations);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>그러나, Spring Boot는 이미 사전에 설정되어 만들어진 <code>Validator</code> 인스턴스를 제공한다. 그렇기 때문에 위와 같이 별도의 Validator 인스턴스를 직접 생성하지 않고 서비스에서 주입받아 사용하면 된다.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="meta">@RequiredArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DirectlyValidateService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Validator validator;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">validateInputWithInjectedValidator</span><span class="params">(InputEntity inputEntity)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> Set&lt;ConstraintViolation&lt;InputEntity&gt;&gt; violations = validator.validate(inputEntity);</span><br><span class="line">        <span class="keyword">if</span> (!violations.isEmpty()) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ConstraintViolationException(violations);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>위의 Service는 Spring에 의해 Bean으로 생성될 때, Validator를 주입받게 된다.</p>
 <p>위의 두 방법이 제대로 동작하는지 확인하기 위해 테스트 코드를 작성해보자.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ExtendWith</span>(SpringExtension.class)</span><br><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DirectlyValidateServiceTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> DirectlyValidateService service;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">whenInputEntityIsInvalid_thenThrowsException</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> InputEntity inputEntity = <span class="keyword">new</span> InputEntity();</span><br><span class="line">        inputEntity.setNumberBetweenOneAndTen(<span class="number">50</span>);</span><br><span class="line">        inputEntity.setNotEmptyString(<span class="string">""</span>);</span><br><span class="line">        inputEntity.setPinCode(<span class="string">"1234"</span>);</span><br><span class="line"></span><br><span class="line">        assertThrows(ConstraintViolationException.class, () -&gt; &#123;</span><br><span class="line">            service.validateInput(inputEntity);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">givenInjectedValidator_whenInputEntityIsInvalid_thenThrowsException</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> InputEntity inputEntity = <span class="keyword">new</span> InputEntity();</span><br><span class="line">        inputEntity.setNumberBetweenOneAndTen(<span class="number">50</span>);</span><br><span class="line">        inputEntity.setNotEmptyString(<span class="string">""</span>);</span><br><span class="line">        inputEntity.setPinCode(<span class="string">"1234"</span>);</span><br><span class="line"></span><br><span class="line">        assertThrows(ConstraintViolationException.class, () -&gt; &#123;</span><br><span class="line">            service.validateInputWithInjectedValidator(inputEntity);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="validation-groups"><a href="#Validation-Groups" class="headerlink" title="Validation Groups"></a>Validation Groups</h1><p>종종 특정 객체(클래스)는 서로 다른 상황에서 공유되어 사용될 수 있다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ExtendWith(SpringExtension.class)</span></span><br><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DirectlyValidateServiceTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> DirectlyValidateService service;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">whenInputEntityIsInvalid_thenThrowsException</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> InputEntity inputEntity = <span class="keyword">new</span> InputEntity();</span><br><span class="line">        inputEntity.setNumberBetweenOneAndTen(<span class="number">50</span>);</span><br><span class="line">        inputEntity.setNotEmptyString(<span class="string">&quot;&quot;</span>);</span><br><span class="line">        inputEntity.setPinCode(<span class="string">&quot;1234&quot;</span>);</span><br><span class="line"></span><br><span class="line">        assertThrows(ConstraintViolationException.class, () -&gt; &#123;</span><br><span class="line">            service.validateInput(inputEntity);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">givenInjectedValidator_whenInputEntityIsInvalid_thenThrowsException</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> InputEntity inputEntity = <span class="keyword">new</span> InputEntity();</span><br><span class="line">        inputEntity.setNumberBetweenOneAndTen(<span class="number">50</span>);</span><br><span class="line">        inputEntity.setNotEmptyString(<span class="string">&quot;&quot;</span>);</span><br><span class="line">        inputEntity.setPinCode(<span class="string">&quot;1234&quot;</span>);</span><br><span class="line"></span><br><span class="line">        assertThrows(ConstraintViolationException.class, () -&gt; &#123;</span><br><span class="line">            service.validateInputWithInjectedValidator(inputEntity);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h1><span id="validation-groups">Validation Groups</span></h1><p>종종 특정 객체(클래스)는 서로 다른 상황에서 공유되어 사용될 수 있다.</p>
 <p>예를 들면, CRUD와 같은 작업에서 “Create”와 “Update”를 수행할 때 같은 객체(클래스)를 사용하는 것이다. 그러나 다음의 경우처럼 서로 다른 상황에서 실행되어야 하는 validation이 있을 수 있다.</p>
 <ul>
 <li>“Create” 상황에서만 Validation</li>
@@ -207,507 +46,45 @@
 </ul>
 <p>위와 같이 Validation 규칙을 구현할 수 있는 Bean Validation 기능을 <code>Validation Groups</code>이라고 부른다.</p>
 <p>이전에 custom constraint 어노테이션을 직접 만들면서 <code>groups</code> 필드가 반드시 있어야 하는것을 보았다. 이를 이용해서 Validation이 실행되어야 하는 특정 validation group을 명시할 수 있다.</p>
-<p>CRUD 예제를 위해 <code>OnCreate</code>와 <code>OnUpdate</code>라는 2개의 marker interface를 정의한다.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">OnCreate</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">OnUpdate</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure></p>
-<p>그 다음 marker interface를 다음과 같은 constraint 어노테이션과 함께 사용할 수 있다.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">InputEntityWithCustomValidator</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Null</span>(groups = OnCreate.class)</span><br><span class="line">  <span class="meta">@NotNull</span>(groups = OnUpdate.class)</span><br><span class="line">  <span class="keyword">private</span> Long id;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>CRUD 예제를 위해 <code>OnCreate</code>와 <code>OnUpdate</code>라는 2개의 marker interface를 정의한다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">OnCreate</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">OnUpdate</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>그 다음 marker interface를 다음과 같은 constraint 어노테이션과 함께 사용할 수 있다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">InputEntityWithCustomValidator</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Null(groups = OnCreate.class)</span></span><br><span class="line">  <span class="meta">@NotNull(groups = OnUpdate.class)</span></span><br><span class="line">  <span class="keyword">private</span> Long id;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>위의 코드는 “Create” 상황에서는 id가 null일 수 있고, “Update” 상황에서는 not null이어야 함을 의미한다.</p>
 <p>Spring은 <code>@Validated</code> 어노테이션을 이용해 validation group을 사용할 수 있도록 지원한다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="meta">@Validated</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ValidateServiceWithGroups</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Validated</span>(OnCreate.class)</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">validateForCreate</span><span class="params">(@Valid InputEntityWithCustomValidator input)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// do something</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Validated</span>(OnUpdate.class)</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">validateForUpdate</span><span class="params">(@Valid InputEntityWithCustomValidator input)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// do something</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="meta">@Validated</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ValidateServiceWithGroups</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Validated(OnCreate.class)</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">validateForCreate</span><span class="params">(<span class="meta">@Valid</span> InputEntityWithCustomValidator input)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// do something</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Validated(OnUpdate.class)</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">validateForUpdate</span><span class="params">(<span class="meta">@Valid</span> InputEntityWithCustomValidator input)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// do something</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p><code>@Validated</code> 어노테이션은 클래스에도 적용되어야 하며, validation group에 의한 Validation을 하기 위해서는 메서드에도 적용되어야 한다.</p>
 <p>제대로 동작하는지 확인하기 위해 테스트 코드를 작성해보자.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ExtendWith</span>(SpringExtension.class)</span><br><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ValidateServiceWithGroupsTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> ValidateServiceWithGroups service;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">whenInputIsInvalidForCreate_thenThrowsException</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        InputEntityWithCustomValidator input = <span class="keyword">new</span> InputEntityWithCustomValidator();</span><br><span class="line">        input.setId(<span class="number">17L</span>);</span><br><span class="line">        input.setNumberBetweenOneAndTen(<span class="number">5</span>);</span><br><span class="line">        input.setNotEmptyString(<span class="string">"not empty"</span>);</span><br><span class="line">        input.setPinCode(<span class="string">"123456"</span>);</span><br><span class="line"></span><br><span class="line">        assertThrows(ConstraintViolationException.class, () -&gt; &#123;</span><br><span class="line">            service.validateForCreate(input);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">whenInputIsInvalidForUpdate_thenThrowsException</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        InputEntityWithCustomValidator input = <span class="keyword">new</span> InputEntityWithCustomValidator();</span><br><span class="line">        input.setId(<span class="keyword">null</span>);</span><br><span class="line">        input.setNumberBetweenOneAndTen(<span class="number">5</span>);</span><br><span class="line">        input.setNotEmptyString(<span class="string">"not empty"</span>);</span><br><span class="line">        input.setPinCode(<span class="string">"123456"</span>);</span><br><span class="line"></span><br><span class="line">        assertThrows(ConstraintViolationException.class, () -&gt; &#123;</span><br><span class="line">            service.validateForUpdate(input);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-        </div>
-        
-        <div class="level is-size-7 is-uppercase">
-            <div class="level-start">
-                <div class="level-item">
-                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/Bean-Validation/">Bean Validation</a>, <a class="has-link-grey -link" href="/tags/Java/">Java</a>, <a class="has-link-grey -link" href="/tags/Spring/">Spring</a>, <a class="has-link-grey -link" href="/tags/Spring-Boot/">Spring Boot</a>
-                </div>
-            </div>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-<div class="card card-transparent">
-    <div class="level post-navigation is-flex-wrap is-mobile">
-        
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/12/03/Spring/micrometer/">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">Micrometer</span>
-            </a>
-        </div>
-        
-        
-        <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2019/11/18/Spring/bean-validation-1/">
-                <span class="level-item">Spring Boot에서의 Bean Validation (1)</span>
-                <i class="level-item fas fa-chevron-right"></i>
-            </a>
-        </div>
-        
-    </div>
-</div>
-
-
-
-<div class="card">
-    <div class="card-content">
-        <h3 class="title is-5 has-text-weight-normal">댓글</h3>
-        
-<script>
-    var disqus_config = function () {
-        this.page.url = 'https://jongmin92.github.io/2019/11/21/Spring/bean-validation-2/';
-        this.page.identifier = '2019/11/21/Spring/bean-validation-2/';
-    };
-    (function() {
-        var d = document, s = d.createElement('script');  
-        s.src = '//' + 'https-jongmin92-github-io' + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-
-<div id="disqus_thread">
-    
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-    </div>
-</div>
-
-
-<!-- For Google Adsense -->
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
-<script>
-  (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
-</div>
-                
-                
-
-
-
-
-<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-3 column-right is-sticky">
-    
-        
-
-    <div class="card widget" id="toc">
-        <div class="card-content">
-            <div class="menu">
-                <h3 class="menu-label">
-                    카탈로그
-                </h3>
-                <ul class="menu-list"><li>
-        <a class="is-flex" href="#custom-validator">
-        <span class="has-mr-6">1</span>
-        <span>Custom Validator</span>
-        </a></li><li>
-        <a class="is-flex" href="#직접-validator를-생성해-validation-하기">
-        <span class="has-mr-6">2</span>
-        <span>직접 Validator를 생성해 Validation 하기</span>
-        </a></li><li>
-        <a class="is-flex" href="#validation-groups">
-        <span class="has-mr-6">3</span>
-        <span>Validation Groups</span>
-        </a></li></ul>
-            </div>
-        </div>
-    </div>
-
-    
-        
-<div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-            <h3 class="menu-label">
-                카테고리
-            </h3>
-            <ul class="menu-list">
-            <li>
-        <a class="level is-marginless" href="/categories/Algorithm/">
-            <span class="level-start">
-                <span class="level-item">Algorithm</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">14</span>
-            </span>
-        </a><ul><li>
-        <a class="level is-marginless" href="/categories/Algorithm/BOJ/">
-            <span class="level-start">
-                <span class="level-item">BOJ</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">6</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Algorithm/Concept/">
-            <span class="level-start">
-                <span class="level-item">Concept</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">8</span>
-            </span>
-        </a></li></ul></li><li>
-        <a class="level is-marginless" href="/categories/Book/">
-            <span class="level-start">
-                <span class="level-item">Book</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">3</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Database/">
-            <span class="level-start">
-                <span class="level-item">Database</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Java/">
-            <span class="level-start">
-                <span class="level-item">Java</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Kotlin/">
-            <span class="level-start">
-                <span class="level-item">Kotlin</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Programming/">
-            <span class="level-start">
-                <span class="level-item">Programming</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">95</span>
-            </span>
-        </a><ul><li>
-        <a class="level is-marginless" href="/categories/Programming/AWS/">
-            <span class="level-start">
-                <span class="level-item">AWS</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Programming/Git/">
-            <span class="level-start">
-                <span class="level-item">Git</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Programming/Gradle/">
-            <span class="level-start">
-                <span class="level-item">Gradle</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">2</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Programming/HTML/">
-            <span class="level-start">
-                <span class="level-item">HTML</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Programming/Java/">
-            <span class="level-start">
-                <span class="level-item">Java</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">21</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Programming/JavaScript/">
-            <span class="level-start">
-                <span class="level-item">JavaScript</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">15</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Programming/Linux-Ubuntu/">
-            <span class="level-start">
-                <span class="level-item">Linux & Ubuntu</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">5</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Programming/Node/">
-            <span class="level-start">
-                <span class="level-item">Node</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">5</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Programming/RaspberryPi/">
-            <span class="level-start">
-                <span class="level-item">RaspberryPi</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">8</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Programming/React-Native/">
-            <span class="level-start">
-                <span class="level-item">React Native</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">4</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Programming/Spring/">
-            <span class="level-start">
-                <span class="level-item">Spring</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">19</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Programming/Tool/">
-            <span class="level-start">
-                <span class="level-item">Tool</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">4</span>
-            </span>
-        </a></li></ul></li><li>
-        <a class="level is-marginless" href="/categories/Project/">
-            <span class="level-start">
-                <span class="level-item">Project</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">6</span>
-            </span>
-        </a><ul><li>
-        <a class="level is-marginless" href="/categories/Project/Emily/">
-            <span class="level-start">
-                <span class="level-item">Emily</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">6</span>
-            </span>
-        </a></li></ul></li><li>
-        <a class="level is-marginless" href="/categories/Tip/">
-            <span class="level-start">
-                <span class="level-item">Tip</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">3</span>
-            </span>
-        </a></li>
-            </ul>
-        </div>
-    </div>
-</div>
-    
-    
-</div>
-
-            </div>
-        </div>
-    </section>
-    <footer class="footer">
-    <div class="container">
-        <div class="level">
-            <div class="level-start has-text-centered-mobile">
-                <a class="footer-logo is-block has-mb-6" href="/">
-                
-                    <img src="/images/logo.png" alt="Spring Boot에서의 Bean Validation (2)" height="28">
-                
-                </a>
-                <p class="is-size-7">
-                &copy; 2021 KimJongMin&nbsp;
-                Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="external nofollow noopener noreferrer">Icarus</a>
-                
-                </p>
-            </div>
-            <div class="level-end">
-            
-                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Creative Commons" href="https://creativecommons.org/">
-                        
-                        <i class="fab fa-creative-commons"></i>
-                        
-                    </a>
-                </p>
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
-                        
-                        <i class="fab fa-creative-commons-by"></i>
-                        
-                    </a>
-                </p>
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
-                        
-                        <i class="fab fa-github"></i>
-                        
-                    </a>
-                </p>
-                
-                </div>
-            
-            </div>
-        </div>
-    </div>
-</footer>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
-<script>moment.locale("ko");</script>
-
-
-<script>
-var IcarusThemeSettings = {
-    site: {
-        url: 'https://jongmin92.github.io',
-        external_link: {"enable":true,"exclude":[]}
-    },
-    article: {
-        highlight: {
-            clipboard: true,
-            fold: 'unfolded'
-        }
-    }
-};
-</script>
-
-
-<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
-
-
-
-
-
-<script src="/js/animation.js"></script>
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
-<script src="/js/gallery.js" defer></script>
-
-
-
-<div id="outdated">
-    <h6>Your browser is out-of-date!</h6>
-    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" rel="external nofollow noopener noreferrer" target="_blank">Update
-            my browser now </a></p>
-    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        outdatedBrowser({
-            bgColor: '#f25648',
-            color: '#ffffff',
-            lowerThan: 'flex'
-        });
-    });
-</script>
-
-
-<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    MathJax.Hub.Config({
-        'HTML-CSS': {
-            matchFontHeight: false
-        },
-        SVG: {
-            matchFontHeight: false
-        },
-        CommonHTML: {
-            matchFontHeight: false
-        },
-        tex2jax: {
-            inlineMath: [
-                ['$','$'],
-                ['\\(','\\)']
-            ]
-        }
-    });
-});
-</script>
-
-
-<a id="back-to-top" title="Zurück nach oben" href="javascript:;">
-    <i class="fas fa-chevron-up"></i>
-</a>
-<script src="/js/back-to-top.js" defer></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script src="/js/main.js" defer></script>
-
-    
-    <div class="searchbox ins-search">
-    <div class="searchbox-container ins-search-container">
-        <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="입력 하세요...">
-            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
-        </div>
-        <div class="searchbox-result-wrapper ins-section-wrapper">
-            <div class="ins-section-container"></div>
-        </div>
-    </div>
-</div>
-<script>
-    (function (window) {
-        var INSIGHT_CONFIG = {
-            TRANSLATION: {
-                POSTS: '포스트',
-                PAGES: '페이지',
-                CATEGORIES: '카테고리',
-                TAGS: '태그',
-                UNTITLED: '(제목없음)',
-            },
-            CONTENT_URL: '/content.json',
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ExtendWith(SpringExtension.class)</span></span><br><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ValidateServiceWithGroupsTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> ValidateServiceWithGroups service;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">whenInputIsInvalidForCreate_thenThrowsException</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        InputEntityWithCustomValidator input = <span class="keyword">new</span> InputEntityWithCustomValidator();</span><br><span class="line">        input.setId(<span class="number">17L</span>);</span><br><span class="line">        input.setNumberBetweenOneAndTen(<span class="number">5</span>);</span><br><span class="line">        input.setNotEmptyString(<span class="string">&quot;not empty&quot;</span>);</span><br><span class="line">        input.setPinCode(<span class="string">&quot;123456&quot;</span>);</span><br><span class="line"></span><br><span class="line">        assertThrows(ConstraintViolationException.class, () -&gt; &#123;</span><br><span class="line">            service.validateForCreate(input);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">whenInputIsInvalidForUpdate_thenThrowsException</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        InputEntityWithCustomValidator input = <span class="keyword">new</span> InputEntityWithCustomValidator();</span><br><span class="line">        input.setId(<span class="keyword">null</span>);</span><br><span class="line">        input.setNumberBetweenOneAndTen(<span class="number">5</span>);</span><br><span class="line">        input.setNotEmptyString(<span class="string">&quot;not empty&quot;</span>);</span><br><span class="line">        input.setPinCode(<span class="string">&quot;123456&quot;</span>);</span><br><span class="line"></span><br><span class="line">        assertThrows(ConstraintViolationException.class, () -&gt; &#123;</span><br><span class="line">            service.validateForUpdate(input);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</div><div class="article-licensing box"><div class="licensing-title"><p>Spring Boot에서의 Bean Validation (2)</p><p><a href="https://jongmin92.github.io/2019/11/21/Spring/bean-validation-2/">https://jongmin92.github.io/2019/11/21/Spring/bean-validation-2/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>KimJongMin</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2019-11-21</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2021-03-21</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icon" rel="external nofollow noopener noreferrer" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a class="icon" rel="external nofollow noopener noreferrer" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a><a class="icon" rel="external nofollow noopener noreferrer" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/Java/">Java</a><a class="link-muted mr-2" rel="tag" href="/tags/Spring/">Spring</a><a class="link-muted mr-2" rel="tag" href="/tags/Spring-Boot/">Spring Boot</a><a class="link-muted mr-2" rel="tag" href="/tags/Bean-Validation/">Bean Validation</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2019/12/03/Spring/micrometer/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">Micrometer</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2019/11/18/Spring/bean-validation-1/"><span class="level-item">Spring Boot에서의 Bean Validation (1)</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">댓글</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'https://jongmin92.github.io/2019/11/21/Spring/bean-validation-2/';
+            this.page.identifier = '2019/11/21/Spring/bean-validation-2/';
         };
-        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-    })(window);
-</script>
-<script src="/js/insight.js" defer></script>
-<link rel="stylesheet" href="/css/search.css">
-<link rel="stylesheet" href="/css/insight.css">
-    
-</body>
-</html>
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'https-jongmin92-github-io' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><!--!--><div class="column column-right is-4-tablet is-4-desktop is-4-widescreen  order-3 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">카탈로그</h3><ul class="menu-list"><li><a class="level is-mobile" href="#"><span class="level-left"><span class="level-item">1</span><span class="level-item">Custom Validator</span></span></a></li><li><a class="level is-mobile" href="#"><span class="level-left"><span class="level-item">2</span><span class="level-item">직접 Validator를 생성해 Validation 하기</span></span></a></li><li><a class="level is-mobile" href="#"><span class="level-left"><span class="level-item">3</span><span class="level-item">Validation Groups</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.png" alt="92Hz" height="28"></a><p class="is-size-7"><span>&copy; 2021 KimJongMin</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="external nofollow noopener noreferrer">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("ko");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="맨 위로" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="입력 하세요..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"입력 하세요...","untitled":"(제목 없음)","posts":"포스트","pages":"페이지","categories":"카테고리","tags":"태그"});
+        });</script></body></html>

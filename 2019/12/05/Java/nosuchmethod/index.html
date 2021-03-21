@@ -1,194 +1,29 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="utf-8">
-
-<meta name="generator" content="Hexo 3.9.0">
-
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-<title>NoSuchMethodException &amp; NoSuchMethodError 해결하기 - 92Hz</title>
-
-<!-- For SEO -->
-<link rel="canonical" href="https://jongmin92.github.io/2019/12/05/java/nosuchmethod/">
-
-
-    <meta name="description" content="애플리케이션에서 사용하는 라이브러리의 버전을 업데이트하거나 혹은 새로운 라이브러리를 추가하는 과정에서 종종 NoSuchMethodError을 마주하게 된다.이번에는 NoSuchMethodErrors 대한 내용과 해결하는 방법에 대해서 알아보자.">
-<meta name="keywords" content="Java">
-<meta property="og:type" content="article">
-<meta property="og:title" content="NoSuchMethodException &amp; NoSuchMethodError 해결하기">
-<meta property="og:url" content="https://jongmin92.github.io/2019/12/05/Java/nosuchmethod/index.html">
-<meta property="og:site_name" content="92Hz">
-<meta property="og:description" content="애플리케이션에서 사용하는 라이브러리의 버전을 업데이트하거나 혹은 새로운 라이브러리를 추가하는 과정에서 종종 NoSuchMethodError을 마주하게 된다.이번에는 NoSuchMethodErrors 대한 내용과 해결하는 방법에 대해서 알아보자.">
-<meta property="og:locale" content="ko">
-<meta property="og:image" content="https://jongmin92.github.io/images/og_image.png">
-<meta property="og:updated_time" content="2020-03-20T17:35:14.052Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="NoSuchMethodException &amp; NoSuchMethodError 해결하기">
-<meta name="twitter:description" content="애플리케이션에서 사용하는 라이브러리의 버전을 업데이트하거나 혹은 새로운 라이브러리를 추가하는 과정에서 종종 NoSuchMethodError을 마주하게 된다.이번에는 NoSuchMethodErrors 대한 내용과 해결하는 방법에 대해서 알아보자.">
-<meta name="twitter:image" content="https://jongmin92.github.io/images/og_image.png">
-
-
-
-
-
-<link rel="alternative" href="rss2.xml" title="NoSuchMethodException &amp; NoSuchMethodError 해결하기" type="application/atom+xml">
-
-
-
-<link rel="icon" href="/images/favicon.png">
-
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
-
-
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>NoSuchMethodException &amp; NoSuchMethodError 해결하기 - 92Hz</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="92Hz"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="92Hz"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="애플리케이션에서 사용하는 라이브러리의 버전을 업데이트하거나 혹은 새로운 라이브러리를 추가하는 과정에서 종종 NoSuchMethodError을 마주하게 된다.이번에는 NoSuchMethodErrors 대한 내용과 해결하는 방법에 대해서 알아보자."><meta property="og:type" content="article"><meta property="og:title" content="NoSuchMethodException &amp; NoSuchMethodError 해결하기"><meta property="og:url" content="https://jongmin92.github.io/2019/12/05/Java/nosuchmethod/"><meta property="og:site_name" content="92Hz"><meta property="og:description" content="애플리케이션에서 사용하는 라이브러리의 버전을 업데이트하거나 혹은 새로운 라이브러리를 추가하는 과정에서 종종 NoSuchMethodError을 마주하게 된다.이번에는 NoSuchMethodErrors 대한 내용과 해결하는 방법에 대해서 알아보자."><meta property="og:locale" content="ko_KR"><meta property="og:image" content="https://jongmin92.github.io/images/post/2019-12-05/tomcat_version.png"><meta property="article:published_time" content="2019-12-05T13:43:00.000Z"><meta property="article:modified_time" content="2021-03-21T11:04:53.174Z"><meta property="article:author" content="KimJongMin"><meta property="article:tag" content="Java"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/images/post/2019-12-05/tomcat_version.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://jongmin92.github.io/2019/12/05/Java/nosuchmethod/"},"headline":"NoSuchMethodException & NoSuchMethodError 해결하기","image":["https://jongmin92.github.io/images/post/2019-12-05/tomcat_version.png"],"datePublished":"2019-12-05T13:43:00.000Z","dateModified":"2021-03-21T11:04:53.174Z","author":{"@type":"Person","name":"KimJongMin"},"description":"애플리케이션에서 사용하는 라이브러리의 버전을 업데이트하거나 혹은 새로운 라이브러리를 추가하는 과정에서 종종 NoSuchMethodError을 마주하게 된다.이번에는 NoSuchMethodErrors 대한 내용과 해결하는 방법에 대해서 알아보자."}</script><link rel="canonical" href="https://jongmin92.github.io/2019/12/05/Java/nosuchmethod/"><link rel="alternate" href="/rss2.xml" title="92Hz" type="application/atom+xml"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=UA-90389042-1" async></script><script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
     
-    
-<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
-
-    
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
-
-    
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
-
-    
-    
-    
-    
-<link rel="stylesheet" href="/css/back-to-top.css">
-
-    
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-90389042-1"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'UA-90389042-1');
-</script>
-
-    
-    
-    
-    
-    
-    <link rel="stylesheet" href="/css/progressbar.css">
-<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
-    
-    
-    
+        gtag('config', 'UA-90389042-1');</script><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><meta name="generator" content="Hexo 5.4.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.png" alt="92Hz" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="external nofollow noopener noreferrer" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="카탈로그" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="검색" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time datetime="2019-12-05T13:43:00.000Z" title="12/5/2019, 10:43:00 PM">2019-12-05</time>&nbsp;게시 됨</span><span class="level-item"><time datetime="2021-03-21T11:04:53.174Z" title="3/21/2021, 8:04:53 PM">2021-03-21</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/Programming/">Programming</a><span> / </span><a class="link-muted" href="/categories/Programming/Spring/">Spring</a></span><span class="level-item">15분안에 읽기 (약 2283 단어)</span></div></div><h1 class="title is-3 is-size-4-mobile">NoSuchMethodException &amp; NoSuchMethodError 해결하기</h1><div class="content"><p>애플리케이션에서 사용하는 라이브러리의 버전을 업데이트하거나 혹은 새로운 라이브러리를 추가하는 과정에서 종종 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/NoSuchMethodError.html">NoSuchMethodError</a>을 마주하게 된다.<br>이번에는 NoSuchMethodErrors 대한 내용과 해결하는 방법에 대해서 알아보자.</p>
+<span id="more"></span>
 
 
-<link rel="stylesheet" href="/css/style.css">
-</head>
-<body class="is-2-column">
-    <nav class="navbar navbar-main">
-    <div class="container">
-        <div class="navbar-brand is-flex-center">
-            <a class="navbar-item navbar-logo" href="/">
-            
-                <img src="/images/logo.png" alt="NoSuchMethodException &amp; NoSuchMethodError 해결하기" height="28">
-            
-            </a>
-        </div>
-        <div class="navbar-menu">
-            
-            <div class="navbar-start">
-                
-                <a class="navbar-item" href="/">Home</a>
-                
-                <a class="navbar-item" href="/archives">Archives</a>
-                
-                <a class="navbar-item" href="/categories">Categories</a>
-                
-                <a class="navbar-item" href="/tags">Tags</a>
-                
-                <a class="navbar-item" href="/about">About</a>
-                
-            </div>
-            
-            <div class="navbar-end">
-                
-                    
-                    <a class="navbar-item" target="_blank" rel="external nofollow noopener noreferrer" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
-                        
-                        <i class="fab fa-github"></i>
-                        
-                    </a>
-                    
-                
-                
-                <a class="navbar-item is-hidden-tablet catalogue" title="카탈로그" href="javascript:;">
-                    <i class="fas fa-list-ul"></i>
-                </a>
-                
-                
-                <a class="navbar-item search" title="검색" href="javascript:;">
-                    <i class="fas fa-search"></i>
-                </a>
-                
-            </div>
-        </div>
-    </div>
-</nav>
-    
-    <section class="section">
-        <div class="container">
-            <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main">
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-12-05T13:43:00.000Z">2019-12-05</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Programming/">Programming</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/Programming/Spring/">Spring</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    15분 읽기 (대략 2283 단어)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                NoSuchMethodException &amp; NoSuchMethodError 해결하기
-            
-        </h1>
-        <div class="content">
-            <p>애플리케이션에서 사용하는 라이브러리의 버전을 업데이트하거나 혹은 새로운 라이브러리를 추가하는 과정에서 종종 <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/NoSuchMethodError.html" rel="external nofollow noopener noreferrer" target="_blank">NoSuchMethodError</a>을 마주하게 된다.<br>이번에는 NoSuchMethodErrors 대한 내용과 해결하는 방법에 대해서 알아보자.<br><a id="more"></a></p>
-<h1 id="nosuchmethoderrors"><a href="#NoSuchMethodErrors" class="headerlink" title="NoSuchMethodErrors"></a>NoSuchMethodErrors</h1><p><strong>NoSuchMethodErrors는 런타임(runtime) 시점에 존재하지 않는 메서드(method)를 호출하는 경우에 발생한다.</strong><br>일반적으로 존재하지 않는 메서드를 사용하려는 경우 컴파일(compile) 시점에 컴파일러가 에러를 발생시킨다. 그런데 런타임 시점에 에러가 발생했다는 말은 즉, <strong>컴파일때는 해당 메서드가 존재했지만 런타임 시점에 찾을 수 없었다는 것을 의미한다.</strong></p>
-<h1 id="원인"><a href="#원인" class="headerlink" title="원인"></a>원인</h1><p>NoSuchMethodErrors가 발생하는 일반적인 상황에 대해서 좀 더 알아보자.</p>
-<h2 id="라이브러리-breaking-change"><a href="#라이브러리-Breaking-Change" class="headerlink" title="라이브러리 Breaking Change"></a>라이브러리 Breaking Change</h2><p>NoSuchMethodErrors가 발생하는 원인 중 하나는 애플리케이션에서 사용하는 라이브러리 중 하나가 한 버전에서 다음 버전으로 변경될 때, Breaking Change를 포함하는 경우이다.<br><strong><code>Breaking Change</code>란 라이브러리가 제공하던 API에 변경 사항이 있음을 의미한다. API가 사라진다던가 return type 혹은 parameters가 변경되는 경우들이 있다.</strong></p>
+<h1><span id="nosuchmethoderrors">NoSuchMethodErrors</span></h1><p><strong>NoSuchMethodErrors는 런타임(runtime) 시점에 존재하지 않는 메서드(method)를 호출하는 경우에 발생한다.</strong><br>일반적으로 존재하지 않는 메서드를 사용하려는 경우 컴파일(compile) 시점에 컴파일러가 에러를 발생시킨다. 그런데 런타임 시점에 에러가 발생했다는 말은 즉, <strong>컴파일때는 해당 메서드가 존재했지만 런타임 시점에 찾을 수 없었다는 것을 의미한다.</strong></p>
+<h1><span id="원인">원인</span></h1><p>NoSuchMethodErrors가 발생하는 일반적인 상황에 대해서 좀 더 알아보자.</p>
+<h2><span id="라이브러리-breaking-change">라이브러리 Breaking Change</span></h2><p>NoSuchMethodErrors가 발생하는 원인 중 하나는 애플리케이션에서 사용하는 라이브러리 중 하나가 한 버전에서 다음 버전으로 변경될 때, Breaking Change를 포함하는 경우이다.<br><strong><code>Breaking Change</code>란 라이브러리가 제공하던 API에 변경 사항이 있음을 의미한다. API가 사라진다던가 return type 혹은 parameters가 변경되는 경우들이 있다.</strong></p>
 <p>그러나, 위에서도 이야기한 것처럼 일반적으로 존재하지 않는 메서드를 사용하려는 경우 컴파일 시점에 컴파일러가 에러를 발생시키는데 어떻게 런타임 시점에 에러가 발생할 수 있는 것일까?</p>
 <p>최근에는 SpringBoot로 애플리케이션을 개발하고 Tomcat 자체를 포함해 fatjar(uberjar)로 패키징(packaging) 후 배포해서 jar 파일을 실행하는 것으로 애플리케이션을 실행하는 것이 자연스럽게 여겨진다.</p>
 <p>Embeded Tomcat을 사용하지 않았던 때를 생각해보자. Spring 애플리케이션을 개발하고 war로 패키징한 후, Tomcat이 설치된 폴더 아래의 webapps에 war를 배포 후 Tomcat을 재기동 하는 것으로 애플리케이션을 실행했었다.</p>
 <p>이것이 의미하는 것이 무엇일까? Servlet Container인 Tomcat과 함게 애플리케이션이 실행되고 있는 런타임 시점에 HTTP 요청이 들어오면 Tomcat은 해당 요청에 대한 HttpServletRequest와 HttpServletResponse를 만들고 우리가 작성한 Spring 애플리케이션 코드를 실행한다.<br>우리는 애플리케이션 코드에서 Tomcat으로부터 전달받은 HttpServletRequest와 HttpServletResponse를 사용하는데, <strong>개발하는 시점에 Spring 애플리케이션에서는 HttpServletRequest와 HttpServletResponse를 어떻게 사용할 수 있는 것일까?</strong></p>
 <p>Gradle을 사용한다면 build.gradle을, Maven을 사용하고 있다면 pom.xml을 확인해보자. 다음과 같이 HttpServletRequest와 HttpServletResponse를 포함하고 있는 <code>javax.servlet-api</code> 라이브러리를 포함하고 있을 것이다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// ex) build.gradle</span><br><span class="line">compileOnly(&quot;javax.servlet:javax.servlet-api:3.0.1&quot;)</span><br></pre></td></tr></table></figure>
-<p>다만 <a href="https://jongmin92.github.io/2019/05/09/Gradle/gradle-api-vs-implementation/">implementation 혹은 api</a>가 아닌 <a href="https://blog.gradle.org/introducing-compile-only-dependencies" rel="external nofollow noopener noreferrer" target="_blank">compileOnly</a>를 사용해서 의존성을 선언하고 있다. 이것이 의미하는 것은 <strong>애플리케이션을 작성하고 컴파일 시점까지만<br>3.0.1 버전의 javax.servlet-api를 사용하겠다는 것이다. 그 후 컴파일이 완료되고 Tomcat에 의해서 애플리케이션이 실행되는 런타임 시점에는 Tomcat에 의해 classpath에 포함된 javax.servlet-api를 사용하게 된다.</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; ex) build.gradle</span><br><span class="line">compileOnly(&quot;javax.servlet:javax.servlet-api:3.0.1&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>다만 <a href="https://jongmin92.github.io/2019/05/09/Gradle/gradle-api-vs-implementation/">implementation 혹은 api</a>가 아닌 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://blog.gradle.org/introducing-compile-only-dependencies">compileOnly</a>를 사용해서 의존성을 선언하고 있다. 이것이 의미하는 것은 <strong>애플리케이션을 작성하고 컴파일 시점까지만<br>3.0.1 버전의 javax.servlet-api를 사용하겠다는 것이다. 그 후 컴파일이 완료되고 Tomcat에 의해서 애플리케이션이 실행되는 런타임 시점에는 Tomcat에 의해 classpath에 포함된 javax.servlet-api를 사용하게 된다.</strong></p>
 <p>Tomcat은 버전에 따라 사용하는 Servlet 버전이 다르다. 따라서 Spring 애플리케이션에서 compileOnly 의존성으로 사용하고 있는 Servlet 라이브러리의 버전과 실제 애플리케이션이 구동되는 Tomcat에서 사용하는 버전에 차이가 있다면 생각과는 다르게 동작할 수 있는 가능성이 있는 것이다.</p>
 <blockquote>
-<p><a href="http://tomcat.apache.org/whichversion.html" rel="external nofollow noopener noreferrer" target="_blank">Apache Tomcat Versions</a><br><img src="/images/post/2019-12-05/tomcat_version.png" alt="tomcat_version"></p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="http://tomcat.apache.org/whichversion.html">Apache Tomcat Versions</a><br><img src="/images/post/2019-12-05/tomcat_version.png" alt="tomcat_version"></p>
 </blockquote>
 <p>만약 Spring 애플리케이션의 Servlet 버전을 3.0 버전에 맞춰 개발하고 있었는데 애플리케이션이 실행되는 Tomcat이 6.0.x(Servlet 버전 2.5) 혹은 8.0.x(Servlet 버전 3.1)이라면 의도치 않은 Breaking Change를 겪게될 수 있는 것이다.</p>
-<h2 id="라이브러리-버전-overriding"><a href="#라이브러리-버전-Overriding" class="headerlink" title="라이브러리 버전 Overriding"></a>라이브러리 버전 Overriding</h2><p>다른 원인으로는 라이브러리 버전 Overriding 문제가 있다. 다음을 가정해보자.</p>
+<h2><span id="라이브러리-버전-overriding">라이브러리 버전 Overriding</span></h2><p>다른 원인으로는 라이브러리 버전 Overriding 문제가 있다. 다음을 가정해보자.</p>
 <p>애플리케이션에서 라이브러리 A를 사용하고 있다. 라이브러리 A는 다른 라이브러리 B에 대해 의존성(dependency)를 갖고 있다. 애플리케이션에서 라이브러리 B를 직접 호출하지는 않지만 라이브러리 B를 사용하기 때문에 A까지 포함되게 되는데 이때, 라이브러리 B는 해당 애플리케이션에 대해 <code>전이 의존성(transitive dependency)</code>이라고 부른다.</p>
 <p>이 경우, 만약 라이브러리 B를 이용하는 또 다른 라이브러리 C가 있고 이를 애플리케이션에서 사용하고 있다면 <strong>build system에 의해 버전 충돌로 인한 문제가 발생할 수 있다.</strong></p>
 <ul>
@@ -197,539 +32,59 @@
 </ul>
 <p>Gradle과 Maven 같은 빌드 시스템은 이와 같은 버전 충돌 문제가 발생했을 때, 두 버전 중 하나를 선택하게 된다.</p>
 <p>위의 예시에서 라이브러리 B의 2.x 버전을 선택하게 되었을 때, 라이브러리 C에서는 문제가 발생하지 않지만 라이브러리 A에서는 문제가 발생할 수 있다. (라이브러리 B가 버전 1.x와 2.x 사이에 Breaking Change가 존재할 수 있기 때문이다.)</p>
-<h1 id="해결책"><a href="#해결책" class="headerlink" title="해결책"></a>해결책</h1><p>크게 3단계로 해결할 수 있다.</p>
-<h2 id="문제의-class-찾기"><a href="#문제의-Class-찾기" class="headerlink" title="문제의 Class 찾기"></a>문제의 Class 찾기</h2><p><strong>먼저 문제의 메서드를 포함하는 클래스를 찾아야한다. NoSuchMethodError 로그로부터 쉽게 찾을 수 있다.</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Exception in thread <span class="string">"main"</span> java.lang.NoSuchMethodError: </span><br><span class="line">  com.jongmin.example.Service.hello(Ljava/lang/String;)Ljava/lang/String;</span><br></pre></td></tr></table></figure></p>
+<h1><span id="해결책">해결책</span></h1><p>크게 3단계로 해결할 수 있다.</p>
+<h2><span id="문제의-class-찾기">문제의 Class 찾기</span></h2><p><strong>먼저 문제의 메서드를 포함하는 클래스를 찾아야한다. NoSuchMethodError 로그로부터 쉽게 찾을 수 있다.</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Exception in thread <span class="string">&quot;main&quot;</span> java.lang.NoSuchMethodError: </span><br><span class="line">  com.jongmin.example.Service.hello(Ljava/lang/String;)Ljava/lang/String;</span><br></pre></td></tr></table></figure>
+
 <p>클래스를 찾았다면 검색 혹은 사용하고 있는 IDE를 통해서 해당 클래스가 포함된 JAR(라이브러리)를 찾을 수 있다.</p>
-<h2 id="class-호출하는-곳-찾기"><a href="#Class-호출하는-곳-찾기" class="headerlink" title="Class 호출하는 곳 찾기"></a>Class 호출하는 곳 찾기</h2><p><strong>다음으로 메서드를 호출하는 위치를 찾아야 한다. 이 정보는 에러 로그의 stack trace를 이용해 찾을 수 있다.</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Exception in thread <span class="string">"main"</span> java.lang.NoSuchMethodError: </span><br><span class="line">  com.jongmin.example.Service.hello(Ljava/lang/String;)Ljava/lang/String;</span><br><span class="line">  at com.jongmin.example.NoSuchMethod.main(ProvokeNoSuchMethodError.java:<span class="number">7</span>)</span><br></pre></td></tr></table></figure></p>
+<h2><span id="class-호출하는-곳-찾기">Class 호출하는 곳 찾기</span></h2><p><strong>다음으로 메서드를 호출하는 위치를 찾아야 한다. 이 정보는 에러 로그의 stack trace를 이용해 찾을 수 있다.</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Exception in thread <span class="string">&quot;main&quot;</span> java.lang.NoSuchMethodError: </span><br><span class="line">  com.jongmin.example.Service.hello(Ljava/lang/String;)Ljava/lang/String;</span><br><span class="line">  at com.jongmin.example.NoSuchMethod.main(ProvokeNoSuchMethodError.java:<span class="number">7</span>)</span><br></pre></td></tr></table></figure>
+
 <p>위의 로그에서는 NoSuchMethod 클래스가 런타임에 존재하지 않는 hello 메서드를 호출하려고 하는 것을 확인할 수 있다. 이제 해당 클래스가 속한 라이브러리를 찾아야한다.</p>
-<h2 id="버전-확인"><a href="#버전-확인" class="headerlink" title="버전 확인"></a>버전 확인</h2><p>이제 NoSuchMethodError가 발생하는 위치와 런타임 시점에 존재하지 않는 메서드를 알았으므로 해결할 수 있다.</p>
+<h2><span id="버전-확인">버전 확인</span></h2><p>이제 NoSuchMethodError가 발생하는 위치와 런타임 시점에 존재하지 않는 메서드를 알았으므로 해결할 수 있다.</p>
 <p><strong>현재 프로젝트의 모든 dependency를 출력해보자.</strong></p>
-<p>Gradle을 사용하고 있다면 다음의 명령어를 사용한다.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./gradlew dependencies &gt; dependencies.txt</span><br></pre></td></tr></table></figure></p>
-<p>Maven을 사용한다면 다음의 명령어를 사용한다.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn dependency:list &gt; dependencies.txt</span><br></pre></td></tr></table></figure></p>
+<p>Gradle을 사용하고 있다면 다음의 명령어를 사용한다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./gradlew dependencies &gt; dependencies.txt</span><br></pre></td></tr></table></figure>
+
+<p>Maven을 사용한다면 다음의 명령어를 사용한다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn dependency:list &gt; dependencies.txt</span><br></pre></td></tr></table></figure>
+
 <p>dependencies.txt 파일을 확인하면 런타임 시점에 존재하지 않는 메서드와 이를 호출하는 클래스가 포함 된 라이브러리를 찾을 수 있다.</p>
-<p>예를 들면, 다음과 같은 출력 결과를 확인할 수 있다.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">\--- org.springframework.data:spring-data-commons:1.8.2.RELEASE</span><br><span class="line">|      \--- org.springframework:spring-core:3.2.10.RELEASE -&gt; 4.3.20.RELEASE (*)</span><br></pre></td></tr></table></figure></p>
+<p>예를 들면, 다음과 같은 출력 결과를 확인할 수 있다.</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">\--- org.springframework.data:spring-data-commons:1.8.2.RELEASE</span><br><span class="line">|      \--- org.springframework:spring-core:3.2.10.RELEASE -&gt; 4.3.20.RELEASE (*)</span><br></pre></td></tr></table></figure>
+
 <p>위의 결과를 보면 spring-data-commons 라이브러리가 3.2.10 버전의 spring-core에 의존하지만 다른 라이브러리도 버전 4.3.20의 spring-core에 의존하고 있어 3.2.10 버전이 4.3.2 버전으로 Overriding된 것이다.</p>
 <p>그럼 이제 어떤 라이브러리가 spring-core 4.3.2 버전 라이브러리에 의존하고 있는지 찾을 수 있다.</p>
 <p>마지막으로 spring-core 라이브러리의 두 버전 중 어떤 버전이 spring-core를 필요로하는 두 라이브러리의 종속성을 만족시키는지 확인하고 결정해야 한다. 일반적이라면 안정적인 라이브러리라면 업데이트 되더라도 하위 호환성(backward compatibility)를 유지하기 때문에 최신 버전을 사용하면 될 것이다.</p>
-<h1 id="nosuchmethodexception"><a href="#NoSuchMethodException" class="headerlink" title="NoSuchMethodException"></a>NoSuchMethodException</h1><p>NoSuchMethodException은 NoSuchMethodError와 관련이 있지만 다른 context에서 발생한다. <strong><code>NoSuchMethodError</code>는 JAR 파일이 컴파일 시점과 런타임 시점에 다른 버전을 갖는 경우 발생한다. 반면 <code>NoSuchMethodException</code>은 reflection을 이용해 존재하지 않는 메서드를 사용하려고하면 발생한다.</strong></p>
-<p>예를 들면, 다음과 같은 코드이다.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String.class.getMethod(<span class="string">"notExist"</span>);</span><br></pre></td></tr></table></figure></p>
-
-        </div>
-        
-        <div class="level is-size-7 is-uppercase">
-            <div class="level-start">
-                <div class="level-item">
-                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/Java/">Java</a>
-                </div>
-            </div>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-<div class="card card-transparent">
-    <div class="level post-navigation is-flex-wrap is-mobile">
-        
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/12/07/Gradle/gradle-implementation/">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">Gradle에서 Dependency Pollution 문제 해결하기</span>
-            </a>
-        </div>
-        
-        
-        <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2019/12/04/Spring/prometheus/">
-                <span class="level-item">SpringBoot Application의 monitoring 시스템 구축하기</span>
-                <i class="level-item fas fa-chevron-right"></i>
-            </a>
-        </div>
-        
-    </div>
-</div>
-
-
-
-<div class="card">
-    <div class="card-content">
-        <h3 class="title is-5 has-text-weight-normal">댓글</h3>
-        
-<script>
-    var disqus_config = function () {
-        this.page.url = 'https://jongmin92.github.io/2019/12/05/Java/nosuchmethod/';
-        this.page.identifier = '2019/12/05/Java/nosuchmethod/';
-    };
-    (function() {
-        var d = document, s = d.createElement('script');  
-        s.src = '//' + 'https-jongmin92-github-io' + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-
-<div id="disqus_thread">
-    
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-    </div>
-</div>
-
-
-<!-- For Google Adsense -->
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
-<script>
-  (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
-</div>
-                
-                
-
-
-
-
-<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-3 column-right is-sticky">
-    
-        
-
-    <div class="card widget" id="toc">
-        <div class="card-content">
-            <div class="menu">
-                <h3 class="menu-label">
-                    카탈로그
-                </h3>
-                <ul class="menu-list"><li>
-        <a class="is-flex" href="#nosuchmethoderrors">
-        <span class="has-mr-6">1</span>
-        <span>NoSuchMethodErrors</span>
-        </a></li><li>
-        <a class="is-flex" href="#원인">
-        <span class="has-mr-6">2</span>
-        <span>원인</span>
-        </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#라이브러리-breaking-change">
-        <span class="has-mr-6">2.1</span>
-        <span>라이브러리 Breaking Change</span>
-        </a></li><li>
-        <a class="is-flex" href="#라이브러리-버전-overriding">
-        <span class="has-mr-6">2.2</span>
-        <span>라이브러리 버전 Overriding</span>
-        </a></li></ul></li><li>
-        <a class="is-flex" href="#해결책">
-        <span class="has-mr-6">3</span>
-        <span>해결책</span>
-        </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#문제의-class-찾기">
-        <span class="has-mr-6">3.1</span>
-        <span>문제의 Class 찾기</span>
-        </a></li><li>
-        <a class="is-flex" href="#class-호출하는-곳-찾기">
-        <span class="has-mr-6">3.2</span>
-        <span>Class 호출하는 곳 찾기</span>
-        </a></li><li>
-        <a class="is-flex" href="#버전-확인">
-        <span class="has-mr-6">3.3</span>
-        <span>버전 확인</span>
-        </a></li></ul></li><li>
-        <a class="is-flex" href="#nosuchmethodexception">
-        <span class="has-mr-6">4</span>
-        <span>NoSuchMethodException</span>
-        </a></li></ul>
-            </div>
-        </div>
-    </div>
-
-    
-        
-<div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-            <h3 class="menu-label">
-                카테고리
-            </h3>
-            <ul class="menu-list">
-            <li>
-        <a class="level is-marginless" href="/categories/Algorithm/">
-            <span class="level-start">
-                <span class="level-item">Algorithm</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">14</span>
-            </span>
-        </a><ul><li>
-        <a class="level is-marginless" href="/categories/Algorithm/BOJ/">
-            <span class="level-start">
-                <span class="level-item">BOJ</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">6</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Algorithm/Concept/">
-            <span class="level-start">
-                <span class="level-item">Concept</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">8</span>
-            </span>
-        </a></li></ul></li><li>
-        <a class="level is-marginless" href="/categories/Book/">
-            <span class="level-start">
-                <span class="level-item">Book</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">3</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Database/">
-            <span class="level-start">
-                <span class="level-item">Database</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Java/">
-            <span class="level-start">
-                <span class="level-item">Java</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Kotlin/">
-            <span class="level-start">
-                <span class="level-item">Kotlin</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Programming/">
-            <span class="level-start">
-                <span class="level-item">Programming</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">95</span>
-            </span>
-        </a><ul><li>
-        <a class="level is-marginless" href="/categories/Programming/AWS/">
-            <span class="level-start">
-                <span class="level-item">AWS</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Programming/Git/">
-            <span class="level-start">
-                <span class="level-item">Git</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Programming/Gradle/">
-            <span class="level-start">
-                <span class="level-item">Gradle</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">2</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Programming/HTML/">
-            <span class="level-start">
-                <span class="level-item">HTML</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Programming/Java/">
-            <span class="level-start">
-                <span class="level-item">Java</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">21</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Programming/JavaScript/">
-            <span class="level-start">
-                <span class="level-item">JavaScript</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">15</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Programming/Linux-Ubuntu/">
-            <span class="level-start">
-                <span class="level-item">Linux & Ubuntu</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">5</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Programming/Node/">
-            <span class="level-start">
-                <span class="level-item">Node</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">5</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Programming/RaspberryPi/">
-            <span class="level-start">
-                <span class="level-item">RaspberryPi</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">8</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Programming/React-Native/">
-            <span class="level-start">
-                <span class="level-item">React Native</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">4</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Programming/Spring/">
-            <span class="level-start">
-                <span class="level-item">Spring</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">19</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Programming/Tool/">
-            <span class="level-start">
-                <span class="level-item">Tool</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">4</span>
-            </span>
-        </a></li></ul></li><li>
-        <a class="level is-marginless" href="/categories/Project/">
-            <span class="level-start">
-                <span class="level-item">Project</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">6</span>
-            </span>
-        </a><ul><li>
-        <a class="level is-marginless" href="/categories/Project/Emily/">
-            <span class="level-start">
-                <span class="level-item">Emily</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">6</span>
-            </span>
-        </a></li></ul></li><li>
-        <a class="level is-marginless" href="/categories/Tip/">
-            <span class="level-start">
-                <span class="level-item">Tip</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">3</span>
-            </span>
-        </a></li>
-            </ul>
-        </div>
-    </div>
-</div>
-    
-    
-</div>
-
-            </div>
-        </div>
-    </section>
-    <footer class="footer">
-    <div class="container">
-        <div class="level">
-            <div class="level-start has-text-centered-mobile">
-                <a class="footer-logo is-block has-mb-6" href="/">
-                
-                    <img src="/images/logo.png" alt="NoSuchMethodException &amp; NoSuchMethodError 해결하기" height="28">
-                
-                </a>
-                <p class="is-size-7">
-                &copy; 2021 KimJongMin&nbsp;
-                Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="external nofollow noopener noreferrer">Icarus</a>
-                
-                </p>
-            </div>
-            <div class="level-end">
-            
-                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Creative Commons" href="https://creativecommons.org/">
-                        
-                        <i class="fab fa-creative-commons"></i>
-                        
-                    </a>
-                </p>
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
-                        
-                        <i class="fab fa-creative-commons-by"></i>
-                        
-                    </a>
-                </p>
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
-                        
-                        <i class="fab fa-github"></i>
-                        
-                    </a>
-                </p>
-                
-                </div>
-            
-            </div>
-        </div>
-    </div>
-</footer>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
-<script>moment.locale("ko");</script>
-
-
-<script>
-var IcarusThemeSettings = {
-    site: {
-        url: 'https://jongmin92.github.io',
-        external_link: {"enable":true,"exclude":[]}
-    },
-    article: {
-        highlight: {
-            clipboard: true,
-            fold: 'unfolded'
-        }
-    }
-};
-</script>
-
-
-<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
-
-
-
-
-
-<script src="/js/animation.js"></script>
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
-<script src="/js/gallery.js" defer></script>
-
-
-
-<div id="outdated">
-    <h6>Your browser is out-of-date!</h6>
-    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" rel="external nofollow noopener noreferrer" target="_blank">Update
-            my browser now </a></p>
-    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        outdatedBrowser({
-            bgColor: '#f25648',
-            color: '#ffffff',
-            lowerThan: 'flex'
-        });
-    });
-</script>
-
-
-<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    MathJax.Hub.Config({
-        'HTML-CSS': {
-            matchFontHeight: false
-        },
-        SVG: {
-            matchFontHeight: false
-        },
-        CommonHTML: {
-            matchFontHeight: false
-        },
-        tex2jax: {
-            inlineMath: [
-                ['$','$'],
-                ['\\(','\\)']
-            ]
-        }
-    });
-});
-</script>
-
-
-<a id="back-to-top" title="Zurück nach oben" href="javascript:;">
-    <i class="fas fa-chevron-up"></i>
-</a>
-<script src="/js/back-to-top.js" defer></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script src="/js/main.js" defer></script>
-
-    
-    <div class="searchbox ins-search">
-    <div class="searchbox-container ins-search-container">
-        <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="입력 하세요...">
-            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
-        </div>
-        <div class="searchbox-result-wrapper ins-section-wrapper">
-            <div class="ins-section-container"></div>
-        </div>
-    </div>
-</div>
-<script>
-    (function (window) {
-        var INSIGHT_CONFIG = {
-            TRANSLATION: {
-                POSTS: '포스트',
-                PAGES: '페이지',
-                CATEGORIES: '카테고리',
-                TAGS: '태그',
-                UNTITLED: '(제목없음)',
-            },
-            CONTENT_URL: '/content.json',
+<h1><span id="nosuchmethodexception">NoSuchMethodException</span></h1><p>NoSuchMethodException은 NoSuchMethodError와 관련이 있지만 다른 context에서 발생한다. <strong><code>NoSuchMethodError</code>는 JAR 파일이 컴파일 시점과 런타임 시점에 다른 버전을 갖는 경우 발생한다. 반면 <code>NoSuchMethodException</code>은 reflection을 이용해 존재하지 않는 메서드를 사용하려고하면 발생한다.</strong></p>
+<p>예를 들면, 다음과 같은 코드이다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String.class.getMethod(<span class="string">&quot;notExist&quot;</span>);</span><br></pre></td></tr></table></figure>
+</div><div class="article-licensing box"><div class="licensing-title"><p>NoSuchMethodException &amp; NoSuchMethodError 해결하기</p><p><a href="https://jongmin92.github.io/2019/12/05/Java/nosuchmethod/">https://jongmin92.github.io/2019/12/05/Java/nosuchmethod/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>KimJongMin</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2019-12-05</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2021-03-21</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icon" rel="external nofollow noopener noreferrer" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a class="icon" rel="external nofollow noopener noreferrer" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a><a class="icon" rel="external nofollow noopener noreferrer" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/Java/">Java</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2019/12/07/Gradle/gradle-implementation/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">Gradle에서 Dependency Pollution 문제 해결하기</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2019/12/04/Spring/prometheus/"><span class="level-item">SpringBoot Application의 monitoring 시스템 구축하기</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">댓글</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'https://jongmin92.github.io/2019/12/05/Java/nosuchmethod/';
+            this.page.identifier = '2019/12/05/Java/nosuchmethod/';
         };
-        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-    })(window);
-</script>
-<script src="/js/insight.js" defer></script>
-<link rel="stylesheet" href="/css/search.css">
-<link rel="stylesheet" href="/css/insight.css">
-    
-</body>
-</html>
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'https-jongmin92-github-io' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><!--!--><div class="column column-right is-4-tablet is-4-desktop is-4-widescreen  order-3 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">카탈로그</h3><ul class="menu-list"><li><a class="level is-mobile" href="#"><span class="level-left"><span class="level-item">1</span><span class="level-item">NoSuchMethodErrors</span></span></a></li><li><a class="level is-mobile" href="#"><span class="level-left"><span class="level-item">2</span><span class="level-item">원인</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">라이브러리 Breaking Change</span></span></a></li><li><a class="level is-mobile" href="#"><span class="level-left"><span class="level-item">2.2</span><span class="level-item">라이브러리 버전 Overriding</span></span></a></li></ul></li><li><a class="level is-mobile" href="#"><span class="level-left"><span class="level-item">3</span><span class="level-item">해결책</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#"><span class="level-left"><span class="level-item">3.1</span><span class="level-item">문제의 Class 찾기</span></span></a></li><li><a class="level is-mobile" href="#"><span class="level-left"><span class="level-item">3.2</span><span class="level-item">Class 호출하는 곳 찾기</span></span></a></li><li><a class="level is-mobile" href="#"><span class="level-left"><span class="level-item">3.3</span><span class="level-item">버전 확인</span></span></a></li></ul></li><li><a class="level is-mobile" href="#"><span class="level-left"><span class="level-item">4</span><span class="level-item">NoSuchMethodException</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.png" alt="92Hz" height="28"></a><p class="is-size-7"><span>&copy; 2021 KimJongMin</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="external nofollow noopener noreferrer">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("ko");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="맨 위로" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="입력 하세요..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"입력 하세요...","untitled":"(제목 없음)","posts":"포스트","pages":"페이지","categories":"카테고리","tags":"태그"});
+        });</script></body></html>

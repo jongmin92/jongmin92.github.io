@@ -1,181 +1,12 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="utf-8">
-
-<meta name="generator" content="Hexo 3.9.0">
-
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-<title>MySQL - Replication - 92Hz</title>
-
-<!-- For SEO -->
-<link rel="canonical" href="https://jongmin92.github.io/2019/11/13/database/mysql-replication/">
-
-
-    <meta name="description" content="Database Replication여러 대의 DB 서버가 있을 때 각각의 DB 서버가 동일한 데이터를 유지하도록 하는 메커니즘 혹은 기법을 말한다. Replication(리플리케이션)을 이용해서 백업과 부하분산같은 목적을 달성할 수 있다.master 서버에 데이터가 기록(쓰기)되고, slave 서버들은 master에 기록된 데이터를 전파받으며 보통 읽기에">
-<meta name="keywords" content="MySQL,Replication,MMM">
-<meta property="og:type" content="article">
-<meta property="og:title" content="MySQL - Replication">
-<meta property="og:url" content="https://jongmin92.github.io/2019/11/13/Database/mysql-replication/index.html">
-<meta property="og:site_name" content="92Hz">
-<meta property="og:description" content="Database Replication여러 대의 DB 서버가 있을 때 각각의 DB 서버가 동일한 데이터를 유지하도록 하는 메커니즘 혹은 기법을 말한다. Replication(리플리케이션)을 이용해서 백업과 부하분산같은 목적을 달성할 수 있다.master 서버에 데이터가 기록(쓰기)되고, slave 서버들은 master에 기록된 데이터를 전파받으며 보통 읽기에">
-<meta property="og:locale" content="ko">
-<meta property="og:image" content="https://jongmin92.github.io/images/og_image.png">
-<meta property="og:updated_time" content="2020-03-20T17:22:39.547Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MySQL - Replication">
-<meta name="twitter:description" content="Database Replication여러 대의 DB 서버가 있을 때 각각의 DB 서버가 동일한 데이터를 유지하도록 하는 메커니즘 혹은 기법을 말한다. Replication(리플리케이션)을 이용해서 백업과 부하분산같은 목적을 달성할 수 있다.master 서버에 데이터가 기록(쓰기)되고, slave 서버들은 master에 기록된 데이터를 전파받으며 보통 읽기에">
-<meta name="twitter:image" content="https://jongmin92.github.io/images/og_image.png">
-
-
-
-
-
-<link rel="alternative" href="rss2.xml" title="MySQL - Replication" type="application/atom+xml">
-
-
-
-<link rel="icon" href="/images/favicon.png">
-
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
-
-
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>MySQL - Replication - 92Hz</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="92Hz"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="92Hz"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="Database Replication여러 대의 DB 서버가 있을 때 각각의 DB 서버가 동일한 데이터를 유지하도록 하는 메커니즘 혹은 기법을 말한다. Replication(리플리케이션)을 이용해서 백업과 부하분산같은 목적을 달성할 수 있다.master 서버에 데이터가 기록(쓰기)되고, slave 서버들은 master에 기록된 데이터를 전파받으며 보통 읽기에"><meta property="og:type" content="article"><meta property="og:title" content="MySQL - Replication"><meta property="og:url" content="https://jongmin92.github.io/2019/11/13/Database/mysql-replication/"><meta property="og:site_name" content="92Hz"><meta property="og:description" content="Database Replication여러 대의 DB 서버가 있을 때 각각의 DB 서버가 동일한 데이터를 유지하도록 하는 메커니즘 혹은 기법을 말한다. Replication(리플리케이션)을 이용해서 백업과 부하분산같은 목적을 달성할 수 있다.master 서버에 데이터가 기록(쓰기)되고, slave 서버들은 master에 기록된 데이터를 전파받으며 보통 읽기에"><meta property="og:locale" content="ko_KR"><meta property="og:image" content="https://jongmin92.github.io/images/post/2019-11-13/replication_1.jpg"><meta property="og:image" content="https://jongmin92.github.io/images/post/2019-11-13/replication_2.jpg"><meta property="article:published_time" content="2019-11-13T13:22:00.000Z"><meta property="article:modified_time" content="2021-03-21T11:03:42.799Z"><meta property="article:author" content="KimJongMin"><meta property="article:tag" content="MySQL"><meta property="article:tag" content="Replication"><meta property="article:tag" content="MMM"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/images/post/2019-11-13/replication_1.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://jongmin92.github.io/2019/11/13/Database/mysql-replication/"},"headline":"MySQL - Replication","image":["https://jongmin92.github.io/images/post/2019-11-13/replication_1.jpg","https://jongmin92.github.io/images/post/2019-11-13/replication_2.jpg"],"datePublished":"2019-11-13T13:22:00.000Z","dateModified":"2021-03-21T11:03:42.799Z","author":{"@type":"Person","name":"KimJongMin"},"description":"Database Replication여러 대의 DB 서버가 있을 때 각각의 DB 서버가 동일한 데이터를 유지하도록 하는 메커니즘 혹은 기법을 말한다. Replication(리플리케이션)을 이용해서 백업과 부하분산같은 목적을 달성할 수 있다.master 서버에 데이터가 기록(쓰기)되고, slave 서버들은 master에 기록된 데이터를 전파받으며 보통 읽기에"}</script><link rel="canonical" href="https://jongmin92.github.io/2019/11/13/Database/mysql-replication/"><link rel="alternate" href="/rss2.xml" title="92Hz" type="application/atom+xml"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=UA-90389042-1" async></script><script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
     
-    
-<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
-
-    
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
-
-    
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
-
-    
-    
-    
-    
-<link rel="stylesheet" href="/css/back-to-top.css">
-
-    
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-90389042-1"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'UA-90389042-1');
-</script>
-
-    
-    
-    
-    
-    
-    <link rel="stylesheet" href="/css/progressbar.css">
-<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
-    
-    
-    
-
-
-<link rel="stylesheet" href="/css/style.css">
-</head>
-<body class="is-2-column">
-    <nav class="navbar navbar-main">
-    <div class="container">
-        <div class="navbar-brand is-flex-center">
-            <a class="navbar-item navbar-logo" href="/">
-            
-                <img src="/images/logo.png" alt="MySQL - Replication" height="28">
-            
-            </a>
-        </div>
-        <div class="navbar-menu">
-            
-            <div class="navbar-start">
-                
-                <a class="navbar-item" href="/">Home</a>
-                
-                <a class="navbar-item" href="/archives">Archives</a>
-                
-                <a class="navbar-item" href="/categories">Categories</a>
-                
-                <a class="navbar-item" href="/tags">Tags</a>
-                
-                <a class="navbar-item" href="/about">About</a>
-                
-            </div>
-            
-            <div class="navbar-end">
-                
-                    
-                    <a class="navbar-item" target="_blank" rel="external nofollow noopener noreferrer" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
-                        
-                        <i class="fab fa-github"></i>
-                        
-                    </a>
-                    
-                
-                
-                <a class="navbar-item is-hidden-tablet catalogue" title="카탈로그" href="javascript:;">
-                    <i class="fas fa-list-ul"></i>
-                </a>
-                
-                
-                <a class="navbar-item search" title="검색" href="javascript:;">
-                    <i class="fas fa-search"></i>
-                </a>
-                
-            </div>
-        </div>
-    </div>
-</nav>
-    
-    <section class="section">
-        <div class="container">
-            <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main">
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-11-13T13:22:00.000Z">2019-11-13</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Database/">Database</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    16분 읽기 (대략 2395 단어)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                MySQL - Replication
-            
-        </h1>
-        <div class="content">
-            <h1 id="database-replication"><a href="#Database-Replication" class="headerlink" title="Database Replication"></a>Database Replication</h1><p><strong>여러 대의 DB 서버가 있을 때 각각의 DB 서버가 동일한 데이터를 유지하도록 하는 메커니즘 혹은 기법을 말한다.</strong></p>
+        gtag('config', 'UA-90389042-1');</script><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><meta name="generator" content="Hexo 5.4.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.png" alt="92Hz" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="external nofollow noopener noreferrer" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="카탈로그" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="검색" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time datetime="2019-11-13T13:22:00.000Z" title="11/13/2019, 10:22:00 PM">2019-11-13</time>&nbsp;게시 됨</span><span class="level-item"><time datetime="2021-03-21T11:03:42.799Z" title="3/21/2021, 8:03:42 PM">2021-03-21</time>&nbsp;업데이트 됨</span><span class="level-item"><a class="link-muted" href="/categories/Database/">Database</a></span><span class="level-item">16분안에 읽기 (약 2395 단어)</span></div></div><h1 class="title is-3 is-size-4-mobile">MySQL - Replication</h1><div class="content"><h1><span id="database-replication">Database Replication</span></h1><p><strong>여러 대의 DB 서버가 있을 때 각각의 DB 서버가 동일한 데이터를 유지하도록 하는 메커니즘 혹은 기법을 말한다.</strong></p>
 <p>Replication(리플리케이션)을 이용해서 <code>백업</code>과 <code>부하분산</code>같은 목적을 달성할 수 있다.<br>master 서버에 데이터가 기록(쓰기)되고, slave 서버들은 master에 기록된 데이터를 전파받으며 보통 읽기에 사용된다.</p>
 <p>정리하면 한대의 master 서버는 쓰기, 여러대의 slave 서버들은 읽기에 사용되는 것이다.</p>
-<h1 id="백업과-부하분산"><a href="#백업과-부하분산" class="headerlink" title="백업과 부하분산"></a>백업과 부하분산</h1><p><strong>master DB의 데이터가 빠른 속도로 slave DB에 복제되기 때문에 master DB에 문제가 생겼을 때, slave DB를 master DB로 대체해 빠르게 장애를 복구할 수 있다.</strong></p>
+<h1><span id="백업과-부하분산">백업과 부하분산</span></h1><p><strong>master DB의 데이터가 빠른 속도로 slave DB에 복제되기 때문에 master DB에 문제가 생겼을 때, slave DB를 master DB로 대체해 빠르게 장애를 복구할 수 있다.</strong></p>
 <p>그렇지만 <strong>Replication 자체가 완전한 백업을 의미하는 것은 아니다.</strong> master DB에 의도하지 않은 작업(데이터를 잘못해서 대량으로 삭제)을 수행했을 때 해당 작업이 slave DB에도 전파가 되기 때문에 이러한 것들은 복구가 불가능하다.<br>그러므로 실시간 성의 백업은 Replication이 담당하고, 시간차를 두고 백업이 필요한 것은 보통 스케쥴링을 통하여 시간 간격을 두고 백업을 하는것이 바람직하다.</p>
 <p>읽기와 관련된 부하분산을 할 수 있다는 것이 Replication의 장점이다. 한계라고 하면 쓰기와 관련된 부분인데, 한 대의 master DB에 쓰기가 집중되기 때문에 쓰기 작업에 부하가 많다면 문제가 생길 수 있다.</p>
 <p>간략하게 Replication이 동작하는 방식을 확인해보자. 아래 그림은 master DB와 slave DB가 1대1로 연결되어 있는 구조이다.</p>
@@ -189,32 +20,60 @@
 </ol>
 <p>아래 그림은 또 다른 구조의 Replication이다. master DB와 slave DB가 존재하고 slave DB에 다시 slave DB가 존재하는 구조이다.<br>가운데의 slave DB가 master DB 처럼 Binary log를 생성해서 다른 slave에게 전달하는 것이다. 이 경우 가장 마지막에 있는 slave DB가 직접 master DB에 접근하는 것이 아니기 때문에 master DB의 부담을 줄일 수 있다.<br>또한 가운데의 slave DB 역시 master DB 처럼 Binary log를 생성하고 있기 때문에 master DB에 문제가 생겼을 때, 빠르고 쉽게 master DB로 대체가 가능하다.</p>
 <p><img src="/images/post/2019-11-13/replication_2.jpg" alt="replication-2"></p>
-<h1 id="replication-실습"><a href="#Replication-실습" class="headerlink" title="Replication 실습"></a>Replication 실습</h1><p>그럼 이제 간단하게 MySQL Replication을 구축해보자. 여러 대의 서버에 MySQL을 설치하고 준비하는 것은 번거롭기 때문에 간편하게 도커를 이용해서 진행해보자.</p>
-<h2 id="mysql-master-컨테이너-실행하기"><a href="#MySQL-master-컨테이너-실행하기" class="headerlink" title="MySQL master 컨테이너 실행하기"></a>MySQL master 컨테이너 실행하기</h2><p>먼저 master DB 컨테이너를 생성하고 접속한다.<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> docker run --name mysql-master -e MYSQL_ROOT_PASSWORD=asdf1234 -d mysql</span><br><span class="line"><span class="meta">$</span> docker exec -it mysql-master /bin/bash</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> apt-get update; apt-get install vim -y</span><br></pre></td></tr></table></figure></p>
-<p>설치한 vim을 이용해 MySQL 설정 파일인 <code>/etc/mysql/my.cnf</code> 파일에 다음의 내용을 추가한다.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">log-bin=mysql-bin  </span><br><span class="line">server-id=1</span><br></pre></td></tr></table></figure></p>
+<h1><span id="replication-실습">Replication 실습</span></h1><p>그럼 이제 간단하게 MySQL Replication을 구축해보자. 여러 대의 서버에 MySQL을 설치하고 준비하는 것은 번거롭기 때문에 간편하게 도커를 이용해서 진행해보자.</p>
+<h2><span id="mysql-master-컨테이너-실행하기">MySQL master 컨테이너 실행하기</span></h2><p>먼저 master DB 컨테이너를 생성하고 접속한다.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> docker run --name mysql-master -e MYSQL_ROOT_PASSWORD=asdf1234 -d mysql</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> docker <span class="built_in">exec</span> -it mysql-master /bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> apt-get update; apt-get install vim -y</span></span><br></pre></td></tr></table></figure>
+
+<p>설치한 vim을 이용해 MySQL 설정 파일인 <code>/etc/mysql/my.cnf</code> 파일에 다음의 내용을 추가한다.</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">log-bin=mysql-bin  </span><br><span class="line">server-id=1</span><br></pre></td></tr></table></figure>
 <blockquote>
 <ul>
 <li><strong>log-bin</strong>: 업데이트되는 모든 query들을 Binary log 파일에 기록한다는 의미이다.<br>기본적으로 Binary log 파일은 MySQL의 data directory인 /var/lib/mysql/ 에 호스트명-bin.000001, 호스트명-bin.000002 형태로 생성된다.<br>이때, log-bin 설정을 변경하면 Binary log 파일의 경로와 파일명의 접두어를 변경할 수 있다. log-bin=mysql 이라 설정하면 mysql-bin.000001, mysql-bin.000002 형태로 Binary log 파일이 생성된다.</li>
 <li><strong>server-id</strong>: Replication 설정에서 서버를 식별하기 위한 고유 ID값이다. master, slave 각각 다르게 설정해야 한다.</li>
 </ul>
 </blockquote>
-<p>도커 컨테이너(MySQL)를 재시작해서 변경된 설정 파일을 반영한다.<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> docker restart mysql-master</span><br></pre></td></tr></table></figure></p>
-<p>변경한 설정이 잘 적용되었는지 확인해보자.<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> docker exec -it mysql-master /bin/bash</span><br><span class="line"><span class="meta">$</span> mysql -u root -p </span><br><span class="line"><span class="meta">mysql&gt;</span> SHOW MASTER STATUS\G</span><br><span class="line"></span><br><span class="line">*************************** 1. row ***************************</span><br><span class="line">             File: mysql-bin.000001</span><br><span class="line">         Position: 155</span><br><span class="line">     Binlog_Do_DB:</span><br><span class="line"> Binlog_Ignore_DB:</span><br><span class="line">Executed_Gtid_Set:</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure></p>
-<h2 id="master-db에-user-생성하기"><a href="#master-DB에-User-생성하기" class="headerlink" title="master DB에 User 생성하기"></a>master DB에 User 생성하기</h2><p>slave DB에서 접근할 수 있도록 master DB에 User 계정을 생성하고 <code>REPLICATION SLAVE</code> 권한을 부여한다.<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">mysql&gt;</span> CREATE USER 'repl'@'%' IDENTIFIED BY 'replpw';</span><br><span class="line">Query OK, 0 rows affected (0.01 sec)</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span> ALTER USER 'repl'@'%' IDENTIFIED WITH mysql_native_password BY 'replpw';</span><br><span class="line">Query OK, 0 rows affected (0.01 sec)</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span> GRANT REPLICATION SLAVE ON *.* TO 'repl'@'%';</span><br><span class="line">Query OK, 0 rows affected (0.01 sec)</span><br></pre></td></tr></table></figure></p>
-<p>User가 생성되었는지 User 테이블을 확인한다.<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">mysql&gt;</span> USE mysql;</span><br><span class="line">Reading table information for completion of table and column names</span><br><span class="line">You can turn off this feature to get a quicker startup with -A</span><br><span class="line"></span><br><span class="line">Database changed</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span> SELECT user, host FROM user;</span><br><span class="line">+------------------+-----------+</span><br><span class="line">| user             | host      |</span><br><span class="line">+------------------+-----------+</span><br><span class="line">| repl             | %         |</span><br><span class="line">| root             | %         |</span><br><span class="line">| mysql.infoschema | localhost |</span><br><span class="line">| mysql.session    | localhost |</span><br><span class="line">| mysql.sys        | localhost |</span><br><span class="line">| root             | localhost |</span><br><span class="line">+------------------+-----------+</span><br><span class="line">6 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure></p>
-<p>다음으로, Replication 테스트를 위한 DB와 테이블을 생성한다.<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">mysql&gt;</span> CREATE DATABASE testdb;</span><br><span class="line">Query OK, 1 row affected (0.01 sec)</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span> USE testdb;</span><br><span class="line">Database changed</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span> CREATE TABLE testtable ( text varchar(20) );</span><br><span class="line">Query OK, 0 rows affected (0.03 sec)</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span> DESC testtable;</span><br><span class="line">+-------+-------------+------+-----+---------+-------+</span><br><span class="line">| Field | Type        | Null | Key | Default | Extra |</span><br><span class="line">+-------+-------------+------+-----+---------+-------+</span><br><span class="line">| text  | varchar(20) | YES  |     | NULL    |       |</span><br><span class="line">+-------+-------------+------+-----+---------+-------+</span><br><span class="line">1 row in set (0.01 sec)</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span> INSERT INTO testtable VALUES ('test row');</span><br><span class="line">Query OK, 1 row affected (0.01 sec)</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span> SELECT * from testtable;</span><br><span class="line">+----------+</span><br><span class="line">| text     |</span><br><span class="line">+----------+</span><br><span class="line">| test row |</span><br><span class="line">+----------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure></p>
-<h2 id="master-db-dump"><a href="#master-DB-dump" class="headerlink" title="master DB dump"></a>master DB dump</h2><p>slave DB에서 master DB를 연결하기 전에 master DB의 현재 DB 상태(table과 data)를 slave DB에 그대로 반영하기 위해 dump한다.<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> docker exec -it mysql-master /bin/bash</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> mysqldump -u root -p testdb &gt; dump.sql</span><br></pre></td></tr></table></figure></p>
-<p>dump된 파일을 slave DB 컨테이너에 옮기기 위해 먼저 로컬 PC로 복사한다.<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> docker cp mysql-master:dump.sql .</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> cat dump.sql</span><br></pre></td></tr></table></figure></p>
-<h2 id="mysql-slave-컨테이너-실행하기"><a href="#MySQL-slave-컨테이너-실행하기" class="headerlink" title="MySQL slave 컨테이너 실행하기"></a>MySQL slave 컨테이너 실행하기</h2><p>slave DB 컨테이너를 생성하고 접속한다.<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> docker run --name mysql-slave --link mysql-master -e MYSQL_ROOT_PASSWORD=asdf1234 -d mysql</span><br><span class="line"><span class="meta">$</span> docker exec -it mysql-slave /bin/bash</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> apt-get update; apt-get install vim -y</span><br></pre></td></tr></table></figure></p>
-<p>설치한 vim을 이용해 MySQL 설정 파일인 <code>/etc/mysql/my.cnf</code> 파일에 다음의 내용을 추가한다.<br>slave 서버를 여러 대로 구축하고자 할 때에 각 slave 서버의 server-id는 각각 달라야 한다는 것에 주의하자. (2^32-1 까지 가능하다.)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">log-bin=mysql-bin  </span><br><span class="line">server-id=2</span><br></pre></td></tr></table></figure></p>
-<p>도커 컨테이너(MySQL)를 재시작해서 변경된 설정 파일을 반영한다.<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> docker restart mysql-slave</span><br></pre></td></tr></table></figure></p>
-<h2 id="slave-db에-dump-파일-적용"><a href="#slave-DB에-dump-파일-적용" class="headerlink" title="slave DB에 dump 파일 적용"></a>slave DB에 dump 파일 적용</h2><p>로컬 PC로 복사한 master DB의 dump 파일을 slave DB로 옮긴 후 반영한다.<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> docker cp dump.sql mysql-slave:.</span><br><span class="line"><span class="meta">$</span> docker exec -it mysql-slave /bin/bash</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> mysql -u root -p</span><br><span class="line"><span class="meta">mysql&gt;</span> CREATE DATABASE testdb;</span><br><span class="line">Query OK, 1 row affected (0.01 sec)</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span> exit</span><br><span class="line">Bye</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> mysql -u root -p testdb &lt; dump.sql</span><br></pre></td></tr></table></figure></p>
-<p>다시 mysql에 접속해 <code>testdb</code> DB에 <code>testtable</code> 테이블과 데이터가 생성되어 있다면 정상적으로 dump 파일이 적용된 것이다.<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">mysql&gt;</span> USE testdb;</span><br><span class="line">Reading table information for completion of table and column names</span><br><span class="line">You can turn off this feature to get a quicker startup with -A</span><br><span class="line"></span><br><span class="line">Database changed</span><br><span class="line"><span class="meta">mysql&gt;</span> SHOW TABLES;</span><br><span class="line">+------------------+</span><br><span class="line">| Tables_in_testdb |</span><br><span class="line">+------------------+</span><br><span class="line">| testtable        |</span><br><span class="line">+------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure></p>
-<h2 id="slave-db에서-master-db-연동하기"><a href="#slave-DB에서-master-DB-연동하기" class="headerlink" title="slave DB에서 master DB 연동하기"></a>slave DB에서 master DB 연동하기</h2><p>이제 마지막으로 slave 서버에서 master 서버와 연동하는 작업만 하면 된다.</p>
-<p>그 전에 master DB의 mysql에 한번 더 접속하여 Binary log 파일의 현재 상태를 읽어야 한다. 이 <strong>Binary log 파일을 통해 master와 slave의 DB가 동기화되므로 반드시 동일한 로그의 위치를 서로 참조하고 있어야 한다.</strong><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> docker exec -it mysql-master /bin/bash</span><br><span class="line"><span class="meta">$</span> mysql -u root -p  </span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span> SHOW MASTER STATUS\G </span><br><span class="line">*************************** 1. row ***************************</span><br><span class="line">             File: mysql-bin.000001</span><br><span class="line">         Position: 1949</span><br><span class="line">     Binlog_Do_DB:</span><br><span class="line"> Binlog_Ignore_DB:</span><br><span class="line">Executed_Gtid_Set:</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure></p>
+<p>도커 컨테이너(MySQL)를 재시작해서 변경된 설정 파일을 반영한다.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> docker restart mysql-master</span></span><br></pre></td></tr></table></figure>
+
+<p>변경한 설정이 잘 적용되었는지 확인해보자.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> docker <span class="built_in">exec</span> -it mysql-master /bin/bash</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> mysql -u root -p</span> </span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> SHOW MASTER STATUS\G</span></span><br><span class="line"></span><br><span class="line">*************************** 1. row ***************************</span><br><span class="line">             File: mysql-bin.000001</span><br><span class="line">         Position: 155</span><br><span class="line">     Binlog_Do_DB:</span><br><span class="line"> Binlog_Ignore_DB:</span><br><span class="line">Executed_Gtid_Set:</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h2><span id="master-db에-user-생성하기">master DB에 User 생성하기</span></h2><p>slave DB에서 접근할 수 있도록 master DB에 User 계정을 생성하고 <code>REPLICATION SLAVE</code> 권한을 부여한다.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> CREATE USER <span class="string">&#x27;repl&#x27;</span>@<span class="string">&#x27;%&#x27;</span> IDENTIFIED BY <span class="string">&#x27;replpw&#x27;</span>;</span></span><br><span class="line">Query OK, 0 rows affected (0.01 sec)</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> ALTER USER <span class="string">&#x27;repl&#x27;</span>@<span class="string">&#x27;%&#x27;</span> IDENTIFIED WITH mysql_native_password BY <span class="string">&#x27;replpw&#x27;</span>;</span></span><br><span class="line">Query OK, 0 rows affected (0.01 sec)</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> GRANT REPLICATION SLAVE ON *.* TO <span class="string">&#x27;repl&#x27;</span>@<span class="string">&#x27;%&#x27;</span>;</span></span><br><span class="line">Query OK, 0 rows affected (0.01 sec)</span><br></pre></td></tr></table></figure>
+
+<p>User가 생성되었는지 User 테이블을 확인한다.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> USE mysql;</span></span><br><span class="line">Reading table information for completion of table and column names</span><br><span class="line">You can turn off this feature to get a quicker startup with -A</span><br><span class="line"></span><br><span class="line">Database changed</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> SELECT user, host FROM user;</span></span><br><span class="line">+------------------+-----------+</span><br><span class="line">| user             | host      |</span><br><span class="line">+------------------+-----------+</span><br><span class="line">| repl             | %         |</span><br><span class="line">| root             | %         |</span><br><span class="line">| mysql.infoschema | localhost |</span><br><span class="line">| mysql.session    | localhost |</span><br><span class="line">| mysql.sys        | localhost |</span><br><span class="line">| root             | localhost |</span><br><span class="line">+------------------+-----------+</span><br><span class="line">6 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<p>다음으로, Replication 테스트를 위한 DB와 테이블을 생성한다.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> CREATE DATABASE testdb;</span></span><br><span class="line">Query OK, 1 row affected (0.01 sec)</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> USE testdb;</span></span><br><span class="line">Database changed</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> CREATE TABLE testtable ( text varchar(20) );</span></span><br><span class="line">Query OK, 0 rows affected (0.03 sec)</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> DESC testtable;</span></span><br><span class="line">+-------+-------------+------+-----+---------+-------+</span><br><span class="line">| Field | Type        | Null | Key | Default | Extra |</span><br><span class="line">+-------+-------------+------+-----+---------+-------+</span><br><span class="line">| text  | varchar(20) | YES  |     | NULL    |       |</span><br><span class="line">+-------+-------------+------+-----+---------+-------+</span><br><span class="line">1 row in set (0.01 sec)</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> INSERT INTO testtable VALUES (<span class="string">&#x27;test row&#x27;</span>);</span></span><br><span class="line">Query OK, 1 row affected (0.01 sec)</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> SELECT * from testtable;</span></span><br><span class="line">+----------+</span><br><span class="line">| text     |</span><br><span class="line">+----------+</span><br><span class="line">| test row |</span><br><span class="line">+----------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h2><span id="master-db-dump">master DB dump</span></h2><p>slave DB에서 master DB를 연결하기 전에 master DB의 현재 DB 상태(table과 data)를 slave DB에 그대로 반영하기 위해 dump한다.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> docker <span class="built_in">exec</span> -it mysql-master /bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> mysqldump -u root -p testdb &gt; dump.sql</span></span><br></pre></td></tr></table></figure>
+
+<p>dump된 파일을 slave DB 컨테이너에 옮기기 위해 먼저 로컬 PC로 복사한다.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> docker cp mysql-master:dump.sql .</span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> cat dump.sql</span></span><br></pre></td></tr></table></figure>
+
+<h2><span id="mysql-slave-컨테이너-실행하기">MySQL slave 컨테이너 실행하기</span></h2><p>slave DB 컨테이너를 생성하고 접속한다.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> docker run --name mysql-slave --link mysql-master -e MYSQL_ROOT_PASSWORD=asdf1234 -d mysql</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> docker <span class="built_in">exec</span> -it mysql-slave /bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> apt-get update; apt-get install vim -y</span></span><br></pre></td></tr></table></figure>
+
+<p>설치한 vim을 이용해 MySQL 설정 파일인 <code>/etc/mysql/my.cnf</code> 파일에 다음의 내용을 추가한다.<br>slave 서버를 여러 대로 구축하고자 할 때에 각 slave 서버의 server-id는 각각 달라야 한다는 것에 주의하자. (2^32-1 까지 가능하다.)</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">log-bin=mysql-bin  </span><br><span class="line">server-id=2</span><br></pre></td></tr></table></figure>
+
+<p>도커 컨테이너(MySQL)를 재시작해서 변경된 설정 파일을 반영한다.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> docker restart mysql-slave</span></span><br></pre></td></tr></table></figure>
+
+<h2><span id="slave-db에-dump-파일-적용">slave DB에 dump 파일 적용</span></h2><p>로컬 PC로 복사한 master DB의 dump 파일을 slave DB로 옮긴 후 반영한다.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> docker cp dump.sql mysql-slave:.</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> docker <span class="built_in">exec</span> -it mysql-slave /bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> mysql -u root -p</span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> CREATE DATABASE testdb;</span></span><br><span class="line">Query OK, 1 row affected (0.01 sec)</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> <span class="built_in">exit</span></span></span><br><span class="line">Bye</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> mysql -u root -p testdb &lt; dump.sql</span></span><br></pre></td></tr></table></figure>
+
+<p>다시 mysql에 접속해 <code>testdb</code> DB에 <code>testtable</code> 테이블과 데이터가 생성되어 있다면 정상적으로 dump 파일이 적용된 것이다.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> USE testdb;</span></span><br><span class="line">Reading table information for completion of table and column names</span><br><span class="line">You can turn off this feature to get a quicker startup with -A</span><br><span class="line"></span><br><span class="line">Database changed</span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> SHOW TABLES;</span></span><br><span class="line">+------------------+</span><br><span class="line">| Tables_in_testdb |</span><br><span class="line">+------------------+</span><br><span class="line">| testtable        |</span><br><span class="line">+------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h2><span id="slave-db에서-master-db-연동하기">slave DB에서 master DB 연동하기</span></h2><p>이제 마지막으로 slave 서버에서 master 서버와 연동하는 작업만 하면 된다.</p>
+<p>그 전에 master DB의 mysql에 한번 더 접속하여 Binary log 파일의 현재 상태를 읽어야 한다. 이 <strong>Binary log 파일을 통해 master와 slave의 DB가 동기화되므로 반드시 동일한 로그의 위치를 서로 참조하고 있어야 한다.</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> docker <span class="built_in">exec</span> -it mysql-master /bin/bash</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> mysql -u root -p</span>  </span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> SHOW MASTER STATUS\G</span> </span><br><span class="line">*************************** 1. row ***************************</span><br><span class="line">             File: mysql-bin.000001</span><br><span class="line">         Position: 1949</span><br><span class="line">     Binlog_Do_DB:</span><br><span class="line"> Binlog_Ignore_DB:</span><br><span class="line">Executed_Gtid_Set:</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
 <p>출력된 결과에서 File, Position 필드의 값을 기억하도록 한다.<br><strong><code>File</code> 은 현재 바이너리 로그 파일명이고, <code>Position</code> 은 현재 로그의 위치를 나타낸다.</strong> 앞서 DB와 테이블을 생성한 query가 추가됐으므로 이전에 <strong>SHOW MASTER STATUS\G</strong> 를 실행했을 때보다 Position 값이 증가했음을 볼 수 있다.</p>
 <p>이제 slave 서버의 mysql에 접속하여 master 서버와의 연결에 필요한 변수들을 적절히 설정해주어야 한다.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> docker exec -it mysql-slave /bin/bash</span><br><span class="line"><span class="meta">$</span> mysql -u root -p  </span><br><span class="line"><span class="meta">mysql&gt;</span> CHANGE MASTER TO MASTER_HOST='mysql-master', MASTER_USER='repl', MASTER_PASSWORD='replpw', MASTER_LOG_FILE='mysql-bin.000001', MASTER_LOG_POS=1949;</span><br><span class="line">Query OK, 0 rows affected, 2 warnings (0.03 sec)</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span> START SLAVE;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> docker <span class="built_in">exec</span> -it mysql-slave /bin/bash</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> mysql -u root -p</span>  </span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> CHANGE MASTER TO MASTER_HOST=<span class="string">&#x27;mysql-master&#x27;</span>, MASTER_USER=<span class="string">&#x27;repl&#x27;</span>, MASTER_PASSWORD=<span class="string">&#x27;replpw&#x27;</span>, MASTER_LOG_FILE=<span class="string">&#x27;mysql-bin.000001&#x27;</span>, MASTER_LOG_POS=1949;</span></span><br><span class="line">Query OK, 0 rows affected, 2 warnings (0.03 sec)</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> START SLAVE;</span></span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br></pre></td></tr></table></figure>
 <blockquote>
 <ul>
 <li>MASTER_HOST : master 서버의 호스트명</li>
@@ -224,485 +83,15 @@
 <li>MASTER_LOG_POS : master 서버의 현재 로그의 위치</li>
 </ul>
 </blockquote>
-<p>아래의 명령어를 실행해 slave의 상태를 확인해보자.<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">mysql&gt;</span> SHOW SLAVE STATUS\G</span><br></pre></td></tr></table></figure></p>
-<h2 id="replication-테스트"><a href="#Replication-테스트" class="headerlink" title="Replication 테스트"></a>Replication 테스트</h2><p>문제 없이 Replication 설정이 완료되었다면 마지막으로 실제 잘 동작하는지 확인해보자.<br>master DB에서 데이터를 생성하고, slave DB에 복제되어 데이터가 조회되는지 확인한다.</p>
-<p>master DB에서 데이터를 생성한다.<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> docker exec -it mysql-master /bin/bash</span><br><span class="line"><span class="meta">$</span> mysql -u root -p</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span> USE testdb;</span><br><span class="line">Reading table information for completion of table and column names</span><br><span class="line">You can turn off this feature to get a quicker startup with -A</span><br><span class="line"></span><br><span class="line">Database changed</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span> INSERT INTO testtable VALUES ('test row2');</span><br><span class="line">Query OK, 1 row affected (0.01 sec)</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span> SELECT * FROM testtable;</span><br><span class="line">+-----------+</span><br><span class="line">| text      |</span><br><span class="line">+-----------+</span><br><span class="line">| test row  |</span><br><span class="line">| test row2 |</span><br><span class="line">+-----------+</span><br><span class="line">2 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure></p>
-<p>slave DB에서 데이터를 조회한다.<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> docker exec -it mysql-slave /bin/bash</span><br><span class="line"><span class="meta">$</span> mysql -u root -p</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span> SELECT * from testtable;</span><br><span class="line">+-----------+</span><br><span class="line">| text      |</span><br><span class="line">+-----------+</span><br><span class="line">| test row  |</span><br><span class="line">| test row2 |</span><br><span class="line">+-----------+</span><br><span class="line">2 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure></p>
+<p>아래의 명령어를 실행해 slave의 상태를 확인해보자.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> SHOW SLAVE STATUS\G</span></span><br></pre></td></tr></table></figure>
 
-        </div>
-        
-        <div class="level is-size-7 is-uppercase">
-            <div class="level-start">
-                <div class="level-item">
-                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/MMM/">MMM</a>, <a class="has-link-grey -link" href="/tags/MySQL/">MySQL</a>, <a class="has-link-grey -link" href="/tags/Replication/">Replication</a>
-                </div>
-            </div>
-        </div>
-        
-        
-        
-    </div>
-</div>
+<h2><span id="replication-테스트">Replication 테스트</span></h2><p>문제 없이 Replication 설정이 완료되었다면 마지막으로 실제 잘 동작하는지 확인해보자.<br>master DB에서 데이터를 생성하고, slave DB에 복제되어 데이터가 조회되는지 확인한다.</p>
+<p>master DB에서 데이터를 생성한다.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> docker <span class="built_in">exec</span> -it mysql-master /bin/bash</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> mysql -u root -p</span></span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> USE testdb;</span></span><br><span class="line">Reading table information for completion of table and column names</span><br><span class="line">You can turn off this feature to get a quicker startup with -A</span><br><span class="line"></span><br><span class="line">Database changed</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> INSERT INTO testtable VALUES (<span class="string">&#x27;test row2&#x27;</span>);</span></span><br><span class="line">Query OK, 1 row affected (0.01 sec)</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> SELECT * FROM testtable;</span></span><br><span class="line">+-----------+</span><br><span class="line">| text      |</span><br><span class="line">+-----------+</span><br><span class="line">| test row  |</span><br><span class="line">| test row2 |</span><br><span class="line">+-----------+</span><br><span class="line">2 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
 
-
-
-
-
-<div class="card card-transparent">
-    <div class="level post-navigation is-flex-wrap is-mobile">
-        
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/11/18/Spring/bean-validation-1/">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">Spring Boot에서의 Bean Validation (1)</span>
-            </a>
-        </div>
-        
-        
-        <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2019/11/10/Java/reactive-3/">
-                <span class="level-item">Reactive Streams (3)</span>
-                <i class="level-item fas fa-chevron-right"></i>
-            </a>
-        </div>
-        
-    </div>
-</div>
-
-
-
-<div class="card">
-    <div class="card-content">
-        <h3 class="title is-5 has-text-weight-normal">댓글</h3>
-        
-<script>
-    var disqus_config = function () {
-        this.page.url = 'https://jongmin92.github.io/2019/11/13/Database/mysql-replication/';
-        this.page.identifier = '2019/11/13/Database/mysql-replication/';
-    };
-    (function() {
-        var d = document, s = d.createElement('script');  
-        s.src = '//' + 'https-jongmin92-github-io' + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-
-<div id="disqus_thread">
-    
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-    </div>
-</div>
-
-
-<!-- For Google Adsense -->
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3921438651818825" data-ad-slot="3015269677"></ins>
-<script>
-  (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
-</div>
-                
-                
-
-
-
-
-<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-3 column-right is-sticky">
-    
-        
-
-    <div class="card widget" id="toc">
-        <div class="card-content">
-            <div class="menu">
-                <h3 class="menu-label">
-                    카탈로그
-                </h3>
-                <ul class="menu-list"><li>
-        <a class="is-flex" href="#database-replication">
-        <span class="has-mr-6">1</span>
-        <span>Database Replication</span>
-        </a></li><li>
-        <a class="is-flex" href="#백업과-부하분산">
-        <span class="has-mr-6">2</span>
-        <span>백업과 부하분산</span>
-        </a></li><li>
-        <a class="is-flex" href="#replication-실습">
-        <span class="has-mr-6">3</span>
-        <span>Replication 실습</span>
-        </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#mysql-master-컨테이너-실행하기">
-        <span class="has-mr-6">3.1</span>
-        <span>MySQL master 컨테이너 실행하기</span>
-        </a></li><li>
-        <a class="is-flex" href="#master-db에-user-생성하기">
-        <span class="has-mr-6">3.2</span>
-        <span>master DB에 User 생성하기</span>
-        </a></li><li>
-        <a class="is-flex" href="#master-db-dump">
-        <span class="has-mr-6">3.3</span>
-        <span>master DB dump</span>
-        </a></li><li>
-        <a class="is-flex" href="#mysql-slave-컨테이너-실행하기">
-        <span class="has-mr-6">3.4</span>
-        <span>MySQL slave 컨테이너 실행하기</span>
-        </a></li><li>
-        <a class="is-flex" href="#slave-db에-dump-파일-적용">
-        <span class="has-mr-6">3.5</span>
-        <span>slave DB에 dump 파일 적용</span>
-        </a></li><li>
-        <a class="is-flex" href="#slave-db에서-master-db-연동하기">
-        <span class="has-mr-6">3.6</span>
-        <span>slave DB에서 master DB 연동하기</span>
-        </a></li><li>
-        <a class="is-flex" href="#replication-테스트">
-        <span class="has-mr-6">3.7</span>
-        <span>Replication 테스트</span>
-        </a></li></ul></li></ul>
-            </div>
-        </div>
-    </div>
-
-    
-        
-<div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-            <h3 class="menu-label">
-                카테고리
-            </h3>
-            <ul class="menu-list">
-            <li>
-        <a class="level is-marginless" href="/categories/Algorithm/">
-            <span class="level-start">
-                <span class="level-item">Algorithm</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">14</span>
-            </span>
-        </a><ul><li>
-        <a class="level is-marginless" href="/categories/Algorithm/BOJ/">
-            <span class="level-start">
-                <span class="level-item">BOJ</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">6</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Algorithm/Concept/">
-            <span class="level-start">
-                <span class="level-item">Concept</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">8</span>
-            </span>
-        </a></li></ul></li><li>
-        <a class="level is-marginless" href="/categories/Book/">
-            <span class="level-start">
-                <span class="level-item">Book</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">3</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Database/">
-            <span class="level-start">
-                <span class="level-item">Database</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Java/">
-            <span class="level-start">
-                <span class="level-item">Java</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Kotlin/">
-            <span class="level-start">
-                <span class="level-item">Kotlin</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Programming/">
-            <span class="level-start">
-                <span class="level-item">Programming</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">95</span>
-            </span>
-        </a><ul><li>
-        <a class="level is-marginless" href="/categories/Programming/AWS/">
-            <span class="level-start">
-                <span class="level-item">AWS</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Programming/Git/">
-            <span class="level-start">
-                <span class="level-item">Git</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Programming/Gradle/">
-            <span class="level-start">
-                <span class="level-item">Gradle</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">2</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Programming/HTML/">
-            <span class="level-start">
-                <span class="level-item">HTML</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Programming/Java/">
-            <span class="level-start">
-                <span class="level-item">Java</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">21</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Programming/JavaScript/">
-            <span class="level-start">
-                <span class="level-item">JavaScript</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">15</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Programming/Linux-Ubuntu/">
-            <span class="level-start">
-                <span class="level-item">Linux & Ubuntu</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">5</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Programming/Node/">
-            <span class="level-start">
-                <span class="level-item">Node</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">5</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Programming/RaspberryPi/">
-            <span class="level-start">
-                <span class="level-item">RaspberryPi</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">8</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Programming/React-Native/">
-            <span class="level-start">
-                <span class="level-item">React Native</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">4</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Programming/Spring/">
-            <span class="level-start">
-                <span class="level-item">Spring</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">19</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Programming/Tool/">
-            <span class="level-start">
-                <span class="level-item">Tool</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">4</span>
-            </span>
-        </a></li></ul></li><li>
-        <a class="level is-marginless" href="/categories/Project/">
-            <span class="level-start">
-                <span class="level-item">Project</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">6</span>
-            </span>
-        </a><ul><li>
-        <a class="level is-marginless" href="/categories/Project/Emily/">
-            <span class="level-start">
-                <span class="level-item">Emily</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">6</span>
-            </span>
-        </a></li></ul></li><li>
-        <a class="level is-marginless" href="/categories/Tip/">
-            <span class="level-start">
-                <span class="level-item">Tip</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">3</span>
-            </span>
-        </a></li>
-            </ul>
-        </div>
-    </div>
-</div>
-    
-    
-</div>
-
-            </div>
-        </div>
-    </section>
-    <footer class="footer">
-    <div class="container">
-        <div class="level">
-            <div class="level-start has-text-centered-mobile">
-                <a class="footer-logo is-block has-mb-6" href="/">
-                
-                    <img src="/images/logo.png" alt="MySQL - Replication" height="28">
-                
-                </a>
-                <p class="is-size-7">
-                &copy; 2021 KimJongMin&nbsp;
-                Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="external nofollow noopener noreferrer">Icarus</a>
-                
-                </p>
-            </div>
-            <div class="level-end">
-            
-                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Creative Commons" href="https://creativecommons.org/">
-                        
-                        <i class="fab fa-creative-commons"></i>
-                        
-                    </a>
-                </p>
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
-                        
-                        <i class="fab fa-creative-commons-by"></i>
-                        
-                    </a>
-                </p>
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
-                        
-                        <i class="fab fa-github"></i>
-                        
-                    </a>
-                </p>
-                
-                </div>
-            
-            </div>
-        </div>
-    </div>
-</footer>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
-<script>moment.locale("ko");</script>
-
-
-<script>
-var IcarusThemeSettings = {
-    site: {
-        url: 'https://jongmin92.github.io',
-        external_link: {"enable":true,"exclude":[]}
-    },
-    article: {
-        highlight: {
-            clipboard: true,
-            fold: 'unfolded'
-        }
-    }
-};
-</script>
-
-
-<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
-
-
-
-
-
-<script src="/js/animation.js"></script>
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
-<script src="/js/gallery.js" defer></script>
-
-
-
-<div id="outdated">
-    <h6>Your browser is out-of-date!</h6>
-    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" rel="external nofollow noopener noreferrer" target="_blank">Update
-            my browser now </a></p>
-    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        outdatedBrowser({
-            bgColor: '#f25648',
-            color: '#ffffff',
-            lowerThan: 'flex'
-        });
-    });
-</script>
-
-
-<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    MathJax.Hub.Config({
-        'HTML-CSS': {
-            matchFontHeight: false
-        },
-        SVG: {
-            matchFontHeight: false
-        },
-        CommonHTML: {
-            matchFontHeight: false
-        },
-        tex2jax: {
-            inlineMath: [
-                ['$','$'],
-                ['\\(','\\)']
-            ]
-        }
-    });
-});
-</script>
-
-
-<a id="back-to-top" title="Zurück nach oben" href="javascript:;">
-    <i class="fas fa-chevron-up"></i>
-</a>
-<script src="/js/back-to-top.js" defer></script>
+<p>slave DB에서 데이터를 조회한다.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> docker <span class="built_in">exec</span> -it mysql-slave /bin/bash</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> mysql -u root -p</span></span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> SELECT * from testtable;</span></span><br><span class="line">+-----------+</span><br><span class="line">| text      |</span><br><span class="line">+-----------+</span><br><span class="line">| test row  |</span><br><span class="line">| test row2 |</span><br><span class="line">+-----------+</span><br><span class="line">2 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
 
 
 
@@ -716,39 +105,32 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-
-<script src="/js/main.js" defer></script>
-
-    
-    <div class="searchbox ins-search">
-    <div class="searchbox-container ins-search-container">
-        <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="입력 하세요...">
-            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
-        </div>
-        <div class="searchbox-result-wrapper ins-section-wrapper">
-            <div class="ins-section-container"></div>
-        </div>
-    </div>
-</div>
-<script>
-    (function (window) {
-        var INSIGHT_CONFIG = {
-            TRANSLATION: {
-                POSTS: '포스트',
-                PAGES: '페이지',
-                CATEGORIES: '카테고리',
-                TAGS: '태그',
-                UNTITLED: '(제목없음)',
-            },
-            CONTENT_URL: '/content.json',
+</div><div class="article-licensing box"><div class="licensing-title"><p>MySQL - Replication</p><p><a href="https://jongmin92.github.io/2019/11/13/Database/mysql-replication/">https://jongmin92.github.io/2019/11/13/Database/mysql-replication/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>KimJongMin</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2019-11-13</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2021-03-21</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icon" rel="external nofollow noopener noreferrer" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a class="icon" rel="external nofollow noopener noreferrer" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a><a class="icon" rel="external nofollow noopener noreferrer" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/MySQL/">MySQL</a><a class="link-muted mr-2" rel="tag" href="/tags/Replication/">Replication</a><a class="link-muted mr-2" rel="tag" href="/tags/MMM/">MMM</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2019/11/18/Spring/bean-validation-1/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">Spring Boot에서의 Bean Validation (1)</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2019/11/10/Java/reactive-3/"><span class="level-item">Reactive Streams (3)</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">댓글</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'https://jongmin92.github.io/2019/11/13/Database/mysql-replication/';
+            this.page.identifier = '2019/11/13/Database/mysql-replication/';
         };
-        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-    })(window);
-</script>
-<script src="/js/insight.js" defer></script>
-<link rel="stylesheet" href="/css/search.css">
-<link rel="stylesheet" href="/css/insight.css">
-    
-</body>
-</html>
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'https-jongmin92-github-io' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><!--!--><div class="column column-right is-4-tablet is-4-desktop is-4-widescreen  order-3 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">카탈로그</h3><ul class="menu-list"><li><a class="level is-mobile" href="#"><span class="level-left"><span class="level-item">1</span><span class="level-item">Database Replication</span></span></a></li><li><a class="level is-mobile" href="#"><span class="level-left"><span class="level-item">2</span><span class="level-item">백업과 부하분산</span></span></a></li><li><a class="level is-mobile" href="#"><span class="level-left"><span class="level-item">3</span><span class="level-item">Replication 실습</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#"><span class="level-left"><span class="level-item">3.1</span><span class="level-item">MySQL master 컨테이너 실행하기</span></span></a></li><li><a class="level is-mobile" href="#"><span class="level-left"><span class="level-item">3.2</span><span class="level-item">master DB에 User 생성하기</span></span></a></li><li><a class="level is-mobile" href="#"><span class="level-left"><span class="level-item">3.3</span><span class="level-item">master DB dump</span></span></a></li><li><a class="level is-mobile" href="#"><span class="level-left"><span class="level-item">3.4</span><span class="level-item">MySQL slave 컨테이너 실행하기</span></span></a></li><li><a class="level is-mobile" href="#"><span class="level-left"><span class="level-item">3.5</span><span class="level-item">slave DB에 dump 파일 적용</span></span></a></li><li><a class="level is-mobile" href="#"><span class="level-left"><span class="level-item">3.6</span><span class="level-item">slave DB에서 master DB 연동하기</span></span></a></li><li><a class="level is-mobile" href="#"><span class="level-left"><span class="level-item">3.7</span><span class="level-item">Replication 테스트</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.png" alt="92Hz" height="28"></a><p class="is-size-7"><span>&copy; 2021 KimJongMin</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="external nofollow noopener noreferrer">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("ko");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="맨 위로" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="입력 하세요..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"입력 하세요...","untitled":"(제목 없음)","posts":"포스트","pages":"페이지","categories":"카테고리","tags":"태그"});
+        });</script></body></html>
