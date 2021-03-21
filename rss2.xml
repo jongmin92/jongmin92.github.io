@@ -132,9 +132,9 @@
       <category domain="https://jongmin92.github.io/categories/Programming/">Programming</category>
       
       
-      <category domain="https://jongmin92.github.io/tags/SHA256/">SHA256</category>
-      
       <category domain="https://jongmin92.github.io/tags/HMAC/">HMAC</category>
+      
+      <category domain="https://jongmin92.github.io/tags/SHA256/">SHA256</category>
       
       
       <comments>https://jongmin92.github.io/2019/12/23/Programming/hmac/#disqus_thread</comments>
@@ -159,6 +159,8 @@
       <category domain="https://jongmin92.github.io/categories/Programming/Java/">Java</category>
       
       
+      <category domain="https://jongmin92.github.io/tags/SHA256/">SHA256</category>
+      
       <category domain="https://jongmin92.github.io/tags/Hash/">Hash</category>
       
       <category domain="https://jongmin92.github.io/tags/Encryption/">Encryption</category>
@@ -166,8 +168,6 @@
       <category domain="https://jongmin92.github.io/tags/Message-Digest/">Message Digest</category>
       
       <category domain="https://jongmin92.github.io/tags/MD5/">MD5</category>
-      
-      <category domain="https://jongmin92.github.io/tags/SHA256/">SHA256</category>
       
       
       <comments>https://jongmin92.github.io/2019/12/18/Java/hash/#disqus_thread</comments>
