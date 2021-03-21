@@ -141,6 +141,107 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-11-13T13:22:00.000Z">2019-11-13</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Database/">Database</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    16분 읽기 (대략 2395 단어)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/11/13/Database/mysql-replication/">MySQL - Replication</a>
+            
+        </h1>
+        <div class="content">
+            <h1 id="database-replication"><a href="#Database-Replication" class="headerlink" title="Database Replication"></a>Database Replication</h1><p><strong>여러 대의 DB 서버가 있을 때 각각의 DB 서버가 동일한 데이터를 유지하도록 하는 메커니즘 혹은 기법을 말한다.</strong></p>
+<p>Replication(리플리케이션)을 이용해서 <code>백업</code>과 <code>부하분산</code>같은 목적을 달성할 수 있다.<br>master 서버에 데이터가 기록(쓰기)되고, slave 서버들은 master에 기록된 데이터를 전파받으며 보통 읽기에 사용된다.</p>
+<p>정리하면 한대의 master 서버는 쓰기, 여러대의 slave 서버들은 읽기에 사용되는 것이다.</p>
+<h1 id="백업과-부하분산"><a href="#백업과-부하분산" class="headerlink" title="백업과 부하분산"></a>백업과 부하분산</h1><p><strong>master DB의 데이터가 빠른 속도로 slave DB에 복제되기 때문에 master DB에 문제가 생겼을 때, slave DB를 master DB로 대체해 빠르게 장애를 복구할 수 있다.</strong></p>
+<p>그렇지만 <strong>Replication 자체가 완전한 백업을 의미하는 것은 아니다.</strong> master DB에 의도하지 않은 작업(데이터를 잘못해서 대량으로 삭제)을 수행했을 때 해당 작업이 slave DB에도 전파가 되기 때문에 이러한 것들은 복구가 불가능하다.<br>그러므로 실시간 성의 백업은 Replication이 담당하고, 시간차를 두고 백업이 필요한 것은 보통 스케쥴링을 통하여 시간 간격을 두고 백업을 하는것이 바람직하다.</p>
+<p>읽기와 관련된 부하분산을 할 수 있다는 것이 Replication의 장점이다. 한계라고 하면 쓰기와 관련된 부분인데, 한 대의 master DB에 쓰기가 집중되기 때문에 쓰기 작업에 부하가 많다면 문제가 생길 수 있다.</p>
+<p>간략하게 Replication이 동작하는 방식을 확인해보자. 아래 그림은 master DB와 slave DB가 1대1로 연결되어 있는 구조이다.</p>
+<p><img src="/images/post/2019-11-13/replication_1.jpg" alt="replication-1"></p>
+<ol>
+<li>master DB가 Data의 변경사항을 <code>Binary log</code>에 기록한다.</li>
+<li>master DB가 Slave DB에게 변경이 있음을 통지한다.</li>
+<li>slave DB가 <code>I/O thread</code> 이용해 Binary log를 가져온다.</li>
+<li>slave DB의 <code>Relay log</code>에 변경사항을 기록한다.</li>
+<li>slave DB의 <code>SQL thread</code>를 이용해 변경사항을 반영한다.</li>
+</ol>
+<p>아래 그림은 또 다른 구조의 Replication이다. master DB와 slave DB가 존재하고 slave DB에 다시 slave DB가 존재하는 구조이다.<br>가운데의 slave DB가 master DB 처럼 Binary log를 생성해서 다른 slave에게 전달하는 것이다. 이 경우 가장 마지막에 있는 slave DB가 직접 master DB에 접근하는 것이 아니기 때문에 master DB의 부담을 줄일 수 있다.<br>또한 가운데의 slave DB 역시 master DB 처럼 Binary log를 생성하고 있기 때문에 master DB에 문제가 생겼을 때, 빠르고 쉽게 master DB로 대체가 가능하다.</p>
+<p><img src="/images/post/2019-11-13/replication_2.jpg" alt="replication-2"></p>
+<h1 id="replication-실습"><a href="#Replication-실습" class="headerlink" title="Replication 실습"></a>Replication 실습</h1><p>그럼 이제 간단하게 MySQL Replication을 구축해보자. 여러 대의 서버에 MySQL을 설치하고 준비하는 것은 번거롭기 때문에 간편하게 도커를 이용해서 진행해보자.</p>
+<h2 id="mysql-master-컨테이너-실행하기"><a href="#MySQL-master-컨테이너-실행하기" class="headerlink" title="MySQL master 컨테이너 실행하기"></a>MySQL master 컨테이너 실행하기</h2><p>먼저 master DB 컨테이너를 생성하고 접속한다.<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> docker run --name mysql-master -e MYSQL_ROOT_PASSWORD=asdf1234 -d mysql</span><br><span class="line"><span class="meta">$</span> docker exec -it mysql-master /bin/bash</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> apt-get update; apt-get install vim -y</span><br></pre></td></tr></table></figure></p>
+<p>설치한 vim을 이용해 MySQL 설정 파일인 <code>/etc/mysql/my.cnf</code> 파일에 다음의 내용을 추가한다.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">log-bin=mysql-bin  </span><br><span class="line">server-id=1</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<ul>
+<li><strong>log-bin</strong>: 업데이트되는 모든 query들을 Binary log 파일에 기록한다는 의미이다.<br>기본적으로 Binary log 파일은 MySQL의 data directory인 /var/lib/mysql/ 에 호스트명-bin.000001, 호스트명-bin.000002 형태로 생성된다.<br>이때, log-bin 설정을 변경하면 Binary log 파일의 경로와 파일명의 접두어를 변경할 수 있다. log-bin=mysql 이라 설정하면 mysql-bin.000001, mysql-bin.000002 형태로 Binary log 파일이 생성된다.</li>
+<li><strong>server-id</strong>: Replication 설정에서 서버를 식별하기 위한 고유 ID값이다. master, slave 각각 다르게 설정해야 한다.</li>
+</ul>
+</blockquote>
+<p>도커 컨테이너(MySQL)를 재시작해서 변경된 설정 파일을 반영한다.<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> docker restart mysql-master</span><br></pre></td></tr></table></figure></p>
+<p>변경한 설정이 잘 적용되었는지 확인해보자.<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> docker exec -it mysql-master /bin/bash</span><br><span class="line"><span class="meta">$</span> mysql -u root -p </span><br><span class="line"><span class="meta">mysql&gt;</span> SHOW MASTER STATUS\G</span><br><span class="line"></span><br><span class="line">*************************** 1. row ***************************</span><br><span class="line">             File: mysql-bin.000001</span><br><span class="line">         Position: 155</span><br><span class="line">     Binlog_Do_DB:</span><br><span class="line"> Binlog_Ignore_DB:</span><br><span class="line">Executed_Gtid_Set:</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure></p>
+<h2 id="master-db에-user-생성하기"><a href="#master-DB에-User-생성하기" class="headerlink" title="master DB에 User 생성하기"></a>master DB에 User 생성하기</h2><p>slave DB에서 접근할 수 있도록 master DB에 User 계정을 생성하고 <code>REPLICATION SLAVE</code> 권한을 부여한다.<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">mysql&gt;</span> CREATE USER 'repl'@'%' IDENTIFIED BY 'replpw';</span><br><span class="line">Query OK, 0 rows affected (0.01 sec)</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span> ALTER USER 'repl'@'%' IDENTIFIED WITH mysql_native_password BY 'replpw';</span><br><span class="line">Query OK, 0 rows affected (0.01 sec)</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span> GRANT REPLICATION SLAVE ON *.* TO 'repl'@'%';</span><br><span class="line">Query OK, 0 rows affected (0.01 sec)</span><br></pre></td></tr></table></figure></p>
+<p>User가 생성되었는지 User 테이블을 확인한다.<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">mysql&gt;</span> USE mysql;</span><br><span class="line">Reading table information for completion of table and column names</span><br><span class="line">You can turn off this feature to get a quicker startup with -A</span><br><span class="line"></span><br><span class="line">Database changed</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span> SELECT user, host FROM user;</span><br><span class="line">+------------------+-----------+</span><br><span class="line">| user             | host      |</span><br><span class="line">+------------------+-----------+</span><br><span class="line">| repl             | %         |</span><br><span class="line">| root             | %         |</span><br><span class="line">| mysql.infoschema | localhost |</span><br><span class="line">| mysql.session    | localhost |</span><br><span class="line">| mysql.sys        | localhost |</span><br><span class="line">| root             | localhost |</span><br><span class="line">+------------------+-----------+</span><br><span class="line">6 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure></p>
+<p>다음으로, Replication 테스트를 위한 DB와 테이블을 생성한다.<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">mysql&gt;</span> CREATE DATABASE testdb;</span><br><span class="line">Query OK, 1 row affected (0.01 sec)</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span> USE testdb;</span><br><span class="line">Database changed</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span> CREATE TABLE testtable ( text varchar(20) );</span><br><span class="line">Query OK, 0 rows affected (0.03 sec)</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span> DESC testtable;</span><br><span class="line">+-------+-------------+------+-----+---------+-------+</span><br><span class="line">| Field | Type        | Null | Key | Default | Extra |</span><br><span class="line">+-------+-------------+------+-----+---------+-------+</span><br><span class="line">| text  | varchar(20) | YES  |     | NULL    |       |</span><br><span class="line">+-------+-------------+------+-----+---------+-------+</span><br><span class="line">1 row in set (0.01 sec)</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span> INSERT INTO testtable VALUES ('test row');</span><br><span class="line">Query OK, 1 row affected (0.01 sec)</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span> SELECT * from testtable;</span><br><span class="line">+----------+</span><br><span class="line">| text     |</span><br><span class="line">+----------+</span><br><span class="line">| test row |</span><br><span class="line">+----------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure></p>
+<h2 id="master-db-dump"><a href="#master-DB-dump" class="headerlink" title="master DB dump"></a>master DB dump</h2><p>slave DB에서 master DB를 연결하기 전에 master DB의 현재 DB 상태(table과 data)를 slave DB에 그대로 반영하기 위해 dump한다.<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> docker exec -it mysql-master /bin/bash</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> mysqldump -u root -p testdb &gt; dump.sql</span><br></pre></td></tr></table></figure></p>
+<p>dump된 파일을 slave DB 컨테이너에 옮기기 위해 먼저 로컬 PC로 복사한다.<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> docker cp mysql-master:dump.sql .</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> cat dump.sql</span><br></pre></td></tr></table></figure></p>
+<h2 id="mysql-slave-컨테이너-실행하기"><a href="#MySQL-slave-컨테이너-실행하기" class="headerlink" title="MySQL slave 컨테이너 실행하기"></a>MySQL slave 컨테이너 실행하기</h2><p>slave DB 컨테이너를 생성하고 접속한다.<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> docker run --name mysql-slave --link mysql-master -e MYSQL_ROOT_PASSWORD=asdf1234 -d mysql</span><br><span class="line"><span class="meta">$</span> docker exec -it mysql-slave /bin/bash</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> apt-get update; apt-get install vim -y</span><br></pre></td></tr></table></figure></p>
+<p>설치한 vim을 이용해 MySQL 설정 파일인 <code>/etc/mysql/my.cnf</code> 파일에 다음의 내용을 추가한다.<br>slave 서버를 여러 대로 구축하고자 할 때에 각 slave 서버의 server-id는 각각 달라야 한다는 것에 주의하자. (2^32-1 까지 가능하다.)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">log-bin=mysql-bin  </span><br><span class="line">server-id=2</span><br></pre></td></tr></table></figure></p>
+<p>도커 컨테이너(MySQL)를 재시작해서 변경된 설정 파일을 반영한다.<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> docker restart mysql-slave</span><br></pre></td></tr></table></figure></p>
+<h2 id="slave-db에-dump-파일-적용"><a href="#slave-DB에-dump-파일-적용" class="headerlink" title="slave DB에 dump 파일 적용"></a>slave DB에 dump 파일 적용</h2><p>로컬 PC로 복사한 master DB의 dump 파일을 slave DB로 옮긴 후 반영한다.<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> docker cp dump.sql mysql-slave:.</span><br><span class="line"><span class="meta">$</span> docker exec -it mysql-slave /bin/bash</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> mysql -u root -p</span><br><span class="line"><span class="meta">mysql&gt;</span> CREATE DATABASE testdb;</span><br><span class="line">Query OK, 1 row affected (0.01 sec)</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span> exit</span><br><span class="line">Bye</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> mysql -u root -p testdb &lt; dump.sql</span><br></pre></td></tr></table></figure></p>
+<p>다시 mysql에 접속해 <code>testdb</code> DB에 <code>testtable</code> 테이블과 데이터가 생성되어 있다면 정상적으로 dump 파일이 적용된 것이다.<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">mysql&gt;</span> USE testdb;</span><br><span class="line">Reading table information for completion of table and column names</span><br><span class="line">You can turn off this feature to get a quicker startup with -A</span><br><span class="line"></span><br><span class="line">Database changed</span><br><span class="line"><span class="meta">mysql&gt;</span> SHOW TABLES;</span><br><span class="line">+------------------+</span><br><span class="line">| Tables_in_testdb |</span><br><span class="line">+------------------+</span><br><span class="line">| testtable        |</span><br><span class="line">+------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure></p>
+<h2 id="slave-db에서-master-db-연동하기"><a href="#slave-DB에서-master-DB-연동하기" class="headerlink" title="slave DB에서 master DB 연동하기"></a>slave DB에서 master DB 연동하기</h2><p>이제 마지막으로 slave 서버에서 master 서버와 연동하는 작업만 하면 된다.</p>
+<p>그 전에 master DB의 mysql에 한번 더 접속하여 Binary log 파일의 현재 상태를 읽어야 한다. 이 <strong>Binary log 파일을 통해 master와 slave의 DB가 동기화되므로 반드시 동일한 로그의 위치를 서로 참조하고 있어야 한다.</strong><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> docker exec -it mysql-master /bin/bash</span><br><span class="line"><span class="meta">$</span> mysql -u root -p  </span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span> SHOW MASTER STATUS\G </span><br><span class="line">*************************** 1. row ***************************</span><br><span class="line">             File: mysql-bin.000001</span><br><span class="line">         Position: 1949</span><br><span class="line">     Binlog_Do_DB:</span><br><span class="line"> Binlog_Ignore_DB:</span><br><span class="line">Executed_Gtid_Set:</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure></p>
+<p>출력된 결과에서 File, Position 필드의 값을 기억하도록 한다.<br><strong><code>File</code> 은 현재 바이너리 로그 파일명이고, <code>Position</code> 은 현재 로그의 위치를 나타낸다.</strong> 앞서 DB와 테이블을 생성한 query가 추가됐으므로 이전에 <strong>SHOW MASTER STATUS\G</strong> 를 실행했을 때보다 Position 값이 증가했음을 볼 수 있다.</p>
+<p>이제 slave 서버의 mysql에 접속하여 master 서버와의 연결에 필요한 변수들을 적절히 설정해주어야 한다.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> docker exec -it mysql-slave /bin/bash</span><br><span class="line"><span class="meta">$</span> mysql -u root -p  </span><br><span class="line"><span class="meta">mysql&gt;</span> CHANGE MASTER TO MASTER_HOST='mysql-master', MASTER_USER='repl', MASTER_PASSWORD='replpw', MASTER_LOG_FILE='mysql-bin.000001', MASTER_LOG_POS=1949;</span><br><span class="line">Query OK, 0 rows affected, 2 warnings (0.03 sec)</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span> START SLAVE;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>MASTER_HOST : master 서버의 호스트명</li>
+<li>MASTER_USER : master 서버의 mysql에서 REPLICATION SLAVE 권한을 가진 User 계정의 이름</li>
+<li>MASTER_PASSWORD : master 서버의 mysql에서 REPLICATION SLAVE 권한을 가진 User 계정의 비밀번호</li>
+<li>MASTER_LOG_FILE : master 서버의 바이너리 로그 파일명</li>
+<li>MASTER_LOG_POS : master 서버의 현재 로그의 위치</li>
+</ul>
+</blockquote>
+<p>아래의 명령어를 실행해 slave의 상태를 확인해보자.<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">mysql&gt;</span> SHOW SLAVE STATUS\G</span><br></pre></td></tr></table></figure></p>
+<h2 id="replication-테스트"><a href="#Replication-테스트" class="headerlink" title="Replication 테스트"></a>Replication 테스트</h2><p>문제 없이 Replication 설정이 완료되었다면 마지막으로 실제 잘 동작하는지 확인해보자.<br>master DB에서 데이터를 생성하고, slave DB에 복제되어 데이터가 조회되는지 확인한다.</p>
+<p>master DB에서 데이터를 생성한다.<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> docker exec -it mysql-master /bin/bash</span><br><span class="line"><span class="meta">$</span> mysql -u root -p</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span> USE testdb;</span><br><span class="line">Reading table information for completion of table and column names</span><br><span class="line">You can turn off this feature to get a quicker startup with -A</span><br><span class="line"></span><br><span class="line">Database changed</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span> INSERT INTO testtable VALUES ('test row2');</span><br><span class="line">Query OK, 1 row affected (0.01 sec)</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span> SELECT * FROM testtable;</span><br><span class="line">+-----------+</span><br><span class="line">| text      |</span><br><span class="line">+-----------+</span><br><span class="line">| test row  |</span><br><span class="line">| test row2 |</span><br><span class="line">+-----------+</span><br><span class="line">2 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure></p>
+<p>slave DB에서 데이터를 조회한다.<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> docker exec -it mysql-slave /bin/bash</span><br><span class="line"><span class="meta">$</span> mysql -u root -p</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span> SELECT * from testtable;</span><br><span class="line">+-----------+</span><br><span class="line">| text      |</span><br><span class="line">+-----------+</span><br><span class="line">| test row  |</span><br><span class="line">| test row2 |</span><br><span class="line">+-----------+</span><br><span class="line">2 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-11-10T12:01:00.000Z">2019-11-10</time>
                 
                 <div class="level-item">
@@ -239,9 +340,9 @@
 <p>onNext를 제외하고는 Operator 마다 코드가 반복될 수 있기 때문에 해당 부분을 DelegateSub으로 분리해보자.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DelegateSub</span> <span class="keyword">implements</span> <span class="title">Subscriber</span>&lt;<span class="title">Integer</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    Subscriber sub;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DelegateSub</span><span class="params">(Subscriber sub)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.sub = sub;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onSubscribe</span><span class="params">(Subscription s)</span> </span>&#123;</span><br><span class="line">        sub.onSubscribe(s);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onNext</span><span class="params">(Integer i)</span> </span>&#123;</span><br><span class="line">        sub.onNext(i);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onError</span><span class="params">(Throwable t)</span> </span>&#123;</span><br><span class="line">        sub.onError(t);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onComplete</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        sub.onComplete();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>DelegateSub을 사용해서 기존 코드를 다음과 같이 수정할 수 있다. 필요한 onNext 메서드만 오버라이딩해서 사용한다.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PubSub2</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Publisher&lt;Integer&gt; pub = iterPub(Stream.iterate(<span class="number">1</span>, a -&gt; a + <span class="number">1</span>)</span><br><span class="line">                                               .limit(<span class="number">5</span>)</span><br><span class="line">                                               .collect(Collectors.toList()));</span><br><span class="line">        Publisher&lt;Integer&gt; mapPub = mapPub(pub, s -&gt; s * <span class="number">10</span>);</span><br><span class="line">        mapPub.subscribe(logSub());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> Publisher&lt;Integer&gt; <span class="title">mapPub</span><span class="params">(Publisher&lt;Integer&gt; pub, Function&lt;Integer, Integer&gt; f)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Publisher&lt;Integer&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">subscribe</span><span class="params">(Subscriber&lt;? <span class="keyword">super</span> Integer&gt; sub)</span> </span>&#123;</span><br><span class="line">                pub.subscribe(<span class="keyword">new</span> DelegateSub(sub) &#123;</span><br><span class="line">                    <span class="meta">@Override</span></span><br><span class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onNext</span><span class="params">(Integer i)</span> </span>&#123;</span><br><span class="line">                        sub.onNext(f.apply(i));</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> Publisher&lt;Integer&gt; <span class="title">iterPub</span><span class="params">(List&lt;Integer&gt; iter)</span> </span>&#123;</span><br><span class="line">        ...</span><br><span class="line">        ...</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> Subscriber&lt;Integer&gt; <span class="title">logSub</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        ...</span><br><span class="line">        ...</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h1 id="subpub"><a href="#SubPub" class="headerlink" title="SubPub"></a>SubPub</h1><p>이번에는 Publisher로부터 전달받은 Data를 전부 더하는 sum operation을 만들어보자.</p>
+<h1 id="sumpub"><a href="#SumPub" class="headerlink" title="SumPub"></a>SumPub</h1><p>이번에는 Publisher로부터 전달받은 Data를 전부 더하는 sum operation을 만들어보자.</p>
 <p>기존 Publisher와 Subscriber를 onNext로 이어주지 않고, onComplete이 호출되었을 때, sum 값을 onNext로 전달한 뒤 onComplete을 호출해 종료한다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PubSub2</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Publisher&lt;Integer&gt; pub = iterPub(Stream.iterate(<span class="number">1</span>, a -&gt; a + <span class="number">1</span>)</span><br><span class="line">                                               .limit(<span class="number">5</span>)</span><br><span class="line">                                               .collect(Collectors.toList()));</span><br><span class="line">        Publisher&lt;Integer&gt; sumPub = sumPub(pub);</span><br><span class="line">        sumPub.subscribe(logSub());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> Publisher&lt;Integer&gt; <span class="title">sumPub</span><span class="params">(Publisher&lt;Integer&gt; pub)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Publisher&lt;Integer&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">subscribe</span><span class="params">(Subscriber&lt;? <span class="keyword">super</span> Integer&gt; sub)</span> </span>&#123;</span><br><span class="line">                pub.subscribe(<span class="keyword">new</span> DelegateSub(sub) &#123;</span><br><span class="line">                    <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">                    <span class="meta">@Override</span></span><br><span class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onNext</span><span class="params">(Integer i)</span> </span>&#123;</span><br><span class="line">                        sum += i;</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    <span class="meta">@Override</span></span><br><span class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onComplete</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                        sub.onNext(sum);</span><br><span class="line">                        sub.onComplete();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> Publisher&lt;Integer&gt; <span class="title">iterPub</span><span class="params">(List&lt;Integer&gt; iter)</span> </span>&#123;</span><br><span class="line">        ...</span><br><span class="line">        ...</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> Subscriber&lt;Integer&gt; <span class="title">logSub</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        ...</span><br><span class="line">        ...</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- 실행결과</span><br><span class="line"><span class="number">00</span>:<span class="number">30</span>:<span class="number">48.643</span> [main] INFO com.jongmin.reactive.practice.PubSub - onSubscribe</span><br><span class="line"><span class="number">00</span>:<span class="number">30</span>:<span class="number">48.648</span> [main] INFO com.jongmin.reactive.practice.PubSub - onNext: <span class="number">15</span></span><br><span class="line"><span class="number">00</span>:<span class="number">30</span>:<span class="number">48.650</span> [main] INFO com.jongmin.reactive.practice.PubSub - onComplete</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PubSub2</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Publisher&lt;Integer&gt; pub = iterPub(Stream.iterate(<span class="number">1</span>, a -&gt; a + <span class="number">1</span>)</span><br><span class="line">                                               .limit(<span class="number">5</span>)</span><br><span class="line">                                               .collect(Collectors.toList()));</span><br><span class="line">        Publisher&lt;Integer&gt; sumPub = sumPub(pub);</span><br><span class="line">        sumPub.subscribe(logSub());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> Publisher&lt;Integer&gt; <span class="title">sumPub</span><span class="params">(Publisher&lt;Integer&gt; pub)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Publisher&lt;Integer&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">subscribe</span><span class="params">(Subscriber&lt;? <span class="keyword">super</span> Integer&gt; sub)</span> </span>&#123;</span><br><span class="line">                pub.subscribe(<span class="keyword">new</span> DelegateSub(sub) &#123;</span><br><span class="line">                    <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">                    <span class="meta">@Override</span></span><br><span class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onNext</span><span class="params">(Integer i)</span> </span>&#123;</span><br><span class="line">                        sum += i;</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    <span class="meta">@Override</span></span><br><span class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onComplete</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                        sub.onNext(sum);</span><br><span class="line">                        sub.onComplete();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> Publisher&lt;Integer&gt; <span class="title">iterPub</span><span class="params">(List&lt;Integer&gt; iter)</span> </span>&#123;</span><br><span class="line">        ...</span><br><span class="line">        ...</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> Subscriber&lt;Integer&gt; <span class="title">logSub</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        ...</span><br><span class="line">        ...</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- 실행결과</span><br><span class="line"><span class="number">00</span>:<span class="number">30</span>:<span class="number">48.643</span> [main] INFO com.jongmin.reactive.practice.PubSub2 - onSubscribe</span><br><span class="line"><span class="number">00</span>:<span class="number">30</span>:<span class="number">48.648</span> [main] INFO com.jongmin.reactive.practice.PubSub2 - onNext: <span class="number">15</span></span><br><span class="line"><span class="number">00</span>:<span class="number">30</span>:<span class="number">48.650</span> [main] INFO com.jongmin.reactive.practice.PubSub2 - onComplete</span><br></pre></td></tr></table></figure>
 
         </div>
         
@@ -497,96 +598,6 @@
 
 
 
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-05-09T13:13:00.000Z">2019-05-09</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Programming/">Programming</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/Programming/Gradle/">Gradle</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    7분 읽기 (대략 1025 단어)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/05/09/Gradle/gradle-api-vs-implementation/">(Gradle dependency) api와 implementation 차이</a>
-            
-        </h1>
-        <div class="content">
-            <p><strong>build script의 <code>dependencies</code> 블록에 여러 가지 다양한 종속성 구성(api, implementation, compileOnly, runtimeOnly, annotationProcessor)을 사용하여 라이브러리 종속성을 선언할 수 있습니다.</strong> 다양한 종속성 구성 중 api와 implementation의 차이에 대해서 알아봅니다.</p>
-<h1 id="api-amp-implementation"><a href="#api-amp-implementation" class="headerlink" title="api &amp; implementation"></a>api &amp; implementation</h1><p><a href="https://docs.gradle.org/current/userguide/dependency_management_for_java_projects.html#sec:configurations_java_tutorial" rel="external nofollow noopener noreferrer" target="_blank">Gradle document</a>에서는 api와 implementation에 대해서 다음과 같이 설명하고 있습니다.</p>
-<ul>
-<li><strong>api</strong><blockquote>
-<p><strong>The dependencies required to compile the production source of the project which are part of the API exposed by the project.</strong> For example the project uses Guava and exposes public interfaces with Guava classes in their method signatures.</p>
-<p><strong>프로젝트에 의해 노출 된 API의 일부인 프로젝트의 프로덕션 소스를 컴파일하는 데 필요한 종속성</strong></p>
-</blockquote>
-</li>
-<li><strong>implementation</strong><blockquote>
-<p><strong>The dependencies required to compile the production source of the project which are not part of the API exposed by the project.</strong> For example the project uses Hibernate for its internal persistence layer implementation.</p>
-<p><strong>프로젝트에 의해 노출 된 API의 일부가 아닌 프로젝트의 프로덕션 소스를 컴파일하는 데 필요한 종속성</strong></p>
-</blockquote>
-</li>
-</ul>
-<p>위 설명만 가지고는 이해하기가 쉽지 않습니다. <a href="https://developer.android.com/studio/build/dependencies?utm_source=android-studio#dependency_configurations" rel="external nofollow noopener noreferrer" target="_blank">Android Developers document</a>에서는 같은 내용을 다음과 같이 한글로 설명하고 있습니다.</p>
-<ul>
-<li><strong>api</strong><blockquote>
-<p>Gradle은 컴파일 클래스 경로 및 빌드 출력에 종속성을 추가합니다. <strong>모듈에 api 종속성을 포함하면 다른 모듈에 그 종속성을 과도적으로 내보내기를 원하며 따라서 런타임과 컴파일 시 모두 종속성을 사용할 수 있다는 사실을 Gradle에 알려줄 수 있습니다.</strong></p>
-<p>이 구성은 compile(현재 지원 중단됨)과 똑같이 동작합니다. 다만 이것은 주의해서 사용해야 하며 다른 업스트림 소비자에게 일시적으로 내보내는 종속성만 함께 사용해야 합니다. 그 이유는 api 종속성이 외부 API를 변경하면 Gradle이 컴파일 시 해당 종속성에 액세스할 권한이 있는 모듈을 모두 다시 컴파일하기 때문입니다. 그러므로 api 종속성이 많이 있으면 빌드 시간이 상당히 증가합니다. 종속성의 API를 별도의 모듈에 노출시키고 싶은 것이 아니라면 라이브러리 모듈은 implementation 종속성을 대신 사용해야 합니다.</p>
-</blockquote>
-</li>
-<li><strong>implementation</strong><blockquote>
-<p>Gradle은 종속성을 컴파일 클래스 경로에 추가하여 종속성을 빌드 출력에 패키징합니다. 다만 <strong>모듈이 implementation 종속성을 구성하는 경우, 이것은 Gradle에 개발자가 모듈이 컴파일 시 다른 모듈로 유출되는 것을 원치 않는다는 것을 알려줍니다. 즉, 종속성은 런타임 시 다른 모듈에서만 이용할 수 있습니다.</strong></p>
-<p>api 또는 compile(지원 중단됨) 대신 이 종속성 구성을 사용하면 빌드 시스템이 재컴파일해야 하는 모듈의 수가 줄어들기 때문에 빌드 시간이 상당히 개선될 수 있습니다. 예를 들어, implementation 종속성이 API를 변경하면 Gradle은 해당 종속성과 그 종속성에 직접 연결된 모듈만 다시 컴파일합니다. 대부분의 앱과 테스트 모듈은 이 구성을 사용해야 합니다.</p>
-</blockquote>
-</li>
-</ul>
-<p>간단하게 차이점을 정리하면 다음과 같습니다.</p>
-<ul>
-<li><strong>api</strong>: 의존 라이브러리 수정시 해당 모듈을 의존하고 있는 모듈들 또한 재빌드<ul>
-<li>A(api) &lt;- B &lt;- C 일 때, C 에서 A 를 접근할 수 있음</li>
-<li>A 수정시 B 와 C 모두 재빌드</li>
-</ul>
-</li>
-<li><strong>implementaion</strong>: 의존 라이브러리 수정시 본 모듈까지만 재빌드<ul>
-<li>A(implementation) &lt;- B &lt;- C 일 때, C 에서 A 를 접근할 수 없음</li>
-<li>A 수정시 B 까지 재빌드 </li>
-</ul>
-</li>
-</ul>
-<h1 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h1><ul>
-<li><a href="https://stackoverflow.com/a/44419574" rel="external nofollow noopener noreferrer" target="_blank">https://stackoverflow.com/a/44419574</a></li>
-<li><a href="https://medium.com/mindorks/implementation-vs-api-in-gradle-3-0-494c817a6fa" rel="external nofollow noopener noreferrer" target="_blank">https://medium.com/mindorks/implementation-vs-api-in-gradle-3-0-494c817a6fa</a></li>
-<li><a href="https://www.youtube.com/watch?v=7ll-rkLCtyk&amp;feature=youtu.be&amp;t=29m35s" rel="external nofollow noopener noreferrer" target="_blank">https://www.youtube.com/watch?v=7ll-rkLCtyk&amp;feature=youtu.be&amp;t=29m35s</a></li>
-</ul>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
 <!-- For Google Adsense -->
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -663,7 +674,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            124
+                            125
                         </p>
                     </a>
                 </div>
@@ -675,7 +686,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            22
+                            23
                         </p>
                     </a>
                 </div>
@@ -687,7 +698,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            203
+                            205
                         </p>
                     </a>
                 </div>
@@ -731,6 +742,25 @@
         <h3 class="menu-label">
             최근 글
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2021/03/21/Kotlin/coroutines/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="코루틴 이해하기">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-03-20T15:17:42.000Z">2021-03-21</time></div>
+                    <a href="/2021/03/21/Kotlin/coroutines/" class="title has-link-black-ter is-size-6 has-text-weight-normal">코루틴 이해하기</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Kotlin/">Kotlin</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -808,25 +838,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/12/18/Java/hash/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Hash - MD5와 SHA256">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-17T15:23:00.000Z">2019-12-18</time></div>
-                    <a href="/2019/12/18/Java/hash/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Hash - MD5와 SHA256</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Programming/">Programming</a> / <a class="has-link-grey -link" href="/categories/Programming/Java/">Java</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -882,6 +893,14 @@
         <a class="level is-marginless" href="/categories/Java/">
             <span class="level-start">
                 <span class="level-item">Java</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Kotlin/">
+            <span class="level-start">
+                <span class="level-item">Kotlin</span>
             </span>
             <span class="level-end">
                 <span class="level-item tag">1</span>
@@ -1041,7 +1060,7 @@
                 
                 </a>
                 <p class="is-size-7">
-                &copy; 2020 KimJongMin&nbsp;
+                &copy; 2021 KimJongMin&nbsp;
                 Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="external nofollow noopener noreferrer">Icarus</a>
                 
                 </p>
@@ -1159,7 +1178,7 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 
 
-<a id="back-to-top" title="Back to Top" href="javascript:;">
+<a id="back-to-top" title="Zurück nach oben" href="javascript:;">
     <i class="fas fa-chevron-up"></i>
 </a>
 <script src="/js/back-to-top.js" defer></script>

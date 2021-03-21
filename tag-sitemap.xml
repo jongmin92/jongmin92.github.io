@@ -3,8 +3,29 @@
 
 
     <url>
+        <loc>https://jongmin92.github.io/tags/Coroutines/</loc>
+        <lastmod>2021-03-21T06:12:47.200Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/tags/Kotlin/</loc>
+        <lastmod>2021-03-21T06:12:47.200Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://jongmin92.github.io/tags/Reactive/</loc>
+        <lastmod>2020-08-11T04:33:58.326Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://jongmin92.github.io/tags/Java/</loc>
-        <lastmod>2020-03-31T09:02:31.536Z</lastmod>
+        <lastmod>2020-08-11T04:33:58.326Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -943,13 +964,6 @@
     <url>
         <loc>https://jongmin92.github.io/tags/ES6/</loc>
         <lastmod>2020-03-20T17:25:20.919Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://jongmin92.github.io/tags/Reactive/</loc>
-        <lastmod>2020-03-20T17:25:11.848Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

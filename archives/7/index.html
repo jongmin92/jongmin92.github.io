@@ -141,6 +141,196 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-08-06T13:55:00.000Z">2018-08-06</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Programming/">Programming</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/Programming/Tool/">Tool</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    27분 읽기 (대략 4006 단어)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2018/08/06/Tool/maven_basic/">빌드 도구와 메이븐</a>
+            
+        </h1>
+        <div class="content">
+            <h1 id="빌드-도구"><a href="#빌드-도구" class="headerlink" title="빌드 도구"></a>빌드 도구</h1><h2 id="빌드-도구란"><a href="#빌드-도구란" class="headerlink" title="빌드 도구란?"></a>빌드 도구란?</h2><h3 id="개발-환경의-변화와-빌드"><a href="#개발-환경의-변화와-빌드" class="headerlink" title="개발 환경의 변화와 빌드"></a>개발 환경의 변화와 빌드</h3><p>자바를 처음 공부할 때는 이클립스 혹은 인텔리제이 같은 IDE만으로 프로그램을 뚝딱 만들 수 있다. 그러나 현업에 투입되면 무언가 복잡한 환경을 만나게 된다.</p>
+<p>하지만 실제 자바 입문시절에 배운 과정과 현업에서 사용하는 과정에 차이는 없다. 다만 다양한 도구를 사용하여 더 전문화하여 현업 도구에 활용할 뿐이다.</p>
+<ul>
+<li><strong>명령행에서 컴파일하기</strong><br>아주 간단한 프로그램이라면 명령행에서 javac를 이용하는 것만으로도 충분하다. 하지만 라이브러리 등을 이용하면, classpath에 다수의 라이브러리 경로를 기술한 뒤에 컴파일 해야 한다. 또한 생성된 클래스 파일을 모아 JAR 파일을 생성하려면 이 역시 모두 명령어로 실행해야 한다.<br>소스 코드의 컴파일에서 JAR 파일의 생성까지 긴 과정을 수행하려면 방대한 명령어가 필요한데, 이를 매번 수작업으로 작성하면 큰 수고가 든다.</li>
+<li><strong>프로젝트 및 라이브러리 설치</strong><br>최근에는 개발할 때 모든 프로그램을 처음부터 만드는 경우가 거의 없다. 프로그램에 필요한 기능은 라이브러리를 이용하거나, 프레임워크를 이용하여 애플리케이션을 개발한다.<br>이런 경우, 필요한 소프트웨어를 갖추고 정해진 대로 파일을 구성해야 한다.</li>
+<li><strong>테스트 자동화</strong><br>단순한 프로그램이라면 컴파일 후 실행 및 동작만 확인하는 것으로 충분하지만, 어느 정도 규모 있는 프로그램은 프로그램 생성과 함께 테스트를 실행하는 것이 일반적이다.</li>
+<li><strong>프로그램 배포</strong><br>웹 애플리케이션은 구현한 프로그램을 서버에 배포하게 된다. 이런 작업을 수작업으로 시행하기가 번거롭다.</li>
+</ul>
+<h3 id="빌드-도구의-역할"><a href="#빌드-도구의-역할" class="headerlink" title="빌드 도구의 역할"></a>빌드 도구의 역할</h3><p>‘빌드 도구’는 단순히 프로그램을 컴파일하여 애플리케이션을 생성하는 작업 그 이상으로 다양한 기능을 제공한다.</p>
+<ul>
+<li><strong>프로그램 빌드</strong><br>프로그램을 컴파일하고, 지정된 디렉터리에 필요한 리소스를 모아서 프로그램을 완성한다. 그때 라이브러리등 필요한 파일을 설치하도록 지정할 수 있다.</li>
+<li><strong>프로그램 테스트와 실행</strong><br>빌드된 프로그램의 실행뿐 아니라 테스트 기능도 제공한다. 빌드를 실행 할 때, 빌드가 완료되면 곧바로 테스트를 실행하는 도구도 있다.</li>
+<li><strong>라이브러리 관리</strong><br>프로그램에서 필요한 라이브러리들을 관리한다. 빌드 실행 시 자동으로 라이브러리를 다운로드하고 설치하는 등의 작업을 한다.</li>
+<li><strong>배포 작업</strong><br>빌드한 프로그램을 배포하는 기능을 제공한다.</li>
+</ul>
+<h2 id="개발-도구와-빌드-도구"><a href="#개발-도구와-빌드-도구" class="headerlink" title="개발 도구와 빌드 도구"></a>개발 도구와 빌드 도구</h2><p>개발 도구에 있어 빌드 도구를 다루는 방식은 크게 두 가지이다.</p>
+<ul>
+<li><strong>빌드 도구를 이용하는 기능이 포함된 경우</strong><br>이클립스는 메이븐, 인텔리제이는 메이븐과 그레이들을 지원한다.</li>
+<li><strong>개발 도구에서 명령어로 실행하는 경우</strong></li>
+</ul>
+<h1 id="메이븐-기초"><a href="#메이븐-기초" class="headerlink" title="메이븐 기초"></a>메이븐 기초</h1><p>메이븐은 아파치 소프트웨어 재단이 개발하는 오픈 소스 빌드 도구이다. ‘아파치 앤트(Ant)’의 후속으로 개발되었고, 자바 프로그램 개발을 대상으로 한 오픈 소스 빌드 도구이다.</p>
+<h2 id="메이븐-특징"><a href="#메이븐-특징" class="headerlink" title="메이븐 특징"></a>메이븐 특징</h2><ul>
+<li><strong>빌드 파일은 XML로 작성</strong></li>
+<li><strong>단위 작업 ‘골’</strong><br>골은 메이븐에서 실행하는 작업의 목적을 지정한다. 메이븐 명령어를 실행할 때 골을 지정하면, 어떤 작업을 수행하여 무엇을 작성할지 지정할 수 있다.</li>
+<li><strong>라이브러리 관리와 중앙 저장소</strong><br>빌드를 실행하는 사이에, 빌드 파일에 기술된 정보를 바탕으로 필요한 라이브러리를 자동으로 다운로드하여 포함시킨다. 이를 가능하게 하는 것이 중앙 저장소이다. 중앙 저장소는 메이븐에서 이용 가능한 라이브러리를 모아서 관리하는 웹 서비스이다.</li>
+<li><strong>테스트와 문서 생성</strong><br>엔트의 표준에는 포함되지 않았던 JUnit 테스트 및 Javadoc 문서 생성 등의 기능을 갖추고 있다.</li>
+<li><strong>플러그인을 이용한 확장</strong><br>플러그인을 사용하면 메이븐에 기능을 추가할 수 있다.</li>
+</ul>
+<h2 id="메이븐-프로젝트-생성"><a href="#메이븐-프로젝트-생성" class="headerlink" title="메이븐 프로젝트 생성"></a>메이븐 프로젝트 생성</h2><p>메이븐에 포함된 <strong><code>archetype:generate</code></strong>라는 골을 이용하면, 간단하게 프로젝트의 기본 부분을 만들 수 있다. 아키타입(archetype)은 프로그램의 템플릿 모음이다.</p>
+<p>Intellij를 이용해서도 메이븐을 기반으로 프로그램을 빌드하는 프로젝트를 생성할 수 있다. New Project -&gt; 목록에서 Maven 선택 -&gt; Create from archetype 체크 -&gt; maven-archetype-quickstart 선택</p>
+<p>메이븐에서는 mvn 명령어로 각종 조작을 할 수 있는데, 이 명령어들을 인텔리제이의 ‘Run’을 이용하여 실행할 수 있다. 실행할 내용을 컨피그레이션에 설정하면 인텔리제이의 ‘Run’으로 프로그램의 빌드와 실행, 디버그 등의 기능을 수행할 수 있다. (‘Run…’ -&gt; Edit Configurations’ 메뉴에서 설정 가능)</p>
+<h2 id="pomxml"><a href="#pom-xml" class="headerlink" title="pom.xml"></a>pom.xml</h2><p>pom.xml 파일에서 POM은 ‘Project Object Model’을 말한다. 이 파일에 프로젝트에 관한 각종 정보를 기술한다.</p>
+<h3 id="ltprojectgt와-기본속성"><a href="#lt-project-gt-와-기본속성" class="headerlink" title="&lt;project&gt;와 기본속성"></a>&lt;project&gt;와 기본속성</h3><ul>
+<li><p><strong>모델 버전</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">modeVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modeVersion</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>기본적으로 메이븐은 하위 호환성을 지원하기 때문에 이후 새로운 버전이 되더라도 이곳의 버전 번호를 바꾸면 이외 부분은 크게 수정하지 않고도 사용할 수 있다.</p>
+</li>
+<li><p><strong>그룹 ID</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.jongmin<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>그룹 ID는 작성할 프로그램이 어디에 소속되어 있는지를 나타낸다.</p>
+</li>
+<li><p><strong>아티팩트 ID</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mvn-app<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>그룹 ID와 함께 프로그램을 식별하는 데 사용된다. ID이기 때문에 같은 그룹 내에서 같은 프로젝트 이름이 중복되지 않도록 주의해야 한다.</p>
+</li>
+<li><p><strong>버전</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>메이븐을 사용하는 프로젝트를 빌드하거나 패키징한 경우 여기서 지정된 번호가 생성된 프로그램의 버전으로 설정된다. 보통은 생성된 JAR 파일의 파일명에도 사용된다.</p>
+</li>
+<li><p><strong>패키지 종류</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">packaging</span>&gt;</span>jar<span class="tag">&lt;/<span class="name">packaging</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>보통은 jar을 지정하지만, zip이라고 지정하면 ZIP 파일로 패키징한다.</p>
+</li>
+<li><p><strong>애플리케이션 이름</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">name</span>&gt;</span>mvn-app<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>작성하는 애플리케이션의 이름을 지정한다. 그룹 ID나 아티팩트 ID와 달리 유일한 값일 필요가 없다.</p>
+</li>
+<li><p><strong>URL</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.apache.org<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>기본값으로는 메이븐 사이트의 URL이 지정되어 있다.</p>
+</li>
+</ul>
+<p><strong>&lt;properties&gt;</strong>는 pom.xml에서 이용되는 속성값을 설정한다.</p>
+  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">project.build.sourceEncoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">project.build.sourceEncoding</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>기본값으로는 &lt;project.build.sourceEncoding&gt;라는 항목이 설정되어 있는데 이는 소스 파일의 문자 인코딩 방식을 지정한다.</p>
+<h3 id="ltdependenciesgt와-의존성-설정"><a href="#lt-dependencies-gt-와-의존성-설정" class="headerlink" title="&lt;dependencies&gt;와 의존성 설정"></a>&lt;dependencies&gt;와 의존성 설정</h3><p>dependencies 태크를 통해 필요한 라이브러리를 관리할 수 있다. 여기에 의존성을 적어두면 필요한 라이브러리 등을 자동으로 다운로드하여 설치 등을 할 수 있다.</p>
+<blockquote>
+<p> &lt;dependency&gt; 태그를 설정하는 것만으로 의존 라이브러리가 자동으로 로드되는 것은 <strong>메이븐의 중앙 저장소</strong> 때문이다. 중앙 저장소는 메이븐을 개발한 아파치 소프트웨어 재단이 운영하는 사이트이다.</p>
+</blockquote>
+<h2 id="기본적인-골"><a href="#기본적인-‘골’" class="headerlink" title="기본적인 ‘골’"></a>기본적인 ‘골’</h2><p>메이븐은 골을 지정하여 실행할 처리의 역할을 정한다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn 골</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><strong>compile</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn compile</span><br></pre></td></tr></table></figure>
+<p>자바 소스 코드 파일을 컴파일 한다. 프로젝트 폴더 내에 target 폴더가 생성된다.</p>
+</li>
+<li><p><strong>test-compile</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn <span class="built_in">test</span>-compile</span><br></pre></td></tr></table></figure>
+<p>유닛 테스트용 클래스를 컴파일한다. src 폴더 안의 test 안에 작성된 유닛 테스트용 소스 코드 파일을 컴파일하여, target 폴더 안에 test-class 폴더를 작성하고 그 안에 클래스 파일을 생성한다.</p>
+</li>
+<li><p><strong>test</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+<p>메이븐은 테스트(유닛 테스트)가 거의 표준 기능으로 포함되어 있다. 테스트를 개별적으로 실행하는 골이 test이다.작성한 유닛 테스트용 클래스를 이용하여 테스트가 실행되고 그 결과가 출력된다.</p>
+</li>
+<li><p><strong>package</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn package</span><br></pre></td></tr></table></figure>
+<p>mvn compile을 실행하면 클래스 파일이 생성되지만, 일반적으로 자바 프로그램은 클래스파일을 그대로 배포하지는 않는다. 일반적으로 JAR 파일 등으로 패키징하여 배포한다.</p>
+<p>명령 한 번으로 프로그램을 컴파일하여 유닛 테스트를 실행한 후 JAR 파일로 패키징하는 처리가 모두 자동적으로 수행된다.</p>
+<p>실행 후 target 폴더 안에 jar 파일이 생성된다.</p>
+</li>
+<li><p><strong>clean</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn clean</span><br></pre></td></tr></table></figure>
+<p>메이븐은 프로그램을 빌드하면서 컴파일된 클래스 파일 뿐만 아니라, 테스트, 압축을 실행하는 파일 등을 만든다. clean은 부가적으로 생성된 파일을 모두 지운다.</p>
+</li>
+</ul>
+<h2 id="프로그램-실행하기"><a href="#프로그램-실행하기" class="headerlink" title="프로그램 실행하기"></a>프로그램 실행하기</h2><p>클래스가 하나인 코드는 java 명령어로도 쉽게 실행할 수 있다. 그러나 다양한 라이브러리를 이용하는 프로젝트에서는 모든 클래스 경로를 직접 지정해야 하기 때문에 java 명령어를 이용해 실행하는 일은 번거롭다.</p>
+<p>메이븐에는 표준으로 자바 프로그램을 실행하는 골은 없다. 하지만 <code>exec-java-plugin</code> 플러그인을 이용하면 프로그램을 실행할 수 있다.</p>
+<p>pom.xml의 &lt;project&gt; 태그 안에 있는 &lt;dependencies&gt; 종료 태그의 다음 행에 다음과 같이 플러그인을 추가한다.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.codehaus.mojo<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>exec-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.5.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">            	<span class="tag">&lt;<span class="name">mainClass</span>&gt;</span>com.jongmin.App<span class="tag">&lt;/<span class="name">mainClass</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>명령행에 다음과 같이 실행하면 App 클래스가 실행된다. 만약 mvn clean으로 프로젝트의 빌드 결과물을 제거한 경우 다시 mvn package로 빌드한 후에 실행한다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn <span class="built_in">exec</span>:java</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>exec-maven-plugin은 메인 클래스를 지정해야 한다. 플러그인에 정보를 지정할 때는 &lt;configuration&gt; 태그를 이용한다.</p>
+</blockquote>
+<h2 id="빌드-플러그인"><a href="#빌드-플러그인" class="headerlink" title="빌드 플러그인"></a>빌드 플러그인</h2><p>&lt;build&gt; 태그는 빌드에 관한 정보를 기술하는 태그이다. 형태는 다음과 같다.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">plugin</span>&gt;</span>...<span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugin</span>&gt;</span>...<span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">        ...</span><br><span class="line">    <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>&lt;build&gt;와 &lt;plugins&gt; 태그는 여러 개 사용할 수 없다. 반드시 1개씩 있고, 그 안에 모든 &lt;plugin&gt;을 모아서 사용한다.</p>
+<h2 id="메이븐의-골과-플러그인"><a href="#메이븐의-골과-플러그인" class="headerlink" title="메이븐의 골과 플러그인"></a>메이븐의 골과 플러그인</h2><p>exec:java 골은 플러그인을 사용해 추가된 것이다. 사실, 지금까지 사용했던 모든 골들도 플러그인으로 추가된 것이다.</p>
+<ul>
+<li>compile : maven-compiler-plugin</li>
+<li>package : maven-jar-plugin</li>
+<li>test : maven-surefire-plugin</li>
+</ul>
+<p>하지만 위의 플러그인은 표준으로 포함되어 있기 때문에 플러그인이라고 의식하지 못했던 것이다.</p>
+<p>표준이 아닌 &lt;plugin&gt; 태그에 의해 추가된 플러그인의 골을 지정하는 경우에는 <code>xx:xx</code>와 같이 요소가 둘인 경우가 일반적이다. 플러그인 하나가 여러 골을 가질 수도 있기 때문에 ‘플로그인:골’ 형태로 기술한다.</p>
+<blockquote>
+<p>&lt;plugin&gt;이 필수는 아니다. 플러그인으로 추가하여 이용하는 골이라고 해서 &lt;plugin&gt;에 기술하지 않으면 사용하지 못하는 것은 아니다. &lt;plugin&gt;은 플러그인에 포함된 설정 등의 정보를 기술하는 태그이다. 그렇기 때문에 설정이 필요하지 않으면 기술할 필요가 없다.</p>
+</blockquote>
+<h2 id="인텔리제이에서-사용하기"><a href="#인텔리제이에서-사용하기" class="headerlink" title="인텔리제이에서 사용하기"></a>인텔리제이에서 사용하기</h2><p>플러그인을 통해 개발 도구의 프로젝트로 변환이 가능하다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn idea:idea</span><br></pre></td></tr></table></figure>
+<p>위 골을 실행하면 인텔리제이에서 프로젝트를 다루는데 필요한 파일들이 생성된다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn idea:clean</span><br></pre></td></tr></table></figure>
+<p>인텔리제이 프로젝트에서 인텔리제이 관련 파일을 삭제하여 원래의 메이븐 프로젝트로 돌리려면 위의 골을 실행한다.</p>
+<h2 id="실행-가능한-jar-파일-만들기"><a href="#실행-가능한-JAR-파일-만들기" class="headerlink" title="실행 가능한 JAR 파일 만들기"></a>실행 가능한 JAR 파일 만들기</h2><p>앞서 mvn package로 패키징했지만 이렇게 생성된 JAR 파일은 단순히 패키징 된 것이기 때문에 실행되지는 않는다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar 00.jar</span><br></pre></td></tr></table></figure>
+<p>따라서 위의 명렁을 실행해도 00.jar에 기본 Manifest 속성이 없어 실행에 실패하게 된다.</p>
+<p>실행 가능한 JAR 파일을 만들기 위해서는 maven-jar-plugin을 이용해 다음과 같은 &lt;plugin&gt; 태그를 작성하면 된다.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-jar-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>버전<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">archive</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">manifest</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">addClasspath</span>&gt;</span>true<span class="tag">&lt;/<span class="name">addClasspath</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">mainClass</span>&gt;</span>메인 클래스<span class="tag">&lt;/<span class="name">mainClass</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">archive</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>&lt;archive&gt; 태그는 압축에 관한 설정이다. addClasspath는 클래스 경로에 JAR 파일이 있는 경로를 추가하기 위한 태그인데 보통은 true로 지정한다.</p>
+<p>이렇게 설정 후 다시 <strong>mvn package</strong>로 JAR 파일을 생성한 후 java -jar로 실행해보면 문제없이 실행할 수 있다.</p>
+<h2 id="저장소-이용"><a href="#저장소-이용" class="headerlink" title="저장소 이용"></a>저장소 이용</h2><p>&lt;dependency&gt; 를 추가하는 것만으로 필요한 라이브러리를 추가해 사용할 수 있었던 것은 <strong>중앙 저장소</strong> 때문이다. 그런데 저장소가 중앙 저장소만 있는 것은 아니다. 다른 원격 저장소나 로컬 저장소도 있다.</p>
+<h3 id="로컬-저장소"><a href="#로컬-저장소" class="headerlink" title="로컬 저장소"></a>로컬 저장소</h3><p>자신이 만든 라이브러린, 그다지 유명하지 않은 라이브러리라면 아직 중앙 저장소에 공개되지 않을 수도 있다. 이러한 라이브러리는 로컬 저장소를 이용해 사용할 수 있다.</p>
+<ul>
+<li>원격 저장소 : 네트워크를 거쳐 서버에 접속하여 이용하는 공개된 저장소. 중앙 저장소도 원격 저장소의 한 종류이다.</li>
+<li>로컬 저장소 : 로컬 환경에 있는 저장소이다.</li>
+</ul>
+<h3 id="원격-저장소-이용"><a href="#원격-저장소-이용" class="headerlink" title="원격 저장소 이용"></a>원격 저장소 이용</h3><p>원격 저장소는 pom.xml에 &lt;repositories&gt; 태그 안에 저장소 정보를 기술한다.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">repositories</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">repository</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span>&gt;</span>저장소 ID<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>이름<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">url</span>&gt;</span>저장소 주소(URL)<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">repository</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">repositories</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="로컬-저장소에-라이브러리-추가하기"><a href="#로컬-저장소에-라이브러리-추가하기" class="headerlink" title="로컬 저장소에 라이브러리 추가하기"></a>로컬 저장소에 라이브러리 추가하기</h3><p>추가하고자 하는 라이브러리 프로젝트에서 다음과 같이 실행하면 target에 빌드된 JAR 파일을 로컬 저장소에 설치한다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn install</span><br></pre></td></tr></table></figure>
+<p>또는 설치할 JAR 파일이 별도로 준비되어 있다면 <strong>install:install-file</strong> 골을 실행해서 지정한 라이브러리 파일을 로컬 저장소에 설치할 수 있다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mvn install:install-file</span><br><span class="line">-Dfile=<span class="string">"라이브러리 jar의 경로"</span></span><br><span class="line">-DgroupId=<span class="string">"그룹 ID"</span></span><br><span class="line">-DartifactId=<span class="string">"아티팩트 ID"</span></span><br><span class="line">-Dpackaging=<span class="string">"패키징(jar)"</span></span><br><span class="line">-Dversio=<span class="string">"버전(1.0)"</span></span><br></pre></td></tr></table></figure>
+<h3 id="로컬-저장소의-위치-알아보기"><a href="#로컬-저장소의-위치-알아보기" class="headerlink" title="로컬 저장소의 위치 알아보기"></a>로컬 저장소의 위치 알아보기</h3><p>로컬 저장소의 위치는 다음과 같다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">홈 디렉터리/.m2/repository</span><br></pre></td></tr></table></figure>
+<p>이 폴더에는 라이브러리가 그룹 ID마다 폴더로 정리되어 있다.</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2018-08-05T10:45:00.000Z">2018-08-05</time>
                 
                 <div class="level-item">
@@ -969,154 +1159,6 @@
 
 
 
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-05-20T12:00:00.000Z">2018-05-20</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Programming/">Programming</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/Programming/Spring/">Spring</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    한 시간 읽기 (대략 7121 단어)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/05/20/Spring/toby-8/">토비의 스프링 8장 (스프링이란 무엇인가?)</a>
-            
-        </h1>
-        <div class="content">
-            <h1 id="스프링이란-무엇인가"><a href="#스프링이란-무엇인가" class="headerlink" title="스프링이란 무엇인가?"></a>스프링이란 무엇인가?</h1><h2 id="스프링의-정의"><a href="#스프링의-정의" class="headerlink" title="스프링의 정의"></a>스프링의 정의</h2><p>스프링이란 어떤 것이다라고 한마디로 정의하기는 쉽지 않다. 스프링에 대해 가장 잘 알려진 정의는 이렇다.</p>
-<p><strong>자바 엔터프라이즈 개발을 편하게 해주는 오픈소스 경량급 애플리케이션 프레임워크</strong></p>
-<p>정의를 봐도 스프링이 무엇인지 감이 바로 오지는 않는다. 하지만 이 정의에는 스프링의 중요한 특징이 잘 담겨 있다.</p>
-<ul>
-<li><p><strong>애플리케이션 프레임워크</strong></p>
-<p>일반적으로 라이브러리나 프레임워크는 특정 업무 분야나 한 가지 기술에 특화된 목표를 가지고 만들어진다. 그러나 애플리케이션 프레임워크는 조금 다르다.<br>애플리케이션 프레임워크는 특정 계층이나, 기술, 업무 분야에 국한되지 않고 애플리케이션의 전 영역을 포괄하는 범용적인 프레임워크를 말한다. 애플리케이션 프레임워크는 애플리케이션 개발의 전 과정을 빠르고 편리하며 효율적으로 진행하는데 일차적인 목표를 두는 프레임워크다.<br>단지 여러 계층의 다양한 기술을 한데 모아뒀기 때문에 애플리케이션 프레임워크라고 불리는 건 아니다. 애플리케이션의 전 영역을 관통하는 일관된 프로그래밍 모델과 핵심 기술을 바탕으로 해서 각 분야의 특성에 맞는 필요를 채워주고 있기 때문이다.</p>
-</li>
-<li><p><strong>경량급</strong></p>
-<p>스프링이 경량급이라는 건 스프링 자체가 아주 가볍다거나 작은 규모의 코드로 이뤄졌다는 뜻은 아니다.<br>그럼에도 가볍다고 하는 이유는 불필요하게 무겁지 않다는 의미다. 특히 스프링이 처음 등장하던 시절의 자바 주류 기술이었던 예전의 EJB 같은 과도한 엔지니어링이 적용된 기술과 스프링을 대비시켜 설명하려고 사용했던 표현이다.<br>스프링은 가장 단순한 서버환경인 톰캣(Tomcat)이나 제티(Jetty)에서도 완벽하게 동작한다. 단순한 개발툴과 기본적인 개발환경으로도 엔터프라이즈 개발에서 필요로 하는 주요한 기능을 갖춘 애플리케이션을 개발하기에 충분하다. 스프링의 장점은 그런 가볍고 단순한 환경에서도 복잡한 EJB와 고가의 WAS를 갖춰야만 가능했던 엔터프라이즈 개발의 고급 기술을 대부분 사용할 수 있다는 점이다.<br>결과적으로 스프링은 EJB를 대표로 하는 기존의 많은 기술이 불필요하게 무겁고 복잡했음을 증명한 셈이고, 그런 면에서 스프링은 군더더기 없이 깔끔한 기술을 가진 ‘경량급’ 프레임워크라고 불린 것이다.<br>만들어진 코드가 지원하는 기술수준은 비슷하더라도 그것을 훨씬 빠르고 간편하게 작성하게 해줌으로써 생산성과 품질 면에서 유리하다는 것이 바로 경량급이라는 말로 표현되는 스프링의 특징이다.</p>
-</li>
-<li><p><strong>자바 엔터프라이즈 개발을 편하게</strong></p>
-<p>스프링은 근본적인 부분에서 엔터프라이즈 개발의 복잡함을 제거해내고 진정으로 개발을 편하게 해주는 해결책을 제시한다. 단순히 편리한 몇 가지 도구나 기능을 제공해주는 차원이 아니다.<br>편리한 애플리케이션 개발이란 개발자가 복잡하고 실수하기 쉬운 로우레벨 기술에 많은 신경을 쓰지 않으면서도 애플리케이션의 핵심인 사용자의 요구사항, 즉 비즈니스 로직을 빠르고 효과적으로 구현하는 것을 말한다.</p>
-</li>
-<li><p><strong>오픈소스</strong></p>
-</li>
-</ul>
-<h2 id="스프링의-목적"><a href="#스프링의-목적" class="headerlink" title="스프링의 목적"></a>스프링의 목적</h2><p>스프링을 사용해서 엔터프라이즈 애플리케이션 개발을 편하게 하려는 이유는 뭘까? 원래 엔터프라이즈 개발이란 편하지 않기 때문이다.</p>
-<h3 id="엔터프라이즈-개발의-복잡함"><a href="#엔터프라이즈-개발의-복잡함" class="headerlink" title="엔터프라이즈 개발의 복잡함"></a>엔터프라이즈 개발의 복잡함</h3><p>자바 엔터프라이즈(JavaEE) 개발이 실패하는 가장 대표적인 이유는 ‘엔터프라이즈 시스템 개발이 너무 복잡해져서’였다.</p>
-<h4 id="복잡합의-근본적인-이유"><a href="#복잡합의-근본적인-이유" class="headerlink" title="복잡합의 근본적인 이유"></a><strong>복잡합의 근본적인 이유</strong></h4><p>엔터프라이즈 시스템 개발이 복잡한 원인은 크게 두 가지가 있다. (엔터프라이즈 시스템이란 서버에서 동작하며 기업과 조직의 업무를 처리해주는 시스템을 말한다.)</p>
-<ul>
-<li><strong>기술적인 제약조건과 요구사항이 늘어가기 때문이다.</strong></li>
-<li><strong>엔터프라이즈 애플리케이션이 구현해야 할 핵심기능인 비즈니스 로직의 복잡함이 증가하기 때문이다.</strong></li>
-</ul>
-<p>전통적인 자바 엔터프라이즈 개발 기법은 대부분 비즈니스 로직의 복잡한 구현 코드와 엔터프라이즈 서비스를 이용하는 기술적인 코드가 자꾸 혼재될 수 밖에 없는 방식이었다. 결국 개발자가 동시에 그 두 가지를 모두 신경 써서 개발해야 하는 과도한 부담을 줬고, 그에 따라 전체적인 복잡함은 몇 배로 가중됐다.</p>
-<h3 id="복잡함을-해결하려는-도전"><a href="#복잡함을-해결하려는-도전" class="headerlink" title="복잡함을 해결하려는 도전"></a>복잡함을 해결하려는 도전</h3><h4 id="제거될-수-없는-근본적인-복잡함"><a href="#제거될-수-없는-근본적인-복잡함" class="headerlink" title="제거될 수 없는 근본적인 복잡함"></a>제거될 수 없는 근본적인 복잡함</h4><p>엔터프라이즈 개발의 근본적인 복잡함의 원인은 제거할 대상은 아니다. 현실적으로는 불가능하기 때문이다.</p>
-<p>근본적으로 엔터프라이즈 개발에 나타나는 복잡함의 원인은 제거 대상이 아니다. 대신 그 복잡함을 효과적으로 상대할 수 있는 전략과 기법이 필요하다. 문제는 비즈니스 로직의 복잡함을 효과적으로 다루기 위한 방법과 기술적인 복잡함을 효과적으로 처리하는 데 적용되는 방법이 다르다는 점이다. 따라서 두 가지 복잡함이 코드에 한데 어우러져 나타나는 전통적인 개발 방식에서는 효과적으로 복잡함을 다루기가 힘들다. 따라서 가장 먼저 할 일은 성격이 다른 이 두 가지 복잡함을 분리해내는 것이다.</p>
-<h3 id="복잡함을-상대하는-스프링의-전략"><a href="#복잡함을-상대하는-스프링의-전략" class="headerlink" title="복잡함을 상대하는 스프링의 전략"></a>복잡함을 상대하는 스프링의 전략</h3><p>스프링의 기본적인 전략은 비즈니스 로직을 담은 애플리케이션 코드와 엔터프라이즈 기술을 처리하는 코드를 분리시키는 것이다. 이 분리를 통해 두 가지 복잡함의 문제를 효과적으로 공략하게 해준다.</p>
-<h4 id="기술적-복잡함을-상대하는-전략"><a href="#기술적-복잡함을-상대하는-전략" class="headerlink" title="기술적 복잡함을 상대하는 전략"></a>기술적 복잡함을 상대하는 전략</h4><p>기술적인 복잡함을 분리해서 생각하면 그것을 효과적으로 상대할 수 있는 적절한 전략을 발견할 수 있다. 스프링은 엔터프라이즈 기술을 적용했을 때 발생하는 복잡함의 문제를 두 가지로 분류하고 각각에 대한 적절한 대응 방법을 제공한다.</p>
-<ul>
-<li><p><strong>첫 번째 문제 : 기술에 대한 접근 방식이 일관성이 없고, 특정 환경에 종속적이다.</strong></p>
-<p>일관성 없는 기술과 서버환경의 변화에 대한 스프링의 공략 방법은 바로 서비스 추상화다. 앞에서 보았던 트랜잭션 추상화, OXM 추상화, 데이터 액세스에 관한 일관된 예외변환 기능, 데이터 액세스 기술에 독립적으로 적용 가능한 트랜잭션 동기화 기법 등이 대포적인 예다. 기술적인 복잡합은 일단 추상화를 통해 로우레벨의 기술 구현 부분과 기술을 사용하는 인터페이스를 분리하고, 환경과 세부기술에 독립적인 접근 인터페이스를 제공하는 것이 가장 좋은 해결책이다.</p>
-</li>
-<li><p><strong>두 번째 문제 : 기술적인 처리를 담당하는 코드가 성격이 다른 코드에 섞여서 등장한다.</strong></p>
-<p>책임에 따라 계층을 구분하고 그 사이에 서로의 기술과 특성에 의존적인 인터페이스나 예외처리 등을 최대한 제거한다고 할지라도 근본적으로 엔터프라이즈 서비스를 적용하는 한 이런 문제는 쉽게 해결할 수 없다. 이런 기술과 비즈니스 로직의 혼재로 발생하는 복잡함을 해결하기 위한 스프링의 접근 방법은 바로 AOP다.<br>AOP는 최후까지 애플리케이션 로직을 담당하는 코드에 남아 있는 기술 관련 코드를 깔끔하게 분리해서 별도의 모듈로 관리하게 해주는 강력한 기술이다.</p>
-</li>
-</ul>
-<h4 id="비즈니스와-애플리케이션-로직의-복잡함을-상대하는-전략"><a href="#비즈니스와-애플리케이션-로직의-복잡함을-상대하는-전략" class="headerlink" title="비즈니스와 애플리케이션 로직의 복잡함을 상대하는 전략"></a>비즈니스와 애플리케이션 로직의 복잡함을 상대하는 전략</h4><p>비즈니스 로직의 복잡함을 상대하는 전략은 자바라는 객체지향 기술 그 자체다. 스프링은 단지 객체지향 언어의 장점을 제대로 살리지 못하게 방해했던 요소를 제거하도록 도와줄 뿐이다.</p>
-<h4 id="핵심-도구-객체지향과-di"><a href="#핵심-도구-객체지향과-DI" class="headerlink" title="핵심 도구 : 객체지향과 DI"></a>핵심 도구 : 객체지향과 DI</h4><p>객체지향의 설계 기법을 잘 적용할 수 있는 구조를 만들기 위해 DI 같은 유용한 기술을 편하게 적용하도록 도와주는 것이 스프링의 기본 전략이다.</p>
-<p>지금까지 보았듯이 기술적인 복잡함을 효과적으로 다루게 해주는 기법은 모두 DI를 바탕으로 하고 있다. 서비스 추상화, 템플릿/콜백, AOP와 같은 스프링의 기술은 DI 없이는 존재할 수 없는 것들이다.</p>
-<p>그리고 DI는 객체지향 설계 기술 없이는 그 존재의미가 없다. DI란 특별한 기술이라기보다는 유연하게 확장할 수 있는 오브젝트 설계를 하다 보면 자연스럽게 적용하게 되는 객체지향 프로그래밍 기법일 뿐이다. 스프링은 단지 그것을 더욱 편하고 쉽게 사용하도록 도와줄 뿐이다.</p>
-<p>기술적인 복잡함을 해결하는 문제나 기술적인 복잡함이 비즈니스 로직에 침범하지 못하도록 분리하는 경우에도 DI가 바탕이 된 여러 가지 기법이 활용된다. 반면에 비즈니스 로직 자체의 복잡함을 해결하려면 DI보다는 객체지향 설계 기법이 더 중요하다.</p>
-<h2 id="pojo-프로그래밍"><a href="#POJO-프로그래밍" class="headerlink" title="POJO 프로그래밍"></a>POJO 프로그래밍</h2><p>스프링 핵심 개발자들은 “스프링의 정수(essence)”는 엔터프라이즈 서비스 기능을 POJO에 제공하는 것”이라고 했다. 엔터프라이즈 서비스라고 하는 것은 보안, 트랜잭션과 같은 엔터프라이즈 시스템에서 요구되는 기술을 말한다. 이런 기술을 POJO에 제공한다는 말은, 뒤집어 생각해보면 엔터프라이즈 서비스 기술과 POJO라는 애플리케이션 로직을 담은 코드를 분리했다는 뜻이기도 하다. ‘분리됐지만 반드시 필요한 엔터프라이즈 서비스 기술을 POJO 방식으로 개발된 애플리케이션 핵심 로직을 담은 코드에 제공한다’는 것이 스프링의 가장 강력한 특징과 목표다.</p>
-<h3 id="스프링의-핵심-pojo"><a href="#스프링의-핵심-POJO" class="headerlink" title="스프링의 핵심 : POJO"></a>스프링의 핵심 : POJO</h3><p>스프링 애플리케이션은 POJO를 이용해서 만든 애플리케이션 코드와, POJO가 어떻게 관계를 맺고 동작하는지를 정의해놓은 설계정보로 구분된다. DI의 기본 아이디어는 유연하게 확장 가능한 오브젝트를 만들어두고 그 관계는 외부에서 다이내믹하게 설정해준다는 것이다. 이런 DI의 개념을 애플리케이션 전반에 걸쳐 적용하는 것이 스프링의 프로그래밍 모델이다.</p>
-<p>스프링의 주요 기술인 IoC/DI, AOP, 서비스추상화는 애플리케이션을 POJO로 개발할 수 있게 해주는 가능기술이라고 불린다.</p>
-<h3 id="pojo란-무엇인가"><a href="#POJO란-무엇인가" class="headerlink" title="POJO란 무엇인가?"></a>POJO란 무엇인가?</h3><p><strong><code>POJO</code>는 Plain Old Java Object의 첫 글자를 따서 만든 약자다.</strong></p>
-<h3 id="pojo의-조건"><a href="#POJO의-조건" class="headerlink" title="POJO의 조건"></a>POJO의 조건</h3><p>단순하게 보자면 그냥 평범한 자바오브젝트라고 할 수 있지만 좀 더 명확하게 하자면 적어도 다음의 조건을 충족해야 POJO라고 불릴 수 있다.</p>
-<ul>
-<li><p><strong>특정 규약에 종속되지 않는다.</strong></p>
-<p>POJO는 자바 언어와 꼭 필요한 API 외에는 종속되지 않아야 한다. 따라서 EJB2와 같이 특정 규약을 따라 비즈니스 컴포넌트를 만들어야 하는 경우는 POJO가 아니다. 특정 규약을 따라 만들게 하는 경우는 대부분 규약에서 제시하는 특정 클래스를 상속하도록 요구한다. 그럴 경우 자바의 단일 상속 제한 때문에 더 이상 해당 클래스에 객체지향적인 설계 기법을 적용하기가 어려워지는 문제가 생긴다. 또한 규약이 적용된 환경에 종속적이 되기 때문에 다른 환경으로 이전이 힘들다는 문제점이 있다.</p>
-</li>
-<li><p><strong>특정 환경에 종속되지 않는다.</strong></p>
-<p>어떤 경우는 특정 벤더의 서버나 특정 기업의 프레임워크 안에서만 동작 가능한 코드로 작성되기도 한다. 또 환경에 종속적인 클래스나 API를 직접 쓴 경우도 있다. 순수한 애플리케이션 로직을 담고 있는 오브젝트 코드가 특정 환경에 종속되게 만드는 경우라면 그것 역시 POJO라고 할 수 없다. POJO는 환경에 독립적이어야한다.<br>특히 비즈니스 로직을 담고 있는 POJO 클래스는 웹이라는 환경정보나 웹 기술을 담고 있는 클래스나 인터페이스를 사용해서는 안된다. 비즈니스 로직을 담은 코드에 HttpServletRequest나 HttpSession, 캐시와 관련된 API가 등장하거나 웹 프레임워크의 클래스를 직접 이용하는 부분이 있다면 그것은 진정한 POJO라고 볼 수 없다.<br>단지 자바의 문법을 지키고, 순수하게 JavaSE API만을 사용했다고 해서 그 코드를 POJO라고 할 수는 없다. POJO는 객체지향적인 자바 언어의 기본에 충실하게 만들어져야 하기 때문이다.</p>
-</li>
-</ul>
-<h3 id="pojo의-장점"><a href="#POJO의-장점" class="headerlink" title="POJO의 장점"></a>POJO의 장점</h3><p>POJO가 될 수 있는 조건이 그대로 POJO의 장점이 된다.</p>
-<p>특정한 기술과 환경에 종속되지 않는 오브젝트는 그만큼 깔끔한 코드가 될 수 있다. 로우레벨의 기술과 환경에 종속적인 코드가 비즈니스 로직과 함께 섞여 나오는 것만큼 지저분하고 복잡한 코드도 없다.</p>
-<p>POJO로 개발된 코드는 자동화된 테스트에 매우 유리하다. 환경의 제약은 코드의 자동화된 테스트를 어렵게 한다. 컨테이너에서만 동작을 확인할 수 있는 EJB 2는 테스트하려면 서버의 구동 및 빌드와 배치 과정까지 필요하다. 자동화된 테스트가 불가능한 건 아니지만 매우 복잡하고 번거로우므로 대부분 수동 테스트 방식을 선호한다. 그에 반해 어떤 환경에도 종속되지 않은 POJO 코드는 매우 유연한 방식으로 원하는 레벨에서 코드를 빠르고 명확하게 테스트할 수 있다.</p>
-<p>객체지향적인 설계를 자유롭게 적용할 수 있다는 것도 큰 장점이다.</p>
-<h3 id="pojo-프레임워크"><a href="#POJO-프레임워크" class="headerlink" title="POJO 프레임워크"></a>POJO 프레임워크</h3><p>스프링은 POJO를 이용한 엔터프라이즈 애플리케이션 개발을 목적으로 하는 프레임워크이다. POJO 프로그래밍이 가능하도록 기술적인 기반을 제공하는 프레임워크를 POJO 프레임워크라고 한다. 스프링은 엔터프라이즈 애플리케이션 개발의 모든 영역과 계층에서 POJO 방식의 구현이 가능하게 하려는 목적으로 만들어졌다.</p>
-<p>스프링을 이용하면 POJO 프로그래밍의 장점을 그대로 살려서 엔터프라이즈 애플리케이션의 핵심 로직을 객체지향적인 POJO를 기반으로 깔끔하게 구현하고, 동시에 엔터프라이즈 환경의 각종 서비스와 기술적인 필요를 POJO 방식으로 만들어진 코드에 적용할 수 있다.</p>
-<p>스프링은 비즈니스 로직의 복잡함과 엔터프라이즈 기술의 복잡함을 분리해서 구성할 수 있게 도와준다. 하지만 자신은 기술영역에만 관여하지 비즈니스 로직을 담당하는 POJO에서는 모습을 감춘다. 데이터 액세스 로직이나 웹 UI 로직을 다룰 때만 최소한의 방법으로 관여한다. POJO 프레임워크로서 스프링은 자신을 직접 노출하지 않으면서 애플리케이션을 POJO로 쉽게 개발할 수 있게 지원해준다.</p>
-<h2 id="스프링의-기술"><a href="#스프링의-기술" class="headerlink" title="스프링의 기술"></a>스프링의 기술</h2><h3 id="제어의-역전ioc-의존관계-주입di"><a href="#제어의-역전-IoC-의존관계-주입-DI" class="headerlink" title="제어의 역전(IoC) / 의존관계 주입(DI)"></a>제어의 역전(IoC) / 의존관계 주입(DI)</h3><p>왜 두 개의 오브젝트를 분리해서 만들고, 인터페이스를 두고 느슨하게 연결한 뒤, 실제 사용할 대상은 DI를 통해 외부에서 지정하는 것일까? 직접 자신이 사용할 오브젝트를 new 키워드로 생성해서 사용하는 강한 결합을 쓰는 방법보다 나은 점은 무엇일까?</p>
-<p>가장 간단한 답변은 <strong>‘유연한 확징이 가능하게 하기 위함’</strong>이다. DI는 개방 폐쇄 원칙(OCP)이라는 객체지향 설계 원칙으로 잘 설명될 수 있다. 유연한 확장이라는 장점은 OCP의 ‘확장에는 열려 있다(개방)’에 해당한다. DI는 역시 OCP의 ‘변경에는 닫혀 있다(폐쇄)’라는 말로도 설명이 가능하다. 폐쇄 관점에서 볼 때 장점은 ‘재사용이 가능하다’라고 볼 수 있다.</p>
-<h4 id="di의-활용-방법"><a href="#DI의-활용-방법" class="headerlink" title="DI의 활용 방법"></a>DI의 활용 방법</h4><ul>
-<li><p><strong>핵심기능의 변경</strong></p>
-<p>DI의 가장 대표적인 적용 방법은 바로 의존 대상의 구현을 바꾸는 것이다. 디자인 패턴의 전략 패턴이 대표적인 예다. 실제 의존하는 대상이 가진 핵심기능을 DI 설정을 통해 변경하는 것이 대표적인 DI의 활용 방법이다.</p>
-</li>
-<li><p><strong>핵심기능의 동적인 변경</strong></p>
-<p>두 번째 활용 방법은 첫 번째랑 비슷하게 의존 오브젝트의 핵심 기능 자체를 바꾸는 것이다. DI도 기본적으로는 런타임 시에 동적으로 의존 오브젝트를 연결해주는 것이긴 하지만, 일단 DI 되고 나면 그 후로는 바뀌지 않는다. 즉 동적인 방식으로 연결되지만 한 번 DI되면 바뀌지 않는 정적인 관계를 맺어주는 것이다. 하지만 DI를 잘 활용하면 애플리케이션이 동작하는 중간에 그 의존 대상을 다이내믹하게 변경할 수 있다.</p>
-</li>
-<li><p><strong>부가기능의 추가</strong></p>
-<p>세 번째 활용 방법은 핵심기능은 그대로 둔 채로 부가기능을 추가하는 것이다. 데코레이터 패턴을 생각해보면 된다. 인터페이스를 두고 사용하게 하고, 실제 사용할 오브젝트는 외부에서 주입하는 DI를 적용해두면 데코레이터 패턴을 쉽게 적용할 수 있다. 그래서 핵심기능과 클라이언트 코드에는 전혀 영향을 주지 않으면서 부가적인 기능을 얼마든지 추가할 수 있다.</p>
-</li>
-<li><p><strong>인터페이스의 변경</strong></p>
-<p>사용하려고 하는 오브젝트가 가진 인터페이스가 클라이언트와 호환되지 않는 경우가 있다. 이렇게 클라이언트가 사용하는 인터페이스와 실제 오브젝트 사이에 인터페이스가 일치하지 않는 경우에도 DI가 유용하다. 디자인 패턴에서 말하는 오브젝트 방식의 어댑터 패턴의 응용이라고 볼 수 있다.<br>이를 좀 더 일반화해서 아예 인터페이스가 다른 다양한 구현을 같은 방식으로 사용하도록, 중간에 인터페이스 어댑터 역할을 해주는 레이어를 하나 추가하는 방법도 있다. 서비스 추상화(PSA)가 그런 방법이다. PSA는 클라이언트가 일관성 있게 사용할 수 있는 인터페이스를 정의해주고 DI를 통해 어댑터 역할을 하는 오브젝트를 이용하게 해준다. 이를 통해 다른 인터페이스를 가진 로우레벨의 기술을 변경하거나 확장해가면서 사용할 수 있는 것이다.</p>
-</li>
-<li><p><strong>프록시</strong></p>
-<p>필요한 시점에서 실제 사용할 오브젝트를 초기화하고 리소스를 준비하게 해주는 지연된 로딩(lazy loading)을 적용하려면 프록시가 필요하다. 원격 오브젝트를 호출할 때 마치 로컬에 존재하는 오브젝트처럼 사용할 수 있게 해주는 원격 프록시를 적용하려고 할 때도 프록시가 필요하다. 두 가지 방법 모두 DI를 필요로 한다.</p>
-</li>
-<li><p><strong>템플릿과 콜백</strong></p>
-<p>템플릿/콜백 패턴은 DI의 특별한 적용 방법이다. 반복적으로 등장하지만 항상 고정적인 작업 흐름과 그 사이에서 자주 바뀌는 부분을 분리해서 템플릿과 콜백으로 만들 고 이를 DI 원리를 응용해 적용하면 지저분하게 매번 만들어야 하는 코드를 간결하게 만들 수 있다.</p>
-</li>
-<li><p><strong>싱글톤과 오브젝트 스코프</strong></p>
-<p>DI가 필요한 중요한 이유 중 한 가지는 DI 할 오브젝트의 생명주기를 제어할 수 있다는 것이다. DI를 프레임워크로 이용한다는 건 DI 대상 오브젝트를 컨테이너가 관리한다는 의미다. 오브젝트의 생성부터 관계 설정, 이용, 소멸에 이르기까지의 모든 과정을 DI 컨테이너가 주관하기 때문에 그 오브젝트의 스코프를 자유롭게 제어할 수 있다.<br>스프링의 DI는 기본적으로 싱글톤으로 오브젝트를 만들어서 사용하게 한다. 컨테이너가 알아서 싱글톤으로 만들고 관리하기 때문에 클래스 자체는 싱글톤을 고려하지 않고 자유롭게 설계해도 된다는 장점이 있다.</p>
-</li>
-<li><p><strong>테스트</strong></p>
-<p>다른 오브젝트와 협력해서 동작하는 오브젝트를 효과적으로 테스트하는 방법은 가능한 한 고립시키는 것이다. 즉 다른 오브젝트와의 사이에서 일어나는 일을 테스트를 위해 조작할 수 있도록 만든다. 그래야만 테스트 대상인 오브젝트의 기능에 충실하게 테스트가 가능하다. 복잡한 테스트할 대상에 의존하는 오브젝트를, 테스트를 목적으로 만들어진 목 오브젝트로 대체하면 유용하다.</p>
-</li>
-</ul>
-<h3 id="애스펙트-지향-프로그래밍aop"><a href="#애스펙트-지향-프로그래밍-AOP" class="headerlink" title="애스펙트 지향 프로그래밍(AOP)"></a>애스펙트 지향 프로그래밍(AOP)</h3><p>AOP도 스프링의 3개 기술중의 하나다. 사실 애스펙트 지향 프로그래밍은 객체지향 프로그래밍(OOP)처럼 독립적인 프로그래밍 패러다임이 아니다. AOP와 OOP는 서로 배타적이 아니라는 말이다.</p>
-<p>객체지향 기술은 매우 성공적은 프로그래밍 방식임에 분명하다. 하지만 한편으로는 복잡해져 가는 애플리케이션의 요구조건과 기술적인 난해함을 모두 해결하는데 한계가 있기도 하다. AOP는 바로 이러한 객체지향 기술의 한계와 단점을 극복하도록 도와주는 보조적인 프로그래밍 기술이다.</p>
-<p>IOC/DI를 이용해서 POJO에 선언적인 엔터프라이즈 서비스를 제공할 수 있지만 일부 서비스는 순수한 객체지향 기법만으로는 POJO의 조건을 유지한 채로 적용하기 힘들다. 바로 이런 문제를 해결하기 위해 AOP가 필요하다.</p>
-<h4 id="aop-적용-기법"><a href="#AOP-적용-기법" class="headerlink" title="AOP 적용 기법"></a>AOP 적용 기법</h4><p>AOP를 자바 언어에 적용하는 기법은 크게 두 가지로 분류할 수 있다.</p>
-<ul>
-<li><p><strong>스프링과 같이 다이내믹 프록시를 사용하는 방법</strong></p>
-<p>이 방법은 기존 코드에 영향을 주지 않고 부가기능을 적용하게 해주는 데코레이터 패턴을 응용한 것이다. 만들기 쉽고 적용하기 간편하지만 부가기능을 부여할 수 있는 곳은 메소드의 호출이 일어나는 지점뿐이라는 제약이 있다. 인터페이스와 DI를 활용하는 데코레이터 패턴이 기반원리이기 때문이다.</p>
-</li>
-<li><p><strong>자바 언어의 한계를 넘어서는 언어의 확장을 이용하는 방법</strong></p>
-<p>AspectJ라는 유명한 오픈소스 AOP 툴이 있다. AspectJ는 프록시 방식의 AOP에서는 불가능한 다양한 조인포인트를 제공한다. 메소드 호출뿐 아니라 인스턴스 생성, 필드 액세스, 특정 호출 경로를 가진 메소드 호출 등에도 부가기능을 제공할 수 있다. 이런 고급 AOP 기능을 적용하려면 자바 언어와 JDK의 지원만으로는 불가능하다. 그 대신 별도의 AOP 컴파일러를 이용한 빌드 과정을 거치거나, 클래스가 메모리로 로딩될 때 그 바이트 코드를 조작하는 위빙과 같은 별도의 방법을 이용해야 한다.</p>
-</li>
-</ul>
-<h3 id="포터블-서비스-추상화psa"><a href="#포터블-서비스-추상화-PSA" class="headerlink" title="포터블 서비스 추상화(PSA)"></a>포터블 서비스 추상화(PSA)</h3><p>세 번째 기능기술은 환경과 세부 기술의 변화에 관계없이 일관된 방식으로 기술에 접근 할 수 있게 해주는 PSA(Portable Service Abstraction)다. POJO로 개발된 코드는 특정 환경이나 구현 방식에 종속적이지 않아야 한다. 스프링은 JavaEE를 기존 플랫폼으로 하는 자바 엔터프라이즈 개발에 주로 사용된다. 따라서 다양한 JavaEE 기술에 의존적일 수밖에 없다 .특정 환경과 기술에 종속적이지 않다는 게 그런 기술을 사용하지 않는다는 뜻은 아니다. 다만 POJO 코드가 그런 기술에 직접 노출되어 만들어지지 않는다는 말이다. 이를 위해 스프링이 제공하는 대표적인 기술이 바로 일관성 있는 서비스 추상화 기술이다.</p>
-<h1 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h1><p><a href="http://www.acornpub.co.kr/book/toby-spring3.1-vol1" rel="external nofollow noopener noreferrer" target="_blank">토비의 스프링 3.1 Vol. 1 스프링의 이해와 원리</a></p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
 <!-- For Google Adsense -->
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -1195,7 +1237,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            124
+                            125
                         </p>
                     </a>
                 </div>
@@ -1207,7 +1249,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            22
+                            23
                         </p>
                     </a>
                 </div>
@@ -1219,7 +1261,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            203
+                            205
                         </p>
                     </a>
                 </div>
@@ -1263,6 +1305,25 @@
         <h3 class="menu-label">
             최근 글
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2021/03/21/Kotlin/coroutines/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="코루틴 이해하기">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-03-20T15:17:42.000Z">2021-03-21</time></div>
+                    <a href="/2021/03/21/Kotlin/coroutines/" class="title has-link-black-ter is-size-6 has-text-weight-normal">코루틴 이해하기</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Kotlin/">Kotlin</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -1340,25 +1401,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/12/18/Java/hash/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Hash - MD5와 SHA256">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-17T15:23:00.000Z">2019-12-18</time></div>
-                    <a href="/2019/12/18/Java/hash/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Hash - MD5와 SHA256</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Programming/">Programming</a> / <a class="has-link-grey -link" href="/categories/Programming/Java/">Java</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1414,6 +1456,14 @@
         <a class="level is-marginless" href="/categories/Java/">
             <span class="level-start">
                 <span class="level-item">Java</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Kotlin/">
+            <span class="level-start">
+                <span class="level-item">Kotlin</span>
             </span>
             <span class="level-end">
                 <span class="level-item tag">1</span>
@@ -1573,7 +1623,7 @@
                 
                 </a>
                 <p class="is-size-7">
-                &copy; 2020 KimJongMin&nbsp;
+                &copy; 2021 KimJongMin&nbsp;
                 Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="external nofollow noopener noreferrer">Icarus</a>
                 
                 </p>
@@ -1691,7 +1741,7 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 
 
-<a id="back-to-top" title="Back to Top" href="javascript:;">
+<a id="back-to-top" title="Zurück nach oben" href="javascript:;">
     <i class="fas fa-chevron-up"></i>
 </a>
 <script src="/js/back-to-top.js" defer></script>

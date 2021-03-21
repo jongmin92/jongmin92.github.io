@@ -7,7 +7,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-<title>태그: design pattern - 92Hz</title>
+<title>태그: Design Pattern - 92Hz</title>
 
 <!-- For SEO -->
 <link rel="canonical" href="https://jongmin92.github.io/tags/design-pattern/">
@@ -15,7 +15,7 @@
 
     <meta property="og:type" content="website">
 <meta property="og:title" content="92Hz">
-<meta property="og:url" content="https://jongmin92.github.io/tags/design-pattern/index.html">
+<meta property="og:url" content="https://jongmin92.github.io/tags/Design-Pattern/index.html">
 <meta property="og:site_name" content="92Hz">
 <meta property="og:locale" content="ko">
 <meta property="og:image" content="https://jongmin92.github.io/images/og_image.png">
@@ -138,7 +138,7 @@
         <nav class="breadcrumb" aria-label="breadcrumbs">
         <ul>
             <li><a href="/tags">태그</a></li>
-            <li class="is-active"><a href="#" aria-current="page">design pattern</a></li>
+            <li class="is-active"><a href="#" aria-current="page">Design Pattern</a></li>
         </ul>
         </nav>
     </div>
@@ -151,17 +151,17 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-08-20T13:22:00.000Z">2018-08-20</time>
+                <time class="level-item has-text-grey" datetime="2017-06-13T15:00:00.000Z">2017-06-14</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Programming/">Programming</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/Programming/Java/">Java</a>
+                <a class="has-link-grey -link" href="/categories/Programming/">Programming</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/Programming/JavaScript/">JavaScript</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    9분 읽기 (대략 1317 단어)
+                    12분 읽기 (대략 1728 단어)
                 </span>
                 
                 
@@ -170,130 +170,41 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2018/08/20/Java/design-pattern-adapter/">Design Pattern - Adapter</a>
+                <a class="has-link-black-ter" href="/2017/06/14/JavaScript/memoization/">메모이제이션 (Memoization)</a>
             
         </h1>
         <div class="content">
-            <blockquote>
-<p>해당 포스팅은 <a href="https://book.naver.com/bookdb/book_detail.nhn?bid=4529127" rel="external nofollow noopener noreferrer" target="_blank">Java 언어로 배우는 디자인 패턴 입문</a> 책을 참고해 작성했습니다.<br>사용된 코드는 <a href="https://github.com/jongmin92/Design-Pattern" rel="external nofollow noopener noreferrer" target="_blank">jongmin92/Design-Pattern</a> repository 에서 확인할 수 있습니다.</p>
-</blockquote>
-<h1 id="adapter-패턴"><a href="#Adapter-패턴" class="headerlink" title="Adapter 패턴"></a>Adapter 패턴</h1><p>이미 제공되어 있는 것을 그대로 사용할 수 없을 때, 필요한 형태로 교환하고 사용하는 일이 자주 있습니다. <strong>‘이미 제공되어 있는 것’과 ‘필요한 것’ 사이(서로 다른 두 개)의 ‘차이’를 없애주는 디자인 패턴이 <code>Adapter 패턴</code> 입니다.</strong></p>
-<p>Adapter 패턴은 Wrapper 패턴으로 불리기도 하며, 다음과 같은 두 가지 종류가 있습니다.</p>
-<ul>
-<li>클래스에 의한 Adapter 패턴 (상속을 사용한 Adapter 패턴)</li>
-<li>인스턴스에 의한 Adapter 패턴 (위임을 사용한 Adapter 패턴)</li>
-</ul>
-<h2 id="예제-프로그램1-상속을-사용한-adapter-패턴"><a href="#예제-프로그램-1-상속을-사용한-Adapter-패턴" class="headerlink" title="예제 프로그램(1) - 상속을 사용한 Adapter 패턴"></a>예제 프로그램(1) - 상속을 사용한 Adapter 패턴</h2><p>만들 예제 프로그램은 주어진 문자열을 아래와 같이 표시하는 간단한 것입니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(Hello)</span><br><span class="line">*Hello*</span><br></pre></td></tr></table></figure>
-<p>Banner 클래스에는 문자열을 괄호로 묶어서 표시하는 showWithParen 메소드와 문자열 전후에 *를 붙여 표시하는 showWithAster 메소드가 준비되어 있습니다. (이미 제공되어 있는 것)</p>
-<p>Print 인터페이스에는 문자열을 느슨하게(괄호 사용) 표시하기 위한 printWeak 메소드와 문자열을 강하게 표시하기 위한 (* 표시를 앞뒤에 붙여 강조) printStrong 메소드가 선언되어 있습니다.</p>
-<p>지금 하고 싶은 일은 Banner 클래스를 사용해서 Print 인터페이스를 충족시키는 클래스를 만드는 일입니다.</p>
-<p>PrintBanner 클래스가 어댑터의 역할을 담당합니다. 이 클래스는 제공되어 있는 Banner 클래스를 <strong>상속</strong>해서, 필요로 하는 Print 인터페이스를 <strong>구현</strong>합니다.</p>
-<p><img src="/images/post/2018-08-20/adapter-uml_1.png" alt=""></p>
-<h3 id="banner-클래스"><a href="#Banner-클래스" class="headerlink" title="Banner 클래스"></a>Banner 클래스</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Banner</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String string;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Banner</span><span class="params">(String string)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.string = string;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showWithParen</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">'('</span> + string + <span class="string">')'</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showWithAster</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">'*'</span> + string + <span class="string">'*'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="print-인터페이스"><a href="#Print-인터페이스" class="headerlink" title="Print 인터페이스"></a>Print 인터페이스</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Print</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">printWeak</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">printStrong</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="printbanner-클래스"><a href="#PrintBanner-클래스" class="headerlink" title="PrintBanner 클래스"></a>PrintBanner 클래스</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PrintBanner</span> <span class="keyword">extends</span> <span class="title">Banner</span> <span class="keyword">implements</span> <span class="title">Print</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PrintBanner</span><span class="params">(String string)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(string);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printWeak</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        showWithParen();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printStrong</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        showWithAster();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="main-클래스"><a href="#Main-클래스" class="headerlink" title="Main 클래스"></a>Main 클래스</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Print p = <span class="keyword">new</span> PrintBanner(<span class="string">"Hello"</span>);</span><br><span class="line">        p.printWeak();</span><br><span class="line">        p.printStrong();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Main 클래스는 Print 인터페이스를 사용하고 있습니다. Banner 클래스나 showWithParen 메소드나 showWithAster 메소드는 Main 클래스 소스 코드 상에서는 완전히 감추어져 있습니다.</p>
-<h2 id="예제-프로그램2-위임을-사용한-adapter-패턴"><a href="#예제-프로그램-2-위임을-사용한-Adapter-패턴" class="headerlink" title="예제 프로그램(2) - 위임을 사용한 Adapter 패턴"></a>예제 프로그램(2) - 위임을 사용한 Adapter 패턴</h2><p>Main 클래스, Banner 클래스, Print 인터페이스는 예제 프로그램(1)과 동일합니다.</p>
-<p>PrintBanner 클래스는 banner 필드에서 Banner 클래스의 인스턴스를 가집니다. 이 인스턴스는 PrintBanner 클래스의 생성자에서 생성합니다.</p>
-<p>이전 예와는 달리, 이번에는 필드를 경우해서 호출하고 있습니다. 즉 위임을 하고 있습니다.</p>
-<p><img src="/images/post/2018-08-20/adapter-uml_2.png" alt=""></p>
-<h3 id="printbanner-클래스"><a href="#PrintBanner-클래스-1" class="headerlink" title="PrintBanner 클래스"></a>PrintBanner 클래스</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PrintBanner</span> <span class="keyword">implements</span> <span class="title">Print</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Banner banner;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PrintBanner</span><span class="params">(String string)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.banner = <span class="keyword">new</span> Banner(string);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printWeak</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        banner.showWithParen();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printStrong</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        banner.showWithAster();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="adapter-패턴의-구성요소"><a href="#Adapter-패턴의-구성요소" class="headerlink" title="Adapter 패턴의 구성요소"></a>Adapter 패턴의 구성요소</h2><ul>
-<li><strong>Target(대상)의 역할</strong><br>지금 필요한 메소드를 결정합니다. 예제 프로그램에서 Print 인터페이스(상속의 경우)나 Print 클래스(위임의 경우)가 이 역할을 합니다.</li>
-<li><strong>Client(의뢰자)의 역할</strong><br>Target 역할의 메소드를 사용해서 일을 합니다. 예제 프로그램에서 Main 클래스가 이 역할을 합니다.</li>
-<li><strong>Adaptee(개조되는 쪽)의 역할</strong><br>Adaptee는 이미 준비되어 있는 메소드를 갖고 있는 역할입니다. Adaptee역의 메소드가 Target 역할의 메소드와 일치하면 다음 Adapter의 역할은 필요없습니다.</li>
-<li><strong>Adapter의 역할</strong><br>Adapter 패턴의 주인공입니다. Adaptee 역할의 메소드를 사용해서 어떻게든 Target 역할을 만족시키기 위한 것이 Adapter 패턴의 목적이며, Adapter 역할의 임무입니다. 예제 프로그램에서는 PrintBanner 클래스가 Adapter의 역할을 합니다.</li>
-</ul>
-<h2 id="사고-넓히기"><a href="#사고-넓히기" class="headerlink" title="사고 넓히기"></a>사고 넓히기</h2><h3 id="어떤-경우에-사용할까"><a href="#어떤-경우에-사용할까" class="headerlink" title="어떤 경우에 사용할까?"></a>어떤 경우에 사용할까?</h3><p><strong>Adapter 패턴은 기존의 클래스를 개조해서 필요한 클래스를 만듭니다.</strong> 이 패턴으로 필요한 메소드를 빠르게 만들 수 있습니다.</p>
-<p>이미 만들어진 클래스를 새로운 인터페이스(API)에 맞게 개조시킬 때 기존 클래스의 소스를 바꾸어서 ‘수정’하려고 합니다. 그러나 그렇게하면 테스트가 이미 끝난 기존의 클래스를 수정한 후에 다시 한 번 테스트 해야 합니다. Adapter 패턴은 기존의 클래스를 전혀 수정하지 않고 목적한 인터페이스(API)에 맞추려는 것입니다.</p>
-<p>만약 버그가 발생해도 기존의 클래스(Adaptee의 역할)에는 버그가 없으므로 Adapter 역할의 클래스를 중점적으로 조사하면 되고, 프로그램 검사도 상당히 쉬워집니다.</p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-08-18T03:20:00.000Z">2018-08-18</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Programming/">Programming</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/Programming/Java/">Java</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    9분 읽기 (대략 1384 단어)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/08/18/Java/design-pattern-iterator/">Design Pattern - Iterator</a>
-            
-        </h1>
-        <div class="content">
-            <blockquote>
-<p>해당 포스팅은 <a href="https://book.naver.com/bookdb/book_detail.nhn?bid=4529127" rel="external nofollow noopener noreferrer" target="_blank">Java 언어로 배우는 디자인 패턴 입문</a> 책을 참고해 작성했습니다.<br>사용된 코드는 <a href="https://github.com/jongmin92/Design-Pattern" rel="external nofollow noopener noreferrer" target="_blank">jongmin92/Design-Pattern</a> repository 에서 확인할 수 있습니다.</p>
-</blockquote>
-<h1 id="iterator-패턴"><a href="#Iterator-패턴" class="headerlink" title="Iterator 패턴"></a>Iterator 패턴</h1><p>Java 언어에서 배열 arr의 모든 요소를 표시하기 위해서는 다음과 같이 for문을 사용합니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">    System.out.println(arr[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>for문의 i++에서 i를 하나씩 증가시키면서 배열 arr의 요소 전체를 처음부터 차례대로 검색하게 됩니다. 여기서 사용되고 있는 변수 i의 기능을 추상화해서 일반화한 것을 디자인 패턴에서는 <code>Iterator 패턴</code>이라고 합니다.</p>
-<p><strong><code>Iterator 패턴</code>이란, 무엇인가 많이 모여있는 것들을 순서대로 지정하면서 전체를 검색하는 처리를 실행하기 위한 것입니다.</strong> Iterator는 무엇인가를 ‘반복한다’라는 의미이며, 반복자라고도 합니다.</p>
-<h2 id="예제-프로그램"><a href="#예제-프로그램" class="headerlink" title="예제 프로그램"></a>예제 프로그램</h2><p>Iterator 패턴을 사용해 책장에 꽂혀 있는 책들을 하나씩 검색해 책 이름을 출력해보는 예제 프로그램을 작성해 보겠습니다.</p>
-<p><img src="/images/post/2018-08-18/iterator-uml.png" alt=""></p>
-<h3 id="aggregate-인터페이스"><a href="#Aggregate-인터페이스" class="headerlink" title="Aggregate 인터페이스"></a>Aggregate 인터페이스</h3><p><strong><code>Aggregate</code> 인터페이스는 요소들이 나열되어 있는 ‘집합체’를 나타냅니다.</strong> 이 인터페이스를 구현하고 있는 클래스는 배열과 같이 무엇인가가 많이 모여 있습니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Aggregate</span> </span>&#123;</span><br><span class="line">    <span class="function">Iterator <span class="title">iterator</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Aggregate 인터페이스에 선언되어 있는 메소드는 iterator 메소드 하나뿐입니다. 이 메소드는 집합체에 대응하는 Iterator를 1개 작성하기 위한 것입니다.</p>
-<h3 id="iterator-인터페이스"><a href="#Iterator-인터페이스" class="headerlink" title="Iterator 인터페이스"></a>Iterator 인터페이스</h3><p><strong><code>Iterator</code> 인터페이스는 요소를 하나씩 나열하면서 루프 변수와 같은 역할을 수행합니다.</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> interface <span class="title">Iterator</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function">Object <span class="title">next</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>hasNext</strong> 메소드는  다음 요소가 존재하는지를 조사하기 위한 메소드입니다. 다음 요소가 존재하면 true를 반환하고, 다음 요소가 존재하지 않는 마지막 요소라면 false를 반환합니다. 즉, hasNext는 루프의 종료 조건으로 사용됩니다.</p>
-<p><strong>next</strong> 메소드는 집합체의 요소를 1개 반환합니다. 또한 next 메소드를 호출했을 때 다음 요소를 반환하도록 내부 상태를 다음으로 진행시켜 두는 역할도 함께합니다.</p>
-<h3 id="book-클래스"><a href="#Book-클래스" class="headerlink" title="Book 클래스"></a>Book 클래스</h3><p><code>Book</code> 클래스는 책을 나타내는 클래스입니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Book</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Book</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="bookshelf-클래스"><a href="#BookShelf-클래스" class="headerlink" title="BookShelf 클래스"></a>BookShelf 클래스</h3><p><code>BookShelf</code> 클래스는 책장을 나타내는 클래스입니다. 이 클래스를 <strong>집합체로 다루기 위해 Aggregate 인터페이스를 구현합니다.</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BookShelf</span> <span class="keyword">implements</span> <span class="title">Aggregate</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Book[] books;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> last = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BookShelf</span><span class="params">(<span class="keyword">int</span> maxsize)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.books = <span class="keyword">new</span> Book[maxsize];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Book <span class="title">getBookAt</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> books[index];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">appendBook</span><span class="params">(Book book)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.books[last] = book;</span><br><span class="line">        last++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getLength</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> last;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Iterator <span class="title">iterator</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> BookShelfIterator(<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>iterator 메소드는 BookShelf 클래스에 대응하는 Iterator로서, BookShelfIterator라는 클래스의 인스턴스를 생성해서 그것을 반환합니다.</p>
-<h3 id="bookshelfiterator-클래스"><a href="#BookShelfIterator-클래스" class="headerlink" title="BookShelfIterator 클래스"></a>BookShelfIterator 클래스</h3><p><code>BookshelfIterator</code> 를 Iterator로서 다루기 위해 Iterator 인터페이스를 구현합니다. bookShelf 필드는 BookShelfIterator가 검색할 책장이고, index 필드는 현재 가리키는 책을 가리키는 첨자입니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BookShelfIterator</span> <span class="keyword">implements</span> <span class="title">Iterator</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> BookShelf bookShelf;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> index;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BookShelfIterator</span><span class="params">(BookShelf bookShelf)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.bookShelf = bookShelf;</span><br><span class="line">        <span class="keyword">this</span>.index = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> index &lt; bookShelf.getLength();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">next</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Book book = bookShelf.getBookAt(index);</span><br><span class="line">        index++;</span><br><span class="line">        <span class="keyword">return</span> book;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="main-클래스"><a href="#Main-클래스" class="headerlink" title="Main 클래스"></a>Main 클래스</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        BookShelf bookShelf = <span class="keyword">new</span> BookShelf(<span class="number">4</span>);</span><br><span class="line">        bookShelf.appendBook(<span class="keyword">new</span> Book(<span class="string">"Effective Java"</span>));</span><br><span class="line">        bookShelf.appendBook(<span class="keyword">new</span> Book(<span class="string">"Head First Java"</span>));</span><br><span class="line">        bookShelf.appendBook(<span class="keyword">new</span> Book(<span class="string">"Thinking In Java"</span>));</span><br><span class="line">        bookShelf.appendBook(<span class="keyword">new</span> Book(<span class="string">"Agile Java"</span>));</span><br><span class="line"></span><br><span class="line">        Iterator it = bookShelf.iterator();</span><br><span class="line">        <span class="keyword">while</span> (it.hasNext()) &#123;</span><br><span class="line">            Book book = (Book) it.next();</span><br><span class="line">            System.out.println(book.getName());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 실행결과</span></span><br><span class="line">Effective Java</span><br><span class="line">Head First Java</span><br><span class="line">Thinking In Java</span><br><span class="line">Agile Java</span><br></pre></td></tr></table></figure>
-<h2 id="iterator-패턴의-구성요소"><a href="#Iterator-패턴의-구성요소" class="headerlink" title="Iterator 패턴의 구성요소"></a>Iterator 패턴의 구성요소</h2><ul>
-<li><p><strong>Iterator(반복자)의 역할</strong><br>요소를 순서대로 검색해가는 인터페이스(API)를 결정 (hasNext, next)</p>
-</li>
-<li><p><strong>ConcreteIterator(구체적인 반복자)의 역할</strong><br>Iterator가 결정한 인터페이스(API)를 실제로 구현</p>
-</li>
-<li><p><strong>Aggregate(집합체)의 역할</strong><br>Iterator 역할을 만들어내는 인터페이스(API)를 결정</p>
-</li>
-<li><p><strong>ConcreteAggregate(구체적인 집합체)의 역할</strong><br>Aggregate 역할이 결정한 인터페이스(API)를 실제로 구현</p>
-</li>
-</ul>
-<h2 id="사고-넓히기"><a href="#사고-넓히기" class="headerlink" title="사고 넓히기"></a>사고 넓히기</h2><h3 id="구현에-상관-없이-iterator를-사용할-수-있다"><a href="#구현에-상관-없이-Iterator를-사용할-수-있다" class="headerlink" title="구현에 상관 없이 Iterator를 사용할 수 있다."></a>구현에 상관 없이 Iterator를 사용할 수 있다.</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (it.hasNext()) &#123;</span><br><span class="line">	Book book = (Book) it.next();</span><br><span class="line">	System.out.println(book.getName());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>여기서 사용되고 있는 것은 hasNext와 next라는 Iterator의 메소드 뿐입니다. BooShelf의 구현에서 사용되고 있는 메소드는 호출되고 있지 않습니다. 결국 위 코드의 <strong>while 루프는 BookShelf의 구현에 의존하지 않습니다.</strong></p>
-<p>그렇기 때문에 현재 배열을 사용해 구현하고 있는 BookShelf를 List를 사용하도록 수정해도, 위의 while 루프는 전혀 <strong>변경하지 않아도 동작</strong>합니다.</p>
-<h3 id="aggregate와-iterator의-대응"><a href="#Aggregate와-Iterator의-대응" class="headerlink" title="Aggregate와 Iterator의 대응"></a>Aggregate와 Iterator의 대응</h3><p>BookShelfIterator는 BookShelf가 어떻게 구현되고 있는지 알기 때문에, ‘다음 책’을 얻기 위해 getBookAt 메소드를 호출할 수 있었습니다.</p>
-<p>만약 BookShelf의 구현을 전부 변경하고, getBookAt 메소드라는 인터페이스(API)도 변경된다면 BookShelfIterator의 수정이 필요하게 됩니다.</p>
+            <p><img src="/images/post/2017-06-14/bg.jpg" alt=""></p>
+<h2 id="index"><a href="#Index" class="headerlink" title="Index"></a>Index</h2><ol>
+<li><a href="#1">메모이제이션 이란?</a></li>
+<li><a href="#2">메모이제이션 적용하기</a></li>
+<li><a href="#3">결과 비교</a></li>
+<li><a href="#4">마치며</a></li>
+</ol>
+<hr>
+<p><span id="1"></span></p>
+<h2 id="메모이제이션-이란"><a href="#메모이제이션-이란" class="headerlink" title="메모이제이션 이란?"></a>메모이제이션 이란?</h2><p>자바 스크립트에서 함수는 객체이기 때문에 프로퍼티를 가질 수 있습니다. 그리고 언제든지 함수에 사용자 정의 프로퍼티를 추가할 수도 있습니다. 함수에 프로퍼티를 추가하여 <strong>결과(반환 값)을 캐시</strong>하면 다음 호출 시점에 복잡한 연산을 반복하지 않을 수 있습니다. 이런 활용 방법을 <strong><code>메모이제이션 패턴</code></strong>이라고 합니다.</p>
+<p>다음 코드에서는 myFunc 함수에 cache 프로퍼티를 생성합니다. 이 프로퍼티는 일반적인 프로퍼티처럼 myFunc.cache와 같은 형태로 접근할 수 있습니다. cache 프로퍼티는 함수로 전달된 param 매개변수를 키로 사용해서 계산의 결과를 값으로 가지는 객체(해시)입니다. 결과 값은 필요에 따라 복잡한 데이터 구조로 저장할 수도 있습니다.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myFunc = <span class="function"><span class="keyword">function</span> (<span class="params">param</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!myFunc.cache[param]) &#123;</span><br><span class="line">        <span class="keyword">var</span> result = &#123;&#125;;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">        <span class="comment">// 비용이 많이 드는 수행 후 result에 결과 저장</span></span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">        myFunc.cache[param] = result;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> myFunc.cache[param];</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 캐시 저장공간</span></span><br><span class="line">myFunc.cache = &#123;&#125;;</span><br></pre></td></tr></table></figure>
+<hr>
+<p><span id="2"></span></p>
+<h2 id="메모이제이션-적용하기"><a href="#메모이제이션-적용하기" class="headerlink" title="메모이제이션 적용하기"></a>메모이제이션 적용하기</h2><p>메모이제이션을 공부한 후 현재 진행중인 <a href="https://jongmin92.github.io/2017/03/10/Emily/1-start-emily/">에밀리(개인 프로젝트)</a>에 적용해 보았습니다. 어느 부분에 적용했는지 적용 전과 적용 후 얼마나 효율이 올라갔는지를 알아보겠습니다.</p>
+<h4 id="1-수정할-부분"><a href="#1-수정할-부분" class="headerlink" title="1. 수정할 부분"></a>1. 수정할 부분</h4><p>메모이제이션 패턴을 적용할 코드가 현재 하고 있는 기능은 다음과 같습니다. 사용자의 요청(학생식당, 카페테리아, 사범대식당, 기숙사식당, 교직원식당)에 따라 미리 크롤링 후 DB에 저장되어 있는 데이터(메뉴)를 가져와 응답합니다.<br><img src="/images/post/2017-06-14/description_1.png" alt="카카오톡 플러스친구 자동응답 봇"><br>메모이제이션 패턴을 사용함으로써 얻을 수 있는 이점은 <strong>비용이 많이 드는 결과를 캐싱하고 그 이후에 재사용함으로써 비용을 줄일 수 있다는 것입니다.</strong> 현재 코드에서 비용이 많이 드는 작업은 <strong>DB를 조회</strong>하는 부분입니다. DB에는 다음과 같이 미리 크롤링한 데이터가 날짜별로 저장되어 있습니다.</p>
+<p><img src="/images/post/2017-06-14/db-table.png" alt="DB 메뉴 table"></p>
+<p>사용자의 요청에 따라 해당 날짜의 데이터를 조회한 후 사용자가 요청한 식당에 맞는 데이터를 결과로 반환합니다. 그렇기 때문에 <strong>해당 날짜의 최초 요청이 이루어진 후 그 하루 동안에는 계속해서 DB에 같은 쿼리를 통해 같은 결과</strong>를 얻게 됩니다. 이 부분이 비용이 많이 드는 작업이기 때문에 메모이제이션 패턴을 통해 개선해보았습니다.</p>
+<h4 id="2-메모이제이션-적용-전"><a href="#2-메모이제이션-적용-전" class="headerlink" title="2. 메모이제이션 적용 전"></a>2. 메모이제이션 적용 전</h4><p>먼저 메모이제이션 패턴을 적용하기 전 코드입니다. menuHandler 클래스의 <strong>getMenu</strong> 함수는 menuService를 통해 DB에서 해당 날짜의 식당 메뉴를 가져와 매개변수로 전달받은 식당의 이름을 사용하여 결과로 반환하는 역할을 합니다.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> dateUtil = <span class="built_in">require</span>(<span class="string">'util/dateUtil'</span>);</span><br><span class="line"><span class="keyword">const</span> menuService = <span class="built_in">require</span>(<span class="string">'services/menuService'</span>);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">menuHandler</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> getMenu(place) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">_s, _f</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> today = <span class="keyword">new</span> <span class="built_in">Date</span>().yyyymmdd();</span><br><span class="line">      <span class="keyword">let</span> menu = <span class="string">''</span>;</span><br><span class="line"></span><br><span class="line">      menuService.show(today)</span><br><span class="line">        .then(<span class="function"><span class="params">menuList</span> =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">if</span> (!menuList) &#123;</span><br><span class="line">            menu = <span class="string">'데이터가 없습니다. 관리자에게 문의해주세요'</span>;</span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">          <span class="keyword">switch</span> (place) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'학생식당'</span>:</span><br><span class="line">              menu = menuList.student.join(<span class="string">'\n\n'</span>);</span><br><span class="line">              <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'카페테리아'</span>:</span><br><span class="line">              menu = menuList.cafeteria.join(<span class="string">'\n\n'</span>);</span><br><span class="line">              <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'사범대식당'</span>:</span><br><span class="line">              menu = menuList.education.join(<span class="string">'\n\n'</span>);</span><br><span class="line">              <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'기숙사식당'</span>:</span><br><span class="line">              menu = menuList.dormitory.join(<span class="string">'\n\n'</span>);</span><br><span class="line">              <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'교직원식당'</span>:</span><br><span class="line">              menu = menuList.staff.join(<span class="string">'\n\n'</span>);</span><br><span class="line">              <span class="keyword">break</span>;</span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">          _s(menu);</span><br><span class="line">        &#125;)</span><br><span class="line">        .catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">          _f(err);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = menuHandler;</span><br></pre></td></tr></table></figure>
+<h4 id="3-메모이제이션-적용-후"><a href="#3-메모이제이션-적용-후" class="headerlink" title="3. 메모이제이션 적용 후"></a>3. 메모이제이션 적용 후</h4><p>메모이제이션 패턴을 적용 한 후 코드입니다. <strong>setCache, getCache, pickMenu</strong> 함수가 추가되었고, getMenu 함수의 코드도 조금 변경되었습니다. 기존 코드의 getMenu 함수에서는 바로 DB를 조회하여 결과를 반환하였지만, 변경된 코드에서는 <strong>getCache</strong> 함수를 통해 캐시에 저장된 데이터가 있는지 확인 후 분기하여 처리합니다.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> dateUtil = <span class="built_in">require</span>(<span class="string">'util/dateUtil'</span>);</span><br><span class="line"><span class="keyword">const</span> menuService = <span class="built_in">require</span>(<span class="string">'services/menuService'</span>);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">menuHandler</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> setCache(param, menuList) &#123;</span><br><span class="line">    menuHandler.cache[param] = menuList;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> getCache(param) &#123;</span><br><span class="line">    <span class="keyword">if</span> (menuHandler.cache[param]) &#123;</span><br><span class="line">      <span class="keyword">return</span> menuHandler.cache[param];</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> pickMenu(menuList, place) &#123;</span><br><span class="line">    <span class="keyword">let</span> menu = <span class="string">''</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">switch</span> (place) &#123;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">'학생식당'</span>:</span><br><span class="line">        menu = menuList.student.join(<span class="string">'\n\n'</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">'카페테리아'</span>:</span><br><span class="line">        menu = menuList.cafeteria.join(<span class="string">'\n\n'</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">'사범대식당'</span>:</span><br><span class="line">        menu = menuList.education.join(<span class="string">'\n\n'</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">'기숙사식당'</span>:</span><br><span class="line">        menu = menuList.dormitory.join(<span class="string">'\n\n'</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">'교직원식당'</span>:</span><br><span class="line">        menu = menuList.staff.join(<span class="string">'\n\n'</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> menu;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> getMenu(place) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">_s, _f</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> today = <span class="keyword">new</span> <span class="built_in">Date</span>().yyyymmdd();</span><br><span class="line">      <span class="keyword">const</span> cachedMenuList = <span class="keyword">this</span>.getCache(today);</span><br><span class="line">      <span class="keyword">let</span> menu = <span class="string">''</span>;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (cachedMenuList) &#123;</span><br><span class="line">        menu = <span class="keyword">this</span>.pickMenu(cachedMenuList, place);</span><br><span class="line">        _s(menu);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        menuService.show(today)</span><br><span class="line">          .then(<span class="function"><span class="params">menuList</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (!menuList) &#123;</span><br><span class="line">              menu = <span class="string">'데이터가 없습니다. 관리자에게 문의해주세요'</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">this</span>.setCache(today, menuList);</span><br><span class="line"></span><br><span class="line">            menu = <span class="keyword">this</span>.pickMenu(menuList, place);</span><br><span class="line">            _s(menu);</span><br><span class="line">          &#125;)</span><br><span class="line">          .catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">            _f(err);</span><br><span class="line">          &#125;);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">menuHandler.cache = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = menuHandler;</span><br></pre></td></tr></table></figure>
+<p>Line:70 에서 선언한 menuHandler의 <strong>cache Object</strong>에는 다음과 같이 데이터가 <strong>캐싱</strong>될 것입니다.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">    `2017-06-13`: &#123; ... menuList ...&#125;</span><br><span class="line">    `2017-06-14`: &#123; ... menuList ...&#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p><span id="3"></span></p>
+<h2 id="결과-비교"><a href="#결과-비교" class="headerlink" title="결과 비교"></a>결과 비교</h2><p>메모이제이션 패턴을 적용하기 전과 적용한 후의 성능 차이는 아래 보이는것처럼 눈에 띄게 차이가 납니다. 메모이제이션 패턴을 적용한 코드는 첫번째 요청(캐싱 하기 전)때는 메모이제이션 패턴 적용 전과 응답속도가 비슷하지만 그 이후의 응답은 캐싱된 데이터를 이용하기 때문에 비교될 정도로 빨라졌습니다.</p>
+<p><img src="/images/post/2017-06-14/result1.png" alt="메모이제이션 적용 전"></p>
+<p><img src="/images/post/2017-06-14/result2.png" alt="메모이제이션 적용 후"></p>
+<hr>
+<p><span id="4"></span></p>
+<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>메모이제이션을 적용하기 전과 후 모두 같은 기능을 결과를 만들어내는 코드이지만 코드를 작성하는 방법에 따라 더욱 더 빠른 효율적인 서비스를 만들 수 있다는 것을 느끼게 되었습니다.<br>현재 제 상황에서는 캐싱된 데이터도 하루가 지나게되면 쓰이지 않고 계속 메모리에 남아있게 되는데 그 부분에 대한 처리를 추가해야할것 같습니다. 이번에 적용한 코드 뿐만 아니라 아직 프로잭트 내에 메모이제이션 패턴을 적용할 수 있는 부분이 더 있습니다. 앞으로 디자인패턴 공부를 계속하여 새로운 패턴들을 적용시키며 리팩토링을 해야겠습니다.</p>
 
         </div>
         
@@ -358,7 +269,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            124
+                            125
                         </p>
                     </a>
                 </div>
@@ -370,7 +281,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            22
+                            23
                         </p>
                     </a>
                 </div>
@@ -382,7 +293,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            203
+                            205
                         </p>
                     </a>
                 </div>
@@ -426,6 +337,25 @@
         <h3 class="menu-label">
             최근 글
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2021/03/21/Kotlin/coroutines/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="코루틴 이해하기">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-03-20T15:17:42.000Z">2021-03-21</time></div>
+                    <a href="/2021/03/21/Kotlin/coroutines/" class="title has-link-black-ter is-size-6 has-text-weight-normal">코루틴 이해하기</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Kotlin/">Kotlin</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -503,25 +433,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/12/18/Java/hash/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Hash - MD5와 SHA256">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-17T15:23:00.000Z">2019-12-18</time></div>
-                    <a href="/2019/12/18/Java/hash/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Hash - MD5와 SHA256</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Programming/">Programming</a> / <a class="has-link-grey -link" href="/categories/Programming/Java/">Java</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -577,6 +488,14 @@
         <a class="level is-marginless" href="/categories/Java/">
             <span class="level-start">
                 <span class="level-item">Java</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Kotlin/">
+            <span class="level-start">
+                <span class="level-item">Kotlin</span>
             </span>
             <span class="level-end">
                 <span class="level-item tag">1</span>
@@ -736,7 +655,7 @@
                 
                 </a>
                 <p class="is-size-7">
-                &copy; 2020 KimJongMin&nbsp;
+                &copy; 2021 KimJongMin&nbsp;
                 Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="external nofollow noopener noreferrer">Icarus</a>
                 
                 </p>
@@ -854,7 +773,393 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 
 
-<a id="back-to-top" title="Back to Top" href="javascript:;">
+<a id="back-to-top" title="Zurück nach oben" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="입력 하세요...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '포스트',
+                PAGES: '페이지',
+                CATEGORIES: '카테고리',
+                TAGS: '태그',
+                UNTITLED: '(제목없음)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>    <div class="menu">
+            <h3 class="menu-label">
+                카테고리
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Algorithm/">
+            <span class="level-start">
+                <span class="level-item">Algorithm</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">14</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Algorithm/BOJ/">
+            <span class="level-start">
+                <span class="level-item">BOJ</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Algorithm/Concept/">
+            <span class="level-start">
+                <span class="level-item">Concept</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Book/">
+            <span class="level-start">
+                <span class="level-item">Book</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Database/">
+            <span class="level-start">
+                <span class="level-item">Database</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Java/">
+            <span class="level-start">
+                <span class="level-item">Java</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Kotlin/">
+            <span class="level-start">
+                <span class="level-item">Kotlin</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/">
+            <span class="level-start">
+                <span class="level-item">Programming</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">95</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Programming/AWS/">
+            <span class="level-start">
+                <span class="level-item">AWS</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Git/">
+            <span class="level-start">
+                <span class="level-item">Git</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Gradle/">
+            <span class="level-start">
+                <span class="level-item">Gradle</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/HTML/">
+            <span class="level-start">
+                <span class="level-item">HTML</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Java/">
+            <span class="level-start">
+                <span class="level-item">Java</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">21</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/JavaScript/">
+            <span class="level-start">
+                <span class="level-item">JavaScript</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">15</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Linux-Ubuntu/">
+            <span class="level-start">
+                <span class="level-item">Linux & Ubuntu</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Node/">
+            <span class="level-start">
+                <span class="level-item">Node</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/RaspberryPi/">
+            <span class="level-start">
+                <span class="level-item">RaspberryPi</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/React-Native/">
+            <span class="level-start">
+                <span class="level-item">React Native</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Spring/">
+            <span class="level-start">
+                <span class="level-item">Spring</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">19</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Tool/">
+            <span class="level-start">
+                <span class="level-item">Tool</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Project/">
+            <span class="level-start">
+                <span class="level-item">Project</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Project/Emily/">
+            <span class="level-start">
+                <span class="level-item">Emily</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Tip/">
+            <span class="level-start">
+                <span class="level-item">Tip</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+        </div>
+    
+</div>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.png" alt="92Hz" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2021 KimJongMin&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="external nofollow noopener noreferrer">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="external nofollow noopener noreferrer" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("ko");</script>
+
+
+<script>
+var IcarusThemeSettings = {
+    site: {
+        url: 'https://jongmin92.github.io',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" rel="external nofollow noopener noreferrer" target="_blank">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+
+<a id="back-to-top" title="Zurück nach oben" href="javascript:;">
     <i class="fas fa-chevron-up"></i>
 </a>
 <script src="/js/back-to-top.js" defer></script>

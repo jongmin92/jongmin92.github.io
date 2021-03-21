@@ -141,6 +141,147 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-06-05T15:00:00.000Z">2017-06-06</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Programming/">Programming</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/Programming/JavaScript/">JavaScript</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    20분 읽기 (대략 2995 단어)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2017/06/06/JavaScript/client-side-rendering-vs-server-side-rendering/">[번역] Client-side rendering VS. Server-sde rendering</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="index"><a href="#Index" class="headerlink" title="Index"></a>Index</h2><ol>
+<li><a href="#1">성능(Performance)</a></li>
+<li><a href="#2">검색 엔진 최적화(SEO)</a></li>
+<li><a href="#3">사전 렌더링(Prerendering)</a></li>
+<li><a href="#4">더 똑똑해진 크롤러</a></li>
+<li><a href="#5">덜 똑똑한 크롤러</a></li>
+<li><a href="#6">두 세계의 장점</a></li>
+<li><a href="#7">토론</a></li>
+</ol>
+<hr>
+<blockquote>
+<p>해당 포스팅은 <a href="https://medium.com/@adamzerner/client-side-rendering-vs-server-side-rendering-a32d2cf3bfcc" rel="external nofollow noopener noreferrer" target="_blank">Adam Zerner - Client-side rendering vs. server-side rendering</a>의 글을 번역하였습니다.</p>
+</blockquote>
+<p>초기에, 웹 프레임워크들은 서버(Server)에서 렌더링된 뷰를 갖고있었습니다. 현재는 클라이언트(Client)에서도 렌더링된 뷰를 가집니다. 지금부터 각각의 장점과 단점에 대해 알아보겠습니다.</p>
+<p><span id="1"></span></p>
+<h2 id="성능performance"><a href="#성능-Performance" class="headerlink" title="성능(Performance)"></a>성능(Performance)</h2><p><strong><code>서버 측(Server-side)에서 렌더링</code></strong>을 할 경우, 새로운 웹 페이지를 보고 싶을 때마다 다음과 같이 새로운 페이지 요청이 필요합니다.</p>
+<p><img src="/images/post/2017-06-06/server_side_rendering_1.png" alt="서버 측 렌더링 작동 방식 다이어그램"></p>
+<p>이것은 먹고 싶은 것이 있을 때마다 슈퍼마켓에 가는것과 비슷합니다. </p>
+<p>그러나 <strong><code>클라이언트 측(Client-side) 렌더링</code></strong>을 사용할 경우, 슈퍼마켓에 한 번 방문하고 좀 더 시간을 들여 꽤 오랜 기간동안 먹을 음식을 구매합니다. 그런 다음, 먹고 싶은 것이 있을 때마다 슈퍼마켓에 가지 않고 냉장고에서 찾게됩니다.</p>
+<p><img src="/images/post/2017-06-06/client_side_rendering_1.png" alt="클라이언트 측 렌더링 작동 방식 다이어그램"></p>
+<p>각 접근법에서는 성능면에서 장점과 단점이 있습니다.</p>
+<ul>
+<li><strong>클라이언트 측 렌더링</strong>을 사용하면 초기 페이지로드가 느려집니다. 네트워크를 통한 통신이 느리므로 사용자에게 콘텐츠를 표시하기 전에 서버를 두 번 왕복해야합니다. 그러나 그 후에는 이후의 모든 페이지로드가 엄청나게 빠릅니다.</li>
+<li><strong>서버 쪽 렌더링</strong>을 사용하면 초기 페이지로드가 크게 느려지지 않습니다. 그렇다고 크게 빠르지는 않을 것입니다. 그리고 이후의 다른 요청도 마찬가지입니다.</li>
+</ul>
+<p>보다 구체적으로 말하자면, <strong>클라이언트 측 렌더링</strong>을 사용하면 <strong>초기 페이지</strong>는 다음과 같이 보입니다.<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"client-side-framework.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"app.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>app.js</strong>는 JavaScript의 모든 HTML 페이지를 다음과 같이 문자열로 유지합니다.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> pages = &#123;</span><br><span class="line">  <span class="string">'/'</span>: <span class="string">'&lt;html&gt; ... &lt;/html&gt;'</span>,</span><br><span class="line">  <span class="string">'/foo'</span>: <span class="string">'&lt;html&gt; ... &lt;/html&gt;'</span>,</span><br><span class="line">  <span class="string">'/bar'</span>: <span class="string">'&lt;html&gt; ... &lt;/html&gt;'</span>,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>그런 다음 페이지가 로드되면 프레임워크는 URL 표시줄을 보고 [ ‘/‘] 페이지에서 문자열을 가져 와서 <code>div class = &quot;container&quot;&gt; &lt;/ div&gt;</code>에 삽입합니다. 또한 링크를 클릭하면 프레임워크가 이벤트를 가로 채고 컨테이너에 새 문자열 (예 : 페이지 [ ‘/ foo’])을 삽입하고 브라우저가 정상적으로하는 것처럼 HTTP 요청을 실행하지 못하게 합니다.</p>
+<hr>
+<p><span id="2"></span></p>
+<h2 id="검색-엔진-최적화seo"><a href="#검색-엔진-최적화-SEO" class="headerlink" title="검색 엔진 최적화(SEO)"></a>검색 엔진 최적화(SEO)</h2><div class="video-container"><iframe src="//www.youtube.com/embed/BNHR6IQJGZs" frameborder="0" allowfullscreen></iframe></div>
+<p><strong>웹 크롤러</strong>가 <em>reddit.com</em> 을 요청하기 시작했다고 가정해봅시다.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> request = <span class="built_in">require</span>(<span class="string">'request'</span>);</span><br><span class="line">request.get(<span class="string">'reddit.com'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">error, response, body</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// body looks something like this:</span></span><br><span class="line">  <span class="comment">// &lt;html&gt;</span></span><br><span class="line">  <span class="comment">//   &lt;head&gt; ... &lt;/head&gt;</span></span><br><span class="line">  <span class="comment">//   &lt;body&gt;</span></span><br><span class="line">  <span class="comment">//     &lt;a href="espn.com"&gt;ESPN&lt;/a&gt;</span></span><br><span class="line">  <span class="comment">//     &lt;a href="news.ycombinator.com"&gt;Hacker News&lt;/a&gt;</span></span><br><span class="line">  <span class="comment">//     ... other &lt;a&gt; tags ...</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>그러면 크롤러는 응답 본문에있는 <code>&lt;a href&gt;</code> 항목을 사용해서 새 요청을 생성합니다.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> request = <span class="built_in">require</span>(<span class="string">'request'</span>);</span><br><span class="line">request.get(<span class="string">'reddit.com'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">error, response, body</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// body looks something like this:</span></span><br><span class="line">  <span class="comment">// &lt;html&gt;</span></span><br><span class="line">  <span class="comment">//   &lt;head&gt; ... &lt;/head&gt;</span></span><br><span class="line">  <span class="comment">//   &lt;body&gt;</span></span><br><span class="line">  <span class="comment">//     &lt;a href="espn.com"&gt;ESPN&lt;/a&gt;</span></span><br><span class="line">  <span class="comment">//     &lt;a href="news.ycombinator.com"&gt;Hacker News&lt;/a&gt;</span></span><br><span class="line">  <span class="comment">//     ... other &lt;a&gt; tags ...</span></span><br><span class="line">  </span><br><span class="line">  request.get(<span class="string">'espn.com'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; ... &#125;);</span><br><span class="line">  request.get(<span class="string">'news.ycombinator.com'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; ... &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>그 후 크롤러는 <em>espn.com</em> 및 <em>news.ycombinator.com</em>의 링크를 사용하여 크롤링을 계속함으로써 프로세스를 계속 진행합니다.</p>
+<p>결국 다음과 같은 재귀 코드처럼 동작합니다.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> request = <span class="built_in">require</span>(<span class="string">'request'</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">crawlUrl</span>(<span class="params">url</span>) </span>&#123;</span><br><span class="line">  request.get(url, <span class="function"><span class="keyword">function</span> (<span class="params">error, response, body</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> linkUrls = getLinkUrls(body);</span><br><span class="line">    linkUrls.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">linkUrl</span>) </span>&#123;</span><br><span class="line">      crawlUrl(linkUrl);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line">crawlUrl(<span class="string">'reddit.com'</span>);</span><br></pre></td></tr></table></figure>
+<p>그렇다면 만약 요청에 의한 응답이 다음과 같은경우는 어떻게 될까요?</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"client-side-framework.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"app.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>위의 코드는 <code>&lt;a href&gt;</code> 태그가 없습니다. 또한 웹 페이지의 내용이 없기 때문에 검색 결과를 표시 할 때 우선순위를 지정하지 않을 것입니다.</p>
+<p>크롤러는 거의 알지 못하지만, 클라이언트 측 프레임워크는 멋진 콘텐츠로 <code>&lt;div class = &quot;container&quot;&gt; &lt;/div&gt;&quot;</code>를 채우려합니다.</p>
+<p>이러한 이유가 클라이언트 측 렌더링이 SEO에 좋지 않은 이유입니다.</p>
+<hr>
+<p><span id="3"></span></p>
+<h2 id="사전-렌더링prerendering"><a href="#사전-렌더링-Prerendering" class="headerlink" title="사전 렌더링(Prerendering)"></a>사전 렌더링(Prerendering)</h2><p>2009년에 Google은 이 문제를 해결할 수 있는 <a href="https://webmasters.googleblog.com/2009/10/proposal-for-making-ajax-crawlable.html" rel="external nofollow noopener noreferrer" target="_blank">방법</a>을 소개했습니다.</p>
+<p><img src="/images/post/2017-06-06/prerendering.png" alt=""></p>
+<p>크롤러가 <code>www.example.com/page?query#!mystate</code> 를 방문하면 <code>www.example.com/page?query&amp;_escaped_fragment_=mystate</code> 로 변환됩니다. 이렇게하면 서버가 <code>_escaped_fragment_</code>를 사용하여 요청을 받으면 사람이 아닌 크롤러에서 요청을 받는다는 것을 알 수 있습니다.</p>
+<p>그렇기때문에 요청이 크롤러에서 온 경우 <code>&lt;div class = &quot;container&quot;&gt; ... &lt;/ div&gt;</code>를 제공할 수 있습니다.<br>일반적인 요청 인 경우 <code>&lt;div class = &quot;container&quot;&gt; &lt;/ div&gt;</code>를 제공하고 JavaScript가 내용을 내부에 삽입하도록 할 수 있습니다.</p>
+<p>그러나 문제가 있습니다. 서버가 <code>&lt;div class = &quot;container&quot;&gt; &lt;/ div&gt;</code>안에 무엇이 들어가는지 알지 못하기 때문입니다. 내부에 무엇이 들어가는지 파악하려면 JavaScript를 실행하고 DOM을 만들고 DOM을 조작해야합니다. 전통적인 웹 서버는 이를 수행하는 방법을 모르기 때문에 <strong>Headless Browser</strong>로 알려진 서비스를 사용합니다.</p>
+<p><img src="/images/post/2017-06-06/headless_browser.png" alt=""></p>
+<hr>
+<p><span id="4"></span></p>
+<h2 id="더-똑똑해진-크롤러"><a href="#더-똑똑해진-크롤러" class="headerlink" title="더 똑똑해진 크롤러"></a>더 똑똑해진 크롤러</h2><p>6년 후, Google은 크롤러가 한층 더 똑똑해 졌다고 발표했습니다. <strong>Crawler 2.0</strong>에서 <code>&lt;script&gt;</code> 태그를 볼 때 웹 브라우저처럼 실제로 요청을하고 코드를 실행하고 DOM을 조작한다는 것입니다.</p>
+<p>그래서 다음과 같은 코드가<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>이제는 이렇게 보이는 것입니다.<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></span><br><span class="line">  ...</span><br><span class="line">  ...</span><br><span class="line">  ...</span><br><span class="line">  ...</span><br><span class="line">  ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p><a href="https://support.google.com/webmasters/answer/6066468?hl=en" rel="external nofollow noopener noreferrer" target="_blank">Fetch as Google</a>를 사용하여 Google 크롤러가 특정 URL을 방문했을 때 어떤 내용을 볼지 결정할 수 있습니다.</p>
+<p>관련된 발표문의 내용 일부를 첨부합니다.</p>
+<blockquote>
+<p>당시 우리 시스템은 자바 스크립트를 사용하여 사용자에게 콘텐츠를 제공하는 페이지를 렌더링하고 이해할 수 없었습니다. <a href="https://developers.google.com/webmasters/ajax-crawling/docs/learn-more" rel="external nofollow noopener noreferrer" target="_blank">크롤러는 동적으로 생성 된 콘텐츠를 볼 수 없었기 때문에</a> 웹 마스터가 AJAX 기반 애플리케이션을 검색 엔진으로 인덱싱 할 수 있도록 일련의 방법을 제안했습니다.<br><br>시대가 바뀌 었습니다. 현재 Googlebot이 자바 스크립트 또는 CSS 파일을 크롤링하는 것을 차단하지 않는 한 일반적으로 최신 브라우저와 같이 웹 페이지를 렌더링하고 이해할 수 있습니다.</p>
+</blockquote>
+<hr>
+<p><span id="5"></span></p>
+<h2 id="덜-똑똑한-크롤러"><a href="#덜-똑똑한-크롤러" class="headerlink" title="덜 똑똑한 크롤러"></a>덜 똑똑한 크롤러</h2><p>불행히도 Google 만이 유일한 검색 엔진이 아닙니다. Bing, Yahho, Duck Duck Go, Baidu 등도 있으며 실제로 사람들은 이러한 검색 엔진도 빈번하게 사용합니다.</p>
+<p><img src="/images/post/2017-06-06/search_engine.png" alt=""></p>
+<p>다른 검색 엔진은 JavaScript를 잘 처리하지 못합니다. 다음 글을 참고해보세요. <a href="https://medium.freecodecamp.com/seo-vs-react-is-it-neccessary-to-render-react-pages-in-the-backend-74ce5015c0c9" rel="external nofollow noopener noreferrer" target="_blank">SEO vs. React: Web Crawlers are Smarter Than You Think</a></p>
+<hr>
+<p><span id="6"></span></p>
+<h2 id="두-세계의-장점"><a href="#두-세계의-장점" class="headerlink" title="두 세계의 장점"></a>두 세계의 장점</h2><p>두 세계(서버 측 렌더링, 클라이언트 측 렌더링)의 장점을 최대한 활용하려면 다음의 방법이 있습니다.</p>
+<ol>
+<li>첫 번째 페이지 로드에는 서버 측 렌더링을 사용.</li>
+<li>그 후 모든 후속 페이지 로드에는 클라이언트 측 렌더링을 사용.</li>
+</ol>
+<p><img src="/images/post/2017-06-06/both_worlds.png" alt=""></p>
+<p>이것이 의미하는 바를 생각해보세요.</p>
+<ul>
+<li>첫 번째 페이지 로드의 경우 사용자가 콘텐츠를 보기 전에 두 번 왕복하지 않습니다.</li>
+<li>후속 페이지 로드가 빨라집니다.</li>
+<li>크롤러는 간단한 HTML을 얻습니다. 옛날처럼 JavaScript를 실행하거나 _escaped<em>fragment</em>를 처리할 필요가 없습니다.</li>
+</ul>
+<p>그러나 이를 위한 설정을 하기위해서는 서버에서 약간의 작업이 필요합니다. Angular, React 및 Ember 모두 이 접근 방식으로 변경했습니다.</p>
+<hr>
+<p><span id="7"></span></p>
+<h2 id="토론"><a href="#토론" class="headerlink" title="토론"></a>토론</h2><p>먼저 고려해야 할 몇 가지 사항은 다음과 같습니다.</p>
+<ul>
+<li>약 2%의 사용자가 JavaScript를 사용할 수 없게 설정되어 있는 경우 클라이언트 측 렌더링이 전혀 작동하지 않습니다.</li>
+<li>웹 검색의 약 1/4은 Google 이외의 엔진으로 수행됩니다.</li>
+<li>모두가 빠른 인터넷 연결을 사용하는 것은 아닙니다.</li>
+<li>휴대 전화 사용자는 대개 빠른 인터넷 연결이 필요하지 않습니다.</li>
+<li><a href="https://www.nngroup.com/articles/too-fast-ux/" rel="external nofollow noopener noreferrer" target="_blank">너무 빠른 UI는 혼란 스러울 수 있습니다.</a> 사용자가 링크를 클릭한다고 가정 해보세요. 앱에서 새로운 뷰로 이동합니다. 그러나 새로운 뷰는 이전의 뷰와 미묘하게 다릅니다. 그리고 변경 사항은 즉시 발생했습니다 (클라이언트 측 렌더링의 장점). 새로운 뷰가 실제로 로드 된 것을 사용자가 알지 못할 수도 있습니다. 또는 사용자가 주의를 기울 였지만 상대적으로 미묘하기 때문에 사용자는 전환이 실제로 발생했는지 여부를 감지하기 위해 약간의 노력을 기울여야합니다. 때로는 약간의 로딩 스피너와 전체 페이지 재 렌더링을 하는 것이 좋습니다.</li>
+<li>캐싱이 중요합니다. 따라서 서버 측 렌더링을 사용하면 실제로 사용자가 실제로 모든 것을 서버로 가져갈 필요가 없습니다. 때로는 바다 건너편의 “공식”서버가 아닌 근처의 서버에 가면됩니다.</li>
+<li>실제로 성과와 관련하여 때로는 중요하지 않습니다. 때로는 속도가 좋고 속도가 약간 올라가더라도 삶이 더 좋아지지는 않습니다.</li>
+</ul>
+<p>대부분의 사용자는 인터넷 연결 상태가 좋으며 충분히 빠릅니다. 특히 Macbook Pro로 yuppies를 타겟팅하는 경우. 초기로드 시간이 너무 길어서 사용자를 잃을 염려가 없습니다. 사용자가 링크를 클릭 할 때 실제로 새 페이지가 로드된다는 사실을 사용자가 알지 못하는 사용성 문제에 대해 걱정할 필요가 없습니다.</p>
+<p>그러나 초기 페이지 로드시 서버 측 렌더링을 사용하는 클라이언트 측 렌더링을위한 사용 사례는 확실합니다. 큰 회사의 경우 #perfMatters, 인터넷 연결 속도가 느린 사용자가 있고 최적화에 충분한 시간을 할애 할 수있는 충분한 엔지니어링 팀이있는 경우가 종종 있습니다.</p>
+<p>앞으로 이 같은 형태의 웹 프레임 워크 (초기 페이지 로드시 서버 쪽 렌더링을 사용하고 후에는 클라이언트 측 렌더링을 수행)가 보다 안정되고 사용하기 쉬워지기를 기대합니다. 이 시점에서 추가 된 복잡성은 최소화 될 것입니다. 그러나 오늘날,이 모든 것은 매우 새롭고, 많은 추상화가있을 것으로 기대합니다. 앞으로 더 나아가 클라이언트 측 렌더링이 필요하지 않은 곳에 인터넷 연결이 충분해지기 때문에 추세가 다시 서버 측 렌더링으로 되돌아 갈 것으로 예상됩니다.</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2017-05-27T15:00:00.000Z">2017-05-28</time>
                 
                 <div class="level-item">
@@ -640,113 +781,6 @@
 
 
 
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-03-13T15:15:30.000Z">2017-03-14</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Programming/">Programming</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/Programming/JavaScript/">JavaScript</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    16분 읽기 (대략 2418 단어)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2017/03/14/JavaScript/understand-prototype/">Prototype 이제는 이해하자</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="index"><a href="#Index" class="headerlink" title="Index"></a>Index</h2><ol>
-<li><a href="#1">prototype은 왜 어려울까?</a></li>
-<li><a href="#2">객체(object)는 함수(function)로부터 시작된다</a></li>
-<li><a href="#3">함수(function) 생성시 발생하는 일</a></li>
-<li><a href="#4">객체(object) 생성시 발생하는 일</a></li>
-<li><a href="#5">프로토타입 체인(Prototype Chain)</a></li>
-<li><a href="#6">번외</a></li>
-</ol>
-<hr>
-<p><span id="1"></span></p>
-<h2 id="prototype은-왜-어려울까"><a href="#prototype은-왜-어려울까" class="headerlink" title="prototype은 왜 어려울까?"></a>prototype은 왜 어려울까?</h2><p>C++, Java와 같은 <code>클래스</code> 기반 객체지향 언어와 달리 자바스크립트는 <code>프로토타입</code> 기반 객체지향 언어입니다. 프로토타입을 사용하여 객체지향을 추구하기 때문에 자바스크립트를 사용함에 있어 프로토타입을 이해하는 것은 중요합니다. 최근 ECMA6 표준에서 <code>Class</code> 문법이 추가되었지만 C++, Java에서 말하는 클래스가 아닌 <code>프로토타입</code>을 기반으로 하여 만들어진 문법입니다.</p>
-<p>자바스크립트의 프로토타입을 처음 공부하면서 <strong>prototype, [[prototype]], __proto__, 객체, 함수, prototype chain</strong> 과 같은 용어들을 접하게 되는데 공부할수록 서로 뒤엉켜지고, 모르는 것도 아닌 그렇다고 제대로 알고 있는것도 아닌 어중간한 상태가 됩니다.</p>
-<p>자바스크립트를 사용한 경험이 있으시다면 아래의 코드와 같은 형태를 경험한적이 있으실겁니다. 지금부터 아래의 코드가 어떤 원리로 동작하게 되는지 알아보겠습니다.</p>
-<p><img src="/images/post/2017-03-14/prototype_example_1.png" alt="prototype에 property 추가"></p>
-<p>먼저 프로토타입에 대해 이해하기 위해서는 <code>객체(object)는 함수(function)로부터 시작된다</code>라는 것을 알아야 합니다. 이는 prototype을 이해하는데 많은 도움을 줍니다.</p>
-<hr>
-<p><span id="2"></span></p>
-<h2 id="객체object는-함수function로부터-시작된다"><a href="#객체-object-는-함수-function-로부터-시작된다" class="headerlink" title=" 객체(object)는 함수(function)로부터 시작된다"></a><span style="color:red"> 객체(object)는 함수(function)로부터 시작된다</span></h2><p><strong>자바스크립트에서 <a href="https://developer.mozilla.org/ko/docs/Glossary/Primitive" rel="external nofollow noopener noreferrer" target="_blank">primitive</a>를 제외하고는 모두 객체(object)입니다.</strong><br> <strong>앞으로 등장하는 Object와 Function은 function(즉, 생성자)입니다. object는 객체를 의미합니다.</strong></p>
-<p>다음의 코드를 분석하기 전 <code>객체(object)는 함수(function)로부터 시작된다</code>라는걸 다시한번 기억하겠습니다.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Book</span>(<span class="params"></span>) </span>&#123; &#125;                <span class="comment">// 함수</span></span><br><span class="line"><span class="keyword">var</span> jsBook = <span class="keyword">new</span> Book();           <span class="comment">// 객체 생성</span></span><br></pre></td></tr></table></figure></p>
-<p>위의 코드에서 <strong>Book이라는 함수를 통해서 jsBook이라는 객체</strong>를 생성했습니다. 이때 Book 함수를 <code>생성자</code>라고 합니다. 생성자는 새로 생성된 객체를 초기화하는 역할을 합니다. 코어 자바스크립트는 기본 타입에 대한 생성자를 내장하고 있는데 이는 다음 코드를 통해 확인이 가능합니다.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> cssBook = &#123;&#125;;                  <span class="comment">// 생성자 선언 없이 객체 생성</span></span><br></pre></td></tr></table></figure></p>
-<p>위에서는 리터럴 방식을 사용하여 객체를 생성하였습니다. 리터럴 방식 또한 결과적으로는 함수를 통하여 객체를 생성하게 됩니다. <strong>자바스크립트 엔진</strong>이 해당 리터럴을 다음과 같이 해석합니다.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> cssBook = <span class="keyword">new</span> <span class="built_in">Object</span>();        <span class="comment">// 객체 생성</span></span><br></pre></td></tr></table></figure></p>
-<p>따라서 결과적으로는 리터럴 방식으로 객체를 생성할때도 Object라는 함수(생성자)를 통해서 객체를 생성하게 됩니다. <strong>Object 뿐만 아니라 Array, Function, Date, RegExp 모두 함수입니다.</strong></p>
-<p><img src="/images/post/2017-03-14/various_function.png" alt="Object, Array, Function, Date, RegExp - 모두 함수(function)이다"></p>
-<p>배열도 객체이기 때문에(자바스크립트 배열은 객체의 특별한 형태입니다. 프로퍼티 이름이 정수로 사용되며, length 프로퍼티를 가집니다.) 객체를 생성할때와 마찬가지로 배열(객체)의 생성에도 함수가 관여하게 됩니다. 따라서 무심코 사용했던 배열의 리터럴 표현도 결국에는 자바스크립트 엔진이 다음과 같이 해석합니다.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> books = [<span class="string">'html'</span>, <span class="string">'css'</span>, <span class="string">'js'</span>];                  <span class="comment">// 배열(객체) 생성</span></span><br><span class="line"><span class="comment">// 엔진이 다음과 같이 해석합니다.</span></span><br><span class="line"><span class="keyword">var</span> books = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="string">'html'</span>, <span class="string">'css'</span>, <span class="string">'js'</span>);         <span class="comment">// 배열(객체) 생성</span></span><br></pre></td></tr></table></figure></p>
-<p>이제 <code>객체(object)는 함수(function)로부터 시작된다</code>라는 것을 알 수 있습니다.</p>
-<hr>
-<p><span id="3"></span></p>
-<h2 id="함수function-생성시-발생하는-일"><a href="#함수-function-생성시-발생하는-일" class="headerlink" title=" 함수(function) 생성시 발생하는 일"></a><span style="color:red"> 함수(function) 생성시 발생하는 일</span></h2><p>객체(object)는 함수(function)로부터 시작되기 때문에 사용자가 객체를 생성하기 위해 먼저 함수를 정의하게 됩니다. 이때 <strong>발생하는 일</strong>에 대해 알아보겠습니다. 여기서는 2가지를 기억해야 합니다.</p>
-<p>1.<strong>함수를 정의하면 함수가 생성되며 <code>Prototype object</code>가 같이 생성 됩니다. 생성된 Prototype object는 함수의 <code>prototype</code> 속성을 통해 접근할 수 있습니다.</strong> (Prototype object같은 경우 함수 생성시에만 됩니다. 일반 객체 생성시에는 생성되지 않습니다.)</p>
-<p><img src="/images/post/2017-03-14/function_property.png" alt="함수 prototype property"></p>
-<p>2.함수의 생성과 함께 생성된 <code>Prototype object</code>는 <code>constructor</code>와 <code>__proto__</code>를 갖고 있습니다. (cover property를 추가한것 처럼 사용자 임의로 추가 가능합니다.) <strong>constructor</strong>는 생성된 함수를 가리키며(여기서는 function Book을 가리킵니다.) <strong>__proto__</strong>는 <code>Prototype Link</code>로서 <strong>객체가 생성될 때 사용된 생성자(함수)의 Prototype object를 가리킵니다.</strong> Prototype Link는 뒤에서 자세하게 알아보겠습니다.</p>
-<p><img src="/images/post/2017-03-14/prototype_object.png" alt="함수와 함께 생성된 Prototype object"></p>
-<p>다이어그램을 통해 확인하면 다음과 같습니다.</p>
-<p><img src="/images/post/2017-03-14/make_function_diagram.png" alt="함수와 Prototype object의 관계"></p>
-<hr>
-<p><span id="4"></span></p>
-<h2 id="객체object-생성시-발생하는-일"><a href="#객체-object-생성시-발생하는-일" class="headerlink" title=" 객체(object) 생성시 발생하는 일"></a><span style="color:red"> 객체(object) 생성시 발생하는 일</span></h2><p>이번에는 객체 생성시 발생하는 일에 대해 알아보겠습니다. 조금 전에 정의한 Book 함수(생성자)를 사용하여 jsBook이라는 객체를 생성해 보겠습니다.</p>
-<p><img src="/images/post/2017-03-14/make_object.png" alt="Book 함수로 생성한 객체"></p>
-<p>생성자(함수)의 몸체 부분에 어떠한 코드도 작성하지 않았는데 이를 통해 생성한 jsBook 객체가 <code>__proto__</code>라는 프로퍼티를 갖고있습니다.</p>
-<p>여기서 <strong>__proto__</strong> 는 <code>Prototype Link</code>로서 <strong>객체의 생성에 쓰인 생성자 함수의 <code>Prototype object</code></strong>를 가리키고 있습니다. 그렇기 때문에 Book 생성자 함수와 함께 생성된 Prototype object에 추가한 cover라는 프로퍼티가 보이는것을 확인할 수 있습니다.</p>
-<p>조금 더 이해하기 쉽게 다이어그램으로 확인하면 다음과 같습니다.</p>
-<p><img src="/images/post/2017-03-14/make_object_diagram.png" alt="함수, Prototype object, 객체의 관계"></p>
-<p>다이어그램에서도 확인할 수 있다시피 <code>prototype</code> property(함수 생성시 함께 생성된 Prototype object를 가리킴)는 함수객체만 가지며 <code>__proto__</code>는 객체라면 모두 갖고 있습니다.</p>
-<p>이제 프로토타입 체인(Prototype Chain)에 대해 이해할 수 있는 준비가 되었습니다.</p>
-<hr>
-<p><span id="5"></span></p>
-<h2 id="프로토타입-체인prototype-chain"><a href="#프로토타입-체인-Prototype-Chain" class="headerlink" title=" 프로토타입 체인(Prototype Chain)"></a><span style="color:red"> 프로토타입 체인(Prototype Chain)</span></h2><p>결론부터 말씀드리면 <code>프로토타입 체인</code>은 객체의 property를 사용할때 해당 property가 없다면, <code>__proto__</code> property를 이용해 자신의 생성에 관여한 함수(생성자 함수)의 <code>Prototype object</code>에서 property를 찾습니다. 만약 Prototype object에도 해당 property가 없다면 다시 Prototype object의 <strong>__proto__</strong> property를 이용해 Prototype object에서 property를 찾습니다. 이렇게 계속 반복이 이루어지며 해당 property를 찾게 된다면 <strong>값을 반환</strong>하고 찾지 못한다면 <strong>undefined</strong>를 반환합니다. 이렇게 <strong><code>__proto__</code> property를 통해 상위 프로토타입과 연결되어 있는 형태를 프로토타입 체인(Chain)이라고 합니다.</strong></p>
-<p>프로토타입 체인에 대해 알게되었으니 다시한번 처음 코드를 살펴보겠습니다.</p>
-<p><img src="/images/post/2017-03-14/prototype_example_1.png" alt="프로토타입 체인 예제"></p>
-<p>이제 어떻게 jsBook에 cover라는 property를 추가하지 않았는데도 결과가 출력되는지 이해할 수 있습니다. 다음과 같이 동작할 것입니다.</p>
-<p><img src="/images/post/2017-03-14/prototype_diagram_1.png" alt="프로토타입 체인 예제(cover property 찾는 과정)"></p>
-<p>또한 다음과 같이 <strong>프로토타입 체인의 최상위는 Object이기 때문에 Object.prototype의 property들을 모두 사용할 수 있습니다.</strong> 자주 사용하는 toString()과 valueOf() 모두 Object.prototype에 선언되어 있습니다.<br>(Book Prototype object는 <strong>객체</strong>이기 때문에 Object 생성자가 사용될 것입니다. 따라서 Book Prototype object의 <strong>__proto__</strong>는 Object Prototype object를 가리키게 됩니다.)</p>
-<p><img src="/images/post/2017-03-14/prototype_diagram_2.png" alt="프로토타입 체인의 최상위 object"><br><img src="/images/post/2017-03-14/Object_prototype.png" alt="Object.prototype"></p>
-<p><code>Prototype object</code>와 <code>__proto__</code> 그리고 <code>프로토타입 체인</code>에 대해 이해하였으니 다음과 같은 코드도 이해할 수 있습니다. 잘 이해가 되지 않는다면 위의 다이어그램을 참고해보시기 바랍니다.</p>
-<p><img src="/images/post/2017-03-14/prototype_chain_test.png" alt="__proto__와 Prototype object의 관계"></p>
-<hr>
-<p><span id="6"></span></p>
-<h2 id="번외"><a href="#번외" class="headerlink" title="번외"></a>번외</h2><p><img src="/images/post/2017-03-14/prototype_diagram_2_check.png" alt="프로토타입 체인의 최상위 object"><br>혹시 다이어그램을 보면서 function Book의 <strong>__proto__</strong> 는 무엇을 가리키고 있는지 궁금해 하셨을 분들을 위해 추적해보았습니다.</p>
-<p><img src="/images/post/2017-03-14/function_proto.png" alt="function(생성자)의 __proto__ 추적"></p>
-<p>다음 코드를 도식화 하면 다음과 같은 다이어그램이 나오게 됩니다.</p>
-<p><img src="/images/post/2017-03-14/function_proto_diagram.png" alt="function(생성자)의 __proto__ 추적"></p>
-<p>간단하게 포스팅을 하려했는데 주제가 주제인지라 길어졌습니다. 저도 프로토타입을 처음 공부하면서 어려움을 많이 겪었는데 조금이나마 도움이 되었으면 좋겠습니다.</p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
 <!-- For Google Adsense -->
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -825,7 +859,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            124
+                            125
                         </p>
                     </a>
                 </div>
@@ -837,7 +871,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            22
+                            23
                         </p>
                     </a>
                 </div>
@@ -849,7 +883,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            203
+                            205
                         </p>
                     </a>
                 </div>
@@ -893,6 +927,25 @@
         <h3 class="menu-label">
             최근 글
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2021/03/21/Kotlin/coroutines/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="코루틴 이해하기">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-03-20T15:17:42.000Z">2021-03-21</time></div>
+                    <a href="/2021/03/21/Kotlin/coroutines/" class="title has-link-black-ter is-size-6 has-text-weight-normal">코루틴 이해하기</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Kotlin/">Kotlin</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -970,25 +1023,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/12/18/Java/hash/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Hash - MD5와 SHA256">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-17T15:23:00.000Z">2019-12-18</time></div>
-                    <a href="/2019/12/18/Java/hash/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Hash - MD5와 SHA256</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Programming/">Programming</a> / <a class="has-link-grey -link" href="/categories/Programming/Java/">Java</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1044,6 +1078,14 @@
         <a class="level is-marginless" href="/categories/Java/">
             <span class="level-start">
                 <span class="level-item">Java</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Kotlin/">
+            <span class="level-start">
+                <span class="level-item">Kotlin</span>
             </span>
             <span class="level-end">
                 <span class="level-item tag">1</span>
@@ -1203,7 +1245,7 @@
                 
                 </a>
                 <p class="is-size-7">
-                &copy; 2020 KimJongMin&nbsp;
+                &copy; 2021 KimJongMin&nbsp;
                 Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="external nofollow noopener noreferrer">Icarus</a>
                 
                 </p>
@@ -1321,7 +1363,7 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 
 
-<a id="back-to-top" title="Back to Top" href="javascript:;">
+<a id="back-to-top" title="Zurück nach oben" href="javascript:;">
     <i class="fas fa-chevron-up"></i>
 </a>
 <script src="/js/back-to-top.js" defer></script>
